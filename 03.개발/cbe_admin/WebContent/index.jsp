@@ -24,6 +24,7 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
 
+	<!-- Navigation bar -->
   <c:import url="layout/side_bar.jsp"></c:import>
 
     <!-- Content Wrapper -->

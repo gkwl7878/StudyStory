@@ -8,7 +8,7 @@
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+    <div class="sidebar-brand-text mx-3">벚꽃엔딩 관리자</div>
   </a>
 
   <!-- Divider -->
@@ -26,7 +26,7 @@
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    Interface
+    관리자 메뉴
   </div>
 
   <!-- Nav Item - Pages Collapse Menu -->
