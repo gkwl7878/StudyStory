@@ -26,7 +26,7 @@
 </head>
 <body>
 
-	<jsp:include page="tiles/nav.jsp"></jsp:include>
+	<jsp:include page="layout/nav.jsp"></jsp:include>
 
 	벚꽃 축제 지도가 나타나는 메인 페이지(8도)
 	<!-- About Section -->
@@ -44,7 +44,7 @@
   </section>
 
 
-	<jsp:include page="tiles/footer.jsp"></jsp:include>
+	<jsp:include page="layout/footer.jsp"></jsp:include>
 	
 	<!-- Bootstrap core JavaScript -->
 	<script src="./Resources/vendor/jquery/jquery.min.js"></script>

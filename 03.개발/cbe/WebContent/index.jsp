@@ -26,7 +26,7 @@
 
 <body id="page-top">
 	<!-- Nav -->
-	<jsp:include page="tiles/nav.jsp"></jsp:include>
+	<jsp:include page="layout/nav.jsp"></jsp:include>
 
   <!-- Masthead -->
   <header class="masthead">
@@ -45,7 +45,7 @@
   </header>
  
 	<!-- Footer -->
-	<jsp:include page="tiles/footer.jsp"></jsp:include>
+	<jsp:include page="layout/footer.jsp"></jsp:include>
 
   <!-- Bootstrap core JavaScript -->
   <script src="./Resources/vendor/jquery/jquery.min.js"></script>
