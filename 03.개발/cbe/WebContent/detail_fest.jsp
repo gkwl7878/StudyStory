@@ -24,13 +24,12 @@
   <link href="./Resources/css/creative.min.css" rel="stylesheet">
 </head>
 <body>
-
-	<jsp:include page="tiles/nav.jsp"></jsp:include>
+	<jsp:include page="layout/nav.jsp"></jsp:include>
 	
 	디테일한 축제정보 보여주는 페이지
 
 
-	<jsp:include page="tiles/footer.jsp"></jsp:include>
+	<jsp:include page="layout/footer.jsp"></jsp:include>
 	
 	<!-- Bootstrap core JavaScript -->
 	<script src="./Resources/vendor/jquery/jquery.min.js"></script>

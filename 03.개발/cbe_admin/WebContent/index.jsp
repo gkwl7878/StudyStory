@@ -24,7 +24,7 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
 
-  <c:import url="tiles/side_bar.jsp"></c:import>
+  <c:import url="layout/side_bar.jsp"></c:import>
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
