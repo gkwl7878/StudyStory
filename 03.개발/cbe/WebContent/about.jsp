@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<style>
+	#wrap{margin:0px auto; width: 1200px; min-height: 800px}
+	#link{margin-left: 1000px; margin-top: 20px}
+</style>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,10 +29,24 @@
 </head>
 <body>
 
+
 	<jsp:include page="tiles/nav.jsp"></jsp:include>
 	
 	축제정보 소개 페이지	
-
+	<div id="wrap">
+		<div><img src="http://localhost:8080/jsp_prj/common/images/blossom_img1.jpeg"></div>
+		<div id="link">
+			<a href="">봄이 왔음을 알리는 벚꽃</a><br/>
+			<a href="">벚꽃 나들이 준비물 추천!</a>
+		</div>
+		<div>
+			<span style="font-size: 38px">봄이 왔음을 알리는 벚꽃</span>
+		</div>
+	
+	</div>
+	
+	
+	
 
 	<jsp:include page="tiles/footer.jsp"></jsp:include>
 	
