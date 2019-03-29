@@ -105,57 +105,44 @@
 		<form action="create_request.jsp" name="createFrm">
 		 <br/>
 		 <br/>
-		<label id="title"><strong>내 스터디 수정하기</strong></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="" src="Resources/images/create.png" style="width: 150px; height: 120px;">
+		<label id="title"><strong>내 스터디 수정하기</strong></label>&nbsp;&nbsp;&nbsp;&nbsp;<img alt="" src="Resources/images/create.png" style="width: 150px; height: 120px;">
 		<br/>
 		<br/>
 		 <br/>
-  <div class="form-group">
-   <img alt="" src="Resources/images/subject.png" style="width: 50px; height: 50px;">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlTextarea1" style="font-size: 30px;">어떤 <span style="font-weight: bold;">이름</span>으로 변경하시겠습니까?</label>
-    <input type="text" class="form-control" id="name" placeholder="스터디의 이름을 입력해주세요">
-  </div>
-  	<br/>
-	<br/>
-	<br/>
-  <div class="form-group">
+ <div class="form-group row">
+    <img alt="" src="Resources/images/subject.png" style="width: 30px; height: 30px;">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>이름</strong></label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="스터디명" style="width: 610px;">
+    </div>
+  </div>		
  <br/>
- 	 <img alt="" src="Resources/images/sub.png" style="width: 50px; height: 50px;">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlSelect1" id="sub_title" style="font-size: 30px;">어떤 <span style="font-weight: bold;">주제</span>로 변경하시겠습니까? </label>
-    <select class="form-control" id="loc">
-      <option value="">주제를 선택해주세요</option>
-      <option value="언어">언어</option>
-      <option value="취업">취업</option>
-      <option value="취미">취미</option>
-      <option value="기타">기타</option>
-    </select>
 
+  <div class="row">
+    <div class="col">
+    <img alt="" src="Resources/images/loc.png" style="width: 30px; height: 30px; ">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>지역</strong></label>
+      <input type="text" class="form-control" placeholder="지역" style="width: 200px;" />
+    </div>
+    <div class="col">
+    <img alt="" src="Resources/images/sub.png" style="width: 30px; height: 30px;">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>주제</strong></label>
+      <input type="text" class="form-control" placeholder="주제" style="width: 450px;">
+    </div>
   </div>
-  <br/>
-  <br/>
-  <br/>
-  <div class="form-group">
-    <img alt="" src="Resources/images/loc.png" style="width: 50px; height: 50px;">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlSelect1" style="font-size: 30px;">어떤<span style="font-weight: bold;">지역</span>으로 변경하시겠습니까? </label>
-    <select class="form-control" id="loc">
-      <option value="">지역을 선택해주세요</option>
-      <option value="신촌">신촌</option>
-      <option value="홍대">홍대</option>
-      <option value="종각">종각</option>
-      <option value="건대">건대</option>
-      <option value="노원">노원</option>
-      <option value="강남">강남</option>
-    </select>
-  </div>
+
+
+
 <br/>
 <br/>
 <br/>
   <div class="form-group">
-    <img alt="" src="Resources/images/detail.png" style="width: 50px; height: 50px;">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlTextarea1" style="font-size: 25px;">어떤 <span style="font-weight: bold;">주제</span>와  <span style="font-weight: bold;">규칙</span> 으로 변경하시겠습니까?</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="width: 700px; height: 300px;" class="form_control"  name="contents" id="summernote" placeholder="스터디의 상세설명을 입력해주세요"></textarea>
+    <img alt="" src="Resources/images/detail.png" style="width: 30px; height: 30px;">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlTextarea1" style="font-size: 20px;">어떤 <span style="font-weight: bold;">주제</span>와  <span style="font-weight: bold;">규칙</span> 으로 변경하시겠습니까?</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="width: 700px; height: 200px;" class="form_control"  name="contents" id="summernote" placeholder="스터디의 상세설명을 입력해주세요"></textarea>
   </div>
 	<br/>
 	<br/>
 	<br/>
 	
   <div class="form-group">
-    <label for="exampleFormControlTextarea1" style="font-size: 30px;">어떤&nbsp;<strong>대표이미지</strong>로 변경하시겠습니까?</label>
+    <label for="exampleFormControlTextarea1" style="font-size: 20px;">어떤&nbsp;<strong>대표이미지</strong>로 변경하시겠습니까?</label>
 	<div class="input-group mb-3">
   <input type='file' name='file' id='real_file' onchange="previewFile()"  style='display:none; ' />
 	<input type="text" id='file_sub' style="width:700px; border:0px; display: none" readonly="readonly" ;>
