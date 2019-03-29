@@ -5,19 +5,16 @@
 <html>
 <style>
 	#wrap{margin:100px auto; width: 700px; min-height: 800px}
-	/* #link{margin-left: 1000px; margin-top: 20px} */
-	#loginTitle{text-align: center; st}
 </style>
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
   
-	<title>Bootstrap Template By Young</title>
+  <title>스터디 탈퇴</title>
   <!-- Custom styles for this template -->
 
 
-  <title>스터디그룹 개설하기</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript">
   
@@ -32,24 +29,21 @@
 	
 	<div id="wrap" >
 		<form>
-		 <br/>
-		<h1>요청이 <strong>완료</strong>되었습니다.</h1>
+		 <br/><br/>
+		 <div style="border:1px solid #D7D7D7; padding:40px"><br/><br/>
+		<h1 ><Strong>정말 이 스터디를 탈퇴하시겠어요?</Strong></h1>
+		<hr  color="gray" >
+		<h5>이 스터디를 탈퇴하는 이유가 무엇인지 리더에게 알려주세요.</h5>
 		<br/>
+		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+				placeholder="내용을 입력해주세요.">
 		<br/>
-		<br/>
-		<h5>24시간 내에 승인요청 처리를 완료하겠습니다.</h5>
-		<br/>
-		<h3><strong>마이페이지</strong>에서 확인해주세요</h3>
-		<br/>
-		<p>
-	궁금한 사항이 있으실 경우 <a id="" href="#void" class="link" target="_blank">자주묻는 질문</a>을 확인해주세요.
-	그 외 추가적인 문의사항은 <a id="" href="#void" class="link" target="_blank">관리자의 문의사항</a>을 이용해주세요.
 	
-</p>
 	<br/>
-	<br/>
-  <a class="btn btn-secondary btn-lg" href="#void" role="button" >메인으로 가기</a>
-  <a class="btn btn-primary btn-lg" href="#void" role="button">마이페이지로 가기</a>
+  
+  <a class="btn btn-secondary btn-lg" href="#void" role="button" >돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a class="btn btn-secondary btn-lg" href="#void" role="button">스터디 탈퇴</a>
+  </div>
 </form>
 	</div>
 	
