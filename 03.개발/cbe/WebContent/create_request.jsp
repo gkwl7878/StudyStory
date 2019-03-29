@@ -36,16 +36,20 @@
 		<h1>요청이 <strong>완료</strong>되었습니다.</h1>
 		<br/>
 		<br/>
-		
+		<br/>
+		<h5>24시간 내에 승인요청 처리를 완료하겠습니다.</h5>
+		<br/>
 		<h3><strong>마이페이지</strong>에서 확인해주세요</h3>
 		<br/>
 		<p>
-	모든 스터디 이벤트는 <a id="guidelinesLink" href="https://meetup.zendesk.com/hc/sections/360000683791-Community-Guidelines" class="link" target="_blank">커뮤니티 가이드라인</a>에 따른 검토를 거칩니다.
+	궁금한 사항이 있으실 경우 <a id="" href="#void" class="link" target="_blank">자주묻는 질문</a>을 확인해주세요.
+	그 외 추가적인 문의사항은 <a id="" href="#void" class="link" target="_blank">관리자의 문의사항</a>을 이용해주세요.
+	
 </p>
 	<br/>
 	<br/>
-  <a class="btn btn-primary btn-lg" href="#void" role="button" >홈으로 가기</a>
-  <a class="btn btn-secondary btn-lg" href="#void" role="button">취소</a>
+  <a class="btn btn-secondary btn-lg" href="#void" role="button" >메인으로 가기</a>
+  <a class="btn btn-primary btn-lg" href="#void" role="button">마이페이지로 가기</a>
 </form>
 	</div>
 	
