@@ -177,14 +177,10 @@
 				</td>
 			</tr>
 		</table>
-		<div style="text-align: center; padding-bottom: 30px">
+		<div style="padding-left:250px ; padding-bottom: 30px">
 		<button type="button" class="btn btn-dark btn-lg bigBtn" id="eamilValid">돌아가기</button>
 		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn" id="eamilValid">회원가입</button>
 		</div>
-		
-		
-		
-		
   </form>
   </div> 
 
