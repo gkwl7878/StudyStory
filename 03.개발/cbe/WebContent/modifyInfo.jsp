@@ -56,7 +56,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
   
-	<title>회원가입</title>
+	<title>회원정보 수정</title>
   <style>
    .bd-placeholder-img {
      font-size: 1.125rem;
@@ -66,20 +66,13 @@
      -ms-user-select: none;
      user-select: none;
    }
-  	.btn-adjust {
-  		height:37px;
-  	}
-  	.bigBtn{
+   .bigBtn{
   		height: 50px;
   	}
-  	.span{
-  		color: #FF0000;
+   .btn-adjust {
+  		height:37px;
   	}
-  	#essential{
-  		color: #FF0000;
-  		padding-left: 585px
-  	}
-	
+  	
    @media (min-width: 768px) {
      .bd-placeholder-img-lg {
        font-size: 3.5rem;
@@ -98,36 +91,24 @@
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
-    <div class="container">
-      <h1>회원가입</h1>
-      <h6>스터디 스토리에 오신 것을 환영합니다.</h6>
+    <div class="container" >
+      <h1>회원정보 수정</h1>
+      <div style="color: #808080;padding-top: 10px">
+      <h6>고객님의 주소와 연락처등 개인정보를 수정하실수 있습니다.</h6>
+      </div>
     </div>
   </div>
 
   <div class="container">
   	<form id="Frm">
-		<table class="table" style="width: 1200px; " >
+		<table class="table" style="width: 700px;" >
 			<tr>
-				<td>이름<span class="span">*</span></td>
+				<td>이름</td>
 				<td><input type="text"  name="name" class="form-control" style="width:200px"></td>
 			</tr>
+			
 			<tr>
-				<td>아이디<span class="span">*</span></td>
-				<td>
-					<input type="text"  name="id" class="form-control" style="width:200px;display: inline-block;"/>
-					<button type="button" class="btn btn-outline-secondary btn-adjust" id="idValid">중복확인</button>
-				</td>
-			</tr>
-			<tr >
-				<td>비밀번호<span class="span">*</span></td>
-				<td><input type="password"  name="pass1"  class="form-control" style="width:200px"/></td>
-			</tr>
-			<tr>
-				<td>비밀번호 확인<span class="span">*</span></td>
-				<td><input type="password"  name="pass2" id="pass2" class="form-control" style="width:200px"/></td>
-			</tr>
-			<tr>
-				<td rowspan="3">주소<span class="span">*</span></td>
+				<td rowspan="3">주소</td>
 				<td>
 				<input type="text"   id="roadAddr" readonly="readonly" name="addr1" class="form-control" style="width:200px; display: inline-block;"/>
 				<button type="button" class="btn btn-outline-secondary btn-adjust btn-adjust" id="searchZip" >주소검색</button>
@@ -139,8 +120,9 @@
 			<tr >
 				<td><input type="text" name="addr2"  class="form-control" style="width:500px "/></td>
 			</tr>
+			
 			<tr>
-				<td>연락처<span class="span">*</span></td>
+				<td>연락처</td>
 				<td>
 				<select class="form-control" style="width: 80px; display: inline-block;">
 					<option value="010">010</option>
@@ -154,8 +136,9 @@
 				<input type="text"  name="tel3" id="tel2" class="form-control" style="width:80px; display: inline-block;"/>
 				</td>
 			</tr>
+			
 			<tr >
-				<td>이메일<span class="span">*</span></td>
+				<td>이메일</td>
 				<td>
 				<input type="text"  name="email1" id="email1" class="form-control" style="width:120px; display: inline-block;"/>@
 				<input type="text"  name="email2" id="email2"  class="form-control" style="width:120px; display: inline-block;"/>
@@ -166,33 +149,19 @@
 					<option value="구글">gmail.com</option>
 					<option value="네이트">nate.net</option>
 				</select>
-				<button type="button" class="btn btn-outline-secondary btn-adjust" id="eamilValid">중복확인</button>
 				</td>
 			</tr>
-			<tr>
-				<td span="2">인증질문<span class="span">*</span></td>
+			<tr >
+				<td>비밀번호</td>
 				<td>
-				<select class="form-control" style="width:500px">
-					<option value="question">인증 질문을 선택해주세요.</option>
-					<option value="question1">초등학교 담임 선생님 성함은?</option>
-					<option value="question2">가장 좋아하는 캐릭터 이름은?</option>
-				</select>
+				<input type="password"  name="pass" class="form-control" style="width:200px"/>
+				<span style="color:#4691C3 ">정보를 수정하시려면 기존 비밀번호를 입력하시기 바랍니다.</span>
 				</td>
-			</tr>
-			<tr>
-				<td>인증 답<span class="span">*</span></td>
-				<td>
-					<input type="text"  name="answer" id="answer" class="form-control"  style="width:500px"/>
-				</td>
-			</tr>
-			<tr>
-				<td id="essential" colspan="2">*은 필수항목입니다.</td>
 			</tr>
 		</table>
-		
-		<div style="padding-left:285px ; padding-bottom: 30px">
+		<div style="padding-left:180px ; padding-bottom: 30px">
 		<button type="button" class="btn btn-dark btn-lg bigBtn">돌아가기</button>
-		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn">회원가입</button>
+		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn" >나의정보 수정</button>
 		</div>
   </form>
   </div> 
