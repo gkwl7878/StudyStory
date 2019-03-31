@@ -16,6 +16,11 @@
   	.select-card:hover {
   		background-color:#F1F3F4;
   	}
+  	
+  	.font12bold {
+  		font-size:12px;
+  		font-weight:bold;
+  	}
   </style>
 </head>
 <body>
@@ -23,14 +28,12 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  header  끝 -->
 
-	    <main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" style="margin-top:80px;">
+	    <div class="container col-lg-6">
+      <div class="row justify-content-left col-lg-6" style="margin-top:80px;">
         <h1 class="h2">OOO 스터디</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-        </div>
-        <hr>
       </div>
-      <div class="col-lg-12">
+      <hr>
+      <div class="col-lg-12 font12bold">
       	<a href="#">신청자 보기</a>&nbsp;&nbsp;
       	<a href="#">참여자 보기</a>&nbsp;&nbsp;
       	<a href="#">스터디 수정하기</a>&nbsp;&nbsp;
@@ -40,7 +43,7 @@
         	<option value="opened">모집중</option>
         	<option value="closed">모집종료</option>
         </select>
-        <button type="button" class="btn btn-sm btn-outline-secondary">모집상태 변경</button>
+        <button type="button" class="btn btn-sm btn-secondary" style="font-size:12px;">모집상태 변경</button>
         </div>
       </div>
       <hr>
@@ -62,7 +65,7 @@
       		</div>
       	</div>
       </div>
-    </main>
+    </div>
 
 
 
