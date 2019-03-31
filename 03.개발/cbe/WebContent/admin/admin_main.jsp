@@ -8,10 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
   <title>관리자 </title>
-
   <!-- Bootstrap core CSS -->
-<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
-
+	<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
     .bd-placeholder-img {
