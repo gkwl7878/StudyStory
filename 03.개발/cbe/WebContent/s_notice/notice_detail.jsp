@@ -51,16 +51,16 @@
 	     			2019-00-00
 	     		</div>
 	     	</div>	
-	      <div class="row">
+	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3">
 	     			누군가
 	     			<img src="http://localhost:8080/third_prj/Resources/img/no_profile.png" width="50" height="60"/>
 	     		</div>
 	     		<div class="col-9">
-	     			<textarea rows="5" cols="55"></textarea>
+	     			<textarea rows="5" cols="55" readonly="readonly"></textarea>
 	     		</div>
 	      </div>
-	      <div class="row" style="min-height:80px;">
+	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3 font20bold">과제</div>
 	      	<div class="col-2">
 	      		<span class="font12bold">스터디원1</span>
@@ -68,8 +68,8 @@
 	      	<div class="col-6">
 	      		<span class="font12bold">이런거 해오세요~</span>
 	      	</div>
-	      	<div class="col-1">
-	      		<input type="checkbox"/>
+	      	<div class="col-1 form-check">
+	      		<input type="checkbox" class="form-check-input"/>
 	      	</div>
 	      	<div class="col-3"></div><!-- 추가시 공백칼럼 -->
 	      	<div class="col-2">
@@ -78,19 +78,19 @@
 	      	<div class="col-6">
 	      		<span class="font12bold">이런거 해오세요~</span>
 	      	</div>
-	      	<div class="col-1">
-	      		<input type="checkbox"/>
+	      	<div class="col-1 form-check">
+	      		<input type="checkbox" class="form-check-input"/>
 	      	</div>
 	      </div>
-	      <div class="row" style="min-height:300px;">
+	      <div class="row" style="margin-top:30px;">
 		      <div class="col-3 font20bold">장소</div>
 		      <div class="col-9">다음지도 넣을거임~</div>
 	      </div>
-	      <div class="row" style="min-height:80px;">
+	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3 font20bold">시간</div>
 	      	<div class="col-9">어디어디 몇일 몇시 어디서 봅시다</div>
 	      </div>
-	      <div class="row" style="min-height:80px;">
+	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3 font20bold">댓글</div>
 	      	<div class="col-2">
 	      		<span class="font12bold">스터디원1</span>
@@ -115,8 +115,8 @@
 	      	<div class="col-2">
 	      		<span class="font12bold">내닉넴</span>
 	      	</div>
-	      	<div class="col-5">
-	      		<input type="text" placeholder="내용을 입력해주세요." size="25"/>
+	      	<div class="col-5" style="padding-right:0px;">
+	      		<input type="text" placeholder="내용을 입력해주세요." class="form-control form-control-sm" size="25"/>
 	      	</div>
 	      	<div class="col-2 justify-content-center">
 		      	<button type="button" class="btn btn-secondary btn-sm" style="font-size:12px;">댓글달기</button>

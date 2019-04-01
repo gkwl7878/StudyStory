@@ -33,17 +33,21 @@
         <h1 class="h2">OOO 스터디</h1>
       </div>
       <hr>
-      <div class="col-lg-12 font12bold">
-      	<a href="#">신청자 보기</a>&nbsp;&nbsp;
-      	<a href="#">참여자 보기</a>&nbsp;&nbsp;
-      	<a href="#">스터디 수정하기</a>&nbsp;&nbsp;
-      	<a href="#">스터디 활동종료</a>&nbsp;&nbsp;
-      	<div style="float:right;">
-        <select>
+      <div class="row font12bold">
+      	<div class="col-8">
+	      	<a href="#">신청자 보기</a>&nbsp;&nbsp;
+	      	<a href="#">참여자 보기</a>&nbsp;&nbsp;
+	      	<a href="#">스터디 수정하기</a>&nbsp;&nbsp;
+	      	<a href="#">스터디 활동종료</a>
+      	</div>
+      	 <div class="col-2" style="padding-right:3px; font-size:10px;">
+        <select class="form-control form-control-sm">
         	<option value="opened">모집중</option>
         	<option value="closed">모집종료</option>
         </select>
-        <button type="button" class="btn btn-sm btn-secondary" style="font-size:12px;">모집상태 변경</button>
+        </div>
+        <div class="col-2" style="padding-left:0px;">
+        	<button type="button" class="btn btn-sm btn-secondary" style="font-size:12px;">변경</button>
         </div>
       </div>
       <hr>
