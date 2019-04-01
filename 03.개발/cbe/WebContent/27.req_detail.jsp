@@ -38,7 +38,7 @@
 		<!-- <h5>새로운 신청자를 확인 해주세요.</h5> -->
 		<!-- <span style="font-weight: bold;"><h3>자기소개</h3></span> -->
 		
-		<div class="row" style="border:1px solid #BFC8D0">
+		<div class="row" style="border:1px solid #BFC8D0 ;padding-top: 20px ;padding-bottom: 20px" ;>
   <div class="col-2">
     <div class="list-group" id="list-tab" role="tablist">
       <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">자기소개</a>
@@ -55,7 +55,7 @@
 		
   
   </div>
-  <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 300px; ">목록으로</a>
+  <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 250px; ">목록으로</a>
   <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 10px;">수락하기</a>
   <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 10px;">거절하기</a>
 </form>
