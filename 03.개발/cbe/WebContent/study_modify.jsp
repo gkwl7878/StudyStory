@@ -20,20 +20,7 @@
 	<title>Bootstrap Template By Young</title>
   <!-- Custom styles for this template -->
 
-
-
-  <link href="../Resources/summernote/bootstrap.css" rel="stylesheet">
   <script src="./Resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="../Resources/summernote/bootstrap.js"></script>
-  
-  
-  
-<!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script> -->
-  
- <!-- include summernote css/js -->
- <!-- include summernote css/js -->
-
 
   <script type="text/javascript">
 /* $(function() {
@@ -79,7 +66,7 @@
 	  document.getElementById("file_sub").value = document.getElementById("real_file").value;
 	 }
   function previewFile() {
-	  var preview = document.querySelector('img');
+	  var preview = document.querySelector('#img');
 	  var file    = document.querySelector('input[type=file]').files[0];
 	  var reader  = new FileReader();
 
