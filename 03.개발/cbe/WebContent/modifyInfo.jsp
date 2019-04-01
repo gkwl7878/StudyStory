@@ -100,25 +100,28 @@
   </div>
 
   <div class="container">
-  	<form id="Frm">
+  <div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-10">
+  <form id="Frm">
 		<table class="table" style="width: 700px;" >
 			<tr>
 				<td>이름</td>
-				<td><input type="text"  name="name" class="form-control" style="width:200px"></td>
+				<td><input type="text"  class="form-control" style="width:200px"></td>
 			</tr>
 			
 			<tr>
 				<td rowspan="3">주소</td>
 				<td>
-				<input type="text"   id="roadAddr" readonly="readonly" name="addr1" class="form-control" style="width:200px; display: inline-block;"/>
+				<input type="text"  readonly="readonly" class="form-control" style="width:200px; display: inline-block;"/>
 				<button type="button" class="btn btn-outline-secondary btn-adjust btn-adjust" id="searchZip" >주소검색</button>
 				</td>
 			</tr>
 			<tr >
-				<td><input type="text" name="addr2" readonly="readonly" class="form-control" style="width:500px"/></td>
+				<td><input type="text" readonly="readonly" class="form-control" style="width:500px"/></td>
 			</tr>
 			<tr >
-				<td><input type="text" name="addr2"  class="form-control" style="width:500px "/></td>
+				<td><input type="text" class="form-control" style="width:500px "/></td>
 			</tr>
 			
 			<tr>
@@ -132,16 +135,16 @@
 					<option value="018">018</option>
 					<option value="019">019</option>
 				</select>
-				<input type="text"  name="tel2" id="tel1" class="form-control" style="width:80px; display: inline-block;"/>-
-				<input type="text"  name="tel3" id="tel2" class="form-control" style="width:80px; display: inline-block;"/>
+				<input type="text" class="form-control" style="width:80px; display: inline-block;"/>-
+				<input type="text" class="form-control" style="width:80px; display: inline-block;"/>
 				</td>
 			</tr>
 			
 			<tr >
 				<td>이메일</td>
 				<td>
-				<input type="text"  name="email1" id="email1" class="form-control" style="width:120px; display: inline-block;"/>@
-				<input type="text"  name="email2" id="email2"  class="form-control" style="width:120px; display: inline-block;"/>
+				<input type="text" class="form-control" style="width:120px; display: inline-block;"/>@
+				<input type="text" class="form-control" style="width:120px; display: inline-block;"/>
 				<select class="form-control" style="width: 140px; display: inline-block;">
 					<option value="직접입력">직접입력</option>
 					<option value="네이버">naver.com</option>
@@ -154,16 +157,18 @@
 			<tr >
 				<td>비밀번호</td>
 				<td>
-				<input type="password"  name="pass" class="form-control" style="width:200px"/>
+				<input type="password" class="form-control" style="width:200px"/>
 				<span style="color:#4691C3 ">정보를 수정하시려면 기존 비밀번호를 입력하시기 바랍니다.</span>
 				</td>
 			</tr>
 		</table>
-		<div style="padding-left:180px ; padding-bottom: 30px">
+		<div style="padding-left:180px ; padding-bottom: 30px; width: 700px">
 		<button type="button" class="btn btn-dark btn-lg bigBtn">돌아가기</button>
 		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn" >나의정보 수정</button>
 		</div>
   </form>
+  </div>
+  </div>
   </div> 
 
 </main>

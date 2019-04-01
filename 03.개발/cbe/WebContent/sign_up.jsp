@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css"  href="http://localhost:8080/html_prj/common/css/main_v190130.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 	window.onload=function(){
@@ -75,7 +76,7 @@
   	.span{
   		color: #FF0000;
   	}
-  	#essential{
+  	.essential{
   		color: #FF0000;
   		padding-left: 585px
   	}
@@ -104,40 +105,43 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container ">
   	<form id="Frm">
-		<table class="table" style="width: 1200px; " >
+  		 <div class="row" >
+  		 <div class="col-lg-2"></div>
+        <div class="col-lg-10">
+        	<table class="table" style="width: 700px; ">
 			<tr>
 				<td>이름<span class="span">*</span></td>
-				<td><input type="text"  name="name" class="form-control" style="width:200px"></td>
+				<td><input type="text"  class="form-control" style="width:200px"></td>
 			</tr>
 			<tr>
 				<td>아이디<span class="span">*</span></td>
 				<td>
-					<input type="text"  name="id" class="form-control" style="width:200px;display: inline-block;"/>
-					<button type="button" class="btn btn-outline-secondary btn-adjust" id="idValid">중복확인</button>
+					<input type="text" class="form-control" style="width:200px;display: inline-block;"/>
+					<button type="button" class="btn btn-outline-secondary btn-adjust">중복확인</button>
 				</td>
 			</tr>
 			<tr >
 				<td>비밀번호<span class="span">*</span></td>
-				<td><input type="password"  name="pass1"  class="form-control" style="width:200px"/></td>
+				<td><input type="password" class="form-control" style="width:200px"/></td>
 			</tr>
 			<tr>
 				<td>비밀번호 확인<span class="span">*</span></td>
-				<td><input type="password"  name="pass2" id="pass2" class="form-control" style="width:200px"/></td>
+				<td><input type="password" class="form-control" style="width:200px"/></td>
 			</tr>
 			<tr>
 				<td rowspan="3">주소<span class="span">*</span></td>
 				<td>
-				<input type="text"   id="roadAddr" readonly="readonly" name="addr1" class="form-control" style="width:200px; display: inline-block;"/>
+				<input type="text"   readonly="readonly"  class="form-control" style="width:200px; display: inline-block;"/>
 				<button type="button" class="btn btn-outline-secondary btn-adjust btn-adjust" id="searchZip" >주소검색</button>
 				</td>
 			</tr>
 			<tr >
-				<td><input type="text" name="addr2" readonly="readonly" class="form-control" style="width:500px"/></td>
+				<td><input type="text" readonly="readonly" class="form-control" style="width:500px"/></td>
 			</tr>
 			<tr >
-				<td><input type="text" name="addr2"  class="form-control" style="width:500px "/></td>
+				<td><input type="text"  class="form-control" style="width:500px "/></td>
 			</tr>
 			<tr>
 				<td>연락처<span class="span">*</span></td>
@@ -150,15 +154,15 @@
 					<option value="018">018</option>
 					<option value="019">019</option>
 				</select>
-				<input type="text"  name="tel2" id="tel1" class="form-control" style="width:80px; display: inline-block;"/>-
-				<input type="text"  name="tel3" id="tel2" class="form-control" style="width:80px; display: inline-block;"/>
+				<input type="text"   class="form-control" style="width:80px; display: inline-block;"/>-
+				<input type="text"   class="form-control" style="width:80px; display: inline-block;"/>
 				</td>
 			</tr>
 			<tr >
 				<td>이메일<span class="span">*</span></td>
 				<td>
-				<input type="text"  name="email1" id="email1" class="form-control" style="width:120px; display: inline-block;"/>@
-				<input type="text"  name="email2" id="email2"  class="form-control" style="width:120px; display: inline-block;"/>
+				<input type="text"   class="form-control" style="width:120px; display: inline-block;"/>@
+				<input type="text"   class="form-control" style="width:120px; display: inline-block;"/>
 				<select class="form-control" style="width: 140px; display: inline-block;">
 					<option value="직접입력">직접입력</option>
 					<option value="네이버">naver.com</option>
@@ -166,7 +170,7 @@
 					<option value="구글">gmail.com</option>
 					<option value="네이트">nate.net</option>
 				</select>
-				<button type="button" class="btn btn-outline-secondary btn-adjust" id="eamilValid">중복확인</button>
+				<button type="button" class="btn btn-outline-secondary btn-adjust">중복확인</button>
 				</td>
 			</tr>
 			<tr>
@@ -182,18 +186,20 @@
 			<tr>
 				<td>인증 답<span class="span">*</span></td>
 				<td>
-					<input type="text"  name="answer" id="answer" class="form-control"  style="width:500px"/>
+					<input type="text" class="form-control"  style="width:500px"/>
 				</td>
 			</tr>
 			<tr>
-				<td id="essential" colspan="2">*은 필수항목입니다.</td>
+				<td class="essential" colspan="2" style="padding-left: 520px">*은 필수항목입니다.</td>
 			</tr>
 		</table>
-		
-		<div style="padding-left:285px ; padding-bottom: 30px">
+		<div style="padding-left:285px ; padding-bottom: 30px; width: 700px" >
 		<button type="button" class="btn btn-dark btn-lg bigBtn">돌아가기</button>
 		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn">회원가입</button>
 		</div>
+        </div>
+    	</div>
+		
   </form>
   </div> 
 

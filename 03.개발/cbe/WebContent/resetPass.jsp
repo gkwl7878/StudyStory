@@ -46,7 +46,7 @@
   <div class="jumbotron">
     <div class="container" >
       <h1>비밀번호 재설정</h1>
-      <div style="color: #808080;padding-top: 10px">
+      <div style="color: #808080; padding-top: 10px">
       <h6>*새롭게 사용하실 비밀번호를 입력해주세요.</h6>
       </div>
       
@@ -54,23 +54,27 @@
   </div>
 
   <div class="container">
+  <div class="row">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-9">
   	<form id="Frm">
-		<table class="table" style="width: 700px; " >
+		<table class="table" style="width: 500px; " >
 			<tr >
-				<td>새 비밀번호<span class="span">*</span></td>
-				<td><input type="password"  name="newPass"  class="form-control" style="width:200px"/></td>
+				<td>새 비밀번호</td>
+				<td><input type="password"   class="form-control" style="width:200px"/></td>
 			</tr>
 			<tr>
-				<td>새 비밀번호 확인<span class="span">*</span></td>
-				<td><input type="password"  name="newPass2"class="form-control" style="width:200px"/></td>
+				<td>새 비밀번호 확인</td>
+				<td><input type="password" class="form-control" style="width:200px"/></td>
 			</tr>
 		</table>
 		<div style="padding-left:200px ; padding-bottom: 30px">
 		<button type="button" class="btn btn-dark btn-lg bigBtn">확인</button>
 		</div>
   </form>
+  </div>
+  </div>
   </div> 
-
 </main>
 
 	

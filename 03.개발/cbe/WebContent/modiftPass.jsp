@@ -50,19 +50,22 @@
   </div>
 
   <div class="container">
+  	<div class="row">
+  	<div class="col-lg-2"></div>
+  	<div class="col-lg-10">
   	<form id="Frm">
-		<table class="table" style="width: 700px; " >
+		<table class="table" style="width: 600px; " >
 			<tr>
 				<td>기존 비밀번호</td>
-				<td><input type="password"  name="newPass"  class="form-control" style="width:200px"/></td>
+				<td><input type="password"  class="form-control" style="width:200px"/></td>
 			</tr>
 			<tr>
 				<td>새 비밀번호</td>
-				<td><input type="password"  name="newPass"  class="form-control" style="width:200px"/></td>
+				<td><input type="password"  class="form-control" style="width:200px"/></td>
 			</tr>
 			<tr>
 				<td>새 비밀번호 확인</td>
-				<td><input type="password"  name="newPass2"class="form-control" style="width:200px"/></td>
+				<td><input type="password" class="form-control" style="width:200px"/></td>
 			</tr>
 			<tr>
 			<td colspan="2">
@@ -73,11 +76,14 @@
 			</tr>
 		</table>
 		
-		<div style="padding-left:200px ; padding-bottom: 30px">
+		<div style="padding-left:200px ; padding-bottom: 30px; width: 600px">
 		<button type="button" class="btn btn-dark btn-lg bigBtn" >돌아가기</button>
 		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn">비밀번호 수정</button>
 		</div>
   </form>
+  	</div>
+  	</div>
+  	
   <div>
   </div>
   </div> 

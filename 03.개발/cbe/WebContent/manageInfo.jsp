@@ -61,30 +61,34 @@
   </div>
 
   <div class="container">
+  	<div class="row">
+  	<div class="col-lg-2"></div>
+  	<div class="col-lg-10">
   	<form id="Frm">
-  		<table class="table" style="margin: 20px;">
+  		<table class="table" style="margin: 20px; width: 700px">
   			<tr>
   				<td rowspan="2" class="leftTd">회원정보 수정</td>
-  				<td class="rightTd"><button type="button" class="btn btn-outline-secondary btn-adjust btn-adjust" id="modiInfo" >회원정보 수정</button></td>
+  				<td class="rightTd"><button type="button" class="btn btn-outline-secondary btn-adjust btn-adjust" >회원정보 수정</button></td>
   			</tr>
   			<tr>
   				<td class="rightTd">회원가입 할 때에 입력한 정보를 수정할 수 있는 페이지로 이동합니다.</td>
   			</tr>
   			<tr>
   				<td rowspan="2" class="leftTd">비밀번호 변경</td>
-  				<td class="rightTd"><button type="button" class="btn btn-outline-secondary btn-adjust btn-adjust" id="modiPass" >비밀번호 변경</button></td>
+  				<td class="rightTd"><button type="button" class="btn btn-outline-secondary btn-adjust btn-adjust"  >비밀번호 변경</button></td>
   			</tr>
   			<tr>
 				<td class="rightTd"><div>로그인 할 떄에 사용하는 계정의 비밀번호를 수정하는 페이지로 이동합니다.</div></td>
   			</tr>
   			<tr>
   				<td class="leftTd">계정 탈퇴</td>
-				<td s><button type="button" class="btn btn-outline-secondary btn-adjust btn-adjust" id="signOut" >탈퇴하기</button></td>
+				<td s><button type="button" class="btn btn-outline-secondary btn-adjust btn-adjust" >탈퇴하기</button></td>
   			</tr>
   		</table>
   </form>
+  	</div>
   </div> 
-
+</div>
 </main>
 
 	

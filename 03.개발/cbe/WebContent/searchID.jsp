@@ -5,9 +5,8 @@
 <html>
 <link rel="stylesheet" type="text/css"  href="http://localhost:8080/html_prj/common/css/main_v190130.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-		
-	})//ready
 </script>
 <head>
 	<meta charset="UTF-8">
@@ -43,7 +42,6 @@
 
 <main role="main">
 
-  <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container" >
       <h1>아이디/비밀번호 찾기</h1>
@@ -56,21 +54,24 @@
   </div>
 
   <div class="container">
-  	<form id="Frm">
+  <div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-10">
+  <form id="Frm">
 		<table class="table" style="width: 700px; " >
 			<tr>
-				<td style="font-size: 17px"><input type="radio" class="radio" checked="checked" name="radio"/> 아이디 찾기</td>
+				<td style="font-size: 17px"><input type="radio" class="radio" checked="checked" name="radio" /> 아이디 찾기</td>
 				<td style="font-size: 17px"><input type="radio" class="radio" name="radio"/> 비밀번호 찾기</td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text"  name="name" class="form-control" style="width:200px"></td>
+				<td><input type="text"  class="form-control" style="width:200px"></td>
 			</tr>
 			<tr >
 				<td>이메일</td>
 				<td>
-				<input type="text"  name="email1" id="email1" class="form-control" style="width:120px; display: inline-block;"/>@
-				<input type="text"  name="email2" id="email2"  class="form-control" style="width:120px; display: inline-block;"/>
+				<input type="text"  class="form-control" style="width:120px; display: inline-block;"/>@
+				<input type="text" class="form-control" style="width:120px; display: inline-block;"/>
 				<select class="form-control" style="width: 140px; display: inline-block;">
 					<option value="직접입력">직접입력</option>
 					<option value="네이버">naver.com</option>
@@ -81,16 +82,16 @@
 				</td>
 			</tr>
 		</table>
-		<div style="padding-left:200px ; padding-bottom: 30px">
+		<div style="padding-left:200px ; padding-bottom: 30px; width: 700px">
 		<button type="button" class="btn btn-dark btn-lg bigBtn">돌아가기</button>
 		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn" >확인</button>
 		</div>
   </form>
+  </div>
+  </div>
   </div> 
 
 </main>
-
-	
 
 	<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>

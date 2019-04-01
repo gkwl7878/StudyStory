@@ -5,8 +5,9 @@
 <html>
 <link rel="stylesheet" type="text/css"  href="http://localhost:8080/html_prj/common/css/main_v190130.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-    
+	
 </script>
 <head>
 	<meta charset="UTF-8">
@@ -58,22 +59,25 @@
   </div>
 
   <div class="container">
+  	<div class="row">
+  	<div class="col-lg-2"></div>
+  	<div class="col-lg-10">
   	<form id="Frm">
-		<table class="table" style="width: 820px;" >
+		<table class="table" style="width: 700px;" >
 			<tr>
-				<td style="font-size: 17px"><input type="radio" class="radio"  name="radio"/> 아이디 찾기</td>
-				<td style="font-size: 17px"><input type="radio" class="radio"  checked="checked" name="radio"/> 비밀번호 찾기</td>
+				<td style="font-size: 17px"><input type="radio" class="radio"  name="radio"  /> 아이디 찾기</td>
+				<td style="font-size: 17px"><input type="radio" class="radio"  checked="checked" name="radio" /> 비밀번호 찾기</td>
 			</tr>
 			<tr>
 				<td>아이디</td>
 				<td>
-					<input type="text"  name="id" class="form-control" style="width:200px;display: inline-block;"/>
+					<input type="text"  class="form-control" style="width:200px;display: inline-block;"/>
 					<button type="button" class="btn btn-outline-secondary btn-adjust" id="idValid">중복확인</button>
 				</td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text"  name="name" class="form-control" style="width:200px"></td>
+				<td><input type="text"  class="form-control" style="width:200px"></td>
 			</tr>
 			<tr>
 				<td span="2">인증질문</td>
@@ -88,15 +92,18 @@
 			<tr>
 				<td>인증 답</td>
 				<td>
-					<input type="text"  name="answer" id="answer" class="form-control"  style="width:500px"/>
+					<input type="text" class="form-control"  style="width:500px"/>
 				</td>
 			</tr>
 		</table>
-		<div style="padding-left:200px ; padding-bottom: 30px">
+		<div style="padding-left:200px ; padding-bottom: 30px; width: 700px;">
 		<button type="button" class="btn btn-dark btn-lg bigBtn" >돌아가기</button>
 		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn"  >확인</button>
 		</div>
   </form>
+  	</div>
+  	</div>
+  	
   </div> 
 
 </main>
