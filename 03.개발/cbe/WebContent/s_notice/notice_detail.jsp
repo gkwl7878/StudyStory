@@ -25,8 +25,33 @@
   }
   
   
-  
   </style>
+  
+  
+  <!-- daum map api -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=556561d449900c23e674c88c88f33ce6"></script>
+  <script type="text/javascript">
+  $(function() {
+	  var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	  var options = { //지도를 생성할 때 필요한 기본 옵션
+	  	center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+	  	level: 3 //지도의 레벨(확대, 축소 정도)
+	  };
+	
+	  var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+	  
+		// 마커가 표시될 위치입니다 
+	  var markerPosition  = new daum.maps.LatLng(33.450701, 126.570667); 
+
+	  // 마커를 생성합니다
+	  var marker = new daum.maps.Marker({
+	      position: markerPosition
+	  });
+
+	  // 마커가 지도 위에 표시되도록 설정합니다
+	  marker.setMap(map);
+  })
+  </script>
 </head>
 <body>
 	<!-- header -->
@@ -84,7 +109,9 @@
 	      </div>
 	      <div class="row" style="margin-top:30px;">
 		      <div class="col-3 font20bold">장소</div>
-		      <div class="col-9">다음지도 넣을거임~</div>
+		      <div class="col-9">
+		      	<div id="map" style="width:100%;height:400px;"></div>
+		      </div>
 	      </div>
 	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3 font20bold">시간</div>
