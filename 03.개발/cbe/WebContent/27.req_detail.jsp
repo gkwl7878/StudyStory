@@ -5,6 +5,7 @@
 <html>
 <style>
 	#wrap{margin:100px auto; width: 700px; min-height: 800px}
+	.info{border: 1px solid #BFC8D0 ; padding: 50px ;text-align: center; margin-bottom: 50px; margin-top: 30px}
 </style>
 <head>
 	<meta charset="UTF-8">
@@ -29,24 +30,34 @@
 	
 	<div id="wrap" >
 		<form>
-		 <div style= "width: 920px; border:1px solid #D7D7D7; padding:40px ; ">
+		 <div style= "width: 920px; border:1px solid #D7D7D7; padding:40px ; margin-bottom: 20px ">
 		<h3><strong>신청자 상세보기</strong></h3>
-		<div>
-		<img src="Resources/images/no_image.png">
-		</div>
+		<img src="http://localhost:8080/third_prj/Resources/images/no_pic.png" style="float: inherit; margin-top: 20px">
+		<span style="vertical-align: bottom;"><strong>닉네임 : 신규에용</strong></span>
 		<hr  color="gray" >
-		<h5>스터디의 활동 종료 이유를 참여한 회원들에게 알려주세요.</h5>
-		<br/>
-		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
-				placeholder="내용을 입력해주세요.">
-		<br/>
-	
-	<br/>
-  
-  <a class="btn btn-secondary btn-lg" href="#void" role="button">목록으로</a>&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-secondary btn-lg" href="#void" role="button">수락하기</a>&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-secondary btn-lg" href="#void" role="button">거절하기</a>
+		<!-- <h5>새로운 신청자를 확인 해주세요.</h5> -->
+		<!-- <span style="font-weight: bold;"><h3>자기소개</h3></span> -->
+		
+		<div class="row" style="border:1px solid #BFC8D0">
+  <div class="col-2">
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">자기소개</a>
+      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">지원동기</a>
+    </div>
   </div>
+  <div class="col-10">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">안녕하세요. 저는 이 모임에 꼭 가입하고싶습니다. 서울 역삼동에 거주하는 김신규입니다. 잘부탁드려요</div>
+      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">영어 회화 잘하고싶어요. 회화를 배워서 해외여행도 자유롭게 다니는 자유로운 영혼이 되고싶습니다.</div>
+    </div>
+  </div>
+</div>
+		
+  
+  </div>
+  <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 300px; ">목록으로</a>
+  <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 10px;">수락하기</a>
+  <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 10px;">거절하기</a>
 </form>
 	</div>
 	
