@@ -154,7 +154,7 @@
 	<br/>
 	<br/>
 	 <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 250px;" >취소</a> 
-	<a class="btn btn-primary btn-lg" href="#void" role="button" id="request" style="right: 100">승인요청</a>
+	<a class="btn btn-primary btn-lg" href="#void" role="button" id="request" style="right: 100">수정</a>
 </form>
 	</div>
 	
