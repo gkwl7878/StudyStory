@@ -32,9 +32,7 @@
 <body>
 	<!-- header -->
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
-
-
-	<!--  -->
+	<!--  header  끝 -->
 	
 
 
