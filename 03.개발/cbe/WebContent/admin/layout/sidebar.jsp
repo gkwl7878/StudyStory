@@ -34,7 +34,8 @@
         </a>
       </li>
     </ul>
-		<div style="margin-top:400px;">
+
+	<div style="margin-top:400px;">
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
       <span>주간 신규 회원 수 : 00명</span>
       <a class="d-flex align-items-center text-muted" href="#">
