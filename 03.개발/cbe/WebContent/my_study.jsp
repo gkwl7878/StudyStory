@@ -34,10 +34,10 @@
 
 
 	<!-- body -->
-	<div role="body_container">
+	<div role="main">
 
 		<!-- 점보트론 : 전광판 -->
-		<section class="jumbotron text-center">
+		<section class="jumbotron text-center" style="height: 100px;">
 			<div class="container">
 				<h1 class="jumbotron-heading">내 스터디</h1>
 			</div>
@@ -45,14 +45,14 @@
 		<!-- 점보트론 : 전광판 -->
 
 		<!-- CONTAINER DIV -->
-		<div class="container">
+		<div class="container mb-3">
 			<!-- row -->
-			<div class="row">
+			<div class="row justify-content-center">
 
 				<!-- 왼쪽 사용자 상태 -->
 				<div class="col-md-3 pr-0">
-					<div class="card" style="width: 100%;">
-						<img src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top" alt="...">
+					<div class="card" style="width: 200px;">
+						<img style="width: 200px; height: 200px;" src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">사용자의 상태</h5>
 							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -62,11 +62,12 @@
 				</div>
 				<!-- 왼쪽 사용자 상태 -->
 
+
 				<!-- 오른쪽-->
 				<div class="col-md-9">
 
 					<!-- 정렬바 row -->
-					<div class="row mb-3" style="height: 4em;">
+					<div class="row mb-3" style="height: 3em;">
 						<div class="row mr-3 ml-3 w-100 rounded bg-secondary align-items-center">
 
 							<div class="col-auto mr-auto">
@@ -94,7 +95,6 @@
 									<input type="button" class="btn btn-sm btn-light" value="필터 검색" />
 								</form>
 							</div>
-
 						</div>
 					</div>
 					<!-- 정렬바 row -->
@@ -123,13 +123,10 @@
 						<!-- 1번째 줄 시작 -->
 					</div>
 					<!-- 썸네일 row -->
-
 				</div>
 				<!-- 오른쪽-->
-
 			</div>
 			<!-- row -->
-
 		</div>
 		<!-- CONTAINER DIV -->
 	</div>
@@ -137,7 +134,11 @@
 
 
 	<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
+	<footer>
+		<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
+	</footer>
+	<!-- footer -->
+
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
 	<script src="./Resources/js/popper.min.js"></script>

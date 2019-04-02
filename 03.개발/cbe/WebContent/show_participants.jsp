@@ -38,9 +38,10 @@
 	</div>
 
 	<!-- body -->
-	<main role="main">
+	<div role="main">
+	
 
-	<div class="container">
+	<div class="container h-100">
 		<div class="border rounded p-2 bg-light mb-3">
 			<div class="container">
 				<div class="col-md-4">total</div>
@@ -109,12 +110,12 @@
 		</div>
 
 	</div>
-
-	</main>
+	</div>
 	
-	<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
-
+	<footer class="footer mt-auto py-3 fixed-bottom">
+		<!-- footer -->
+		<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
+	</footer>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
