@@ -4,14 +4,16 @@
 <!DOCTYPE html>
 <html>
 <style>
+
 	#wrap{margin:100px auto; width: 700px; min-height: 800px}
+	.carousel-inner-1{position:relative;width:100%;overflow:hidden; height: 500px}
 </style>
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
   
-	<title>스터디 생성 거절</title>
+	<title>서비스 소개</title>
   <!-- Custom styles for this template -->
 
 
@@ -27,22 +29,50 @@
 
 	
 	
-	<div id="wrap" >
+	<div class="banner">
+		<div class="bd-example">
+  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner-1">
+      <div class="carousel-item active">
+        <img src="http://localhost:8080/third_prj/Resources/images/std1.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>편리하게 공부해요!</h5>
+          <p>책가방에서 스터디 플래너를 꺼내고 필통을 꺼내느라 바쁘시죠? 노트북, 모바일로 쉽게 관리해요 !</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="http://localhost:8080/third_prj/Resources/images/std2.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>함께 공부해요 !</h5>
+          <p>아직도 혼자 공부하세요? 같은 목표를 가진 다양한 친구들과 함께라면 !</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="http://localhost:8080/third_prj/Resources/images/std3.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>함께 즐겁게 여유롭게 !</h5>
+          <p>스터디 스토리는 당신의 목표를 응원합니다. 여유롭게 즐거운 스터디 성공을 응원합니다.</p>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+</div>
+		<div id="wrap" >
 		<form>
-		 <br/><br/><br/><br/>
-		<h1 ><Strong>새 스터디 생성 거절</Strong></h1>
-		<hr  color="gray" >
-		<h5>스터디 생성 요청자에게 보여줄 메세지를 입력하세요.</h5>
-		<br/>
-		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
-				placeholder="내용을 입력해주세요.">
-		<br/>
-	
-	<br/>
-	<br/>
-  
-  <a class="btn btn-secondary btn-lg" href="#void" role="button" >돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-secondary btn-lg" href="#void" role="button">보내기</a>
 </form>
 	</div>
 	

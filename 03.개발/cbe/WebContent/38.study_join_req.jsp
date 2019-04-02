@@ -6,9 +6,13 @@
 <style>
 	#wrap{margin:100px auto; width: 700px; min-height: 800px}
 table{ width: 100%; text-align: center;  }
-th,td{  }
+th,td{ text-align: center; }
 div{margin: 0px auto;}
 .info{border: 1px solid #BFC8D0 ; padding: 50px ;text-align: center; margin-bottom: 50px; margin-top: 30px}
+.form-control-1{width:100px;height:calc(1.5em + .75rem + 2px);padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out; margin-left: 20px}
+/* form-control 부트스트랩 내용에서 width 100% 를 수정 */
+/* .table td, .table th{ vertical-align: middle; } */
+
 </style>
 <head>
 	<meta charset="UTF-8">
@@ -23,6 +27,8 @@ div{margin: 0px auto;}
   <script type="text/javascript">
   
   </script>
+  
+  
 </head>
 <body>
 	<!-- header -->
@@ -48,10 +54,10 @@ div{margin: 0px auto;}
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row"><img src="http://localhost:8080/third_prj/Resources/images/no_pic.png"><br/>한지민</th>
-      <td valign="middle"><strong>영어 같이 해봐요! <br/>노하우 만땅 리더의 특급모임</strong></td>
-      <td>호주, 뉴질랜드, 영국, 미국, 인도, 필리핀 영어까지 한번에 정복!</td>
+    <tr style="vertical-align: middle;">
+      <td scope="row"><img src="http://localhost:8080/third_prj/Resources/images/no_pic.png"><br/>한지민</td>
+      <td style="vertical-align: middle;"><strong>영어 같이 해봐요! <br/>노하우 만땅 리더의 특급모임</strong></td>
+      <td style="vertical-align: middle;">호주, 뉴질랜드, 영국, 미국, 인도, 필리핀 영어까지 한번에 정복!</td>
     </tr>
   </tbody>
 </table>
@@ -70,8 +76,8 @@ div{margin: 0px auto;}
 				placeholder="지원동기는 100자 이상 입력해주세요." ;>
 				
 		<div class="info" ><h3>연락가능한 연락처를 적어주세요! </h3></div>
-		<span>연락처
-		<input type="tel" class="form-control"  width="50px"></span>
+		<span style="margin-left: 20%;" ><strong>연락처</strong>
+		<input type="tel" class="form-control-1"  style="margin-left: 30px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<input type="tel" class="form-control-1" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-<input type="tel" class="form-control-1" ></span>
   
   </div>
   <div>
