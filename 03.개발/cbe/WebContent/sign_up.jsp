@@ -118,7 +118,7 @@
 			<tr>
 				<td>아이디<span class="span">*</span></td>
 				<td>
-					<input type="text" class="form-control" style="width:200px;display: inline-block;"/>
+					<input type="text" class="form-control" style="width:200px;display: inline-block;" maxlength="15" placeholder="아이디는 15자 이하"/>
 					<button type="button" class="btn btn-outline-secondary btn-adjust">중복확인</button>
 				</td>
 			</tr>

@@ -6,32 +6,11 @@
 <link rel="stylesheet" type="text/css"  href="http://localhost:8080/html_prj/common/css/main_v190130.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
-	/* sidebar */
-	$(function() {
-	
-	    var $sidebar   = $("#sidebar"), 
-	        $window    = $(window),
-	        offset     = $sidebar.offset(),
-	        topPadding = 15;
-	
-	    $window.scroll(function() {
-	        if ($window.scrollTop() > offset.top) {
-	            $sidebar.stop().animate({
-	                marginTop: $window.scrollTop() - offset.top + topPadding
-	            });
-	        } else {
-	            $sidebar.stop().animate({
-	                marginTop: 0
-	            });
-	        }
-	    });
-	    
-	});
 </script>
 <head>
 	<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 	<link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
   
 	<title>스터디 상세 정보</title>
  <style>
@@ -82,7 +61,7 @@
 				</div> 
 			  	<div class="row">
 			  		<div class="col-lg-8"></div>
-			  		<div class="col-lg-4" style="font-size:17px; font-weight:bold; margin-bottom: 20px">현재 00명이 이 모임을 좋아합니다.</div>
+			  		<div class="col-lg-4" style="font-size:17px; font-weight:bold; margin-bottom: 20px">현재 00명이 이 스터디를 좋아합니다.</div>
 			  	</div>
 			  	<div class="row" style="margin-bottom: 20px">
 			  		<div class="col-lg-12">
@@ -95,7 +74,7 @@
 			  		
 			  		<div class="row">
 				  		<div class="col-lg-6">지역: 건대</div>
-				  		<div class="col-lg-6">인원: 6/10</div>
+				  		<div class="col-lg-6">인원: 10</div>
 			  		</div>
 			  		
 			  		<div class="row">
@@ -151,7 +130,7 @@
 				  	</div>
 				  	<div class="row">
 				  		<div class="col-lg-10">
-					  		<input type="text" class="form-control"/>
+					  		<input type="text" class="form-control" maxlength="100" placeholder="댓글은 100자까지 입력하실 수 있습니다."/>
 				  		</div>
 				  		<div class="col-lg-2">
 					  		<button type="button" class="btn btn btn-secondary btn-adjust" id="searchZip" >확인</button>
@@ -215,30 +194,31 @@
 		  
 	  <!-- 따라다니는 사이드바 -->
 		<div class="col-lg-2" style="position: fixed; margin-left: 940px;">
-			<div id="sidebar">
-				<div style="width: 300px; height: 230px;background-color: #CECECE;padding: 30px">
+			<div id="sidebar" style="width: 300px; height: 300px">
+				<div class="row  border border-secondary" style="padding: 30px; margin-left: 10px">
+				<div class="col-lg-12">
 					<div class="row">
-					<div class="col-lg-1"></div>
-					<div class="col-lg-10">
-				  	<div style="font-size: 17px; font-weight: bold">영어 같이 해봐요! 노하우 만땅 리더의 특급모임</div>
-					</div>
-					<div class="col-lg-1"></div>
-					<div class="row">
-					<div class="col-lg-1"></div>
-					<div class="col-lg-10" style="font-size: 12px; margin-top: 10px">
-				  	<div>호주, 뉴질랜드,영국,미국,인도,필리핀, 영어까지 한번에 정복!</div>
-					</div>
-					<div class="col-lg-1"></div>
+						<div class="col-lg-12">
+					  	<div style="font-size: 17px; font-weight: bold; height: 70px;">영어 같이 해봐요! 노하우 만땅 리더의 특급모임</div>
+						</div>
 					</div>
 					<div class="row">
-					<div class="col-4" ></div>
-					<div class="col-8" style="margin-top: 20px">
-				  	<button type="button" class="btn btn btn-secondary btn-adjust2" id="searchZip" style="width: 140px; height: 37px" >참가 신청하기</button>
+						<div class="col-lg-12" style="font-size: 12px; margin-top: 10px; height: 60px">
+					  	<div>호주, 뉴질랜드,영국,미국,인도,필리핀, 영어까지 한번에 정복!!</div>
+						</div>
 					</div>
-					</div>
-					
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row">
+								<div class="col-lg-2" ></div>
+								<div class="col-lg-8" style="margin-top: 40px">
+							  	<button type="button" class="btn btn btn-secondary btn-adjust2" id="searchZip" style="width: 140px; height: 37px" >참가 신청하기</button>
+								</div>
+							</div>
+						</div>
 					</div>
 			 	</div>
+			 </div>
 			</div>
 		</div>
 		
