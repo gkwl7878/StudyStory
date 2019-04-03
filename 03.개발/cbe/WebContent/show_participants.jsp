@@ -32,90 +32,64 @@
 	<!-- header -->
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 
-	<!-- 페이지 타이틀 -->
-	<div class="col-sm-1 col-md-12 p-4 bg-light mb-4 border-bottom">
-		<p class="h3" style="text-align: center;">스터디 참여자 보기</p>
-	</div>
-
 	<!-- body -->
 	<div role="main">
-	
 
-	<div class="container h-100">
-		<div class="border rounded p-2 bg-light mb-3">
+		<!-- 점보트론 : 전광판 -->
+		<section class="jumbotron text-center bg-white mb-0">
 			<div class="container">
-				<div class="col-md-4">total</div>
+				<h1 class="jumbotron-heading">스터디 참여자 보기</h1>
 			</div>
-		</div>
-	</div>
+		</section>
+		<!-- 점보트론 : 전광판 -->
 
-	<div class="album">
-		<div class="container">
+		<!-- CONTAINER DIV -->
+		<div class="container" style="min-height: 700px;">
+			<!-- row -->
 			<div class="row">
-				<div class="col-md-2">
-					<div class="card mb-3" style="width: 10rem;">
-						<img src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top">
-						<div class="card-body card-body mx-auto">
-							<h5 class="card-title text-center">이름</h5>
-							<p class="card-text text-center">연락처</p>
+				<div class="col-md-12 p-3 bg-light">
+
+					<!-- 정렬바 row -->
+					<div class="row mb-3" style="height: 3em;">
+						<div class="row mr-3 ml-3 w-100 border-bottom align-items-center">
+							<div class="col-auto mr-auto">
+								<p class="h5">조회된 참여자들 : 0건</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="card mb-3" style="width: 10rem;">
-						<img src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top">
-						<div class="card-body card-body mx-auto">
-							<h5 class="card-title text-center">이름</h5>
-							<p class="card-text text-center">연락처</p>
+					<!-- 정렬바 row -->
+
+					<div class="row p-3">
+						<div class="col-12 bg-white">
+							<!-- 썸네일 row -->
+							<div class="row pt-3">
+								<!-- 1번째 줄 시작 -->
+								<div class="col-3">
+									<div class="card mb-4 shadow-sm text-center">
+										<img class="card-img-top" src="http://localhost:8080/third_prj/Resources/images/no_img.png" alt="Card image cap">
+										<div class="card-body">
+											<p class="card-title">닉네임</p>
+											<p class="card-text">010-0000-0000</p>
+										</div>
+									</div>
+								</div>
+								<!-- 1번째 줄 시작 -->
+							</div>
 						</div>
 					</div>
+					<!-- 썸네일 row -->
 				</div>
-				<div class="col-md-2">
-					<div class="card mb-3" style="width: 10rem;">
-						<img src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top">
-						<div class="card-body card-body mx-auto">
-							<h5 class="card-title text-center">이름</h5>
-							<p class="card-text text-center">연락처</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="card mb-3" style="width: 10rem;">
-						<img src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top">
-						<div class="card-body card-body mx-auto">
-							<h5 class="card-title text-center">이름</h5>
-							<p class="card-text text-center">연락처</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="card mb-3" style="width: 10rem;">
-						<img src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top">
-						<div class="card-body card-body mx-auto">
-							<h5 class="card-title text-center">이름</h5>
-							<p class="card-text text-center">연락처</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div class="card mb-3" style="width: 10rem;">
-						<img src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top">
-						<div class="card-body card-body mx-auto">
-							<h5 class="card-title text-center">이름</h5>
-							<p class="card-text text-center">연락처</p>
-						</div>
-					</div>
-				</div>
+
 			</div>
 		</div>
+		<!-- row -->
+	</div>
+	<!-- CONTAINER DIV -->
+	</div>
+	<!-- DIV ROLE MAIN -->
 
-	</div>
-	</div>
-	
-	<footer class="footer mt-auto py-3 fixed-bottom">
-		<!-- footer -->
-		<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
-	</footer>
+	<!-- footer -->
+	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>

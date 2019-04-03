@@ -37,7 +37,7 @@
 	<div role="main">
 
 		<!-- 점보트론 : 전광판 -->
-		<section class="jumbotron text-center" style="height: 100px;">
+		<section class="jumbotron text-center bg-white mb-0">
 			<div class="container">
 				<h1 class="jumbotron-heading">내 스터디</h1>
 			</div>
@@ -50,13 +50,29 @@
 			<div class="row justify-content-center">
 
 				<!-- 왼쪽 사용자 상태 -->
-				<div class="col-md-3 pr-0">
-					<div class="card" style="width: 200px;">
-						<img style="width: 200px; height: 200px;" src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">사용자의 상태</h5>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-							<a href="#" class="btn btn-primary">프로필 관리</a>
+				<div class="col-auto">
+					<div class="card" style="width: 250px;">
+						<img style="width: 200px; height: 200px;" src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top mx-auto d-block rounded-circle mt-3" alt="...">
+						<div class="card-body text-center pt-0">
+							<h5 class="card-title text-center m-4">닉네임</h5>
+							<div class="border-top border-bottom mb-3">
+								<div class="d-flex flex-row p-2 border-bottom">
+									<div class="mr-auto">진행 중인 스터디</div>
+									<div class="text-right">0</div>
+									<div class=""> 건</div>
+								</div>
+								<div class="d-flex flex-row p-2 border-bottom">
+									<div class="mr-auto">오픈 대기 스터디</div>
+									<div class="text-right">10</div>
+									<div class=""> 건</div>
+								</div>
+								<div class="d-flex flex-row p-2">
+									<div class="mr-auto">종료 스터디</div>
+									<div class="text-right">6</div>
+									<div class=""> 건</div>
+								</div>
+							</div>
+							<a href="#" class="btn btn-md btn-primary">프로필 관리</a>
 						</div>
 					</div>
 				</div>
@@ -64,7 +80,7 @@
 
 
 				<!-- 오른쪽-->
-				<div class="col-md-9">
+				<div class="col-auto" style="width: 800px;">
 
 					<!-- 정렬바 row -->
 					<div class="row mb-3" style="height: 3em;">
@@ -75,8 +91,8 @@
 							</div>
 
 							<div class="col-auto">
-								<form action="" class="">
-									<select class="btn btn-light btn-sm dropdown-toggle">
+								<form action="">
+									<select class="btn btn-light btn-sm dropdown-toggle ml-1">
 										<option>지 역</option>
 										<option>신 촌</option>
 										<option>홍 대</option>
@@ -85,14 +101,14 @@
 										<option>노 원</option>
 										<option>강 남</option>
 									</select>
-									<select class="btn btn-light btn-sm dropdown-toggle">
+									<select class="btn btn-light btn-sm dropdown-toggle ml-1">
 										<option>종 류</option>
 										<option>언 어</option>
 										<option>취 업</option>
 										<option>취 미</option>
 										<option>기 타</option>
 									</select>
-									<input type="button" class="btn btn-sm btn-light" value="필터 검색" />
+									<input type="button" class="btn btn-sm btn-light ml-1" value="필터 검색" />
 								</form>
 							</div>
 						</div>
@@ -130,7 +146,8 @@
 		</div>
 		<!-- CONTAINER DIV -->
 	</div>
-	<!-- BODY CONTAINER DIV -->
+	<!-- DIV ROLE MAIN -->
+
 
 
 	<!-- footer -->
