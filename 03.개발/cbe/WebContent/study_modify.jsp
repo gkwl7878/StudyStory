@@ -114,15 +114,25 @@
 						<td><label
 							style="font-size: 20px; width: 70px; margin-left: 10px; margin-top: 7px;"><strong>지역</strong></label>
 						</td>
-						<td><input type="text" class="form-control" placeholder="지역"
-							style="width: 180px;" /></td>
+						<td><select class="form-control" id="subject" style="width: 180px;">
+					<option value="언어">언어</option>
+					<option value="취업">취업</option>
+					<option value="취미">취미</option>
+					<option value="기타">기타</option>
+				</select></td>
 						<td><img alt="" src="Resources/images/sub.png"
 							style="width: 30px; height: 30px; margin-left: 30px;"></td>
 						<td><label
 							style="font-size: 20px; margin-left: 10px; margin-top: 7px;"><strong>주제</strong></label>
 						</td>
-						<td><input type="text" class="form-control" placeholder="주제"
-							style="width: 250px; margin-left: 30px;"></td>
+						<td><select class="form-control" id="loc" style="width: 250px; margin-left: 30px;">
+					<option value="신촌">신촌</option>
+					<option value="홍대">홍대</option>
+					<option value="종각">종각</option>
+					<option value="건대">건대</option>
+					<option value="노원">노원</option>
+					<option value="강남">강남</option>
+				</select></td>
 					</tr>
 				</table>
 			</div>

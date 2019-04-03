@@ -75,7 +75,7 @@
 			<div class=" row">
 				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
 					<textarea class="form-control" rows="3"
-						style="resize: none;; height: 300px;" name="contents"></textarea>
+						style="resize: none;; height: 300px;" name="contents" readonly="readonly"></textarea>
 				</div>
 			</div>
 

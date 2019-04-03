@@ -37,6 +37,18 @@
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
 
+<script type="text/javascript">
+	$(function() {
+		$('#summernote').summernote({
+			placeholder : '공지사항입니다  :)',
+			tabsize : 2,
+			height : 200,
+			lang : 'ko-KR'
+		});
+	});
+</script>
+
+
 </head>
 <body>
 	<!-- header -->
@@ -83,10 +95,11 @@
 				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
 					<label class=" font17bold"><strong>문의내용 </strong> </label>
 				</div>
-				<div class="col-9">
-					<textarea style="resize: none;; margin-left: 100px; height: 200px;"
+				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
+					<input type="text" class="form-control" id="summernote">
+					<!-- <textarea style="resize: none;; margin-left: 100px; height: 200px;"
 						class=" form-control" rows="3" name="contents"
-						placeholder="자세한 내용을 입력해주세요"></textarea>
+						placeholder="자세한 내용을 입력해주세요"></textarea> -->
 				</div>
 			</div>
 

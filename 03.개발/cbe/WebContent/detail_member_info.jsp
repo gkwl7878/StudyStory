@@ -112,12 +112,17 @@
 				<div class="col-3 font20bold" style="margin-top: 10px;">
 					<strong>인증질문</strong>
 				</div>
-				<div class="col-7 font20bold" style="margin-top: 10px;">
-					<select class="form-control">
-						<option>인증질문</option>
-						<option>초등학교 담임선생님 성함은?</option>
-						<option>가장 좋아하는 캐릭터 이름은?</option>
-					</select>
+				<div class="col-7"  style="margin-top: 10px;">
+						<label>초등학교 담임선생님 성함은?</label> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-3 font20bold" style="margin-top: 10px;">
+					<strong>질문답</strong>
+				</div>
+				<div class="col-7 " style="margin-top: 10px;">
+						<label>김민희</label> 
+					
 				</div>
 			</div>
 

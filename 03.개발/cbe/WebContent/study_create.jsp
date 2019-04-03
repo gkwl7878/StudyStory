@@ -31,6 +31,23 @@
 
 <script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
 
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
+	rel="stylesheet">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$('#summernote').summernote({
+			placeholder : '공지사항입니다  :)',
+			tabsize : 2,
+			height : 200,
+			lang : 'ko-KR'
+		});
+	});
+</script>
+
 <script type="text/javascript">
   $(function() {
         $("#request").click(function (){
@@ -138,12 +155,15 @@
 				<label style="font-size: 26px;">스터디 <strong>주제</strong>와 이
 					방의 <strong>규칙</strong>등을 자세히 설명해주세요
 				</label>
-				<textarea id="detail" class="form-control" rows="3"
+				<div class="col-9" style="resize: none; width: 700px; height: 300px;">
+					<input type="text" class="form-control" id="summernote">
+				<!-- <textarea id="detail" class="form-control" rows="3"
 					style="resize: none; width: 700px; height: 300px;"
 					class="form_control" name="contents"
-					placeholder="스터디의 상세설명을 입력해주세요"></textarea>
+					placeholder="스터디의 상세설명을 입력해주세요"></textarea> -->
 			</div>
-
+			</div>
+		
 			<div class="form-group" style="margin-bottom: 70px;">
 				<label for="exampleFormControlTextarea1" style="font-size: 30px;">대표이미지</label>
 				<div class="input-group mb-3">

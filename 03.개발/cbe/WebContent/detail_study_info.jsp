@@ -30,6 +30,23 @@
 <!-- Custom styles for this template -->
 
 <script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
+	rel="stylesheet">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$('#summernote').summernote({
+			
+			tabsize : 2,
+			height : 200,
+			lang : 'ko-KR'
+		});
+	});
+</script>
+
 
 
 <script type="text/javascript">
@@ -90,7 +107,12 @@
 				<strong>주제</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="password" class="form-control" placeholder="주제">
+				<select class="form-control" id="subject">
+					<option value="언어">언어</option>
+					<option value="취업">취업</option>
+					<option value="취미">취미</option>
+					<option value="기타">기타</option>
+				</select>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 10px;">
@@ -98,23 +120,31 @@
 				<strong>지역</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" placeholder="지역">
+				<select class="form-control" id="loc">
+					<option value="신촌">신촌</option>
+					<option value="홍대">홍대</option>
+					<option value="종각">종각</option>
+					<option value="건대">건대</option>
+					<option value="노원">노원</option>
+					<option value="강남">강남</option>
+				</select>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 10px;">
 			<div class="col-3 font20bold">
 				<strong>참여자 수</strong>
 			</div>
-			<div class="col-7 font20bold">
-				<input type="text" class="form-control" placeholder="참여자 수">
+			<div class="col-7 ">
+				<label>25명 </label>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 10px;">
 			<div class="col-3 font20bold">
 				<strong>생성일</strong>
 			</div>
-			<div class="col-7 font20bold">
-				<input type="text" class="form-control" placeholder="생성일">
+			<div class="col-7 ">
+				<label>2019년</label>
+				
 			</div>
 		</div>
 
@@ -137,9 +167,10 @@
 			<div class="col-3 font20bold">
 				<strong>상세설명</strong>
 			</div>
-			<div class="col-7 font20bold">
-				<textarea class="form-control" rows="3"
-					style="resize: none; width: 440px; height: 300px;" name="contents"></textarea>
+			<div class="col-7 font20bold" style="width: 440px; height: 300px">
+				<input type="text" class="form-control" id="summernote">
+				<!-- <textarea class="form-control" rows="3"
+					style="resize: none; width: 440px; height: 300px;" name="contents"></textarea> -->
 			</div>
 		</div>
 		<div class="row" style="margin-top: 30px;">

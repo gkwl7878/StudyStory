@@ -75,14 +75,14 @@
 			<div class=" row">
 				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
 					<textarea class="form-control" rows="3"
-						style="resize: none;; height: 300px;" name="contents" placeholder="내용"></textarea>
+						style="resize: none;; height: 300px;" name="contents" placeholder="내용"  readonly="readonly"></textarea>
 				</div>
 			</div>
 			<div class=" row">
 				<div class="col-9"
 					style="margin-top: 10px; margin-left: 100px; margin-top: 20px;">
 					<textarea class="form-control" rows="3"
-						style="resize: none;; height: 300px;" name="contents" placeholder="운영자 답변내용"></textarea>
+						style="resize: none;; height: 300px;" name="contents" placeholder="운영자 답변내용" readonly="readonly"></textarea>
 				</div>
 			</div>
 
