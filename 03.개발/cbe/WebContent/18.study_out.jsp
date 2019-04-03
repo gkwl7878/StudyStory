@@ -36,7 +36,7 @@
 		<h5>이 스터디를 탈퇴하는 이유가 무엇인지 리더에게 알려주세요.</h5>
 		<br/>
 		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
-				placeholder="내용을 입력해주세요.">
+				placeholder="내용을 입력해주세요." >
 		<br/>
 	
 	<br/>
