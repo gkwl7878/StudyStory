@@ -5,7 +5,6 @@
 <html>
 <style>
 	#wrap{margin:100px auto; width: 700px; min-height: 800px}
-	.div1{ text-align: center;}
 </style>
 <head>
 	<meta charset="UTF-8">
@@ -36,14 +35,13 @@
 		<hr  color="gray" >
 		<h5>스터디의 활동 종료 이유를 참여한 회원들에게 알려주세요.</h5>
 		<br/>
-		<textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none; "placeholder="내용을 입력해주세요."></textarea>
+		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+				placeholder="내용을 입력해주세요.">
 		<br/>
 	
 	<br/>
-  <div class="div1">
   <a class="btn btn-secondary btn-lg" href="#void" role="button" >돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a class="btn btn-secondary btn-lg" href="#void" role="button">스터디 활동종료</a>
-  </div>
   </div>
 </form>
 	</div>

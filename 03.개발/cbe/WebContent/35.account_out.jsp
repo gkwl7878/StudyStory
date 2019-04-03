@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
   
   <title>계정 탈퇴 </title>
+  <!-- 계정 탈퇴시 회원님이 남긴 정보는 유지됩니다. 계속 탈퇴 진행하시겠습니까? -->
   <!-- Custom styles for this template -->
 
 
@@ -33,7 +34,7 @@
 		 <div style="border:1px solid #D7D7D7; padding:40px"><br/><br/>
 		<h1 ><Strong>계정 탈퇴</Strong></h1>
 		<hr  color="gray" >
-		<h5>정말 진행하시겠습니까? <br/>탈퇴를 하면 회원님의 모든 기록은 지워지게 됩니다.</h5>
+		<h5>계정탈퇴시 회원님이 남긴 정보는 유지됩니다. <br/>계속 탈퇴 진행하시겠습니까?</h5>
 		<br/>
 		<input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
 				placeholder="비밀번호 입력.">

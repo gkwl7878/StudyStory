@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
   
-	<title>스터디 생성 거절</title>
+	<title>스터디 삭제</title>
   <!-- Custom styles for this template -->
 
 
@@ -30,21 +30,19 @@
 	<div id="wrap" >
 		<form>
 		 <br/><br/><br/><br/>
-		<h1 ><Strong>새 스터디 생성 거절</Strong></h1>
+		<h1 ><Strong>스터디 삭제</Strong></h1>
 		<hr  color="gray" >
-		<h5>스터디 생성 요청자에게 보여줄 메세지를 입력하세요.</h5>
+		<h5>모든 스터디 참여자에게 보여줄 삭제 사유를 입력하세요.</h5>
 		<br/>
-		<!--input typt text  -->
 		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
 				placeholder="내용을 입력해주세요.">
-		<!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="내용을 입력해주세요.";></textarea> -->
 		<br/>
 	
 	<br/>
 	<br/>
   
   <a class="btn btn-secondary btn-lg" href="#void" role="button" >돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-secondary btn-lg" href="#void" role="button">보내기</a>
+  <a class="btn btn-secondary btn-lg" href="#void" role="button">삭제</a>
 </form>
 	</div>
 	

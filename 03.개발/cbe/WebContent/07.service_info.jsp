@@ -5,12 +5,13 @@
 <html>
 <style>
 
-	#wrap{margin:100px auto; width: 700px; min-height: 800px}
+	.wrap{background-color: #120C01}
 	.carousel-inner-1{position:relative;width:100%;overflow:hidden; height: 500px}
-	.banner{ height: 500px; }
+	.banner{ height: 500px;margin-bottom: 30px }
 	.carousel-caption d-none d-md-block{ margin-top: 100px }
 	.d-block w-100{ height: 500px; width: 100%}
-	.intro{ width: 100%; height: 1500px; margin-bottom: 50px }
+	.intro{ width: 100%; height: 1600px; margin-bottom: 30px }
+	.img-frm{ width: 960px; height: 500px ;float: left; margin-bottom: 20px ; border: 0px; }
 	
 </style>
 <head>
@@ -32,7 +33,7 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 
 	
-	
+	<div class="wrap">
 	<div class="banner">
 		<div class="bd-example">
   <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -77,10 +78,12 @@
 </div>
 
 <div class="intro">
-	<img src="">
+	<img src="http://localhost:8080/third_prj/Resources/images/notebook.jpg" class="img-frm">
+	<img src="http://localhost:8080/third_prj/Resources/images/book.jpg"  class="img-frm" style="float: right;">
+	<img src="http://localhost:8080/third_prj/Resources/images/fist.jpg"  class="img-frm">
 
 </div>
-
+</div>
 	
 		<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
