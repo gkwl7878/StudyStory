@@ -23,7 +23,7 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  header  끝 -->
 
-	    <main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-4">
+	    <main role="main" class="col-lg-10 px-4" style="margin:0px auto;">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" style="margin-top:80px;">
         <h1 class="h2">OOO 스터디</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
