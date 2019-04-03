@@ -6,7 +6,7 @@
 <style>
 #wrap {
 	margin: 100px auto;
-	width: 800px;
+	width: 810px;
 	min-height: 800px
 }
 /* #link{margin-left: 1000px; margin-top: 20px} */
@@ -61,9 +61,7 @@
 			<div class="row">
 				<div class="col-12 justify-content-left"
 					style="margin-bottom: 20px;">
-					<h2>
-						<strong>새 공지사항</strong>
-					</h2>
+					<label style="font-size: 40px;"><strong>새 공지사항</strong></label>
 				</div>
 			</div>
 
@@ -81,7 +79,7 @@
 
 			<div class="row" style="margin-top: 30px;">
 				<a class="btn btn-secondary btn" href="#void" role="button"
-					style="margin-left: 300px;">목록으로</a> <a
+					style="margin-left: 280px;">목록으로</a> <a
 					class="btn btn-secondary btn" href="#void" role="button"
 					style="margin-left: 10px;">작성</a>
 			</div>

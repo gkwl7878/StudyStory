@@ -48,9 +48,7 @@
 			<div class="row">
 				<div class="col-12 justify-content-left"
 					style="margin-bottom: 20px;">
-					<h2>
-						<strong>내 문의보기</strong>
-					</h2>
+					<label style="font-size: 40px;"><strong>내 문의보기</strong></label>
 				</div>
 			</div>
 
@@ -77,14 +75,14 @@
 			<div class=" row">
 				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
 					<textarea class="form-control" rows="3"
-						style="resize: none;; height: 300px;" name="contents"></textarea>
+						style="resize: none;; height: 300px;" name="contents" placeholder="내용"></textarea>
 				</div>
 			</div>
 			<div class=" row">
 				<div class="col-9"
 					style="margin-top: 10px; margin-left: 100px; margin-top: 20px;">
 					<textarea class="form-control" rows="3"
-						style="resize: none;; height: 300px;" name="contents"></textarea>
+						style="resize: none;; height: 300px;" name="contents" placeholder="운영자 답변내용"></textarea>
 				</div>
 			</div>
 

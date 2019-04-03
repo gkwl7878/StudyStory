@@ -84,12 +84,18 @@
 
 	<div id="wrap">
 		<form action="create_request.jsp" name="createFrm">
-
-			<label style="font-size: 45px; margin-bottom: 20px;"><strong>내
-					스터디 수정하기</strong></label><img alt="" src="Resources/images/create.png"
-				style="width: 150px; height: 120px; margin-left: 30px; margin-bottom: 30px;">
-
-			<div class="form-group row">
+			
+			
+			<div class="row">
+			<div class="col-12 justify-content-left"
+				style="margin-bottom: 20px; ">
+				<strong style="font-size: 45px;">내 스터디 수정하기</strong><img
+					src="Resources/images/create.png"
+					style="width: 150px; height: 120px; margin-left: 30px;">
+			</div>
+		</div>
+				
+			<div class="row" style="margin-top: 30px;">
 				<img alt="" src="Resources/images/subject.png"
 					style="width: 34px; height: 32px; margin-left: 10px; margin-right: 12px;"><label
 					style="font-size: 20px; margin-right: 20px;"><strong>이름</strong></label>

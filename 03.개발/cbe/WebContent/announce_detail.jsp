@@ -12,7 +12,7 @@
 /* #link{margin-left: 1000px; margin-top: 20px} */
 #loginTitle {
 	text-align: center;
-	st
+	
 }
 </style>
 <head>
@@ -55,9 +55,7 @@
 			<div class="row">
 				<div class="col-12 justify-content-left"
 					style="margin-bottom: 20px;">
-					<h2>
-						<strong>세부 공지사항</strong>
-					</h2>
+					<label style="font-size: 40px;"><strong>세부 공지사항</strong></label>
 				</div>
 			</div>
 
@@ -68,10 +66,10 @@
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<label style="width: 50px;">등록일</label> <label
-						style="width: 200px; margin-left: 30px;">2019</label> <label
-						style="width: 100px; margin-left: 20px;">조회수</label> <label
-						style="width: 100px; margin-left: 50px;">0000</label>
+					<label style="width: 50px;">등록일</label> 
+					<label style="width: 200px; margin-left: 30px;">2019</label> 
+					<label style="width: 50px; margin-left: 20px;">조회수</label> 
+					<label style="width: 100px; margin-left: 30px;">0000</label>
 				</div>
 
 			</div>

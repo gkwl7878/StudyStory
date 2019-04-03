@@ -60,7 +60,7 @@
 			</div>
 			<div class="col-7 font20bold">
 				<textarea class="form-control" rows="3"
-					style="resize: none;; width: 440px; height: 300px;" name="contents"></textarea>
+					style="resize: none;  height: 300px;" name="contents"></textarea>
 			</div>
 		</div>
 
@@ -71,7 +71,7 @@
 			</div>
 		</div>
 		<a class="btn btn-secondary btn" href="#void" role="button"
-			style="margin-left: 350px; margin-top: 30px;">목록으로</a>
+			style="margin-left: 340px; margin-top: 15px;">목록으로</a>
 	</div>
 
 

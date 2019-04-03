@@ -62,7 +62,7 @@
 	<div class="container form-group" id="wrap">
 		<div class="row">
 			<div class="col-12 justify-content-left"
-				style="margin-bottom: 20px; margin-top: 30px;">
+				style="margin-bottom: 20px; ">
 				<strong style="font-size: 45px;">상세 스터디 정보</strong><img
 					src="Resources/images/create.png"
 					style="width: 150px; height: 120px; margin-left: 30px;">

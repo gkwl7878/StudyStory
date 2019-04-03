@@ -84,13 +84,17 @@
 	<div id="wrap">
 		<form action="create_request.jsp" name="createFrm">
 
-			<div class="row" style="margin-top: 30px; margin-bottom: 60px;">
-				<label id="title" style="font-size: 45px;"><strong>스터디그룹
-						개설하기</strong></label> <img src="Resources/images/create.png"
+			
+				<div class="row">
+			<div class="col-12 justify-content-left"
+				style="margin-bottom: 20px; ">
+				<strong style="font-size: 45px;">스터디 그룹 개설하기</strong><img
+					src="Resources/images/create.png"
 					style="width: 150px; height: 120px; margin-left: 30px;">
 			</div>
-
-			<div class="form-group" style="margin-bottom: 60px;">
+		</div>
+		
+			<div class="form-group" style="margin-bottom: 70px; margin-top: 40px;" >
 
 				<img alt="" src="Resources/images/sub.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
@@ -104,7 +108,7 @@
 				</select>
 			</div>
 
-			<div class="form-group" style="margin-bottom: 60px;">
+			<div class="form-group" style="margin-bottom: 70px;">
 				<img alt="" src="Resources/images/loc.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
 				<label class="font30">새로운 스터디 그룹의 주 <strong>지역</strong>은
@@ -120,7 +124,7 @@
 				</select>
 			</div>
 
-			<div class="form-group" style="margin-bottom: 60px;">
+			<div class="form-group" style="margin-bottom: 70px;">
 				<img alt="" src="Resources/images/subject.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
 				<label class="font30">스터디의 <strong>이름</strong>을 정해주세요
@@ -128,7 +132,7 @@
 					placeholder="스터디의 이름을 입력해주세요" id="name">
 			</div>
 
-			<div class="form-group" style="margin-bottom: 60px;">
+			<div class="form-group" style="margin-bottom: 70px;">
 				<img alt="" src="Resources/images/detail.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
 				<label style="font-size: 26px;">스터디 <strong>주제</strong>와 이
@@ -140,7 +144,7 @@
 					placeholder="스터디의 상세설명을 입력해주세요"></textarea>
 			</div>
 
-			<div class="form-group" style="margin-bottom: 60px;">
+			<div class="form-group" style="margin-bottom: 70px;">
 				<label for="exampleFormControlTextarea1" style="font-size: 30px;">대표이미지</label>
 				<div class="input-group mb-3">
 					<input type='file' name='file' id='real_file'

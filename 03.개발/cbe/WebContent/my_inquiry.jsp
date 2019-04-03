@@ -48,9 +48,7 @@
 			<div class="row">
 				<div class="col-12 justify-content-left"
 					style="margin-bottom: 20px;">
-					<h2>
-						<strong>내 문의보기</strong>
-					</h2>
+					<label style="font-size: 40px;"><strong>내 문의보기</strong></label>
 				</div>
 			</div>
 

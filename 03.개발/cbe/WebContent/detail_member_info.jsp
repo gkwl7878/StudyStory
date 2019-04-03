@@ -44,11 +44,9 @@
 	<form action="create_request.jsp" name="createFrm">
 		<div class="container form-group" id="wrap">
 			<div class="row">
-				<div class="col-12 justify-content-left"
-					style="margin-bottom: 20px;">
-					<h2>
-						<strong>상세 회원 정보</strong>
-					</h2>
+				<div class="col-12 justify-content-left" 
+					style="margin-bottom: 20px; ">
+						<label style="font-size: 40px;"><strong>상세 회원 정보</strong></label>
 				</div>
 			</div>
 
