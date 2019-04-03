@@ -7,9 +7,6 @@
 	#wrap{margin:100px auto; width: 800px; min-height: 800px}
 	/* #link{margin-left: 1000px; margin-top: 20px} */
 	#loginTitle{text-align: center; st}
-	#request{left: 300px;}
-	#title{font-size: 45px;}
-	#sub_title{}
 
 .font20bold {
 		font-size:20px;
@@ -91,9 +88,9 @@
                 </div>
                  <div class="row">
                         <div class="col-3 font20bold" style="margin-top: 10px;">
-                            <strong>스터디명</strong>                    
+                            <label>스터디명</label>                    
                         </div>
-                    <div class="col-7 font20bold" style="margin-top: 10px; margin-bottom: 10px;">
+                    <div class="col-7 " style="margin-top: 10px; margin-bottom: 10px;">
                      <label>스터디명스터디명</label>
                     </div>
                   </div>    
@@ -102,7 +99,7 @@
                         <div class="col-3 font20bold">
                         <strong>리더</strong>
                         </div>
-                    <div class="col-7 font20bold">
+                    <div class="col-7 ">
                       <label>리더뽀로로</label>
                     </div>
                   </div>              
@@ -119,7 +116,7 @@
                     <strong>지역</strong>
                     </div>
                     <div class="col-7 font20bold" style="margin-top: 10px;">
-                      <input type="text" class="form-control" placeholder="지역" style="" >
+                      <input type="text" class="form-control" placeholder="지역" >
                     </div>
                   </div>              
                  <div class="row">
@@ -141,7 +138,7 @@
                     
                   <div class=" row">
                  <div class="col-3 font20bold" style="margin-top: 10px;">
-    					<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>대표썸네일</strong></label>&nbsp;
+    					<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>스터디 썸네일</strong></label>&nbsp;
                     </div>
                  <div class="col-7 font20bold" style="margin-top: 10px; " >
   					<input type='file' name='file' id='real_file' onchange="previewFile()"  style='display:none; ' />

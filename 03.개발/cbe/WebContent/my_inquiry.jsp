@@ -7,12 +7,9 @@
 	#wrap{margin:100px auto; width: 800px; min-height: 800px}
 	/* #link{margin-left: 1000px; margin-top: 20px} */
 	#loginTitle{text-align: center; st}
-	#request{left: 300px;}
-	#title{font-size: 45px;}
-	#sub_title{}
 
-.font20bold {
-		font-size:20px;
+.font17bold {
+		font-size:17px;
 		font-weight:bold;
 	}
 
@@ -24,11 +21,23 @@
   
 	<title>Bootstrap Template By Young</title>
   <!-- Custom styles for this template -->
-  
+
   <script src="./Resources/js/jquery-3.3.1.slim.min.js" ></script>
 
-  <script type="text/javascript">
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script> 
 
+
+    <script type="text/javascript">
+	 $(function() {
+          $('#summernote').summernote({
+                placeholder: '공지사항입니다  :)',
+                tabsize: 2,
+                height: 200,
+                lang: 'ko-KR'
+          });
+        }); 
+</script>
   <script type="text/javascript">
   $(function() {
   	$("#request").click(function (){
@@ -81,58 +90,46 @@
 	<!-- header -->
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  -->
-
 	
-<div class="container form-group" id="wrap" >
-              
-              
-                
-                     
-                 <div class="row">
-                 <div class="col-3 font20bold"  style="margin-top: 200px;">
-                   <strong>제목</strong>
-                    </div>
-                    <div class="col-7 font20bold" style="margin-top: 200px;">
-                      <input type="password" class="form-control"  style="">
-                    </div>
-                  </div>              
-                 <div class="row">
-                 <div class="col-3 font20bold" style="margin-top: 10px;">
-                    <strong>분류</strong>
-                    </div>
-                    <div class="col-7 font20bold" style="margin-top: 10px;">
-                      <input type="text" class="form-control" placeholder="지역" style="" >
-                    </div>
-                  </div>              
-                   
-             
-  
- 					<div class=" row">
-                 <div class="col-3 font20bold" style="margin-top: 10px;">
- 					 <strong>내용</strong>
-                    </div>
-                 <div class="col-7 font20bold" style="margin-top: 10px; " >
-    				<textarea class="form-control" rows="3" style="width: 440px; height: 300px;" name="contents" ></textarea>
-  					</div>  
-					</div>  
-					                  
- 					<div class=" row">
-                 <div class="col-3 font20bold" style="margin-top: 10px;">
- 					
-                    </div>
-                 <div class="col-7 " style="margin-top: 10px; " >
-    				<label>날짜 : </label>
-  					</div>  
-					</div>                    
-                    
-               
-         <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 350px; margin-top: 30px;" >목록으로</a>
-     
-        </div>	
+	<form action="create_request.jsp" name="createFrm">
+	<div class="container form-group" id="wrap" >
+		<div class="row">
+			<div class="col-12 justify-content-left" style="margin-bottom: 20px;">
+				<h2><strong>내 문의보기</strong></h2>
+			</div>
+		</div>
 
-
-
-
+		 <div class="row">
+		    <div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
+		       <label style="font-size: 25px;">제목제목</label>
+		    </div>
+		  </div>		
+ 			<div class=" row">
+            <div class="col-9" style="margin-top: 10px; margin-left: 100px;">
+				<label style="width: 50px; " class="font17bold"><strong>분류</strong></label>
+				<label style="width: 200px; margin-left: 30px;">회원관련</label>
+			</div>                    
+            </div>
+		<div class="row">
+		    <div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
+				<label style="width: 80px; " class="font17bold"><strong>등록일</strong></label>
+				<label style="width: 150px; margin-left: 30px;">2019</label>
+				<label style="width: 100px; margin-left: 20px;" class="font17bold">답변여부</label>
+				<label style="width: 100px; margin-left: 50px;">미완료</label>
+		    </div>
+			</div>
+		 
+ 			<div class=" row">
+            <div class="col-9" style="margin-top: 10px; margin-left: 100px;">
+    			<textarea class="form-control" rows="3" style="height: 300px;" name="contents" ></textarea>
+  			</div>  
+  			</div>  
+		 
+		
+	
+	 <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 330px; margin-top: 30px;" >목록으로</a> 
+	</div>
+</form>
 	
 		<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>

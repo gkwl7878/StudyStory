@@ -7,9 +7,6 @@
 	#wrap{margin:100px auto; width: 700px; min-height: 800px}
 	/* #link{margin-left: 1000px; margin-top: 20px} */
 	#loginTitle{text-align: center; st}
-	#request{left: 300px;}
-	#title{font-size: 45px;}
-	#sub_title{}
 
 </style>
 <head>
@@ -22,17 +19,6 @@
 
   <script src="./Resources/js/jquery-3.3.1.slim.min.js" ></script>
 
-  <script type="text/javascript">
-/* $(function() {
-	  $('#summernote').summernote({
-		  	placeholder: '이벤트를 작성해주세요.',
-	        tabsize: 2,
-	        height: 150,
-	        width: 390,
-	        lang: 'ko-KR'
-	  });
-	}); */
-</script> 
   <script type="text/javascript">
   $(function() {
   	$("#request").click(function (){
@@ -92,47 +78,50 @@
 		<form action="create_request.jsp" name="createFrm">
 		 <br/>
 		 <br/>
-		<label id="title"><strong>내 스터디 수정하기</strong></label>&nbsp;&nbsp;&nbsp;&nbsp;<img alt="" src="Resources/images/create.png" style="width: 150px; height: 120px;">
-		<br/>
-		<br/>
-		 <br/>
+		<label style="font-size: 45px; margin-bottom: 30px;"><strong>내 스터디 수정하기</strong></label><img alt="" src="Resources/images/create.png" style="width: 150px; height: 120px; margin-left: 30px; margin-bottom: 30px;">
+	
  <div class="form-group row">
-    <img alt="" src="Resources/images/subject.png" style="width: 30px; height: 30px;">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>이름</strong></label>
+    <img alt="" src="Resources/images/subject.png" style="width: 34px; height: 32px; margin-left: 10px; margin-right: 12px;"><label style="font-size: 20px; margin-right: 20px;" ><strong>이름</strong></label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="스터디명" style="width: 610px;">
+      <input type="text" class="form-control" placeholder="스터디명" style="margin-bottom: 30px;">
     </div>
   </div>		
- <br/>
-
-  <div class="row">
-    <div class="col">
-    <img alt="" src="Resources/images/loc.png" style="width: 30px; height: 30px; ">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>지역</strong></label>
-      <input type="text" class="form-control" placeholder="지역" style="width: 200px;" />
-    </div>
-    <div class="col">
-    <img alt="" src="Resources/images/sub.png" style="width: 30px; height: 30px;">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>주제</strong></label>
-      <input type="text" class="form-control" placeholder="주제" style="width: 450px;">
-    </div>
+ 
+  <div class="row"><!--margin top주기  -->
+  	<table>
+  	<tr>
+    <td>
+    <img src="Resources/images/loc.png" style="width: 30px; height: 30px;  margin-left: 13px;">
+    </td>
+    <td >
+    <label style="font-size: 20px; width: 70px; margin-left: 10px; margin-top: 7px;"><strong>지역</strong></label>
+    </td>
+    <td >
+      <input type="text" class="form-control" placeholder="지역" style="width: 180px;" />
+    </td>
+    <td >
+    <img alt="" src="Resources/images/sub.png" style="width: 30px; height: 30px; margin-left: 30px;">
+    </td>
+    <td >
+	<label style="font-size: 20px; margin-left: 10px; margin-top: 7px;"><strong>주제</strong></label>    
+    </td>
+    <td >
+      <input type="text" class="form-control" placeholder="주제" style="width: 250px; margin-left: 30px;">
+    </td>
+    </tr>
+    </table>
   </div>
 
-
-
-<br/>
-<br/>
-<br/>
-  <div class="form-group">
-    <img alt="" src="Resources/images/detail.png" style="width: 30px; height: 30px;">&nbsp;&nbsp;&nbsp;<label for="exampleFormControlTextarea1" style="font-size: 20px;">어떤 <span style="font-weight: bold;">주제</span>와  <span style="font-weight: bold;">규칙</span> 으로 변경하시겠습니까?</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="width: 700px; height: 200px;" class="form_control"  name="contents" id="summernote" placeholder="스터디의 상세설명을 입력해주세요"></textarea>
+  <div class="form-group" style="margin-top: 70px;">
+    <img  src="Resources/images/detail.png" style="width: 30px; height: 30px; margin-right: 10px; margin-bottom: 10px; "><label style="font-size: 20px; margin-bottom: 20px; ">어떤 <strong>주제</strong>와  <strong>규칙</strong> 으로 변경하시겠습니까?</label>
+    <textarea class="form-control" rows="3" style="width: 700px; height: 200px;" class="form_control"   id="summernote" placeholder="스터디의 상세설명을 입력해주세요"></textarea>
   </div>
-	<br/>
-	<br/>
-	<br/>
-	
+
   <div class="form-group">
-    <label for="exampleFormControlTextarea1" style="font-size: 20px;">어떤&nbsp;<strong>대표이미지</strong>로 변경하시겠습니까?</label>
+    <label style="font-size: 20px; margin-top: 50px;">어떤 <strong>대표이미지</strong>로 변경하시겠습니까?</label>
 	<div class="input-group mb-3">
   <input type='file' name='file' id='real_file' onchange="previewFile()"  style='display:none; ' />
-	<input type="text" id='file_sub' style="width:700px; border:0px; display: none" readonly="readonly" ;>
+	<input type="text" id='file_sub' style="width:700px; border:0px; display: none" readonly="readonly" >
 
 <a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img  width="700" height="300" id="img" src="Resources/images/Image.png" border="0" title='찾아보기' alt='찾아보기'></a>
 </div>

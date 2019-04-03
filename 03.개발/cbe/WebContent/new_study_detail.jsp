@@ -4,12 +4,14 @@
 <!DOCTYPE html>
 <html>
 <style>
-	#wrap{margin:100px auto; width: 600px; min-height: 800px}
+	#wrap{margin:100px auto; width: 800px; min-height: 800px}
 	/* #link{margin-left: 1000px; margin-top: 20px} */
 	#loginTitle{text-align: center; st}
-	#request{left: 300px;}
-	#title{font-size: 45px;}
-	#sub_title{}
+
+.font20bold {
+		font-size:20px;
+		font-weight:bold;
+	}
 
 </style>
 <head>
@@ -19,16 +21,11 @@
   
 	<title>Bootstrap Template By Young</title>
   <!-- Custom styles for this template -->
-
-
-
-  <script src="./Resources/js/jquery-3.3.1.slim.min.js" ></script>
   
- 
+  <script src="./Resources/js/jquery-3.3.1.slim.min.js" ></script>
 
   <script type="text/javascript">
 
-</script> 
   <script type="text/javascript">
   $(function() {
   	$("#request").click(function (){
@@ -83,80 +80,92 @@
 	<!--  -->
 
 	
-	
-	<div id="wrap" >
-		<form action="create_request.jsp" name="createFrm">
-		 <br/>
-		 <br/>
-		<label id="title"><strong>새 스터디 상세 정보</strong></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img alt="" src="Resources/images/create.png" style="width: 150px; height: 120px;">
-		<br/>
-		<br/>
-		 <br/>
- <div class="form-group row">
-    <label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>번호</strong></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="번호" style="width: 500px;" readonly="readonly">
-    </div>
-  </div>		
- <div class="form-group row">
-    <label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>리더</strong></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="리더" style="width: 500px;" readonly="readonly">
-    </div>
-  </div>		
- <div class="form-group row">
-    <label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>주제</strong></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="주제" style="width: 500px;" readonly="readonly">
-    </div>
-  </div>		
- <div class="form-group row">
-    <label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>지역</strong></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="지역" style="width: 500px;" readonly="readonly">
-    </div>
-  </div>		
- <div class="form-group row">
-    <label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>스터디명</strong></label>&nbsp;&nbsp;&nbsp;&nbsp;
-    <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="스터디명" style="width: 500px;" readonly="readonly">
-    </div>
-  </div>		
- <div class="form-group row">
-    <label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>생성일</strong></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="생서일" style="width: 500px;" readonly="readonly">
-    </div>
-  </div>		
-  <br/>
- <div class="form-group row">
-    <label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>대표썸네일</strong></label>&nbsp;
-	<div class="col-sm-10">
-  <input type='file' name='file' id='real_file' onchange="previewFile()"  style='display:none; ' />
-	<input type="text" id='file_sub' style="width:600px; border:0px; display: none" readonly="readonly" ;>
+<div class="container form-group" id="wrap" >
+                <div class="row">
+                        <div class="col-12 justify-content-left" style="margin-bottom: 20px; margin-top: 30px;">
+                             <strong style="font-size: 45px;">새 스터디 상세 정보</strong><img src="Resources/images/create.png" style="width: 150px; height: 120px; margin-left: 30px;" >
+                        </div>
+                </div>
+                 <div class="row" >
+                        <div class="col-3 font20bold" >
+                            <strong>번호</strong>                    
+                        </div>
+                    <div class="col-7 font20bold" >
+                      <input type="text" class="form-control" readonly="readonly" >
+                    </div>
+                  </div>    
+                            
+                 <div class="row" style="margin-top: 15px;">
+                        <div class="col-3 font20bold">
+                        <strong>리더</strong>
+                        </div>
+                    <div class="col-7 font20bold">
+                      <input type="text" class="form-control" readonly="readonly">
+                    </div>
+                  </div>              
+                 <div class="row" style="margin-top: 15px;">
+                 <div class="col-3 font20bold" >
+                   <strong>주제</strong>
+                    </div>
+                    <div class="col-7 font20bold" >
+                      <input type="password" class="form-control" readonly="readonly" >
+                    </div>
+                  </div>              
+                 <div class="row" style="margin-top: 15px;">
+                 <div class="col-3 font20bold" >
+                    <strong>지역</strong>
+                    </div>
+                    <div class="col-7 font20bold" >
+                      <input type="text" class="form-control" readonly="readonly" >
+                    </div>
+                  </div>              
+                 <div class="row" style="margin-top: 15px;">
+                 <div class="col-3 font20bold" >
+                    <strong>스터디명</strong>
+                    </div>
+                    <div class="col-7 font20bold" >
+                      <input type="text" class="form-control" readonly="readonly">
+                  </div>             
+                  </div>              
+                 <div class="row" style="margin-top: 15px;">
+                 <div class="col-3 font20bold" >
+  					<strong>생성일</strong>
+                    </div>
+                 <div class="col-7 font20bold" >
+                      <input type="text" class="form-control" readonly="readonly">
+                 </div>
+                    </div>
+                    
+                  <div class=" row" style="margin-top: 15px;">
+                 <div class="col-3 font20bold" >
+    					<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>스터디 썸네일</strong></label>&nbsp;
+                    </div>
+                 <div class="col-7 font20bold" >
+  					<input type='file' name='file' id='real_file' onchange="previewFile()"  style='display:none; ' />
+					<input type="text" id='file_sub' style="width:600px; border:0px; display: none">
 
-<a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img  width="500" height="300" id="img" src="Resources/images/Image.png" border="0" title='찾아보기' alt='찾아보기'></a>
-</div>
-  </div>
-<br/>
-<br/>
- <div class="form-group row">
-   <label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>상세설명</strong></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   
-    
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="width: 500px; height: 300px;" class="form_control"  name="contents" id="summernote" placeholder="스터디의 상세설명을 입력해주세요"></textarea>
-  </div>
+					<a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img  width="440" height="300" id="img" src="Resources/images/Image.png" border="0" title='찾아보기' alt='찾아보기'></a>
+                 </div>
+				</div>
+
+ 					<div class=" row" style="margin-top: 15px;">
+                 <div class="col-3 font20bold" >
+ 					 <strong>상세설명</strong>
+                    </div>
+                 <div class="col-7 font20bold" >
+    				<textarea class="form-control" rows="3" style="width: 440px; height: 300px; margin-top: 20px;" name="contents" readonly="readonly"></textarea>
+  					</div>  
+					</div>                    
+                    
+               
+         <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 180px; margin-top: 30px;" >목록으로</a>
+        <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left:  10px; margin-top: 30px;">수락</a>
+        <a class="btn btn-secondary btn" href="#void" role="button"  style="margin-left:  10px; margin-top: 30px;">거절</a>
+        </div>	
 
 
 
-  <br/>
-	<br/>
-	<br/>
-	 <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 200px;" >목록으로</a> 
-	<a class="btn btn-secondary btn-lg" href="#void" role="button" id="request" style="margin: 0px auto; ">수락</a>
-	<a class="btn btn-secondary btn-lg" href="#void" role="button" id="request" style="; ">거절</a>
-</form>
-	</div>
+
 	
 		<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
