@@ -16,11 +16,6 @@
   	.select-card:hover {
   		background-color:#F1F3F4;
   	}
-  	
-  	.font12bold {
-  		font-size:12px;
-  		font-weight:bold;
-  	}
   </style>
 </head>
 <body>
@@ -28,16 +23,18 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  header  끝 -->
 
-	    <div class="container col-lg-6">
-      <div class="row justify-content-left col-lg-6" style="margin-top:80px;">
+	    <main role="main" class="col-md-9 ml-sm-auto col-lg-12 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" style="margin-top:80px;">
         <h1 class="h2">OOO 스터디</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+        </div>
+        <hr>
       </div>
-      <hr>
-      <div class="col-lg-6 justify-content-center font12bold">
+      <div class="col-lg-12">
       	<a href="#">스터디 탈퇴하기</a>
       </div>
       <hr>
-      <div class="container" style="min-height:500px;">
+      <div class="container-fluid" style="min-height:500px;">
       	<div class="row col-sm justify-content-center">
 	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
 	      		<div class="card-body">
@@ -78,7 +75,7 @@
       		</div>
       	</div>
       </div>
-    </div>
+    </main>
 
 	<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
