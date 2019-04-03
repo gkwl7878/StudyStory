@@ -35,8 +35,8 @@
 		<hr  color="gray" >
 		<h5>정말 진행하시겠습니까? <br/>탈퇴를 하면 회원님의 모든 기록은 지워지게 됩니다.</h5>
 		<br/>
-		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
-				placeholder="내용을 입력해주세요.">
+		<input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+				placeholder="비밀번호 입력.">
 		<br/>
 	
 	<br/>

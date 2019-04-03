@@ -47,7 +47,7 @@
   </div>
   <div class="col-10">
     <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">안녕하세요. 저는 이 모임에 꼭 가입하고싶습니다. 서울 역삼동에 거주하는 김신규입니다. 잘부탁드려요</div>
+      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">안녕하세요. 저는 이 모임에 꼭 가입하고싶습니다. 서울 역삼동에 거주하는 김신규입니다. 잘부탁드려요안녕하세요. 저는 이 모임에 꼭 가입하고싶습니다. 서울 역삼동에 거주하는 김신규입니다. 잘부탁드려요안녕하세요. 저는 이 모임에 꼭 가입하고싶습니다. 서울 역삼동에 거주하는 김신규입니다. 잘부탁드려요안녕하세요. 저는 이 모임에 꼭 가입하고싶습니다. 서울 역삼동에 거주하는 김신규입니다. 잘부탁드려요안녕하세요. 저는 이 모임에 꼭 가입하고싶습니다. 서울 역삼동에 거주하는 김신규입니다. 잘부탁드려요안녕하세요. 저는 이 모임에 꼭 가입하고싶습니다. 서울 역삼동에 거주하는 김신규입니다. 잘부탁드려요안녕하세요. 저는 이 모임에 꼭 가입하고싶습니다. 서울 역삼동에 거주하는 김신규입니다. 잘부탁드려요</div>
       <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">영어 회화 잘하고싶어요. 회화를 배워서 해외여행도 자유롭게 다니는 자유로운 영혼이 되고싶습니다.</div>
     </div>
   </div>

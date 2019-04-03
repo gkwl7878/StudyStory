@@ -7,6 +7,7 @@
 
 	#wrap{margin:100px auto; width: 700px; min-height: 800px}
 	.carousel-inner-1{position:relative;width:100%;overflow:hidden; height: 500px}
+	.banner{ height: 500px; }
 </style>
 <head>
 	<meta charset="UTF-8">
@@ -25,7 +26,6 @@
 <body>
 	<!-- header -->
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
-	<!--  -->
 
 	
 	

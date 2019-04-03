@@ -5,6 +5,9 @@
 <html>
 <style>
 	#wrap{margin:100px auto; width: 700px; min-height: 800px}
+	.form-control-1{display:block;width:100%;height:150px;padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out ; overflow: hidden;}
+	.div-1{ text-align: center;}
+/* input type text 의 height을 변경해줌. */
 </style>
 <head>
 	<meta charset="UTF-8">
@@ -35,14 +38,14 @@
 		<hr  color="gray" >
 		<h5>이 스터디를 탈퇴하는 이유가 무엇인지 리더에게 알려주세요.</h5>
 		<br/>
-		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
-				placeholder="내용을 입력해주세요." >
-		<br/>
+		  <div class="form-group">
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="내용을 입력해주세요.";></textarea>
+  </div>
 	
-	<br/>
-  
+  <div style="margin-top: 30px" class="div-1" >
   <a class="btn btn-secondary btn-lg" href="#void" role="button" >돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a class="btn btn-secondary btn-lg" href="#void" role="button">스터디 탈퇴</a>
+  </div>
   </div>
 </form>
 	</div>

@@ -5,6 +5,7 @@
 <html>
 <style>
 	#wrap{margin:100px auto; width: 700px; min-height: 800px}
+	.div-1{ text-align: center}
 </style>
 <head>
 	<meta charset="UTF-8">
@@ -40,9 +41,10 @@
 		<br/>
 	
 	<br/>
-  
+  <div class="div-1">
   <a class="btn btn-secondary btn-lg" href="#void" role="button" >돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a class="btn btn-secondary btn-lg" href="#void" role="button">거절하기</a>
+  </div>
   </div>
 </form>
 	</div>

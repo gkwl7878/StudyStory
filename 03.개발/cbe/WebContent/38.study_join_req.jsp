@@ -8,7 +8,7 @@
 table{ width: 100%; text-align: center;  }
 th,td{ text-align: center; }
 div{margin: 0px auto;}
-.info{border: 1px solid #BFC8D0 ; padding: 50px ;text-align: center; margin-bottom: 50px; margin-top: 30px}
+.info{border: 1px solid #BFC8D0 ; padding: 50px ;text-align: center; margin-bottom: 50px; margin-top: 30px; background-color: #E0E4FA; border: 3px solid #CCD2D9; }
 .form-control-1{width:100px;height:calc(1.5em + .75rem + 2px);padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out; margin-left: 20px}
 /* form-control 부트스트랩 내용에서 width 100% 를 수정 */
 /* .table td, .table th{ vertical-align: middle; } */
@@ -39,7 +39,7 @@ div{margin: 0px auto;}
 	
 	<div id="wrap" >
 		<form>
-		 <div style= "width: 920px; height: 1400px; border:1px solid #D7D7D7; padding:40px ; ">
+		 <div style= "width: 920px; height: 1500px; border:1px solid #D7D7D7; padding:40px ; ">
 		<h3><strong>스터디 참여 신청</strong></h3>
 		<div>
 		</div>
@@ -62,18 +62,16 @@ div{margin: 0px auto;}
   </tbody>
 </table>
 		
-		<h1 align="center" style="margin-top: 30px;"><strong>김신규</strong>님 !</h1><br/>
+		<h1 align="center" style="margin-top: 30px;"><strong>김신규( abcd123 )</strong>님 !</h1><br/>
 		<h3 align="center">모임이 당신을 궁금해합니다!</h3>
 		
-		<div class="info" ><h3>자기소개를 부탁드립니다. </h3></div>
+		<div class="info"><h3>자기소개를 부탁드립니다. </h3></div>
 		
-		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
-				placeholder="자기소개는 100자 이상 입력해주세요." ;>
+		<textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="자기소개는 100자 이상 입력해주세요.";></textarea>
 				
 		<div class="info" ><h3>이 모임에 지원하게된 동기가 무엇인가요? </h3></div>
 		
-		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
-				placeholder="지원동기는 100자 이상 입력해주세요." ;>
+		<textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="지원동기는 100자 이상 입력해주세요.";></textarea>
 				
 		<div class="info" ><h3>연락가능한 연락처를 적어주세요! </h3></div>
 		<span style="margin-left: 20%;" ><strong>연락처</strong>
