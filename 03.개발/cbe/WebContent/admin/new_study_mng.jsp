@@ -40,7 +40,6 @@
   </head>
   <body>
   
-  
 <!-- navbar 시작 -->
 <c:import url="http://localhost:8080/third_prj/admin/layout/navbar.jsp"></c:import>
 <!-- navbar 끝 -->
@@ -51,11 +50,13 @@
     <!-- sidebar 시작 -->
     <c:import url="http://localhost:8080/third_prj/admin/layout/sidebar.jsp"></c:import>
 		<!-- sidebar 끝 -->	
-        
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">새 스터디 관리</h1>
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="row justify-content-between" style="margin-top:40px; margin-bottom:10px;">
+    	<div class="col-12">
+      	<h1 class="h2">새 스터디 관리</h1>
       </div>
+    </div>
 
       <div class="table-responsive">
         <table class="table table-striped table-sm">
@@ -63,10 +64,10 @@
             <tr class="text-center">
               <th width="50">번호</th>
               <th width="50">리더</th>
-              <th width="250">스터디명</th>
+              <th width="320">스터디명</th>
               <th width="50">분류</th>
               <th width="50">지역</th>
-              <th width="120">생성일</th>
+              <th width="50">생성일</th>
             </tr>
           </thead>
           <tbody>

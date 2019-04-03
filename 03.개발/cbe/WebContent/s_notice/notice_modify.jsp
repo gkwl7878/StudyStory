@@ -85,7 +85,7 @@
 	  </div>
     <hr>
     <div class="row">
-   		<div class="col-3 font20bold text-center">스터디 공지<br/>작성</div>
+   		<div class="col-3 font20bold text-center">스터디 공지<br/>수정</div>
 			<div class="col-9 form-group">
 				<input type="text" class="form-control" placeholder="공지명을 입력해주세요(최대100자)">
 			</div>
@@ -179,7 +179,8 @@
 	   </div>
 	   <div class="row justify-content-center" style="min-height:100px; margin-top:30px;">
 	   	<span style="padding-right:10px;"><button type="button" class="btn btn-secondary" style="height:40px; width:120px;">취소</button></span>
-	   	<button type="button" class="btn btn-secondary" style="height:40px; width:120px;">작성</button>
+	   	<span style="padding-right:10px;"><button type="button" class="btn btn-secondary" style="height:40px; width:120px;">수정</button></span>
+	   	<button type="button" class="btn btn-secondary" style="height:40px; width:120px;">삭제</button>
 	   </div>
 		</div>
 	</div>

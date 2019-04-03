@@ -51,10 +51,28 @@
     <!-- sidebar 시작 -->
     <c:import url="http://localhost:8080/third_prj/admin/layout/sidebar.jsp"></c:import>
 		<!-- sidebar 끝 -->	
-        
+
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">새 스터디 관리</h1>
+      <div class="row justify-content-between" style="margin-top:40px; margin-bottom:10px;">
+      	<div class="col-8">
+        	<h1 class="h2">회원정보 관리</h1>
+        </div>
+        <div class="col-2" style="padding-left:2px; padding-right:2px">
+			    <select class="form-control" style="font-size:12px;">
+			      <option>--검색조건--</option>
+			      <option>아이디</option>
+			      <option>이름</option>
+			      <option>닉네임</option>
+			    </select>
+			  </div>
+			  <div class="col-1" style="padding-left:2px; padding-right:2px">
+			    <input type="text" class="form-control form-control-sm" />
+		    </div>
+		    <div class="col-1" style="padding-left:2px; padding-right:2px">
+          <button type="button" class="btn btn-sm btn-secondary">
+            검색
+          </button>
+        </div>  
       </div>
 
       <div class="table-responsive">
@@ -62,22 +80,24 @@
           <thead>
             <tr class="text-center">
               <th width="50">번호</th>
-              <th width="50">리더</th>
-              <th width="250">스터디명</th>
-              <th width="50">분류</th>
-              <th width="50">지역</th>
-              <th width="120">생성일</th>
+              <th width="50">아이디</th>
+              <th width="50">닉네임</th>
+              <th width="50">이름</th>
+              <th width="100">연락처</th>
+              <th width="100">이메일</th>
+              <th width="100">가입일</th>
             </tr>
           </thead>
           <tbody>
           	<c:forEach begin="1" end="10" step="1">
-            <tr>
-              <td class="text-center">1</td>
-              <td class="text-center">아이디</td>
-              <td>새로운 스터디명입니다</td>
-              <td class="text-center">취업</td>
-              <td class="text-center">강남</td>
-              <td class="text-center">2019-03-00</td>
+            <tr  class="text-center">
+              <td>123</td>
+              <td>아이디이</td>
+              <td>닉네이임</td>
+              <td>이이이름</td>
+              <td>010-1111-2222</td>
+              <td>young@sist.co.kr</td>
+              <td>2019-03-00</td>
             </tr>
             </c:forEach>
           </tbody>
