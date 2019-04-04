@@ -26,7 +26,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
 
-<title>Bootstrap Template By Young</title>
+<title>상세 스터디 정보</title>
 <!-- Custom styles for this template -->
 
 <script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
@@ -158,7 +158,7 @@
 					type="text" id='file_sub'
 					style="width: 600px; border: 0px; display: none"> <a
 					href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img
-					width="440" height="300" id="img" src="Resources/images/Image.png"
+					width="440" height="300" id="img" src="Resources/images/preview_Image.png"
 					border="0" title='찾아보기' alt='찾아보기'></a>
 			</div>
 		</div>
@@ -175,7 +175,7 @@
 		</div>
 		<div class="row" style="margin-top: 30px;">
 			<a class="btn btn-secondary btn" href="#void" role="button"
-				style="margin-left: 180px;">목록으로</a> <a
+				style="margin-left: 250px;">목록으로</a> <a
 				class="btn btn-secondary btn" href="#void" role="button"
 				style="margin-left: 10px;">수정</a> <a class="btn btn-secondary btn"
 				href="#void" role="button" style="margin-left: 10px;">탈퇴</a>

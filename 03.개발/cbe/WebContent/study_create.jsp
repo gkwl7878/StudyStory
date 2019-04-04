@@ -25,8 +25,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
 
-<title>Bootstrap Template By Young</title>
-<!-- Custom styles for this template -->
+
 <title>스터디그룹 개설하기</title>
 
 <script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>

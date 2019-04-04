@@ -26,7 +26,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
 
-<title>Bootstrap Template By Young</title>
+<title>새 공지사항</title>
 <!-- Custom styles for this template -->
 
 <script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
@@ -54,7 +54,6 @@
 <body>
 	<!-- header -->
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
-	<!--  -->
 
 	<form>
 		<div class="container form-group" id="wrap">

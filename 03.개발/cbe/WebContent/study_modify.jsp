@@ -21,7 +21,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
 
-<title>Bootstrap Template By Young</title>
+<title>내 스터디 수정하기</title>
 <!-- Custom styles for this template -->
 
 <script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
