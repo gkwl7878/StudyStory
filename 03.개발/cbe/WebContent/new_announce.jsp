@@ -43,7 +43,7 @@
 		$('#summernote').summernote({
 			placeholder : '공지사항을 입력해주세요 :)',
 			tabsize : 2,
-			height : 200,
+			height : 300,
 
 			lang : 'ko-KR'
 		});
@@ -59,9 +59,10 @@
 	<form>
 		<div class="container form-group" id="wrap">
 			<div class="row">
-				<div class="col-12 justify-content-left"
-					style="margin-bottom: 20px;">
+				<div class="col-12 justify-content-left">
 					<label style="font-size: 40px;"><strong>새 공지사항</strong></label>
+					<img alt="" src="Resources/images/notice.png"
+				style="width: 100px; height: 100px; margin-left: 15px; margin-bottom: 30px;">
 				</div>
 			</div>
 
@@ -79,7 +80,7 @@
 
 			<div class="row" style="margin-top: 30px;">
 				<a class="btn btn-secondary btn" href="#void" role="button"
-					style="margin-left: 280px;">목록으로</a> <a
+					style="margin-left: 320px;">목록으로</a> <a
 					class="btn btn-secondary btn" href="#void" role="button"
 					style="margin-left: 10px;">작성</a>
 			</div>

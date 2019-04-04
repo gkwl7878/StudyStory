@@ -42,7 +42,7 @@
 		$('#summernote').summernote({
 			placeholder : '공지사항입니다  :)',
 			tabsize : 2,
-			height : 200,
+			height : 300,
 			lang : 'ko-KR'
 		});
 	});
@@ -59,8 +59,10 @@
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-12 justify-content-left"
-					style="margin-bottom: 20px;">
+					style="margin-top: 20px;">
 					<label style="font-size: 40px;"><strong>관리자에게 문의하기</strong></label>
+					<img alt="" src="Resources/images/qa.png"
+				style="width: 130px; height: 100px; margin-left: 0px;">
 				</div>
 			</div>
 

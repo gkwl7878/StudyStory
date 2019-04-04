@@ -38,7 +38,7 @@
 		$('#summernote').summernote({
 			placeholder : '공지사항입니다  :)',
 			tabsize : 2,
-			height : 200,
+			height : 300,
 			lang : 'ko-KR'
 		});
 	});
@@ -56,6 +56,8 @@
 				<div class="col-12 justify-content-left"
 					style="margin-bottom: 20px;">
 					<label style="font-size: 40px;"><strong>세부 공지사항</strong></label>
+					<img alt="" src="Resources/images/notice.png"
+				style="width: 100px; height: 100px; margin-left: 15px; margin-bottom: 30px;">
 				</div>
 			</div>
 

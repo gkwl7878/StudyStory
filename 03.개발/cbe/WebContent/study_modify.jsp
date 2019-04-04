@@ -100,7 +100,7 @@
 	<div id="wrap">
 
 		<div class="row" >
-			<div class="col-12 justify-content-left" style="margin-bottom: 20px; padding: 0px;">
+			<div class="col-12 justify-content-left" style="margin-bottom: 20px; margin-top:15px;  padding: 0px;">
 				<strong style="font-size: 45px;">내 스터디 수정하기</strong><img
 					src="Resources/images/create.png"
 					style="width: 150px; height: 120px; margin-left: 30px;">

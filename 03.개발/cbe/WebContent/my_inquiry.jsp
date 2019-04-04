@@ -43,11 +43,10 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  -->
 
-	<form action="create_request.jsp" name="createFrm">
-		<div class="container form-group" id="wrap">
+			<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-12 justify-content-left"
-					style="margin-bottom: 20px;">
+					style="margin-bottom: 20px; margin-top: 20px;" >
 					<label style="font-size: 40px;"><strong>내 문의보기</strong></label>
 					<img alt="" src="Resources/images/qa.png"
 				style="width: 130px; height: 100px; margin-left: 0px;">
@@ -84,7 +83,6 @@
 			<a class="btn btn-secondary btn" href="#void" role="button"
 				style="margin-left: 330px; margin-top: 30px;">목록으로</a>
 		</div>
-	</form>
 
 	<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>

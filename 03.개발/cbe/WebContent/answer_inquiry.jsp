@@ -59,8 +59,10 @@
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-12 justify-content-left"
-					style="margin-bottom: 20px;">
+					style="margin-bottom: 20px; margin-top: 20px;">
 					<label style="font-size: 40px;"><strong>문의 답변하기</strong></label>
+					<img alt="" src="Resources/images/qa.png"
+				style="width: 130px; height: 100px; margin-left: 0px;">
 				</div>
 			</div>
 			<div class=" row">

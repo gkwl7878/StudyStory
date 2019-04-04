@@ -41,16 +41,16 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  -->
 
-	<form action="create_request.jsp" name="createFrm">
+	
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-12 justify-content-left" 
-					style="margin-bottom: 20px; ">
-						<label style="font-size: 40px;"><strong>상세 회원 정보</strong></label>
+					style="margin-bottom: 20px; margin-top: 20px;">
+						<label style="font-size: 45px;"><strong>상세 회원 정보</strong></label>
 				</div>
 			</div>
 
-			<div class="row" style="margin-bottom: 10px;">
+			<div class="row" style="margin-bottom: 10px; margin-top: 20px;">
 				<div class="col-3 font20bold" style="margin-top: 10px;">
 					<strong>아이디</strong>
 				</div>
@@ -58,7 +58,7 @@
 					<label>someid</label>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-3 font20bold">
 					<strong>이름</strong>
 				</div>
@@ -66,7 +66,7 @@
 					<input type="text" class="form-control" readonly="readonly">
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-3 font20bold" style="margin-top: 10px;">
 					<strong>비밀번호</strong>
 				</div>
@@ -74,7 +74,7 @@
 					<input type="password" class="form-control" readonly="readonly">
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-3 font20bold" style="margin-top: 10px;">
 					<strong>연락처</strong>
 				</div>
@@ -82,7 +82,7 @@
 					<input type="text" class="form-control" readonly="readonly">
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-3 font20bold" style="margin-top: 10px;">
 					<strong>주소</strong>
 				</div>
@@ -94,13 +94,13 @@
 						placeholder="스터디명" style="margin-left: 12px;">
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-bottom: 10px;"> 
 				<div class="col-3 font20bold" style="margin-top: 10px;"></div>
 				<div class="col-7 font20bold" style="margin-top: 10px;">
 					<input type="text" class="form-control" readonly="readonly">
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-3 font20bold" style="margin-top: 10px;">
 					<strong>상세주소</strong>
 				</div>
@@ -108,7 +108,7 @@
 					<input type="text" class="form-control" readonly="readonly">
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-3 font20bold" style="margin-top: 10px;">
 					<strong>인증질문</strong>
 				</div>
@@ -116,7 +116,7 @@
 						<label>초등학교 담임선생님 성함은?</label> 
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-3 font20bold" style="margin-top: 10px;">
 					<strong>질문답</strong>
 				</div>
@@ -126,7 +126,7 @@
 				</div>
 			</div>
 
-			<div class="row" style="margin-top: 30px;">
+			<div class="row" style="margin-top: 70px;">
 				<a class="btn btn-secondary btn" href="#void" role="button"
 					style="margin-left: 180px;">목록으로</a> <a
 					class="btn btn-secondary btn" href="#void" role="button"
@@ -134,7 +134,6 @@
 					href="#void" role="button" style="margin-left: 10px;">탈퇴</a>
 			</div>
 		</div>
-	</form>
 
 	<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>

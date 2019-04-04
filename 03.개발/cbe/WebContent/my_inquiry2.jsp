@@ -47,7 +47,7 @@
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-12 justify-content-left"
-					style="margin-bottom: 20px;">
+					style="margin-bottom: 20px; margin-top: 20px;">
 					<label style="font-size: 40px;"><strong>내 문의보기</strong></label>
 					<img alt="" src="Resources/images/qa.png"
 				style="width: 130px; height: 100px; margin-left: 0px;">
@@ -91,7 +91,7 @@
 
 			<div class="row" style="margin-top: 30px;">
 				<a class="btn btn-secondary btn" href="#void" role="button"
-					style="margin-left: 270px;">목록으로</a> <a
+					style="margin-left: 290px;">목록으로</a> <a
 					class="btn btn-secondary btn" href="#void" role="button"
 					style="margin-left: 10px;">재문의하기</a>
 			</div>
