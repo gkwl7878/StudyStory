@@ -184,7 +184,6 @@
 	<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
 
-
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="./Resources/js/popper.min.js"></script>
 	<script src="./Resources/js/bootstrap.min.js"></script>

@@ -104,7 +104,7 @@
 			</div>
 			<div class="col-7 font20bold">
 				<img width="440" height="300" id="img"
-					src="Resources/images/Image.png" border="0" title='찾아보기' alt='찾아보기'>
+					src="Resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'>
 			</div>
 		</div>
 
@@ -128,19 +128,12 @@
 		</div>
 	</div>
 
-
-
-
-
 	<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
-
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="./Resources/js/popper.min.js"></script>
 	<script src="./Resources/js/bootstrap.min.js"></script>
-
-
 
 </body>
 </html>

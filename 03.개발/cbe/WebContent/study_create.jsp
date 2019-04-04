@@ -43,7 +43,7 @@
 			placeholder : '공지사항입니다  :)',
 			tabsize : 2,
 			height : 200,
-			lang : 'ko-KR'
+			lang : 'ko-KR',
 		});
 	});
 </script>
@@ -104,7 +104,7 @@
 			
 				<div class="row">
 			<div class="col-12 justify-content-left"
-				style="margin-bottom: 20px; ">
+				style="margin-bottom: 20px; padding: 0px;">
 				<strong style="font-size: 45px;">스터디 그룹 개설하기</strong><img
 					src="Resources/images/create.png"
 					style="width: 150px; height: 120px; margin-left: 30px;">
@@ -142,20 +142,36 @@
 			</div>
 
 			<div class="form-group" style="margin-bottom: 70px;">
-				<img alt="" src="Resources/images/subject.png"
+				<img alt="" src="Resources/images/name.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
 				<label class="font30">스터디의 <strong>이름</strong>을 정해주세요
 				</label> <input type="email" class="form-control" id="name"
-					placeholder="스터디의 이름을 입력해주세요" id="name">
+					placeholder="스터디의 이름을 입력해주세요(24자까지 입력가능합니다.)" id="name">
 			</div>
 
+			<div class="form-group" style="margin-bottom: 70px;">
+			<img alt="" src="Resources/images/Image.png"
+					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
+				<label for="exampleFormControlTextarea1" style="font-size: 30px;"> <strong>대표이미지</strong>를 선택해주세요</label>
+				<div class="input-group mb-3">
+					<input type='file' name='file' id='real_file'
+						onchange="previewFile()" style='display: none;' /> <input
+						type="text" id='file_sub'
+						style="width: 700px; border: 0px; display: none"
+						readonly="readonly"> <a href="<?echo $PHP_SELF;?>"
+						onclick="schfile(); return false;"><img width="700"
+						height="300" id="img" src="Resources/images/preview_Image.png" border="0"
+						title='찾아보기' alt='찾아보기'></a>
+				</div>
+			</div>
+			
 			<div class="form-group" style="margin-bottom: 70px;">
 				<img alt="" src="Resources/images/detail.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
 				<label style="font-size: 26px;">스터디 <strong>주제</strong>와 이
 					방의 <strong>규칙</strong>등을 자세히 설명해주세요
 				</label>
-				<div class="col-9" style="resize: none; width: 700px; height: 300px;">
+				<div style="resize: none; width: 700px; height: 300px;">
 					<input type="text" class="form-control" id="summernote">
 				<!-- <textarea id="detail" class="form-control" rows="3"
 					style="resize: none; width: 700px; height: 300px;"
@@ -164,19 +180,6 @@
 			</div>
 			</div>
 		
-			<div class="form-group" style="margin-bottom: 70px;">
-				<label for="exampleFormControlTextarea1" style="font-size: 30px;">대표이미지</label>
-				<div class="input-group mb-3">
-					<input type='file' name='file' id='real_file'
-						onchange="previewFile()" style='display: none;' /> <input
-						type="text" id='file_sub'
-						style="width: 700px; border: 0px; display: none"
-						readonly="readonly"> <a href="<?echo $PHP_SELF;?>"
-						onclick="schfile(); return false;"><img width="700"
-						height="300" id="img" src="Resources/images/Image.png" border="0"
-						title='찾아보기' alt='찾아보기'></a>
-				</div>
-			</div>
 			<div class="row" style="margin-bottom: 60px;">
 				<a class="btn btn-secondary btn-lg" href="#void" role="button"
 					style="margin-left: 250px; margin-right: 10px;">취소</a> <a

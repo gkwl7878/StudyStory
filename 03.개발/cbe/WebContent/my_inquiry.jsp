@@ -49,6 +49,8 @@
 				<div class="col-12 justify-content-left"
 					style="margin-bottom: 20px;">
 					<label style="font-size: 40px;"><strong>내 문의보기</strong></label>
+					<img alt="" src="Resources/images/qa.png"
+				style="width: 130px; height: 100px; margin-left: 0px;">
 				</div>
 			</div>
 
@@ -59,7 +61,7 @@
 			</div>
 			<div class=" row">
 				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
-					<label style="width: 50px;" class="font17bold"><strong>분류</strong></label>
+					<label style="width: 80px;" class="font17bold"><strong>분류</strong></label>
 					<label style="width: 200px; margin-left: 30px;">회원관련</label>
 				</div>
 			</div>

@@ -50,11 +50,11 @@
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="row" style="margin-bottom: 10px;">
 				<div class="col-3 font20bold" style="margin-top: 10px;">
 					<strong>아이디</strong>
 				</div>
-				<div class="col-9 font20bold" style="margin-top: 10px;">
+				<div class="col-9 " style="margin-top: 10px;">
 					<label>someid</label>
 				</div>
 			</div>
@@ -63,7 +63,7 @@
 					<strong>이름</strong>
 				</div>
 				<div class="col-7 font20bold">
-					<input type="text" class="form-control" placeholder="리더" style="">
+					<input type="text" class="form-control" readonly="readonly">
 				</div>
 			</div>
 			<div class="row">
@@ -71,7 +71,7 @@
 					<strong>비밀번호</strong>
 				</div>
 				<div class="col-7 font20bold" style="margin-top: 10px;">
-					<input type="password" class="form-control" style="">
+					<input type="password" class="form-control" readonly="readonly">
 				</div>
 			</div>
 			<div class="row">
@@ -79,7 +79,7 @@
 					<strong>연락처</strong>
 				</div>
 				<div class="col-7 font20bold" style="margin-top: 10px;">
-					<input type="text" class="form-control" placeholder="지역" style="">
+					<input type="text" class="form-control" readonly="readonly">
 				</div>
 			</div>
 			<div class="row">
@@ -87,7 +87,7 @@
 					<strong>주소</strong>
 				</div>
 				<div class="col-5 font20bold" style="margin-top: 10px;">
-					<input type="text" class="form-control" placeholder="스터디명">
+					<input type="text" class="form-control" readonly="readonly">
 				</div>
 				<div class="font20bold" style="margin-top: 10px;">
 					<input type="button" class="btn btn-secondary btn" value="주소검색"
@@ -97,7 +97,7 @@
 			<div class="row">
 				<div class="col-3 font20bold" style="margin-top: 10px;"></div>
 				<div class="col-7 font20bold" style="margin-top: 10px;">
-					<input type="text" class="form-control" placeholder="스터디명">
+					<input type="text" class="form-control" readonly="readonly">
 				</div>
 			</div>
 			<div class="row">
@@ -105,7 +105,7 @@
 					<strong>상세주소</strong>
 				</div>
 				<div class="col-7 font20bold" style="margin-top: 10px;">
-					<input type="text" class="form-control" placeholder="생성일">
+					<input type="text" class="form-control" readonly="readonly">
 				</div>
 			</div>
 			<div class="row">

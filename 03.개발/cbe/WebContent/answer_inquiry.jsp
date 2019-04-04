@@ -106,8 +106,7 @@
 
 			<div class=" row">
 				<div class="col-9" style="margin-top: 30px; margin-left: 100px;">
-					<textarea class="form-control" rows="3"
-						style="resize: none;; height: 200px;" name="contents"></textarea>
+					<input type="text" class="form-control" id="summernote">
 				</div>
 			</div>
 			<div class="row" style="margin-top: 30px;">
