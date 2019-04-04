@@ -33,7 +33,7 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 
 	<!-- body -->
-	<div role="main">
+	<div role="main" style="min-height: 900px">
 
 		<!-- 점보트론 : 전광판 -->
 		<section class="jumbotron text-center bg-white mb-0">
@@ -44,7 +44,7 @@
 		<!-- 점보트론 : 전광판 -->
 
 		<!-- CONTAINER DIV -->
-		<div class="container" style="min-height: 700px;">
+		<div class="container">
 			<!-- row -->
 			<div class="row">
 				<div class="col-md-12 p-3 bg-light">
@@ -59,6 +59,7 @@
 					</div>
 					<!-- 정렬바 row -->
 
+					<!-- 썸네일 row -->
 					<div class="row p-3">
 						<div class="col-12 bg-white">
 							<!-- 썸네일 row -->
@@ -78,13 +79,12 @@
 						</div>
 					</div>
 					<!-- 썸네일 row -->
-				</div>
 
+				</div>
 			</div>
+			<!-- row -->
 		</div>
-		<!-- row -->
-	</div>
-	<!-- CONTAINER DIV -->
+		<!-- CONTAINER DIV -->
 	</div>
 	<!-- DIV ROLE MAIN -->
 

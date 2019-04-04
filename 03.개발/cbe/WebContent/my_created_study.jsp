@@ -23,10 +23,40 @@
 		font-size: 3.5rem;
 	}
 }
+
+a:hover {
+	box-shadow: 0 4px 50px -3px rgba(0, 0, 0, 0.1);
+}
+
+#cross {
+	background: red;
+	height: 100px;
+	position: relative;
+	width: 20px;
+}
+
+#cross:after {
+	background: red;
+	content: "";
+	height: 20px;
+	left: -40px;
+	position: absolute;
+	top: 40px;
+	width: 100px;
+}
+
 </style>
 <!-- Custom styles for this template -->
 <link href="./Resources/css/jumbotron.css" rel="stylesheet">
+<script type="text/javascript">
+	window.onload = function() {
+		var fdsa = document.getElementById("fdsa");
+		var asdf = document.getElementById("asdf");
+		var asdfHeight = asdf.offsetHeight;
+		fdsa.style.height = asdfHeight;
 
+	} // onload function
+</script>
 </head>
 <body>
 	<!-- header -->
@@ -34,7 +64,7 @@
 
 
 	<!-- body -->
-	<div role="main">
+	<div role="main" style="min-height: 900px">
 
 		<!-- 점보트론 : 전광판 -->
 		<section class="jumbotron text-center bg-white mb-0">
@@ -45,34 +75,54 @@
 		<!-- 점보트론 : 전광판 -->
 
 		<!-- CONTAINER DIV -->
-		<div class="container mb-3">
+		<div class="container">
 			<!-- row -->
 			<div class="row justify-content-center">
 
 				<!-- 왼쪽 사용자 상태 -->
 				<div class="col-auto">
 					<div class="card" style="width: 250px;">
-						<img style="width: 200px; height: 200px;" src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top mx-auto d-block rounded-circle mt-3" alt="...">
+						<img src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top w-75 mx-auto d-block rounded-circle mt-3">
 						<div class="card-body text-center pt-0">
-							<h5 class="card-title text-center m-4">닉네임</h5>
-							<div class="border-top border-bottom mb-3">
+							<h6 class="card-title text-center my-3">
+								<strong>닉네임</strong>
+							</h6>
+							<div class="border-top border-bottom my-4">
 								<div class="d-flex flex-row p-2 border-bottom">
-									<div class="mr-auto">진행 중인 스터디</div>
-									<div class="text-right">0</div>
-									<div class="">건</div>
+									<div class="mr-auto">
+										<small>진행 중인 스터디</small>
+									</div>
+									<div class="text-right">
+										<small>10</small>
+									</div>
+									<div class="">
+										<small> 건</small>
+									</div>
 								</div>
 								<div class="d-flex flex-row p-2 border-bottom">
-									<div class="mr-auto">오픈 대기 스터디</div>
-									<div class="text-right">10</div>
-									<div class="">건</div>
+									<div class="mr-auto">
+										<small>오픈 대기 스터디</small>
+									</div>
+									<div class="text-right">
+										<small>10</small>
+									</div>
+									<div class="">
+										<small> 건</small>
+									</div>
 								</div>
 								<div class="d-flex flex-row p-2">
-									<div class="mr-auto">종료 스터디</div>
-									<div class="text-right">6</div>
-									<div class="">건</div>
+									<div class="mr-auto">
+										<small>종료 스터디</small>
+									</div>
+									<div class="text-right">
+										<small>10</small>
+									</div>
+									<div class="">
+										<small> 건</small>
+									</div>
 								</div>
 							</div>
-							<a href="#" class="btn btn-md btn-primary">프로필 관리</a>
+							<a href="#" class="btn btn-sm btn-primary">프로필 관리</a>
 						</div>
 					</div>
 				</div>
@@ -80,66 +130,73 @@
 
 
 				<!-- 오른쪽-->
-				<div class="col-auto" style="width: 800px;">
+				<div class="col-auto" style="width: 850px;">
 
 					<!-- 정렬바 row -->
-					<div class="row mb-3" style="height: 3em;">
-						<div class="row mr-3 ml-3 w-100 rounded bg-secondary align-items-center">
+					<div class="row mb-3" style="height: 4em;">
+						<div class="row mx-3 w-100 border-top border-bottom align-items-center">
 
 							<div class="col-auto mr-auto">
 								<span>Total</span>
 							</div>
 
 							<div class="col-auto">
-								<form action="">
-									<select class="btn btn-light btn-sm dropdown-toggle ml-1">
-										<option>지 역</option>
-										<option>신 촌</option>
-										<option>홍 대</option>
-										<option>종 각</option>
-										<option>건 대</option>
-										<option>노 원</option>
-										<option>강 남</option>
-									</select>
-									<select class="btn btn-light btn-sm dropdown-toggle ml-1">
-										<option>종 류</option>
-										<option>언 어</option>
-										<option>취 업</option>
-										<option>취 미</option>
-										<option>기 타</option>
-									</select>
-									<input type="button" class="btn btn-sm btn-light ml-1" value="필터 검색" />
+								<form class="form-row align-item-center" action="">
+									<div class="col-auto">
+										<select class="form-control-sm">
+											<option>지 역</option>
+											<option>신 촌</option>
+											<option>홍 대</option>
+											<option>종 각</option>
+											<option>건 대</option>
+											<option>노 원</option>
+											<option>강 남</option>
+										</select>
+									</div>
+									<div class="col-auto">
+										<select class="form-control-sm">
+											<option>종 류</option>
+											<option>언 어</option>
+											<option>취 업</option>
+											<option>취 미</option>
+											<option>기 타</option>
+										</select>
+									</div>
+									<input type="button" class="btn btn-sm btn-secondary ml-1" value="필터 검색" />
 								</form>
 							</div>
 						</div>
 					</div>
 					<!-- 정렬바 row -->
 
+
+					<div>
+						<a> </a>
+					</div>
+
 					<!-- 썸네일 row -->
 					<div class="row">
 						<!-- 1번째 줄 시작 -->
-
 						<div class="col-md-4">
 							<div class="card mb-4 shadow-sm">
-								<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-										<title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" />
-										<text x="50%" y="50%" fill="#eceeef" dy=".3em">이미지</text></svg>
-								<div class="card-body">
-									<p class="card-text">제목부분</p>
-									<p class="card-text">간략한 내용...(25자 이상 ...으로)</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button" class="btn btn-sm btn-outline-secondary">버튼1</button>
-											<button type="button" class="btn btn-sm btn-outline-secondary">버튼2</button>
+								<a href="#" style="text-decoration: none; color: #000;"> <img class="card-img-top" src="http://localhost:8080/third_prj/Resources/images/no_img.png">
+									<div class="card-body" style="text-decoration: none;">
+										<p class="card-text">제목부분</p>
+										<p class="card-text">간략한 내용...(25자 이상 ...으로)</p>
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="btn-group">
+												<button type="button" class="btn btn-sm btn-outline-secondary">버튼2</button>
+											</div>
+											<small class="text-muted">날짜</small>
 										</div>
-										<small class="text-muted">날짜</small>
 									</div>
-								</div>
+								</a>
 							</div>
 						</div>
 
 						<div class="col-md-4">
-							<button class="btn btn-outline-secondary btn-block h-100">추가하기</button>
+							<button class="btn btn-outline-secondary btn-block text-center" style="height: 426.328px;">
+							</button>
 						</div>
 						<!-- 1번째 줄 시작 -->
 					</div>

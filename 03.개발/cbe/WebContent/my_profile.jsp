@@ -48,7 +48,7 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 
 	<!-- body -->
-	<div role="main">
+	<div role="main" style="min-height: 900px">
 
 		<!-- 점보트론 : 전광판 -->
 		<section class="jumbotron text-center bg-white mb-0">
@@ -60,7 +60,7 @@
 
 
 		<!-- CONTAINER DIV -->
-		<div class="container mb-3" style="min-height: 700px;">
+		<div class="container">
 			<!-- row -->
 			<div class="row border-top border-bottom pt-4 pb-4 justify-content-center">
 
