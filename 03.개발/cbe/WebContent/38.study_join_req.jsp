@@ -8,7 +8,7 @@
 table{ width: 100%; text-align: center;  }
 th,td{ text-align: center; }
 div{margin: 0px auto;}
-.info{border: 0 ; padding: 30px ;text-align: center; margin-bottom: 30px; margin-top: 30px; background-color: #E9ECEF; height: 80px ;width: 100%}
+.info{border: 0 ; padding: 30px ;text-align: center; margin-bottom: 30px; margin-top: 30px; background-color: #E9ECEF; height: 80px ;width: 100%; font:x-large bolder;}
 .form-control-1{width:100px;height:calc(1.5em + .75rem + 2px);padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out; margin-left: 20px}
 /* form-control 부트스트랩 내용에서 width 100% 를 수정 */
 /* .table td, .table th{ vertical-align: middle; } */
@@ -39,7 +39,7 @@ div{margin: 0px auto;}
 	
 	<div id="wrap" >
 		<form>
-		 <div style= "width: 920px; height: 1500px; border:1px solid #D7D7D7; padding:40px ; ">
+		 <div style= "width: 920px; height: 1100px; border:1px solid #D7D7D7; padding:40px ; ">
 		<h3><strong>스터디 참여 신청</strong></h3>
 		<div>
 		</div>
@@ -69,11 +69,10 @@ div{margin: 0px auto;}
 		자기소개를 부탁드립니다.
 		</div>
 		
-		<div class="info"><h3> </h3></div>
 		
 		<textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="자기소개는 100자 이상 입력해주세요.";></textarea>
 				
-		<div class="info" ><h3>이 모임에 지원하게된 동기가 무엇인가요? </h3></div>
+		<div class="info" >이 모임에 지원하게된 동기가 무엇인가요? </div>
 		
 		<textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="지원동기는 100자 이상 입력해주세요.";></textarea>
 				
