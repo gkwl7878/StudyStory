@@ -3,73 +3,64 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-  <title>관리자 </title>
-  <!-- Bootstrap core CSS -->
-	<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
-
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-  </style>
-  <!-- Custom styles for this template -->
-  <link href="http://localhost:8080/third_prj/Resources/css/admin_dashboard.css" rel="stylesheet">
-  <script src="http://localhost:8080/third_prj/Resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="http://localhost:8080/third_prj/Resources/js/bootstrap.bundle.min.js"></script>
-  <script src="http://localhost:8080/third_prj/Resources/js/feather-icons/4.9.0/feather.min.js"></script>
-  <script src="http://localhost:8080/third_prj/Resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="http://localhost:8080/third_prj/Resources/js/admin_dashboard.js"></script></body>
-</head>
-<body>
+    <title>관리자 </title>
 
-	<!-- 상단 네비게이션  바 -->
-	<c:import url="http://localhost:8080/third_prj/admin/layout/navbar.jsp"></c:import>
-	
-	<div class="container-fluid">
-	  <div class="row">
-  	<!-- 사이드바 -->
+    <!-- Bootstrap core CSS -->
+		<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="http://localhost:8080/third_prj/Resources/css/admin_dashboard.css" rel="stylesheet">
+    <script src="http://localhost:8080/third_prj/Resources/js/jquery-3.3.1.slim.min.js"></script>
+		<script src="http://localhost:8080/third_prj/Resources/js/bootstrap.bundle.min.js"></script>
+    <script src="http://localhost:8080/third_prj/Resources/js/feather-icons/4.9.0/feather.min.js"></script>
+    <script src="http://localhost:8080/third_prj/Resources/js/Chart.js/2.7.3/Chart.min.js"></script>
+		<script src="http://localhost:8080/third_prj/Resources/js/admin_dashboard.js"></script></body>
+  </head>
+  <body>
+  
+  
+<!-- navbar 시작 -->
+<c:import url="http://localhost:8080/third_prj/admin/layout/navbar.jsp"></c:import>
+<!-- navbar 끝 -->
+
+<div class="container-fluid">
+  <div class="row">
+  
+    <!-- sidebar 시작 -->
     <c:import url="http://localhost:8080/third_prj/admin/layout/sidebar.jsp"></c:import>
-
-
-
-
-
-		<!-- 변경할 부분 메인 시작 ------------->
+		<!-- sidebar 끝 -->	
+        
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">새 스터디 관리(타이틀)</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group mr-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">정렬쪽</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">버튼등</button>
-          </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            	셀렉트?
-          </button>
-        </div>
+        <h1 class="h2">새 스터디 관리</h1>
       </div>
 
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
-            <tr>
+            <tr class="text-center">
               <th width="50">번호</th>
               <th width="50">리더</th>
               <th width="250">스터디명</th>
@@ -81,12 +72,12 @@
           <tbody>
           	<c:forEach begin="1" end="10" step="1">
             <tr>
-              <td>1</td>
-              <td>아이디</td>
+              <td class="text-center">1</td>
+              <td class="text-center">아이디</td>
               <td>새로운 스터디명입니다</td>
-              <td>취업</td>
-              <td>강남</td>
-              <td>2019-03-00</td>
+              <td class="text-center">취업</td>
+              <td class="text-center">강남</td>
+              <td class="text-center">2019-03-00</td>
             </tr>
             </c:forEach>
           </tbody>
@@ -119,12 +110,7 @@
         </ul>
         </div>
       </div>
-    </main><!-- 변경할 부분 메인 끝 -->
-    
-    
-    
-    
-	  </div><!-- div low -->
-	</div><!-- div container-fluid -->
-</body>
+    </main>
+  </div>
+</div>
 </html>
