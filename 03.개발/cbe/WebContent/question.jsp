@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <title>관리자 - 유저정보 관리</title>
+    <title>내 문의내역</title>
 
     <!-- Bootstrap core CSS -->
 		<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
@@ -22,62 +22,34 @@
   </head>
   <body>
   
-<!-- navbar 시작 -->
-<c:import url="http://localhost:8080/third_prj/admin/layout/navbar.jsp"></c:import>
-<!-- navbar 끝 -->
-
 <div class="container-fluid">
   <div class="row">
   
-    <!-- sidebar 시작 -->
-    <c:import url="http://localhost:8080/third_prj/admin/layout/sidebar.jsp"></c:import>
-		<!-- sidebar 끝 -->	
-
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <main role="main" class="col-md-9 col-lg-10 px-4" style="margin:0px auto;">
       <div class="row justify-content-between" style="margin-top:40px; margin-bottom:10px;">
       	<div class="col-8">
-        	<h1 class="h2">회원정보 관리</h1>
+        	<h1 class="h2">내 문의내역</h1>
         </div>
-        <div class="col-2" style="padding-left:2px; padding-right:2px; padding-top:15px;">
-			    <select class="form-control" style="font-size:12px;">
-			      <option>--검색조건--</option>
-			      <option>아이디</option>
-			      <option>이름</option>
-			      <option>닉네임</option>
-			    </select>
-			  </div>
-			  <div class="col-1" style="padding-left:2px; padding-right:2px; padding-top:15px;">
-			    <input type="text" class="form-control form-control-sm" />
-		    </div>
-		    <div class="col-1" style="padding-left:2px; padding-right:2px; padding-top:15px;">
-          <button type="button" class="btn btn-sm btn-secondary">
-            검색
-          </button>
-        </div>  
       </div>
 
       <div class="table-responsive">
         <table class="table table-striped table-sm border-bottom">
           <thead>
             <tr class="text-center">
-              <th width="50">번호</th>
-              <th width="50">아이디</th>
-              <th width="50">닉네임</th>
-              <th width="50">이름</th>
-              <th width="100">연락처</th>
-              <th width="100">이메일</th>
-              <th width="100">가입일</th>
+              <th style="width:100px">번호</th>
+              <th style="width:150px">분류</th>
+              <th style="width:500px">제목</th>
+              <th style="width:150px">답변여부</th>
+              <th style="width:100px">조회수</th>
             </tr>
           </thead>
           <tbody>
           	<c:forEach begin="1" end="10" step="1">
-            <tr  class="text-center">
+            <tr class="text-center">
               <td>123</td>
-              <td>아이디이</td>
-              <td>닉네이임</td>
-              <td>이이이름</td>
-              <td>010-1111-2222</td>
-              <td>young@sist.co.kr</td>
+              <td>회원 관련</td>
+              <td class="text-left">제목입니다 문의입니다 숑숑</td>
+              <td>미답변</td>
               <td>2019-03-00</td>
             </tr>
             </c:forEach>

@@ -7,29 +7,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <title>관리자 </title>
+    <title>알림 보기</title>
 
     <!-- Bootstrap core CSS -->
 		<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
 
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-      
-    </style>
     <!-- Custom styles for this template -->
     <link href="http://localhost:8080/third_prj/Resources/css/admin_dashboard.css" rel="stylesheet">
     <script src="http://localhost:8080/third_prj/Resources/js/jquery-3.3.1.slim.min.js"></script>
@@ -40,44 +22,35 @@
   </head>
   <body>
   
-  
-<!-- navbar 시작 -->
-<c:import url="http://localhost:8080/third_prj/admin/layout/navbar.jsp"></c:import>
-<!-- navbar 끝 -->
-
 <div class="container-fluid">
   <div class="row">
   
-    <!-- sidebar 시작 -->
-    <c:import url="http://localhost:8080/third_prj/admin/layout/sidebar.jsp"></c:import>
-		<!-- sidebar 끝 -->	
-        
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">새 스터디 관리</h1>
+    <main role="main" class="col-md-9 col-lg-10 px-4" style="margin:0px auto;">
+      <div class="row justify-content-between" style="margin-top:40px; margin-bottom:10px;">
+      	<div class="col-8">
+        	<h1 class="h2">알림 보기</h1>
+        </div>
       </div>
 
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm border-bottom">
           <thead>
             <tr class="text-center">
-              <th width="50">번호</th>
-              <th width="50">리더</th>
-              <th width="250">스터디명</th>
-              <th width="50">분류</th>
-              <th width="50">지역</th>
-              <th width="120">생성일</th>
+              <th style="width:100px">번호</th>
+              <th style="width:150px">분류</th>
+              <th style="width:500px">제목</th>
+              <th style="width:100px">날짜</th>
+              <th style="width:100px">읽음여부</th>
             </tr>
           </thead>
           <tbody>
           	<c:forEach begin="1" end="10" step="1">
-            <tr>
-              <td class="text-center">1</td>
-              <td class="text-center">아이디</td>
-              <td>새로운 스터디명입니다</td>
-              <td class="text-center">취업</td>
-              <td class="text-center">강남</td>
-              <td class="text-center">2019-03-00</td>
+            <tr class="text-center">
+              <td>123</td>
+              <td>스터디|공지사항</td>
+              <td class="text-left">제목입니다 문의입니다 숑숑</td>
+              <td>2019-03-00</td>
+              <td>안읽음</td>
             </tr>
             </c:forEach>
           </tbody>

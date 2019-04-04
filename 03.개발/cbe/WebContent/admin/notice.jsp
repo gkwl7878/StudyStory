@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <title>관리자 - 유저정보 관리</title>
+    <title>관리자 - 공지사항</title>
 
     <!-- Bootstrap core CSS -->
 		<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
@@ -21,6 +21,7 @@
 		<script src="http://localhost:8080/third_prj/Resources/js/admin_dashboard.js"></script></body>
   </head>
   <body>
+  
   
 <!-- navbar 시작 -->
 <c:import url="http://localhost:8080/third_prj/admin/layout/navbar.jsp"></c:import>
@@ -36,15 +37,10 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="row justify-content-between" style="margin-top:40px; margin-bottom:10px;">
       	<div class="col-8">
-        	<h1 class="h2">회원정보 관리</h1>
+        	<h1 class="h2">공지사항</h1>
         </div>
-        <div class="col-2" style="padding-left:2px; padding-right:2px; padding-top:15px;">
-			    <select class="form-control" style="font-size:12px;">
-			      <option>--검색조건--</option>
-			      <option>아이디</option>
-			      <option>이름</option>
-			      <option>닉네임</option>
-			    </select>
+        <div class="col-2 text-right" style="padding-left:2px; padding-right:15px; padding-top:20px;">
+			    <strong>제목</strong>
 			  </div>
 			  <div class="col-1" style="padding-left:2px; padding-right:2px; padding-top:15px;">
 			    <input type="text" class="form-control form-control-sm" />
@@ -60,56 +56,57 @@
         <table class="table table-striped table-sm border-bottom">
           <thead>
             <tr class="text-center">
-              <th width="50">번호</th>
-              <th width="50">아이디</th>
-              <th width="50">닉네임</th>
-              <th width="50">이름</th>
-              <th width="100">연락처</th>
-              <th width="100">이메일</th>
-              <th width="100">가입일</th>
+              <th style="width:100px">번호</th>
+              <th style="width:500px">제목</th>
+              <th style="width:200px">등록일</th>
+              <th style="width:100px">조회수</th>
             </tr>
           </thead>
           <tbody>
           	<c:forEach begin="1" end="10" step="1">
-            <tr  class="text-center">
+            <tr class="text-center">
               <td>123</td>
-              <td>아이디이</td>
-              <td>닉네이임</td>
-              <td>이이이름</td>
-              <td>010-1111-2222</td>
-              <td>young@sist.co.kr</td>
+              <td class="text-left">스터디명 블라블라블라</td>
               <td>2019-03-00</td>
+              <td>000</td>
             </tr>
             </c:forEach>
           </tbody>
         </table>
-        <div class="d-flex justify-content-center">
-        <ul class="pagination">
-        	<li class="paginate_button page-item previous disabled" id="dataTable_previous">
-        		<a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a>
-        	</li>
-        		<li class="paginate_button page-item active">
-        			<a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-        		</li>
-        		<li class="paginate_button page-item ">
-        			<a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-        		</li>
-        		<li class="paginate_button page-item ">
-        			<a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-        		</li>
-        		<li class="paginate_button page-item ">
-							<a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-						</li>
-						<li class="paginate_button page-item ">
-        			<a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-        		</li>
-        		<li class="paginate_button page-item ">
-        			<a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-        		</li>
-        		<li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
-        	</li>
-        </ul>
-        </div>
+        <div class="d-flex">
+	        <div class="col-10">
+	        <ul class="pagination justify-content-center">
+	        	<li class="paginate_button page-item previous disabled" id="dataTable_previous">
+	        		<a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a>
+	        	</li>
+	        		<li class="paginate_button page-item active">
+	        			<a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+	        		</li>
+	        		<li class="paginate_button page-item ">
+	        			<a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+	        		</li>
+	        		<li class="paginate_button page-item ">
+	        			<a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+	        		</li>
+	        		<li class="paginate_button page-item ">
+								<a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+							</li>
+							<li class="paginate_button page-item ">
+	        			<a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+	        		</li>
+	        		<li class="paginate_button page-item ">
+	        			<a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+	        		</li>
+	        		<li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
+	        	</li>
+	        </ul>
+	        </div>
+	        <div class="col-2 text-right" style="padding-right:20px;">
+		        <button type="button" class="btn btn-sm btn-secondary" style="height:35px;">
+		          글쓰기
+		        </button>
+		      </div>
+	      </div>
       </div>
     </main>
   </div>

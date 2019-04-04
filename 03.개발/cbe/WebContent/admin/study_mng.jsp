@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <title>관리자 - 유저정보 관리</title>
+    <title>관리자 </title>
 
     <!-- Bootstrap core CSS -->
 		<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
@@ -21,6 +21,7 @@
 		<script src="http://localhost:8080/third_prj/Resources/js/admin_dashboard.js"></script></body>
   </head>
   <body>
+  
   
 <!-- navbar 시작 -->
 <c:import url="http://localhost:8080/third_prj/admin/layout/navbar.jsp"></c:import>
@@ -36,13 +37,13 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="row justify-content-between" style="margin-top:40px; margin-bottom:10px;">
       	<div class="col-8">
-        	<h1 class="h2">회원정보 관리</h1>
+        	<h1 class="h2">스터디 정보 관리</h1>
         </div>
         <div class="col-2" style="padding-left:2px; padding-right:2px; padding-top:15px;">
 			    <select class="form-control" style="font-size:12px;">
 			      <option>--검색조건--</option>
+			      <option>스터디명</option>
 			      <option>아이디</option>
-			      <option>이름</option>
 			      <option>닉네임</option>
 			    </select>
 			  </div>
@@ -63,21 +64,21 @@
               <th width="50">번호</th>
               <th width="50">아이디</th>
               <th width="50">닉네임</th>
-              <th width="50">이름</th>
-              <th width="100">연락처</th>
-              <th width="100">이메일</th>
-              <th width="100">가입일</th>
+              <th width="200">스터디명</th>
+              <th width="50">분류</th>
+              <th width="50">지역</th>
+              <th width="100">생성일</th>
             </tr>
           </thead>
           <tbody>
           	<c:forEach begin="1" end="10" step="1">
-            <tr  class="text-center">
+            <tr class="text-center">
               <td>123</td>
               <td>아이디이</td>
               <td>닉네이임</td>
-              <td>이이이름</td>
-              <td>010-1111-2222</td>
-              <td>young@sist.co.kr</td>
+              <td class="text-left">스터디명 블라블라블라</td>
+              <td>취업</td>
+              <td>강남</td>
               <td>2019-03-00</td>
             </tr>
             </c:forEach>

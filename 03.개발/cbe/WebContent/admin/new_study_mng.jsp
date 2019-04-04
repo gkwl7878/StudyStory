@@ -7,29 +7,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    <title>관리자 </title>
+    <title>관리자 - 새 스터디 관리</title>
 
     <!-- Bootstrap core CSS -->
 		<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
 
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-      
-    </style>
     <!-- Custom styles for this template -->
     <link href="http://localhost:8080/third_prj/Resources/css/admin_dashboard.css" rel="stylesheet">
     <script src="http://localhost:8080/third_prj/Resources/js/jquery-3.3.1.slim.min.js"></script>
@@ -59,7 +41,7 @@
     </div>
 
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm border-bottom">
           <thead>
             <tr class="text-center">
               <th width="50">번호</th>
