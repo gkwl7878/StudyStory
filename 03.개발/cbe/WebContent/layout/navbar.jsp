@@ -39,13 +39,13 @@
 	</div>
 
 </nav> -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div class="container">
 		<!-- 로고 -->
-		<!-- <a class="navbar-brand" href="#">Container</a>
+		<a class="navbar-brand" href="#">Container</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
-		</button> -->
+		</button>
 
 		<div class="collapse navbar-collapse" id="navbarsExample07">
 			<ul class="navbar-nav mr-auto">
@@ -76,10 +76,6 @@
 				<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
 				<button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="submit">검색</button>
 			</form>
-
-			<div class="bg-light mr-sm-2" style="width: 40px; height: 40px;"></div>
-			<div class="bg-light" style="width: 40px; height: 40px;"></div>
-
 		</div>
 	</div>
 </nav>

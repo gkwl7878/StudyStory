@@ -50,7 +50,7 @@
 				<div class="col-md-12 p-3 bg-light">
 
 					<!-- 정렬바 row -->
-					<div class="row mb-3" style="height: 3em;">
+					<div class="row" style="height: 3em;">
 						<div class="row mr-3 ml-3 w-100 border-bottom align-items-center">
 							<div class="col-auto mr-auto">
 								<p class="h5">조회된 참여자들 : 0건</p>

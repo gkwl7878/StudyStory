@@ -26,7 +26,10 @@
 </style>
 <!-- Custom styles for this template -->
 <link href="./Resources/css/jumbotron.css" rel="stylesheet">
-
+<!-- 확인용 CDN -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!-- 확인용 CDN -->
 </head>
 <body>
 	<!-- header -->
@@ -45,7 +48,7 @@
 		<!-- 점보트론 : 전광판 -->
 
 		<!-- CONTAINER DIV -->
-		<div class="container">
+		<div class="container-fluid">
 			<!-- row -->
 			<div class="row justify-content-center">
 
@@ -100,7 +103,7 @@
 
 
 				<!-- 오른쪽-->
-				<div class="col-auto" style="width: 850px;">
+				<div class="col-auto" style="width: 1000px;">
 
 					<!-- 정렬바 row -->
 					<div class="row mb-3" style="height: 4em;">
@@ -145,15 +148,41 @@
 						<div class="col-md-4">
 							<div class="card mb-4 shadow-sm">
 								<img class="card-img-top" src="http://localhost:8080/third_prj/Resources/images/no_img.png">
-								<div class="card-body">
-									<p class="card-text">제목부분</p>
-									<p class="card-text">간략한 내용...(25자 이상 ...으로)</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button" class="btn btn-sm btn-outline-secondary">버튼1</button>
-											<button type="button" class="btn btn-sm btn-outline-secondary">버튼2</button>
+								<div class="card-body text-center p-3">
+
+									<div class="d-flex justify-content-end align-items-center mb-3">
+										<div class="mr-5">
+											<small class="text-muted">2019/00/00</small>
 										</div>
-										<small class="text-muted">날짜</small>
+										<small class="pr-1">모집상태</small>
+									</div>
+									<div class="px-3 border-bottom">
+										<p class="card-text pb-3">
+											<strong>제목부분</strong> <br> <small>내용 어쩌구 어쩌구 내용 어쩌구 어쩌구 내용 어쩌구 어쩌구</small>
+										</p>
+									</div>
+									<div class="d-flex justify-content-between align-items-center mt-3 px-2">
+
+										<div class="border border-secondary rounded-circle" style="width: 45px; height: 45px;">
+											<img src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top w-100 rounded-circle">
+										</div>
+
+										<div class="border-right p-2">
+											<small>닉네임</small>
+										</div>
+
+										<div class="border-right p-2">
+											<small>위치</small>
+										</div>
+
+										<div class="p-2">
+											<small>종류</small>
+										</div>
+
+
+										<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
+										<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">좋아요</button>
+
 									</div>
 								</div>
 							</div>
