@@ -85,7 +85,8 @@ ALTER TABLE user_table
 	ADD
 		CONSTRAINT UK_user_table
 		UNIQUE (
-			nick
+			nick,
+			email
 		);
 
 /* 공지사항 */
