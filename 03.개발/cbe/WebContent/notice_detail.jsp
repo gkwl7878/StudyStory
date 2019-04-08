@@ -12,12 +12,7 @@
 /* #link{margin-left: 1000px; margin-top: 20px} */
 #loginTitle {
 	text-align: center;
-	st
-}
-
-.font20bold {
-	font-size: 20px;
-	font-weight: bold;
+	
 }
 </style>
 <head>
@@ -26,57 +21,75 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
 
-<title>세부 알림보기</title>
+<title>세부 공지사항</title>
 <!-- Custom styles for this template -->
 
 <script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
+
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
+	rel="stylesheet">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+
+
+<script type="text/javascript">
+	$(function() {
+		$('#summernote').summernote({
+			placeholder : '공지사항입니다  :)',
+			tabsize : 2,
+			height : 300,
+			lang : 'ko-KR'
+		});
+	});
+</script>
 
 </head>
 <body>
 	<!-- header -->
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  -->
-	<div class="container form-group" id="wrap">
 
-		<div class="row" style="margin-top: 300px;">
-			<div class="col-3 font20bold">
-				<strong style="float: right;">제목 </strong>
+	<form action="create_request.jsp" name="createFrm">
+		<div class="container form-group" id="wrap">
+			<div class="row">
+				<div class="col-12 justify-content-left"
+					style="margin-bottom: 20px;">
+					<label style="font-size: 40px;"><strong>세부 공지사항</strong></label>
+					<img alt="" src="Resources/images/notice.png"
+				style="width: 100px; height: 100px; margin-left: 15px; margin-bottom: 30px;">
+				</div>
 			</div>
-			<div class="col-7 font20bold">
-				<input type="text" class="form-control">
+
+			<div class="row">
+				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
+					<label style="font-size: 25px;">제목제목</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
+					<label style="width: 50px;">등록일</label> 
+					<label style="width: 200px; margin-left: 30px;">2019</label> 
+					<label style="width: 50px; margin-left: 20px;">조회수</label> 
+					<label style="width: 100px; margin-left: 30px;">0000</label>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
+					<input type="text" class="form-control" id="summernote">
+				</div>
+			</div>
+
+			<div class="row" style="margin-top: 30px;">
+				<a class="btn btn-secondary btn" href="#void" role="button"
+					style="margin-left: 250px;">목록으로</a> <a
+					class="btn btn-secondary btn" href="#void" role="button"
+					style="margin-left: 10px;">수정</a> <a class="btn btn-secondary btn"
+					href="#void" role="button" style="margin-left: 10px;">삭제</a>
 			</div>
 		</div>
-		<div class="row" style="margin-top: 10px;">
-			<div class="col-3 font20bold">
-				<strong style="float: right;">분류 </strong>
-			</div>
-			<div class="col-7 font20bold">
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class=" row" style="margin-top: 10px;">
-			<div class="col-3 font20bold">
-				<strong style="float: right;">내용 </strong>
-			</div>
-			<div class="col-7 font20bold">
-				<textarea class="form-control" rows="3"
-					style="resize: none;  height: 300px;" name="contents"></textarea>
-			</div>
-		</div>
-
-		<div class=" row" style="margin-top: 10px;">
-			<div class="col-3 font20bold"></div>
-			<div class="col-7 ont20bold">
-				<label>날짜 : </label>
-			</div>
-		</div>
-		<a class="btn btn-secondary btn" href="#void" role="button"
-			style="margin-left: 340px; margin-top: 15px;">목록으로</a>
-	</div>
-
-
-
-
+	</form>
 
 	<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
