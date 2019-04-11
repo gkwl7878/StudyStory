@@ -3,9 +3,8 @@ package kr.co.studystory.dao;
 import java.io.IOException;
 import java.io.Reader;
 
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import javax.annotation.Resources;
+
 
 public class CommonDAO {
 	
@@ -13,14 +12,13 @@ public class CommonDAO {
 	
 	public static CommonDAO getInstance() {
 		if (c_dao == null) {
-			org.apache.ibatis.logging.LogFactory.useLog4JLogging(); // ·Î±ë »ç¿ë
 			c_dao = new CommonDAO();
 		}
 		
 		return c_dao;
 	}
 	
-	public SqlSessionFactory getSqlSessionFactory() {
+	/*public SqlSessionFactory getSqlSessionFactory() {
 		SqlSessionFactory ssf = null;
 		
 		try {
@@ -35,7 +33,7 @@ public class CommonDAO {
 		}
 		
 		return ssf;
-	}
+	}*/
 	
 
 }
