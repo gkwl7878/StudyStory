@@ -19,12 +19,12 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 
 <title>세부 공지사항</title>
 <!-- Custom styles for this template -->
 
-<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 
 <link
 	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
@@ -56,7 +56,7 @@
 				<div class="col-12 justify-content-left"
 					style="margin-bottom: 20px;">
 					<label style="font-size: 40px;"><strong>세부 공지사항</strong></label>
-					<img alt="" src="Resources/images/notice.png"
+					<img alt="" src="resources/images/notice.png"
 				style="width: 100px; height: 100px; margin-left: 15px; margin-bottom: 30px;">
 				</div>
 			</div>
@@ -96,8 +96,8 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="./Resources/js/popper.min.js"></script>
-	<script src="./Resources/js/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 
 
 

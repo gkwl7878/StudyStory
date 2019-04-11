@@ -6,12 +6,12 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 	<title>스터디 공지 리스트</title>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/Resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/Resources/js/popper.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/Resources/js/bootstrap.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
   <style type="text/css">
   
   .font20bold {
@@ -28,9 +28,9 @@
   <!-- summernote 관련 library 시작 -->
 	<!-- jQuery 순서 중요 -->
 	<!-- include libraries(jQuery, bootstrap) -->
-	<link href="http://localhost:8080/third_prj/Resources/summernote/bootstrap.css" rel="stylesheet">
-	<script src="http://localhost:8080/third_prj/Resources/summernote/jquery.js"></script> 
-	<script src="http://localhost:8080/third_prj/Resources/summernote/bootstrap.js"></script> 
+	<link href="http://localhost:8080/third_prj/resources/summernote/bootstrap.css" rel="stylesheet">
+	<script src="http://localhost:8080/third_prj/resources/summernote/jquery.js"></script> 
+	<script src="http://localhost:8080/third_prj/resources/summernote/bootstrap.js"></script> 
 
 	<!-- include summernote css/js, font깨짐으로 CDN이용해서 summernote 사용 -->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
@@ -46,7 +46,7 @@
 		});
   </script>
   <!-- include summernote-ko-KR -->
-	<script src="http://localhost:8080/third_prj/Resources/summernote/summernote-ko-KR.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/summernote/summernote-ko-KR.js"></script>
 	<!-- summernote 관련 library 끝 -->
   
   <!-- daum map api -->
@@ -119,7 +119,7 @@
 	   		<span class="font12bold">이런거 해오세요~</span>
 	   	</div>
 	   	<div class="col-1 text-center">
-	   		<a href="#"><img src="http://localhost:8080/third_prj/Resources/img/minus.png" style="width:20px; height:20px;"/></a>
+	   		<a href="#"><img src="http://localhost:8080/third_prj/resources/img/minus.png" style="width:20px; height:20px;"/></a>
 	   	</div>
 	  </div>
 	  <div class="row" style="margin-top:30px;">

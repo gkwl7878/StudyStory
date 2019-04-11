@@ -24,12 +24,12 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 
 <title>새 스터디 상세 정보</title>
 <!-- Custom styles for this template -->
 
-<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 
 </head>
 <body>
@@ -41,7 +41,7 @@
 			<div class="col-12 justify-content-left"
 				style="margin-bottom: 20px; ">
 				<strong style="font-size: 45px;">새 스터디 상세 정보</strong><img
-					src="Resources/images/create.png"
+					src="resources/images/create.png"
 					style="width: 150px; height: 120px; margin-left: 30px;">
 			</div>
 		</div>
@@ -102,7 +102,7 @@
 			</div>
 			<div class="col-7 font20bold">
 				<img width="440" height="300" id="img"
-					src="Resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'>
+					src="resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'>
 			</div>
 		</div>
 
@@ -130,8 +130,8 @@
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="./Resources/js/popper.min.js"></script>
-	<script src="./Resources/js/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>

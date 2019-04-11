@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 
 <title>Bootstrap Template By Young</title>
 <style>
@@ -40,7 +40,7 @@
 /* 프로필 작성 */
 </style>
 <!-- Custom styles for this template -->
-<link href="./Resources/css/jumbotron.css" rel="stylesheet">
+<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 
 </head>
 <body>
@@ -67,7 +67,7 @@
 				<!-- 왼쪽 사용자 이미지-->
 				<div class="col-auto">
 					<div class="card border-0 pr-0" style="width: 260px;">
-						<img style="width: 200px; height: 200px;" src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top mx-auto d-block rounded-circle mt-3" alt="...">
+						<img style="width: 200px; height: 200px;" src="http://localhost:8080/third_prj/resources/images/no_img.png" class="card-img-top mx-auto d-block rounded-circle mt-3" alt="...">
 						<div class="card-body text-center pt-0">
 							<h5 class="card-title text-center m-4">프로필 사진</h5>
 							<a href="#" class="btn btn-sm btn-primary mb-4">이미지 업로드</a>
@@ -130,8 +130,8 @@
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
 	
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="./Resources/js/popper.min.js"></script>
-	<script src="./Resources/js/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

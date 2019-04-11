@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 
 <title>Bootstrap Template By Young</title>
 <style>
@@ -25,7 +25,7 @@
 }
 </style>
 <!-- Custom styles for this template -->
-<link href="./Resources/css/jumbotron.css" rel="stylesheet">
+<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 
 </head>
 <body>
@@ -53,7 +53,7 @@
 					<!-- 1번째 줄 시작 -->
 					<div class="col-md-4">
 						<div class="card mb-4 shadow-sm">
-							<img class="card-img-top" src="http://localhost:8080/third_prj/Resources/images/no_img.png">
+							<img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/no_img.png">
 							<div class="card-body text-center p-3">
 
 								<div class="d-flex justify-content-end align-items-center mb-3">
@@ -70,7 +70,7 @@
 								<div class="d-flex justify-content-between align-items-center mt-3 px-2">
 
 									<div class="border border-secondary rounded-circle" style="width: 45px; height: 45px;">
-										<img src="http://localhost:8080/third_prj/Resources/images/no_img.png" class="card-img-top w-100 rounded-circle">
+										<img src="http://localhost:8080/third_prj/resources/images/no_img.png" class="card-img-top w-100 rounded-circle">
 									</div>
 
 									<div class="border-right p-2">
@@ -107,8 +107,8 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="./Resources/js/popper.min.js"></script>
-	<script src="./Resources/js/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

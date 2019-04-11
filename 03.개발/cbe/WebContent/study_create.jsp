@@ -23,12 +23,12 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 
 
 <title>스터디그룹 개설하기</title>
 
-<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 
 <link
 	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
@@ -105,14 +105,14 @@
 			<div class="col-12 justify-content-left"
 				style="margin-bottom: 20px; margin-top:15px ; padding: 0px;">
 				<strong style="font-size: 45px;">스터디 그룹 개설하기</strong><img
-					src="Resources/images/create.png"
+					src="resources/images/create.png"
 					style="width: 150px; height: 120px; margin-left: 30px;">
 			</div>
 		</div>
 		
 			<div class="form-group" style="margin-bottom: 70px; margin-top: 40px;" >
 
-				<img alt="" src="Resources/images/sub.png"
+				<img alt="" src="resources/images/sub.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
 				<label class="font30">어떤 <strong>주제</strong> 와 관련된 스터디인가요?
 				</label> <select class="form-control" id="subject">
@@ -125,7 +125,7 @@
 			</div>
 
 			<div class="form-group" style="margin-bottom: 70px;">
-				<img alt="" src="Resources/images/loc.png"
+				<img alt="" src="resources/images/loc.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
 				<label class="font30">새로운 스터디 그룹의 주 <strong>지역</strong>은
 					어디인가요?
@@ -141,7 +141,7 @@
 			</div>
 
 			<div class="form-group" style="margin-bottom: 70px;">
-				<img alt="" src="Resources/images/name.png"
+				<img alt="" src="resources/images/name.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
 				<label class="font30">스터디의 <strong>이름</strong>을 정해주세요
 				</label> <input type="email" class="form-control" id="name"
@@ -149,7 +149,7 @@
 			</div>
 
 			<div class="form-group" style="margin-bottom: 70px;">
-			<img alt="" src="Resources/images/Image.png"
+			<img alt="" src="resources/images/Image.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
 				<label for="exampleFormControlTextarea1" style="font-size: 30px;"> <strong>대표이미지</strong>를 선택해주세요</label>
 				<div class="input-group mb-3">
@@ -159,13 +159,13 @@
 						style="width: 700px; border: 0px; display: none"
 						readonly="readonly"> <a href="<?echo $PHP_SELF;?>"
 						onclick="schfile(); return false;"><img width="700"
-						height="300" id="img" src="Resources/images/preview_Image.png" border="0"
+						height="300" id="img" src="resources/images/preview_Image.png" border="0"
 						title='찾아보기' alt='찾아보기'></a>
 				</div>
 			</div>
 			
 			<div class="form-group" style="margin-bottom: 70px;">
-				<img alt="" src="Resources/images/detail.png"
+				<img alt="" src="resources/images/detail.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
 				<label style="font-size: 26px;">스터디 <strong>주제</strong>와 이
 					방의 <strong>규칙</strong>등을 자세히 설명해주세요
@@ -191,8 +191,8 @@
 	<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="./Resources/js/popper.min.js"></script>
-	<script src="./Resources/js/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 
 
 </body>

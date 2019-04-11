@@ -10,7 +10,7 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
   
   <title>신청자 상세보기 페이지</title>
   <!-- Custom styles for this template -->
@@ -32,7 +32,7 @@
 		<form>
 		 <div style= "width: 920px; border:1px solid #D7D7D7; padding:40px ; margin-bottom: 20px ">
 		<h3><strong>신청자 상세보기</strong></h3>
-		<img src="http://localhost:8080/third_prj/Resources/images/no_pic.png" style="float: inherit; margin-top: 20px">
+		<img src="http://localhost:8080/third_prj/resources/images/no_pic.png" style="float: inherit; margin-top: 20px">
 		<span style="vertical-align: bottom;"><strong>닉네임 : 신규에용</strong></span>
 		<hr  color="gray" >
 		<!-- <h5>새로운 신청자를 확인 해주세요.</h5> -->
@@ -66,9 +66,9 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="./Resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="./Resources/js/popper.min.js" ></script>
-  <script src="./Resources/js/bootstrap.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
 	
 
 	

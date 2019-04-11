@@ -24,12 +24,12 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 
 <title>상세 스터디 정보</title>
 <!-- Custom styles for this template -->
 
-<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <link
 	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
 	rel="stylesheet">
@@ -81,7 +81,7 @@
 			<div class="col-12 justify-content-left"
 				style="margin-bottom: 20px; ">
 				<strong style="font-size: 45px;">상세 스터디 정보</strong><img
-					src="Resources/images/create.png"
+					src="resources/images/create.png"
 					style="width: 150px; height: 120px; margin-left: 30px;">
 			</div>
 		</div>
@@ -158,7 +158,7 @@
 					type="text" id='file_sub'
 					style="width: 600px; border: 0px; display: none"> <a
 					href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img
-					width="440" height="300" id="img" src="Resources/images/preview_Image.png"
+					width="440" height="300" id="img" src="resources/images/preview_Image.png"
 					border="0" title='찾아보기' alt='찾아보기'></a>
 			</div>
 		</div>
@@ -185,8 +185,8 @@
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="./Resources/js/popper.min.js"></script>
-	<script src="./Resources/js/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 
 
 
