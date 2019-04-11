@@ -9,7 +9,7 @@
     <title>관리자 로그인</title>
 
     <!-- Bootstrap core CSS -->
-		<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <style>
       .bd-placeholder-img {
@@ -34,10 +34,15 @@
     <form class="form-signin">
   <img class="mb-4" src="http://localhost:8080/third_prj/Resources/img/no_logo.png" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">관리자 로그인</h1>
-  <label class="sr-only">관리자 아이디</label>
-  <input type="text" id="inputEmail" class="form-control" placeholder="관리자 아이디" required autofocus>
-  <label class="sr-only">비밀번호</label>
+  <label for="inputEmail" class="sr-only">관리자 아이디</label>
+  <input type="email" id="inputEmail" class="form-control" placeholder="관리자 아이디" required autofocus>
+  <label for="inputPassword" class="sr-only">비밀번호</label>
   <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
+  <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me"> 아이디 저장
+    </label>
+  </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
   <p class="mt-5 mb-3 text-muted">&copy; SIST Team Project 2019</p>
 </form>
