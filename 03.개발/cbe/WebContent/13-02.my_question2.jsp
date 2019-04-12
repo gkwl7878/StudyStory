@@ -26,7 +26,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 
-<title>관리자에게 문의하기</title>
+<title>내 문의보기</title>
 <!-- Custom styles for this template -->
 
 <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
@@ -36,18 +36,7 @@
 	rel="stylesheet">
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
-
-<script type="text/javascript">
-	$(function() {
-		$('#summernote').summernote({
-			placeholder : '공지사항입니다  :)',
-			tabsize : 2,
-			height : 300,
-			lang : 'ko-KR'
-		});
-	});
-</script>
-
+	<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
 </head>
 <body>
@@ -57,59 +46,63 @@
 
 	<form action="create_request.jsp" name="createFrm">
 		<div class="container form-group" id="wrap">
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-12 justify-content-left"
-					style="margin-top: 20px;">
-					<label style="font-size: 40px;"><strong>관리자에게 문의하기</strong></label>
+					style="margin-bottom: 20px; margin-top: 20px;">
+					<label style="font-size: 40px;"><strong>내 문의보기</strong></label>
 					<img alt="" src="resources/images/qa.png"
 				style="width: 130px; height: 100px; margin-left: 0px;">
 				</div>
-			</div>
-
-
-
-			<div class="row" style="margin-top: 30px;">
-				<div class="col-5" style="margin-left: 100px;">
-					<label class="font17bold"><strong>문의 제목 </strong> </label>
-				</div>
-				<div class="col-4">
-					<label class="font17bold"><strong>문의 분류 </strong> </label>
-				</div>
-			</div>
+			</div> -->
+			 <!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:20px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">내 문의보기</h1>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
 
 			<div class="row">
-				<div class="col-5" style="margin-left: 100px;">
-					<input type="text" class=" form-control" name="contents"
-						placeholder="제목을 입력해주세요(100자 이내)">
+				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
+					<label style="font-size: 25px;">제목제목</label>
 				</div>
-				<div class="col-4">
-					<select class="custom-select">
-						<option selected>분류 선택</option>
-						<option value="회원정보 관련">회원정보 관련</option>
-						<option value="스터디 관련">스터디 관련</option>
-						<option value="홈페이지 관련">홈페이지 관련</option>
-						<option value="기타">기타</option>
-					</select>
+			</div>
+			<div class=" row">
+				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
+					<label style="width: 80px;" class="font17bold"><strong>분류</strong></label>
+					<label style="width: 200px; margin-left: 30px;">회원관련</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
+					<label style="width: 80px;" class="font17bold"><strong>등록일</strong></label>
+					<label style="width: 150px; margin-left: 30px;">2019</label> <label
+						style="width: 100px; margin-left: 20px;" class="font17bold">답변여부</label>
+					<label style="width: 100px; margin-left: 50px;">미완료</label>
 				</div>
 			</div>
 
-			<div class="row" style="margin-top: 30px;">
+			<div class=" row">
 				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
-					<label class=" font17bold"><strong>문의내용 </strong> </label>
-				</div>
-				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
-					<input type="text" class="form-control" id="summernote">
-					<!-- <textarea style="resize: none;; margin-left: 100px; height: 200px;"
-						class=" form-control" rows="3" name="contents"
-						placeholder="자세한 내용을 입력해주세요"></textarea> -->
+					<textarea class="form-control" rows="3"
+						style="resize: none;; height: 300px;" name="contents" placeholder="내용"  readonly="readonly"></textarea>
 				</div>
 			</div>
+			<div class=" row">
+				<div class="col-9"
+					style="margin-top: 10px; margin-left: 100px; margin-top: 20px;">
+					<textarea class="form-control" rows="3"
+						style="resize: none;; height: 300px;" name="contents" placeholder="운영자 답변내용" readonly="readonly"></textarea>
+				</div>
+			</div>
+
 
 			<div class="row" style="margin-top: 30px;">
 				<a class="btn btn-secondary btn" href="#void" role="button"
-					style="margin-left: 300px;">돌아가기</a> <a
+					style="margin-left: 290px;">목록으로</a> <a
 					class="btn btn-secondary btn" href="#void" role="button"
-					style="margin-left: 10px;">문의하기</a>
+					style="margin-left: 10px;">재문의하기</a>
 			</div>
 		</div>
 	</form>

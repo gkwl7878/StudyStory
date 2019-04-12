@@ -36,7 +36,7 @@
 	rel="stylesheet">
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
-
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
 <script type="text/javascript">
 	 $(function() {
@@ -57,14 +57,23 @@
 
 	<form action="create_request.jsp" name="createFrm">
 		<div class="container form-group" id="wrap">
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-12 justify-content-left"
 					style="margin-bottom: 20px; margin-top: 20px;">
 					<label style="font-size: 40px;"><strong>문의 답변하기</strong></label>
 					<img alt="" src="resources/images/qa.png"
 				style="width: 130px; height: 100px; margin-left: 0px;">
 				</div>
-			</div>
+			</div> -->
+			 <!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">문의 답변하기</h1>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
+			
 			<div class=" row">
 				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
 					<label style="width: 50px;" class="font17bold"><strong>번호</strong>

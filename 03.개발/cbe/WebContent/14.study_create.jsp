@@ -35,6 +35,8 @@
 	rel="stylesheet">
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+	
+	<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
 <script type="text/javascript">
 	$(function() {
@@ -98,17 +100,24 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  -->
 	<div id="wrap">
-		<form action="create_request.jsp" name="createFrm">
 
 			
-				<div class="row">
+			<!-- 	<div class="row">
 			<div class="col-12 justify-content-left"
 				style="margin-bottom: 20px; margin-top:15px ; padding: 0px;">
 				<strong style="font-size: 45px;">스터디 그룹 개설하기</strong><img
 					src="resources/images/create.png"
 					style="width: 150px; height: 120px; margin-left: 30px;">
 			</div>
-		</div>
+		</div> -->
+		 <!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">스터디 그룹 개설하기</h1>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
 		
 			<div class="form-group" style="margin-bottom: 70px; margin-top: 40px;" >
 
@@ -185,7 +194,6 @@
 					class="btn btn-primary btn-lg" href="#void" role="button"
 					id="request" style="right: 100">승인요청</a>
 			</div>
-		</form>
 	</div>
 
 	<!-- footer -->

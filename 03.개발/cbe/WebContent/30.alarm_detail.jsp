@@ -25,7 +25,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 <title>세부 알림보기</title>
 <!-- Custom styles for this template -->
 
@@ -38,7 +38,16 @@
 	<!--  -->
 	<div class="container form-group" id="wrap">
 
-		<div class="row" style="margin-top: 300px;">
+		   <!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">세부 알림보기</h1>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
+
+		<div class="row" style="margin-top: 30px;">
 			<div class="col-3 font20bold">
 				<strong style="float: right;">제목 </strong>
 			</div>

@@ -35,7 +35,7 @@
 	rel="stylesheet">
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
-
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 <script type="text/javascript">
 	$(function() {
 		$('#summernote').summernote({
@@ -77,15 +77,16 @@
 
 
 	<div class="container form-group" id="wrap">
-		<div class="row">
-			<div class="col-12 justify-content-left"
-				style="margin-bottom: 20px; ">
-				<strong style="font-size: 45px;">상세 스터디 정보</strong><img
-					src="resources/images/create.png"
-					style="width: 150px; height: 120px; margin-left: 30px;">
-			</div>
-		</div>
-		<div class="row" style="margin-top: 10px;">
+		 <!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">상세 스터디 정보</h1>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
+	
+		<div class="row" style="margin-top: 30px;">
 			<div class="col-3 font20bold">
 				<label>스터디명</label>
 			</div>

@@ -31,6 +31,7 @@
 	rel="stylesheet">
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
 <script type="text/javascript">
 	$(function() {
@@ -99,13 +100,22 @@
 
 	<div id="wrap">
 
-		<div class="row" >
+		<!-- <div class="row" >
 			<div class="col-12 justify-content-left" style="margin-bottom: 20px; margin-top:15px;  padding: 0px;">
 				<strong style="font-size: 45px;">내 스터디 수정하기</strong><img
 					src="resources/images/create.png"
 					style="width: 150px; height: 120px; margin-left: 30px;">
 			</div>
-		</div>
+		</div> -->
+		  <!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">내가 만든 스터디</h1>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
+		
 
 		<div class="row" style="margin-top: 30px;">
 			<img alt="" src="resources/images/name.png"
