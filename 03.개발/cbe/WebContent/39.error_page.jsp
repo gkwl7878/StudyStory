@@ -10,7 +10,7 @@
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
   <title>페이지 찾을 수 없음</title>
   <!-- Custom styles for this template -->
 

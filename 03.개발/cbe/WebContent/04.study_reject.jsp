@@ -10,6 +10,7 @@
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
   
 	<title>스터디 생성 거절</title>
   <!-- Custom styles for this template -->
@@ -30,7 +31,7 @@
 	<div id="wrap">
 		<form>
 		 <br/><br/><br/><br/>
-		<h1 ><Strong>새 스터디 생성 거절</Strong></h1>
+		 <h1 ><Strong>새 스터디 생성 거절</Strong></h1>  
 		<hr  color="gray" >
 		<h5>스터디 생성 요청자에게 보여줄 메세지를 입력하세요.</h5>
 		<br/>

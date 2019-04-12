@@ -18,7 +18,7 @@ div{margin: 0px auto;}
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
   <title>스터디 참여 신청</title>
   <!-- Custom styles for this template -->
 
@@ -39,8 +39,16 @@ div{margin: 0px auto;}
 	
 	<div id="wrap" >
 		<form>
-		 <div style= "width: 920px; height: 1100px; border:1px solid #D7D7D7; padding:40px ; ">
-		<h3><strong>스터디 참여 신청</strong></h3>
+		 <div style= "width: 920px; height: 1100px; border:1px solid #D7D7D7; padding:30px ; ">
+		<!-- <h3><strong>스터디 참여 신청</strong></h3> -->
+		<!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">스터디 참여 신청</h1>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
 		<div>
 		</div>
 		<hr  color="gray" >
