@@ -11,7 +11,7 @@
 
     <!-- Bootstrap core CSS -->
 		<link href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
-
+		<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
     <!-- Custom styles for this template -->
     <link href="http://localhost:8080/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
     <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>

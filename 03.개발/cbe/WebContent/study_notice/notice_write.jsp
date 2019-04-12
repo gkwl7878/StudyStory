@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 	<title>스터디 공지 리스트</title>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
@@ -119,7 +120,7 @@
 	   		<span class="font12bold">이런거 해오세요~</span>
 	   	</div>
 	   	<div class="col-1 text-center">
-	   		<a href="#"><img src="http://localhost:8080/third_prj/resources/img/minus.png" style="width:20px; height:20px;"/></a>
+	   		<a href="#"><images src="http://localhost:8080/third_prj/resources/images/minus.png" style="width:20px; height:20px;"/></a>
 	   	</div>
 	  </div>
 	  <div class="row" style="margin-top:30px;">

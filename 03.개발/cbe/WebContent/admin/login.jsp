@@ -9,8 +9,8 @@
     <title>관리자 로그인</title>
 
     <!-- Bootstrap core CSS -->
-		<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
-
+		<link href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;

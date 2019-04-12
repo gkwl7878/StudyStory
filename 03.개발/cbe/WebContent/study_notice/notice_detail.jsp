@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 	<title>스터디 공지 리스트</title>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
@@ -79,7 +80,7 @@
 	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3">
 	     			누군가
-	     			<img src="http://localhost:8080/third_prj/resources/img/no_profile.png" width="50" height="60"/>
+	     			<images src="http://localhost:8080/third_prj/resources/images/no_profile.png" width="50" height="60"/>
 	     		</div>
 	     		<div class="col-9">
 	     			<textarea rows="5" cols="55" readonly="readonly"></textarea>
