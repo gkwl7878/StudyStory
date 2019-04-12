@@ -45,18 +45,19 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 
 <main role="main">
-
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
-    <div class="container" >
-      <h1>아이디/비밀번호 찾기</h1>
-      <div style="color: #808080;padding-top: 10px">
-      <h6>*이름과 이메일을 입력하여 아이디를 찾을 수 있습니다.</h6>
-      <h6>*비밀번호를 찾을 수 없을 경우 관리자에 문의바랍니다.</h6>
-      </div>
-      
-    </div>
-  </div>
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+  <!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">아이디/비밀번호 찾기</h1>
+           <div style="color: #808080;padding-top: 10px">
+	      <h6>이름과 이메일을 입력하여 아이디를 찾을 수 있습니다.</h6>
+	      <h6>아이디를 찾을 수 없을 경우 관리자에 문의바랍니다.</h6>
+	      </div>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
 
   <div class="container">
   	<div class="row">
