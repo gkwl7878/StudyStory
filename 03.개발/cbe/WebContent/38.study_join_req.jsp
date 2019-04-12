@@ -70,8 +70,8 @@ div{margin: 0px auto;}
   </tbody>
 </table>
 		
-		<h1 align="center" style="margin-top: 30px;"><strong>김신규( abcd123 )</strong>님 !</h1><br/>
-		<h3 align="center">모임이 당신을 궁금해합니다!</h3>
+		<h2 align="center" style="margin-top: 30px;"><strong>김신규( abcd123 )</strong>님 !</h2><br/>
+		<h4 align="center">모임이 당신을 궁금해합니다!</h4>
 		
 		<div class="info">
 		자기소개를 부탁드립니다.
