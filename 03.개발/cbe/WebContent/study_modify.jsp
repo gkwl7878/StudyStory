@@ -19,12 +19,12 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 
 <title>내 스터디 수정하기</title>
 <!-- Custom styles for this template -->
 
-<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 
 <link
 	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
@@ -102,13 +102,13 @@
 		<div class="row" >
 			<div class="col-12 justify-content-left" style="margin-bottom: 20px; margin-top:15px;  padding: 0px;">
 				<strong style="font-size: 45px;">내 스터디 수정하기</strong><img
-					src="Resources/images/create.png"
+					src="resources/images/create.png"
 					style="width: 150px; height: 120px; margin-left: 30px;">
 			</div>
 		</div>
 
 		<div class="row" style="margin-top: 30px;">
-			<img alt="" src="Resources/images/name.png"
+			<img alt="" src="resources/images/name.png"
 				style="width: 35px; height: 33px; margin-right: 12px;"><label
 				style="font-size: 20px; margin-right: 20px;"><strong>이름</strong></label>
 			<div class="col-sm-10">
@@ -120,7 +120,7 @@
 			<!--margin top주기  -->
 			<table>
 				<tr>
-					<td><img src="Resources/images/loc.png"
+					<td><img src="resources/images/loc.png"
 						style="width: 33px; height: 33px; "></td>
 					<td><label
 						style="font-size: 20px; width: 70px; margin-left: 10px; margin-top: 7px;"><strong>지역</strong></label>
@@ -132,7 +132,7 @@
 							<option value="취미">취미</option>
 							<option value="기타">기타</option>
 					</select></td>
-					<td><img alt="" src="Resources/images/sub.png"
+					<td><img alt="" src="resources/images/sub.png"
 						style="width: 33px; height: 33px; margin-left: 30px;"></td>
 					<td><label
 						style="font-size: 20px; margin-left: 10px; margin-top: 7px;"><strong>주제</strong></label>
@@ -151,7 +151,7 @@
 		</div>
 
 		<div class="row" style="margin-top: 50px;">
-		<img src="Resources/images/Image.png"
+		<img src="resources/images/Image.png"
 				style="width: 35px; height: 35px; margin-right: 10px; margin-bottom: 10px;">
 			<label style="font-size: 20px;">어떤 <strong>대표이미지</strong>로
 				변경하시겠습니까?
@@ -162,13 +162,13 @@
 					type="text" id='file_sub'
 					style="width: 700px; border: 0px; display: none"> <a
 					href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img
-					width="700" height="300" id="img" src="Resources/images/preview_Image.png"
+					width="700" height="300" id="img" src="resources/images/preview_Image.png"
 					border="0" title='찾아보기' alt='찾아보기'></a>
 			</div>
 		</div>
 
 		<div class="row" style="margin-top: 50px;">
-			<img src="Resources/images/detail.png"
+			<img src="resources/images/detail.png"
 				style="width: 30px; height: 30px; margin-right: 10px; margin-bottom: 10px;"><label
 				style="font-size: 20px; margin-bottom: 20px;">어떤 <strong>주제</strong>와
 				<strong>규칙</strong> 으로 변경하시겠습니까?
@@ -192,8 +192,8 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="./Resources/js/popper.min.js"></script>
-	<script src="./Resources/js/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 
 
 

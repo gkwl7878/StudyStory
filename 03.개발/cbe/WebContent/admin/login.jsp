@@ -9,7 +9,7 @@
     <title>관리자 로그인</title>
 
     <!-- Bootstrap core CSS -->
-		<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -28,11 +28,11 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="http://localhost:8080/third_prj/Resources/css/signin.css" rel="stylesheet">
+    <link href="http://localhost:8080/third_prj/resources/css/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
     <form class="form-signin">
-  <img class="mb-4" src="http://localhost:8080/third_prj/Resources/img/no_logo.png" alt="" width="72" height="72">
+  <img class="mb-4" src="http://localhost:8080/third_prj/resources/images/no_logo.png" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">관리자 로그인</h1>
   <label class="sr-only">관리자 아이디</label>
   <input type="text" id="inputEmail" class="form-control" placeholder="관리자 아이디" required autofocus>

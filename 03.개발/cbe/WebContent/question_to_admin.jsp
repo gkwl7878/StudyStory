@@ -24,12 +24,12 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 
 <title>관리자에게 문의하기</title>
 <!-- Custom styles for this template -->
 
-<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 
 <link
 	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
@@ -61,7 +61,7 @@
 				<div class="col-12 justify-content-left"
 					style="margin-top: 20px;">
 					<label style="font-size: 40px;"><strong>관리자에게 문의하기</strong></label>
-					<img alt="" src="Resources/images/qa.png"
+					<img alt="" src="resources/images/qa.png"
 				style="width: 130px; height: 100px; margin-left: 0px;">
 				</div>
 			</div>
@@ -119,8 +119,8 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="./Resources/js/popper.min.js"></script>
-	<script src="./Resources/js/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 
 
 

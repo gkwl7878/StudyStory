@@ -12,7 +12,7 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
   
 	<title>비밀번호 찾기</title>
   <style>
@@ -37,7 +37,7 @@
    
   </style>
   <!-- Custom styles for this template -->
-  <link href="./Resources/css/jumbotron.css" rel="stylesheet">
+  <link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 	
 </head>
 <body>
@@ -115,8 +115,8 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="./Resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="./Resources/js/popper.min.js" ></script>
-  <script src="./Resources/js/bootstrap.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
 </body>
 </html>

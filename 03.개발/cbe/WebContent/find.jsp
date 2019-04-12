@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
   
 	<title>아이디/비밀번호 찾기</title>
   <style>
@@ -27,7 +27,7 @@
   </style>
   
   <!-- Custom styles for this template -->
-  <link href="./Resources/css/jumbotron.css" rel="stylesheet">
+  <link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 	
 </head>
 <body>
@@ -50,7 +50,7 @@
 			<div class="memPage findMem">
 				<!-- find id -->
 				<div class="findIdPw">
-					<h2 class="tMar35"><img src="Resources/images/find_id_pw.png" alt="아이디 찾기" /></h2>
+					<h2 class="tMar35"><img src="resources/images/find_id_pw.png" alt="아이디 찾기" /></h2>
 					<ul class="help">
 						<li> 이름과 연락처를 입력하여 아이디를 찾을 수 있습니다.</li>
 					</ul>
@@ -140,8 +140,8 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="./Resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="./Resources/js/popper.min.js" ></script>
-  <script src="./Resources/js/bootstrap.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
 </body>
 </html>

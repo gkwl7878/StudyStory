@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 
 <title>Bootstrap Template By Young</title>
 <style>
@@ -25,7 +25,7 @@
 }
 </style>
 <!-- Custom styles for this template -->
-<link href="./Resources/css/jumbotron.css" rel="stylesheet">
+<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 
 </head>
 <body>
@@ -67,7 +67,7 @@
 								<!-- 1번째 줄 시작 -->
 								<div class="col-3">
 									<div class="card mb-4 shadow-sm text-center">
-										<img class="card-img-top" src="http://localhost:8080/third_prj/Resources/images/no_img.png" alt="Card image cap">
+										<img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/no_img.png" alt="Card image cap">
 										<div class="card-body">
 											<p class="card-title">닉네임</p>
 											<p class="card-text">010-0000-0000</p>
@@ -92,8 +92,8 @@
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="./Resources/js/popper.min.js"></script>
-	<script src="./Resources/js/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
   
 	<title>스터디 삭제</title>
   <!-- Custom styles for this template -->
@@ -51,9 +51,9 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="./Resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="./Resources/js/popper.min.js" ></script>
-  <script src="./Resources/js/bootstrap.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
 	
 
 	

@@ -10,15 +10,15 @@
     <title>관리자 - 새 스터디 관리</title>
 
     <!-- Bootstrap core CSS -->
-		<link href="http://localhost:8080/third_prj/Resources/css/bootstrap.min.css" rel="stylesheet">
+		<link href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="http://localhost:8080/third_prj/Resources/css/admin_dashboard.css" rel="stylesheet">
-    <script src="http://localhost:8080/third_prj/Resources/js/jquery-3.3.1.slim.min.js"></script>
-		<script src="http://localhost:8080/third_prj/Resources/js/bootstrap.bundle.min.js"></script>
-    <script src="http://localhost:8080/third_prj/Resources/js/feather-icons/4.9.0/feather.min.js"></script>
-    <script src="http://localhost:8080/third_prj/Resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-		<script src="http://localhost:8080/third_prj/Resources/js/admin_dashboard.js"></script></body>
+    <link href="http://localhost:8080/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+    <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+		<script src="http://localhost:8080/third_prj/resources/js/bootstrap.bundle.min.js"></script>
+    <script src="http://localhost:8080/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
+    <script src="http://localhost:8080/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
+		<script src="http://localhost:8080/third_prj/resources/js/admin_dashboard.js"></script></body>
   </head>
   <body>
   

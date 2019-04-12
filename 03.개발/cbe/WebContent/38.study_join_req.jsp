@@ -17,7 +17,7 @@ div{margin: 0px auto;}
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
   
   <title>스터디 참여 신청</title>
   <!-- Custom styles for this template -->
@@ -55,7 +55,7 @@ div{margin: 0px auto;}
   </thead>
   <tbody>
     <tr style="vertical-align: middle;">
-      <td scope="row"><img src="http://localhost:8080/third_prj/Resources/images/no_pic.png"><br/>한지민</td>
+      <td scope="row"><img src="http://localhost:8080/third_prj/resources/images/no_pic.png"><br/>한지민</td>
       <td style="vertical-align: middle;"><strong>영어 같이 해봐요! <br/>노하우 만땅 리더의 특급모임</strong></td>
       <td style="vertical-align: middle;">호주, 뉴질랜드, 영국, 미국, 인도, 필리핀 영어까지 한번에 정복!</td>
     </tr>
@@ -90,9 +90,9 @@ div{margin: 0px auto;}
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="./Resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="./Resources/js/popper.min.js" ></script>
-  <script src="./Resources/js/bootstrap.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
+  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
 	
 
 	

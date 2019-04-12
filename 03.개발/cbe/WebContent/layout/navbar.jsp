@@ -36,7 +36,7 @@
 			<ul class="navbar-nav text-center">
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" id="my_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img class="rounded-circle" src="http://localhost:8080/third_prj/Resources/images/icon_notice.png" style="width: 35px; height: 35px;">
+						<img class="rounded-circle" src="http://localhost:8080/third_prj/resources/images/icon_notice.png" style="width: 35px; height: 35px;">
 					</a>
 					<div class="dropdown-menu" aria-labelledby="notice">
 						<a class="dropdown-item" href="#">더 보기</a>
@@ -44,7 +44,7 @@
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" id="my_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img class="rounded-circle" src="http://localhost:8080/third_prj/Resources/images/icon_my_page.png" style="width: 35px; height: 35px;">
+						<img class="rounded-circle" src="http://localhost:8080/third_prj/resources/images/icon_my_page.png" style="width: 35px; height: 35px;">
 					</a>
 					<div class="dropdown-menu" aria-labelledby="my_menu">
 						<a class="dropdown-item" href="#">내 스터디</a>
