@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+<!-- 폰트 CSS -->
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
 
 <title>Bootstrap Template By Young</title>
 <style>
@@ -36,12 +38,12 @@
 	<div role="main" style="min-height: 900px">
 
 		<!-- 점보트론 : 전광판 -->
-		<section class="jumbotron text-center bg-white m-0">
+		<section class="text-center bg-white mb-0" style="margin-top: 30px; margin-bottom: 20px;">
 			<div class="container">
 				<h1 class="jumbotron-heading">내 관심 스터디</h1>
-				<p class="lead text-muted">Something short and leading about the collection below—its contents,</p>
 			</div>
 		</section>
+		<div style="height: 20px;"></div>
 		<!-- 점보트론 : 전광판 -->
 
 
@@ -104,7 +106,7 @@
 									</div>
 									<div class="px-3 border-bottom">
 										<p class="card-text pb-3">
-											<strong>제목부분</strong> <br> <small>내용 어쩌구 어쩌구 내용 어쩌구 어쩌구 내용 어쩌구 어쩌구</small>
+											<strong>제목부분</strong>
 										</p>
 									</div>
 									<div class="d-flex justify-content-between align-items-center mt-3 px-2">
