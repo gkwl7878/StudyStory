@@ -10,7 +10,7 @@
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
   <title>계정 탈퇴 </title>
   <!-- 계정 탈퇴시 회원님이 남긴 정보는 유지됩니다. 계속 탈퇴 진행하시겠습니까? -->
   <!-- Custom styles for this template -->
