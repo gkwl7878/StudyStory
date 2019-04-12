@@ -47,12 +47,8 @@
 	<!-- header -->
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 <main role="main">
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
-    <div class="container" >
-      <h1>스터디 상세 정보</h1>
-    </div>
-  </div>
+  
+  
   <div class="container" style="min-height: 2000px">
 	  <div class="row">
 		  <div class="col-lg-10">
