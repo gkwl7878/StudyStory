@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+<!-- 폰트 CSS -->
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
 <title>Bootstrap Template By Young</title>
 <style>
@@ -46,7 +48,7 @@
 	<!-- CONTAINER DIV -->
 	<div class="container-fluid">
 		<!-- row -->
-		<div class="row justify-content-center">
+		<div class="row justify-content-center"  style="min-height: 900px">
 			<div class="col-auto" style="width: 1000px;">
 				<!-- 썸네일 row -->
 				<div class="row">
@@ -64,7 +66,7 @@
 								</div>
 								<div class="px-3 border-bottom">
 									<p class="card-text pb-3">
-										<strong>제목부분</strong> <br> <small>내용 어쩌구 어쩌구 내용 어쩌구 어쩌구 내용 어쩌구 어쩌구</small>
+										<strong>제목부분</strong>
 									</p>
 								</div>
 								<div class="d-flex justify-content-between align-items-center mt-3 px-2">
