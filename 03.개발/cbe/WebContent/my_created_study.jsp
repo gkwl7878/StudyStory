@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+<!-- 폰트 CSS -->
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
 <title>Bootstrap Template By Young</title>
 <style>
@@ -66,11 +68,12 @@ a:hover {
 	<div role="main" style="min-height: 900px">
 
 		<!-- 점보트론 : 전광판 -->
-		<section class="jumbotron text-center bg-white mb-0">
+		<section class="text-center bg-white mb-0" style="margin-top: 30px; margin-bottom: 20px;">
 			<div class="container">
-				<h1 class="jumbotron-heading">내가 만든 스터디</h1>
+				<h1 class="jumbotron-heading">프로필 관리</h1>
 			</div>
 		</section>
+		<div style="height: 30px;"></div>
 		<!-- 점보트론 : 전광판 -->
 
 		<!-- CONTAINER DIV -->
@@ -189,7 +192,7 @@ a:hover {
 									</div>
 									<div class="px-3 border-bottom">
 										<p class="card-text pb-3">
-											<strong>제목부분</strong> <br> <small>내용 어쩌구 어쩌구 내용 어쩌구 어쩌구 내용 어쩌구 어쩌구</small>
+											<strong>제목부분</strong>
 										</p>
 									</div>
 									<div class="d-flex justify-content-between align-items-center mt-3 px-2">
@@ -221,7 +224,7 @@ a:hover {
 
 						<!-- 추가하기 버튼 -->
 						<div class="col-md-4">
-							<div class="roounded" style="height: 525px; border: 1.5px dashed #EAEAEA; border-radius: 5px;">
+							<div class="roounded" style="height: 475.328px; border: 1.5px dashed #EAEAEA; border-radius: 5px;">
 								<button class="d-flex justify-content-center btn h-100 btn-outline-secondary btn-block text-center border-0">추가하기</button>
 							</div>
 						</div>

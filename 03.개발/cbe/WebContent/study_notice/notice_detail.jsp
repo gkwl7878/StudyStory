@@ -59,13 +59,18 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  header  끝 -->
 
-	    <div class="container col-lg-6">
-      <div class="row justify-content-left col-lg-6" style="margin-top:80px;">
-        <h1 class="h2">OOO 스터디</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-        </div>
-      </div>
-       <hr>
+		<!-- 점보트론 : 전광판 -->
+  <section class="text-center bg-white mb-0" style="margin-top:90px; margin-bottom:20px;">
+     <div class="container">
+        <h1 class="jumbotron-heading">영어공부스터뒹</h1>
+     </div>
+  </section>
+  <div style="height:20px;"></div>
+  <!-- 점보트론 : 전광판 -->
+	
+
+	    <main role="main" class="col-lg-10 px-4" style="margin:0px auto;">
+      <hr>
       
       <div class="container" style="min-height:500px;">
 	      <div class="row">
@@ -79,11 +84,11 @@
 	     	</div>	
 	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3">
-	     			누군가
-	     			<images src="http://localhost:8080/third_prj/resources/images/no_profile.png" width="50" height="60"/>
+	     			누군가<br/>
+	     			<img src="http://localhost:8080/third_prj/resources/images/no_profile.png" width="50" height="60"/>
 	     		</div>
 	     		<div class="col-9">
-	     			<textarea rows="5" cols="55" readonly="readonly"></textarea>
+	     			<textarea style="width:100%;" readonly="readonly"></textarea>
 	     		</div>
 	      </div>
 	      <div class="row" style="margin-top:30px;">
@@ -147,7 +152,7 @@
 	      		<input type="text" placeholder="내용을 입력해주세요." class="form-control form-control-sm" size="25"/>
 	      	</div>
 	      	<div class="col-2 justify-content-center">
-		      	<button type="button" class="btn btn-secondary btn-sm" style="font-size:12px;">댓글달기</button>
+		      	<button type="button" class="btn btn-secondary btn-sm" style="font-size:12px; width:80%">댓글달기</button>
 	      	</div>
 	      </div>
 	      <div class="row justify-content-center" style="min-height:100px; margin-top:30px;">

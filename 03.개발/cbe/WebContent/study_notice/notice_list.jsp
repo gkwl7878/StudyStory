@@ -23,14 +23,19 @@
 	<!-- header -->
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  header  끝 -->
+	
+		<!-- 점보트론 : 전광판 -->
+  <section class="text-center bg-white mb-0" style="margin-top:90px; margin-bottom:20px;">
+     <div class="container">
+        <h1 class="jumbotron-heading">스터디명스터디명스터디명</h1>
+     </div>
+  </section>
+  <div style="height:20px;"></div>
+  <!-- 점보트론 : 전광판 -->
+	
 
 	    <main role="main" class="col-lg-10 px-4" style="margin:0px auto;">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" style="margin-top:80px;">
-        <h1 class="h2">OOO 스터디</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-        </div>
-        <hr>
-      </div>
+      <hr>
       <div class="col-lg-12">
       	<a href="#">스터디 탈퇴하기</a>
       </div>
