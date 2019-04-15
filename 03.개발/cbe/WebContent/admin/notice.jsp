@@ -31,7 +31,7 @@
 			<c:import url="http://localhost:8080/third_prj/admin/layout/sidebar.jsp"></c:import>
 			<!-- sidebar 끝 -->
 
-			<main role="main" class="col-md-9 col-lg-10 px-4" style="margin:0px auto;">
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 			<div class="row justify-content-between" style="margin-top: 40px; margin-bottom: 10px;">
 				<div class="col-8">
 					<h1 class="h2">공지사항</h1>
