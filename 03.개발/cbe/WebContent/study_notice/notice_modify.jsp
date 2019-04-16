@@ -7,7 +7,8 @@
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-	<title>스터디 공지 리스트</title>
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+	<title>스터디 공지 수정</title>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
   <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
@@ -28,13 +29,12 @@
   <!-- summernote 관련 library 시작 -->
 	<!-- jQuery 순서 중요 -->
 	<!-- include libraries(jQuery, bootstrap) -->
-	<link href="http://localhost:8080/third_prj/resources/summernote/bootstrap.css" rel="stylesheet">
 	<script src="http://localhost:8080/third_prj/resources/summernote/jquery.js"></script> 
 	<script src="http://localhost:8080/third_prj/resources/summernote/bootstrap.js"></script> 
 
 	<!-- include summernote css/js, font깨짐으로 CDN이용해서 summernote 사용 -->
-	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 	<script>
 		$(document).ready(function() {
 		  $('#summernote').summernote({
@@ -78,20 +78,25 @@
 	<!-- header -->
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  header  끝 -->
+	
+	<!-- 점보트론 : 전광판 -->
+  <section class="text-center bg-white mb-0" style="margin-top:90px; margin-bottom:20px;">
+     <div class="container">
+        <h1 class="jumbotron-heading">스터디 공지 수정</h1>
+     </div>
+  </section>
+  <div style="height:20px;"></div>
+  <!-- 점보트론 : 전광판 -->
 
 	<div class="container col-10" style="margin:0px auto;">
-	  <div class="row justify-content-left">
-	    <h1 style="padding-left:30px;">OOO 스터디</h1>
-	  </div>
-    <hr>
     <div class="row">
-   		<div class="col-3 font20bold text-center">스터디 공지<br/>수정</div>
+   		<div class="col-3 font20bold text-center">제목</div>
 			<div class="col-9 form-group">
 				<input type="text" class="form-control" placeholder="공지명을 입력해주세요(최대100자)">
 			</div>
   	</div>	
 	  <div class="row" style="margin-top:30px;">
-	   	<div class="col-3 text-center" style="min-height:200px;"></div>
+	   	<div class="col-3 font20bold text-center" style="min-height:200px;">내용</div>
 	  	<div class="col-9">
 	  		<div id="summernote"></div>
 	  	</div>
@@ -119,7 +124,7 @@
 	   		<span class="font12bold">이런거 해오세요~</span>
 	   	</div>
 	   	<div class="col-1 text-center">
-	   		<a href="#"><img src="http://localhost:8080/third_prj/resources/img/minus.png" style="width:20px; height:20px;"/></a>
+	   		<a href="#"><images src="http://localhost:8080/third_prj/resources/images/minus.png" style="width:20px; height:20px;"/></a>
 	   	</div>
 	  </div>
 	  <div class="row" style="margin-top:30px;">

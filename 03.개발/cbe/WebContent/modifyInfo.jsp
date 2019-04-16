@@ -89,15 +89,19 @@
 
 <main role="main">
 
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
-    <div class="container" >
-      <h1>회원정보 수정</h1>
-      <div style="color: #808080;padding-top: 10px">
-      <h6>고객님의 주소와 연락처등 개인정보를 수정하실수 있습니다.</h6>
-      </div>
-    </div>
-  </div>
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>  
+  <!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">회원정보 수정</h1>
+	      <div style="color: #808080;padding-top: 10px">
+	      <h6>고객님의 주소와 연락처등 개인정보를 수정하실수 있습니다.</h6>
+	      </div>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
+
 
   <div class="container">
   <div class="row">

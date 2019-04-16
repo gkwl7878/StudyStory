@@ -1,53 +1,53 @@
 /* 유저 */
-DROP TABLE user_table
+DROP TABLE user_table 
 	CASCADE CONSTRAINTS;
 
 /* 공지사항 */
-DROP TABLE notice
+DROP TABLE notice 
 	CASCADE CONSTRAINTS;
 
 /* 문의사항 */
-DROP TABLE question
+DROP TABLE question 
 	CASCADE CONSTRAINTS;
 
 /* 스터디 */
-DROP TABLE study
+DROP TABLE study 
 	CASCADE CONSTRAINTS;
 
 /* 스터디 공지 */
-DROP TABLE study_notice
+DROP TABLE study_notice 
 	CASCADE CONSTRAINTS;
 
 /* 과제 */
-DROP TABLE homework
+DROP TABLE homework 
 	CASCADE CONSTRAINTS;
 
 /* 스터디 댓글 */
-DROP TABLE s_comment
+DROP TABLE s_comment 
 	CASCADE CONSTRAINTS;
 
 /* 스터디 참여자 */
-DROP TABLE member
+DROP TABLE member 
 	CASCADE CONSTRAINTS;
 
 /* 스터디 신청자 */
-DROP TABLE join
+DROP TABLE join 
 	CASCADE CONSTRAINTS;
 
 /* 알림 */
-DROP TABLE alarm
+DROP TABLE alarm 
 	CASCADE CONSTRAINTS;
 
 /* 좋아하는 스터디 */
-DROP TABLE fav_study
+DROP TABLE fav_study 
 	CASCADE CONSTRAINTS;
 
 /* 스터디 공지 댓글 */
-DROP TABLE sn_comment
+DROP TABLE sn_comment 
 	CASCADE CONSTRAINTS;
 
 /* 관리자 유저 */
-DROP TABLE admin_user
+DROP TABLE admin_user 
 	CASCADE CONSTRAINTS;
 
 /* 유저 */
@@ -56,7 +56,7 @@ CREATE TABLE user_table (
 	nick VARCHAR2(30) NOT NULL, /* 닉네임 */
 	name VARCHAR2(30) NOT NULL, /* 이름 */
 	pass VARCHAR2(100) NOT NULL, /* 비밀번호 */
-	zipcode NUMBER NOT NULL, /* 우편번호 */
+	zipcode VARCHAR2(6) NOT NULL, /* 우편번호 */
 	addr1 VARCHAR2(150) NOT NULL, /* 주소1 */
 	addr2 VARCHAR2(150) NOT NULL, /* 주소2 */
 	tel VARCHAR2(13) NOT NULL, /* 연락처 */
@@ -119,6 +119,7 @@ CREATE TABLE question (
 	input_date DATE DEFAULT SYSDATE, /* 등록일 */
 	answer_flag CHAR(1) DEFAULT 'N', /* 답변여부 */
 	answer_content CLOB, /* 답변내용 */
+	answer_date DATE, /* 답변일 */
 	id VARCHAR2(15) NOT NULL /* 아이디 */
 );
 
@@ -146,7 +147,8 @@ CREATE TABLE study (
 	accept_flag CHAR(1) DEFAULT 'N', /* 수락여부 */
 	input_date DATE DEFAULT SYSDATE, /* 생성일 */
 	deactivation CHAR(1), /* 종료여부 */
-	id VARCHAR2(15) NOT NULL /* 리더 아이디 */
+	id VARCHAR2(15) NOT NULL, /* 리더 아이디 */
+	delete_flag CHAR(1) /* 삭제여부 */
 );
 
 CREATE UNIQUE INDEX PK_study
@@ -213,23 +215,11 @@ ALTER TABLE homework
 
 /* 스터디 댓글 */
 CREATE TABLE s_comment (
-	s_num CHAR(8) NOT NULL, /* 스터디 번호 */
 	s_comment VARCHAR2(300) NOT NULL, /* 댓글내용 */
 	input_date DATE DEFAULT SYSDATE, /* 댓글등록일 */
-	id VARCHAR2(15) NOT NULL /* 아이디 */
+	id VARCHAR2(15) NOT NULL, /* 아이디 */
+	s_num CHAR(8) /* 스터디 번호 */
 );
-
-CREATE UNIQUE INDEX PK_s_comment
-	ON s_comment (
-		s_num ASC
-	);
-
-ALTER TABLE s_comment
-	ADD
-		CONSTRAINT PK_s_comment
-		PRIMARY KEY (
-			s_num
-		);
 
 /* 스터디 참여자 */
 CREATE TABLE member (
@@ -320,23 +310,11 @@ ALTER TABLE fav_study
 
 /* 스터디 공지 댓글 */
 CREATE TABLE sn_comment (
-	sn_num CHAR(9) NOT NULL, /* 스터디 공지번호 */
 	sn_comment VARCHAR2(300) NOT NULL, /* 댓글내용 */
 	input_date DATE DEFAULT SYSDATE, /* 댓글등록일 */
-	id VARCHAR2(15) NOT NULL /* 아이디 */
+	id VARCHAR2(15) NOT NULL, /* 아이디 */
+	sn_num CHAR(9) /* 스터디 공지번호 */
 );
-
-CREATE UNIQUE INDEX PK_sn_comment
-	ON sn_comment (
-		sn_num ASC
-	);
-
-ALTER TABLE sn_comment
-	ADD
-		CONSTRAINT PK_sn_comment
-		PRIMARY KEY (
-			sn_num
-		);
 
 /* 관리자 유저 */
 CREATE TABLE admin_user (
@@ -427,8 +405,7 @@ ALTER TABLE s_comment
 		)
 		REFERENCES study (
 			s_num
-		)
-		ON DELETE CASCADE;
+		);
 
 ALTER TABLE member
 	ADD
@@ -521,7 +498,4 @@ ALTER TABLE sn_comment
 		)
 		REFERENCES study_notice (
 			sn_num
-		)
-		ON DELETE CASCADE;
-
-COMMIT;
+		);

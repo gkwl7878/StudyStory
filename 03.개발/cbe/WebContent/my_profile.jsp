@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+<!-- 폰트 CSS -->
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
 <title>Bootstrap Template By Young</title>
 <style>
@@ -51,11 +53,12 @@
 	<div role="main" style="min-height: 900px">
 
 		<!-- 점보트론 : 전광판 -->
-		<section class="jumbotron text-center bg-white mb-0">
+		<section class="text-center bg-white mb-0" style="margin-top: 30px; margin-bottom: 20px;">
 			<div class="container">
 				<h1 class="jumbotron-heading">프로필 관리</h1>
 			</div>
 		</section>
+		<div style="height: 30px;"></div>
 		<!-- 점보트론 : 전광판 -->
 
 
@@ -128,7 +131,7 @@
 
 	<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
-	
+
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
