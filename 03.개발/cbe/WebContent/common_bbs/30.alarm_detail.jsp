@@ -37,15 +37,6 @@
 
 
 	<div class="container form-group" id="wrap">
-		<!-- 점보트론 : 전광판 -->
-		<section class="text-center bg-white mb-0" style="margin-top: 30px; margin-bottom: 20px;">
-			<div class="container">
-				<h1 class="jumbotron-heading">내 스터디</h1>
-			</div>
-		</section>
-		<div style="height: 20px;"></div>
-		<!-- 점보트론 : 전광판 -->
-
 		   <!-- 점보트론 : 전광판 -->
     <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
        <div class="container">
