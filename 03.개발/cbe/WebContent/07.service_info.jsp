@@ -83,24 +83,30 @@
 	<div class="intro-num">
 	<img src="http://localhost:8080/third_prj/resources/images/notebook.jpg" class="img-frm" style="margin-left: 50px">
 		<div class="text-1" style="float: right; text-align: right;">
-          <h3>01. 컴퓨터 하나로 통하는 미래</h3>
-          <p>(주)스터디 스토리는 당신의 성공적인 스터디 스토리를 기대합니다. <br/>
+          <h3>01. 손끝에서 만들어나가는 미래</h3>
+          <p> 현대인들이 선정한 내 일을 망치는 방해요인 1순위 = '스마트폰/스마트기기' <br/>
+          멀리하고싶지만 없어서는 안되는 골칫덩어리 스마트폰 !<br/>
+          스마트기기를 더욱 더 스마트하게! 사람에게 좀 더 이롭게!<br/>
+          스터디 스토리 개발팀은 스마트한 스터디 플랫폼을 만들고자 하였습니다.
           </p>
 		</div>
      </div>
 	<div class="intro-num">
 	<img src="http://localhost:8080/third_prj/resources/images/book.jpg"  class="img-frm" style="float: right; margin-right: 50px">
-		<div class="text-1" style="float: left; text-align: left; margin-left: 180px">
-          <h3>02. 능률적인 스터디를 위한 필수 서비스</h3>
-          <p>(주)스터디 스토리는 당신의 성공적인 스터디 스토리를 기대합니다. <br/>
-          </p>
+		<div class="text-1" style="float: left; text-align: left; margin-left: 100px">
+          <h3>02. 스터디를 만들어가고 완성시켜주는 플랫폼.</h3>
+          <p>스터디 스토리는 스토리를 만들어가고 완성시켜주는 자율 스터디 플랫폼입니다. <br/>
+				스터디 개설을 원하는, 스터디에 참여하고 싶은 누구에게든<br/>
+				스터디 스토리는 당신의 이야기를 만들어드립니다.
 		</div>
      </div>
 	<div class="intro-num">
 	<img src="http://localhost:8080/third_prj/resources/images/fist.jpg"  class="img-frm"style="margin-left: 50px">
 		<div class="text-1" style="float: right; text-align: right;">
-          <h3>03. 함께 만들어나가는 스터디 스토리 </h3>
-          <p>(주)스터디 스토리는 당신의 성공적인 스터디 스토리를 기대합니다. <br/>
+          <h3>03. 나와 함께 발전해나가는 스터디 스토리  </h3>
+          <p>스터디 스토리는 현재 서울시의 신촌, 홍대, 종각, 건대, 노원, 강남을 범위로 시범 운영중입니다.<br/>
+				사용자의 의견을 적극 수렴, 반영하여 함께 발전해나가는  더 나은 서비스를 만들어 나가겠습니다. <br/>
+				
           </p>
 		</div>
      </div>
