@@ -31,10 +31,10 @@
 
 <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <link
-	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
+	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css"
 	rel="stylesheet">
 <script
-	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 <script type="text/javascript">
 	$(function() {
@@ -159,9 +159,9 @@
 					type="text" id='file_sub'
 					style="width: 600px; border: 0px; display: none"> <a
 					href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img
-					width="440" height="300" id="img" src="resources/images/preview_Image.png"
+					width="440" height="300" id="img" src="../resources/images/preview_Image.png"
 					border="0" title='찾아보기' alt='찾아보기'></a>
-			</div>
+			</div><!--  상대경로 수정할 것 -->
 		</div>
 
 		<div class=" row" style="margin-top: 10px;">
