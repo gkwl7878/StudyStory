@@ -58,19 +58,17 @@ div{margin: 0px auto;}
     <tr>
       <th scope="col"  >리더명</th>
       <th scope="col" >제목</th>
-      <th scope="col" >간략소개</th>
     </tr>
   </thead>
   <tbody>
     <tr style="vertical-align: middle;">
       <td scope="row"><img src="http://localhost:8080/third_prj/resources/images/no_pic.png"><br/>한지민</td>
       <td style="vertical-align: middle;"><strong>영어 같이 해봐요! <br/>노하우 만땅 리더의 특급모임</strong></td>
-      <td style="vertical-align: middle;">호주, 뉴질랜드, 영국, 미국, 인도, 필리핀 영어까지 한번에 정복!</td>
     </tr>
   </tbody>
 </table>
 		
-		<h2 align="center" style="margin-top: 30px;"><strong>김신규( abcd123 )</strong>님 !</h2><br/>
+		<h2 align="center" style="margin-top: 30px;"><strong>김신규</strong>님 !</h2><br/>
 		<h4 align="center">모임이 당신을 궁금해합니다!</h4>
 		
 		<div class="info">
