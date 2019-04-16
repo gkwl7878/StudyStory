@@ -91,12 +91,8 @@
 				</div>
 			</div>
 
-			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="#void" role="button"
-					style="margin-left: 250px;">목록으로</a> <a
-					class="btn btn-secondary btn" href="#void" role="button"
-					style="margin-left: 10px;">수정</a> <a class="btn btn-secondary btn"
-					href="#void" role="button" style="margin-left: 10px;">삭제</a>
+			<div class="row justify-content-center" style="margin-top: 30px;">
+				<a class="btn btn-secondary btn" href="#void" role="button">목록으로</a>
 			</div>
 		</div>
 	</form>
