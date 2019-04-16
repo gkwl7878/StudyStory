@@ -30,22 +30,33 @@
 <!-- Custom styles for this template -->
 
 <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 </head>
 <body>
 	<!-- header -->
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 
 	<div class="container form-group" id="wrap">
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-12 justify-content-left"
 				style="margin-bottom: 20px; ">
 				<strong style="font-size: 45px;">새 스터디 상세 정보</strong><img
 					src="resources/images/create.png"
 					style="width: 150px; height: 120px; margin-left: 30px;">
 			</div>
-		</div>
-		<div class="row" style="margin-top: 10px;">
+		</div> -->
+		 <!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">새 스터디 상세 정보</h1>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
+		
+		
+		
+		<div class="row" style="margin-top: 30px;">
 			<div class="col-3 font20bold">
 				<strong>번호</strong>
 			</div>

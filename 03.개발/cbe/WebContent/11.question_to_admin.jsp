@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -22,8 +21,7 @@
 </style>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 
 <title>관리자에게 문의하기</title>
@@ -36,7 +34,7 @@
 	rel="stylesheet">
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
-
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 <script type="text/javascript">
 	$(function() {
 		$('#summernote').summernote({
@@ -55,18 +53,25 @@
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 	<!--  -->
 
+
 	<form action="create_request.jsp" name="createFrm">
 		<div class="container form-group" id="wrap">
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-12 justify-content-left"
 					style="margin-top: 20px;">
 					<label style="font-size: 40px;"><strong>관리자에게 문의하기</strong></label>
 					<img alt="" src="resources/images/qa.png"
 				style="width: 130px; height: 100px; margin-left: 0px;">
 				</div>
-			</div>
-
-
+			</div> -->
+			  <!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">관리자에게 문의하기</h1>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
 
 			<div class="row" style="margin-top: 30px;">
 				<div class="col-5" style="margin-left: 100px;">
@@ -79,8 +84,7 @@
 
 			<div class="row">
 				<div class="col-5" style="margin-left: 100px;">
-					<input type="text" class=" form-control" name="contents"
-						placeholder="제목을 입력해주세요(100자 이내)">
+					<input type="text" class=" form-control" name="contents" placeholder="제목을 입력해주세요(100자 이내)">
 				</div>
 				<div class="col-4">
 					<select class="custom-select">
@@ -106,10 +110,7 @@
 			</div>
 
 			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="#void" role="button"
-					style="margin-left: 300px;">돌아가기</a> <a
-					class="btn btn-secondary btn" href="#void" role="button"
-					style="margin-left: 10px;">문의하기</a>
+				<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 300px;">돌아가기</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">문의하기</a>
 			</div>
 		</div>
 	</form>

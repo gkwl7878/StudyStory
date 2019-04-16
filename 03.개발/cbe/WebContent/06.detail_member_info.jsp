@@ -32,8 +32,8 @@
 <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 
 <script type="text/javascript">
-
 </script>
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
 </head>
 <body>
@@ -43,12 +43,20 @@
 
 	
 		<div class="container form-group" id="wrap">
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-12 justify-content-left" 
 					style="margin-bottom: 20px; margin-top: 20px;">
 						<label style="font-size: 45px;"><strong>상세 회원 정보</strong></label>
 				</div>
-			</div>
+			</div> -->
+			  <!-- 점보트론 : 전광판 -->
+    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+       <div class="container">
+          <h1 class="jumbotron-heading">회원 상세 정보</h1>
+       </div>
+    </section>
+    <div style="height:20px;"></div>
+    <!-- 점보트론 : 전광판 -->
 
 			<div class="row" style="margin-bottom: 10px; margin-top: 20px;">
 				<div class="col-3 font20bold" style="margin-top: 10px;">
