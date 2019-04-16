@@ -49,21 +49,18 @@
         <img src="http://localhost:8080/third_prj/resources/images/std1.jpg" class="d-block w-100" alt="..." style="height: 500px;">
         <div class="carousel-caption d-none d-md-block">
           <h2>편리하게 공부해요!</h2>
-          <h5>책가방에서 스터디 플래너를 꺼내고 필통을 꺼내느라 바쁘시죠? 노트북, 모바일로 쉽게 관리해요 !</h5>
         </div>
       </div>
       <div class="carousel-item">
         <img src="http://localhost:8080/third_prj/resources/images/std2.jpg" class="d-block w-100" alt="..." style="height: 500px;">
         <div class="carousel-caption d-none d-md-block">
           <h2>함께 공부해요 !</h2>
-          <h5>아직도 혼자 공부하세요? 같은 목표를 가진 다양한 친구들과 함께라면 !</h5>
         </div>
       </div>
       <div class="carousel-item">
         <img src="http://localhost:8080/third_prj/resources/images/std3.jpg" class="d-block w-100" alt="..." style="height: 500px;">
         <div class="carousel-caption d-none d-md-block">
           <h2>함께 즐겁게 여유롭게 !</h2>
-          <h5>스터디 스토리는 당신의 목표를 응원합니다. 여유롭게 즐거운 스터디 성공을 응원합니다.</h5>
         </div>
       </div>
     </div>
