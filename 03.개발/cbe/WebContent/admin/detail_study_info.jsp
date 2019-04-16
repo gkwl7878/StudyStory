@@ -33,8 +33,8 @@
 <script src="http://localhost:8080/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="http://localhost:8080/third_prj/resources/js/admin_dashboard.js"></script>
 
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 
 <script type="text/javascript">
 	$(function() {
@@ -82,8 +82,9 @@
 
 	<div class="container form-group" id="wrap">
 		<div class="row">
-			<div class="col-12 justify-content-left" style="margin-bottom: 20px;">
-				<strong style="font-size: 45px;">상세 스터디 정보</strong><img src="resources/images/create.png" style="width: 150px; height: 120px; margin-left: 30px;">
+			<div class="col-2"></div>
+			<div class="col-10 justify-content-left" style="margin-bottom: 20px;">
+				<strong style="font-size: 45px;">상세 스터디 정보</strong><img src="../resources/images/create.png" style="width: 150px; height: 120px; margin-left: 30px;">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 10px;">
@@ -154,7 +155,7 @@
 				<strong>스터디 썸네일</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> <input type="text" id='file_sub' style="width: 600px; border: 0px; display: none"> <a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img width="440" height="300" id="img" src="resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'></a>
+				<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> <input type="text" id='file_sub' style="width: 600px; border: 0px; display: none"> <a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img width="440" height="300" id="img" src="../resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'></a>
 			</div>
 		</div>
 
