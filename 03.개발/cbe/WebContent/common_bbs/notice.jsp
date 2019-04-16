@@ -6,11 +6,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>내 문의내역</title>
+<title>관리자</title>
 
 <!-- Bootstrap core CSS -->
 <link href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
 <!-- Custom styles for this template -->
 <link href="http://localhost:8080/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
@@ -19,35 +18,35 @@
 <script src="http://localhost:8080/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
 <script src="http://localhost:8080/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="http://localhost:8080/third_prj/resources/js/admin_dashboard.js"></script>
-</body>
 </head>
+
 <body>
 
-	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
-
 	<div class="container-fluid">
-		<div class="row">
-
-			<main role="main" class="col-md-9 col-lg-10 px-4" style="margin:0px auto;">
-			
-			<!-- 점보트론 : 전광판 -->
-			<section class="text-center bg-white mb-0" style="margin-top: 30px; margin-bottom: 20px;">
-				<div class="container">
-					<h1 class="jumbotron-heading">내 문의내역</h1>
+		
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+			<div class="row justify-content-between" style="margin-top: 40px; margin-bottom: 10px;">
+				<div class="col-8">
+					<h1 class="h2">공지사항</h1>
 				</div>
-			</section>
-			<div style="height: 20px;"></div>
-			<!-- 점보트론 : 전광판 -->
+				<div class="col-2 text-right" style="padding-left: 2px; padding-right: 15px; padding-top: 20px;">
+					<strong>제목</strong>
+				</div>
+				<div class="col-1" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
+					<input type="text" class="form-control form-control-sm" />
+				</div>
+				<div class="col-1" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
+					<button type="button" class="btn btn-sm btn-secondary">검색</button>
+				</div>
+			</div>
 
 			<div class="table-responsive">
 				<table class="table table-striped table-sm border-bottom">
 					<thead>
 						<tr class="text-center">
 							<th style="width: 100px">번호</th>
-							<th style="width: 150px">분류</th>
 							<th style="width: 500px">제목</th>
-							<th style="width: 150px">답변여부</th>
+							<th style="width: 200px">등록일</th>
 							<th style="width: 100px">조회수</th>
 						</tr>
 					</thead>
@@ -55,10 +54,9 @@
 						<c:forEach begin="1" end="10" step="1">
 							<tr class="text-center">
 								<td>123</td>
-								<td>회원 관련</td>
-								<td class="text-left">제목입니다 문의입니다 숑숑</td>
-								<td>미답변</td>
+								<td class="text-left">스터디명 블라블라블라</td>
 								<td>2019-03-00</td>
+								<td>000</td>
 							</tr>
 						</c:forEach>
 					</tbody>
