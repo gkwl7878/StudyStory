@@ -30,6 +30,7 @@
 
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
 <script type="text/javascript">
 	$(function() {
@@ -114,7 +115,7 @@
 		
 			<div class="form-group" style="margin-bottom: 70px; margin-top: 40px;" >
 
-				<img alt="" src="resources/images/sub.png"
+				<img alt="" src="http://localhost:8080/third_prj/resources/images/sub.png"
 					style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;">
 				<label class="font30">어떤 <strong>주제</strong> 와 관련된 스터디인가요?
 				</label> <select class="form-control" id="subject">
@@ -127,7 +128,7 @@
 			</div>
 
 			<div class="form-group" style="margin-bottom: 70px;">
-				<img alt="" src="resources/images/loc.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label class="font30">새로운 스터디 그룹의 주 <strong>지역</strong>은 어디인가요?
+				<img alt="" src="http://localhost:8080/third_prj/resources/images/loc.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label class="font30">새로운 스터디 그룹의 주 <strong>지역</strong>은 어디인가요?
 				</label>
 				<select class="form-control" id="loc">
 					<option value="">지역을 선택해주세요</option>
@@ -141,20 +142,20 @@
 			</div>
 
 			<div class="form-group" style="margin-bottom: 70px;">
-				<img alt="" src="resources/images/name.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label class="font30">스터디의 <strong>이름</strong>을 정해주세요
+				<img alt="" src="http://localhost:8080/third_prj/resources/images/name.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label class="font30">스터디의 <strong>이름</strong>을 정해주세요
 				</label> <input type="email" class="form-control" id="name" placeholder="스터디의 이름을 입력해주세요(24자까지 입력가능합니다.)" id="name">
 			</div>
 
 			<div class="form-group" style="margin-bottom: 70px;">
-				<img alt="" src="resources/images/Image.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label for="exampleFormControlTextarea1" style="font-size: 30px;"> <strong>대표이미지</strong>를 선택해주세요
+				<img alt="" src="http://localhost:8080/third_prj/resources/images/Image.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label for="exampleFormControlTextarea1" style="font-size: 30px;"> <strong>대표이미지</strong>를 선택해주세요
 				</label>
 				<div class="input-group mb-3">
-					<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> <input type="text" id='file_sub' style="width: 700px; border: 0px; display: none" readonly="readonly"> <a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img width="700" height="300" id="img" src="resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'></a>
+					<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> <input type="text" id='file_sub' style="width: 700px; border: 0px; display: none" readonly="readonly"> <a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img width="700" height="300" id="img" src="http://localhost:8080/third_prj/resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'></a>
 				</div>
 			</div>
 
 			<div class="form-group" style="margin-bottom: 70px;">
-				<img alt="" src="resources/images/detail.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label style="font-size: 26px;">스터디 <strong>주제</strong>와 이 방의 <strong>규칙</strong>등을 자세히 설명해주세요
+				<img alt="" src="http://localhost:8080/third_prj/resources/images/detail.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label style="font-size: 26px;">스터디 <strong>주제</strong>와 이 방의 <strong>규칙</strong>등을 자세히 설명해주세요
 				</label>
 				<div style="resize: none; width: 700px; height: 300px;">
 					<input type="text" class="form-control" id="summernote">
