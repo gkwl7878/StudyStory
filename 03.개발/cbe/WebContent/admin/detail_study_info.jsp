@@ -152,7 +152,8 @@
 
 		<div class=" row" style="margin-top: 10px;">
 			<div class="col-3 font20bold">
-				<strong>스터디 썸네일</strong>
+				<div><strong>스터디 썸네일</strong></div>
+				<div style="font-size: 12px; color: #FF0000"><strong>*이미지를 클릭해서 변경</strong></div>
 			</div>
 			<div class="col-7 font20bold">
 				<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> <input type="text" id='file_sub' style="width: 600px; border: 0px; display: none"> <a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img width="440" height="300" id="img" src="../resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'></a>
