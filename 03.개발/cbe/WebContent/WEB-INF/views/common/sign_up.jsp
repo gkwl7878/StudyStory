@@ -92,9 +92,6 @@
 	
 </head>
 <body>
-	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
-
 <main role="main">
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
    <!-- 점보트론 : 전광판 -->
@@ -205,12 +202,6 @@
   </div> 
 
 </main>
-
-	
-
-	<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
-
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
