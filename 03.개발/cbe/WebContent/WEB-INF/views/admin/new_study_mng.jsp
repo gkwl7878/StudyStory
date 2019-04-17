@@ -22,14 +22,14 @@
 <body>
 
 	<!-- navbar 시작 -->
-	<c:import url="http://localhost:8080/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
 
 	<div class="container-fluid">
 		<div class="row">
 
 			<!-- sidebar 시작 -->
-			<c:import url="http://localhost:8080/third_prj/admin/layout/sidebar.jsp"></c:import>
+			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"></c:import>
 			<!-- sidebar 끝 -->
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
