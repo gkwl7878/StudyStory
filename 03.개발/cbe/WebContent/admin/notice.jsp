@@ -43,7 +43,7 @@
 					<input type="text" class="form-control form-control-sm" />
 				</div>
 				<div class="col-1" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
-					<button type="button" class="btn btn-sm btn-secondary">검색</button>
+					<button type="button" class="btn btn-sm btn-secondary" style="width: 70px">검색</button>
 				</div>
 			</div>
 
@@ -68,6 +68,10 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<div class="row">
+					<div class="col-11"></div>
+					<div class="col-1" ><button type="button" class="btn btn-sm btn-secondary" style="width: 70px;">글쓰기</button></div>
+				</div>
 				<div class="d-flex justify-content-center">
 					<ul class="pagination">
 						<li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a></li>

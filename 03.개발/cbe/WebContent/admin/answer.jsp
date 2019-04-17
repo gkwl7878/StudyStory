@@ -33,8 +33,8 @@
 <script src="http://localhost:8080/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="http://localhost:8080/third_prj/resources/js/admin_dashboard.js"></script>
 
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 
 
 <script type="text/javascript">
@@ -61,7 +61,8 @@
 	<form action="create_request.jsp" name="createFrm">
 		<div class="container form-group" id="wrap">
 			<div class="row">
-				<div class="col-12 justify-content-left" style="margin-bottom: 20px; margin-top: 20px;">
+				<div class="col-3"></div>
+				<div class="col-9 justify-content-left" style="margin-bottom: 20px; margin-top: 20px;">
 					<label style="font-size: 40px;"><strong>문의 답변하기</strong></label> <img alt="" src="resources/images/qa.png" style="width: 130px; height: 100px; margin-left: 0px;">
 				</div>
 			</div>

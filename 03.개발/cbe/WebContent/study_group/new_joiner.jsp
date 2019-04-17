@@ -46,8 +46,7 @@
 						<tr class="text-center">
 							<th style="width: 50px">번호</th>
 							<th style="width: 100px">닉네임</th>
-							<th style="width: 250px">자기소개</th>
-							<th style="width: 250px">지원동기</th>
+							<th style="width: 500px">지원동기</th>
 							<th style="width: 100px">수락여부</th>
 							<th style="width: 100px">신청일</th>
 						</tr>
@@ -61,7 +60,6 @@
 									<br />
 									<span class="text-center"><strong>닉네임</strong></span>
 								</td>
-								<td class="text-left align-middle">저는 어릴적부터 엄한 가정교육을 받으며...</td>
 								<td class="text-left align-middle">공부공부공부하고싶어서..동기부여...</td>
 								<td class="align-middle">대기</td>
 								<td class="align-middle">2019-03-00</td>

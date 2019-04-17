@@ -11,7 +11,6 @@
 /* #link{margin-left: 1000px; margin-top: 20px} */
 #loginTitle {
 	text-align: center;
-	st
 }
 
 .font20bold {
