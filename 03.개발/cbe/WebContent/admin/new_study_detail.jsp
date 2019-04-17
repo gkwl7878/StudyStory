@@ -46,7 +46,7 @@
 	<div class="container form-group" id="wrap">
 		<div class="row">
 			<div class="col-12 justify-content-left" style="margin-bottom: 20px;">
-				<strong style="font-size: 45px;">새 스터디 상세 정보</strong><img src="resources/images/create.png" style="width: 150px; height: 120px; margin-left: 30px;">
+				<strong style="font-size: 45px;">새 스터디 상세 정보</strong><img src="../resources/images/create.png" style="width: 150px; height: 120px; margin-left: 30px;">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 10px;">
@@ -104,7 +104,7 @@
 				<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>스터디 썸네일</strong></label>&nbsp;
 			</div>
 			<div class="col-7 font20bold">
-				<img width="440" height="300" id="img" src="resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'>
+				<img width="440" height="300" id="img" src="../resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'>
 			</div>
 		</div>
 
