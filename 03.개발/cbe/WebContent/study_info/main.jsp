@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
 <!-- 폰트 CSS -->
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
 
 <title>Bootstrap Template By Young</title>
 <style>
@@ -25,6 +25,15 @@
 		font-size: 3.5rem;
 	}
 }
+
+.custom_jumbo {
+	min-height: 350px;
+	background-image: url('http://localhost:8080/third_prj/resources/images/main_page_jumbotron.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	color: #fff;
+}
 </style>
 <!-- Custom styles for this template -->
 <link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
@@ -34,21 +43,19 @@
 	<!-- header -->
 	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
 
-	<!-- body -->
-	<main role="main">
-
-	<section class="jumbotron text-center">
+	<section class="jumbotron custom_jumbo" style="min-height: 350px;">
 		<div class="container">
-			<h1 class="jumbotron-heading">메인 페이지</h1>
-			<p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but
-				not too short so folks don’t simply skip over it entirely.</p>
+			<div style="margin-left: 50px; margin-top: 280px;">
+				<h2>스터디 스토리</h2>
+				<h5>성공을 향해 나아가는 당신의 이야기.</h5>
+			</div>
 		</div>
 	</section>
 
 	<!-- CONTAINER DIV -->
 	<div class="container-fluid">
 		<!-- row -->
-		<div class="row justify-content-center"  style="min-height: 900px">
+		<div class="row justify-content-center">
 			<div class="col-auto" style="width: 1000px;">
 				<!-- 썸네일 row -->
 				<div class="row">
@@ -102,7 +109,8 @@
 		</div>
 		<!-- row -->
 	</div>
-	<!-- CONTAINER DIV --> </main>
+	<!-- CONTAINER DIV -->
+	</main>
 
 	<!-- footer -->
 	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
