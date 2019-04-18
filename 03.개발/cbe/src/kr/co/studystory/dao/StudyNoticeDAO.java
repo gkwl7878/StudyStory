@@ -47,9 +47,12 @@ public class StudyNoticeDAO {
 		return ssf;
 	}//getSessionFactory
 	
-	public List<StudyNotice> selectSnList(){
+	//스터디 공지사항 페이지(참여자)
+	public List<StudyNotice> selectSnList(String studyNum){
+		List<StudyNotice> list=null;
 		SqlSession ss=getSessionFactory().openSession();
-		List<StudyNotice> list=ss.selectList("statement");
+		list=ss.selectList("noticeList",studyNum);
+		ss.close();
 		return list;
 	}//selectSnList
 	
