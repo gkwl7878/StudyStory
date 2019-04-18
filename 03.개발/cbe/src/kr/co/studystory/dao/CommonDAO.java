@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.Reader;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import kr.co.studystory.vo.NewUserVO;
 
 public class CommonDAO {
 	
@@ -24,7 +27,7 @@ public class CommonDAO {
 		SqlSessionFactory ssf = null;
 		
 		try {
-			Reader r = Resources.getResourceAsReader("연결할 mybatis_config.xml");
+			Reader r = Resources.getResourceAsReader("kr/co/studystory/dao/mybatis_config.xml");
 			SqlSessionFactoryBuilder ssfb = new SqlSessionFactoryBuilder();
 			ssf = ssfb.build(r);
 			if (r != null) {
@@ -37,5 +40,63 @@ public class CommonDAO {
 		return ssf;
 	}
 	
-
+	/**
+	 * 아이디 중복체크
+	 * by 영근 190418
+	 */
+	public boolean selectDupId(String id) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.selectOne("checkDupId",id);
+		ss.close();
+		
+		if (cnt == 1) { // 아이디가 존재하면 true
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	/**
+	 * 이메일 중복체크
+	 * by 영근 190418
+	 */
+	public boolean selectDupEmail(String email) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.selectOne("checkDupEmail",email);
+		ss.close();
+		
+		if (cnt == 1) { // 이메일이 존재하면 true
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	/**
+	 * 회원가입
+	 * by 영근 190418
+	 */
+	public boolean insertSignUp(NewUserVO nuvo) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.insert("insertNewUser",nuvo);
+		
+		if (cnt == 1) { // 회원가입이 수행되면 true
+			flag = true; 
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
+	/*public static void main(String[] args) {
+		NewUserVO nuvo = new NewUserVO("ooo123123", "영근오", "호롤롤로", "12345", "지구어딘가", "지구어딘가2", "010-2222-3333", "oooooo@ooooo.com", "1", "노래해");
+		System.out.println(CommonDAO.getInstance().insertSignUp(nuvo));
+	}*/
 }
