@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.vo.NewStudyVO;
 
 
@@ -45,11 +46,19 @@ public class StudyGroupDAO {
 		return ssf;
 	}//getSqlSessionFactory
 
+	//내 스터디 개설하기
 	public void insertNewStudy(NewStudyVO ns_vo) {
 		SqlSession ss=getSqlSessionFactory().openSession();
 		int cnt=ss.insert("insertStudy", ns_vo);
 		ss.commit();
 		System.out.println("추가 작업"+cnt);
 	}//insertNewStudy
+	
+	//내 스터디 수정하기 
+	public PrevStudyInfo selectPrevStudyInfo(String s_num) {
+		PrevStudyInfo psi=null;
+		SqlSession ss=getSqlSessionFactory().openSession();
+		psi=ss.select("", );
+	}
 	
 }//class

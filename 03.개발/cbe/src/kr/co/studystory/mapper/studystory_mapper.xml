@@ -13,6 +13,8 @@
   values( , , , , ,#{id}, ,s_num.nextval,#{study_name},#{loc},#{category},#{content})
   </insert>
   
+  <select id="selectPrevStudyInfo" parameterType="" ></select>
+  
  <!--  <update id="updateStudy" parameterType="kr.co.studystory.vo.NewStudyVO">
   UPDATE CP_DEPT
   SET 		DNAME=#{dname}, LOC=#{loc}

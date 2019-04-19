@@ -22,11 +22,27 @@ public class UserStudyController {
 		return "";
 	}
 	
-	@RequestMapping(value="")
+	@RequestMapping(value="/study_group/createStudy.do", method=GET)
 	public String createStudyProcess(NewStudyVO ns_vo,HttpServletRequest request, Model model) {
 		
 		StudyGroupService sgs=new StudyGroupService();
+		sgs.addNewStudy(ns_vo);
 		
-		return "";
+		String studyName=request.getParameter("studyName");
+		String loc=request.getParameter("loc");
+		String category=request.getParameter("category");
+		String content=request.getParameter("content");
+		String img=request.getParameter("img");
+		String id=request.getParameter("id");
+	
+		model.addAttribute("studyName",studyName);
+		model.addAttribute("loc",loc);
+		model.addAttribute("category",category);
+		model.addAttribute("content",content);
+		model.addAttribute("img",img);
+		model.addAttribute("id",id);
+		
+		
+		return "study_create_request";
 	}
 }

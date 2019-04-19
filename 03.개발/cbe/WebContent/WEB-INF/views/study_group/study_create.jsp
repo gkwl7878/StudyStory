@@ -94,16 +94,9 @@
 	<!-- header -->
 	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
+<form action="/study_group/createStudy.do">	
 	<div id="wrap">
 
-			<!-- 	<div class="row">
-			<div class="col-12 justify-content-left"
-				style="margin-bottom: 20px; margin-top:15px ; padding: 0px;">
-				<strong style="font-size: 45px;">스터디 그룹 개설하기</strong><img
-					src="resources/images/create.png"
-					style="width: 150px; height: 120px; margin-left: 30px;">
-			</div>
-		</div> -->
 		 <!-- 점보트론 : 전광판 -->
     <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
        <div class="container">
@@ -120,7 +113,7 @@
 				<label class="font30">어떤 <strong>주제</strong> 와 관련된 스터디인가요?
 				</label> <select class="form-control" id="subject">
 					<option value="">주제를 선택해주세요</option>
-					<option value="언어">언어</option>
+					<option value="언어" >언어</option>
 					<option value="취업">취업</option>
 					<option value="취미">취미</option>
 					<option value="기타">기타</option>
@@ -167,10 +160,11 @@
 			</div>
 
 			<div class="row" style="margin-bottom: 60px;">
-				<a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 250px; margin-right: 10px;">취소</a> <a class="btn btn-primary btn-lg" href="#void" role="button" id="request" style="right: 100">승인요청</a>
+				<a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 250px; margin-right: 10px;">취소</a> 
+				<input type="submit" value="승인요청" class="btn btn-primary btn-lg" name="request" id="request" style="right: 100">
 			</div>
 	</div>
-
+</form>
 	<!-- footer -->
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
