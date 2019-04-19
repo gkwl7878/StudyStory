@@ -28,8 +28,8 @@
 
 <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
 <script type="text/javascript">
@@ -92,7 +92,7 @@
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
 	<div id="wrap">
 
@@ -172,7 +172,7 @@
 	</div>
 
 	<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
 	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>

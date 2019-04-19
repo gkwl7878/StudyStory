@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!--쿼리문을 정의  
+  	namespace : XML내에서 중복된 id를 사용할 수 있도록 구분하는 것.
+  					(패키지와 비슷한 용도)
+  -->
+<mapper namespace="kr.co.studystory">
+
+  <insert id="insertStudy" parameterType="kr.co.studystory.vo.NewStudyVO">
+  insert into study(img,recruitment,accept_flag,input_date,deactivation,id,delete_flag,s_num,study_name,loc,category,content) 
+  values( , , , , ,#{id}, ,s_num.nextval,#{study_name},#{loc},#{category},#{content})
+  </insert>
+  
+ <!--  <update id="updateStudy" parameterType="kr.co.studystory.vo.NewStudyVO">
+  UPDATE CP_DEPT
+  SET 		DNAME=#{dname}, LOC=#{loc}
+  WHERE DEPTNO=#{deptno}
+  </update>
+  
+  <delete id="deleteStudy" parameterType="int">
+  DELETE FROM CP_DEPT
+  WHERE DEPTNO=#{deptno}
+  </delete> -->
+</mapper>
