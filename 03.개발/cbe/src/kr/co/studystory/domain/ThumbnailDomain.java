@@ -1,4 +1,4 @@
-package kr.co.studystory.studyInfo.domain;
+package kr.co.studystory.domain;
 
 /**
  * ΩÊ≥ª¿œ Domain.

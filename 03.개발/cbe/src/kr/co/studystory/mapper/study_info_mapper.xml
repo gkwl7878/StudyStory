@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.studystory.studyinfo">
+
+
+
+	<!-- 스터디 상세 정보 조회. - 진행중. -->
+	<resultMap type="kr.co.studystory.studyinfo.domain.StudyInfoDomain" id="StudyInfoDomain">
+	</resultMap>
+	
+	<select id="selectDetailStudy" parameterType="String" resultMap="StudyInfoDomain">
+		SELECT STD.STUDY_NAME, STD.LOC, STD.CATEGORY, STD.CONTENT, STD.IMG , STD.INPUT_DATE, UT.NICK, UT.INTRODUCE
+		FROM USER_TABLE UT, STUDY STD
+		WHERE UT.ID = STD.ID AND UT.ID = #{ userID }
+	</select>
+	<!-- 스터디 상세 정보 조회. -->
+
+	<!-- 메인 페이지의 썸네일들 조회. - 진행중. -->
+	<resultMap type="kr.co.studystory.studyinfo.domain.ThumbnailDomain" id="ThumbnailDomain">
+		<result column="s_num" property=""/>
+		<result column="STUDY_NAME" property=""/>
+		<result column="LOC" property=""/>
+		<result column="CATEGORY" property=""/>
+		<result column="IMG" property=""/>
+		<result column="RECRUITMENT" property=""/>
+		<result column="INPUT_DATE" property=""/>
+		<result column="NICK" property=""/>
+		<result column="IMG" property=""/>
+	</resultMap>
+	
+	<select id="selectStudyList">
+		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, INPUT_DATE, NICK, IMG, 
+		FROM STUDY
+	</select>
+	<!-- 메인 페이지의 썸네일들 조회. -->
+
+</mapper>

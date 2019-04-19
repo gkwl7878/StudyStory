@@ -9,6 +9,6 @@ public class CommonController {
 
 	@RequestMapping(value="/index.do",method=GET)
 	public String indexPage() {
-		return "common/index";
+		return "study_info/detailStudy";
 	}
 }

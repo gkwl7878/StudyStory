@@ -16,6 +16,7 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="kr/co/studystory/mapper/연결할mapper명.xml"/> 
+  	<!-- 재현 -->
+    <mapper resource="kr/co/studystory/mapper/study_info_mapper.xml"/> 
   </mappers>
 </configuration>
