@@ -56,4 +56,8 @@ public class StudyNoticeDAO {
 		return list;
 	}//selectSnList
 	
+	public static void main(String[] args) {
+		
+	}
+	
 }//class

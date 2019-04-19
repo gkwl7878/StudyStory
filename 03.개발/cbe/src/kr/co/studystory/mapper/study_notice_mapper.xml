@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.co.studystory.study_notice_mapper">
+<resultMap type="kr.co.studystory.domain.StudyNotice" id="studyNoticeResult">
+	<result column="snNum" property="snNum"/>
+	<result column="subject" property="subject"/>
+	<result column="img" property="img"/>
+	<result column="inputDate" property="inputDate"/>
+</resultMap>
+
+<select id="studyNoticeList" resultType="studyNoticeResult">
+select sn.s_num,sn.subject, ut.img, to_char(sn.input_date,'yyyy-MM-dd') input_date
+from study_notice sn, study s, user_table ut
+where sn.s_num=s.s_num
+ and ut.id=s.id  
+
+</select>
+
+
+
+
+</mapper>
