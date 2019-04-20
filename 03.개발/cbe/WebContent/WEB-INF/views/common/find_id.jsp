@@ -11,6 +11,12 @@
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
 
 <title>아이디 찾기</title>
+<style type="text/css">
+   	body {
+		background-image: url("http://localhost:8080/third_prj/resources/images/cover.png");
+		background-size: 100%;
+	}
+</style>
 <!-- Custom styles for this template -->
 <link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 <script type="text/javascript">
@@ -24,7 +30,7 @@
 <body>
 	<main role="main">
 	<!-- 점보트론 : 전광판 -->
-	<section class="text-center bg-white mb-0" style="margin-top: 30px; margin-bottom: 20px;">
+	<section class="text-center mb-0" style="margin-top: 30px; margin-bottom: 20px;">
 		<div class="container">
 			<h1 class="jumbotron-heading">아이디/비밀번호 찾기</h1>
 			<div style="color: #808080; padding-top: 10px">
