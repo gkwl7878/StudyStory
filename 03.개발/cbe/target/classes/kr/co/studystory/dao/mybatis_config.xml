@@ -16,6 +16,6 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="kr/co/studystory/mapper/연결할mapper명.xml"/> 
+    <mapper resource="kr/co/studystory/mapper/signup_mapper.xml"/> 
   </mappers>
 </configuration>

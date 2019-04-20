@@ -21,10 +21,10 @@
   <input type="text" id="inputEmail" class="form-control" placeholder="아이디" required autofocus>
   <label class="sr-only">비밀번호</label>
   <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">회원가입</button>
+  <button class="btn btn-lg btn-primary btn-block" type="button">로그인</button>
+  <button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='sign_up.do'">회원가입</button>
   <br/>
-  <label><a href="#">아이디/비밀번호 찾기</a></label>
+  <label><a href="common/find_id.do">아이디/비밀번호 찾기</a></label>
   <p class="mt-5 mb-3 text-muted">&copy; SIST Team Project 2019</p>
 </form>
 </body>
