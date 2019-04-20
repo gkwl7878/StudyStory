@@ -10,5 +10,104 @@
 	from ADMIN_USER 
 	where id=#{id} and pass=#{pass}
 </select>
+
+<select id="countWeekUser" resultType="Integer" >
+	select count(*)
+	from study
+	where input_date between (SYSDATE-7) and SYSDATE
+</select>
+
+<select id="countWeekStudy" resultType="Integer" >
+	select count(*)
+	from user_table
+	where reg_date between (SYSDATE-7) and SYSDATE
+</select>
+
+<select id="countAllUser" resultType="Integer" >
+	select count(*)
+	from study
+</select>
+
+<select id="countAllStudy" resultType="Integer" >
+	select count(*)
+	from user_table
+</select>
+
+<select id="nsTotalCnt" resultType="Integer">
+	select count(*)
+	from study 
+	where accept_flag='N'
+</select>
+
+<select id="uTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.UserBoardVO">
+	select count(*)
+	from user_table
+	<where>
+		<if test="'id'.equals(searchCondition)">
+			id#{searchWord}
+		</if>
+		<if test="'name'.equals(searchCondition)">
+			name=#{searchWord}
+		</if>
+		<if test="'nick'.equals(searchCondition)">
+			nick=#{searchWord}
+		</if>
+	</where>
+</select>
+
+<select id="sTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.StudyBoardVO">
+	select count(*)
+	from(
+		select s.id,s.study_name,ut.nick
+		from study s, user_table ut
+		where s.id=ut.id
+	)
+	<where>
+		<if test="'studyName'.equals(searchCondition)">
+			study_name=#{searchWord}
+		</if>
+		<if test="'id'.equals(searchCondition)">
+			id=#{searchWord}
+		</if>
+		<if test="'nick'.equals(searchCondition)">
+			nick=#{searchWord}
+		</if>
+	</where>
+</select>
+
+<select id="qTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.QuestionBoardVO">
+	select count(*)
+	from question
+	<where>
+		<if test="'userInfo'.equals(searchCondition)">
+			category='회원정보'
+		</if>
+		<if test="'study'.equals(searchCondition)">
+			category='스터디'
+		</if>
+		<if test="'homepage'.equals(searchCondition)">
+			category='홈페이지'
+		</if>
+		<if test="'etc'.equals(searchCondition)">
+			category='기타'
+		</if>
+	</where>
+</select>
+
+<select id="nTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.NoticeBoardVO">
+	select count(*)
+	from notice
+	where subject like '%'||'${searchWord}'||'%'
+</select>
+
+
+
+
+
+
+
+
+
+
 	
 </mapper>

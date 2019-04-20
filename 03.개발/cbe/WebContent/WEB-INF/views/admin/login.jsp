@@ -13,6 +13,8 @@
 		<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script type="text/javascript">
+
+	
 		$(function() {
 			if(!${ requestScope.loginFlag }){
 				alert("정보가 일치하지 않습니다.");
@@ -45,7 +47,7 @@
   <label class="sr-only">관리자 아이디</label>
   <input type="text" id="inputEmail" class="form-control" placeholder="관리자 아이디" name="id" required autofocus>
   <label class="sr-only">비밀번호</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호" name="pass" required>
+  <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호" name="pass" required >
   <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
   <p class="mt-5 mb-3 text-muted">&copy; SIST Team Project 2019</p>
 </form>

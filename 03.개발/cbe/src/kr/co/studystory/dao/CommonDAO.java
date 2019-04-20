@@ -13,7 +13,7 @@ public class CommonDAO {
 	
 	public static CommonDAO getInstance() {
 		if (c_dao == null) {
-			org.apache.ibatis.logging.LogFactory.useLog4JLogging(); // ·Î±ë »ç¿ë
+			//org.apache.ibatis.logging.LogFactory.useLog4JLogging(); // ·Î±ë »ç¿ë
 			c_dao = new CommonDAO();
 		}
 		

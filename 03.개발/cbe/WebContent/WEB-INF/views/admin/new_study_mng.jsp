@@ -29,7 +29,14 @@
 		<div class="row">
 
 			<!-- sidebar 시작 -->
-			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"></c:import>
+			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
+				<c:param name="weekUser" value="${requestScope.weekUser}"></c:param>
+				<c:param name="weekStudy" value="${requestScope.weekStudy}"></c:param>
+				<c:param name="allUser" value="${requestScope.allUser}"></c:param>
+				<c:param name="allStudy" value="${requestScope.allStudy}"></c:param>
+			</c:import>
+			
+			<%-- <c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"></c:import> --%>
 			<!-- sidebar 끝 -->
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
+import kr.co.studystory.admin.domain.UserAndStudy;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.vo.LoginVO;
 
@@ -32,11 +33,25 @@ public class LoginController {
 		String url= "admin/login";
 		boolean loginFlag=false;
 		CommonMngService cms= new CommonMngService();
+		UserAndStudy uas= new UserAndStudy();
+		uas=cms.getCountUserAndStudy();
+		
 		loginFlag= cms.login(l_vo);
+		int weekUser= uas.getWeekUser();
+		int weekStudy= uas.getWeekStudy();
+		int allUser= uas.getAllUser();
+		int allStudy= uas.getAllStudy();
+		
 		if(loginFlag) {
 			url= "admin/new_study_mng";
 		}
+		
 		model.addAttribute("loginFlag",loginFlag);
+		model.addAttribute("weekUser",weekUser);
+		model.addAttribute("weekStudy",weekStudy);
+		model.addAttribute("allUser",allUser);
+		model.addAttribute("allStudy",allStudy);
+		
 		return url;
 	}
 	
@@ -45,8 +60,10 @@ public class LoginController {
 	 * @param ss
 	 */
 	@RequestMapping(value="/admin/logout.do")
-	public String LogOut(SessionStatus ss){
+	public String LogOut(SessionStatus ss,Model model){
+		boolean logoutFlag=false;
 		ss.setComplete();
+		model.addAttribute("logoutFlag",logoutFlag);
 		return "admin/login";
 	}
 	
