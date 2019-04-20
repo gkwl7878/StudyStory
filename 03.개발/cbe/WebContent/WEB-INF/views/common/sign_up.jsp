@@ -3,30 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript">
-	window.onload=function(){
-		document.getElementById("searchZip").addEventListener("click", execPostcode);
-	}
-  //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-  function execPostcode() {
-      new daum.Postcode({
-          oncomplete: function(data) {
-              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-              // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-              var roadAddr = data.roadAddress; // 도로명 주소 변수
-
-              // 우편번호와 주소 정보를 해당 필드에 넣는다.
-              document.getElementById('zipcode').value = data.zonecode;
-              document.getElementById("addr1").value = roadAddr;
-             // document.getElementById("jibunAddr").value = data.jibunAddress;
-          }
-      }).open();
-  }
-</script>
 <head >
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -48,6 +24,30 @@
   		padding-left: 585px
   	}
   </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+  <script type="text/javascript">
+		window.onload=function(){
+			document.getElementById("searchZip").addEventListener("click", execPostcode);
+		}
+	  //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+	  function execPostcode() {
+	      new daum.Postcode({
+	          oncomplete: function(data) {
+	              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	
+	              // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+	              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	              var roadAddr = data.roadAddress; // 도로명 주소 변수
+	
+	              // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	              document.getElementById('zipcode').value = data.zonecode;
+	              document.getElementById("addr1").value = roadAddr;
+	             // document.getElementById("jibunAddr").value = data.jibunAddress;
+	          }
+	      }).open();
+	  }
+  </script>
   <script type="text/javascript">
   	
   	//////////////////////////////////////// 검증처리부터 할 것 ~0418////////////
