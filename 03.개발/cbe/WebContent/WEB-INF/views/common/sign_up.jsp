@@ -10,6 +10,10 @@
   
 	<title>회원가입</title>
   <style>
+   	body {
+		background-image: url("http://localhost:8080/third_prj/resources/images/cover.png");
+		background-size: 100%;
+	}
   	.btn-adjust {
   		height:37px;
   	}
@@ -52,17 +56,35 @@
   	
   	//////////////////////////////////////// 검증처리부터 할 것 ~0418////////////
   	// 입력값 검증처리 후 회원가입 수행
-  	
-  	
-  	
-  	
+  	$(function() {
+  		$("#dupId").click(function() { // 아이디 중복 AJAX 처리
+  			
+  		});
+  		
+  		$("#dupEmail").click(function() { // 이메일 중복 AJAX 처리
+  			
+  		});
+  		
+  		$("#signUpBtn").click(function() {
+  			
+  			
+  			// 패스워드2개 일치 검증
+  			
+  			// 빈값 존재하지 않도록 검증
+  			
+  			// tel이랑 email은 분리되어 있는데 submit할 때 한개의 값으로 어떻게 전달하는지?
+  					
+  			
+  			
+  		});
+  	});
   </script>
 </head>
 <body>
 <main role="main">
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
    <!-- 점보트론 : 전광판 -->
-    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+    <section class="text-center mb-0" style="margin-top:30px; margin-bottom:20px;">
        <div class="container">
           <h1 class="jumbotron-heading">회원 가입</h1>
        </div>
@@ -71,47 +93,47 @@
     <!-- 점보트론 : 전광판 -->
 
   <div class="container ">
-  	<form id="signUpFrm">
+  	<form id="signUpFrm" action="sign_up_process.do" method="post">
   		 <div class="row" >
   		 <div class="col-lg-2"></div>
         <div class="col-lg-10">
         	<table class="table" style="width: 700px; ">
 			<tr>
 				<td>이름<span class="span">*</span></td>
-				<td><input type="text"  class="form-control" style="width:200px"></td>
+				<td><input type="text" id="name" name="name" class="form-control" style="width:200px"></td>
 			</tr>
 			<tr>
 				<td>아이디<span class="span">*</span></td>
 				<td>
-					<input type="text" class="form-control" style="width:200px;display: inline-block;" maxlength="15" placeholder="아이디는 15자 이하"/>
-					<button type="button" class="btn btn-outline-secondary btn-adjust">중복확인</button>
+					<input type="text" id="id" name="id" class="form-control" style="width:200px;display: inline-block;" maxlength="15" placeholder="아이디는 15자 이하"/>
+					<button type="button" id="dupId" class="btn btn-outline-secondary btn-adjust">중복확인</button>
 				</td>
 			</tr>
 			<tr >
 				<td>비밀번호<span class="span">*</span></td>
-				<td><input type="password" class="form-control" style="width:200px"/></td>
+				<td><input type="password" id="password1" name="password" class="form-control" style="width:200px"/></td>
 			</tr>
 			<tr>
 				<td>비밀번호 확인<span class="span">*</span></td>
-				<td><input type="password" class="form-control" style="width:200px"/></td>
+				<td><input type="password" id="password2" class="form-control" style="width:200px"/></td>
 			</tr>
 			<tr>
 				<td rowspan="3">주소<span class="span">*</span></td>
 				<td>
-				<input type="text"  id="zipcode" readonly="readonly"  class="form-control" style="width:200px; display: inline-block;"/>
+				<input type="text"  id="zipcode" name="zipcode" readonly="readonly"  class="form-control" style="width:200px; display: inline-block;"/>
 				<button type="button" class="btn btn-outline-secondary btn-adjust btn-adjust" id="searchZip" >주소검색</button>
 				</td>
 			</tr>
 			<tr >
-				<td><input id="addr1" type="text" readonly="readonly" class="form-control" style="width:500px"/></td>
+				<td><input id="addr1" type="text" name="addr1" readonly="readonly" class="form-control" style="width:500px"/></td>
 			</tr>
 			<tr >
-				<td><input id="addr2" type="text"  class="form-control" style="width:500px "/></td>
+				<td><input id="addr2" type="text" name="addr2" class="form-control" style="width:500px "/></td>
 			</tr>
 			<tr>
 				<td>연락처<span class="span">*</span></td>
 				<td>
-				<select class="form-control" style="width: 80px; display: inline-block;">
+				<select class="form-control" style="width: 80px; display: inline-block;" name="tel1">
 					<option value="010">010</option>
 					<option value="011">011</option>
 					<option value="016">016</option>
@@ -119,15 +141,15 @@
 					<option value="018">018</option>
 					<option value="019">019</option>
 				</select>
-				<input type="text"   class="form-control" style="width:80px; display: inline-block;"/>-
-				<input type="text"   class="form-control" style="width:80px; display: inline-block;"/>
+				<input type="text" id="tel2" class="form-control" style="width:80px; display: inline-block;"/>-
+				<input type="text" id="tel3" class="form-control" style="width:80px; display: inline-block;"/>
 				</td>
 			</tr>
 			<tr >
 				<td>이메일<span class="span">*</span></td>
 				<td>
-				<input type="text"   class="form-control" style="width:120px; display: inline-block;"/>@
-				<input type="text"   class="form-control" style="width:120px; display: inline-block;"/>
+				<input type="text" id="email1"  class="form-control" style="width:120px; display: inline-block;"/>@
+				<input type="text" id="email2"  class="form-control" style="width:120px; display: inline-block;"/>
 				<select class="form-control" style="width: 140px; display: inline-block;">
 					<option value="직접입력">직접입력</option>
 					<option value="네이버">naver.com</option>
@@ -135,23 +157,23 @@
 					<option value="구글">gmail.com</option>
 					<option value="네이트">nate.net</option>
 				</select>
-				<button type="button" class="btn btn-outline-secondary btn-adjust">중복확인</button>
+				<button type="button" id="dupEmail" class="btn btn-outline-secondary btn-adjust">중복확인</button>
 				</td>
 			</tr>
 			<tr>
 				<td span="2">인증질문<span class="span">*</span></td>
 				<td>
-				<select class="form-control" style="width:500px">
-					<option value="question">인증 질문을 선택해주세요.</option>
-					<option value="question1">초등학교 담임 선생님 성함은?</option>
-					<option value="question2">가장 좋아하는 캐릭터 이름은?</option>
+				<select id="question" name="question" class="form-control" style="width:500px">
+					<option value="none">인증 질문을 선택해주세요.</option>
+					<option value="1">초등학교 담임 선생님 성함은?</option>
+					<option value="2">가장 좋아하는 캐릭터 이름은?</option>
 				</select>
 				</td>
 			</tr>
 			<tr>
 				<td>인증 답<span class="span">*</span></td>
 				<td>
-					<input type="text" class="form-control"  style="width:500px"/>
+					<input type="text" id="answer" name="answer" class="form-control"  style="width:500px"/>
 				</td>
 			</tr>
 			<tr>
@@ -159,8 +181,8 @@
 			</tr>
 		</table>
 		<div style="padding-left:260px ; padding-bottom: 30px; width: 700px" >
-		<button type="button" class="btn btn-dark btn-lg bigBtn">돌아가기</button>
-		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn">회원가입</button>
+		<button type="button" class="btn btn-dark btn-lg bigBtn" onclick="history.back()">돌아가기</button>
+		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn" id="signUpBtn">회원가입</button>
 		</div>
         </div>
     	</div>
