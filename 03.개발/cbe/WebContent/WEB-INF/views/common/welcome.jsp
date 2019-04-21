@@ -39,7 +39,7 @@
 		<br/>
 		<hr color="#F0F0F0" >
 	<br/>
-  <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 30%">메인으로</a>
+  <a class="btn btn-primary btn-lg" href="#void" role="button" style="margin-left: 30%">메인으로</a>
     </div>
     </form>
   </div>

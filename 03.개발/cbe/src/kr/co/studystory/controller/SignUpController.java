@@ -50,7 +50,7 @@ public class SignUpController {
 		
 		CommonService cs = new CommonService();
 		
-		String encPass = cs.shaEncoding(nuvo.getPass());
+		String encPass = CommonService.shaEncoding(nuvo.getPass());
 		nuvo.setPass(encPass);
 		
 		String url = "common/sign_up";

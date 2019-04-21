@@ -7,6 +7,9 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.simple.JSONObject;
 
 import kr.co.studystory.dao.CommonDAO;
+import kr.co.studystory.vo.ChangePassVO;
+import kr.co.studystory.vo.FindIdVO;
+import kr.co.studystory.vo.FindPassVO;
 import kr.co.studystory.vo.NewUserVO;
 
 public class CommonService {
@@ -85,6 +88,42 @@ public class CommonService {
 		nick = c_dao.selectNick(id);
 		
 		return nick;
+	}
+	
+	/**
+	 * 아이디 찾기
+	 * by 영근 190421
+	 */
+	public String findId(FindIdVO fivo) {
+		String id = "";
+		
+		id = c_dao.selectId(fivo);
+		
+		return id;
+	}
+	
+	/**
+	 * 비밀번호 찾기(검증)
+	 * by 영근 190421
+	 */
+	public boolean findPass(FindPassVO fpvo) {
+		boolean flag = false;
+		
+		flag = c_dao.selectAnswer(fpvo);
+		
+		return flag;
+	}
+	
+	/**
+	 * 새로운 비밀번호 설정
+	 * by 영근 190421
+	 */
+	public boolean setNewPass(ChangePassVO cpvo) {
+		boolean flag = false;
+
+		flag = c_dao.updatePass(cpvo);
+		
+		return flag;
 	}
 
 }

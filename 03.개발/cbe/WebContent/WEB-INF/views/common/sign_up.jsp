@@ -17,9 +17,6 @@
   	.btn-adjust {
   		height:37px;
   	}
-  	.bigBtn{
-  		height: 50px;
-  	}
   	.span{
   		color: #FF0000;
   	}
@@ -294,7 +291,6 @@
   			var tel1 = $("#tel1").val();
   			
   			var tel = tel1+"-"+tel2+"-"+tel3;
-  			alert("tel : "+tel);
   			$("#tel").prop("value",tel);
   			
   			if(!emailFlag) {
@@ -304,7 +300,6 @@
   			}
   			
   			var email = $("#email1").val()+"@"+$("#email2").val();
-  			alert("email : "+email);
   			$("#email").prop("value",email);
   			
   			var question = $("#question").val();
@@ -377,11 +372,11 @@
 			<span class="span" style="margin-left:13px;">* 모든 항목은 필수입력항목입니다</span>
         	<table class="table" style="width: 700px; margin-top:5px;">
 			<tr>
-				<td>이름</td>
+				<td><strong>이름</strong></td>
 				<td><input type="text" id="name" maxlength="10" name="name" class="form-control" style="width:200px"></td>
 			</tr>
 			<tr>
-				<td>아이디</td>
+				<td><strong>아이디</strong></td>
 				<td>
 					<input type="text" maxlength="15" id="id" name="id" class="form-control" style="width:200px;display: inline-block;" maxlength="15" placeholder="아이디는 15자 이하"/>
 					<button type="button" id="dupId" class="btn btn-outline-secondary btn-adjust">중복확인</button>
@@ -389,31 +384,31 @@
 				</td>
 			</tr>
 			<tr >
-				<td>비밀번호</td>
+				<td><strong>비밀번호</strong></td>
 				<td><input maxlength="20" type="password" id="pass1" name="pass" class="form-control" style="width:200px"/></td>
 			</tr>
 			<tr>
-				<td>비밀번호 확인</td>
+				<td><strong>비밀번호 확인</strong></td>
 				<td><input maxlength="20" type="password" id="pass2" class="form-control" style="width:200px"/>
 				<span class="span" style="font-size:12px;">비밀번호는 영어 대소문자, 숫자 포함 20자 미만이어야 합니다</span></td>
 			</tr>
 			<tr>
-				<td rowspan="3">주소</td>
+				<td rowspan="3"><strong>주소</strong></td>
 				<td>
 				<input type="text"  id="zipcode" name="zipcode" readonly="readonly"  class="form-control" style="width:200px; display: inline-block;"/>
 				<button type="button" class="btn btn-outline-secondary btn-adjust btn-adjust" id="searchZip" >주소검색</button>
 				</td>
 			</tr>
 			<tr >
-				<td><input id="addr1" type="text" name="addr1" readonly="readonly" class="form-control" style="width:500px"/></td>
+				<td><input id="addr1" type="text" readonly="readonly" class="form-control" style="width:500px"/></td>
 			</tr>
 			<tr >
-				<td><input id="addr2" type="text" name="addr2" class="form-control" style="width:500px "/></td>
+				<td><input id="addr2" type="text" class="form-control" style="width:500px "/></td>
 			</tr>
 			<tr>
-				<td>연락처</td>
+				<td><strong>연락처</strong></td>
 				<td>
-				<select id="tel1" class="form-control" style="width: 80px; display: inline-block;" name="tel1">
+				<select id="tel1" class="form-control" style="width: 80px; display: inline-block;">
 					<option value="010">010</option>
 					<option value="011">011</option>
 					<option value="016">016</option>
@@ -426,7 +421,7 @@
 				</td>
 			</tr>
 			<tr >
-				<td>이메일</td>
+				<td><strong>이메일</strong></td>
 				<td>
 				<input type="text" id="email1"  class="form-control" style="width:120px; display: inline-block;"/>&nbsp;@&nbsp;
 				<input type="text" id="email2"  class="form-control" style="width:120px; display: inline-block;"/>
@@ -442,7 +437,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>인증질문</td>
+				<td><strong>인증질문</strong></td>
 				<td>
 				<select id="question" name="question" class="form-control" style="width:500px">
 					<option value="none">인증 질문을 선택해주세요.</option>
@@ -452,15 +447,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td>인증 답</td>
+				<td><strong>인증 답</strong></td>
 				<td>
 					<input type="text" maxlength="10" id="answer" name="answer" class="form-control"  style="width:500px"/>
 				</td>
 			</tr>
 		</table>
 		<div style="padding-left:260px ; padding-bottom: 30px; width: 700px" >
-		<button type="button" class="btn btn-dark btn-lg bigBtn" onclick="location.href='login.do'">돌아가기</button>
-		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn" id="signUpBtn">회원가입</button>
+		<button type="button" class="btn btn-dark btn-lg" onclick="location.href='login.do'">돌아가기</button>
+		<button type="button" class="btn btn-primary btn-lg" id="signUpBtn">회원가입</button>
 		</div>
         </div>
     	</div>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html>
 <head>
@@ -21,6 +21,19 @@
 		max-width:462px;
 	}
    </style>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+   <script type="text/javascript">
+   		$(function() {
+   			
+   			<c:if test="${ not empty foundId }">
+   				alert("고객님의 아이디는 '${ foundId }' 입니다");
+   			</c:if>
+   			<c:if test="${ changePassFlag }">
+   				alert("새로운 비밀번호로 변경되었습니다");
+   			</c:if>
+   			
+   		});
+   </script>
 </head>
 <body class="text-center">
   <form class="form-signin">
@@ -33,7 +46,7 @@
 	  <button class="btn btn-lg btn-primary btn-block" type="button">로그인</button>
 	  <button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='sign_up.do'">회원가입</button>
 	  <br/>
-	  <label><a href="common/find_id.do">아이디/비밀번호 찾기</a></label>
+	  <label><a href="find_id.do">아이디/비밀번호 찾기</a></label>
 	  <p class="mt-5 mb-3 text-muted">&copy; SIST Team Project 2019</p>
   </form>
 </body>
