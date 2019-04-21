@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
 
@@ -41,7 +42,7 @@ public class StudyInfoDAO {
 			Reader reader = null;
 			try {
 				// 1.설정용 xml 로딩.
-				reader = Resources.getResourceAsReader("kr/co/sist/dao/mybatis_config.xml");
+				reader = Resources.getResourceAsReader("kr/co/studystory/dao/mybatis_config.xml");
 
 				// 2. MyBatis Framework 생성.
 				SqlSessionFactoryBuilder ssfb = new SqlSessionFactoryBuilder();
@@ -63,54 +64,58 @@ public class StudyInfoDAO {
 		return ssf;
 	}// getSessionFatory
 
-	///////// 메인 페이지 /////////
+	////////////////// 메인 페이지
 
-	/**
-	 * DB에서 Thumbnail목록 조회하는 메서드.
-	 * 
-	 * @return List<ThumbnailDomain>
-	 */
 	public List<ThumbnailDomain> selectHotStudies() {
 		List<ThumbnailDomain> list = null;
 
 		return list;
 	}// selectHotStudies()
 
-	/**
-	 * "좋아요" DB에 insert 메서드.
-	 * 
-	 * @return boolean
-	 */
 	public boolean insertLikeStudy() {
 		return false;
 	}// insertLikeStudy
 
-	/**
-	 * "좋아요" 해제 했을 때 DB에 update 메서드.
-	 * 
-	 * @return boolean
-	 */
 	public boolean deleteLikeStudy() {
 		return false;
 	}// insertLikeStudy
 
-	///////// 메인 페이지 /////////
+	////////////////// 메인 페이지
 
-	///////// 상세 스터디 페이지 /////////
+	////////////////// 상세 스터디 페이지
 
 	/**
-	 * DB에서 스터디 상세 정보 조회.
+	 * 스터디의 상세 정보를 조회하는 메서드. - 수정 필요할 수도 있음...
 	 * 
 	 * @param id
-	 * @return StudyInfo
+	 * @return StudyInfoDomain
 	 */
-	public StudyInfoDomain selectStudyInfo(String id) {
+	public StudyInfoDomain selectStudyInfo(String s_num) {
 		StudyInfoDomain s_info = null;
 		SqlSession ss = getSessionFatory().openSession();
-		s_info = ss.selectOne("", "");
+		s_info = ss.selectOne("selectDetailStudy", s_num);
 		return s_info;
 	}// selectStudyInfo
 
-	///////// 상세 스터디 페이지 /////////
+	/**
+	 * 상세 스터디의 댓들 List를 조회하는 메서드.
+	 * 
+	 * @return List<StudyCommentDomain>
+	 */
+	public List<StudyCommentDomain> selectSCommentList(String s_num) {
+		List<StudyCommentDomain> list = null;
+		SqlSession ss = getSessionFatory().openSession();
+		list = ss.selectList("selectStudyCommentList", s_num);
+		return list;
+	}// selectSCommentList
+
+	////////////////// 상세 스터디 페이지
+
+	////////////////// 단위 테스트
+	public static void main(String[] args) {
+		List<StudyCommentDomain> list = null;
+		list = StudyInfoDAO.getInstance().selectSCommentList("s_000042");
+		System.out.println(list);
+	}// main
 
 }// class

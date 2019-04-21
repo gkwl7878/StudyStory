@@ -6,33 +6,41 @@
 
 
 	<!-- 스터디 상세 정보 조회. - 진행중. -->
-	<resultMap type="kr.co.studystory.studyinfo.domain.StudyInfoDomain" id="StudyInfoDomain">
+	<resultMap type="kr.co.studystory.domain.StudyInfoDomain" id="StudyInfoDomain">
+
+		<!-- private String studyName, loc, category, content, studyImg, leaderImg, 
+			inputDate, nick, introduce; private int favNum, memberNum; // 좋아요 갯수, 스터디 
+			참여자 수. -->
+
+		<result column="STUDY_NAME" property="studyName" />
+		<result column="LOC" property="loc" />
+		<result column="CATEGORY" property="category" />
+		<result column="CONTENT" property="content" />
+		<result column="IMG" property="studyImg" />
+		<result column="INPUT_DATE" property="inputDate" />
+		<result column="NICK" property="nick" />
+		<result column="INTRODUCE" property="introduce" />
+
 	</resultMap>
-	
+
 	<select id="selectDetailStudy" parameterType="String" resultMap="StudyInfoDomain">
-		SELECT STD.STUDY_NAME, STD.LOC, STD.CATEGORY, STD.CONTENT, STD.IMG , STD.INPUT_DATE, UT.NICK, UT.INTRODUCE
-		FROM USER_TABLE UT, STUDY STD
-		WHERE UT.ID = STD.ID AND UT.ID = #{ userID }
+		SELECT STD.STUDY_NAME, STD.LOC, STD.CATEGORY, STD.CONTENT, STD.IMG , TO_CHAR(STD.INPUT_DATE,'YYYY/MM/DD') INPUT_DATE, UT.NICK, UT.INTRODUCE
+		FROM STUDY STD, USER_TABLE UT
+		WHERE ( STD.ID = UT.ID ) AND S_NUM = #{ study_num }
 	</select>
 	<!-- 스터디 상세 정보 조회. -->
 
-	<!-- 메인 페이지의 썸네일들 조회. - 진행중. -->
-	<resultMap type="kr.co.studystory.studyinfo.domain.ThumbnailDomain" id="ThumbnailDomain">
-		<result column="s_num" property=""/>
-		<result column="STUDY_NAME" property=""/>
-		<result column="LOC" property=""/>
-		<result column="CATEGORY" property=""/>
-		<result column="IMG" property=""/>
-		<result column="RECRUITMENT" property=""/>
-		<result column="INPUT_DATE" property=""/>
-		<result column="NICK" property=""/>
-		<result column="IMG" property=""/>
-	</resultMap>
-	
-	<select id="selectStudyList">
-		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, INPUT_DATE, NICK, IMG, 
-		FROM STUDY
+	<!-- 스터디 상세 정보의 댓글 조회 -->
+	<select id="selectStudyCommentList" resultType="kr.co.studystory.domain.StudyCommentDomain" parameterType="String">
+		SELECT SC.S_COMMENT, TO_CHAR(SC.INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, SC.ID 
+		FROM STUDY STD, S_COMMENT SC
+		WHERE STD.S_NUM=SC.S_NUM AND SC.S_NUM=#{ study_num }
+		ORDER BY INPUT_DATE DESC
 	</select>
+	<!-- 스터디 상세 정보의 댓글 조회 -->
+
+
+	<!-- 메인 페이지의 썸네일들 조회. - 진행중. -->
 	<!-- 메인 페이지의 썸네일들 조회. -->
 
 </mapper>
