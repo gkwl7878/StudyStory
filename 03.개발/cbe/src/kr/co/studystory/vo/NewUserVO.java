@@ -5,20 +5,6 @@ public class NewUserVO {
 	private String id, name, pass, zipcode, addr1, addr2, tel,
 		email, question, answer;
 
-	public NewUserVO(String id, String name, String pass, String zipcode, String addr1, String addr2, String tel,
-			String email, String question, String answer) {
-		this.id = id;
-		this.name = name;
-		this.pass = pass;
-		this.zipcode = zipcode;
-		this.addr1 = addr1;
-		this.addr2 = addr2;
-		this.tel = tel;
-		this.email = email;
-		this.question = question;
-		this.answer = answer;
-	}
-
 	public String getId() {
 		return id;
 	}

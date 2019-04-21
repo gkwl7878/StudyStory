@@ -23,4 +23,10 @@
 				#{ zipcode }, #{ addr1 }, #{ addr2 }, #{ tel },
 				#{ email }, #{ question }, #{ answer })
 	</insert>
+	
+	<select id="selectNick" parameterType="String" resultType="String">
+		SELECT nick
+		FROM user_table
+		WHERE id = #{ id }
+	</select>
 </mapper>

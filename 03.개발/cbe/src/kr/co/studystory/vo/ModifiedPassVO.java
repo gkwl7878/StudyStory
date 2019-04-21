@@ -4,12 +4,6 @@ public class ModifiedPassVO {
 	
 	private String id, pass, newPass;
 
-	public ModifiedPassVO(String id, String pass, String newPass) {
-		this.id = id;
-		this.pass = pass;
-		this.newPass = newPass;
-	}
-
 	public String getId() {
 		return id;
 	}

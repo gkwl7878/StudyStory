@@ -4,11 +4,6 @@ public class ChangePassVO {
 	
 	private String id, pass;
 
-	public ChangePassVO(String id, String pass) {
-		this.id = id;
-		this.pass = pass;
-	}
-
 	public String getId() {
 		return id;
 	}

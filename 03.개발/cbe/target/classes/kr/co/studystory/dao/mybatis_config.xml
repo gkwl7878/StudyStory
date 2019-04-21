@@ -17,5 +17,6 @@
   </environments>
   <mappers>
     <mapper resource="kr/co/studystory/mapper/signup_mapper.xml"/> 
+    <mapper resource="kr/co/studystory/mapper/find_mapper.xml"/> 
   </mappers>
 </configuration>
