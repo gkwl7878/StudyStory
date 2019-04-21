@@ -95,6 +95,20 @@ public class CommonDAO {
 		return flag;
 	}
 	
+	/**
+	 * 회원 가입 후 nick얻기
+	 * by 영근 190421
+	 */
+	public String selectNick(String id) {
+		String nick = "";
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		nick = ss.selectOne("selectNick", id);
+		ss.close();
+		
+		return nick;
+	}
+	
 	/*public static void main(String[] args) {
 		NewUserVO nuvo = new NewUserVO("ooo123123", "영근오", "호롤롤로", "12345", "지구어딘가", "지구어딘가2", "010-2222-3333", "oooooo@ooooo.com", "1", "노래해");
 		System.out.println(CommonDAO.getInstance().insertSignUp(nuvo));

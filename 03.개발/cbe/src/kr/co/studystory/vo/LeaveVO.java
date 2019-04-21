@@ -4,11 +4,6 @@ public class LeaveVO {
 	
 	private String id, pass;
 
-	public LeaveVO(String id, String pass) {
-		this.id = id;
-		this.pass = pass;
-	}
-
 	public String getId() {
 		return id;
 	}

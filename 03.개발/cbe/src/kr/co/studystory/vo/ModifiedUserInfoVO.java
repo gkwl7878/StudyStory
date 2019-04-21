@@ -4,18 +4,6 @@ public class ModifiedUserInfoVO {
 
 	private String id, name, zipcode, addr1, addr2, tel, email, pass;
 
-	public ModifiedUserInfoVO(String id, String name, String zipcode, String addr1, String addr2, String tel,
-			String email, String pass) {
-		this.id = id;
-		this.name = name;
-		this.zipcode = zipcode;
-		this.addr1 = addr1;
-		this.addr2 = addr2;
-		this.tel = tel;
-		this.email = email;
-		this.pass = pass;
-	}
-
 	public String getId() {
 		return id;
 	}

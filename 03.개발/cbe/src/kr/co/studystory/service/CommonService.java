@@ -74,5 +74,17 @@ public class CommonService {
 		}
 		return cipherText;
 	}
+	
+	/**
+	 * 회원가입 후 nick얻기
+	 * by 영근 190421
+	 */
+	public String getNick(String id) {
+		String nick = "";
+		
+		nick = c_dao.selectNick(id);
+		
+		return nick;
+	}
 
 }

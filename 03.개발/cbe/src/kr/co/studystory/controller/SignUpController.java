@@ -18,7 +18,7 @@ import org.json.simple.JSONObject;
 @Controller
 public class SignUpController {
 
-	@RequestMapping(value="/sign_up.do", method=GET)
+	@RequestMapping(value="/sign_up.do", method= { GET,POST })
 	public String signupForm() {
 		return "common/sign_up";
 	}
@@ -49,11 +49,16 @@ public class SignUpController {
 	public String signUpProcess(NewUserVO nuvo, Model model) {
 		
 		CommonService cs = new CommonService();
+		
+		String encPass = cs.shaEncoding(nuvo.getPass());
+		nuvo.setPass(encPass);
+		
 		String url = "common/sign_up";
 		
 		if(cs.signUp(nuvo)) {
-			url ="common/welcome";
+			url ="forward:welcome.do";
 			model.addAttribute("id",nuvo.getId());
+			model.addAttribute("name",nuvo.getName());
 		} else {
 			model.addAttribute("signUpFlag", false);
 		}
@@ -61,12 +66,19 @@ public class SignUpController {
 		return url;
 	}
 	
-	
-	public String welcomePage(Model model) {
+	@RequestMapping(value="/welcome.do", method=POST)
+	public String welcomePage(String id, String name, Model model) {
 		
-		// 아이디로 닉네임 조회 후 저장 처리
-		/*model.addAttribute("id", )*/
+
+		CommonService cs = new CommonService();
 		
-		return "";
+		String nick = cs.getNick(id);
+		
+		// 아이디로 닉네임 조회 후 세션에 둘 다 저장 후 응답
+		model.addAttribute("id", id);
+		model.addAttribute("nick", nick);
+		model.addAttribute("name", name);
+		
+		return "common/welcome";
 	}
 }
