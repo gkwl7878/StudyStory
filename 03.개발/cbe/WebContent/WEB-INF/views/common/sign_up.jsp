@@ -400,10 +400,10 @@
 				</td>
 			</tr>
 			<tr >
-				<td><input id="addr1" type="text" readonly="readonly" class="form-control" style="width:500px"/></td>
+				<td><input id="addr1" name="addr1" type="text" readonly="readonly" class="form-control" style="width:500px"/></td>
 			</tr>
 			<tr >
-				<td><input id="addr2" type="text" class="form-control" style="width:500px "/></td>
+				<td><input id="addr2" name="addr2" type="text" class="form-control" style="width:500px "/></td>
 			</tr>
 			<tr>
 				<td><strong>연락처</strong></td>
