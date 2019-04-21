@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.co.studystory.vo.LoginVO;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
 
-	@RequestMapping(value="/login.do", method=GET)
+	@RequestMapping(value="/login.do", method= { GET, POST })
 	public String loginForm() {
 		return "common/login";
 	}

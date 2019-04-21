@@ -8,6 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.studystory.vo.ChangePassVO;
+import kr.co.studystory.vo.FindIdVO;
+import kr.co.studystory.vo.FindPassVO;
 import kr.co.studystory.vo.NewUserVO;
 
 public class CommonDAO {
@@ -95,8 +98,66 @@ public class CommonDAO {
 		return flag;
 	}
 	
+	/**
+	 * 회원 가입 후 nick얻기
+	 * by 영근 190421
+	 */
+	public String selectNick(String id) {
+		String nick = "";
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		nick = ss.selectOne("selectNick", id);
+		ss.close();
+		
+		return nick;
+	}
+	
+	/**
+	 * 아이디 찾기
+	 * by 영근 190421
+	 */
+	public String selectId(FindIdVO fivo) {
+		String id = "";
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		id = ss.selectOne("selectId", fivo);
+		ss.close();
+		
+		return id;
+	}
+	
+	public boolean selectAnswer(FindPassVO fpvo) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.selectOne("selectPass", fpvo);
+		ss.close();
+		if (cnt == 1) {
+			flag = true;
+		}
+		
+		return flag; 
+	}
+	
+	public boolean updatePass(ChangePassVO cpvo) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.update("updatePass", cpvo);
+		if (cnt == 1) {
+			ss.commit();
+			flag = true;
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
 	/*public static void main(String[] args) {
-		NewUserVO nuvo = new NewUserVO("ooo123123", "영근오", "호롤롤로", "12345", "지구어딘가", "지구어딘가2", "010-2222-3333", "oooooo@ooooo.com", "1", "노래해");
-		System.out.println(CommonDAO.getInstance().insertSignUp(nuvo));
+		ChangePassVO cpvo = new ChangePassVO();
+		cpvo.setId("kim111");
+		cpvo.setPass("2zKUjmj8DdNQ3G5OVUNeJsnOKrI=");
+		
+		System.out.println(CommonDAO.getInstance().updatePass(cpvo));
 	}*/
 }

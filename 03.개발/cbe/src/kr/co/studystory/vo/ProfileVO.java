@@ -4,13 +4,6 @@ public class ProfileVO {
 	
 	private String id, nick, introduce, img;
 
-	public ProfileVO(String id, String nick, String introduce, String img) {
-		this.id = id;
-		this.nick = nick;
-		this.introduce = introduce;
-		this.img = img;
-	}
-
 	public String getId() {
 		return id;
 	}
