@@ -7,9 +7,11 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.simple.JSONObject;
 
 import kr.co.studystory.dao.CommonDAO;
+import kr.co.studystory.domain.LoginResult;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
 import kr.co.studystory.vo.FindPassVO;
+import kr.co.studystory.vo.LoginVO;
 import kr.co.studystory.vo.NewUserVO;
 
 public class CommonService {
@@ -18,6 +20,15 @@ public class CommonService {
 	
 	public CommonService() {
 		c_dao = CommonDAO.getInstance();
+	}
+	
+	public LoginResult login(LoginVO lvo) {
+		LoginResult lr = c_dao.selectLogin(lvo);
+		if(!c_dao.selectDeactivation(lvo.getId())) {
+			lr.setLogged(false);
+			lr.setMsg("Å»ÅðÇÑ À¯ÀúÀÔ´Ï´Ù");
+		}
+		return lr;
 	}
 	
 	/**

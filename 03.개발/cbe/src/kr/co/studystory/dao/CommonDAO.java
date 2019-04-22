@@ -8,9 +8,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.studystory.domain.LoginResult;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
 import kr.co.studystory.vo.FindPassVO;
+import kr.co.studystory.vo.LoginVO;
 import kr.co.studystory.vo.NewUserVO;
 
 public class CommonDAO {
@@ -42,6 +44,51 @@ public class CommonDAO {
 		
 		return ssf;
 	}
+	
+	/**
+	 * 로그인
+	 * by 영근 190422
+	 */
+	public LoginResult selectLogin(LoginVO lvo) {
+		LoginResult lr = new LoginResult();
+		
+		System.out.println("======DAO lvo :"+ lvo.getId()+"/"+lvo.getPass());
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.selectOne("login",lvo);
+		ss.close();
+		System.out.println("=============== cnt :: " + cnt);
+		if (cnt == 1) {
+			lr.setLogged(true);
+			lr.setMsg(null);
+		} else {
+			lr.setLogged(false);
+			lr.setMsg("로그인에 실패했습니다");
+		}
+		
+		return lr;
+	}
+	
+	/**
+	 * 탈퇴유저인지 조회
+	 * false면 탈퇴유저
+	 * true면 활동중인 유저
+	 * by 영근 190422
+	 */
+	public boolean selectDeactivation(String id) {
+		boolean flag = false; 
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		String selectResult = ss.selectOne("checkDeactivation",id);
+		ss.close();
+		if (selectResult == null) { // null이면 활동중인 유저 = true
+			flag = true;
+		}
+		
+		System.out.println("========= deactive flag : "+flag);
+		return flag;
+	}
+	
 	
 	/**
 	 * 아이디 중복체크
@@ -153,11 +200,8 @@ public class CommonDAO {
 		return flag;
 	}
 	
-	/*public static void main(String[] args) {
-		ChangePassVO cpvo = new ChangePassVO();
-		cpvo.setId("kim111");
-		cpvo.setPass("2zKUjmj8DdNQ3G5OVUNeJsnOKrI=");
+	public static void main(String[] args) {
 		
-		System.out.println(CommonDAO.getInstance().updatePass(cpvo));
-	}*/
+		System.out.println(CommonDAO.getInstance().selectDeactivation("kim111"));
+	}
 }

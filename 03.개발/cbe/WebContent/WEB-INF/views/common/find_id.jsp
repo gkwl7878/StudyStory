@@ -11,7 +11,7 @@
 	<style type="text/css">
 	   	body {
 			background-image: url("http://localhost:8080/third_prj/resources/images/cover.png");
-			background-size: 100%;
+			background-size: 100% 100%;
 		}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
