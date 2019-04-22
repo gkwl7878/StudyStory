@@ -18,13 +18,18 @@
 <script src="http://localhost:8080/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
 <script src="http://localhost:8080/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="http://localhost:8080/third_prj/resources/js/admin_dashboard.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//location.href = "new_study.do";
+	});
+</script>
 </head>
 <body>
 
 	<!-- navbar 시작 -->
 	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
-
+	
 	<div class="container-fluid">
 		<div class="row">
 

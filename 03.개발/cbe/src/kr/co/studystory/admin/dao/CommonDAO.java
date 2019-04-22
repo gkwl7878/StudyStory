@@ -32,7 +32,6 @@ public class CommonDAO {
 	
 	public synchronized SqlSessionFactory getSessionFactory() {
 		if(ssf==null) {
-			org.apache.ibatis.logging.LogFactory.useLog4JLogging();
 			
 			Reader reader = null;
 			try {
@@ -175,9 +174,7 @@ public class CommonDAO {
 		NoticeBoardVO nb_vo= new NoticeBoardVO();
 		nb_vo.setSearchWord("º£Å¸");
 		System.out.println(c_dao.selectNoticeTotal(nb_vo));
-		
 	}
-	
 	
 	
 }

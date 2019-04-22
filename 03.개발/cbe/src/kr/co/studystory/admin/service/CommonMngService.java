@@ -115,6 +115,6 @@ public class CommonMngService {
 	
 	public static void main(String[] args) {
 		CommonMngService cms= new CommonMngService();
-		cms.getCountUserAndStudy();
+		System.out.println();
 	}
 }
