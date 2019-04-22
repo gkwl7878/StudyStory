@@ -14,17 +14,17 @@ public class CommonController {
 		return "common/index";
 	}
 	
-	@RequestMapping(value="/agreement.do", method=GET)
+	@RequestMapping(value="common/agreement.do", method=GET)
 	public String agreement() {
 		return "common/agreement";
 	}
 	
-	@RequestMapping(value="/faq.do", method=GET)
+	@RequestMapping(value="common/faq.do", method=GET)
 	public String faqPage() {
 		return "common/faq";
 	}
 	
-	@RequestMapping(value="/introduction.do", method=GET)
+	@RequestMapping(value="common/introduction.do", method=GET)
 	public String introduction() {
 		return "common/service_info";
 	}

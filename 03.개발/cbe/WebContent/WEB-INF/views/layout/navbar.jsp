@@ -13,17 +13,17 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link text-secondary dropdown-toggle" href="#" id="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">메뉴</a>
 					<div class="dropdown-menu" aria-labelledby="menu">
-						<a class="dropdown-item" href="#">서비스소개</a>
+						<a class="dropdown-item" href="../common/introduction.do">서비스소개</a>
 						<a class="dropdown-item" href="#">공지사항</a>
 						<a class="dropdown-item" href="#">문의하기</a>
-						<a class="dropdown-item" href="#">FAQ</a>
+						<a class="dropdown-item" href="../common/faq.do">FAQ</a>
 						<a class="dropdown-item" href="#">문의 내역 확인</a>
 					</div>
 				</li>
 				<li class="nav-item"><a class="nav-link text-secondary" href="#">스터디 찾기</a></li>
 				<li class="nav-item"><a class="nav-link text-secondary" href="#">스터디 만들기</a></li>
 			</ul>
-			<a class="navbar-brand mx-auto text-dark" href="#">스터디 스토리</a>
+			<a class="navbar-brand mx-auto text-dark" href="../study_info/main.do"><img src="http://localhost:8080/third_prj/resources/images/study_story_logo2.png" width="140" height="40"/></a>
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
 				<button class="btn btn-outline-info my-2 my-sm-0 mr-sm-2" type="submit">검색</button>
@@ -47,7 +47,7 @@
 						<a class="dropdown-item" href="#">관심 스터디 보기</a>
 						<a class="dropdown-item" href="#">알림보기</a>
 						<a class="dropdown-item" href="#">프로필 관리</a>
-						<a class="dropdown-item" href="#">로그아웃</a>
+						<a class="dropdown-item" href="../logout.do">로그아웃</a>
 					</div>
 				</li>
 			</ul>
