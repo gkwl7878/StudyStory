@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 public class StudySearchController {
 
 	public String mainPage(Model model) {
-
 		return "";
 	}// mainPage
 

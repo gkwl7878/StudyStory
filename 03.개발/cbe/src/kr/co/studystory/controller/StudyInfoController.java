@@ -25,15 +25,11 @@ public class StudyInfoController {
 
 	@RequestMapping(value = "/index.do", method = GET)
 	public String studyInfoPage(String s_num, HttpSession session, Model model) {
-
 		StudyInfoService sis = new StudyInfoService();
-
 		StudyInfoDomain sInfo = sis.getStudyInfo("s_000042"); // 스터디 상세 정보 가져오기.
 		List<StudyCommentDomain> sCommentList = sis.getStudyComment("s_000042"); // 스터디 상세정보의 댓글 List 가져오기.
-
 		model.addAttribute("s_Info", sInfo); // 스터디 상세정보 model에 담기.
 		model.addAttribute("sCommentList", sCommentList); // 댓글 list 모델에 담기.
-
 		return "study_info/detailStudy";
 	}// studyInfoPage()
 
