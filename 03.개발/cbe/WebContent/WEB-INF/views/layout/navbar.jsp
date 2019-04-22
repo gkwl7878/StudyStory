@@ -15,9 +15,9 @@
 					<div class="dropdown-menu" aria-labelledby="menu">
 						<a class="dropdown-item" href="../common/introduction.do">서비스소개</a>
 						<a class="dropdown-item" href="#">공지사항</a>
-						<a class="dropdown-item" href="#">문의하기</a>
 						<a class="dropdown-item" href="../common/faq.do">FAQ</a>
-						<a class="dropdown-item" href="#">문의 내역 확인</a>
+						<a class="dropdown-item" href="#">문의하기</a>
+						<a class="dropdown-item" href="#">내 문의내역</a>
 					</div>
 				</li>
 				<li class="nav-item"><a class="nav-link text-secondary" href="#">스터디 찾기</a></li>
@@ -25,7 +25,7 @@
 			</ul>
 			<a class="navbar-brand mx-auto text-dark" href="../study_info/main.do"><img src="http://localhost:8080/third_prj/resources/images/study_story_logo2.png" width="140" height="40"/></a>
 			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+				<input class="form-control mr-sm-2" type="text" placeholder="스터디명으로 찾아보세요" aria-label="Search">
 				<button class="btn btn-outline-info my-2 my-sm-0 mr-sm-2" type="submit">검색</button>
 			</form>
 			<ul class="navbar-nav text-center">
@@ -47,6 +47,7 @@
 						<a class="dropdown-item" href="#">관심 스터디 보기</a>
 						<a class="dropdown-item" href="#">알림보기</a>
 						<a class="dropdown-item" href="#">프로필 관리</a>
+						<a class="dropdown-item" href="../common/user_modify_menu.do">회원정보 관리</a>
 						<a class="dropdown-item" href="../logout.do">로그아웃</a>
 					</div>
 				</li>

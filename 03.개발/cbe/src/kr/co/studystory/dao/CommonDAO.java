@@ -9,10 +9,12 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.co.studystory.domain.LoginResult;
+import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
 import kr.co.studystory.vo.FindPassVO;
 import kr.co.studystory.vo.LoginVO;
+import kr.co.studystory.vo.ModifiedUserInfoVO;
 import kr.co.studystory.vo.NewUserVO;
 
 public class CommonDAO {
@@ -28,7 +30,7 @@ public class CommonDAO {
 		return c_dao;
 	}
 	
-	public SqlSessionFactory getSqlSessionFactory() {
+	public synchronized SqlSessionFactory getSqlSessionFactory() {
 		SqlSessionFactory ssf = null;
 		
 		try {
@@ -200,8 +202,44 @@ public class CommonDAO {
 		return flag;
 	}
 	
+	public PrevUserInfo selectPrevUserInfo(String id) {
+		PrevUserInfo pui = null;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		pui = ss.selectOne("selectPrevUserInfo", id);
+		ss.close();
+		
+		return pui;
+	}
+	
+	public boolean updateUserInfo(ModifiedUserInfoVO muivo) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		System.out.println("============cnt!!!! : ");
+		int cnt = ss.update("updateUserInfo",muivo);
+		System.out.println("============cnt!!!! : "+cnt);
+		
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+
+		return flag;
+	}
+	
 	public static void main(String[] args) {
 		
-		System.out.println(CommonDAO.getInstance().selectDeactivation("kim111"));
+		ModifiedUserInfoVO muivo = new ModifiedUserInfoVO();
+		muivo.setId("young");
+		muivo.setAddr1("왜안바뀌어어어어어어어");
+		muivo.setAddr2("대체 왜!!!");
+		muivo.setEmail("ooosss@kkkcff.com");
+		muivo.setTel("010-2312-1234");
+		muivo.setName("으아악");
+		muivo.setZipcode("00000");
+		muivo.setPass("Bjb7hU0s3KxFxH1+dy6tiWs9XlM=");
+		System.out.println(CommonDAO.getInstance().updateUserInfo(muivo));
 	}
 }

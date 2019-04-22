@@ -30,10 +30,10 @@ public class LoginController {
 		lvo.setPass(encPass);
 		LoginResult lr = cs.login(lvo);
 		if(lr.getLogged()) {
-			url = "forward:study_info/main.do";
 			model.addAttribute("id",lvo.getId());
 			String nick = cs.getNick(lvo.getId());
 			model.addAttribute("nick",nick);
+			url = "redirect:study_info/main.do";
 		} else {
 			model.addAttribute("deniedMsg", lr.getMsg());
 		}

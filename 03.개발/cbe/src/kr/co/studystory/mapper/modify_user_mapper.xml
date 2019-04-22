@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.studystory.modify_user">
+
+	<select id="selectPrevUserInfo" parameterType="String" resultType="kr.co.studystory.domain.PrevUserInfo">
+		SELECT name, zipcode, addr1, addr2, tel, email
+		FROM user_table
+		WHERE id=#{ id }
+	</select>
+	
+	<update id="updateUserInfo" parameterType="kr.co.studystory.vo.ModifiedUserInfoVO">
+		UPDATE user_table
+		SET name=#{ name }, zipcode=#{ zipcode }, addr1=#{ addr1 }, 
+					addr2=#{ addr2 }, tel=#{ tel }, email=#{ email }
+		WHERE id=#{ id } AND pass=#{ pass }
+	</update>
+		
+
+</mapper>
