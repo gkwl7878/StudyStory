@@ -11,7 +11,7 @@ import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.vo.LoginVO;
 
 @Controller
-public class LoginController {
+public class adLoginController {
 	
 	/**
 	 * 로그인 페이지 띄워주기
@@ -43,7 +43,7 @@ public class LoginController {
 		int allStudy= uas.getAllStudy();
 		
 		if(loginFlag) {
-			url= "admin/new_study_mng";
+			url= "forward:/admin/new_study.do";
 		}
 		
 		model.addAttribute("loginFlag",loginFlag);
