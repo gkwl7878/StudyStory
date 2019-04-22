@@ -8,7 +8,7 @@
 		#wrap{ margin:0px auto; margin-top:200px; width: 700px; min-height: 800px; }
    	body {
 			background-image: url("http://localhost:8080/third_prj/resources/images/cover.png");
-			background-size: 100%;
+			background-size: 100% 100%;
 		}
   </style>
   <meta charset="UTF-8">

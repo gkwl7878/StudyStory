@@ -52,8 +52,11 @@ public class CommonDAO {
 	public LoginResult selectLogin(LoginVO lvo) {
 		LoginResult lr = new LoginResult();
 		
+		System.out.println("======DAO lvo :"+ lvo.getId()+"/"+lvo.getPass());
+		
 		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
 		int cnt = ss.selectOne("login",lvo);
+		ss.close();
 		System.out.println("=============== cnt :: " + cnt);
 		if (cnt == 1) {
 			lr.setLogged(true);
@@ -77,10 +80,12 @@ public class CommonDAO {
 		
 		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
 		String selectResult = ss.selectOne("checkDeactivation",id);
-		if (selectResult == null) { 
-			flag = true; // true면 활동중인 유저
+		ss.close();
+		if (selectResult == null) { // null이면 활동중인 유저 = true
+			flag = true;
 		}
 		
+		System.out.println("========= deactive flag : "+flag);
 		return flag;
 	}
 	
