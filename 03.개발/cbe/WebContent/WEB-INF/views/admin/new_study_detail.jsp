@@ -36,11 +36,11 @@
 
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="http://localhost:8080/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
 
 	<!-- sidebar 시작 -->
-	<c:import url="http://localhost:8080/third_prj/admin/layout/sidebar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"></c:import>
 	<!-- sidebar 끝 -->
 
 	<div class="container form-group" id="wrap">
@@ -116,9 +116,10 @@
 				<textarea class="form-control" rows="3" style="resize: none; width: 440px; height: 300px; margin-top: 20px;" name="contents" readonly="readonly"></textarea>
 			</div>
 		</div>
-
-		<div class="row" style="margin-top: 30px;">
-			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 180px;">목록으로</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">수락</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">거절</a>
+		<div class="row" style="margin-top: 30px; margin-left: 116px">
+			<a class="btn btn-secondary btn" href="#" onclick="history.back()" role="button" style="margin-left: 180px;">목록으로</a> 
+			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">수락</a> 
+			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">거절</a>
 		</div>
 	</div>
 

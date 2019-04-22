@@ -16,7 +16,7 @@
 
 	
 		$(function() {
-			if(!${ requestScope.loginFlag }){
+			if(${ requestScope.loginFlag }!=true){
 				alert("정보가 일치하지 않습니다.");
 			}
 		})//ready

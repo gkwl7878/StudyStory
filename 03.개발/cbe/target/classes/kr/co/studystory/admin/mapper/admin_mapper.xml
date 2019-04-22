@@ -97,16 +97,38 @@
 <select id="nTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.NoticeBoardVO">
 	select count(*)
 	from notice
-	where subject like '%'||'${searchWord}'||'%'
+	where subject like '%'||'#{searchWord}'||'%'
 </select>
 
+<resultMap type="kr.co.studystory.admin.domain.NewStudyInfo" id="newStudyResult">
+	<result column="s_num" property="sNum"/>
+	<result column="id" property="id"/>
+	<result column="study_name" property="studyName"/>
+	<result column="category" property="category"/>
+	<result column="loc" property="loc"/>
+	<result column="input_date" property="inputDate"/>
+</resultMap>
+<select id="newStudyList" resultMap="newStudyResult" parameterType="kr.co.studystory.admin.vo.NsBoardVO">
+	select s_num, id, study_name, category, loc, input_date 
+	from STUDY 
+	where accept_flag='N'
+</select>
 
+<resultMap type="kr.co.studystory.admin.domain.DetailNewStudyInfo" id="detailResult">
+	<result column="id" property="id"/>
+	<result column="study_name" property="studyName"/>
+	<result column="category" property="category"/>
+	<result column="loc" property="loc"/>
+	<result column="input_date" property="inputDate"/>
+	<result column="img" property="img"/>
+	<result column="content" property="content"/>
+</resultMap>	
 
-
-
-
-
-
+<select id="detailResult" resultMap="detailResult" parameterType="int">
+	select id, category, loc, study_name, input_date, img, content
+	from study
+	where s_num= #{sNum}
+</select>
 
 
 	

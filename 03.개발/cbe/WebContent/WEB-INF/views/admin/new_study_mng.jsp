@@ -64,14 +64,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach begin="1" end="10" step="1">
+						<c:forEach var="nsList" items="${nsList }">
+						<c:set var="i" value="${i+1 }"/>
 							<tr>
-								<td class="text-center">1</td>
-								<td class="text-center">아이디</td>
-								<td>새로운 스터디명입니다</td>
-								<td class="text-center">취업</td>
-								<td class="text-center">강남</td>
-								<td class="text-center">2019-03-00</td>
+								<td class="text-center"><c:out value="${(totalCount-(currentPage-1)*pageScale-i)+1}"/><br/></td>
+								<td class="text-center"><c:out value="${nsList.id }"/></td>
+								<td><a href="ns_detail.do?num=${nsList.sNum}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
+								<td class="text-center"><c:out value="${nsList.category }"/></td>
+								<td class="text-center"><c:out value="${nsList.loc }"/></td>
+								<td class="text-center"><c:out value="${nsList.inputDate }"/></td>
 							</tr>
 						</c:forEach>
 					</tbody>

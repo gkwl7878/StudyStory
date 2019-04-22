@@ -37,6 +37,7 @@ public class adLoginController {
 		uas=cms.getCountUserAndStudy();
 		
 		loginFlag= cms.login(l_vo);
+		
 		int weekUser= uas.getWeekUser();
 		int weekStudy= uas.getWeekStudy();
 		int allUser= uas.getAllUser();
