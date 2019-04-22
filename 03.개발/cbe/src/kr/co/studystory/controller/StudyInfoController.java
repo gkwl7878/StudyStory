@@ -1,6 +1,7 @@
 package kr.co.studystory.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ import kr.co.studystory.service.StudyInfoService;
 @Controller
 public class StudyInfoController {
 
-	@RequestMapping(value = "/index.do", method = GET)
+	@RequestMapping(value = "", method = GET)
 	public String studyInfoPage(String s_num, HttpSession session, Model model) {
 
 		StudyInfoService sis = new StudyInfoService();

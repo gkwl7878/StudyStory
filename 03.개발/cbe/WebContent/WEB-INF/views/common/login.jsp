@@ -25,6 +25,9 @@
    <script type="text/javascript">
    		$(function() {
    			
+ 	   		<c:if test="${ not empty sessionScope.id }">
+ 	   			location.replace("study_info/main.do");
+ 	   		</c:if>
    			<c:if test="${ not empty foundId }">
    				alert("고객님의 아이디는 '${ foundId }' 입니다");
    			</c:if>
