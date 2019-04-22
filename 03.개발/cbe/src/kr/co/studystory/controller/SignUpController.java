@@ -14,7 +14,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import org.json.simple.JSONObject;
 
-@SessionAttributes({"id","nick"})
 @Controller
 public class SignUpController {
 
@@ -50,14 +49,10 @@ public class SignUpController {
 		
 		CommonService cs = new CommonService();
 		
-		String encPass = CommonService.shaEncoding(nuvo.getPass());
-		nuvo.setPass(encPass);
-		
 		String url = "common/sign_up";
 		
 		if(cs.signUp(nuvo)) {
 			url ="forward:welcome.do";
-			model.addAttribute("id",nuvo.getId());
 			model.addAttribute("name",nuvo.getName());
 		} else {
 			model.addAttribute("signUpFlag", false);
@@ -67,16 +62,9 @@ public class SignUpController {
 	}
 	
 	@RequestMapping(value="/welcome.do", method=POST)
-	public String welcomePage(String id, String name, Model model) {
-		
+	public String welcomePage(String name, Model model) {
 
 		CommonService cs = new CommonService();
-		
-		String nick = cs.getNick(id);
-		
-		// 아이디로 닉네임 조회 후 세션에 둘 다 저장 후 응답
-		model.addAttribute("id", id);
-		model.addAttribute("nick", nick);
 		model.addAttribute("name", name);
 		
 		return "common/welcome";

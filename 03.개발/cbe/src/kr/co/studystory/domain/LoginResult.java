@@ -5,7 +5,7 @@ public class LoginResult {
 	private boolean logged;
 	private String msg;
 	
-	public boolean isLogged() {
+	public boolean getLogged() {
 		return logged;
 	}
 	public void setLogged(boolean logged) {

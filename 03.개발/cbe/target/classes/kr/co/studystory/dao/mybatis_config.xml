@@ -16,7 +16,11 @@
     </environment>
   </environments>
   <mappers>
+  	<!-- 재현 -->
+    <mapper resource="kr/co/studystory/mapper/study_info_mapper.xml"/> 
+    <mapper resource="kr/co/studystory/mapper/login_mapper.xml"/> 
     <mapper resource="kr/co/studystory/mapper/signup_mapper.xml"/> 
     <mapper resource="kr/co/studystory/mapper/find_mapper.xml"/> 
+    <mapper resource="kr/co/studystory/mapper/modify_user_mapper.xml"/> 
   </mappers>
 </configuration>

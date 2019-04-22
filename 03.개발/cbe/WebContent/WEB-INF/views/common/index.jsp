@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
 <head>
@@ -16,7 +16,7 @@
    <style type="text/css">
    	body {
 		background-image: url("http://localhost:8080/third_prj/resources/images/cover.png");
-		background-size: 100%;
+		background-size: 100% 100%;
 	}
 	.form-signin {
 		max-width:462px;
@@ -24,6 +24,11 @@
    </style>
    <script type="text/javascript">
    	$(function() {
+   		
+   		<c:if test="${ not empty sessionScope.id }">
+   			location.replace("study_info/main.do");
+   		</c:if>
+   		
    		$("#btn").click(function() {
    			$("#frm").submit();
    		});

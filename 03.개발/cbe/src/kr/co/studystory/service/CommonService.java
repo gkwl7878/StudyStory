@@ -7,9 +7,13 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.simple.JSONObject;
 
 import kr.co.studystory.dao.CommonDAO;
+import kr.co.studystory.domain.LoginResult;
+import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
 import kr.co.studystory.vo.FindPassVO;
+import kr.co.studystory.vo.LoginVO;
+import kr.co.studystory.vo.ModifiedUserInfoVO;
 import kr.co.studystory.vo.NewUserVO;
 
 public class CommonService {
@@ -18,6 +22,15 @@ public class CommonService {
 	
 	public CommonService() {
 		c_dao = CommonDAO.getInstance();
+	}
+	
+	public LoginResult login(LoginVO lvo) {
+		LoginResult lr = c_dao.selectLogin(lvo);
+		if(!c_dao.selectDeactivation(lvo.getId())) {
+			lr.setLogged(false);
+			lr.setMsg("탈퇴한 유저입니다");
+		}
+		return lr;
 	}
 	
 	/**
@@ -84,9 +97,7 @@ public class CommonService {
 	 */
 	public String getNick(String id) {
 		String nick = "";
-		
 		nick = c_dao.selectNick(id);
-		
 		return nick;
 	}
 	
@@ -96,9 +107,7 @@ public class CommonService {
 	 */
 	public String findId(FindIdVO fivo) {
 		String id = "";
-		
 		id = c_dao.selectId(fivo);
-		
 		return id;
 	}
 	
@@ -108,9 +117,7 @@ public class CommonService {
 	 */
 	public boolean findPass(FindPassVO fpvo) {
 		boolean flag = false;
-		
 		flag = c_dao.selectAnswer(fpvo);
-		
 		return flag;
 	}
 	
@@ -120,10 +127,29 @@ public class CommonService {
 	 */
 	public boolean setNewPass(ChangePassVO cpvo) {
 		boolean flag = false;
-
 		flag = c_dao.updatePass(cpvo);
-		
 		return flag;
 	}
-
+	
+	/**
+	 * 회원정보 수정 전 기존 회원정보 조회
+	 * by 영근 190422 
+	 */
+	public PrevUserInfo selectMyInfo(String id) {
+		PrevUserInfo pui = null;
+		pui = c_dao.selectPrevUserInfo(id);
+		return pui;
+	}
+	
+	/**
+	 * 회원정보 수정
+	 * by 영근 190422
+	 */
+	public boolean changeUserInfo(ModifiedUserInfoVO muivo) {
+		boolean flag = false;
+		if(c_dao.updateUserInfo(muivo)) {
+			flag = true;
+		}
+		return flag;
+	}
 }

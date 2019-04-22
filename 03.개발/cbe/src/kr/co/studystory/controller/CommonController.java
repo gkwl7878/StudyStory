@@ -2,10 +2,12 @@ package kr.co.studystory.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+@SessionAttributes({ "id", "nick" })
 @Controller
 public class CommonController {
 
@@ -14,17 +16,17 @@ public class CommonController {
 		return "common/index";
 	}
 	
-	@RequestMapping(value="/agreement.do", method=GET)
+	@RequestMapping(value="common/agreement.do", method=GET)
 	public String agreement() {
 		return "common/agreement";
 	}
 	
-	@RequestMapping(value="/faq.do", method=GET)
+	@RequestMapping(value="common/faq.do", method=GET)
 	public String faqPage() {
 		return "common/faq";
 	}
 	
-	@RequestMapping(value="/introduction.do", method=GET)
+	@RequestMapping(value="common/introduction.do", method=GET)
 	public String introduction() {
 		return "common/service_info";
 	}

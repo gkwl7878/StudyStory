@@ -3,48 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css"  href="http://localhost:8080/html_prj/common/css/main_v190130.css">
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript">
-    
-</script>
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  
+  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>  
 	<title>비밀번호 수정</title>
-  <style>
-   .bd-placeholder-img {
-     font-size: 1.125rem;
-     text-anchor: middle;
-     -webkit-user-select: none;
-     -moz-user-select: none;
-     -ms-user-select: none;
-     user-select: none;
-   }
+  <style type="text/css">
    .bigBtn{
   		height: 50px;
   	}
-   @media (min-width: 768px) {
-     .bd-placeholder-img-lg {
-       font-size: 3.5rem;
-     }
-   
   </style>
-  <!-- Custom styles for this template -->
-  <link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
-	
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"/>
 
-<main role="main">
-  
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>  
   <!-- 점보트론 : 전광판 -->
-    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+    <section class="text-center bg-white mb-0" style="margin-top:90px; margin-bottom:20px;">
        <div class="container" >
       <h1 class="jumbotron-heading">비밀번호 수정</h1>
     </div>
@@ -86,21 +62,14 @@
   </form>
   	</div>
   	</div>
-  	
   <div>
   </div>
   </div> 
 
-</main>
-
-	
-
 	<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
-
+	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
   <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
   <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
 </body>

@@ -1,30 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
-<style>
-
-	.wrap{background-color: #120C01}
-	.carousel-inner-1{position:relative;width:100%;overflow:hidden; height: 500px}
-	.banner{ height: 500px;margin-bottom: 30px }
-	.carousel-caption d-none d-md-block{ margin-top: 100px; font-size: 24px }
-	.d-block w-100{ height: 500px; width: 100%}
-	.intro{ width: 100%; height: 1700px; margin-bottom: 30px }
-	.intro-num{ width: 100%; height: 500px}
-	.img-frm{ width: 960px; height: 500px ;float: left; margin-bottom: 20px ;margin: 20px }
-	.text-1{ color: white; margin-right: 180px;margin-top: 100px }
-	
-</style>
 <head>
+	<style type="text/css">
+		.wrap{background-color: #120C01}
+		.carousel-inner-1{position:relative;width:100%;overflow:hidden; height: 500px}
+		.banner{ height: 500px;margin-bottom: 30px }
+		.carousel-caption d-none d-md-block{ margin-top: 100px; font-size: 24px }
+		.d-block w-100{ height: 500px; width: 100%}
+		.intro{ width: 100%; height: 1700px; margin-bottom: 30px }
+		.intro-num{ width: 100%; height: 500px}
+		.img-frm{ width: 960px; height: 500px ;float: left; margin-bottom: 20px ;margin: 20px }
+		.text-1{ color: white; margin-right: 180px;margin-top: 100px }
+	</style>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 	<title>서비스 소개</title>
-  <!-- Custom styles for this template -->
-
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript">
   
@@ -32,8 +27,7 @@
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
-
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"/>
 	
 	<div class="wrap">
 	<div class="banner">
@@ -114,15 +108,10 @@
 	</div>
 </div>
 		<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
-
+	<c:import url="/WEB-INF/views/layout/footer.jsp"/>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
   <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
   <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
-	
-
-	
 </body>
 </html>

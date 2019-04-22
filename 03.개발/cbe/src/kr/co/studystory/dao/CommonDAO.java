@@ -8,9 +8,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.studystory.domain.LoginResult;
+import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
 import kr.co.studystory.vo.FindPassVO;
+import kr.co.studystory.vo.LoginVO;
+import kr.co.studystory.vo.ModifiedUserInfoVO;
 import kr.co.studystory.vo.NewUserVO;
 
 public class CommonDAO {
@@ -26,7 +30,7 @@ public class CommonDAO {
 		return c_dao;
 	}
 	
-	public SqlSessionFactory getSqlSessionFactory() {
+	public synchronized SqlSessionFactory getSqlSessionFactory() {
 		SqlSessionFactory ssf = null;
 		
 		try {
@@ -42,6 +46,51 @@ public class CommonDAO {
 		
 		return ssf;
 	}
+	
+	/**
+	 * 로그인
+	 * by 영근 190422
+	 */
+	public LoginResult selectLogin(LoginVO lvo) {
+		LoginResult lr = new LoginResult();
+		
+		System.out.println("======DAO lvo :"+ lvo.getId()+"/"+lvo.getPass());
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.selectOne("login",lvo);
+		ss.close();
+		System.out.println("=============== cnt :: " + cnt);
+		if (cnt == 1) {
+			lr.setLogged(true);
+			lr.setMsg(null);
+		} else {
+			lr.setLogged(false);
+			lr.setMsg("로그인에 실패했습니다");
+		}
+		
+		return lr;
+	}
+	
+	/**
+	 * 탈퇴유저인지 조회
+	 * false면 탈퇴유저
+	 * true면 활동중인 유저
+	 * by 영근 190422
+	 */
+	public boolean selectDeactivation(String id) {
+		boolean flag = false; 
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		String selectResult = ss.selectOne("checkDeactivation",id);
+		ss.close();
+		if (selectResult == null) { // null이면 활동중인 유저 = true
+			flag = true;
+		}
+		
+		System.out.println("========= deactive flag : "+flag);
+		return flag;
+	}
+	
 	
 	/**
 	 * 아이디 중복체크
@@ -153,11 +202,44 @@ public class CommonDAO {
 		return flag;
 	}
 	
-	/*public static void main(String[] args) {
-		ChangePassVO cpvo = new ChangePassVO();
-		cpvo.setId("kim111");
-		cpvo.setPass("2zKUjmj8DdNQ3G5OVUNeJsnOKrI=");
+	public PrevUserInfo selectPrevUserInfo(String id) {
+		PrevUserInfo pui = null;
 		
-		System.out.println(CommonDAO.getInstance().updatePass(cpvo));
-	}*/
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		pui = ss.selectOne("selectPrevUserInfo", id);
+		ss.close();
+		
+		return pui;
+	}
+	
+	public boolean updateUserInfo(ModifiedUserInfoVO muivo) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		System.out.println("============cnt!!!! : ");
+		int cnt = ss.update("updateUserInfo",muivo);
+		System.out.println("============cnt!!!! : "+cnt);
+		
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+
+		return flag;
+	}
+	
+	public static void main(String[] args) {
+		
+		ModifiedUserInfoVO muivo = new ModifiedUserInfoVO();
+		muivo.setId("young");
+		muivo.setAddr1("왜안바뀌어어어어어어어");
+		muivo.setAddr2("대체 왜!!!");
+		muivo.setEmail("ooosss@kkkcff.com");
+		muivo.setTel("010-2312-1234");
+		muivo.setName("으아악");
+		muivo.setZipcode("00000");
+		muivo.setPass("Bjb7hU0s3KxFxH1+dy6tiWs9XlM=");
+		System.out.println(CommonDAO.getInstance().updateUserInfo(muivo));
+	}
 }

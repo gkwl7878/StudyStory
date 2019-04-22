@@ -9,9 +9,9 @@
 	<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
 	<title>아이디 찾기</title>
 	<style type="text/css">
-	   	body {
+   	body {
 			background-image: url("http://localhost:8080/third_prj/resources/images/cover.png");
-			background-size: 100%;
+			background-size: 100% ;
 		}
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
