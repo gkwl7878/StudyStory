@@ -11,11 +11,12 @@
 	<result column="inputDate" property="inputDate"/>
 </resultMap>
 
-<select id="studyNoticeList" resultType="studyNoticeResult">
-select sn.s_num,sn.subject, ut.img, to_char(sn.input_date,'yyyy-MM-dd') input_date
-from study_notice sn, study s, user_table ut
-where sn.s_num=s.s_num
- and ut.id=s.id  
+<select id="studyNoticeList" resultType="kr.co.studystory.domain.StudyNotice">
+select img, sn_num, subject, input_date
+from (select s.s_num, ut.img
+       from study s, user_table ut
+       where s_num=#{snNum} AND s.id = ut.id) ss, study_notice sn
+where sn.s_num = #{snNum}
 
 </select>
 

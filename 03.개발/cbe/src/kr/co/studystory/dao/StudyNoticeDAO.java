@@ -18,7 +18,6 @@ public class StudyNoticeDAO {
 	private SqlSessionFactory ssf=null;
 	
 	public StudyNoticeDAO() {
-		
 	}//StudyNoticeDAO
 	
 	public static StudyNoticeDAO getInstance() {
@@ -30,7 +29,6 @@ public class StudyNoticeDAO {
 	
 	public synchronized SqlSessionFactory getSessionFactory() {
 		if(ssf==null) {
-			
 		Reader reader=null;
 		
 		try {
@@ -51,13 +49,15 @@ public class StudyNoticeDAO {
 	public List<StudyNotice> selectSnList(String studyNum){
 		List<StudyNotice> list=null;
 		SqlSession ss=getSessionFactory().openSession();
-		list=ss.selectList("noticeList",studyNum);
+		list=ss.selectList("studyNoticeList",studyNum);
 		ss.close();
 		return list;
 	}//selectSnList
 	
-	public static void main(String[] args) {
-		
+	
+	public static void main(String[] args) {//테스트
+		StudyNoticeDAO sn_dao= new StudyNoticeDAO();
+		sn_dao.selectSnList("s_000041");//카티션 곱 
 	}
 	
 }//class

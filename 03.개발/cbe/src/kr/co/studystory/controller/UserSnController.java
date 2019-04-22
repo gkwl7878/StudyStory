@@ -10,7 +10,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class UserSnController {
 	
 	@RequestMapping(value="/study_notice/notice_list.do",method=GET)
-	public  String userSnList(String s, Model m) {
+	public  String userSnList(String s_num, Model model) {
+		
 		return "study_notice/notice_list";
 	}
 	
