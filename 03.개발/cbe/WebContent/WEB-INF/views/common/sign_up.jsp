@@ -12,7 +12,7 @@
   <style>
    	body {
 			background-image: url("http://localhost:8080/third_prj/resources/images/cover.png");
-			background-size: 100% 100%;
+			background-size: 100%;
 		}
   	.btn-adjust {
   		height:37px;

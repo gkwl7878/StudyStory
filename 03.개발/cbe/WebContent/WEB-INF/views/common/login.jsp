@@ -15,7 +15,7 @@
     <style type="text/css">
    	body {
 		background-image: url("http://localhost:8080/third_prj/resources/images/cover.png");
-		background-size: 100% 100%;
+		background-size: 100%;
 	}
 	.form-signin {
 		max-width:462px;
