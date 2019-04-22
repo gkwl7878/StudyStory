@@ -10,19 +10,23 @@
 
   <insert id="insertStudy" parameterType="kr.co.studystory.vo.NewStudyVO">
   insert into study(img,recruitment,accept_flag,input_date,deactivation,id,delete_flag,s_num,study_name,loc,category,content) 
-  values( , , , , ,#{id}, ,s_num.nextval,#{study_name},#{loc},#{category},#{content})
+  values(#{img},'Y' ,'N' ,sysdate ,'N' ,#{id},'N' ,s_num.nextval,#{study_name},#{loc},#{category},#{content})
   </insert>
   
-  <select id="selectPrevStudyInfo" parameterType="" ></select>
+  <select id="selectPrevStudyInfo" parameterType="kr.co.studystory.domain.PrevStudyInfo" >
+ 	select study_name, loc, category, content, img
+	from study
+	where study_name=#{study_name}
+  </select>
   
- <!--  <update id="updateStudy" parameterType="kr.co.studystory.vo.NewStudyVO">
-  UPDATE CP_DEPT
-  SET 		DNAME=#{dname}, LOC=#{loc}
-  WHERE DEPTNO=#{deptno}
+<update id="updateStudy" parameterType="kr.co.studystory.vo.ModifiedStudyVO">
+  update study
+  set 		content=#{content}, img=#{img}
+  where s_num=#{snum}
   </update>
   
-  <delete id="deleteStudy" parameterType="int">
-  DELETE FROM CP_DEPT
+  <!-- <delete id="deleteStudy" parameterType="int">
+  DELETE FROM study
   WHERE DEPTNO=#{deptno}
   </delete> -->
 </mapper>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<head>
 <style>
 #wrap {
 	margin: 100px auto;
@@ -18,7 +19,6 @@
 	font-size: 30px;
 }
 </style>
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
@@ -136,7 +136,7 @@
 
 			<div class="form-group" style="margin-bottom: 70px;">
 				<img alt="" src="http://localhost:8080/third_prj/resources/images/name.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label class="font30">스터디의 <strong>이름</strong>을 정해주세요
-				</label> <input type="email" class="form-control" id="name" placeholder="스터디의 이름을 입력해주세요(24자까지 입력가능합니다.)" id="name">
+				</label> <input type="text" class="form-control" id="name" placeholder="스터디의 이름을 입력해주세요(24자까지 입력가능합니다.)" id="name">
 			</div>
 
 			<div class="form-group" style="margin-bottom: 70px;">

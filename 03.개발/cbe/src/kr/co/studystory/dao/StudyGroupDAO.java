@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
+import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
 
 
@@ -47,18 +49,70 @@ public class StudyGroupDAO {
 	}//getSqlSessionFactory
 
 	//내 스터디 개설하기
-	public void insertNewStudy(NewStudyVO ns_vo) {
+	public boolean selectDupStudyName(String studyName) {
+		boolean flag=false;
+		
+		StudyGroupDAO sg_dao=StudyGroupDAO.sg_dao;
+		SqlSession ss=sg_dao.getSqlSessionFactory().openSession();
+		
+		
+		return flag;
+	}//selectDupStudyName
+	
+	public boolean insertNewStudy(NewStudyVO ns_vo) {
+		boolean flag=false;
 		SqlSession ss=getSqlSessionFactory().openSession();
+		
 		int cnt=ss.insert("insertStudy", ns_vo);
+		if(cnt==1) {
+			flag=true;
+		}
 		ss.commit();
-		System.out.println("추가 작업"+cnt);
+		
+		return flag;
 	}//insertNewStudy
 	
 	//내 스터디 수정하기 
-	public PrevStudyInfo selectPrevStudyInfo(String s_num) {
+	public PrevStudyInfo selectPrevStudyInfo(String sNum) {
 		PrevStudyInfo psi=null;
+		
 		SqlSession ss=getSqlSessionFactory().openSession();
-		psi=ss.select("", );
+		psi=ss.selectOne("selectPrevStudyInfo", sNum);
+		ss.close();
+		
+		return psi;
+	}//selectPrevStudyInfo
+	
+	public boolean updateStudy(ModifiedStudyVO ms_vo) {
+		boolean flag=false;
+		
+		SqlSession ss=getSqlSessionFactory().openSession();
+		
+		int cnt=ss.update("updateStudy",ms_vo);
+		if(cnt==1) {
+			flag=true;
+		}
+		
+		return flag;
 	}
 	
+	//내 스터디
+	
 }//class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
