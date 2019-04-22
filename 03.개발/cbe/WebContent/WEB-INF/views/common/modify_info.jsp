@@ -43,6 +43,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript">
   	$(function() {
+  		
+  		<c:if test="${ failFlag }">
+			alert("변경에 실패했습니다");
+		</c:if>
+  		
   		$("#modifyBtn").click(function() {
   			
   			// 이름 한글 10자까지 입력 가능
@@ -102,18 +107,12 @@
   			var tel = tel1+"-"+tel2+"-"+tel3;
   			$("#tel").prop("value",tel);
   			
-  			if(!emailFlag) {
-  				alert("이메일 중복확인을 해주세요");
-  				$("#email1").focus();
-  				return;
-  			}
-  			
   			var email = $("#email1").val()+"@"+$("#email2").val();
   			$("#email").prop("value",email);
   			
   			var pass = $("#pass").val();
   			
-  			if (pass = "") {
+  			if (pass == "") {
   				alert("비밀번호를 입력해주세요");
   				$("#pass").focus();
   				return;
@@ -121,88 +120,6 @@
   			
   			$("#modifyFrm").submit();
   		}); // modifyBtn
-  		
-  		$("#selectEmail").change(function() {
-  			var email2 = $("#selectEmail").val();
-  			
-  			if (email2 == 'none') {
-  				$("#email2").val("");
-  				$("#email2").prop("readonly",false);
-  			} else {
-  				$("#email2").val(email2);
-  				$("#email2").prop("readonly",true);
-  			}
-  		});
-  		
-  		
-			$("#dupEmail").click(function() { // 이메일 중복 AJAX 처리
-  			
-  			var email1 = $("#email1").val();
-  			var email2 = $("#email2").val();
-  	  		
-  			if (email1 == "") {
-  				alert("이메일을 입력해주세요");
-  				$("#email1").focus();
-  				return;
-  			}
-  			
-  			// 한글 email 방지
-  			var tempEmail1 = email1.replace(/[ㄱ-힣~!@#$%^&*()_+={}\[\];:]/g,"");
-  			if (email1.length != tempEmail1.length) {
-  				alert("이메일은 영문과 숫자로만 입력가능합니다.");
-  				$("#email1").val("");
-  				$("#email1").focus();
-  				return;
-  			}
-  			
-  			if (email2 == "") {
-  				alert("이메일을 입력해주세요");
-  				$("#email2").focus();
-  				return;
-  			}
-  			
-  			// 한글 email 방지
-  			var tempEmail2 = email2.replace(/[ㄱ-힣~!@#$%^&*()_+={}\[\];:]/g,"");
-  			if (email2.length != tempEmail2.length) {
-  				alert("이메일은 영문과 숫자로만 입력가능합니다.");
-  				$("#email2").val("");
-  				$("#email2").focus();
-  				return;
-  			}
-  			
-  			var tempEmail3 = email2.indexOf("."); 
-  			if (tempEmail3 == -1) {
-  				alert("입력하신 이메일 도메인 확인해주세요");
-  				$("#email2").val("");
-  				$("#email2").focus();
-  				return;
-  			} 
-  			
-  			var email = email1+"@"+email2;
-  			
-  			$.ajax({
- 				 url:"../check_dup_email.do",
- 				 data:"email="+email,
-          dataType:"json",
-          type:"get",
-          error:function(xhr) {
-                alert("문제발생 "+xhr.status);
-          },
-          success:function(json_obj){
-         	 if(json_obj.isDup) {
-         		 $("#dupEmailMsg").html("<br/><span style='color:#FF0000'>사용중인 이메일입니다</span>");
-         		 emailFlag = false;
-         	 } else {
-         		 $("#dupEmailMsg").html("<br/><span style='color:#0F68B1'>사용가능한 이메일입니다</span>");
-         		 emailFlag = true;
-         	 }
-          }
- 				});
-  		}); // email 체크
-			
-			
-			
-			
   	});
   </script>
 </head>
@@ -228,12 +145,12 @@
   <div class="col-lg-10">
   <form id="modifyFrm" action="modify_info_process.do" method="post">
   	<input type="hidden" name="id" value="${ id }"/>
-  	<input type="hidden" name="tel"/>
-  	<input type="hidden" name="email"/>
+  	<input type="hidden" id="tel" name="tel"/>
+  	<input type="hidden" id="email" name="email"/>
 		<table class="table" style="width: 700px;" >
 			<tr>
 				<td>이름</td>
-				<td><input id="name" id="name" type="text"  maxlength="10" class="form-control" style="width:200px" value="${ prevInfo.name }"></td>
+				<td><input id="name" name="name" type="text"  maxlength="10" class="form-control" style="width:200px" value="${ prevInfo.name }"></td>
 			</tr>
 			<tr>
 				<td rowspan="3">주소</td>
@@ -268,17 +185,8 @@
 			<tr >
 				<td>이메일</td>
 				<td>
-				<input type="text" id="email1" value="${ email1 }" class="form-control" style="width:120px; display: inline-block;"/>@
-				<input type="text" id="email2" value="${ email2 }" class="form-control" style="width:120px; display: inline-block;"/>
-				<select id="selectEmail" class="form-control" style="width: 140px; display: inline-block;">
-					<option value="none">직접입력</option>
-					<option value="naver.com" ${ email2 eq 'naver.com' ? 'selected="selcted"' : '' }>naver.com</option>
-					<option value="hanmail.net" ${ email2 eq 'hanmail.net' ? 'selected="selcted"' : '' }>hanmail.net</option>
-					<option value="gmail.com" ${ email2 eq 'gmail.com' ? 'selected="selcted"' : '' }>gmail.com</option>
-					<option value="nate.com" ${ email2 eq 'nate.com' ? 'selected="selcted"' : '' }>nate.net</option>
-				</select>
-				<button type="button" id="dupEmail" class="btn btn-outline-secondary btn-adjust">중복확인</button>
-				<span id="dupEmailMsg"></span>
+				<input type="text" readonly="readonly" id="email1" value="${ email1 }" class="form-control" style="width:120px; display: inline-block;"/>&nbsp;@&nbsp;
+				<input type="text" readonly="readonly" id="email2" value="${ email2 }" class="form-control" style="width:120px; display: inline-block;"/>
 				</td>
 			</tr>
 			<tr >
@@ -290,7 +198,7 @@
 			</tr>
 		</table>
 		<div style="padding-left:180px ; padding-bottom: 30px; width: 700px">
-		<button type="button" class="btn btn-dark btn-lg bigBtn" onclick="history.back()">돌아가기</button>
+		<button type="button" class="btn btn-dark btn-lg bigBtn" onclick="location.href='modify_info.do'">돌아가기</button>
 		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn" id="modifyBtn">수정</button>
 		</div>
   </form>

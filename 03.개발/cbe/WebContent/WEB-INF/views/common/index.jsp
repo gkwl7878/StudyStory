@@ -24,9 +24,12 @@
    </style>
    <script type="text/javascript">
    	$(function() {
-   		
    		<c:if test="${ not empty sessionScope.id }">
    			location.replace("study_info/main.do");
+   		</c:if>
+   		
+   		<c:if test="${ deactiveFlag }">
+   			alert("탈퇴처리 되었습니다");
    		</c:if>
    		
    		$("#btn").click(function() {

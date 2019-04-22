@@ -12,7 +12,9 @@ import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
 import kr.co.studystory.vo.FindPassVO;
+import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.LoginVO;
+import kr.co.studystory.vo.ModifiedPassVO;
 import kr.co.studystory.vo.ModifiedUserInfoVO;
 import kr.co.studystory.vo.NewUserVO;
 
@@ -150,6 +152,33 @@ public class CommonService {
 		if(c_dao.updateUserInfo(muivo)) {
 			flag = true;
 		}
+		return flag;
+	}
+	
+	/**
+	 * 비밀번호 변경
+	 * by 영근 190422
+	 */
+	public boolean changePass(ModifiedPassVO mpvo) {
+		boolean flag = false;
+		if (c_dao.updateNewPass(mpvo)) {
+			flag = true;
+		}
+		return flag;
+	}
+	
+	/**
+	 * 회원 탈퇴 처리
+	 * by 영근 190422
+	 */
+	public boolean setDeactivation(LeaveVO lvo) {
+		boolean flag = false;
+		
+		if (c_dao.updateDeactivation(lvo)) {
+			c_dao.deleteStudyMember(lvo.getId());
+			flag = true;
+		}
+		
 		return flag;
 	}
 }

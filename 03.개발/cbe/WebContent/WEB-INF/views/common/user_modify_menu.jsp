@@ -18,10 +18,10 @@
   <script type="text/javascript">
   	$(function() {
   		
-  		<c:if test="${ failFlag }">
-  			alert("변경에 실패했습니다");
-  		</c:if>
-  		
+  		<c:if test="${ param.info_changed or successFlag }">
+			alert("회원정보가 변경되었습니다");
+		</c:if>
+		
 		  $("#modifyInfoBtn").click(function() {
 			  location.href="modify_info.do";
 		  });

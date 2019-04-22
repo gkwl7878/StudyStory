@@ -6,12 +6,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @SessionAttributes({ "id", "nick" })
 @Controller
 public class CommonController {
 
-	@RequestMapping(value="/index.do",method=GET)
+	@RequestMapping(value="/index.do",method= { GET, POST })
 	public String indexPage() {
 		return "common/index";
 	}

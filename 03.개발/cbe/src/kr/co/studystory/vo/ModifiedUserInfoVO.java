@@ -67,4 +67,10 @@ public class ModifiedUserInfoVO {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+
+	@Override
+	public String toString() {
+		return "ModifiedUserInfoVO [id=" + id + ", name=" + name + ", zipcode=" + zipcode + ", addr1=" + addr1
+				+ ", addr2=" + addr2 + ", tel=" + tel + ", email=" + email + ", pass=" + pass + "]";
+	}
 }

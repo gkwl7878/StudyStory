@@ -3,7 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.studystory.modify_user">
-
+	<sql id="condition_id_and_pass">
+		WHERE id=#{ id } AND pass=#{ pass }
+	</sql>
+	
 	<select id="selectPrevUserInfo" parameterType="String" resultType="kr.co.studystory.domain.PrevUserInfo">
 		SELECT name, zipcode, addr1, addr2, tel, email
 		FROM user_table
@@ -14,8 +17,33 @@
 		UPDATE user_table
 		SET name=#{ name }, zipcode=#{ zipcode }, addr1=#{ addr1 }, 
 					addr2=#{ addr2 }, tel=#{ tel }, email=#{ email }
-		WHERE id=#{ id } AND pass=#{ pass }
+		<include refid="condition_id_and_pass"/>
+	</update>
+	
+	<update id="updateNewPass" parameterType="kr.co.studystory.vo.ModifiedPassVO">
+		UPDATE user_table
+		SET pass=#{ newPass }
+		<include refid="condition_id_and_pass"/>
 	</update>
 		
-
+	<update id="updateDeactive" parameterType="kr.co.studystory.vo.LeaveVO">
+		UPDATE user_table
+		SET deactivation='Y'
+		<include refid="condition_id_and_pass"/>
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		DELETE FROM member
+		WHERE id=#{ id }		
+	</delete>
+	
+	<delete id="deleteJoin" parameterType="String">
+		DELETE FROM join
+		WHERE id=#{ id }
+	</delete>
+	
+	<delete id="deleteFav" parameterType="String">
+		DELETE FROM fav_study
+		WHERE id=#{ id }
+	</delete>
 </mapper>
