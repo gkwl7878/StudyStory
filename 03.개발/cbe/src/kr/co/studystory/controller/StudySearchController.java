@@ -2,6 +2,14 @@ package kr.co.studystory.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.co.studystory.domain.ThumbnailDomain;
+import kr.co.studystory.service.StudyInfoService;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
+import java.util.List;
 
 /**
  * 
@@ -13,9 +21,27 @@ import org.springframework.ui.Model;
 @Controller
 public class StudySearchController {
 
+	@RequestMapping(value = "/main/main.do", method = GET)
 	public String mainPage(Model model) {
-		return "";
+
+		StudyInfoService sis = new StudyInfoService();
+		// 썸네일 리스트 생성.
+		List<ThumbnailDomain> list = sis.getThumbnailList();
+		// model 객체에 값 저장.
+		model.addAttribute("thumbnail_list", list);
+
+		return "study_info/main";
 	}// mainPage
+
+	/**
+	 * 조건 검색.
+	 * @return
+	 */
+	@RequestMapping(value = "search/search.do", method = GET)
+	public String conditionSearchPage() {
+		
+		return "study_info/search";
+	}// conditionSearchPage
 
 	public String likeOrDislikeProcess() {
 
@@ -27,10 +53,6 @@ public class StudySearchController {
 		return "";
 	}// WordSearchedPage
 
-	public String conditionSearchPage() {
-
-		return "";
-	}// conditionSearchPage
 
 	public String studyLikedPage() {
 

@@ -23,7 +23,7 @@ import kr.co.studystory.service.StudyInfoService;
 @Controller
 public class StudyInfoController {
 
-	@RequestMapping(value = "/index.do", method = GET)
+	@RequestMapping(value = "/detail/detail.do", method = GET)
 	public String studyInfoPage(String s_num, HttpSession session, Model model) {
 		StudyInfoService sis = new StudyInfoService();
 		StudyInfoDomain sInfo = sis.getStudyInfo("s_000042"); // 스터디 상세 정보 가져오기.
