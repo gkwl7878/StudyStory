@@ -31,19 +31,44 @@
    			<c:if test="${ changePassFlag }">
    				alert("새로운 비밀번호로 변경되었습니다");
    			</c:if>
+   			<c:if test="${ not empty deniedMsg }">
+   				alert("${ deniedMsg }");
+   			</c:if>
+   			
+   			
+   			$("#loginBtn").click(function() {
+   				
+   				var id = $("#id").val();
+   				
+   				if (id == "") {
+   					alert("아이디를 입력해주세요");
+   					$("#id").focus();
+   					return;
+   				}
+   				
+   				var pass = $("#pass").val();
+   				
+   				if (pass == "") {
+   					alert("비밀번호를 입력해주세요");
+   					$("#pass").focus();
+   					return;
+   				}
+   				
+   				$("#loginFrm").submit();
+   			});
    			
    		});
    </script>
 </head>
 <body class="text-center">
-  <form class="form-signin">
+  <form class="form-signin" id="loginFrm" action="login_process.do" method="post">
 	  <h1><img src="http://localhost:8080/third_prj/resources/images/study_story_logo.png"/></h1>
 	  <h5 class="mb-3 font-weight-normal">서비스 사용을 위해선 로그인이 필요합니다</h5>
 	  <label class="sr-only">관리자 아이디</label>
-	  <input type="text" id="inputEmail" class="form-control" placeholder="아이디" required autofocus>
+	  <input type="text" id="id" name="id" class="form-control" placeholder="아이디" required autofocus>
 	  <label class="sr-only">비밀번호</label>
-	  <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
-	  <button class="btn btn-lg btn-primary btn-block" type="button">로그인</button>
+	  <input type="password" id="pass" name="pass" class="form-control" placeholder="비밀번호" required>
+	  <button class="btn btn-lg btn-primary btn-block" type="button" id="loginBtn">로그인</button>
 	  <button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='sign_up.do'">회원가입</button>
 	  <br/>
 	  <label><a href="find_id.do">아이디/비밀번호 찾기</a></label>
