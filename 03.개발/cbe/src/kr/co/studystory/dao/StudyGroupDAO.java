@@ -7,13 +7,14 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
 import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
 
-
+@Component
 public class StudyGroupDAO {
 	private static StudyGroupDAO sg_dao;
 	private SqlSessionFactory ssf=null;
@@ -66,9 +67,9 @@ public class StudyGroupDAO {
 		int cnt=ss.insert("insertStudy", ns_vo);
 		if(cnt==1) {
 			flag=true;
+			ss.commit();
 		}
-		ss.commit();
-		
+		ss.close();
 		return flag;
 	}//insertNewStudy
 	
@@ -91,13 +92,24 @@ public class StudyGroupDAO {
 		int cnt=ss.update("updateStudy",ms_vo);
 		if(cnt==1) {
 			flag=true;
+			ss.commit();
 		}
-		
+		ss.close();
 		return flag;
 	}
 	
 	//내 스터디
-	
+	public static void main(String[] args) {
+		NewStudyVO ns_vo=new NewStudyVO();
+		ns_vo.setStudyName("ddd");
+		ns_vo.setCategory("취업");
+		ns_vo.setContent("ooo");
+		ns_vo.setId("ioioio");
+		ns_vo.setImg("img");
+		ns_vo.setLoc("강남");
+		
+		System.out.println(sg_dao.insertNewStudy(ns_vo));
+	}
 }//class
 
 
