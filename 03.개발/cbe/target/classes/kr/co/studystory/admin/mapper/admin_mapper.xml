@@ -130,5 +130,11 @@
 	where s_num= #{sNum}
 </select>
 
+<update id="updateNsAccept" parameterType="String">
+	UPDATE study
+	SET accept_flag='Y'
+	WHERE s_num= #{sNum}
+</update>
+
 	
 </mapper>

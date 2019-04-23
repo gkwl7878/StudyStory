@@ -68,13 +68,15 @@ public class StudyAndUserDAO {
 		boolean acceptFlag= false;
 		int cnt=0;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		
+		cnt= ss.selectOne("updateNsAccept",sNum);
+		System.out.println("===="+cnt);
 		ss.close();
 		return acceptFlag;
 	}
 	
 	public static void main(String[] args) {
 		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
+		sau_dao.updeteAccept("s_001111");
 	}
 	
 }
