@@ -11,13 +11,18 @@
 	<result column="inputDate" property="inputDate"/>
 </resultMap>
 
-<select id="studyNoticeList" resultType="kr.co.studystory.domain.StudyNotice">
+<resultMap type="kr.co.studystory.domain.StudyNotice" id="snList">
+	<result column="sn_num" property="snNum"/>
+	<result column="img" property="img"/>
+	<result column="subject" property="subject"/>
+	<result column="input_date" property="inputDate"/>
+</resultMap>
+<select id="studyNoticeList" resultMap="snList" parameterType="String">
 select img, sn_num, subject, input_date
 from (select s.s_num, ut.img
        from study s, user_table ut
        where s_num=#{snNum} AND s.id = ut.id) ss, study_notice sn
 where sn.s_num = #{snNum}
-
 </select>
 
 

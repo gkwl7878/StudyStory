@@ -40,11 +40,13 @@
       	<a href="#">스터디 탈퇴하기</a>
       </div>
       <hr>
+      
+      
       <div class="container-fluid" style="min-height:500px;">
       	<div class="row col-sm justify-content-center">
 	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
 	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong>언제 모일 스터디 공지명입니다.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
+	      			 <h6 class="card-title"><strong>공지명 3.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
 						    <p class="card-text">
 						    	<p class="text-left">
 						    		<span style="font-size:12px;">2019-03-00</span>
@@ -57,7 +59,7 @@
       	<div class="row col-sm justify-content-center">
 	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
 	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong>언제 모일 스터디 공지명입니다.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
+	      			 <h6 class="card-title"><strong>공지명2.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
 						    <p class="card-text">
 						    	<p class="text-left">
 						    		<span style="font-size:12px;">2019-03-00</span>
@@ -70,7 +72,7 @@
       	<div class="row col-sm justify-content-center">
 	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
 	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong>언제 모일 스터디 공지명입니다.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
+	      			 <h6 class="card-title"><strong>공지명1.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
 						    <p class="card-text">
 						    	<p class="text-left">
 						    		<span style="font-size:12px;">2019-03-00</span>

@@ -8,10 +8,12 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
 import kr.co.studystory.domain.StudyNotice;
 
 ////스터디 노티스 dao 정미
+@Component
 public class StudyNoticeDAO {
 
 	private static StudyNoticeDAO sn_dao;
