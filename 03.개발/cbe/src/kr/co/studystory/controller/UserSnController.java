@@ -13,7 +13,7 @@ public class UserSnController {
 	public  String userSnList(String s_num, Model model) {
 		
 		return "study_notice/notice_list";
-	}
+	}//userSnList
 	
 	
 }

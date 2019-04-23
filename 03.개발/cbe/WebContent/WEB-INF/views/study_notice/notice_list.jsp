@@ -6,13 +6,13 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
 	<title>스터디 공지 리스트</title>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
+  <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="/third_prj/resources/js/popper.min.js" ></script>
+  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
   <style type="text/css">
   	.select-card:hover {
   		background-color:#F1F3F4;
@@ -44,11 +44,11 @@
       	<div class="row col-sm justify-content-center">
 	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
 	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong>언제 모일 스터디 공지명입니다.&nbsp;&nbsp;&nbsp;&nbsp;<images src="http://localhost:8080/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
+	      			 <h6 class="card-title"><strong>언제 모일 스터디 공지명입니다.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
 						    <p class="card-text">
 						    	<p class="text-left">
 						    		<span style="font-size:12px;">2019-03-00</span>
-						    		<images src="http://localhost:8080/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
+						    		<images src="/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
 						    	</p>
 					    	</p>
 	      		</div>
@@ -57,11 +57,11 @@
       	<div class="row col-sm justify-content-center">
 	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
 	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong>언제 모일 스터디 공지명입니다.&nbsp;&nbsp;&nbsp;&nbsp;<images src="http://localhost:8080/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
+	      			 <h6 class="card-title"><strong>언제 모일 스터디 공지명입니다.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
 						    <p class="card-text">
 						    	<p class="text-left">
 						    		<span style="font-size:12px;">2019-03-00</span>
-						    		<images src="http://localhost:8080/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
+						    		<images src="/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
 						    	</p>
 					    	</p>
 	      		</div>
@@ -70,11 +70,11 @@
       	<div class="row col-sm justify-content-center">
 	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
 	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong>언제 모일 스터디 공지명입니다.&nbsp;&nbsp;&nbsp;&nbsp;<images src="http://localhost:8080/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
+	      			 <h6 class="card-title"><strong>언제 모일 스터디 공지명입니다.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
 						    <p class="card-text">
 						    	<p class="text-left">
 						    		<span style="font-size:12px;">2019-03-00</span>
-						    		<images src="http://localhost:8080/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
+						    		<images src="/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
 						    	</p>
 					    	</p>
 	      		</div>
