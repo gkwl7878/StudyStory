@@ -25,16 +25,15 @@ public class LoginController {
 	public String loginProcess(LoginVO lvo, Model model) {
 		String url = "common/login";
 		
-		System.out.println("=========="+lvo.getId()+" / "+lvo.getPass());
 		CommonService cs = new CommonService();
 		String encPass = CommonService.shaEncoding(lvo.getPass());
 		lvo.setPass(encPass);
 		LoginResult lr = cs.login(lvo);
 		if(lr.getLogged()) {
-			url = "study_info/main";
 			model.addAttribute("id",lvo.getId());
 			String nick = cs.getNick(lvo.getId());
 			model.addAttribute("nick",nick);
+			url = "redirect:study_info/main.do";
 		} else {
 			model.addAttribute("deniedMsg", lr.getMsg());
 		}
