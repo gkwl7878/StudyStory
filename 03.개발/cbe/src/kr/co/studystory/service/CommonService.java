@@ -17,7 +17,7 @@ import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
 import kr.co.studystory.vo.FindPassVO;
-import kr.co.studystory.vo.LeaveVO;
+import kr.co.studystory.vo.OutVO;
 import kr.co.studystory.vo.LoginVO;
 import kr.co.studystory.vo.ModifiedPassVO;
 import kr.co.studystory.vo.ModifiedUserInfoVO;
@@ -223,11 +223,11 @@ public class CommonService {
 	 * È¸¿ø Å»Åð Ã³¸®
 	 * by ¿µ±Ù 190422
 	 */
-	public boolean setDeactivation(LeaveVO lvo) {
+	public boolean setDeactivation(OutVO ovo) {
 		boolean flag = false;
 		
-		if (c_dao.updateDeactivation(lvo)) {
-			c_dao.deleteStudyMember(lvo.getId());
+		if (c_dao.updateDeactivation(ovo)) {
+			c_dao.deleteStudyMember(ovo.getId());
 			flag = true;
 		}
 		

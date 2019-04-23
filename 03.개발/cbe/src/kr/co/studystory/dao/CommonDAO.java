@@ -15,7 +15,7 @@ import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
 import kr.co.studystory.vo.FindPassVO;
-import kr.co.studystory.vo.LeaveVO;
+import kr.co.studystory.vo.OutVO;
 import kr.co.studystory.vo.LoginVO;
 import kr.co.studystory.vo.ModifiedPassVO;
 import kr.co.studystory.vo.ModifiedUserInfoVO;
@@ -268,11 +268,11 @@ public class CommonDAO {
 	 * È¸¿øÅ»Åð Ã³¸®
 	 * by ¿µ±Ù 190422
 	 */
-	public boolean updateDeactivation(LeaveVO lvo) {
+	public boolean updateDeactivation(OutVO ovo) {
 		boolean flag = false;
 		
 		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
-		int cnt = ss.update("updateDeactive", lvo);
+		int cnt = ss.update("updateDeactive", ovo);
 		
 		if (cnt == 1) {
 			flag = true;
