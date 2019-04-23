@@ -37,6 +37,7 @@ public class StudyAndUserService {
 	}
 	
 	public static void main(String[] args) {
-		 
+		 StudyAndUserService saus= new StudyAndUserService();
+		 System.out.println(saus.detailNewStudy("s_000021"));
 	}
 }

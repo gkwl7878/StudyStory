@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.service.StudyAndUserService;
@@ -55,6 +56,16 @@ public class NewStudyMngController {
 	
 	@RequestMapping(value="/admin/ns_detail.do",method=RequestMethod.GET)
 	public String nsDetailPage(NsDetailVO nd_vo,Model model) {
+		StudyAndUserService saus= new StudyAndUserService();
+		DetailNewStudyInfo dnsi= saus.detailNewStudy(nd_vo.getsNum());
+		model.addAttribute("id",dnsi.getId());
+		model.addAttribute("category",dnsi.getCategory());
+		model.addAttribute("content",dnsi.getContent());
+		model.addAttribute("img",dnsi.getImg());
+		model.addAttribute("inputDate",dnsi.getInputDate());
+		model.addAttribute("loc",dnsi.getLoc());
+		model.addAttribute("studyName",dnsi.getStudyName());
+		System.out.println("==========="+dnsi.getContent());
 		
 		return "/admin/new_study_detail";
 	}

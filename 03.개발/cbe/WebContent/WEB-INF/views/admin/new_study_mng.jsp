@@ -69,7 +69,7 @@
 							<tr>
 								<td class="text-center"><c:out value="${(totalCount-(currentPage-1)*pageScale-i)+1}"/><br/></td>
 								<td class="text-center"><c:out value="${nsList.id }"/></td>
-								<td><a href="ns_detail.do?num=${nsList.sNum}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
+								<td><a href="ns_detail.do?sNum=${nsList.sNum}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
 								<td class="text-center"><c:out value="${nsList.category }"/></td>
 								<td class="text-center"><c:out value="${nsList.loc }"/></td>
 								<td class="text-center"><c:out value="${nsList.inputDate }"/></td>

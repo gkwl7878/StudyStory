@@ -114,22 +114,21 @@
 	where accept_flag='N'
 </select>
 
-<resultMap type="kr.co.studystory.admin.domain.DetailNewStudyInfo" id="detailResult">
+<resultMap type="kr.co.studystory.admin.domain.DetailNewStudyInfo" id="nsDetailResult">
 	<result column="id" property="id"/>
 	<result column="study_name" property="studyName"/>
 	<result column="category" property="category"/>
 	<result column="loc" property="loc"/>
 	<result column="input_date" property="inputDate"/>
 	<result column="img" property="img"/>
-	<result column="content" property="content"/>
-</resultMap>	
+	<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String"/>
+</resultMap>
 
-<select id="detailResult" resultMap="detailResult" parameterType="int">
+<select id="nsDetail" resultMap="nsDetailResult" parameterType="String">
 	select id, category, loc, study_name, input_date, img, content
-	from study
+	from STUDY
 	where s_num= #{sNum}
 </select>
-
 
 	
 </mapper>

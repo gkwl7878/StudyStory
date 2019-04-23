@@ -59,12 +59,5 @@ public class DetailNewStudyInfo {
 		this.content = content;
 	}
 
-	@Override
-	public String toString() {
-		return "DetailNewStudyInfo [id=" + id + ", category=" + category + ", loc=" + loc + ", studyName=" + studyName
-				+ ", inputDate=" + inputDate + ", img=" + img + ", content=" + content + "]";
-	}
-	
-	
 	
 }

@@ -59,14 +59,22 @@ public class StudyAndUserDAO {
 	public DetailNewStudyInfo selectDetailNewStudy(String sNum) {
 		DetailNewStudyInfo dnsi=null;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		dnsi= ss.selectOne("detailResult",sNum);
+		dnsi= ss.selectOne("nsDetail",sNum);
 		ss.close();
 		return dnsi;
 	}
 	
+	public boolean updeteAccept(String sNum) {
+		boolean acceptFlag= false;
+		int cnt=0;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		
+		ss.close();
+		return acceptFlag;
+	}
+	
 	public static void main(String[] args) {
 		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
-		System.out.println(sau_dao.selectDetailNewStudy("s_000021"));
 	}
 	
 }

@@ -54,7 +54,7 @@
 				<strong>번호</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${param.sNum }">
 			</div>
 		</div>
 
@@ -63,7 +63,7 @@
 				<strong>리더</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${requestScope.id }">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;">
@@ -71,7 +71,7 @@
 				<strong>주제</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${requestScope.category }">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;">
@@ -79,7 +79,7 @@
 				<strong>지역</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${requestScope.loc }">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;">
@@ -87,7 +87,7 @@
 				<strong>스터디명</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${requestScope.studyName }">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;">
@@ -95,7 +95,7 @@
 				<strong>생성일</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${requestScope.inputDate }">
 			</div>
 		</div>
 
@@ -104,7 +104,8 @@
 				<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>스터디 썸네일</strong></label>&nbsp;
 			</div>
 			<div class="col-7 font20bold">
-				<img width="440" height="300" id="img" src="../resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'>
+				<img width="440" height="300" id="img" src="../resources/images/${requestScope.img }" border="0" title='찾아보기' alt='찾아보기'>
+				
 			</div>
 		</div>
 
@@ -113,7 +114,7 @@
 				<strong>상세설명</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<textarea class="form-control" rows="3" style="resize: none; width: 440px; height: 300px; margin-top: 20px;" name="contents" readonly="readonly"></textarea>
+				<textarea class="form-control" rows="3" style="resize: none; width: 440px; height: 300px; margin-top: 20px;" name="contents" readonly="readonly" >${requestScope.content}</textarea>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 30px; margin-left: 116px">
