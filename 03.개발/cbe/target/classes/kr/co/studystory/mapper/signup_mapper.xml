@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.studystory.signup">
+
+	<select id="checkDupId" parameterType="String" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM user_table
+		WHERE id=#{ id }
+	</select>
+	
+	<select id="checkDupEmail" parameterType="String" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM user_table
+		WHERE email=#{ email }
+	</select>
+
+	<insert id="insertNewUser" parameterType="kr.co.studystory.vo.NewUserVO">
+		INSERT INTO user_table(id, nick, name, pass, zipcode, addr1, 
+				addr2, tel, email, question, answer)
+		VALUES(#{ id }, user_code, #{ name }, #{ pass }, 
+				#{ zipcode }, #{ addr1 }, #{ addr2 }, #{ tel },
+				#{ email }, #{ question }, #{ answer })
+	</insert>
+	
+	<select id="selectNick" parameterType="String" resultType="String">
+		SELECT nick
+		FROM user_table
+		WHERE id = #{ id }
+	</select>
+</mapper>

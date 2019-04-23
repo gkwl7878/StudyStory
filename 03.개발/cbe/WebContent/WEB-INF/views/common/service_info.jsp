@@ -1,30 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
-<style>
-
-	.wrap{background-color: #120C01}
-	.carousel-inner-1{position:relative;width:100%;overflow:hidden; height: 500px}
-	.banner{ height: 500px;margin-bottom: 30px }
-	.carousel-caption d-none d-md-block{ margin-top: 100px; font-size: 24px }
-	.d-block w-100{ height: 500px; width: 100%}
-	.intro{ width: 100%; height: 1700px; margin-bottom: 30px }
-	.intro-num{ width: 100%; height: 500px}
-	.img-frm{ width: 960px; height: 500px ;float: left; margin-bottom: 20px ;margin: 20px }
-	.text-1{ color: white; margin-right: 180px;margin-top: 100px }
-	
-</style>
 <head>
+	<style type="text/css">
+		.wrap{background-color: #120C01}
+		.carousel-inner-1{position:relative;width:100%;overflow:hidden; height: 500px}
+		.banner{ height: 500px;margin-bottom: 30px }
+		.carousel-caption d-none d-md-block{ margin-top: 100px; font-size: 24px }
+		.d-block w-100{ height: 500px; width: 100%}
+		.intro{ width: 100%; height: 1700px; margin-bottom: 30px }
+		.intro-num{ width: 100%; height: 500px}
+		.img-frm{ width: 960px; height: 500px ;float: left; margin-bottom: 20px ;margin: 20px }
+		.text-1{ color: white; margin-right: 180px;margin-top: 100px }
+	</style>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
 	<title>서비스 소개</title>
-  <!-- Custom styles for this template -->
-
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript">
   
@@ -32,8 +27,7 @@
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
-
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"/>
 	
 	<div class="wrap">
 	<div class="banner">
@@ -46,19 +40,19 @@
     </ol>
     <div class="carousel-inner-1">
       <div class="carousel-item active">
-        <img src="http://localhost:8080/third_prj/resources/images/std1.jpg" class="d-block w-100" alt="..." style="height: 500px;">
+        <img src="/third_prj/resources/images/std1.jpg" class="d-block w-100" alt="..." style="height: 500px;">
         <div class="carousel-caption d-none d-md-block">
           <h2>편리하게 공부해요!</h2>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="http://localhost:8080/third_prj/resources/images/std2.jpg" class="d-block w-100" alt="..." style="height: 500px;">
+        <img src="/third_prj/resources/images/std2.jpg" class="d-block w-100" alt="..." style="height: 500px;">
         <div class="carousel-caption d-none d-md-block">
           <h2>함께 공부해요 !</h2>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="http://localhost:8080/third_prj/resources/images/std3.jpg" class="d-block w-100" alt="..." style="height: 500px;">
+        <img src="/third_prj/resources/images/std3.jpg" class="d-block w-100" alt="..." style="height: 500px;">
         <div class="carousel-caption d-none d-md-block">
           <h2>함께 즐겁게 여유롭게 !</h2>
         </div>
@@ -78,7 +72,7 @@
 
 <div class="intro">
 	<div class="intro-num">
-	<img src="http://localhost:8080/third_prj/resources/images/notebook.jpg" class="img-frm" style="margin-left: 50px">
+	<img src="/third_prj/resources/images/notebook.jpg" class="img-frm" style="margin-left: 50px">
 		<div class="text-1" style="float: right; text-align: right;">
           <h3>01. 손끝에서 만들어나가는 미래</h3>
           <p> 현대인들이 선정한 내 일을 망치는 방해요인 1순위 = '스마트폰/스마트기기' <br/>
@@ -89,7 +83,7 @@
 		</div>
      </div>
 	<div class="intro-num">
-	<img src="http://localhost:8080/third_prj/resources/images/book.jpg"  class="img-frm" style="float: right; margin-right: 50px">
+	<img src="/third_prj/resources/images/book.jpg"  class="img-frm" style="float: right; margin-right: 50px">
 		<div class="text-1" style="float: left; text-align: left; margin-left: 100px">
           <h3>02. 스터디를 만들어가고 완성시켜주는 플랫폼.</h3>
           <p>스터디 스토리는 스토리를 만들어가고 완성시켜주는 자율 스터디 플랫폼입니다. <br/>
@@ -98,7 +92,7 @@
 		</div>
      </div>
 	<div class="intro-num">
-	<img src="http://localhost:8080/third_prj/resources/images/fist.jpg"  class="img-frm"style="margin-left: 50px">
+	<img src="/third_prj/resources/images/fist.jpg"  class="img-frm"style="margin-left: 50px">
 		<div class="text-1" style="float: right; text-align: right;">
           <h3>03. 나와 함께 발전해나가는 스터디 스토리  </h3>
           <p>스터디 스토리는 현재 서울시의 신촌, 홍대, 종각, 건대, 노원, 강남을 범위로 시범 운영중입니다.<br/>
@@ -114,15 +108,10 @@
 	</div>
 </div>
 		<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
-
+	<c:import url="/WEB-INF/views/layout/footer.jsp"/>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
-	
-
-	
+  <script src="/third_prj/resources/js/popper.min.js" ></script>
+  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
 </body>
 </html>

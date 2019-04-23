@@ -26,6 +26,4 @@ public class LeaveVO {
 	public void setsNum(String sNum) {
 		this.sNum = sNum;
 	}
-	
-	
 }

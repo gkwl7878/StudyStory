@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.studystory.find">
+
+	<select id="selectId" parameterType="kr.co.studystory.vo.FindIdVO" resultType="String">
+		SELECT id
+		FROM user_table
+		WHERE name=#{ name } AND email=#{ email }
+	</select>
+	
+	<select id="selectPass" parameterType="kr.co.studystory.vo.FindPassVO" resultType="int">
+		SELECT count(*) cnt
+		FROM user_table
+		WHERE id=#{ id } AND name=#{ name } AND question=#{ question } AND answer=#{ answer }
+	</select>
+	
+	<update id="updatePass" parameterType="kr.co.studystory.vo.ChangePassVO">
+		UPDATE user_table
+		SET pass=#{ pass }
+		WHERE id=#{ id }
+	</update>
+	
+
+</mapper>
