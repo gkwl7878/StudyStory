@@ -7,22 +7,28 @@
   					(패키지와 비슷한 용도)
   -->
 <mapper namespace="kr.co.studystory">
-
+	<resultMap type="kr.co.studystory.domain.PrevStudyInfo" id="studyResult">
+		<result column="study_name" property="name"/>
+		<result column="loc" property="loc"/>
+		<result column="category" property="category"/>
+		<result column="content" property="content"/>
+		<result column="img" property="img"/>
+	</resultMap>
   <insert id="insertStudy" parameterType="kr.co.studystory.vo.NewStudyVO">
   insert into study(img,recruitment,accept_flag,input_date,deactivation,id,delete_flag,s_num,study_name,loc,category,content) 
-  values(#{img},'Y' ,'N' ,sysdate ,'N' ,#{id},'N' ,s_num.nextval,#{study_name},#{loc},#{category},#{content})
+  values(#{img},'Y' ,'N' ,sysdate ,'N' ,#{id},'N' ,s_num.nextval,#{studyName},#{loc},#{category},#{content})
   </insert>
   
-  <select id="selectPrevStudyInfo" parameterType="kr.co.studystory.domain.PrevStudyInfo" >
+  <select id="selectPrevStudyInfo" resultMap="studyResult" >
  	select study_name, loc, category, content, img
 	from study
-	where study_name=#{study_name}
+	where study_name=#{name}
   </select>
   
 <update id="updateStudy" parameterType="kr.co.studystory.vo.ModifiedStudyVO">
   update study
   set 		content=#{content}, img=#{img}
-  where s_num=#{snum}
+  where s_num=#{sNum}
   </update>
   
   <!-- <delete id="deleteStudy" parameterType="int">

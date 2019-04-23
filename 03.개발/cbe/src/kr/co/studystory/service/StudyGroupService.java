@@ -9,6 +9,12 @@ public class StudyGroupService {
 
 	//새 스터디 개설하기
 	//스터디명 중복확인은 ajax로 구현
+	public boolean checkDupStudyName(String sName) {
+		boolean flag=false;
+		
+		return flag;
+	}
+	
 	public boolean addNewStudy(NewStudyVO ns_vo) {
 		boolean flag=false;
 		

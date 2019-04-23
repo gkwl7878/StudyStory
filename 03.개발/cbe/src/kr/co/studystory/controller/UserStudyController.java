@@ -1,6 +1,7 @@
 package kr.co.studystory.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,7 @@ public class UserStudyController {
 	}//checkDupStudyName
 	
 	@RequestMapping(value="/study_group/createStudy.do", method=GET)
-	public String createStudyProcess(NewStudyVO ns_vo,HttpServletRequest request, Model model) {
+	public String createStudyProcess(NewStudyVO ns_vo,HttpSession session,HttpServletRequest request, Model model) {
 		
 		StudyGroupService sgs=new StudyGroupService();
 		sgs.addNewStudy(ns_vo);
