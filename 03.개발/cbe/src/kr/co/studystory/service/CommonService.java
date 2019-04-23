@@ -3,11 +3,16 @@ package kr.co.studystory.service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import kr.co.studystory.dao.CommonDAO;
 import kr.co.studystory.domain.LoginResult;
+import kr.co.studystory.domain.PrevProfile;
 import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
@@ -17,14 +22,13 @@ import kr.co.studystory.vo.LoginVO;
 import kr.co.studystory.vo.ModifiedPassVO;
 import kr.co.studystory.vo.ModifiedUserInfoVO;
 import kr.co.studystory.vo.NewUserVO;
+import kr.co.studystory.vo.ProfileVO;
 
+@Component
 public class CommonService {
 	
+	@Autowired
 	private CommonDAO c_dao;
-	
-	public CommonService() {
-		c_dao = CommonDAO.getInstance();
-	}
 	
 	public LoginResult login(LoginVO lvo) {
 		LoginResult lr = c_dao.selectLogin(lvo);
@@ -130,6 +134,54 @@ public class CommonService {
 	public boolean setNewPass(ChangePassVO cpvo) {
 		boolean flag = false;
 		flag = c_dao.updatePass(cpvo);
+		return flag;
+	}
+	
+	/**
+	 * 프로필 수정 전
+	 * 이전 프로필 가져오기
+	 * by 영근 190421
+	 */
+	public PrevProfile getProfile(String id) {
+		PrevProfile pv = null;
+		pv = c_dao.selectProfile(id);
+		return pv;
+	}
+	
+	/**
+	 * 변경 닉네임 중복체크,
+	 * true면 중복
+	 * by 영근 190423
+	 */
+	public boolean checkDupNick(String nick) {
+		boolean flag = false;
+		
+		if (c_dao.selectDupNick(nick)) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	/**
+	 * 새로운 이미지 업로드 메서드
+	 * by 영근 190423
+	 */
+	public void uploadNewImg(HttpServletRequest request) {
+		
+	}
+	
+	/**
+	 * 새로운 입력정보로 프로필정보 변경
+	 * by 영근 190423
+	 */
+	public boolean setProfile(ProfileVO pv) {
+		boolean flag = false;
+		
+		if (c_dao.updateProfile(pv)) {
+			flag = true;
+		}
+		
 		return flag;
 	}
 	
