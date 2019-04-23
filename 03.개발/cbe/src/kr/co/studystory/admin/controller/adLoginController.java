@@ -1,5 +1,6 @@
 package kr.co.studystory.admin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,8 @@ import kr.co.studystory.admin.vo.LoginVO;
 
 @Controller
 public class adLoginController {
-	
+	@Autowired
+	private CommonMngService cms;
 	/**
 	 * 로그인 페이지 띄워주기
 	 * @return
@@ -32,7 +34,6 @@ public class adLoginController {
 	public String loginProcess(LoginVO l_vo, Model model) {
 		String url= "admin/login";
 		boolean loginFlag=false;
-		CommonMngService cms= new CommonMngService();
 		UserAndStudy uas= new UserAndStudy();
 		uas=cms.getCountUserAndStudy();
 		

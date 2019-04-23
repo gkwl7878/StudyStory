@@ -1,6 +1,9 @@
 package kr.co.studystory.admin.service;
 
-import kr.co.studystory.admin.dao.CommonDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import kr.co.studystory.admin.dao.AdCommonDAO;
 import kr.co.studystory.admin.domain.UserAndStudy;
 import kr.co.studystory.admin.vo.LoginVO;
 import kr.co.studystory.admin.vo.NewStudyBoardVO;
@@ -9,12 +12,10 @@ import kr.co.studystory.admin.vo.QuestionBoardVO;
 import kr.co.studystory.admin.vo.StudyBoardVO;
 import kr.co.studystory.admin.vo.UserBoardVO;
 
+@Component
 public class CommonMngService {
-	private CommonDAO c_dao;
-	
-	public CommonMngService() {
-		c_dao= CommonDAO.getInstance();
-	}//CommonMngService
+	@Autowired
+	private AdCommonDAO c_dao;
 	
 	/**
 	 * 로그인
@@ -22,7 +23,6 @@ public class CommonMngService {
 	 * @return
 	 */
 	public boolean login(LoginVO l_vo) {
-		CommonDAO c_dao= CommonDAO.getInstance();
 		boolean login_flag=c_dao.selectLogin(l_vo);
 		return login_flag;
 	}
@@ -33,7 +33,6 @@ public class CommonMngService {
 	 */
 	public UserAndStudy getCountUserAndStudy() {
 		UserAndStudy uas= new UserAndStudy();
-		CommonDAO c_dao= CommonDAO.getInstance();
 		uas.setWeekUser(c_dao.selectWeekUser());
 		uas.setWeekStudy(c_dao.selectWeekStudy());
 		uas.setAllUser(c_dao.selectAllUser());
@@ -48,29 +47,26 @@ public class CommonMngService {
 	 * @return
 	 */
 	public int newStudyCount(NewStudyBoardVO nsb_vo) {
-		CommonDAO c_dao= CommonDAO.getInstance();
 		int totalPage=c_dao.selectNewStudyTotal();
 		return totalPage;
 	}
 	
 	public int userCount(UserBoardVO ub_vo) {
-		CommonDAO c_dao= CommonDAO.getInstance();
 		int totalPage=c_dao.selectUserTotal(ub_vo);
 		return totalPage;
 	}
 	public int studyCount(StudyBoardVO sb_vo) {
-		CommonDAO c_dao= CommonDAO.getInstance();
 		int totalPage=c_dao.selectStudyTotal(sb_vo);
 		return totalPage;
 	}
 	
 	public int questionCount(QuestionBoardVO qb_vo) {
-		CommonDAO c_dao= CommonDAO.getInstance();
+		
 		int totalPage=c_dao.selectQuestionTotal(qb_vo);
 		return totalPage;
 	}
 	public int noticeCount(NoticeBoardVO nb_vo) {
-		CommonDAO c_dao= CommonDAO.getInstance();
+		
 		int totalPage=c_dao.selectNoticeTotal(nb_vo);
 		return totalPage;
 	}
@@ -128,73 +124,25 @@ public class CommonMngService {
 		return endNum;
 	}//endNum
 	
-	/**
-	 * 게시판 이동버튼 만들기
-	 * @param current_page
-	 * @param total_page
-	 * @param list_url
-	 * @return
-	 */
-	public String indexList(int current_page, int total_page, String list_url) {
-		int pagenumber; // 화면에 보여질 페이지 인덱스 수
-		int startpage; // 화면에 보여질 시작페이지 번호
-		int endpage; // 화면에 보여질 마지막페이지 번호
-		int curpage; // 이동하고자 하는 페이지 번호
-
-		String strList=""; // 리턴될 페이지 인덱스 리스트
-
-		pagenumber = 10; // 한 화면의 페이지 인덱스 수 
-
-		// 시작 페이지번호 구하기
-		startpage = ((current_page - 1) / pagenumber) * pagenumber + 1;
-
-		// 마지막 페이지번호 구하기
-		endpage = (((startpage - 1) + pagenumber) / pagenumber) * pagenumber;
-
-		// 총 페이지 수가 계산된 마지막페이지 번호보다 작을경우 
-
-		// 총 페이지 수가 마지막페이지 번호가 됨
-
-
-		if (total_page <= endpage){
-			endpage = total_page;
-		}//end if
-
-		// 첫번째 페이지 인덱스 화면이 아닌경우
-		if ( current_page > pagenumber) {
-			curpage = startpage - 1; // 시작페이지 번호보다 1 적은 페이지로 이동
-			strList = strList + "[ <a href="+list_url+"?currentPage="+curpage+"> &lt;&lt; </a> ]";
-		}else{
-			strList = strList + "[<<]";
+	public int pageIndexNum() {
+		return 3;
+	}
+	
+	public int startPage(int currPage, int pageIndexNum) {
+		int startPage = ((currPage - 1)/pageIndexNum) * pageIndexNum + 1;
+		return startPage;
+	}
+	
+	public int endPage(int startPage, int pageIndexNum, int totalPage) {
+		int endPage = (((startPage - 1) + pageIndexNum) / pageIndexNum)*pageIndexNum;
+		
+		if (totalPage <= endPage) {
+			endPage = totalPage;
 		}
-
-		strList = strList + " ... ";
-
-		// 시작페이지 번호부터 마지막페이지 번호까지 화면에 표시
-		curpage = startpage;
-
-		while (curpage <= endpage){
-			if (curpage == current_page) {
-				strList = strList + "[ "+current_page+" ]";
-			} else {
-				strList = strList +"[ <a href="+list_url+"?currentPage="+curpage+">"+curpage+" </a> ]";
-			}//end else
-
-			curpage++;
-		}//end while
-
-		strList = strList + " ... ";
-
-		// 뒤에 페이지가 더 있는경우
-		if ( total_page > endpage) {
-			curpage = endpage + 1; 
-			strList = strList + "[ <a href="+list_url+"?currentPage="+curpage+">&gt;&gt;</a> ]";
-		}else{
-			strList = strList + "[>>]";
-		}//end else
-
-		return strList;
-		}//indexList
+		
+		return endPage;
+	}
+	
 	
 	public static void main(String[] args) {
 		CommonMngService cms= new CommonMngService();

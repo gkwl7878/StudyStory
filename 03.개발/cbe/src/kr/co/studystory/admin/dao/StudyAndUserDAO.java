@@ -8,11 +8,13 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
 import kr.co.studystory.admin.vo.NsBoardVO;
 
+@Component
 public class StudyAndUserDAO {
 	private static StudyAndUserDAO sau_dao;
 	private SqlSessionFactory ssf=null;

@@ -3,16 +3,18 @@ package kr.co.studystory.admin.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import kr.co.studystory.admin.dao.StudyAndUserDAO;
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
 import kr.co.studystory.admin.vo.NsBoardVO;
 
+@Component
 public class StudyAndUserService {
+	@Autowired
 	private StudyAndUserDAO sau_dao;
-	public StudyAndUserService() {
-		sau_dao=StudyAndUserDAO.getInstance();
-	}
 	
 	public List<NewStudyInfo> searchNewStudy(NsBoardVO nb_vo) {
 		List<NewStudyInfo> list =new ArrayList<NewStudyInfo>();

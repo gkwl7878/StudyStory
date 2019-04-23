@@ -7,6 +7,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.vo.LoginVO;
 import kr.co.studystory.admin.vo.NewStudyBoardVO;
@@ -15,17 +16,17 @@ import kr.co.studystory.admin.vo.QuestionBoardVO;
 import kr.co.studystory.admin.vo.StudyBoardVO;
 import kr.co.studystory.admin.vo.UserBoardVO;
 
-
-public class CommonDAO {
-	private static CommonDAO c_dao;
+@Component
+public class AdCommonDAO {
+	private static AdCommonDAO c_dao;
 	private SqlSessionFactory ssf=null;
 	
-	private CommonDAO() {
+	private AdCommonDAO() {
 	}//CommonDAO
 	
-	public static CommonDAO getInstance() {
+	public static AdCommonDAO getInstance() {
 		if(c_dao==null) {
-			c_dao=new CommonDAO();
+			c_dao=new AdCommonDAO();
 		}//end if
 		return c_dao;
 	}//getInstance
@@ -55,7 +56,7 @@ public class CommonDAO {
 	public boolean selectLogin(LoginVO l_vo) {
 		boolean login_flag =false;
 		int validCnt=0;
-		SqlSession ss= CommonDAO.getInstance().getSessionFactory().openSession();
+		SqlSession ss= AdCommonDAO.getInstance().getSessionFactory().openSession();
 		validCnt= ss.selectOne("loginValid",l_vo);
 		if(validCnt>0) {
 			login_flag=true;
@@ -70,7 +71,7 @@ public class CommonDAO {
 	 */
 	public int selectWeekUser() {
 		int weekUser=0;
-		SqlSession ss= CommonDAO.getInstance().getSessionFactory().openSession();
+		SqlSession ss= AdCommonDAO.getInstance().getSessionFactory().openSession();
 		weekUser= ss.selectOne("countWeekUser");
 		ss.close();
 		return weekUser;
@@ -82,7 +83,7 @@ public class CommonDAO {
 	 */
 	public int selectWeekStudy() {
 		int weekStudy=0;
-		SqlSession ss= CommonDAO.getInstance().getSessionFactory().openSession();
+		SqlSession ss= AdCommonDAO.getInstance().getSessionFactory().openSession();
 		weekStudy= ss.selectOne("countWeekStudy");
 		ss.close();
 		return weekStudy;
@@ -94,7 +95,7 @@ public class CommonDAO {
 	 */
 	public int selectAllUser() {
 		int allUser=0;
-		SqlSession ss= CommonDAO.getInstance().getSessionFactory().openSession();
+		SqlSession ss= AdCommonDAO.getInstance().getSessionFactory().openSession();
 		allUser= ss.selectOne("countAllUser");
 		ss.close();
 		return allUser;
@@ -106,7 +107,7 @@ public class CommonDAO {
 	 */
 	public int selectAllStudy() {
 		int allStudy=0;
-		SqlSession ss= CommonDAO.getInstance().getSessionFactory().openSession();
+		SqlSession ss= AdCommonDAO.getInstance().getSessionFactory().openSession();
 		allStudy= ss.selectOne("countAllStudy");
 		ss.close();
 		return allStudy;
@@ -170,7 +171,7 @@ public class CommonDAO {
 	
 	
 	public static void main(String[] args) {
-		CommonDAO c_dao = new CommonDAO();
+		AdCommonDAO c_dao = new AdCommonDAO();
 		NoticeBoardVO nb_vo= new NoticeBoardVO();
 		nb_vo.setSearchWord("º£Å¸");
 		System.out.println(c_dao.selectNoticeTotal(nb_vo));

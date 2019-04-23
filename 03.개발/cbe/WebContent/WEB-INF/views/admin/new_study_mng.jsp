@@ -69,7 +69,9 @@
 							<tr>
 								<td class="text-center"><c:out value="${(totalCount-(currentPage-1)*pageScale-i)+1}"/><br/></td>
 								<td class="text-center"><c:out value="${nsList.id }"/></td>
-								<td><a href="ns_detail.do?sNum=${nsList.sNum}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
+								<td><a href="ns_detail.do?currentPage=${currentPage}&sNum=${nsList.sNum}&weekUser=${requestScope.weekUser}
+									&weekStudy=${requestScope.weekStudy}&allUser=${requestScope.allUser}
+									&allStudy=${requestScope.allStudy}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
 								<td class="text-center"><c:out value="${nsList.category }"/></td>
 								<td class="text-center"><c:out value="${nsList.loc }"/></td>
 								<td class="text-center"><c:out value="${nsList.inputDate }"/></td>
@@ -77,16 +79,21 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="d-flex justify-content-center">
+								<div class="d-flex justify-content-center">
 					<ul class="pagination">
-						<li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a></li>
-						<li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-						<li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a></li>
+						<li class="paginate_button page-item previous ${ forwardFlag ? '' : 'disabled' }" id="dataTable_previous">
+							<a href="new_study.do?currentPage=${ startPage-1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a>
+						</li>
+						<c:forEach var="i" step="1" begin="${ startPage }" end="${ endPage }">
+							<li class="paginate_button page-item ${ currentPage == i ? 'active' : '' }">
+								<a href="new_study.do?currentPage=${ i }" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+									<c:out value="${ i }"/>
+								</a>
+							</li>
+						</c:forEach>
+						<li class="paginate_button page-item next ${ backwardFlag ? '' : 'disabled' }" id="dataTable_next">
+							<a href="new_study.do?currentPage=${ endPage+1 }" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
+						</li>
 					</ul>
 				</div>
 			</div>
