@@ -17,8 +17,8 @@
 	</style>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
 	<title>서비스 소개</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript">
@@ -40,19 +40,19 @@
     </ol>
     <div class="carousel-inner-1">
       <div class="carousel-item active">
-        <img src="http://localhost:8080/third_prj/resources/images/std1.jpg" class="d-block w-100" alt="..." style="height: 500px;">
+        <img src="/third_prj/resources/images/std1.jpg" class="d-block w-100" alt="..." style="height: 500px;">
         <div class="carousel-caption d-none d-md-block">
           <h2>편리하게 공부해요!</h2>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="http://localhost:8080/third_prj/resources/images/std2.jpg" class="d-block w-100" alt="..." style="height: 500px;">
+        <img src="/third_prj/resources/images/std2.jpg" class="d-block w-100" alt="..." style="height: 500px;">
         <div class="carousel-caption d-none d-md-block">
           <h2>함께 공부해요 !</h2>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="http://localhost:8080/third_prj/resources/images/std3.jpg" class="d-block w-100" alt="..." style="height: 500px;">
+        <img src="/third_prj/resources/images/std3.jpg" class="d-block w-100" alt="..." style="height: 500px;">
         <div class="carousel-caption d-none d-md-block">
           <h2>함께 즐겁게 여유롭게 !</h2>
         </div>
@@ -72,7 +72,7 @@
 
 <div class="intro">
 	<div class="intro-num">
-	<img src="http://localhost:8080/third_prj/resources/images/notebook.jpg" class="img-frm" style="margin-left: 50px">
+	<img src="/third_prj/resources/images/notebook.jpg" class="img-frm" style="margin-left: 50px">
 		<div class="text-1" style="float: right; text-align: right;">
           <h3>01. 손끝에서 만들어나가는 미래</h3>
           <p> 현대인들이 선정한 내 일을 망치는 방해요인 1순위 = '스마트폰/스마트기기' <br/>
@@ -83,7 +83,7 @@
 		</div>
      </div>
 	<div class="intro-num">
-	<img src="http://localhost:8080/third_prj/resources/images/book.jpg"  class="img-frm" style="float: right; margin-right: 50px">
+	<img src="/third_prj/resources/images/book.jpg"  class="img-frm" style="float: right; margin-right: 50px">
 		<div class="text-1" style="float: left; text-align: left; margin-left: 100px">
           <h3>02. 스터디를 만들어가고 완성시켜주는 플랫폼.</h3>
           <p>스터디 스토리는 스토리를 만들어가고 완성시켜주는 자율 스터디 플랫폼입니다. <br/>
@@ -92,7 +92,7 @@
 		</div>
      </div>
 	<div class="intro-num">
-	<img src="http://localhost:8080/third_prj/resources/images/fist.jpg"  class="img-frm"style="margin-left: 50px">
+	<img src="/third_prj/resources/images/fist.jpg"  class="img-frm"style="margin-left: 50px">
 		<div class="text-1" style="float: right; text-align: right;">
           <h3>03. 나와 함께 발전해나가는 스터디 스토리  </h3>
           <p>스터디 스토리는 현재 서울시의 신촌, 홍대, 종각, 건대, 노원, 강남을 범위로 시범 운영중입니다.<br/>
@@ -111,7 +111,7 @@
 	<c:import url="/WEB-INF/views/layout/footer.jsp"/>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
+  <script src="/third_prj/resources/js/popper.min.js" ></script>
+  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
 </body>
 </html>

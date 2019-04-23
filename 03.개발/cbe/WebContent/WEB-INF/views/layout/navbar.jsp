@@ -46,7 +46,7 @@
 						<a class="dropdown-item" href="#">내가 만든 스터디</a>
 						<a class="dropdown-item" href="#">관심 스터디 보기</a>
 						<a class="dropdown-item" href="#">알림보기</a>
-						<a class="dropdown-item" href="#">프로필 관리</a>
+						<a class="dropdown-item" href="../common/profile.do">프로필 관리</a>
 						<a class="dropdown-item" href="../common/user_modify_menu.do">회원정보 관리</a>
 						<a class="dropdown-item" href="../logout.do">로그아웃</a>
 					</div>

@@ -6,8 +6,8 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/> 
+  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/third_prj/resources/css/font.css"/> 
 	<title>회원정보 관리</title>
   <style>
   	.btn-adjust {
@@ -92,7 +92,7 @@
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
+  <script src="/third_prj/resources/js/popper.min.js" ></script>
+  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
 </body>
 </html>

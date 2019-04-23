@@ -12,8 +12,13 @@ import kr.co.studystory.vo.FindPassVO;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Controller
 public class FindController {
+	
+	@Autowired
+	private CommonService cs;
 
 	@RequestMapping(value="/find_id.do", method=GET)
 	public String findIdForm() {
@@ -23,7 +28,7 @@ public class FindController {
 	@RequestMapping(value="/find_id_process.do", method=POST)
 	public String findIdProcess(FindIdVO fivo, Model model) {
 		
-		CommonService cs = new CommonService();
+		cs = new CommonService();
 		
 		String url = "common/find_id";
 		String id = cs.findId(fivo);
@@ -48,7 +53,7 @@ public class FindController {
 	@RequestMapping(value="/find_pass_process.do", method=POST)
 	public String findPassProcess(FindPassVO fpvo, Model model) {
 		
-		CommonService cs = new CommonService();
+		cs = new CommonService();
 
 		String url = "common/find_pass";
 		if(cs.findPass(fpvo)) {
@@ -64,7 +69,7 @@ public class FindController {
 	@RequestMapping(value="/set_new_pass.do", method=POST)
 	public String setNewPassProcess(ChangePassVO cpvo, Model model) {
 		
-		CommonService cs = new CommonService();
+		cs = new CommonService();
 		String encPass = CommonService.shaEncoding(cpvo.getPass());
 		cpvo.setPass(encPass);
 		String url ="common/login";
