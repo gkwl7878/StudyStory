@@ -1,22 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
-<style>
-	#wrap{margin:100px auto; width: 700px; min-height: 800px}
-	.info{border: 1px solid #BFC8D0 ; padding: 50px ;text-align: center; margin-bottom: 50px; margin-top: 30px}
-	.card-header-1{padding: 10px;margin-bottom:0;background-color:white; }
-</style>
 <head >
+	<style type="text/css">
+		#wrap{margin:100px auto; width: 700px; min-height: 800px; width:920px;}
+		.info{border: 1px solid #BFC8D0 ; padding: 50px ;text-align: center; margin-bottom: 50px; margin-top: 30px}
+		.card-header-1{padding: 10px;margin-bottom:0;background-color:white; }
+	</style>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
-  
+  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
   <title>자주묻는 질문</title>
-  <!-- Custom styles for this template -->
-
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript">
@@ -25,13 +22,9 @@
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
-	<!--  -->
-
-	
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"/>
 	
 	<div id="wrap" >
-		<form>
 		 <div style= "width: 920px; border:1px solid #D7D7D7; padding:40px ; margin-bottom: 20px ">
 		  <!-- 점보트론 : 전광판 -->
     <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
@@ -147,20 +140,16 @@
 		
   
   </div>
-  <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 55%; ">목록으로</a>
-</form>
+  <div class="row text-center">
+  	<a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin:0px auto;" onclick="history.back()">이전으로</a>
+  </div>
 	</div>
 	
 		<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
-
+	<c:import url="/WEB-INF/views/layout/footer.jsp"/>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
-	
-
-	
+  <script src="/third_prj/resources/js/popper.min.js" ></script>
+  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
 </body>
 </html>

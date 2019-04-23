@@ -1,8 +1,17 @@
 ﻿/bin/
 
+
 # eXERD 프로젝트 내용 제외
+
+
 02.설계/ERD/.metadata/*
+
 02.설계/ERD/studyStrory/.project
 
-.classpath
-.project
+
+
+03.개발/cbe/.settings/*
+03.개발/cbe/.classpath
+03.개발/cbe/.project
+03.개발/cbe/build/*
+03.개발/cbe/target/*

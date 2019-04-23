@@ -3,45 +3,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<style>
-#wrap {
-	margin: 100px auto;
-	width: 800px;
-	min-height: 800px
-}
-/* #link{margin-left: 1000px; margin-top: 20px} */
-#loginTitle {
-	text-align: center;
-	st
-}
-
-.font17bold {
-	font-size: 17px;
-	font-weight: bold;
-}
-</style>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-
-<title>이용 약관</title>
-<!-- Custom styles for this template -->
-
-<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
-
-	<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+	<style type="text/css">
+	#wrap {
+		margin: 100px auto;
+		width: 800px;
+		min-height: 800px
+	}
+	/* #link{margin-left: 1000px; margin-top: 20px} */
+	#loginTitle {
+		text-align: center;
+		st
+	}
+	
+	.font17bold {
+		font-size: 17px;
+		font-weight: bold;
+	}
+	</style>
+	<meta charset="UTF-8">
+	<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+	<title>이용 약관</title>
+	<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+	<link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"/>
 	<!--  -->
 
 			<div class="container form-group" id="wrap">
@@ -454,19 +443,15 @@
 						<br/>
 					</div>
 			<div class="row" style="margin-top: 10px;">
-			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 350px;">뒤로가기</a>
+			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 350px;" onclick="history.back()">뒤로가기</a>
 		</div>
-				</div>
-			</div>
-			
-	
+	</div>
+</div>
 	<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
-
+	<c:import url="/WEB-INF/views/layout/footer.jsp"/>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
-
+	<script src="/third_prj/resources/js/popper.min.js"></script>
+	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
