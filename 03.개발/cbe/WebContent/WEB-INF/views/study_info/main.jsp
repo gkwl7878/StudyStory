@@ -39,6 +39,11 @@
 <!-- Custom styles for this template -->
 <link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 
+<!-- 동작 -->
+<script type="text/javascript">
+	$(function() {
+	}); // ready
+</script>
 </head>
 <body>
 	<!-- header -->
@@ -66,51 +71,53 @@
 						<div class="col-md-4">
 							<div class="card mb-4 shadow-sm">
 
-								<!-- 썸네일 스터디 이미지 -->
-								<img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }">
-								<div class="card-body text-center p-3">
-
-									<div class="d-flex justify-content-end align-items-center mb-3">
-										<div class="mr-5">
-											<!-- 썸네일 들록일 -->
-											<small class="text-muted">${ thumbnail.inputDate }</small>
+								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
+								<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }">
+								 <!-- 썸네일 스터디 이미지 -->
+								 <img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }" />
+									<div class="card-body text-center p-3">
+										<div class="d-flex justify-content-end align-items-center mb-3">
+											<div class="mr-5">
+												<!-- 썸네일 들록일 -->
+												<small class="text-muted">${ thumbnail.inputDate }</small>
+											</div>
+											<!-- 썸네일 모집상태 - 진행중. -->
+											<small class="pr-1">모집상태</small>
 										</div>
-										<!-- 썸네일 모집상태 - 진행중. -->
-										<small class="pr-1">모집상태</small>
+										<div class="px-3 border-bottom">
+											<p class="card-text pb-3">
+												<!-- 썸네일 제목부분 -->
+												<strong>${ thumbnail.studyName }</strong>
+											</p>
+										</div>
+										<div class="d-flex justify-content-between align-items-center mt-3 px-2">
+
+											<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
+												<!-- 썸네일 리더의 이미지 -->
+												<img src="http://localhost:8080/third_prj/resources/images/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle">
+											</div>
+
+											<div class="border-right p-2">
+												<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
+												<small>${ thumbnail.nick }</small>
+											</div>
+
+											<div class="border-right p-2">
+												<!-- 썸네일 리더의 닉네임 -->
+												<small>${ thumbnail.loc }</small>
+											</div>
+
+											<div class="p-2">
+												<!-- 썸네일 리더의 닉네임 -->
+												<small>${ thumbnail.category }</small>
+											</div>
+
+											<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
+											<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">좋아요</button>
+
+										</div>
 									</div>
-									<div class="px-3 border-bottom">
-										<p class="card-text pb-3">
-											<!-- 썸네일 제목부분 -->
-											<strong>${ thumbnail.studyName }</strong>
-										</p>
-									</div>
-									<div class="d-flex justify-content-between align-items-center mt-3 px-2">
-
-										<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
-											<!-- 썸네일 리더의 이미지 -->
-											<img src="http://localhost:8080/third_prj/resources/images/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle">
-										</div>
-
-										<div class="border-right p-2">
-											<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-											<small>${ thumbnail.nick }</small>
-										</div>
-
-										<div class="border-right p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>${ thumbnail.loc }</small>
-										</div>
-
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>${ thumbnail.category }</small>
-										</div>
-
-										<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
-										<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">좋아요</button>
-
-									</div>
-								</div>
+								</a>
 							</div>
 						</div>
 					</c:forEach>

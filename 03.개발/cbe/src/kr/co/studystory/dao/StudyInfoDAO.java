@@ -69,8 +69,6 @@ public class StudyInfoDAO {
 
 	////////////////// Singleton
 
-	////////////////// 메인 페이지
-
 	/**
 	 * 메인 페이지의 썸네일 리스트 조회 하는 메서드.
 	 * 
@@ -95,10 +93,6 @@ public class StudyInfoDAO {
 		ss.close();
 		return false;
 	}// insertLikeStudy
-
-	////////////////// 메인 페이지
-
-	////////////////// 상세 스터디 페이지
 
 	/**
 	 * 스터디의 상세 정보를 조회하는 메서드. - 수정 필요할 수도 있음...
@@ -126,8 +120,6 @@ public class StudyInfoDAO {
 		ss.close();
 		return list;
 	}// selectSCommentList
-
-	////////////////// 상세 스터디 페이지
 
 	////////////////// 단위 테스트
 	public static void main(String[] args) {

@@ -23,25 +23,40 @@ import kr.co.studystory.service.StudyInfoService;
 @Controller
 public class StudyInfoController {
 
-	@RequestMapping(value = "/detail/detail.do", method = GET)
-	public String studyInfoPage(String s_num, HttpSession session, Model model) {
+	@RequestMapping(value = "/detail/detail_study.do", method = GET)
+	public String studyInfoPage(String sNum, HttpSession session, Model model) {
 		StudyInfoService sis = new StudyInfoService();
-		StudyInfoDomain sInfo = sis.getStudyInfo("s_000042"); // 스터디 상세 정보 가져오기.
-		List<StudyCommentDomain> sCommentList = sis.getStudyComment("s_000042"); // 스터디 상세정보의 댓글 List 가져오기.
+		StudyInfoDomain sInfo = sis.getStudyInfo(sNum); // 스터디 상세 정보 가져오기.
+		List<StudyCommentDomain> sCommentList = sis.getStudyComment(sNum); // 스터디 상세정보의 댓글 List 가져오기.
+
+		// 파라미터 값 확인 - 나중에 지우기.
+		System.out.println("//////////////////////////////" + sNum);
+
 		model.addAttribute("s_Info", sInfo); // 스터디 상세정보 model에 담기.
 		model.addAttribute("sCommentList", sCommentList); // 댓글 list 모델에 담기.
 		return "study_info/detailStudy";
 	}// studyInfoPage()
 
+	/**
+	 * 스터디 가입 요청 페이지으로 부터의 요청 처리.
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/study_info/study_req_join.do", method = GET)
+	public String joinPage() {
+
+		return "study_info/study_join_req";
+	}// joinPage()
+
+	@RequestMapping(value = "/study_group/my_created_study.do", method = GET)
+	public String test() {
+		return "study_group/my_created_study";
+	}// test()
+
 	public String addComment() {
 
 		return "";
 	}// addComment()
-
-	public String joinPage() {
-
-		return "";
-	}// joinPage()
 
 	public String joinProcess() {
 
