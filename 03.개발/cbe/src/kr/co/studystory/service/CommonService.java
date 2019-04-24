@@ -1,5 +1,7 @@
 package kr.co.studystory.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -10,6 +12,9 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import kr.co.studystory.dao.CommonDAO;
 import kr.co.studystory.domain.LoginResult;
 import kr.co.studystory.domain.PrevProfile;
@@ -17,11 +22,11 @@ import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
 import kr.co.studystory.vo.FindPassVO;
-import kr.co.studystory.vo.OutVO;
 import kr.co.studystory.vo.LoginVO;
 import kr.co.studystory.vo.ModifiedPassVO;
 import kr.co.studystory.vo.ModifiedUserInfoVO;
 import kr.co.studystory.vo.NewUserVO;
+import kr.co.studystory.vo.OutVO;
 import kr.co.studystory.vo.ProfileVO;
 
 @Component
@@ -164,11 +169,24 @@ public class CommonService {
 	}
 	
 	/**
-	 * 새로운 이미지 업로드 메서드
+	 * 새로운 이미지 업로드 메서드, 업로드된 파일명 반환
 	 * by 영근 190423
 	 */
-	public void uploadNewImg(HttpServletRequest request) {
+	public String uploadNewImg(HttpServletRequest request) throws IOException {
 		
+		int maxSize = 1024*1024*10;
+		
+		File uploadDir = new File("C:/dev/Cherry-Blossom-Ending/03.개발/cbe/WebContent/profile_img");
+		
+		// 1. 생성 - 파일 업로드
+		MultipartRequest mr = 
+			new MultipartRequest(request, uploadDir.getAbsolutePath(), 
+					maxSize, "UTF-8", new DefaultFileRenamePolicy());
+		
+		// 2. 파라미터 처리
+		String name = mr.getFilesystemName("upFile");
+		
+		return name;
 	}
 	
 	/**

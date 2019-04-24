@@ -25,7 +25,20 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
+$(function() {
+	$("#imgBtn").click(function() { //이미지 업로드
+		
+		$.ajax({ /////////////////////////////// 이미지 업로드 AJAX 처리 작업중 190424
+			url:"profile_img_upload.do",
+			dataType:"json",
+				
+		});
+	});
 	
+	$("#modifyBtn").click(function() { // 변경하기 버튼
+		
+	});
+});	
 </script>
 </head>
 <body>
@@ -56,7 +69,9 @@
 						<img style="width: 200px; height: 200px;" src="/third_prj/profile_img/${ prevProfile.img }" class="card-img-top mx-auto d-block rounded-circle mt-3" alt="...">
 						<div class="card-body text-center pt-0">
 							<h5 class="card-title text-center m-4">프로필 사진</h5>
-							<a href="#" class="btn btn-sm btn-primary mb-4" id="imgBtn">이미지 업로드</a>
+							<form id="imgFrm" action="profile_img_upload.do" method="post" enctype="multipart/form-data">
+								<input type="file" name="upFile" id="upFile" class="btn btn-sm btn-primary mb-4" style="width:150px;" id="imgBtn">
+							</form>
 							<p class="text-left text-muted">
 								<small>사이즈는 가로 200px, 세로 200px에 최적화 되어 있으며 jpg, gif, png파일을 지원합니다.</small>
 							</p>

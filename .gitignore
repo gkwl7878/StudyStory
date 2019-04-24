@@ -14,4 +14,12 @@
 03.개발/cbe/.classpath
 03.개발/cbe/.project
 03.개발/cbe/build/*
-03.개발/cbe/target/*
+03.개발/cbe/target/classes/kr/co/studystory/controller/*
+03.개발/cbe/target/classes/kr/co/studystory/dao/*
+03.개발/cbe/target/classes/kr/co/studystory/domain/*
+03.개발/cbe/target/classes/kr/co/studystory/mapper/*
+03.개발/cbe/target/classes/kr/co/studystory/service/*
+03.개발/cbe/target/classes/kr/co/studystory/util/*
+03.개발/cbe/target/classes/kr/co/studystory/vo/*
+
+*.class
