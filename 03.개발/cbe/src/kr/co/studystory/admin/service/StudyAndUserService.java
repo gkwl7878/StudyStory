@@ -3,12 +3,15 @@ package kr.co.studystory.admin.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.javassist.ClassClassPath;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.dao.StudyAndUserDAO;
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
+import kr.co.studystory.admin.vo.AcceptVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
 
 @Component
@@ -38,8 +41,20 @@ public class StudyAndUserService {
 		return dnsi;
 	}
 	
+	public boolean acceptStudy(AcceptVO a_vo) {
+		boolean acceptFlag= false;
+		acceptFlag =sau_dao.updeteAccept(a_vo);
+		if(acceptFlag) {
+			System.out.println("¾Ë¶÷");
+		}
+		return acceptFlag;
+	}
+	
 	public static void main(String[] args) {
-		 StudyAndUserService saus= new StudyAndUserService();
-		 System.out.println(saus.detailNewStudy("s_000021"));
+//		 StudyAndUserService saus= new StudyAndUserService();
+//		 AcceptVO a_vo= new AcceptVO();
+//		 a_vo.setsNum("s_000021");
+//		 saus.acceptStudy(a_vo);
+		
 	}
 }

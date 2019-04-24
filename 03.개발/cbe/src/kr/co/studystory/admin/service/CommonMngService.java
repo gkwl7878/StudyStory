@@ -86,7 +86,7 @@ public class CommonMngService {
 	 * @return
 	 */
 	public int pageScale() {
-		int pageScale=10;
+		int pageScale=3;
 		return pageScale;
 	}//pageScale
 	

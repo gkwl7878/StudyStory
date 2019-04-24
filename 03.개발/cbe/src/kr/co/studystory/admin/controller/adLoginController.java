@@ -30,7 +30,7 @@ public class adLoginController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/admin/login_proc.do", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/login_proc.do", method=RequestMethod.GET)
 	public String loginProcess(LoginVO l_vo, Model model) {
 		String url= "admin/login";
 		boolean loginFlag=false;
@@ -45,7 +45,7 @@ public class adLoginController {
 		int allStudy= uas.getAllStudy();
 		
 		if(loginFlag) {
-			url= "forward:/admin/new_study.do";
+			url= "redirect:/admin/new_study.do";
 		}
 		
 		model.addAttribute("loginFlag",loginFlag);
@@ -65,6 +65,7 @@ public class adLoginController {
 	public String LogOut(SessionStatus ss,Model model){
 		boolean logoutFlag=false;
 		ss.setComplete();
+		logoutFlag=true;
 		model.addAttribute("logoutFlag",logoutFlag);
 		return "admin/login";
 	}

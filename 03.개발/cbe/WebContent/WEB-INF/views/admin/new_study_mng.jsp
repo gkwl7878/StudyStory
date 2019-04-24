@@ -9,18 +9,22 @@
 <title>관리자 - 새 스터디 관리</title>
 
 <!-- Bootstrap core CSS -->
-<link href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
+<link href="/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
-<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/admin_dashboard.js"></script>
+<link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
+<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
+<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script type="text/javascript">
 	$(function() {
-		//location.href = "new_study.do";
+		$(function() {
+			if("${acceptFlag}"=="true"){
+				alert("수락되었습니다.");
+			}
+		});//ready
 	});
 </script>
 </head>
@@ -67,9 +71,9 @@
 						<c:forEach var="nsList" items="${nsList }">
 						<c:set var="i" value="${i+1 }"/>
 							<tr>
-								<td class="text-center"><c:out value="${(totalCount-(currentPage-1)*pageScale-i)+1}"/><br/></td>
+								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/><br/></td>
 								<td class="text-center"><c:out value="${nsList.id }"/></td>
-								<td><a href="ns_detail.do?currentPage=${currentPage}&sNum=${nsList.sNum}&weekUser=${requestScope.weekUser}
+								<td><a href="ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}&weekUser=${requestScope.weekUser}
 									&weekStudy=${requestScope.weekStudy}&allUser=${requestScope.allUser}
 									&allStudy=${requestScope.allStudy}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
 								<td class="text-center"><c:out value="${nsList.category }"/></td>
@@ -79,20 +83,20 @@
 						</c:forEach>
 					</tbody>
 				</table>
-								<div class="d-flex justify-content-center">
+					<div class="d-flex justify-content-center">
 					<ul class="pagination">
 						<li class="paginate_button page-item previous ${ forwardFlag ? '' : 'disabled' }" id="dataTable_previous">
-							<a href="new_study.do?currentPage=${ startPage-1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a>
+							<a href="new_study.do?currPage=${ startPage-1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a>
 						</li>
 						<c:forEach var="i" step="1" begin="${ startPage }" end="${ endPage }">
-							<li class="paginate_button page-item ${ currentPage == i ? 'active' : '' }">
-								<a href="new_study.do?currentPage=${ i }" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+							<li class="paginate_button page-item ${ currPage == i ? 'active' : '' }">
+								<a href="new_study.do?currPage=${ i }" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
 									<c:out value="${ i }"/>
 								</a>
 							</li>
 						</c:forEach>
 						<li class="paginate_button page-item next ${ backwardFlag ? '' : 'disabled' }" id="dataTable_next">
-							<a href="new_study.do?currentPage=${ endPage+1 }" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
+							<a href="new_study.do?currPage=${ endPage+1 }" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
 						</li>
 					</ul>
 				</div>

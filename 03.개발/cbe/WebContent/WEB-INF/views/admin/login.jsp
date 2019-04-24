@@ -9,15 +9,21 @@
     <title>관리자 로그인</title>
 
     <!-- Bootstrap core CSS -->
-		<link href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+		<link href="/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script type="text/javascript">
 
 	
 		$(function() {
-			if(${ requestScope.loginFlag }!=true){
-				alert("정보가 일치하지 않습니다.");
+			if("${requestScope.logoutFlag}"=="true"){
+				alert("로그아웃 되었습니다.");
+			
+			}
+			if("${param.id}"!=""){
+				if("${ requestScope.loginFlag }"!="true"){
+					alert("정보가 일치하지 않습니다.");
+				}
 			}
 		})//ready
 	</script>
@@ -38,11 +44,11 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="http://localhost:8080/third_prj/resources/css/signin.css" rel="stylesheet">
+    <link href="/third_prj/resources/css/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form class="form-signin" action="login_proc.do" method="post">
-  <img class="mb-4" src="http://localhost:8080/third_prj/resources/images/no_logo.png" alt="" width="72" height="72">
+   <form class="form-signin" action="login_proc.do" method="get">
+  <img class="mb-4" src="/third_prj/resources/images/no_logo.png" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">관리자 로그인</h1>
   <label class="sr-only">관리자 아이디</label>
   <input type="text" id="inputEmail" class="form-control" placeholder="관리자 아이디" name="id" required autofocus>

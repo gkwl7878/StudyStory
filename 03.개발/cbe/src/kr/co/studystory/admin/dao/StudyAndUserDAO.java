@@ -12,15 +12,13 @@ import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
+import kr.co.studystory.admin.vo.AcceptVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
 
 @Component
 public class StudyAndUserDAO {
 	private static StudyAndUserDAO sau_dao;
 	private SqlSessionFactory ssf=null;
-	
-	private StudyAndUserDAO() {
-	}//CommonDAO
 	
 	public static StudyAndUserDAO getInstance() {
 		if(sau_dao==null) {
@@ -53,7 +51,7 @@ public class StudyAndUserDAO {
 	
 	public List<NewStudyInfo> selectNewStudy(NsBoardVO nb_vo){
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		List<NewStudyInfo> list =ss.selectList("newStudyList");
+		List<NewStudyInfo> list =ss.selectList("newStudyList",nb_vo);
 		ss.close();
 		return list;
 	}
@@ -66,19 +64,24 @@ public class StudyAndUserDAO {
 		return dnsi;
 	}
 	
-	public boolean updeteAccept(String sNum) {
+	public boolean updeteAccept(AcceptVO a_vo) {
 		boolean acceptFlag= false;
 		int cnt=0;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		cnt= ss.selectOne("updateNsAccept",sNum);
-		System.out.println("===="+cnt);
+		cnt =ss.update("updateNsAccept",a_vo);
+		if(cnt>0) {
+			acceptFlag=true;
+			ss.commit();
+		}
 		ss.close();
 		return acceptFlag;
 	}
 	
 	public static void main(String[] args) {
 		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
-		sau_dao.updeteAccept("s_001111");
+		AcceptVO a_vo= new AcceptVO();
+		a_vo.setsNum("s_000021");
+		System.out.println(sau_dao.updeteAccept(a_vo));
 	}
 	
 }

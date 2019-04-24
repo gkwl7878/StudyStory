@@ -109,9 +109,14 @@
 	<result column="input_date" property="inputDate"/>
 </resultMap>
 <select id="newStudyList" resultMap="newStudyResult" parameterType="kr.co.studystory.admin.vo.NsBoardVO">
-	select s_num, id, study_name, category, loc, input_date 
-	from STUDY 
-	where accept_flag='N'
+	select s_num, id, study_name, category, loc, input_date
+	from(
+		select s_num, id, study_name, category, loc, input_date,
+		row_number() over( order by input_date desc) r_num
+		from STUDY
+		where accept_flag='N'
+	)
+	where r_num between #{begin} and #{end}
 </select>
 
 <resultMap type="kr.co.studystory.admin.domain.DetailNewStudyInfo" id="nsDetailResult">
@@ -130,7 +135,7 @@
 	where s_num= #{sNum}
 </select>
 
-<update id="updateNsAccept" parameterType="String">
+<update id="updateNsAccept" parameterType="kr.co.studystory.admin.vo.AcceptVO">
 	UPDATE study
 	SET accept_flag='Y'
 	WHERE s_num= #{sNum}

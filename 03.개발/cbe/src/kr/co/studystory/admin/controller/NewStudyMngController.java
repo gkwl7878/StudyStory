@@ -13,6 +13,7 @@ import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.service.StudyAndUserService;
+import kr.co.studystory.admin.vo.AcceptVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
 import kr.co.studystory.admin.vo.NsDetailVO;
 
@@ -31,7 +32,7 @@ public class NewStudyMngController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/admin/new_study.do", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/new_study.do", method=RequestMethod.GET)
 	public String nsMngPage(NsBoardVO nb_vo, Model model) {
 		int totalCount=cms.nsTotalCount();
 		int pageScale=cms.pageScale();
@@ -42,6 +43,7 @@ public class NewStudyMngController {
 		
 		int startNum= cms.startNum(nb_vo.getCurrPage());
 		int endNum= cms.endNum(startNum);
+		
 		int pageIndexNum= cms.pageIndexNum();
 		int startPage= cms.startPage(nb_vo.getCurrPage(), pageIndexNum);
 		int endPage= cms.endPage(startPage, pageIndexNum, totalPage);
@@ -51,13 +53,27 @@ public class NewStudyMngController {
 		
 		List<NewStudyInfo> list= saus.searchNewStudy(nb_vo);
 		
+		model.addAttribute("forwardFlag", false);
+		model.addAttribute("backwardFlag", false);
+		model.addAttribute("pageIndexNum", pageIndexNum);
+		
+		
+		if(nb_vo.getCurrPage()> pageIndexNum) {
+			model.addAttribute("forwardFlag", true);
+		}
+		if(totalPage> endPage) {
+			model.addAttribute("backwardFlag", true);
+		}
+		
 		model.addAttribute("nsList",list);
 		model.addAttribute("pageScale",pageScale);
 		model.addAttribute("totalCount",totalCount);
-		model.addAttribute("currentPage",nb_vo.getCurrPage());
+		model.addAttribute("currPage",nb_vo.getCurrPage());
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
 		
+		//model.addAttribute("forwardFlag",forwardFlag);
+		//model.addAttribute("backwardFlag",backwardFlag);
 		return "/admin/new_study_mng";
 	}
 	
@@ -73,6 +89,14 @@ public class NewStudyMngController {
 		model.addAttribute("studyName",dnsi.getStudyName());
 		
 		return "/admin/new_study_detail";
+	}
+	
+	@RequestMapping(value="/admin/ns_accept.do", method=RequestMethod.GET)
+	public String acceptNsProcess(AcceptVO a_vo, Model model) {
+		boolean acceptFlag= saus.acceptStudy(a_vo);
+		
+		model.addAttribute("acceptFlag",acceptFlag);
+		return "forward:/admin/new_study.do";
 	}
 	
 	
