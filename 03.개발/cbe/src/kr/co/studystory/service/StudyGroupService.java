@@ -1,10 +1,14 @@
 package kr.co.studystory.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.dao.StudyGroupDAO;
+import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
+import kr.co.studystory.vo.ConditionVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
 
@@ -16,11 +20,15 @@ public class StudyGroupService {
 	
 	//새 스터디 개설하기
 	//스터디명 중복확인은 ajax로 구현
-	public boolean checkDupStudyName(String sName) {
+	public boolean checkDupStudyName(String studyName) {
 		boolean flag=false;
 		
+		if(sg_dao.selectDupStudyName(studyName)) {
+			flag=true;
+		}
+		
 		return flag;
-	}
+	}//checkDupStudyName
 	
 	public boolean addNewStudy(NewStudyVO ns_vo) {
 		boolean flag=false;
@@ -49,9 +57,15 @@ public class StudyGroupService {
 		}
 		
 		return flag;
-	}
+	}//modifyStudy
 	
-	
+	//내 스터디
+	//프로필 정보는 StudyInfoService의 getMyProfile 사용
+	public List<MyStudy> getMyStudy(ConditionVO c_vo) {
+		List<MyStudy> list=null;
+		list=sg_dao.selectMyStudies(c_vo);
+		return list;
+	}//getMyStudy
 }
 
 

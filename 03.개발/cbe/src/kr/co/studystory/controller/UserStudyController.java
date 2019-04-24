@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import kr.co.studystory.service.StudyGroupService;
+import kr.co.studystory.vo.ConditionVO;
 import kr.co.studystory.vo.NewStudyVO;
 
 @Controller
@@ -19,7 +20,7 @@ public class UserStudyController {
 	@Autowired
 	private StudyGroupService sgs;
 	
-	@RequestMapping(value="/study_group/create_study.do", method=GET )
+	@RequestMapping(value="study_group/create_study.do", method=GET )
 	public String createStudyPage() {
 		return "study_group/study_create";
 	}//createStudyPage
@@ -29,50 +30,47 @@ public class UserStudyController {
 		return "";
 	}//checkDupStudyName
 	
-	@RequestMapping(value="/study_group/createStudy.do", method=GET)
+	@RequestMapping(value="study_group/create_study_process.do", method=GET)
 	public String createStudyProcess(NewStudyVO ns_vo,HttpSession session,HttpServletRequest request, Model model) {
 		
 		
 		String id=(String)session.getAttribute("id");
 		ns_vo.setId(id);
 		
+		String url="study_group/study_create";//???요청완료페이지
+		
 		//이미지업로드
 		
 		if(sgs.addNewStudy(ns_vo)) {
-			
+			url = "forword:request_study.do";
+			model.addAttribute("id",ns_vo.getId());
+		}else{
+			//????
 		}
-		
-
-		
+		return url;
 		//session:아이디얻기
 		
-		
-		return "study_create_request";
 	}//createStudyProcess
 	
-	@RequestMapping(value="/study_group/modify_study.do", method=GET )
+	@RequestMapping(value="study_group/request_study.do", method=GET )
+	public String RequestStudyPage() {
+		return "study_group/study_create_request";
+	}//createStudyPage
+	
+	
+	@RequestMapping(value="study_group/modify_study.do", method=GET )
 	public String modifyStudyPage() {
 		return "study_group/study_modify";
 	}//createStudyPage
 	
-/*	@RequestMapping(value="/study_group/createStudy.do", method=GET)
-	public String modifyStudyProcess(ModifiedStudyVO ms_vo,HttpServletRequest request, Model model) {
+	@RequestMapping(value="study_group/my_study.do", method=GET)
+	public String myStudyPage(ConditionVO c_vo, HttpSession session, Model model) {
 		
-		StudyGroupService sgs=new StudyGroupService();
-		sgs.modifyStudy(ms_vo);
+		String id=(String)session.getAttribute("id");
+		c_vo.setId(id);
 		
-		String content=request.getParameter("content");
-		String img=request.getParameter("img");
-		String s_num=request.getParameter("s_num");
-	
-		model.addAttribute("content",content);
-		model.addAttribute("img",img);
-		model.addAttribute("s_num",s_num);
-		
-		
-		return "";
-	}//createStudyProcess
-	*/
+		return "study_group/my_study";
+	}
 	
 	
 	
