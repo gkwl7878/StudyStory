@@ -30,5 +30,14 @@ public class UserSnController {
 		return "study_notice/notice_list";
 	}//userSnList
 	
+	@RequestMapping(value="/study_notice/notice_detail.do", method=GET)
+	public String userDetailSn(String s, Model model) {
+		
+		
+		
+		return "study_notice/notice_detail";
+	}//userDetailSn
 	
-}
+	
+	
+}//class

@@ -41,16 +41,39 @@
       </div>
       <hr>
       
-      
+      <!-- 공지가 존재하지 않을 경우 공지사항이 없다고 보여주기  -->
+      <c:if test="${ empty snList  }">
+      <div	style="text-align: center; margin-top: 200px">
+      	<strong>등록된 공지사항이 없습니다.</strong>
+      	</div>
+      </c:if>
+      	<!--공지사항이 있으면 표시  -->
       <div class="container-fluid" style="min-height:500px;">
+      	<c:forEach var="sndata" items="${ snList }">
       	<div class="row col-sm justify-content-center">
+      	
 	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
 	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong>공지명 3.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
+	      			 <h6 class="card-title"><strong><c:out value="${ sndata.subject }"/>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#void"><img src="http://localhost:8080/third_prj/resources/images/setting.png" width="20" height="20" align="right" /></strong></a></h6>
+						    <p class="card-text">
+						    	<p class="text-left">
+						    		<span style="font-size:12px; vertical-align:text-bottom;"><c:out value="${ sndata.inputDate }"/></span>
+						    		<img src="http://localhost:8080/third_prj/resources/images/${ sndata.img }"width="50" height="60" style="float:right;"/>
+<%-- 						    		<img src="/resources/images/"${ sndata.img }" width="50" height="60" style="float:right;"/> --%>
+						    	</p>
+					    	</p>
+	      		</div>
+      		</div>
+      	</div>
+      	</c:forEach>
+<!--       	<div class="row col-sm justify-content-center">
+	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
+	      		<div class="card-body">
+	      			 <h6 class="card-title"><strong>공지명2.&nbsp;&nbsp;&nbsp;&nbsp;<img src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
 						    <p class="card-text">
 						    	<p class="text-left">
 						    		<span style="font-size:12px;">2019-03-00</span>
-						    		<images src="/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
+						    		<img src="/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
 						    	</p>
 					    	</p>
 	      		</div>
@@ -59,29 +82,16 @@
       	<div class="row col-sm justify-content-center">
 	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
 	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong>공지명2.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
+	      			 <h6 class="card-title"><strong>공지명1.&nbsp;&nbsp;&nbsp;&nbsp;<img src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
 						    <p class="card-text">
 						    	<p class="text-left">
 						    		<span style="font-size:12px;">2019-03-00</span>
-						    		<images src="/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
+						    		<img src="/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
 						    	</p>
 					    	</p>
 	      		</div>
       		</div>
-      	</div>
-      	<div class="row col-sm justify-content-center">
-	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
-	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong>공지명1.&nbsp;&nbsp;&nbsp;&nbsp;<images src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
-						    <p class="card-text">
-						    	<p class="text-left">
-						    		<span style="font-size:12px;">2019-03-00</span>
-						    		<images src="/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
-						    	</p>
-					    	</p>
-	      		</div>
-      		</div>
-      	</div>
+      	</div> -->
       </div>
     </main>
 
