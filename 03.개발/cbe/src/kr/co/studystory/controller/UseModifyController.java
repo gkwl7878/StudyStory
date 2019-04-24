@@ -1,5 +1,10 @@
 package kr.co.studystory.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,14 +14,9 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.service.CommonService;
-import kr.co.studystory.vo.OutVO;
 import kr.co.studystory.vo.ModifiedPassVO;
 import kr.co.studystory.vo.ModifiedUserInfoVO;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import javax.servlet.http.HttpSession;
+import kr.co.studystory.vo.OutVO;
 
 @SessionAttributes("id")
 @Controller

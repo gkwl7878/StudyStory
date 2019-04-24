@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.studystory.domain.PrevProfile;
 import kr.co.studystory.service.CommonService;
+import kr.co.studystory.vo.ProfileVO;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -33,23 +34,23 @@ public class ProfileController {
 		return url;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="common/profile_img_upload.do", method=POST)
-	public String profileImgUpload(HttpServletRequest request) {
-
-		String fileName = "";
-		JSONObject json = new JSONObject();
+	@RequestMapping(value="common/profile_change.do",method=POST)
+	public String profileChange(ProfileVO pv, HttpServletRequest request, Model model) {
+		
+		String fileName = ""; 		
 		try {
 			fileName = cs.uploadNewImg(request);
+			pv.setImg(fileName);
+			if (cs.setProfile(pv)) {
+				model.addAttribute("changeFlag", true);
+			} else {
+				model.addAttribute("changeFlag", false);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		if (!"".equals(fileName)) {
-			json.put("fileName", fileName);
-		}
-		
-		// 업로드한 파일명을 JSON형태로 반환
-		return json.toJSONString();
+		return "common/my_profile";
 	}
+	
 }
