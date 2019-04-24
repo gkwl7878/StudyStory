@@ -56,14 +56,14 @@ div{margin: 0px auto;}
 		<table class="table"  style="border:1px solid #E9ECEF">
   <thead class="thead-light">
     <tr>
-      <th scope="col"  >리더명</th>
-      <th scope="col" >제목</th>
+      <th scope="col"  >리더</th>
+      <th scope="col" >스터디의 이름</th>
     </tr>
   </thead>
   <tbody>
     <tr style="vertical-align: middle;">
-      <td scope="row"><img src="http://localhost:8080/third_prj/resources/images/no_pic.png"><br/>한지민</td>
-      <td style="vertical-align: middle;"><strong>영어 같이 해봐요! <br/>노하우 만땅 리더의 특급모임</strong></td>
+      <td scope="row"><img src="/third_prj/resources/images/${ leader.leaderImg }"><br/>${ leader.nick }</td>
+      <td style="vertical-align: middle;">${ leader.studyName }</td>
     </tr>
   </tbody>
 </table>

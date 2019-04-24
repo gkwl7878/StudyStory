@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
@@ -121,11 +122,23 @@ public class StudyInfoDAO {
 		return list;
 	}// selectSCommentList
 
+	/**
+	 * 스터디 참여하기의 리더 정보 조회.
+	 * 
+	 * @return LeaderOfJoinDomain
+	 */
+	public LeaderOfJoinDomain selectLeaderOfJoin(String s_num) {
+		LeaderOfJoinDomain loj = null;
+		SqlSession ss = getSessionFatory().openSession();
+		loj = ss.selectOne("selectLeaderOfJoin", s_num);
+		ss.close();
+		return loj;
+	}// selectLeaderOfJoin
+
 	////////////////// 단위 테스트
 	public static void main(String[] args) {
-		List<ThumbnailDomain> list = null;
-		list = StudyInfoDAO.getInstance().selectThumbnailList();
-		System.out.println(list);
+		LeaderOfJoinDomain loj = StudyInfoDAO.getInstance().selectLeaderOfJoin("s_000021");
+		System.out.println(loj);
 	}// main
 
 }// class

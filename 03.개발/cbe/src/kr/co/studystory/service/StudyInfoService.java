@@ -3,6 +3,7 @@ package kr.co.studystory.service;
 import java.util.List;
 
 import kr.co.studystory.dao.StudyInfoDAO;
+import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
@@ -18,7 +19,7 @@ public class StudyInfoService {
 	/**
 	 * 썸네일 리스트 얻기.
 	 * 
-	 * @return
+	 * @return List<ThumbnailDomain>
 	 */
 	public List<ThumbnailDomain> getThumbnailList() {
 		List<ThumbnailDomain> list = null;
@@ -43,7 +44,7 @@ public class StudyInfoService {
 	 * 스터디 상세정보 얻기.
 	 * 
 	 * @param s_num
-	 * @return
+	 * @return StudyInfoDomain
 	 */
 	public StudyInfoDomain getStudyInfo(String s_num) {
 		StudyInfoDomain s_info = null;
@@ -55,7 +56,7 @@ public class StudyInfoService {
 	 * 스터디 댓글 리스트 얻기.
 	 * 
 	 * @param s_num
-	 * @return
+	 * @return List<StudyCommentDomain>
 	 */
 	public List<StudyCommentDomain> getStudyComment(String s_num) {
 		List<StudyCommentDomain> list = null;
@@ -63,12 +64,23 @@ public class StudyInfoService {
 		return list;
 	}// getStudyComment
 
+	/**
+	 * 스터디 참여의 리더의 기본 정보 얻기.
+	 * 
+	 * @param s_num
+	 * @return LeaderOfJoinDomain
+	 */
+	public LeaderOfJoinDomain getLeaderOfJoin(String s_num) {
+		LeaderOfJoinDomain loj = null;
+		loj = si_dao.selectLeaderOfJoin(s_num);
+		return loj;
+	}// getLeaderOfJoin
+
 	/************ 이하 메인 메서드 : 단위 테스트 ************/
 	// 단위 테스트 main.
 	public static void main(String[] args) {
 		StudyInfoService sInfoService = new StudyInfoService();
-		StudyInfoDomain sInfo = sInfoService.getStudyInfo("");
-		System.out.println(sInfo);
+		LeaderOfJoinDomain inst = sInfoService.getLeaderOfJoin("s_000021");
 	}// main
 
 }// class

@@ -2,15 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/html_prj/common/css/main_v190130.css">
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript">
-	
-</script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/third_prj/resources/js/popper.min.js"></script>
+<script src="/third_prj/resources/js/bootstrap.min.js"></script>
 
 <title>스터디 상세 정보</title>
 <style>
@@ -46,8 +46,20 @@
 	}
 }
 </style>
+
 <!-- Custom styles for this template -->
 <link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
+
+<!-- CDN : jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#study_join_btn").click(function() {
+			$("#detail_study_frm").submit(); // submit
+		});// click
+	}); // ready
+</script>
+
 </head>
 <body>
 	<!-- header -->
@@ -70,7 +82,7 @@
 					<div class="col-lg-12">
 						<!-- 스터디 이미지 -->
 						<div style="height: 450px; background-color: #F0F0F0">
-							<img src="http://localhost:8080/third_prj/resources/images/${ s_Info.studyImg }">
+							<img src="/third_prj/resources/images/${ s_Info.studyImg }">
 						</div>
 					</div>
 				</div>
@@ -184,12 +196,14 @@
 						<div class="col-lg-12">
 							<div class="row">
 								<div class="col-lg-12">
-									<div style="font-size: 17px; font-weight: bold; height: 70px;">영어 같이 해봐요! 노하우 만땅 리더의 특급모임</div>
+									<!-- 스터디명 -->
+									<div style="font-size: 17px; font-weight: bold; height: 70px;">${ s_Info.studyName }</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-lg-12" style="font-size: 12px; margin-top: 10px; height: 60px">
-									<div>호주, 뉴질랜드,영국,미국,인도,필리핀, 영어까지 한번에 정복!!</div>
+									<!-- 스터디 참여인원 및 ... 생각해 보기. -->
+									<div>현재 인원,</div>
 								</div>
 							</div>
 							<div class="row">
@@ -197,7 +211,10 @@
 									<div class="row">
 										<div class="col-lg-2"></div>
 										<div class="col-lg-8" style="margin-top: 40px">
-											<button type="button" class="btn btn btn-secondary btn-adjust2" id="searchZip" style="width: 140px; height: 37px">참가 신청하기</button>
+											<form id="detail_study_frm" action="../study_info/study_req_join.do">
+												<button id="study_join_btn" type="button" class="btn btn-secondary btn-sm">스터디 참여하기</button>
+												<input type="hidden" name="sNum" value="${ param.sNum }">
+											</form>
 										</div>
 									</div>
 								</div>
@@ -214,12 +231,6 @@
 
 	<!-- footer -->
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
-
-
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>
