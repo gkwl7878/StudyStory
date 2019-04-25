@@ -20,6 +20,7 @@ import kr.co.studystory.vo.ModifiedPassVO;
 import kr.co.studystory.vo.ModifiedUserInfoVO;
 import kr.co.studystory.vo.NewUserVO;
 import kr.co.studystory.vo.OutVO;
+import kr.co.studystory.vo.ProfileImgVO;
 import kr.co.studystory.vo.ProfileVO;
 
 @Component
@@ -329,7 +330,7 @@ public class CommonDAO {
 	}
 	
 	/**
-	 * 유저 프로필 변경
+	 * 유저 프로필(닉네임, 자기소개) 변경
 	 * by 영근 190423
 	 */
 	public boolean updateProfile(ProfileVO pv) {
@@ -337,6 +338,24 @@ public class CommonDAO {
 		
 		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
 		int cnt = ss.update("updateProfile", pv);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
+	/**
+	 * 프로필 이미지 변경
+	 * by 영근 190423
+	 */
+	public boolean updateProfileImg(ProfileImgVO pivo) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.update("updateProfileImg", pivo);
 		if (cnt == 1) {
 			flag = true;
 			ss.commit();

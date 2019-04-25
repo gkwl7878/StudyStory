@@ -16,9 +16,15 @@
 		WHERE nick=#{ nick }
 	</select>
 	
+	<update id="updateProfileImg" parameterType="kr.co.studystory.vo.ProfileImgVO">
+		UPDATE user_table
+		SET	img=#{ img }
+		WHERE id=#{ id }
+	</update>
+	
 	<update id="updateProfile" parameterType="kr.co.studystory.vo.ProfileVO">
 		UPDATE user_table
-		SET	nick=#{ nick }, introduce=#{ introduce }, img=#{ img }
+		SET	nick=#{ nick }, introduce=#{ introduce }
 		WHERE id=#{ id }
 	</update>
 </mapper>
