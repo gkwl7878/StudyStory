@@ -32,7 +32,11 @@
 <script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script type="text/javascript">
-	
+	$(function() {
+		if("${acceptFlag}"=="true"){
+			alert("수락되었습니다.");
+		}
+	});//ready
 </script>
 
 </head>
@@ -127,7 +131,9 @@
 		</div>
 		<div class="row" style="margin-top: 30px; margin-left: 116px">
 			<a class="btn btn-secondary btn" href="new_study.do?sNum=${param.sNum}&acceptFlag=${acceptFlag}"  role="button" style="margin-left: 180px;">목록으로</a> 
-			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}&acceptFlag=${acceptFlag}" role="button" style="margin-left: 10px;">수락</a> 
+			<!--알람: id,subject, category, content  -->
+			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}
+				&acceptFlag=${acceptFlag}&id=${requestScope.id }" role="button" style="margin-left: 10px;">수락</a> 
 			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">거절</a>
 		</div>
 	</div>

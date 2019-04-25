@@ -14,6 +14,7 @@ import kr.co.studystory.admin.domain.NewStudyInfo;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.service.StudyAndUserService;
 import kr.co.studystory.admin.vo.AcceptVO;
+import kr.co.studystory.admin.vo.AlramVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
 import kr.co.studystory.admin.vo.NsDetailVO;
 
@@ -61,6 +62,7 @@ public class NewStudyMngController {
 		if(nb_vo.getCurrPage()> pageIndexNum) {
 			model.addAttribute("forwardFlag", true);
 		}
+		
 		if(totalPage> endPage) {
 			model.addAttribute("backwardFlag", true);
 		}
@@ -92,8 +94,14 @@ public class NewStudyMngController {
 	}
 	
 	@RequestMapping(value="/admin/ns_accept.do", method=RequestMethod.GET)
-	public String acceptNsProcess(AcceptVO a_vo, Model model) {
+	public String acceptNsProcess(AcceptVO a_vo,Model model) {
 		boolean acceptFlag= saus.acceptStudy(a_vo);
+		AlramVO al_vo= new AlramVO();
+		
+		al_vo.setId(a_vo.getId());
+		al_vo.setCategory("서비스");
+		al_vo.setSubject("새 스터디가 수락되었습니다.");
+		al_vo.setContent(a_vo.getsNum()+"스터디가 수락되었습니다.");
 		
 		model.addAttribute("acceptFlag",acceptFlag);
 		return "forward:/admin/new_study.do";

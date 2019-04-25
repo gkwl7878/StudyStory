@@ -20,12 +20,10 @@
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$(function() {
-			if("${acceptFlag}"=="true"){
-				alert("수락되었습니다.");
-			}
-		});//ready
-	});
+		if("${loginSession}"!=""||){
+			window.location.href = "/admin/login.do";
+		}
+	});//ready
 </script>
 </head>
 <body>

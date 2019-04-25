@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.dao.AdCommonDAO;
 import kr.co.studystory.admin.domain.UserAndStudy;
+import kr.co.studystory.admin.vo.AlramVO;
 import kr.co.studystory.admin.vo.LoginVO;
 import kr.co.studystory.admin.vo.NewStudyBoardVO;
 import kr.co.studystory.admin.vo.NoticeBoardVO;
@@ -26,6 +27,17 @@ public class CommonMngService {
 		boolean login_flag=c_dao.selectLogin(l_vo);
 		return login_flag;
 	}
+	
+	/**
+	 * 알람
+	 * @param a_vo
+	 * @return
+	 */
+	public boolean sendAlram(AlramVO a_vo) {
+		boolean alramFlag=c_dao.insertAlram(a_vo);
+		return alramFlag;
+	}
+
 	
 	/**
 	 * 주간신규,주간스터디,총회원수,총스터디수 조회

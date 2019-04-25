@@ -3,11 +3,10 @@ package kr.co.studystory.admin.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ibatis.javassist.ClassClassPath;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import kr.co.studystory.admin.dao.AdCommonDAO;
 import kr.co.studystory.admin.dao.StudyAndUserDAO;
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
@@ -18,6 +17,10 @@ import kr.co.studystory.admin.vo.NsBoardVO;
 public class StudyAndUserService {
 	@Autowired
 	private StudyAndUserDAO sau_dao;
+	
+	@Autowired
+	private AdCommonDAO ac_dao;
+	
 	
 	public List<NewStudyInfo> searchNewStudy(NsBoardVO nb_vo) {
 		List<NewStudyInfo> list =new ArrayList<NewStudyInfo>();
@@ -43,12 +46,15 @@ public class StudyAndUserService {
 	
 	public boolean acceptStudy(AcceptVO a_vo) {
 		boolean acceptFlag= false;
+		boolean minsertFlag= false;
 		acceptFlag =sau_dao.updeteAccept(a_vo);
-		if(acceptFlag) {
+		minsertFlag= sau_dao.insertFirstMember(a_vo);
+		if(acceptFlag&&minsertFlag) {
 			System.out.println("¾Ë¶÷");
 		}
 		return acceptFlag;
 	}
+	
 	
 	public static void main(String[] args) {
 //		 StudyAndUserService saus= new StudyAndUserService();

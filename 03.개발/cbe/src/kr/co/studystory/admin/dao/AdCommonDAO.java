@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
+import kr.co.studystory.admin.vo.AlramVO;
 import kr.co.studystory.admin.vo.LoginVO;
 import kr.co.studystory.admin.vo.NewStudyBoardVO;
 import kr.co.studystory.admin.vo.NoticeBoardVO;
@@ -65,6 +66,19 @@ public class AdCommonDAO {
 		return login_flag;
 	}
 	
+	public boolean insertAlram(AlramVO a_vo) {
+		boolean alramFlag= false;
+		int cnt= 0;
+		SqlSession ss= AdCommonDAO.getInstance().getSessionFactory().openSession();
+		cnt= ss.insert("insertAlram",a_vo);
+		if(cnt >0) {
+			alramFlag=true;
+			ss.commit();
+		}
+		ss.close();
+		return alramFlag;
+	}
+	
 	/**
 	 *  한주 가입 유저 수
 	 * @return
@@ -112,6 +126,8 @@ public class AdCommonDAO {
 		ss.close();
 		return allStudy;
 	}
+	
+	
 	
 	/**
 	 * NewStudy totalcount

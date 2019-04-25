@@ -11,6 +11,11 @@
 	where id=#{id} and pass=#{pass}
 </select>
 
+<insert id="insertAlram" parameterType="kr.co.studystory.admin.vo.AlramVO">
+	insert into member(id,s_num)
+	values(#{id}, #{sNum})
+</insert>
+
 <select id="countWeekUser" resultType="Integer" >
 	select count(*)
 	from study
@@ -131,15 +136,20 @@
 
 <select id="nsDetail" resultMap="nsDetailResult" parameterType="String">
 	select id, category, loc, study_name, input_date, img, content
-	from STUDY
-	where s_num= #{sNum}
+	from study
+	where s_num= #{snum}
 </select>
 
 <update id="updateNsAccept" parameterType="kr.co.studystory.admin.vo.AcceptVO">
-	UPDATE study
-	SET accept_flag='Y'
-	WHERE s_num= #{sNum}
+	update study
+	set accept_flag='Y'
+	where s_num= #{sNum}
 </update>
+
+<insert id="insertNsMember" parameterType="kr.co.studystory.admin.vo.AcceptVO">
+	insert into member(id,s_num)
+	values(#{id}, #{sNum})
+</insert>
 
 	
 </mapper>

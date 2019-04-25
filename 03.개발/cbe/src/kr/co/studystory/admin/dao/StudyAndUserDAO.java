@@ -77,6 +77,21 @@ public class StudyAndUserDAO {
 		return acceptFlag;
 	}
 	
+	public boolean insertFirstMember(AcceptVO a_vo) {
+		boolean membInsertFlag = false; 
+		int cnt=0;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		cnt= ss.insert("insertNsMember", a_vo);
+		if(cnt>0) {
+			membInsertFlag=true;
+			ss.commit();
+		}
+		ss.close();
+		return membInsertFlag;
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
 		AcceptVO a_vo= new AcceptVO();
