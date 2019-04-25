@@ -1,5 +1,7 @@
 package kr.co.studystory.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -10,6 +12,9 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import kr.co.studystory.dao.CommonDAO;
 import kr.co.studystory.domain.LoginResult;
 import kr.co.studystory.domain.PrevProfile;
@@ -17,11 +22,12 @@ import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
 import kr.co.studystory.vo.FindPassVO;
-import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.LoginVO;
 import kr.co.studystory.vo.ModifiedPassVO;
 import kr.co.studystory.vo.ModifiedUserInfoVO;
 import kr.co.studystory.vo.NewUserVO;
+import kr.co.studystory.vo.OutVO;
+import kr.co.studystory.vo.ProfileImgVO;
 import kr.co.studystory.vo.ProfileVO;
 
 @Component
@@ -164,15 +170,57 @@ public class CommonService {
 	}
 	
 	/**
-	 * 새로운 이미지 업로드 메서드
+	 * 새로운 이미지 업로드 메서드, 업로드된 파일명 반환
 	 * by 영근 190423
 	 */
-	public void uploadNewImg(HttpServletRequest request) {
+	public String uploadNewImg(HttpServletRequest request) {
 		
+		int maxSize = 1024*1024*10;
+		String name = "";
+		
+		File uploadDir = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/profile_img");
+		
+		// 1. 생성 - 파일 업로드
+		MultipartRequest mr = null;
+		try {
+			mr = new MultipartRequest(request, uploadDir.getAbsolutePath(), 
+					maxSize, "UTF-8", new DefaultFileRenamePolicy());
+			
+			// param으로 받은 img(기존 파일)를 삭제
+			String prevImg = mr.getParameter("prevImg");
+
+			File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/profile_img/"
+					+prevImg);
+			
+			if (file.exists()) { // 파일이 존재하면 삭제
+				file.delete();
+			}
+			
+			// 2. 파라미터 처리
+			name = mr.getFilesystemName("upFile");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return name;
 	}
 	
 	/**
-	 * 새로운 입력정보로 프로필정보 변경
+	 * 프로필이미지 변경
+	 * by 영근 190423
+	 */
+	public boolean setProfileImg(ProfileImgVO pivo) {
+		boolean flag = false;
+		
+		if (c_dao.updateProfileImg(pivo)) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	/**
+	 * 새로운 입력정보(닉네임, 자기소개)로 프로필정보 변경
 	 * by 영근 190423
 	 */
 	public boolean setProfile(ProfileVO pv) {
@@ -223,11 +271,11 @@ public class CommonService {
 	 * 회원 탈퇴 처리
 	 * by 영근 190422
 	 */
-	public boolean setDeactivation(LeaveVO lvo) {
+	public boolean setDeactivation(OutVO ovo) {
 		boolean flag = false;
 		
-		if (c_dao.updateDeactivation(lvo)) {
-			c_dao.deleteStudyMember(lvo.getId());
+		if (c_dao.updateDeactivation(ovo)) {
+			c_dao.deleteStudyMember(ovo.getId());
 			flag = true;
 		}
 		

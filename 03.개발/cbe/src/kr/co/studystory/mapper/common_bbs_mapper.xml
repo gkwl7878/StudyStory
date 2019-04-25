@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.studystory.common_bbs">
+
+	<select id="selectTotalCnt" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM ${ tableName }
+		WHERE id=#{ id }
+	</select>
+
+	<select id="selectNewAlarms" resultType="kr.co.studystory.domain.NewAlarm" parameterType="String">
+		SELECT A_NUM, CATEGORY, SUBJECT, INPUT_DATE
+		FROM ( SELECT A_NUM, CATEGORY, SUBJECT, INPUT_DATE, ROW_NUMBER() OVER( ORDER BY INPUT_DATE DESC ) R_NUM
+		       FROM ALARM
+		       WHERE ID=#{ id } AND READ_FLAG ='N')
+		WHERE R_NUM BETWEEN 1 AND 3
+	</select>
+
+</mapper>
