@@ -42,7 +42,7 @@ public class StudyInfoController {
 	@RequestMapping(value = "/study_info/study_req_join.do", method = GET)
 	public String joinPage(String sNum, Model model) {
 		StudyInfoService sis = new StudyInfoService();
-		LeaderOfJoinDomain loj = sis.getLeaderOfJoin("s_000021");
+		LeaderOfJoinDomain loj = sis.getLeaderOfJoin(sNum);
 		model.addAttribute("leader", loj);
 		
 		System.out.println("///////////////////////" + loj.getStudyName());
