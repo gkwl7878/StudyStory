@@ -9,7 +9,7 @@
 <!-- 폰트 CSS -->
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
 
-<title>Bootstrap Template By Young</title>
+<title>스터디 스토리</title>
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;

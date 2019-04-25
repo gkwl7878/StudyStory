@@ -7,14 +7,23 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
 import kr.co.studystory.domain.LoginResult;
+import kr.co.studystory.domain.PrevProfile;
+import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.vo.ChangePassVO;
 import kr.co.studystory.vo.FindIdVO;
 import kr.co.studystory.vo.FindPassVO;
 import kr.co.studystory.vo.LoginVO;
+import kr.co.studystory.vo.ModifiedPassVO;
+import kr.co.studystory.vo.ModifiedUserInfoVO;
 import kr.co.studystory.vo.NewUserVO;
+import kr.co.studystory.vo.OutVO;
+import kr.co.studystory.vo.ProfileImgVO;
+import kr.co.studystory.vo.ProfileVO;
 
+@Component
 public class CommonDAO {
 	
 	private static CommonDAO c_dao;
@@ -28,7 +37,7 @@ public class CommonDAO {
 		return c_dao;
 	}
 	
-	public SqlSessionFactory getSqlSessionFactory() {
+	public synchronized SqlSessionFactory getSqlSessionFactory() {
 		SqlSessionFactory ssf = null;
 		
 		try {
@@ -52,18 +61,16 @@ public class CommonDAO {
 	public LoginResult selectLogin(LoginVO lvo) {
 		LoginResult lr = new LoginResult();
 		
-		System.out.println("======DAO lvo :"+ lvo.getId()+"/"+lvo.getPass());
 		
 		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
 		int cnt = ss.selectOne("login",lvo);
 		ss.close();
-		System.out.println("=============== cnt :: " + cnt);
 		if (cnt == 1) {
 			lr.setLogged(true);
 			lr.setMsg(null);
 		} else {
 			lr.setLogged(false);
-			lr.setMsg("로그인에 실패했습니다");
+			lr.setMsg("로그인에 실패했습니다. 입력 정보를 다시 확인해주세요");
 		}
 		
 		return lr;
@@ -84,8 +91,6 @@ public class CommonDAO {
 		if (selectResult == null) { // null이면 활동중인 유저 = true
 			flag = true;
 		}
-		
-		System.out.println("========= deactive flag : "+flag);
 		return flag;
 	}
 	
@@ -173,6 +178,10 @@ public class CommonDAO {
 		return id;
 	}
 	
+	/**
+	 * 비밀번호찾기 검증
+	 * by 영근 190422
+	 */
 	public boolean selectAnswer(FindPassVO fpvo) {
 		boolean flag = false;
 		
@@ -186,6 +195,10 @@ public class CommonDAO {
 		return flag; 
 	}
 	
+	/**
+	 * 새 비밀번호 설정
+	 * by 영근 190422 
+	 */
 	public boolean updatePass(ChangePassVO cpvo) {
 		boolean flag = false;
 		
@@ -200,8 +213,167 @@ public class CommonDAO {
 		return flag;
 	}
 	
-	public static void main(String[] args) {
+	/**
+	 * 회원정보 수정 전 기존정보 조회
+	 * by 영근 190422
+	 */
+	public PrevUserInfo selectPrevUserInfo(String id) {
+		PrevUserInfo pui = null;
 		
-		System.out.println(CommonDAO.getInstance().selectDeactivation("kim111"));
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		pui = ss.selectOne("selectPrevUserInfo", id);
+		ss.close();
+		
+		return pui;
 	}
+	
+	/**
+	 * 회원정보 수정
+	 * by 영근 190422
+	 */
+	public boolean updateUserInfo(ModifiedUserInfoVO muivo) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.update("updateUserInfo",muivo);
+		
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+
+		return flag;
+	}
+	
+	/**
+	 * 비밀번호 변경
+	 * by 영근 190422
+	 */
+	public boolean updateNewPass(ModifiedPassVO mpvo) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.update("updateNewPass", mpvo);
+		
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
+	/**
+	 * 회원탈퇴 처리
+	 * by 영근 190422
+	 */
+	public boolean updateDeactivation(OutVO ovo) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.update("updateDeactive", ovo);
+		
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
+	/**
+	 * 회원탈퇴 시 가입한 스터디, 신청한 스터디, 좋아하는 스터디 테이블에서 유저정보 삭제
+	 * by 영근 190422
+	 */
+	public void deleteStudyMember(String id) {
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		ss.delete("deleteMember", id);
+		ss.delete("deleteJoin", id);
+		ss.delete("deleteFav", id);
+		
+		ss.commit();
+		ss.close();
+	}
+	
+	/**
+	 * 이전 프로필 조회
+	 * by 영근 190423
+	 */
+	public PrevProfile selectProfile(String id) {
+		PrevProfile pp = null;
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		pp = ss.selectOne("selectPrevProfile", id);
+		ss.close();
+		
+		return pp;
+	}
+	
+	/**
+	 * 프로필 닉네임 수정 시 중복닉 조회
+	 * true면 중복
+	 * by 영근 190423
+	 */
+	public boolean selectDupNick(String nick) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.selectOne("selectDupNick",nick);
+		if (cnt == 1) {
+			flag = true; // true면 중복
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
+	/**
+	 * 유저 프로필(닉네임, 자기소개) 변경
+	 * by 영근 190423
+	 */
+	public boolean updateProfile(ProfileVO pv) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.update("updateProfile", pv);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
+	/**
+	 * 프로필 이미지 변경
+	 * by 영근 190423
+	 */
+	public boolean updateProfileImg(ProfileImgVO pivo) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.update("updateProfileImg", pivo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
+	/*public static void main(String[] args) {
+		
+		ProfileVO pv = new ProfileVO();
+		pv.setId("young333");
+		pv.setNick("오룡룡");
+		pv.setIntroduce("반갑습니다 낯선이여");
+		pv.setImg("무슨.jpg");
+		
+		System.out.println(CommonDAO.getInstance().updateProfile(pv));
+		
+	}*/
 }

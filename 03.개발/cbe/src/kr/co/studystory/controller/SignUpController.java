@@ -1,5 +1,6 @@
 package kr.co.studystory.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,9 @@ import org.json.simple.JSONObject;
 
 @Controller
 public class SignUpController {
+	
+	@Autowired
+	private CommonService cs;
 
 	@RequestMapping(value="/sign_up.do", method= { GET,POST })
 	public String signupForm() {
@@ -26,10 +30,7 @@ public class SignUpController {
 	@RequestMapping(value="/check_dup_id.do", method=GET)
 	public String checkDupId(String id) {
 		JSONObject json = null;
-		
-		CommonService cs = new CommonService();
 		json = cs.checkDupId(id);
-		
 		return  json.toJSONString();
 	}
 	
@@ -37,17 +38,12 @@ public class SignUpController {
 	@RequestMapping(value="/check_dup_email.do", method=GET)
 	public String checkDupEmail(String email) {
 		JSONObject json = null;
-		
-		CommonService cs = new CommonService();
 		json = cs.checkDupEmail(email);
-		
 		return  json.toJSONString();
 	}
 	
 	@RequestMapping(value="/sign_up_process.do", method=POST)
 	public String signUpProcess(NewUserVO nuvo, Model model) {
-		
-		CommonService cs = new CommonService();
 		
 		String url = "common/sign_up";
 		
@@ -63,8 +59,7 @@ public class SignUpController {
 	
 	@RequestMapping(value="/welcome.do", method=POST)
 	public String welcomePage(String name, Model model) {
-
-		CommonService cs = new CommonService();
+		
 		model.addAttribute("name", name);
 		
 		return "common/welcome";

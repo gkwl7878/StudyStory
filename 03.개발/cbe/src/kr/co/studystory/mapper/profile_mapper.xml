@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.studystory.profile">
+
+	<select id="selectPrevProfile" parameterType="String" resultType="kr.co.studystory.domain.PrevProfile">
+		SELECT nick, img, introduce
+		FROM user_table
+		WHERE id=#{ id }
+	</select>
+	
+	<select id="selectDupNick" parameterType="String" resultType="int">
+		SELECT count(*) cnt
+		FROM user_table
+		WHERE nick=#{ nick }
+	</select>
+	
+	<update id="updateProfileImg" parameterType="kr.co.studystory.vo.ProfileImgVO">
+		UPDATE user_table
+		SET	img=#{ img }
+		WHERE id=#{ id }
+	</update>
+	
+	<update id="updateProfile" parameterType="kr.co.studystory.vo.ProfileVO">
+		UPDATE user_table
+		SET	nick=#{ nick }, introduce=#{ introduce }
+		WHERE id=#{ id }
+	</update>
+</mapper>
