@@ -11,9 +11,9 @@
 	where id=#{id} and pass=#{pass}
 </select>
 
-<insert id="insertAlram" parameterType="kr.co.studystory.admin.vo.AlramVO">
-	insert into member(id,s_num)
-	values(#{id}, #{sNum})
+<insert id="insertAlarm" parameterType="kr.co.studystory.admin.vo.AlarmVO">
+	insert into alarm(a_num,category,subject,content,id)
+	values(a_code,#{category},#{subject},#{content},#{id})
 </insert>
 
 <select id="countWeekUser" resultType="Integer" >
@@ -41,7 +41,7 @@
 <select id="nsTotalCnt" resultType="Integer">
 	select count(*)
 	from study 
-	where accept_flag='N'
+	where accept_flag='N' or delete_flag='N'
 </select>
 
 <select id="uTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.UserBoardVO">
@@ -119,7 +119,7 @@
 		select s_num, id, study_name, category, loc, input_date,
 		row_number() over( order by input_date desc) r_num
 		from STUDY
-		where accept_flag='N'
+		where accept_flag='N' or delete_flag='N'
 	)
 	where r_num between #{begin} and #{end}
 </select>
@@ -150,6 +150,12 @@
 	insert into member(id,s_num)
 	values(#{id}, #{sNum})
 </insert>
+
+<update id="deleteNewStudy" parameterType="String">
+	update study
+	set delete_flag='Y'
+	where s_num= #{sNum}
+</update>
 
 	
 </mapper>

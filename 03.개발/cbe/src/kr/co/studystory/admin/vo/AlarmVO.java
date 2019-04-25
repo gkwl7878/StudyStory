@@ -1,6 +1,6 @@
 package kr.co.studystory.admin.vo;
 
-public class AlramVO {
+public class AlarmVO {
 	private String id,subject, category, content;
 
 	public String getId() {

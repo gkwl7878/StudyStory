@@ -90,13 +90,22 @@ public class StudyAndUserDAO {
 		return membInsertFlag;
 	}
 	
+	public boolean updateDeleteFlag(String sNum) {
+		boolean updateDeleteFlag = false; 
+		int cnt=0;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		cnt= ss.insert("deleteNewStudy", sNum);
+		if(cnt>0) {
+			updateDeleteFlag=true;
+			ss.commit();
+		}
+		ss.close();
+		return updateDeleteFlag;
+	}
 	
 	
 	public static void main(String[] args) {
 		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
-		AcceptVO a_vo= new AcceptVO();
-		a_vo.setsNum("s_000021");
-		System.out.println(sau_dao.updeteAccept(a_vo));
 	}
 	
 }

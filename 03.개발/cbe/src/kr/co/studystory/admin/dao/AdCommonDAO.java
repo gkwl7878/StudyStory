@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
-import kr.co.studystory.admin.vo.AlramVO;
+import kr.co.studystory.admin.vo.AlarmVO;
 import kr.co.studystory.admin.vo.LoginVO;
 import kr.co.studystory.admin.vo.NewStudyBoardVO;
 import kr.co.studystory.admin.vo.NoticeBoardVO;
@@ -66,17 +66,17 @@ public class AdCommonDAO {
 		return login_flag;
 	}
 	
-	public boolean insertAlram(AlramVO a_vo) {
-		boolean alramFlag= false;
+	public boolean insertAlarm(AlarmVO a_vo) {
+		boolean AlarmFlag= false;
 		int cnt= 0;
 		SqlSession ss= AdCommonDAO.getInstance().getSessionFactory().openSession();
-		cnt= ss.insert("insertAlram",a_vo);
+		cnt= ss.insert("insertAlarm",a_vo);
 		if(cnt >0) {
-			alramFlag=true;
+			AlarmFlag=true;
 			ss.commit();
 		}
 		ss.close();
-		return alramFlag;
+		return AlarmFlag;
 	}
 	
 	/**
@@ -188,9 +188,12 @@ public class AdCommonDAO {
 	
 	public static void main(String[] args) {
 		AdCommonDAO c_dao = new AdCommonDAO();
-		NoticeBoardVO nb_vo= new NoticeBoardVO();
-		nb_vo.setSearchWord("º£Å¸");
-		System.out.println(c_dao.selectNoticeTotal(nb_vo));
+		AlarmVO al_vo= new AlarmVO();
+		al_vo.setContent("test");
+		al_vo.setCategory("test");
+		al_vo.setId("vv11");
+		al_vo.setSubject("test");
+		System.out.println(c_dao.insertAlarm(al_vo));
 	}
 	
 	

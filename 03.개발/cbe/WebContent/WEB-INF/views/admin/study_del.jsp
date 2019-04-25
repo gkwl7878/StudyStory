@@ -29,12 +29,20 @@
 </head>
 
 <body>
-	<!-- navbar 시작 -->
-	<c:import url="/third_prj/admin/layout/navbar.jsp"></c:import>
-	<!-- navbar 끝 -->
 
+	<!-- navbar 시작 -->
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
+	<!-- navbar 끝 -->
+	
 	<!-- sidebar 시작 -->
-	<c:import url="/third_prj/admin/layout/sidebar.jsp"></c:import>
+			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
+				<c:param name="weekUser" value="${requestScope.weekUser}"></c:param>
+				<c:param name="weekStudy" value="${requestScope.weekStudy}"></c:param>
+				<c:param name="allUser" value="${requestScope.allUser}"></c:param>
+				<c:param name="allStudy" value="${requestScope.allStudy}"></c:param>
+			</c:import>
+			
+	<%-- <c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"></c:import> --%>
 	<!-- sidebar 끝 -->
 
 	<div id="wrap">
@@ -49,13 +57,13 @@
 			<hr color="gray">
 			<h5>모든 스터디 참여자에게 보여줄 삭제 사유를 입력하세요.</h5>
 			<br />
-			<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="내용을 입력해주세요.">
+			<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="내용을 입력해주세요." name="msg" >
 			<br />
 
 			<br />
 			<br />
 
-			<a class="btn btn-secondary btn-lg" href="#void" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-secondary btn-lg" href="#void" role="button">삭제</a>
+			<a class="btn btn-secondary btn-lg" href="ns_detail.do?sNum=${param.sNum}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-secondary btn-lg" href="study_del_proc.do?sNum=${param.sNum}&id=${param.id}" role="button">삭제</a>
 		</form>
 	</div>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

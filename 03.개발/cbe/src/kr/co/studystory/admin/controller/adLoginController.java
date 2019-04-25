@@ -1,5 +1,6 @@
 package kr.co.studystory.admin.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +36,11 @@ public class adLoginController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/admin/login_proc.do", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/login_proc.do", method=RequestMethod.POST)
 	public String loginProcess(LoginVO l_vo, Model model) {
 		String url= "admin/login";
 		boolean loginFlag=false;
+		boolean loginSession=false;
 		UserAndStudy uas= new UserAndStudy();
 		uas=cms.getCountUserAndStudy();
 		
@@ -50,10 +52,10 @@ public class adLoginController {
 		int allStudy= uas.getAllStudy();
 		
 		if(loginFlag) {
-			model.addAttribute("loginSession",true);
-			url= "redirect:/admin/new_study.do";
+			loginSession=true;
+			url= "forward:new_study.do";
 		}
-		
+		model.addAttribute("loginSession",loginSession);
 		model.addAttribute("loginFlag",loginFlag);
 		model.addAttribute("weekUser",weekUser);
 		model.addAttribute("weekStudy",weekStudy);
@@ -73,7 +75,7 @@ public class adLoginController {
 		ss.setComplete();
 		logoutFlag=true;
 		model.addAttribute("logoutFlag",logoutFlag);
-		return "admin/login";
+		return "admin/logout";
 	}
 	
 	

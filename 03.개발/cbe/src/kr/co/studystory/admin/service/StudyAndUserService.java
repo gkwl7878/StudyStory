@@ -12,6 +12,7 @@ import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
 import kr.co.studystory.admin.vo.AcceptVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
+import kr.co.studystory.admin.vo.RefuseVO;
 
 @Component
 public class StudyAndUserService {
@@ -46,15 +47,17 @@ public class StudyAndUserService {
 	
 	public boolean acceptStudy(AcceptVO a_vo) {
 		boolean acceptFlag= false;
-		boolean minsertFlag= false;
+		boolean mInsertFlag= false;
 		acceptFlag =sau_dao.updeteAccept(a_vo);
-		minsertFlag= sau_dao.insertFirstMember(a_vo);
-		if(acceptFlag&&minsertFlag) {
-			System.out.println("¾Ë¶÷");
-		}
+		mInsertFlag= sau_dao.insertFirstMember(a_vo);
 		return acceptFlag;
 	}
 	
+	public boolean refuseStudy(RefuseVO r_vo) {
+		boolean deleteFlag= false;
+		deleteFlag =sau_dao.updateDeleteFlag(r_vo.getsNum());
+		return deleteFlag;
+	}
 	
 	public static void main(String[] args) {
 //		 StudyAndUserService saus= new StudyAndUserService();

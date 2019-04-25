@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.dao.AdCommonDAO;
 import kr.co.studystory.admin.domain.UserAndStudy;
-import kr.co.studystory.admin.vo.AlramVO;
+import kr.co.studystory.admin.vo.AlarmVO;
 import kr.co.studystory.admin.vo.LoginVO;
 import kr.co.studystory.admin.vo.NewStudyBoardVO;
 import kr.co.studystory.admin.vo.NoticeBoardVO;
@@ -33,8 +33,8 @@ public class CommonMngService {
 	 * @param a_vo
 	 * @return
 	 */
-	public boolean sendAlram(AlramVO a_vo) {
-		boolean alramFlag=c_dao.insertAlram(a_vo);
+	public boolean sendAlarm(AlarmVO a_vo) {
+		boolean alramFlag=c_dao.insertAlarm(a_vo);
 		return alramFlag;
 	}
 

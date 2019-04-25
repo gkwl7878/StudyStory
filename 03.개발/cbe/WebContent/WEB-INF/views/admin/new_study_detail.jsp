@@ -33,9 +33,15 @@
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script type="text/javascript">
 	$(function() {
-		if("${acceptFlag}"=="true"){
-			alert("수락되었습니다.");
-		}
+		
+		<c:if test="${ acceptFlag }">
+			alert(${param.sNum}+"번 스터디가 수락되었습니다.");
+			location.href="new_study.do";
+		</c:if>
+		
+		<c:if test="${ !loginSession }">
+		location.replace("login.do");
+		</c:if>
 	});//ready
 </script>
 
@@ -133,8 +139,8 @@
 			<a class="btn btn-secondary btn" href="new_study.do?sNum=${param.sNum}&acceptFlag=${acceptFlag}"  role="button" style="margin-left: 180px;">목록으로</a> 
 			<!--알람: id,subject, category, content  -->
 			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}
-				&acceptFlag=${acceptFlag}&id=${requestScope.id }" role="button" style="margin-left: 10px;">수락</a> 
-			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">거절</a>
+				&id=${requestScope.id }" role="button" style="margin-left: 10px;">수락</a> 
+			<a class="btn btn-secondary btn" href="study_del.do?sNum=${param.sNum}&id=${requestScope.id }" role="button" style="margin-left: 10px;">거절</a>
 		</div>
 	</div>
 

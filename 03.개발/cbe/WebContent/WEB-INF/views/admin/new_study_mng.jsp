@@ -15,14 +15,27 @@
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 <script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script type="text/javascript">
 	$(function() {
-		if("${loginSession}"!=""||){
-			window.location.href = "/admin/login.do";
-		}
+		
+		<c:if test="${ !loginSession }">
+			location.replace("login.do");
+		</c:if>
+		
+		<c:if test="${ acceptFlag }">
+			alert("정상적으로 수락처리 되었습니다");
+		</c:if>
+		
+		<c:if test="${ deleteFlag }">
+			alert("정상적으로 거절처리 되었습니다");
+		</c:if>
+		/* var loginSession= "${loginSession}";
+		if(loginSession==""){
+			window.location.href = "login.do";
+		} */
 	});//ready
 </script>
 </head>
