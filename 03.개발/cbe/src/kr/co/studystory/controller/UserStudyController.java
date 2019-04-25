@@ -3,11 +3,15 @@ package kr.co.studystory.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import kr.co.studystory.service.StudyGroupService;
@@ -26,9 +30,18 @@ public class UserStudyController {
 		return "study_group/study_create";
 	}//createStudyPage
 	
-	public String checkDupStudyName(String id) {
+	@ResponseBody
+	@RequestMapping(value="/check_dup_study_name.do", method=GET)
+	public String checkDupStudyName(String studyName) {
+		JSONObject json=new JSONObject();
 		
-		return "";
+		if(sgs.checkDupStudyName(studyName)) {
+			json.put("dupFlag", true);
+		}else {
+			json.put("dupFlag", false);
+			
+		}
+		return json.toJSONString();
 	}//checkDupStudyName
 	
 	@RequestMapping(value="study_group/create_study_process.do", method=GET)
@@ -53,7 +66,7 @@ public class UserStudyController {
 		
 	}//createStudyProcess
 	
-	@RequestMapping(value="study_group/request_study.do", method=GET )
+	@RequestMapping(value="study_group/request_study.do", method=RequestMethod.POST )
 	public String RequestStudyPage() {
 		return "study_group/study_create_request";
 	}//createStudyPage

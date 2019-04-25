@@ -45,7 +45,13 @@
 
 <script type="text/javascript">
 	$(function() {
+
+		var nameFlag= false;
+		
 		$("#request").click(function() {
+		
+			var id=$("#name").val()
+	
 			if ($("#subject").val() == "") {
 				alert("주제를 선택해주세요.");
 				$("#subject").focus();
@@ -66,6 +72,25 @@
 				$("#detail").focus();
 				return;
 			}//end if
+			
+			$.ajax({
+				url:"/check_dup_study_name.do",//????
+				data:"name="+name,
+				dataType:"json",
+				type:"get",
+				 error:function(xhr) {
+                     alert("문제발생 "+xhr.status);
+               },
+               success:function(json_obj){
+              	 if(json_obj.dupFlag) {
+              		 $("#dupStudyNameMsg").html("<span style='color:#FF2626'>사용중인 스터디명입니다.</span>");
+              		nameFlag = false;
+              	 } else {
+              		 $("#dupStudyNameMsg").html("<span style='color:##0000FF'>사용가능한 스터디명입니다</span>");
+              		nameFlag = true;
+              	 }
+               }
+			});//ajax
 
 		});//click
 	});//ready
@@ -94,7 +119,7 @@
 	<!-- header -->
 	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
-<form action="/study_group/createStudy.do">	
+<form action="/request_study.do" method="post" enctype="multipart/form-data">	
 	<div id="wrap">
 
 		 <!-- 점보트론 : 전광판 -->
@@ -137,6 +162,7 @@
 			<div class="form-group" style="margin-bottom: 70px;">
 				<img alt="" src="http://localhost:8080/third_prj/resources/images/name.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label class="font30">스터디의 <strong>이름</strong>을 정해주세요
 				</label> <input type="text" class="form-control" id="name" placeholder="스터디의 이름을 입력해주세요(24자까지 입력가능합니다.)" id="name">
+				<span id="dupStudyNameMsg"></span>
 			</div>
 
 			<div class="form-group" style="margin-bottom: 70px;">
