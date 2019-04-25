@@ -4,20 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="kr.co.studystory.study_notice_mapper">
-<!-- 여기는 아마도 틀린 것일것. 아래쪽이 맞는것. 도메인과 컬럼의 이름이 달라서.. -->
-<resultMap type="kr.co.studystory.domain.StudyNotice" id="studyNoticeResult">
-	<result column="snNum" property="snNum"/>
-	<result column="subject" property="subject"/>
-	<result column="img" property="img"/>
-	<result column="inputDate" property="inputDate"/>
-</resultMap>
 
+<!--컬럼과 도메인의 값이 다르기 때문에 맞춰줌  -->
 <resultMap type="kr.co.studystory.domain.StudyNotice" id="snList">
 	<result column="sn_num" property="snNum"/>
 	<result column="img" property="img"/>
 	<result column="subject" property="subject"/>
 	<result column="input_date" property="inputDate"/>
 </resultMap>
+
 <select id="studyNoticeList" resultMap="snList" parameterType="String">
 select img, sn_num, subject, input_date
 from (select s.s_num, ut.img
@@ -27,8 +22,13 @@ where sn.s_num = #{snNum}
 order by input_date desc
 </select>
 
-<select id="">
-
+<select id="studyDetailNoticeList" resultMap="snDtList" parameterType="">
+	select sn_num, subject, content, meeting_info, addr, input_date, nick, img
+from (select s.s_num, ut.nick, ut.img
+	  from study s, user_table ut
+	  where s_num='s_000041' and s.id=ut.id) ss, study_notice sn
+where sn.sn_num= 'sn_000087';
+	
 </select>
 
 
