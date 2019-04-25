@@ -73,21 +73,9 @@ public class UserStudyController {
 		return "study_group/my_study";
 	}//myStudyPage
 	
-	public String leaveStudyPage(String ) {
+/*	public String leaveStudyPage(String ) {
 		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}*/
 }//class
 
 
