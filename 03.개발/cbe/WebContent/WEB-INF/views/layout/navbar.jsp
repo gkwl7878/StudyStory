@@ -1,8 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		
+		var getAlarmFlag = false;
+		
 		$("#showNewAlarm").click(function() {
-			alert("이게 되나?");
+			if (!getAlarmFlag) {
+				$.ajax({
+					url:"../new_alarm.do",
+					dataType:"json",
+					async:"true",
+					error:function(xhr) {
+						alert("에러코드 : "+xhr+status+", 에러 메시지 : "+xhr.statusText);
+					},
+					success:function(jsonArr) {
+						console.log(jsonArr);
+						var jsonArrLength = jsonArr.length;
+						if (jsonArrLength == 0) {
+							alert("새로운 알림이 없습니다.");
+						} else {
+							for(var i=0; i<jsonArrLength; i++){
+								$("#alarmMenu").append("<a class='dropdown-item' href='#'>["
+										+jsonArr[i].category+"] "+jsonArr[i].subject+" "+jsonArr[i].input_date
+										+"<input type=hidden value='"+jsonArr[i].a_num+"'/></a>");
+							}
+							$("#alarmMenu").append("<a class='dropdown-item' href='#'>더보기</a>");
+							getAlarmFlag = true;
+						}
+					}
+				});//ajax
+			}
 		});
 	});
 </script>
@@ -41,11 +69,7 @@
 					<a class="nav-link" href="#" id="my_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<img class="rounded-circle" src="/third_prj/resources/images/nav_icon_alarm.png" id="showNewAlarm" style="width: 36px; height: 36px;">
 					</a>
-					<div class="dropdown-menu" aria-labelledby="notice">
-						<a class="dropdown-item" href="#">[공지사항] 안녕하십니까...</a>
-						<a class="dropdown-item" href="#">[스터디] 가입이되었습니다...</a>
-						<a class="dropdown-item" href="#">[공지사항] 안녕하십니까...</a>
-						<a class="dropdown-item" href="#">더보기</a>
+					<div class="dropdown-menu" aria-labelledby="notice" id="alarmMenu">
 					</div>
 				</li>
 				<li class="nav-item dropdown">

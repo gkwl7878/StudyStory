@@ -2,6 +2,7 @@ package kr.co.studystory.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,16 +26,33 @@ public class AlarmController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value="",method=GET)
+	@RequestMapping(value="/new_alarm.do",method=GET, produces="text/plain;charset=UTF-8")
 	public String navAlarm(HttpSession session) {
 		
-		JSONObject json = new JSONObject();
+		JSONArray jsonArr = new JSONArray();
 		
+		JSONObject json = null;
+		NewAlarm na = null;
 		List<NewAlarm> list = cbs.getNewAlarms((String)session.getAttribute("id"));
-		json.put("newAlarm", list);
-		// 이걸 제이슨으로 해야하나? model에 담아서 반환해야하는거 아닐까?? ㅠㅠ
 		
-		return json.toJSONString();
+		System.out.println((String)session.getAttribute("id"));
+		System.out.println(list);
+		
+		for(int i=0; i<list.size(); i++) {
+			na = list.get(i);
+			json = new JSONObject();
+			// a_num, category, subject, input_date;
+			json.put("a_num", na.getA_num());
+			json.put("category", na.getCategory());
+			json.put("subject", na.getSubject());
+			json.put("input_date", na.getInput_date());
+			
+			jsonArr.add(json);
+		}
+		
+		System.out.println(jsonArr.toJSONString());
+		
+		return jsonArr.toJSONString();
 	}
 	
 }
