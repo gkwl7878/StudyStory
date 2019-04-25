@@ -44,11 +44,6 @@ public class StudyInfoController {
 		StudyInfoService sis = new StudyInfoService();
 		LeaderOfJoinDomain loj = sis.getLeaderOfJoin(sNum);
 		model.addAttribute("leader", loj);
-		
-		System.out.println("///////////////////////" + loj.getStudyName());
-		System.out.println("///////////////////////" + loj.getNick());
-		System.out.println("///////////////////////" + loj.getLeaderImg());
-		
 		return "study_info/study_join_req";
 	}// joinPage()
 

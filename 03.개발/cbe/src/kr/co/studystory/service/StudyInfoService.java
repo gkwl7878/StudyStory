@@ -79,8 +79,8 @@ public class StudyInfoService {
 	/************ 이하 메인 메서드 : 단위 테스트 ************/
 	// 단위 테스트 main.
 	public static void main(String[] args) {
-		StudyInfoService sInfoService = new StudyInfoService();
-		LeaderOfJoinDomain inst = sInfoService.getLeaderOfJoin("s_000021");
+//		StudyInfoService sInfoService = new StudyInfoService();
+//		LeaderOfJoinDomain inst = sInfoService.getLeaderOfJoin("s_000021");
 	}// main
 
 }// class

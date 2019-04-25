@@ -24,5 +24,11 @@
 		WHERE ( STD.ID=UT.ID )
 	</select>
 	<!-- 메인 페이지 썸네일 조회. -->
+	
+	<!-- '좋아요' 버튼 (관심 스터디) 인서트하기 -->
+	<insert id="insertFavStudy">
+		insert into fav_study
+		values()
+	</insert>
 
 </mapper>

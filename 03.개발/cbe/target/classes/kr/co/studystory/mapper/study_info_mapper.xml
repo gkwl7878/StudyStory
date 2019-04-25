@@ -30,8 +30,6 @@
 	</select>
 	<!-- 스터디 상세 정보의 댓글 조회 -->
 	
-	
-	
 	<!-- LeaderOfJoinDomain 조회. : leaderImg, nick, studyName -->
 	<select id="selectLeaderOfJoin" resultType="kr.co.studystory.domain.LeaderOfJoinDomain" parameterType="String">
 		SELECT UT.IMG leaderImg, UT.NICK nick, STD.STUDY_NAME studyName
