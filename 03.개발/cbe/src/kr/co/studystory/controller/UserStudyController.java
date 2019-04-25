@@ -20,6 +20,7 @@ public class UserStudyController {
 	@Autowired
 	private StudyGroupService sgs;
 	
+	//새 스터디 개설하기 
 	@RequestMapping(value="study_group/create_study.do", method=GET )
 	public String createStudyPage() {
 		return "study_group/study_create";
@@ -57,7 +58,7 @@ public class UserStudyController {
 		return "study_group/study_create_request";
 	}//createStudyPage
 	
-	
+	//내 스터디 수정하기
 	@RequestMapping(value="study_group/modify_study.do", method=GET )
 	public String modifyStudyPage() {
 		return "study_group/study_modify";
@@ -70,6 +71,10 @@ public class UserStudyController {
 		c_vo.setId(id);
 		
 		return "study_group/my_study";
+	}//myStudyPage
+	
+	public String leaveStudyPage(String ) {
+		
 	}
 	
 	
