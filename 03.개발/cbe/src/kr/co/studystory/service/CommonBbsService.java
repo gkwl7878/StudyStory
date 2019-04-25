@@ -6,23 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.dao.CommonBbsDAO;
+import kr.co.studystory.domain.Alarm;
 import kr.co.studystory.domain.NewAlarm;
-import kr.co.studystory.vo.AlaramOrQuestionVO;
+import kr.co.studystory.vo.AlarmBbsVO;
 
 @Component
 public class CommonBbsService {
 
 	@Autowired
 	private CommonBbsDAO cb_dao;
-	
-	/**
-	 * 알람, 문의사항 전체 게시글수를 반환하는 메서드
-	 * by 영근 190424
-	 */
-	public int getTotalCnt(AlaramOrQuestionVO aoqvo) {
-		int cnt = cb_dao.selectTotalCnt(aoqvo);
-		return cnt;
-	}
 	
 	/**
 	 * 10개의 게시글을 한 페이지에 보여줄 것
@@ -95,5 +87,20 @@ public class CommonBbsService {
 		return cb_dao.selectNewAlarms(id);
 	}
 	
+	/**
+	 * 해당 유저의 전체 알람수 반환
+	 * by 영근 190425
+	 */
+	public int getAlarmTotal(String id) {
+		return cb_dao.selectAlarmTotal(id);
+	}
+	
+	/**
+	 * 알람 리스트 조회 후 반환
+	 * by 영근 190425
+	 */
+	public List<Alarm> getAlarms(AlarmBbsVO abv) {
+		return cb_dao.selectAlarms(abv);
+	}
 	
 }

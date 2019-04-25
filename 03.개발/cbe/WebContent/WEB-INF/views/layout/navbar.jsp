@@ -18,6 +18,8 @@
 						console.log(jsonArr);
 						var jsonArrLength = jsonArr.length;
 						if (jsonArrLength == 0) {
+							$("#alarmMenu").append("<a class='dropdown-item' href='../common_bbs/alarm.do'>더보기</a>");
+							getAlarmFlag = true;
 							alert("새로운 알림이 없습니다.");
 						} else {
 							for(var i=0; i<jsonArrLength; i++){
@@ -25,7 +27,7 @@
 										+jsonArr[i].category+"] "+jsonArr[i].subject+" "+jsonArr[i].input_date
 										+"<input type=hidden value='"+jsonArr[i].a_num+"'/></a>");
 							}
-							$("#alarmMenu").append("<a class='dropdown-item' href='#'>더보기</a>");
+							$("#alarmMenu").append("<a class='dropdown-item' href='../common_bbs/alarm.do'>더보기</a>");
 							getAlarmFlag = true;
 						}
 					}
@@ -80,7 +82,7 @@
 						<a class="dropdown-item" href="#">내 스터디</a>
 						<a class="dropdown-item" href="#">내가 만든 스터디</a>
 						<a class="dropdown-item" href="#">관심 스터디 보기</a>
-						<a class="dropdown-item" href="#">알림보기</a>
+						<a class="dropdown-item" href="../common_bbs/alarm.do">알림보기</a>
 						<a class="dropdown-item" href="../common/profile.do">프로필 관리</a>
 						<a class="dropdown-item" href="../common/user_modify_menu.do">회원정보 관리</a>
 						<a class="dropdown-item" href="../logout.do">로그아웃</a>

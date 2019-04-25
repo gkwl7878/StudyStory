@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.studystory.domain.Alarm;
 import kr.co.studystory.domain.NewAlarm;
 import kr.co.studystory.service.CommonBbsService;
+import kr.co.studystory.vo.AlarmBbsVO;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -54,5 +56,54 @@ public class AlarmController {
 		
 		return jsonArr.toJSONString();
 	}
+	
+	@RequestMapping(value="common_bbs/alarm.do", method=GET)
+	public String alarmBbs(AlarmBbsVO abvo, HttpSession session, Model model) {
+		
+		if(abvo.getCurrPage() == 0) {
+			abvo.setCurrPage(1);
+		}
+		
+		String id = (String)session.getAttribute("id");
+		
+		int currPage = abvo.getCurrPage();
+		
+		int totalCnt = cbs.getAlarmTotal(id);
+		int begin = cbs.beginNum(currPage);
+		int end = cbs.endNum(begin);
+		
+		int pageScale = cbs.pageScale();
+		
+		abvo.setBegin(begin);
+		abvo.setEnd(end);
+		
+		List<Alarm> alarmList = cbs.getAlarms(abvo);
+		
+		int totalPage = cbs.getTotalPage(totalCnt);
+		int pageIndexNum = cbs.pageIndexNum();
+		int startPage = cbs.startPage(currPage, pageIndexNum);
+		int endPage = cbs.endPage(startPage, pageIndexNum, totalPage);
+		
+		model.addAttribute("forwardFlag", false);
+		model.addAttribute("backwardFlag", false);
+		
+		if (currPage > pageIndexNum) {
+			model.addAttribute("forwardFlag", true);
+		}
+		
+		if (totalPage > endPage) {
+			model.addAttribute("backwardFlag", true);
+		}
+		
+		model.addAttribute("pageScale", pageScale);
+		model.addAttribute("totalCnt", totalCnt);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("currPage", currPage);
+		model.addAttribute("alarmList", alarmList);
+		
+		return "common_bbs/alarm_list";
+	}
+	
 	
 }

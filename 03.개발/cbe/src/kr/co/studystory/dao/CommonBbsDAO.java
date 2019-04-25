@@ -14,24 +14,11 @@ import kr.co.studystory.domain.Alarm;
 import kr.co.studystory.domain.DetailAlarm;
 import kr.co.studystory.domain.DetailNotice;
 import kr.co.studystory.domain.DetailQuestion;
-import kr.co.studystory.domain.LoginResult;
 import kr.co.studystory.domain.MyQuestion;
 import kr.co.studystory.domain.NewAlarm;
 import kr.co.studystory.domain.Notice;
-import kr.co.studystory.domain.PrevProfile;
-import kr.co.studystory.domain.PrevUserInfo;
-import kr.co.studystory.vo.AlaramOrQuestionVO;
 import kr.co.studystory.vo.AlarmBbsVO;
-import kr.co.studystory.vo.ChangePassVO;
-import kr.co.studystory.vo.FindIdVO;
-import kr.co.studystory.vo.FindPassVO;
-import kr.co.studystory.vo.LoginVO;
-import kr.co.studystory.vo.ModifiedPassVO;
-import kr.co.studystory.vo.ModifiedUserInfoVO;
-import kr.co.studystory.vo.NewUserVO;
 import kr.co.studystory.vo.NoticeBbsVO;
-import kr.co.studystory.vo.OutVO;
-import kr.co.studystory.vo.ProfileVO;
 import kr.co.studystory.vo.QuestionBbsVO;
 import kr.co.studystory.vo.QuestionVO;
 
@@ -67,19 +54,6 @@ public class CommonBbsDAO {
 	}
 	
 	/**
-	 * 알림과 문의사항 게시글 수를 반환하는 메서드
-	 * by 영근 190424
-	 */
-	public int selectTotalCnt(AlaramOrQuestionVO aoqvo) {
-		int totalCnt = 0;
-		
-		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
-		totalCnt = ss.selectOne("selectTotalCnt", aoqvo);
-		
-		return totalCnt;
-	}
-	
-	/**
 	 * 새 알람(네비에 있는) 눌렀을 때 안읽은 알람을 조회하는 메서드
 	 * by 영근 190425
 	 */
@@ -100,6 +74,10 @@ public class CommonBbsDAO {
 	public int selectAlarmTotal(String id) {
 		int alarmTotal = 0;
 		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		ss.selectOne("selectAlarmTotal", id);
+		ss.close();
+		
 		return alarmTotal;
 	}
 	
@@ -109,6 +87,10 @@ public class CommonBbsDAO {
 	 */
 	public List<Alarm> selectAlarms(AlarmBbsVO abv) {
 		List<Alarm> list = null;
+		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		list = ss.selectList("selectAlarmBbs", abv);
+		ss.close();
 		
 		return list;
 	}
