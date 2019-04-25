@@ -24,11 +24,12 @@
 		WHERE ( STD.ID=UT.ID )
 	</select>
 	<!-- 메인 페이지 썸네일 조회. -->
-	
-	<!-- '좋아요' 버튼 (관심 스터디) 인서트하기 -->
-	<insert id="insertFavStudy">
-		insert into fav_study
-		values()
-	</insert>
+
+	<!-- 내 관심 스터디 조회. -->
+	<select id="selectFavStudy" resultMap="ThumbnailDomain" parameterType="String">
+		SELECT  FSTD.ID, STD.S_NUM, STD.STUDY_NAME, STD.LOC, STD.CATEGORY, STD.IMG, STD.RECRUITMENT, TO_CHAR(STD.INPUT_DATE, 'YYYY/MM/DD') INPUT_DATE, UT.NICK, UT.IMG USERIMG
+		FROM STUDY STD, USER_TABLE UT, FAV_STUDY FSTD
+		WHERE ( STD.S_NUM=FSTD.S_NUM ) and ( STD.ID=UT.ID ) and FSTD.ID = #{ my_id }
+	</select>
 
 </mapper>

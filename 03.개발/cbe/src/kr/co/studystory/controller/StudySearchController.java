@@ -4,12 +4,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.studystory.domain.ThumbnailDomain;
 import kr.co.studystory.service.StudyInfoService;
+
 /**
  * 
  * 메인 페이지, 검색 결과, 내가 좋아하는 스터디 페이지로 이동하는 Controller 클래스.
@@ -26,9 +29,8 @@ public class StudySearchController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/main/main.do", method = GET)
+	@RequestMapping(value = "/study_info/main.do", method = GET)
 	public String mainPage(Model model) {
-
 		StudyInfoService sis = new StudyInfoService();
 		// 썸네일 리스트 생성.
 		List<ThumbnailDomain> list = sis.getThumbnailList();
@@ -45,7 +47,7 @@ public class StudySearchController {
 	 */
 	@RequestMapping(value = "search/search.do", method = GET)
 	public String conditionSearchPage(Model model) {
-		
+
 		StudyInfoService sis = new StudyInfoService();
 		// 썸네일 리스트 생성.
 		List<ThumbnailDomain> list = sis.getThumbnailList();
@@ -61,17 +63,20 @@ public class StudySearchController {
 	 * @return
 	 */
 	@RequestMapping(value = "study_info/show_interest_study.do", method = GET)
-	public String studyLikedPage(Model model) {
-		
+	public String studyLikedPage(Model model, HttpSession session) {
+		String my_id = (String) session.getAttribute("id");
+
 		StudyInfoService sis = new StudyInfoService();
+
 		// 썸네일 리스트 생성.
-		List<ThumbnailDomain> list = sis.getThumbnailList();
+		List<ThumbnailDomain> list = sis.getMyInterestStudy(my_id);
+
 		// model 객체에 값 저장.
 		model.addAttribute("thumbnail_list", list);
 
 		return "study_info/show_interest_study";
 	}// studyLikedPage
-	
+
 	public String likeOrDislikeProcess() {
 
 		return "";

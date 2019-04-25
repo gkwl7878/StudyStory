@@ -135,10 +135,25 @@ public class StudyInfoDAO {
 		return loj;
 	}// selectLeaderOfJoin
 
+	/**
+	 * 내 관심 스터디 썸네일 조회.
+	 * 
+	 * @param my_id
+	 * @return List<ThumbnailDomain>
+	 */
+	public List<ThumbnailDomain> selectMyFavStudy(String my_id) {
+		List<ThumbnailDomain> list = null;
+		SqlSession ss = getSessionFatory().openSession();
+		list = ss.selectList("selectFavStudy", my_id);
+		ss.close();
+		return list;
+	}// selectMyFavStudy
+
 	////////////////// 단위 테스트
 	public static void main(String[] args) {
-		LeaderOfJoinDomain loj = StudyInfoDAO.getInstance().selectLeaderOfJoin("s_000021");
-		System.out.println(loj);
+		List<ThumbnailDomain> list = null;
+		list = StudyInfoDAO.getInstance().selectMyFavStudy("gohome1");
+		System.out.println(list);
 	}// main
 
 }// class

@@ -30,11 +30,12 @@
 	</select>
 	<!-- 스터디 상세 정보의 댓글 조회 -->
 	
-	<!-- LeaderOfJoinDomain 조회. : leaderImg, nick, studyName -->
+	<!-- 스터디 참여하기 페이지의 기본 정보 조회. -->
 	<select id="selectLeaderOfJoin" resultType="kr.co.studystory.domain.LeaderOfJoinDomain" parameterType="String">
 		SELECT UT.IMG leaderImg, UT.NICK nick, STD.STUDY_NAME studyName
 		FROM USER_TABLE UT, STUDY STD
 		WHERE UT.ID = STD.ID AND STD.S_NUM = #{SNUM}
 	</select>
+	<!-- 스터디 참여하기 페이지의 기본 정보 조회. -->
 	
 </mapper>

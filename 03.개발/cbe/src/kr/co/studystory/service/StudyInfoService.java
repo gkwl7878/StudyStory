@@ -76,11 +76,34 @@ public class StudyInfoService {
 		return loj;
 	}// getLeaderOfJoin
 
+	/**
+	 * 내 관심 스터디 리스트 얻기.
+	 * 
+	 * @param my_id
+	 * @return List<ThumbnailDomain>
+	 */
+	public List<ThumbnailDomain> getMyInterestStudy(String my_id) {
+		List<ThumbnailDomain> list = null;
+		list = si_dao.selectMyFavStudy(my_id);
+
+		// 썸네일의 nick의 길이가 3을 넘어가면 "..." 처리.
+		String changedNick = "";
+		for (ThumbnailDomain td : list) {
+			if (td.getNick().length() > 3) {
+				changedNick = td.getNick().substring(0, 3) + "...";
+				td.setNick(changedNick);
+			} // end if
+		} // end for
+
+		return list;
+	}// getMyInterestStudy
+
 	/************ 이하 메인 메서드 : 단위 테스트 ************/
 	// 단위 테스트 main.
 	public static void main(String[] args) {
-//		StudyInfoService sInfoService = new StudyInfoService();
-//		LeaderOfJoinDomain inst = sInfoService.getLeaderOfJoin("s_000021");
+		StudyInfoService sis = new StudyInfoService();
+		List<ThumbnailDomain> list = sis.getMyInterestStudy("Dkfkfl");
+		System.out.println(list);
 	}// main
 
 }// class

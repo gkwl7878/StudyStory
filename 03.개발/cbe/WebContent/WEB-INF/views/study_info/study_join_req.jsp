@@ -108,7 +108,7 @@ div {
 				</table>
 
 				<h2 align="center" style="margin-top: 30px;">
-					<strong>김신규</strong>님 !
+					<strong>${ my_nick }</strong>님 !
 				</h2>
 				<br />
 				<h4 align="center">모임이 당신을 궁금해합니다!</h4>
@@ -116,16 +116,17 @@ div {
 				<div class="info">자기소개를 부탁드립니다.</div>
 
 
-				<textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="자기소개는 100자 이상 입력해주세요.";></textarea>
+				<textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="자기소개는 100자 이하로 입력해주세요."></textarea>
 
 				<div class="info">이 모임에 지원하게된 동기가 무엇인가요?</div>
 
-				<textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="지원동기는 100자 이상 입력해주세요.";></textarea>
+				<textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="지원동기는 100자 이하로 입력해주세요."></textarea>
 
 
 			</div>
 			<div>
-				<a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 50%; margin-top: 15px">돌아가기</a> <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 10px; margin-top: 15px">참여하기</a>
+				<a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 50%; margin-top: 15px">돌아가기</a> 
+				<a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 10px; margin-top: 15px">참여하기</a>
 			</div>
 		</form>
 	</div>

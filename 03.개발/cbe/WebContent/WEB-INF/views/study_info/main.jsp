@@ -9,6 +9,11 @@
 <!-- 폰트 CSS -->
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
 
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
+<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
+
 <title>스터디 스토리</title>
 <style>
 .bd-placeholder-img {
@@ -39,7 +44,8 @@
 <!-- Custom styles for this template -->
 <link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 
-<!-- 동작 -->
+<!-- CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 	}); // ready
@@ -72,9 +78,7 @@
 							<div class="card mb-4 shadow-sm">
 
 								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-								<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }">
-								 <!-- 썸네일 스터디 이미지 -->
-								 <img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }" />
+								<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }" />
 									<div class="card-body text-center p-3">
 										<div class="d-flex justify-content-end align-items-center mb-3">
 											<div class="mr-5">
@@ -134,10 +138,5 @@
 	<!-- footer -->
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
-
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
