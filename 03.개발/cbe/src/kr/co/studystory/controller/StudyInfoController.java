@@ -24,7 +24,7 @@ import kr.co.studystory.service.StudyInfoService;
 @Controller
 public class StudyInfoController {
 
-	@RequestMapping(value = "", method = GET)
+	@RequestMapping(value = "study_info/study_info.do", method = GET)
 	public String studyInfoPage(String s_num, HttpSession session, Model model) {
 
 		StudyInfoService sis = new StudyInfoService();

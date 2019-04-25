@@ -3,6 +3,7 @@ package kr.co.studystory.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,9 @@ import kr.co.studystory.vo.LoginVO;
 @SessionAttributes({"id","nick"})
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private CommonService cs;
 
 	@RequestMapping(value="/login.do", method= { GET, POST })
 	public String loginForm() {
@@ -25,7 +29,6 @@ public class LoginController {
 	public String loginProcess(LoginVO lvo, Model model) {
 		String url = "common/login";
 		
-		CommonService cs = new CommonService();
 		String encPass = CommonService.shaEncoding(lvo.getPass());
 		lvo.setPass(encPass);
 		LoginResult lr = cs.login(lvo);
@@ -40,5 +43,4 @@ public class LoginController {
 		
 		return url;
 	}
-	
 }

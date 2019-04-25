@@ -1,5 +1,11 @@
 package kr.co.studystory.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,18 +14,16 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import kr.co.studystory.domain.PrevUserInfo;
 import kr.co.studystory.service.CommonService;
-import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.ModifiedPassVO;
 import kr.co.studystory.vo.ModifiedUserInfoVO;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import javax.servlet.http.HttpSession;
+import kr.co.studystory.vo.OutVO;
 
 @SessionAttributes("id")
 @Controller
 public class UseModifyController {
+	
+	@Autowired
+	private CommonService cs;
 
 	@RequestMapping(value="/common/user_modify_menu.do", method= { GET, POST })
 	public String userModifyMenu() {
@@ -30,7 +34,7 @@ public class UseModifyController {
 	public String userInfoModifyForm(HttpSession session, Model model) {
 		
 		String id = (String)session.getAttribute("id");
-		CommonService cs = new CommonService();
+		
 		String url = "redirect:user_modify_menu.do";
 		PrevUserInfo pui = cs.selectMyInfo(id);
 		if (pui != null) {
@@ -56,8 +60,6 @@ public class UseModifyController {
 	@RequestMapping(value="/common/modify_info_process.do", method=POST)
 	public String userInfoChange(ModifiedUserInfoVO muivo, Model model) {
 		
-		CommonService cs = new CommonService();
-		
 		String encPass = CommonService.shaEncoding(muivo.getPass());
 		muivo.setPass(encPass);
 		
@@ -78,8 +80,6 @@ public class UseModifyController {
 	@RequestMapping(value="/common/modify_pass_process.do", method=POST)
 	public String changePassProcess(ModifiedPassVO mpvo, HttpSession session, Model model) {
 		String url = "common/modify_pass";
-		
-		CommonService cs = new CommonService();
 		
 		String encPass = CommonService.shaEncoding(mpvo.getPass());
 		String encNewPass = CommonService.shaEncoding(mpvo.getNewPass());
@@ -103,16 +103,15 @@ public class UseModifyController {
 	}
 	
 	@RequestMapping(value="/common/account_out_process.do", method=POST)
-	public String leaveProcess(LeaveVO lvo, HttpSession session, SessionStatus status, Model model) {
+	public String leaveProcess(OutVO ovo, HttpSession session, SessionStatus status, Model model) {
 		
-		CommonService cs = new CommonService();
-		String encPass = CommonService.shaEncoding(lvo.getPass());
+		String encPass = CommonService.shaEncoding(ovo.getPass());
 		
-		lvo.setId((String)session.getAttribute("id"));
-		lvo.setPass(encPass);
+		ovo.setId((String)session.getAttribute("id"));
+		ovo.setPass(encPass);
 		
 		String url = "common/account_out";
-		if(cs.setDeactivation(lvo)) {
+		if(cs.setDeactivation(ovo)) {
 			url = "redirect:../index.do";
 			model.addAttribute("id", "");
 			status.setComplete();

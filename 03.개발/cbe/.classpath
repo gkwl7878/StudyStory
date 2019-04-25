@@ -17,5 +17,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/dev/drivers/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/dev/StudyStory/03.개발/cbe/WebContent/WEB-INF/lib/cos.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

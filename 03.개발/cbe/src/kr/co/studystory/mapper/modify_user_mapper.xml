@@ -26,7 +26,7 @@
 		<include refid="condition_id_and_pass"/>
 	</update>
 		
-	<update id="updateDeactive" parameterType="kr.co.studystory.vo.LeaveVO">
+	<update id="updateDeactive" parameterType="kr.co.studystory.vo.OutVO">
 		UPDATE user_table
 		SET deactivation='Y'
 		<include refid="condition_id_and_pass"/>
