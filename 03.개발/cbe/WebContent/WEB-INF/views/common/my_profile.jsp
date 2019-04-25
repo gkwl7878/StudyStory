@@ -40,7 +40,8 @@ $(function() {
 	
 	$("#nick").keyup(function() {
 		
-		var queryString = "nick="+$("#nick").val();
+		var nick = $("#nick").val();
+		var queryString = "nick="+nick;
 		
 		
 		$.ajax({
@@ -54,13 +55,15 @@ $(function() {
 			},
 			success:function(json) {
 				if (json.dupFlag) {
-					nickChangeFlag = true;
-					$("#nickCheck").css("color","#FF0000");
-					$("#nickCheck").text(json.msg);
-				} else if (nick == "${ prevProfile.img }") {
-					nickChangeFlag = false;
-					$("#nickCheck").css("color","#0F68B1");
-					$("#nickCheck").text(json.msg);
+					if (nick == "${ prevProfile.nick }") {
+						nickChangeFlag = false;
+						$("#nickCheck").css("color","#0F68B1");
+						$("#nickCheck").text("기존 닉네임과 동일합니다");
+					} else {
+						nickChangeFlag = true;
+						$("#nickCheck").css("color","#FF0000");
+						$("#nickCheck").text(json.msg);
+					}
 				}	else {
 					nickChangeFlag = false;
 					$("#nickCheck").css("color","#0F68B1");
@@ -87,25 +90,6 @@ $(function() {
 		
 		$("#profileFrm").submit();
 	});
-	
-	/* $("#nick").change(function() { // 닉네임이 변경 되면 AJAX로 중복확인
-		nickChangeFlag = true;
-	
-		
-	}); */
-	
-	/* $("#modifyBtn").click(function() { // 변경하기 버튼
-		// 입력값 변경 검증
-		
-		 if (nickChangeFlag) { // 변경되지 않았다면 바로 submit
-		} else {
-			// 닉네임이 변경되었다면 과거 닉네임과 비교, 같으면 그대로 submit
-			// 같지 않은데 변경되었고 중복이 아니면 submit
-			// 같지 않은데 변경되었고 중복이면 alert
-			alert("변경돼서 아직 변경안됨!");
-			
-		} */
-	// });
 });	
 </script>
 </head>
