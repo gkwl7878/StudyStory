@@ -28,8 +28,6 @@ public class FindController {
 	@RequestMapping(value="/find_id_process.do", method=POST)
 	public String findIdProcess(FindIdVO fivo, Model model) {
 		
-		cs = new CommonService();
-		
 		String url = "common/find_id";
 		String id = cs.findId(fivo);
 		
@@ -52,8 +50,6 @@ public class FindController {
 	
 	@RequestMapping(value="/find_pass_process.do", method=POST)
 	public String findPassProcess(FindPassVO fpvo, Model model) {
-		
-		cs = new CommonService();
 
 		String url = "common/find_pass";
 		if(cs.findPass(fpvo)) {
@@ -69,7 +65,6 @@ public class FindController {
 	@RequestMapping(value="/set_new_pass.do", method=POST)
 	public String setNewPassProcess(ChangePassVO cpvo, Model model) {
 		
-		cs = new CommonService();
 		String encPass = CommonService.shaEncoding(cpvo.getPass());
 		cpvo.setPass(encPass);
 		String url ="common/login";
@@ -79,7 +74,4 @@ public class FindController {
 		
 		return url;
 	}
-	
-	
-	
 }

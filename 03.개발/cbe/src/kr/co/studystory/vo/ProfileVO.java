@@ -2,7 +2,7 @@ package kr.co.studystory.vo;
 
 public class ProfileVO {
 	
-	private String id, nick, introduce, img;
+	private String id, nick, introduce;
 
 	public String getId() {
 		return id;
@@ -28,11 +28,8 @@ public class ProfileVO {
 		this.introduce = introduce;
 	}
 
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
+	@Override
+	public String toString() {
+		return "ProfileVO [id=" + id + ", nick=" + nick + ", introduce=" + introduce + "]";
 	}
 }
