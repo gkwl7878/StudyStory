@@ -27,6 +27,18 @@
 		<result column="deacivation" property="deacivation"/>
 	</resultMap>
 	
+	<resultMap type="kr.co.studystory.domain.AppliedStudy" id="appliedStudyResult">
+		<result column="s_num" property="sNum"/>
+		<result column="study_name" property="studyName"/>
+		<result column="loc" property="loc"/>
+		<result column="category" property="category"/>
+		<result column="img" property="img"/>
+		<result column="recruitment" property="recruitment"/>
+		<result column="input_date" property="inputDate"/>
+		<result column="nick" property="nick"/>
+		<result column="accept_flag" property="joinAcceptFlag"/>
+	</resultMap>
+	
 <select id="selectDupStudyName" parameterType="String" resultType="int">
 	select count(*) cnt
 	from study
@@ -57,8 +69,10 @@
   where  st.id=ut.id and id=#{id}<!--???????  -->
   </select>
   
-  <select id="SelectAppliedStudies" >
-  	
+  <select id="SelectAppliedStudies" resultMap="appliedStudyResult" >
+  	select st.s_num, st.study_name, st.loc, st.category, st.img, st.recruitment, st.input_date, ut.nick, st.accept_flag
+  from  study st, user_table ut
+  where  st.id=ut.id
   </select>
   
   <!-- <delete id="deleteStudy" parameterType="int">

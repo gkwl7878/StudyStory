@@ -1,11 +1,13 @@
 package kr.co.studystory.service;
 
 import java.util.List;
+import java.util.concurrent.locks.Condition;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.dao.StudyGroupDAO;
+import kr.co.studystory.domain.AppliedStudy;
 import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.vo.ConditionVO;
@@ -66,6 +68,13 @@ public class StudyGroupService {
 		list=sg_dao.selectMyStudies(c_vo);
 		return list;
 	}//getMyStudy
+	
+	public List<AppliedStudy> getMyApplied(ConditionVO c_vo) {
+		List<AppliedStudy> list=null;
+		list=sg_dao.selectAppliedStudy(c_vo);
+		return list;
+	}//getMyApplied
+	
 }
 
 

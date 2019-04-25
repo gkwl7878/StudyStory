@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
+import kr.co.studystory.domain.AppliedStudy;
 import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.vo.ConditionVO;
@@ -117,9 +118,14 @@ public class StudyGroupDAO {
 	}//selectMyStudies
 	
 	
-	/////////////////////////////////////////////////////////////////////////////////////////////////
-	/*public List<>*/
-	
+	public List<AppliedStudy> selectAppliedStudy(ConditionVO c_vo) {
+		List<AppliedStudy> list=null;
+		
+		SqlSession ss=getSqlSessionFactory().openSession();
+		list=ss.selectList("appliedStudyResult",c_vo);
+		
+		return list;
+	}//selectAppliedStudy
 	
 	
 	public static void main(String[] args) {
