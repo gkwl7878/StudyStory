@@ -22,14 +22,21 @@ where sn.s_num = #{snNum}
 order by input_date desc
 </select>
 
-<select id="studyDetailNoticeList" resultMap="snDtList" parameterType="">
-	select sn_num, subject, content, meeting_info, addr, input_date, nick, img
-from (select s.s_num, ut.nick, ut.img
-	  from study s, user_table ut
-	  where s_num='s_000041' and s.id=ut.id) ss, study_notice sn
-where sn.sn_num= 'sn_000087';
+<resultMap type="kr.co.studystory.domain.DetailStudyNotice" id="snDtList">
+	<result column="subject" property="subject"/>
+	<result column="content" property="content" jdbcType="CLOB"  javaType="java.lang.String" />
+	<result column="nick" property="nick"/>
+	<result column="img" property="img"/>
+	<result column="meeting_info" property="meetingInfo"/>
+	<result column="addr" property="addr"/>
+	<result column="input_date" property="input_date"/>
+</resultMap>
+<select id="studyDetailNoticeList" resultMap="snDtList" parameterType="String">
+select sn.subject, to_char(sn.content) , sn.meeting_info, sn.addr, sn.input_date, ut.nick, ut.img
+from study_notice sn, study s, user_table ut
+where  s.id=ut.id and s.s_num=sn.s_num and sn.sn_num=#{snNum}	
 	
-</select>
+</select> 
 
 
 

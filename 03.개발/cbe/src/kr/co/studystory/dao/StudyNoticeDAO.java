@@ -62,10 +62,10 @@ public class StudyNoticeDAO {
 	}//selectSnList
 	
 	//////스터디 공지 상세페이지
-	public DetailStudyNotice selectDetailSn(String sn_num) {
+	public DetailStudyNotice selectDetailSn(String snNum) {
 		DetailStudyNotice dsn=null;
 		SqlSession ss=getSessionFactory().openSession();
-		dsn=ss.selectOne("", sn_num);
+		dsn=ss.selectOne("studyDetailNoticeList", snNum);
 		ss.close();
 		return dsn;
 		
@@ -90,7 +90,8 @@ public class StudyNoticeDAO {
 	
 	public static void main(String[] args) {//테스트
 		StudyNoticeDAO sn_dao= new StudyNoticeDAO();
-		sn_dao.selectSnList("s_000041");//카티션 곱 
+		//sn_dao.selectSnList("s_000041");//카티션 곱 
+		sn_dao.selectDetailSn("sn_000042");//
 	}
 	
 }//class

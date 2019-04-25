@@ -54,7 +54,7 @@
       	
 	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
 	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong><c:out value="${ sndata.subject }"/>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#void"><img src="http://localhost:8080/third_prj/resources/images/setting.png" width="20" height="20" align="right" /></strong></a></h6>
+	      			 <h6 class="card-title"><a href="../study_notice/notice_detail.do?${ sndata.snNum }"><strong><c:out value="${ sndata.subject }"/></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#void"><img src="http://localhost:8080/third_prj/resources/images/setting.png" width="20" height="20" align="right" /></strong></a></h6>
 						    <p class="card-text">
 						    	<p class="text-left">
 						    		<span style="font-size:12px; vertical-align:text-bottom;"><c:out value="${ sndata.inputDate }"/></span>
