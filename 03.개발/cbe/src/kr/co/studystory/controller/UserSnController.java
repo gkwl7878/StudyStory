@@ -31,9 +31,9 @@ public class UserSnController {
 	}//userSnList
 	
 	@RequestMapping(value="/study_notice/notice_detail.do", method=GET)
-	public String userDetailSn(String s, Model model) {
+	public String userDetailSn(String sn_num, Model model) {
 		
-		
+		System.out.println("---------------------------------------------"+sn_num);
 		
 		return "study_notice/notice_detail";
 	}//userDetailSn
