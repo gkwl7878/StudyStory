@@ -76,6 +76,7 @@ public class AlarmController {
 		
 		abvo.setBegin(begin);
 		abvo.setEnd(end);
+		abvo.setId((String)session.getAttribute("id"));
 		
 		List<Alarm> alarmList = cbs.getAlarms(abvo);
 		

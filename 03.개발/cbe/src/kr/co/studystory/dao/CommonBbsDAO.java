@@ -75,7 +75,7 @@ public class CommonBbsDAO {
 		int alarmTotal = 0;
 		
 		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
-		ss.selectOne("selectAlarmTotal", id);
+		alarmTotal = ss.selectOne("selectAlarmTotal", id);
 		ss.close();
 		
 		return alarmTotal;
