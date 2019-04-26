@@ -45,7 +45,7 @@ public class UserSnController {
 						
 						
 						return "study_group/my_study";
-					}//userDetailSn
+					}//myStudyPage
 	
 	
 	

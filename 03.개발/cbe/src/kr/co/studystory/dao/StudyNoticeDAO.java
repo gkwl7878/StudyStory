@@ -24,9 +24,9 @@ public class StudyNoticeDAO {
 	private SqlSessionFactory ssf=null;
 	
 	/////////////주입해줬으니 얘는???얘도 지워야하나
-	public StudyNoticeDAO() {
+/*	public StudyNoticeDAO() {
 	}//StudyNoticeDAO
-	
+*/	
 /*	public static StudyNoticeDAO getInstance() {
 		if(sn_dao==null) {
 			sn_dao=new StudyNoticeDAO();
@@ -71,27 +71,33 @@ public class StudyNoticeDAO {
 		
 	}//selectDetailSn
 	
+	//homework 조회
 	public List<Homework> selectHomework(String sn_num){
 		List<Homework> list=null;
 		SqlSession ss= getSessionFactory().openSession();
-		list=ss.selectList("",sn_num);
+		list=ss.selectList("HomeworkList",sn_num);
 		ss.close();
 		return list;
 	}//getHomework
 	
+	//공지 댓글 
 	public List<SnComment> selectComment(String sn_num){
 		List<SnComment> list= null;
 		SqlSession ss= getSessionFactory().openSession();
-		list= ss.selectList("",sn_num);
+		list= ss.selectList("SnCommentList",sn_num);
 		ss.close();
 		return list;
 	}//selectComment
 	
 	
+	
 	public static void main(String[] args) {//테스트
 		StudyNoticeDAO sn_dao= new StudyNoticeDAO();
 		//sn_dao.selectSnList("s_000041");//카티션 곱 
-		sn_dao.selectDetailSn("sn_000042");//
+		//sn_dao.selectDetailSn("sn_000042");//
+		//sn_dao.selectHomework("sn_000041");
+		//sn_dao.selectComment("sn_000084");
+		
 	}
 	
 }//class

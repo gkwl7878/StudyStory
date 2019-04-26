@@ -23,8 +23,6 @@ public class StudyNoticeService {
 		
 		//StudyNotice sn_do=null;                --제목 줄이기 좀 나중에
 		//String 
-		
-		
 		return list;
 	}//getSnList
 

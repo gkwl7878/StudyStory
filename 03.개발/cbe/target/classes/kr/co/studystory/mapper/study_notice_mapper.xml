@@ -38,7 +38,24 @@ where  s.id=ut.id and s.s_num=sn.s_num and sn.sn_num=#{snNum}
 	
 </select> 
 
+<select id="HomeworkList" resultType="kr.co.studystory.domain.Homework" parameterType="String">
+	select hw.id, hw.workload, hw.finish_flag, ut.nick
+	from homework hw, user_table ut
+	where hw.id = ut.id and sn_num=#{snNum}
+</select>
 
+<!--comment 조회  -->
+<resultMap type="kr.co.studystory.domain.SnComment" id="snCommentList">
+	<result column="sn_comment" property="SnComment"/>
+	<result column="input_date" property="inputDate"/>
+	<result column="nick" property="nick"/>
+</resultMap>
+
+<select id="SnCommentList" resultMap="snCommentList">
+	select sc.sn_comment, sc.input_date, ut.nick
+	from sn_comment sc, user_table ut
+	where sc.id= ut.id and sn_num=#{snNum}
+</select>
 
 
 </mapper>
