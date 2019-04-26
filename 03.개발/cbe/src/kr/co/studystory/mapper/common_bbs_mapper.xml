@@ -68,25 +68,56 @@
 		</where>
 	</select>
 	
-	<select id="selectDetailNotice" parameterType="String" resultType="kr.co.studystory.domain.DetailNotice">
+	<resultMap type="kr.co.studystory.domain.DetailNotice" id="dnResult">
+		<result column="subject" property="subject"/>
+		<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result column="input_date" property="input_date"/>
+		<result column="view_cnt" property="view_cnt"/>
+	</resultMap>
+	<select id="selectDetailNotice" parameterType="String" resultMap="dnResult">
 		SELECT  subject, content, input_date, view_cnt
 		FROM notice
 		WHERE n_num=#{ n_num }
 	</select>
-	
+
 	<update id="updateViewCnt" parameterType="String">
 		UPDATE notice
 		SET view_cnt=view_cnt+1
 		WHERE n_num=#{ n_num }
 	</update>
+
+	<insert id="insertNewQuestion" parameterType="kr.co.studystory.vo.QuestionVO">
+		INSERT INTO question(q_num, id, subject, category, content)
+		values(q_code, #{ id }, #{ subject }, #{ category }, #{ content })
+	</insert>
+	
+	<select id="selectMyQuestions" parameterType="kr.co.studystory.vo.QuestionBbsVO" resultType="kr.co.studystory.domain.MyQuestion">
+		SELECT q_num, category, subject, answer_flag, TO_CHAR(INPUT_DATE, 'yyyy-mm-dd') input_date
+		FROM ( SELECT q_num, category, subject, answer_flag, input_date, ROW_NUMBER() OVER( ORDER BY INPUT_DATE DESC ) R_NUM
+		       FROM question
+		       WHERE ID=#{ id })
+		WHERE R_NUM BETWEEN #{ begin } AND #{ end }
+	</select>
+	
+	<!-- subject, category, input_date, answer_flag, content, answer_content; -->
+	<resultMap type="kr.co.studystory.domain.DetailQuestion" id="dqResult">
+		<result column="subject" property="subject"/>
+		<result column="category" property="category"/>
+		<result column="input_date" property="input_date"/>
+		<result column="answer_flag" property="answer_flag"/>
+		<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result column="answer_content" property="answer_content" jdbcType="CLOB" javaType="java.lang.String"/>
+	</resultMap>
+	<select id="selectDetailQuestion" parameterType="String" resultMap="dqResult">
+		SELECT  subject, category, TO_CHAR(input_date, 'yyyy-mm-dd') 
+			input_date, answer_flag, content, answer_content, TO_CHAR(answer_date, 'yyyy-mm-dd') answer_date
+		FROM question
+		WHERE q_num=#{ q_num }
+	</select>
 	
 	<select id="selectQuestionTotal" resultType="int">
 		SELECT COUNT(*) cnt
 		FROM question
 		WHERE id=#{ id }
 	</select>
-	
-	
-	
-
 </mapper>

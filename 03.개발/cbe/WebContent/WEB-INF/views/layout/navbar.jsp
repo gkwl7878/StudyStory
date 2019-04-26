@@ -53,8 +53,8 @@
 						<a class="dropdown-item" href="../common/introduction.do">서비스소개</a>
 						<a class="dropdown-item" href="../common_bbs/notice.do">공지사항</a>
 						<a class="dropdown-item" href="../common/faq.do">FAQ</a>
-						<a class="dropdown-item" href="#">문의하기</a>
-						<a class="dropdown-item" href="#">내 문의내역</a>
+						<a class="dropdown-item" href="../common_bbs/ask.do">문의하기</a>
+						<a class="dropdown-item" href="../common_bbs/question.do">내 문의내역</a>
 					</div>
 				</li>
 				<li class="nav-item"><a class="nav-link text-secondary" href="#">스터디 찾기</a></li>

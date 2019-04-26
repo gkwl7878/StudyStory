@@ -50,7 +50,7 @@
 				<strong style="float: right;">제목 </strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" value="${ detailAlarm.subject }" readonly="readonly">
+				<input type="text" class="form-control bg-white" value="${ detailAlarm.subject }" readonly="readonly">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 10px;">
@@ -58,7 +58,7 @@
 				<strong style="float: right;">분류 </strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" value="${ detailAlarm.category }" readonly="readonly">
+				<input type="text" class="form-control bg-white" value="${ detailAlarm.category }" readonly="readonly">
 			</div>
 		</div>
 		<div class=" row" style="margin-top: 10px;">
@@ -66,7 +66,7 @@
 				<strong style="float: right;">내용 </strong>
 			</div>
 			<div class="col-7 font20bold">
-				<textarea class="form-control" rows="3" style="resize: none; 
+				<textarea class="form-control bg-white" rows="3" style="resize: none; 
 					height: 300px;" name="contents" readonly="readonly"><c:out value="${ detailAlarm.content }"/></textarea>
 			</div>
 		</div>

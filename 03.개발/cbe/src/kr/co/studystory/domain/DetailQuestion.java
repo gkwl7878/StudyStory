@@ -2,7 +2,15 @@ package kr.co.studystory.domain;
 
 public class DetailQuestion {
 	
-	private String subject, category, input_date, answer_flag, content, answer_content;
+	private String subject, category, input_date, answer_flag, content, answer_content, answer_date;
+
+	public String getAnswer_date() {
+		return answer_date;
+	}
+
+	public void setAnswer_date(String answer_date) {
+		this.answer_date = answer_date;
+	}
 
 	public String getSubject() {
 		return subject;

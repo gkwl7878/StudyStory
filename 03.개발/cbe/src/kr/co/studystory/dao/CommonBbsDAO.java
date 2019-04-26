@@ -69,7 +69,7 @@ public class CommonBbsDAO {
 	
 	/**
 	 * id에 해당하는 전체 알람수를 반환하는 메서드
-	 * by 영근 
+	 * by 영근 190426
 	 */
 	public int selectAlarmTotal(String id) {
 		int alarmTotal = 0;
@@ -83,7 +83,7 @@ public class CommonBbsDAO {
 	
 	/**
 	 * 알람 더보기 게시판 게시글 반환하는 메서드
-	 * by 영근
+	 * by 영근 190426
 	 */
 	public List<Alarm> selectAlarms(AlarmBbsVO abv) {
 		List<Alarm> list = null;
@@ -97,7 +97,7 @@ public class CommonBbsDAO {
 	
 	/**
 	 * 알람 읽음처리 메서드
-	 * by 영근
+	 * by 영근 190426
 	 */
 	public void updateReadFlag(String a_num) {
 		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
@@ -108,7 +108,7 @@ public class CommonBbsDAO {
 	
 	/**
 	 * 알람 상세글을 조회하는 메서드
-	 * by 영근
+	 * by 영근 190426
 	 */
 	public DetailAlarm selectDetailAlarm(String a_num) {
 		DetailAlarm da = null;
@@ -122,7 +122,7 @@ public class CommonBbsDAO {
 	
 	/**
 	 * 전체 공지사항을 반환하는 메서드
-	 * by 영근
+	 * by 영근 190426
 	 */
 	public int selectNoticeTotal(String serachWord) {
 		int noticeTotal = 0;
@@ -136,7 +136,7 @@ public class CommonBbsDAO {
 	
 	/**
 	 * 공지사항 게시글을 조회하는 메서드
-	 * by 영근
+	 * by 영근 190426
 	 */
 	public List<Notice> selectNotice(NoticeBbsVO nbv) {
 		List<Notice> list = null;
@@ -150,7 +150,7 @@ public class CommonBbsDAO {
 	
 	/**
 	 * 공지사항 조회수를 올리는 메서드
-	 * by 영근
+	 * by 영근 190426
 	 */
 	public void updateViewCnt(String n_num) {
 		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
@@ -161,7 +161,7 @@ public class CommonBbsDAO {
 	
 	/**
 	 * 상세 공지사항을 조회하는 메서드
-	 * by 영근
+	 * by 영근 190426
 	 */
 	public DetailNotice selectDetailNotice(String n_num) {
 		DetailNotice dn = null;
@@ -173,33 +173,61 @@ public class CommonBbsDAO {
 	
 	/**
 	 * 문의사항을 등록하는 메서드
-	 * by 영근
+	 * by 영근 190426
 	 */
-	public void insertQuestion(QuestionVO qvo) {
+	public boolean insertQuestion(QuestionVO qvo) {
+		boolean flag = false;
 		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.insert("insertNewQuestion", qvo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
+	/**
+	 * id에 해당하는 전체 문의수를 반환하는 메서드
+	 * by 영근 190426
+	 */
+	public int selectQuestionTotal(String id) {
+		int qTotal = 0;
+		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		qTotal = ss.selectOne("selectQuestionTotal", id);
+		ss.close();
+		
+		return qTotal;
 	}
 	
 	/**
 	 * 내가 남긴 문의글을 조회하는 메서드
+	 * by 영근 190426
 	 */
 	public List<MyQuestion> selectMyQuestion(QuestionBbsVO qbv) {
 		List<MyQuestion> list = null;
+		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		list = ss.selectList("selectMyQuestions", qbv);
+		ss.close();
 		
 		return list; 
 	}
 	
 	/**
-	 * 상세 문의글을 조회하는 메서드
+	 * 상세 내 문의글을 조회하는 메서드
+	 * by 영근 190426
 	 */
 	public DetailQuestion selectDetailQuestion(String q_num) {
 		DetailQuestion dq = null;
 		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		dq = ss.selectOne("selectDetailQuestion",q_num);
+		ss.close();
+		
 		return dq;
 	}
-	
-	
-	public static void main(String[] args) {
-		System.out.println(CommonBbsDAO.getInstance().selectNewAlarms("kim111"));
-	}
-	
 }
