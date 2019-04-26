@@ -75,6 +75,9 @@
   where  st.id=ut.id
   </select>
   
+  <insert id="insertLeaveAlarm" parameterType="kr.co.studystory.vo.LeaveAlarmVO">
+   insert	leaderId, reason, category, subject, content
+  </insert>
   <!-- <delete id="deleteStudy" parameterType="int">
   DELETE FROM study
   WHERE DEPTNO=#{deptno}
