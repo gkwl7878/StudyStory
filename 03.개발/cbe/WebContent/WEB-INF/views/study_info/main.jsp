@@ -117,7 +117,6 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
 	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 </body>
