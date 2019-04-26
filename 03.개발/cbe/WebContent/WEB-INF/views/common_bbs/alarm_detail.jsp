@@ -13,6 +13,16 @@
 	font-size: 20px;
 	font-weight: bold;
 }
+
+.content {
+	margin-top: 10px;
+	margin-left: 100px;
+	margin-top: 20px;
+	min-height:200px;
+	padding-top:15px;
+	border-radius: 10px;
+	border:1px solid #C0C0C0;
+}
 </style>
 <head>
 <meta charset="UTF-8">

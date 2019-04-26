@@ -14,6 +14,15 @@
 	width: 800px;
 	min-height: 800px
 }
+.content {
+	margin-top: 10px;
+	margin-left: 100px;
+	margin-top: 20px;
+	min-height:200px;
+	padding-top:15px;
+	border-radius: 10px;
+	border:1px solid #C0C0C0;
+}
 </style>
 <title>세부 공지사항</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -62,11 +71,11 @@ $(function() {
 			</div>
 
 		</div>
-		<div class="row">
-			<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-				<textarea class="form-control"><c:out value="${ detailNotice.content }"/></textarea>
+		<div class=" row">
+				<div class="col-9 content">
+					<c:out value="${ detailNotice.content }" escapeXml="false"/>
+				</div>
 			</div>
-		</div>
 
 		<div class="row justify-content-center" style="margin-top: 30px;">
 				<a id="backBtn" class="btn btn-secondary btn"
