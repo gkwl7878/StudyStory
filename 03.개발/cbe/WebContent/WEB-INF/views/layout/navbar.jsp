@@ -23,9 +23,8 @@
 							alert("새로운 알림이 없습니다.");
 						} else {
 							for(var i=0; i<jsonArrLength; i++){
-								$("#alarmMenu").append("<a class='dropdown-item' href='#'>["
-										+jsonArr[i].category+"] "+jsonArr[i].subject+" "+jsonArr[i].input_date
-										+"<input type=hidden value='"+jsonArr[i].a_num+"'/></a>");
+								$("#alarmMenu").append("<a class='dropdown-item' href='../common_bbs/detail_alarm.do?a_num="+jsonArr[i].a_num+"'>["
+										+jsonArr[i].category+"] "+jsonArr[i].subject+" "+jsonArr[i].input_date+"</a>");
 							}
 							$("#alarmMenu").append("<a class='dropdown-item' href='../common_bbs/alarm.do'>더보기</a>");
 							getAlarmFlag = true;
@@ -52,7 +51,7 @@
 					<a class="nav-link text-secondary dropdown-toggle" href="#" id="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">메뉴</a>
 					<div class="dropdown-menu" aria-labelledby="menu">
 						<a class="dropdown-item" href="../common/introduction.do">서비스소개</a>
-						<a class="dropdown-item" href="#">공지사항</a>
+						<a class="dropdown-item" href="../common_bbs/notice.do">공지사항</a>
 						<a class="dropdown-item" href="../common/faq.do">FAQ</a>
 						<a class="dropdown-item" href="#">문의하기</a>
 						<a class="dropdown-item" href="#">내 문의내역</a>

@@ -7,8 +7,12 @@ import org.springframework.stereotype.Component;
 
 import kr.co.studystory.dao.CommonBbsDAO;
 import kr.co.studystory.domain.Alarm;
+import kr.co.studystory.domain.DetailAlarm;
+import kr.co.studystory.domain.DetailNotice;
 import kr.co.studystory.domain.NewAlarm;
+import kr.co.studystory.domain.Notice;
 import kr.co.studystory.vo.AlarmBbsVO;
+import kr.co.studystory.vo.NoticeBbsVO;
 
 @Component
 public class CommonBbsService {
@@ -102,5 +106,35 @@ public class CommonBbsService {
 	public List<Alarm> getAlarms(AlarmBbsVO abv) {
 		return cb_dao.selectAlarms(abv);
 	}
+	
+	/**
+	 * 알람 상세조회 + 읽음처리
+	 * by 영근 190426
+	 */
+	public DetailAlarm getDetailAlarm(String a_num) {
+		cb_dao.updateReadFlag(a_num);
+		return cb_dao.selectDetailAlarm(a_num);
+	}
+	
+	/**
+	 * 공지 전체 수를 조회하는 메서드
+	 * by 영근 190426
+	 */
+	public int getNoticeTotal() {
+		return cb_dao.selectNoticeTotal();
+	}
+	
+	/**
+	 * 공지 게시글을 조회하는 메서드
+	 * by 영근 190426
+	 */
+	public List<Notice> getNotices(NoticeBbsVO nbvo) {
+		return cb_dao.selectNotice(nbvo); 
+	}
+	
+	/*public DetailNotice getDetailNotice(String n_num) {
+		
+	}*/
+	
 	
 }

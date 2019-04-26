@@ -99,11 +99,11 @@ public class CommonBbsDAO {
 	 * 알람 읽음처리 메서드
 	 * by 영근
 	 */
-	public boolean updateReadFlag(String a_num) {
-		boolean flag = false;
-		
-		
-		return flag;
+	public void updateReadFlag(String a_num) {
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.update("updateReadFlag", a_num);
+		ss.commit();
+		ss.close();
 	}
 	
 	/**
@@ -113,6 +113,9 @@ public class CommonBbsDAO {
 	public DetailAlarm selectDetailAlarm(String a_num) {
 		DetailAlarm da = null;
 		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		da = ss.selectOne("selectDetailAlarm", a_num);
+		ss.close();
 		
 		return da;
 	}
@@ -123,7 +126,10 @@ public class CommonBbsDAO {
 	 */
 	public int selectNoticeTotal() {
 		int noticeTotal = 0;
-
+		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		noticeTotal = ss.selectOne("selectNoticeTotal");
+		ss.close();
 		
 		return noticeTotal;
 	}
@@ -135,6 +141,10 @@ public class CommonBbsDAO {
 	public List<Notice> selectNotice(NoticeBbsVO nbv) {
 		List<Notice> list = null;
 		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		list = ss.selectList("selectNoticeBbs", nbv);
+		ss.close();
+		
 		return list;
 	}
 	
@@ -143,7 +153,9 @@ public class CommonBbsDAO {
 	 * by 영근
 	 */
 	public void updateViewCnt(String n_num) {
-		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		ss.update("updateViewCnt",n_num);
+		ss.close();
 	}
 	
 	/**

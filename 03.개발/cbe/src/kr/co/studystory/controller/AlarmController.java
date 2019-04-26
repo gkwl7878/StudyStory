@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.studystory.domain.Alarm;
+import kr.co.studystory.domain.DetailAlarm;
 import kr.co.studystory.domain.NewAlarm;
 import kr.co.studystory.service.CommonBbsService;
 import kr.co.studystory.vo.AlarmBbsVO;
+import kr.co.studystory.vo.AlarmPagingVO;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -106,5 +108,20 @@ public class AlarmController {
 		return "common_bbs/alarm_list";
 	}
 	
+	@RequestMapping(value="common_bbs/detail_alarm.do", method=GET)
+	public String detailAlarm(AlarmPagingVO apvo, Model model) {
+		
+		String a_num = apvo.getA_num();
+		String currPage = apvo.getCurrPage();
+		
+		DetailAlarm da = cbs.getDetailAlarm(a_num);
+		
+		if (da != null) {
+			model.addAttribute("detailAlarm", da);
+			model.addAttribute("currPage", currPage);
+		}
+		
+		return "common_bbs/alarm_detail";
+	}
 	
 }
