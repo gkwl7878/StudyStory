@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.co.studystory.domain.DetailNotice;
 import kr.co.studystory.domain.Notice;
 import kr.co.studystory.service.CommonBbsService;
 import kr.co.studystory.vo.NoticeBbsVO;
+import kr.co.studystory.vo.NoticePagingVO;
 
 @Controller
 public class NoticeController {
@@ -22,15 +24,15 @@ public class NoticeController {
 		
 		if(nbvo.getSearchWord() == null) {
 			nbvo.setSearchWord("");
-		}
+		} 
 		
 		if(nbvo.getCurrPage() == 0) {
 			nbvo.setCurrPage(1);
 		}
 		
+		int totalCnt = cbs.getNoticeTotal(nbvo.getSearchWord());
 		int currPage = nbvo.getCurrPage();
 		
-		int totalCnt = cbs.getNoticeTotal();
 		int begin = cbs.beginNum(currPage);
 		int end = cbs.endNum(begin);
 		
@@ -67,8 +69,19 @@ public class NoticeController {
 		return "common_bbs/notice_list";
 	}
 	
-	@RequestMapping("/common/bbs/notice_detail.do")
-	public String noticeDetail(String n_num, Model model) {
+	@RequestMapping("/common_bbs/detail_notice.do")
+	public String noticeDetail(NoticePagingVO npvo, Model model) {
+		
+		String n_num = npvo.getN_num();
+		String currPage = npvo.getCurrPage();
+		
+		DetailNotice dn = cbs.getDetailNotice(n_num);
+		
+		if (dn != null) {
+			model.addAttribute("detailNotice", dn);
+			model.addAttribute("currPage", currPage);
+		}
+		
 		return "common_bbs/notice_detail";
 	}
 }

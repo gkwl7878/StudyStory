@@ -39,26 +39,39 @@
 		WHERE a_num=#{ a_num }
 	</update>
 	
-	<select id="selectNoticeTotal" resultType="int">
+	<select id="selectNoticeTotal" resultType="int" parameterType="String">
 		SELECT COUNT(*) cnt
 		FROM notice
+		<where>
+			<if test='value != ""'>
+				subject LIKE '%'||#{ value }||'%'
+			</if>
+		</where>
 	</select>
 	
 	<select id="selectNoticeBbs" parameterType="kr.co.studystory.vo.NoticeBbsVO"  resultType="kr.co.studystory.domain.Notice">
 		SELECT n_num, subject, TO_CHAR(INPUT_DATE, 'yyyy-mm-dd') input_date, view_cnt
 		FROM ( SELECT n_num, subject, INPUT_DATE, view_cnt, ROW_NUMBER() OVER( ORDER BY INPUT_DATE DESC ) R_NUM
-		       FROM notice)
+		       FROM notice
+		       <choose>
+						<when test='searchWord == ""'>
+							)
+						</when>
+						<otherwise>
+							<where>
+								subject LIKE '%'||#{ searchWord }||'%')
+							</where>	
+						</otherwise>
+			 		 </choose>
 		<where>
-			<choose>
-				<when test='searchWord == ""'>
-					R_NUM BETWEEN #{ begin } AND #{ end }
-				</when>
-				<otherwise>
-					R_NUM BETWEEN #{ begin } AND #{ end }
-						AND subject LIKE '%'||#{ searchWord }||'%'
-				</otherwise>
-			</choose>
+			R_NUM BETWEEN #{ begin } AND #{ end }
 		</where>
+	</select>
+	
+	<select id="selectDetailNotice" parameterType="String" resultType="kr.co.studystory.domain.DetailNotice">
+		SELECT  subject, content, input_date, view_cnt
+		FROM notice
+		WHERE n_num=#{ n_num }
 	</select>
 	
 	<update id="updateViewCnt" parameterType="String">

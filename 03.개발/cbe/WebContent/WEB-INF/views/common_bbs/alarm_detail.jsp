@@ -89,16 +89,11 @@
 		</c:choose>
 	</div>
 
-
 	<!-- footer -->
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
-
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="/third_prj/resources/js/popper.min.js"></script>
 	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
-
-
-
 </body>
 </html>

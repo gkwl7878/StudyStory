@@ -124,11 +124,11 @@ public class CommonBbsDAO {
 	 * 전체 공지사항을 반환하는 메서드
 	 * by 영근
 	 */
-	public int selectNoticeTotal() {
+	public int selectNoticeTotal(String serachWord) {
 		int noticeTotal = 0;
 		
 		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
-		noticeTotal = ss.selectOne("selectNoticeTotal");
+		noticeTotal = ss.selectOne("selectNoticeTotal", serachWord);
 		ss.close();
 		
 		return noticeTotal;
@@ -155,6 +155,7 @@ public class CommonBbsDAO {
 	public void updateViewCnt(String n_num) {
 		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
 		ss.update("updateViewCnt",n_num);
+		ss.commit();
 		ss.close();
 	}
 	
@@ -164,7 +165,9 @@ public class CommonBbsDAO {
 	 */
 	public DetailNotice selectDetailNotice(String n_num) {
 		DetailNotice dn = null;
-		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		dn = ss.selectOne("selectDetailNotice",n_num);
+		ss.close();
 		return dn;
 	}
 	

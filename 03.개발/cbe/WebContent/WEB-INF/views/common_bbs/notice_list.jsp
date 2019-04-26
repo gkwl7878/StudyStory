@@ -14,6 +14,38 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		
+		$("#id").keydown(function(event){
+				if (event.which == 13) {
+					$("#pass").focus();
+				}
+			});
+		
+		$("#searchWord").keydown(function(event){
+			if(event.which == 13) {
+				search();
+			}
+		});
+		
+		$("#searchBtn").click(function() {
+			search();
+		});
+	});
+	
+	function search() {
+		var searchWord = $("#searchWord").val();
+		
+		if (searchWord == "") {
+			alert("검색어를 입력해주세요");
+			$("#searchWord").focus();
+			return;
+		}
+		
+		location.href='notice.do?searchWord='+searchWord;
+	}
+	</script>
 </head>
 <body>
 	<!-- header -->
@@ -35,8 +67,8 @@
 					<div class="col-8"></div>
 					<div class="col-4 text-right">
 						<strong>제목</strong>
-						<input type="text" class="form-control-sm" style="width:90px;"/>
-						<button type="button" class="btn btn-sm btn-secondary">검색</button>
+						<input id="searchWord" type="text" class="form-control-sm" style="width:90px;"/>
+						<button type="button" class="btn btn-sm btn-secondary" id="searchBtn">검색</button>
 					</div>	
 				</div>
 

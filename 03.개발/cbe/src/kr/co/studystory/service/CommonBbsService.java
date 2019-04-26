@@ -120,8 +120,8 @@ public class CommonBbsService {
 	 * 공지 전체 수를 조회하는 메서드
 	 * by 영근 190426
 	 */
-	public int getNoticeTotal() {
-		return cb_dao.selectNoticeTotal();
+	public int getNoticeTotal(String serachWord) {
+		return cb_dao.selectNoticeTotal(serachWord);
 	}
 	
 	/**
@@ -132,9 +132,14 @@ public class CommonBbsService {
 		return cb_dao.selectNotice(nbvo); 
 	}
 	
-	/*public DetailNotice getDetailNotice(String n_num) {
-		
-	}*/
+	/**
+	 * 상세 게시글 내용을 조회하는 메서드 + 뷰카운트++
+	 * by 영근 190426
+	 */
+	public DetailNotice getDetailNotice(String n_num) {
+		cb_dao.updateViewCnt(n_num);
+		return cb_dao.selectDetailNotice(n_num);
+	}
 	
 	
 }
