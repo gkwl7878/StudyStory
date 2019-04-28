@@ -188,12 +188,14 @@ public class CommonService {
 			
 			// param으로 받은 img(기존 파일)를 삭제
 			String prevImg = mr.getParameter("prevImg");
-
-			File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/profile_img/"
-					+prevImg);
 			
-			if (file.exists()) { // 파일이 존재하면 삭제
-				file.delete();
+			if (!"no_user_img.png".equals(prevImg)) {
+				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/profile_img/"
+						+prevImg);
+				
+				if (file.exists()) { // 파일이 존재하면 삭제
+					file.delete();
+				}
 			}
 			
 			// 2. 파라미터 처리
