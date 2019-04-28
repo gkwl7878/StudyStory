@@ -31,5 +31,6 @@
 		FROM STUDY STD, USER_TABLE UT, FAV_STUDY FSTD
 		WHERE ( STD.S_NUM=FSTD.S_NUM ) and ( STD.ID=UT.ID ) and FSTD.ID = #{ my_id }
 	</select>
+	<!-- 내 관심 스터디 조회. -->
 
 </mapper>

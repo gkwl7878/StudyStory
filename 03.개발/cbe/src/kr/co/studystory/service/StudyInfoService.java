@@ -2,11 +2,14 @@ package kr.co.studystory.service;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import kr.co.studystory.dao.StudyInfoDAO;
 import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
+import kr.co.studystory.vo.ReplyVO;
 
 public class StudyInfoService {
 
@@ -98,12 +101,27 @@ public class StudyInfoService {
 		return list;
 	}// getMyInterestStudy
 
+	/**
+	 * 스터디 상세 페이지의 댓을 입력하기.
+	 * 
+	 * @param reply
+	 */
+	public JSONObject addReply(ReplyVO r_vo) {
+		JSONObject json = new JSONObject();
+		int cnt = si_dao.insertComment(r_vo);
+		json.put("result", cnt == 1);
+		return json;
+	}// addReply
+
 	/************ 이하 메인 메서드 : 단위 테스트 ************/
+	
 	// 단위 테스트 main.
 	public static void main(String[] args) {
-		StudyInfoService sis = new StudyInfoService();
-		List<ThumbnailDomain> list = sis.getMyInterestStudy("Dkfkfl");
-		System.out.println(list);
+		ReplyVO a = new ReplyVO();
+		a.setId("gohome1");
+		a.setsNum("s_000042");
+		a.setReply("테스트1");
+		System.out.println(new StudyInfoService().addReply(a) );
 	}// main
 
 }// class

@@ -13,6 +13,7 @@ import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
+import kr.co.studystory.vo.ReplyVO;
 
 /**
  * study_info에 관한 DAO.
@@ -123,6 +124,24 @@ public class StudyInfoDAO {
 	}// selectSCommentList
 
 	/**
+	 * 상세 스터디의 댓글을 insert하는 메서드.
+	 * 
+	 * @return int count
+	 */
+	public int insertComment(ReplyVO r_vo) {
+		int cnt = 0;
+		SqlSession ss = getSessionFatory().openSession();
+		cnt = ss.insert("insertComment", r_vo);
+
+		// 1개 행이 정상적으로 입력 되었을 때.
+		if (cnt == 1) {
+			ss.commit();
+		} // end if
+		ss.close();
+		return cnt;
+	}// insertComment
+
+	/**
 	 * 스터디 참여하기의 리더 정보 조회.
 	 * 
 	 * @return LeaderOfJoinDomain
@@ -151,9 +170,11 @@ public class StudyInfoDAO {
 
 	////////////////// 단위 테스트
 	public static void main(String[] args) {
-		List<ThumbnailDomain> list = null;
-		list = StudyInfoDAO.getInstance().selectMyFavStudy("gohome1");
-		System.out.println(list);
+		ReplyVO a = new ReplyVO();
+		a.setId("gohome1");
+		a.setsNum("s_000042");
+		a.setReply("테스트2");
+		System.out.println(StudyInfoDAO.getInstance().insertComment(a));
 	}// main
 
 }// class
