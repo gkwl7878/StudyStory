@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import java.util.List;
+
+import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.service.StudyGroupService;
 import kr.co.studystory.vo.ConditionVO;
 import kr.co.studystory.vo.NewStudyVO;
@@ -79,10 +82,15 @@ public class UserStudyController {
 	
 	@RequestMapping(value="study_group/my_study.do", method=GET)
 	public String myStudyPage(ConditionVO c_vo, HttpSession session, Model model) {
+		List<MyStudy> list=null;
 		
 		String id=(String)session.getAttribute("id");
 		c_vo.setId(id);
 		
+		list=sgs.getMyStudy(c_vo);
+		
+		model.addAttribute("id", c_vo.getId());
+		model.addAttribute("mystudyList", list);
 		return "study_group/my_study";
 	}//myStudyPage
 	
