@@ -14,6 +14,7 @@ import kr.co.studystory.domain.DetailStudyNotice;
 import kr.co.studystory.domain.Homework;
 import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
+import kr.co.studystory.vo.RecruitVO;
 
 ////스터디 노티스 dao 정미
 @Component
@@ -87,6 +88,19 @@ public class StudyNoticeDAO {
 		return list;
 	}//selectComment
 	
+	public boolean updateRecruit(RecruitVO rvo) {
+		boolean flag = false;
+		
+		SqlSession ss= getSessionFactory().openSession();
+		int cnt = ss.update("updateRecruit", rvo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
+	}
 	
 	
 	public static void main(String[] args) {//테스트

@@ -10,6 +10,7 @@ import kr.co.studystory.domain.DetailStudyNotice;
 import kr.co.studystory.domain.Homework;
 import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
+import kr.co.studystory.vo.RecruitVO;
 @Component
 public class StudyNoticeService {
 	@Autowired
@@ -46,5 +47,15 @@ public class StudyNoticeService {
 		
 		return list; 
 	}//getComment
+	
+	/**
+	 * 모집상태 변경
+	 * by 영근
+	 */
+	public boolean changeRecruit(RecruitVO rvo) {
+		boolean flag = false;
+		flag = sn_dao.updateRecruit(rvo);
+		return flag;
+	}
 	
 }//class
