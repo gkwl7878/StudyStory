@@ -94,11 +94,21 @@ public class CommonMngService {
 	}//nsTotalCount
 	
 	/**
+	 * user 총 게시물의 수 얻기
+	 * @return
+	 */
+	public int uTotalCount(UserBoardVO ub_vo) {
+		int cnt=0;
+		cnt = c_dao.selectUserTotal(ub_vo);
+		return cnt;
+	}//nsTotalCount
+	
+	/**
 	 * 한페이지에 보여줄 게시물의 수 
 	 * @return
 	 */
 	public int pageScale() {
-		int pageScale=3;
+		int pageScale=10;
 		return pageScale;
 	}//pageScale
 	

@@ -18,27 +18,41 @@
 <script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
 <script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#searchBtn").click(function() {
+			
+		})
+	});//ready
+</script>
 </head>
 
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
+
+	<!-- sidebar 시작 -->
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
+				<c:param name="weekUser" value="${param.weekUser}"></c:param>
+				<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
+				<c:param name="allUser" value="${param.allUser}"></c:param>
+				<c:param name="allStudy" value="${param.allStudy}"></c:param>
+				<c:param name="activeFlag" value="${requestScope.activeFlag}"></c:param>
+	</c:import>
+	<!-- sidebar 끝 -->
 
 	<div class="container-fluid">
 		<div class="row">
 
-			<!-- sidebar 시작 -->
-			<c:import url="/third_prj/admin/layout/sidebar.jsp"></c:import>
-			<!-- sidebar 끝 -->
-
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+			<form action="user_mng.do?searchCondition=${param.condition}&searchWord=${param.word}">
 			<div class="row justify-content-between" style="margin-top: 40px; margin-bottom: 10px;">
 				<div class="col-8">
 					<h1 class="h2">회원정보 관리</h1>
 				</div>
 				<div class="col-2" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
-					<select class="form-control" style="font-size: 12px;">
+					<select class="form-control" name="searchCondition" style="font-size: 12px;">
 						<option>--검색조건--</option>
 						<option>아이디</option>
 						<option>이름</option>
@@ -46,12 +60,13 @@
 					</select>
 				</div>
 				<div class="col-1" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
-					<input type="text" class="form-control form-control-sm" />
+					<input type="text" name="searchWord" class="form-control form-control-sm" />
 				</div>
 				<div class="col-1" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
-					<button type="button" class="btn btn-sm btn-secondary">검색</button>
+					<button type="submit" id="searchBtn" class="btn btn-sm btn-secondary">검색</button>
 				</div>
 			</div>
+			</form>
 
 			<div class="table-responsive">
 				<table class="table table-striped table-sm border-bottom">
@@ -67,29 +82,35 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach begin="1" end="10" step="1">
-							<tr class="text-center">
-								<td>123</td>
-								<td>아이디이</td>
-								<td>닉네이임</td>
-								<td>이이이름</td>
-								<td>010-1111-2222</td>
-								<td>young@sist.co.kr</td>
-								<td>2019-03-00</td>
+						<c:forEach var="uList" items="${uList }">
+						<c:set var="i" value="${i+1 }"/>
+							<tr>
+								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
+								<td class="text-center"><c:out value="${uList.id }"/></td>
+								<td class="text-center"><c:out value="${uList.nick }"/></td>
+								<td class="text-center"><c:out value="${uList.name}"/></td>
+								<td class="text-center"><c:out value="${uList.tel }"/></td>
+								<td class="text-center"><c:out value="${uList.email }"/></td>
+								<td class="text-center"><c:out value="${uList.regDate }"/></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 				<div class="d-flex justify-content-center">
 					<ul class="pagination">
-						<li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a></li>
-						<li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-						<li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a></li>
+						<li class="paginate_button page-item previous ${ forwardFlag ? '' : 'disabled' }" id="dataTable_previous">
+							<a href="user_mng.do?currPage=${ startPage-1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a>
+						</li>
+						<c:forEach var="i" step="1" begin="${ startPage }" end="${ endPage }">
+							<li class="paginate_button page-item ${ currPage == i ? 'active' : '' }">
+								<a href="user_mng.do?currPage=${ i }&searchCondition=${searchCondition}&searchWord=${searchWord}" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+									<c:out value="${ i }"/>
+								</a>
+							</li>
+						</c:forEach>
+						<li class="paginate_button page-item next ${ backwardFlag ? '' : 'disabled' }" id="dataTable_next">
+							<a href="user_mng.do?currPage=${ endPage+1 }" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
+						</li>
 					</ul>
 				</div>
 			</div>

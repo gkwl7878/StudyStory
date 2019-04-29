@@ -4,31 +4,33 @@
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link active" href="#">
+        <a class="nav-link ${activeFlag=='nsActiveFlag'? 'active':''}"  href="new_study.do?weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}">
           <span data-feather="home"></span>
           	새 스터디 관리 <span class="sr-only">(current)</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link ${activeFlag=='uActiveFlag'? 'active':''}" href="user_mng.do?weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}">
           <span data-feather="file"></span>
           	회원정보 관리
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link ${activeFlag=='sActiveFlag'? 'active':''}" href="#">
           <span data-feather="shopping-cart"></span>
           	스터디 정보 관리
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link ${activeFlag=='qActiveFlag'? 'active':''}" href="#">
           <span data-feather="users"></span>
           	문의사항
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link ${activeFlag=='nActiveFlag'? 'active':''} href="#">
           <span data-feather="bar-chart-2"></span>
           	공지사항
         </a>

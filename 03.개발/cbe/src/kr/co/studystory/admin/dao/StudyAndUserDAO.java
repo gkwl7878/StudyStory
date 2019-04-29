@@ -12,8 +12,10 @@ import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
+import kr.co.studystory.admin.domain.UserInfo;
 import kr.co.studystory.admin.vo.AcceptVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
+import kr.co.studystory.admin.vo.UserBoardVO;
 
 @Component
 public class StudyAndUserDAO {
@@ -49,6 +51,11 @@ public class StudyAndUserDAO {
 		return ssf;
 	}//getSessionFactory
 	
+	/**
+	 * NewStudy 리스트 조회
+	 * @param nb_vo
+	 * @return
+	 */
 	public List<NewStudyInfo> selectNewStudy(NsBoardVO nb_vo){
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
 		List<NewStudyInfo> list =ss.selectList("newStudyList",nb_vo);
@@ -56,6 +63,11 @@ public class StudyAndUserDAO {
 		return list;
 	}
 	
+	/**
+	 * NewStudy Detail 조회
+	 * @param sNum
+	 * @return
+	 */
 	public DetailNewStudyInfo selectDetailNewStudy(String sNum) {
 		DetailNewStudyInfo dnsi=null;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
@@ -64,6 +76,11 @@ public class StudyAndUserDAO {
 		return dnsi;
 	}
 	
+	/**
+	 * New Study AcceptFlag 변환
+	 * @param a_vo
+	 * @return
+	 */
 	public boolean updeteAccept(AcceptVO a_vo) {
 		boolean updateAcceptFlag= false;
 		int cnt=0;
@@ -77,6 +94,11 @@ public class StudyAndUserDAO {
 		return updateAcceptFlag;
 	}
 	
+	/**
+	 * NewStudy의 멤버 넣기
+	 * @param a_vo
+	 * @return
+	 */
 	public boolean insertFirstMember(AcceptVO a_vo) {
 		boolean membInsertFlag = false; 
 		int cnt=0;
@@ -90,6 +112,11 @@ public class StudyAndUserDAO {
 		return membInsertFlag;
 	}
 	
+	/**
+	 * NewStudy DeleteFlag 변환
+	 * @param sNum
+	 * @return
+	 */
 	public boolean updateDeleteFlag(String sNum) {
 		boolean updateDeleteFlag = false; 
 		int cnt=0;
@@ -101,6 +128,18 @@ public class StudyAndUserDAO {
 		}
 		ss.close();
 		return updateDeleteFlag;
+	}
+	
+	/**
+	 * 유저 리스트 조회
+	 * @param nb_vo
+	 * @return
+	 */
+	public List<UserInfo> selectUserInfo(UserBoardVO ub_vo){
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		List<UserInfo> list =ss.selectList("userInfoList",ub_vo);
+		ss.close();
+		return list;
 	}
 	
 	public static void main(String[] args) {

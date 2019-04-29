@@ -74,9 +74,8 @@ public class NewStudyMngController {
 		model.addAttribute("currPage",nb_vo.getCurrPage());
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
+		model.addAttribute("activeFlag","nsActiveFlag");
 		
-		//model.addAttribute("forwardFlag",forwardFlag);
-		//model.addAttribute("backwardFlag",backwardFlag);
 		return "/admin/new_study_mng";
 	}
 	
@@ -117,26 +116,26 @@ public class NewStudyMngController {
 		return url;
 	}
 	
-	@RequestMapping(value="/admin/study_del.do", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/study_reject.do", method=RequestMethod.GET)
 	public String refuseNsPage(String sNum, Model model) {
-		return "/admin/study_del";
+		return "/admin/study_reject";
 	}
 	
-	@RequestMapping(value="/admin/study_del_proc.do",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/study_reject_proc.do",method=RequestMethod.GET)
 	public String refuseNsProcess(RefuseVO r_vo, Model model) {
-		boolean delectFlag=saus.refuseStudy(r_vo);
+		boolean rejectFlag=saus.refuseStudy(r_vo);
 		AlarmVO al_vo= new AlarmVO();
-		if(delectFlag) {
+		if(rejectFlag) {
 			al_vo.setId(r_vo.getId());
 			al_vo.setCategory("스터디");
 			al_vo.setSubject("새 스터디가 거절되었습니다.");
 			al_vo.setContent(r_vo.getsNum()+" 번 스터디가 거절되었습니다. 거절사유:" +r_vo.getMsg());
-			delectFlag= cms.sendAlarm(al_vo);
+			rejectFlag= cms.sendAlarm(al_vo);
 		}
 		
-		String url="forward:study_del.do";
-		if(delectFlag) {
-			model.addAttribute("deleteFlag", true);
+		String url="forward:study_reject.do";
+		if(rejectFlag) {
+			model.addAttribute("rejectFlag", true);
 			url="forward:new_study.do";
 		}
 		

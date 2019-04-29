@@ -10,9 +10,11 @@ import kr.co.studystory.admin.dao.AdCommonDAO;
 import kr.co.studystory.admin.dao.StudyAndUserDAO;
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
+import kr.co.studystory.admin.domain.UserInfo;
 import kr.co.studystory.admin.vo.AcceptVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
 import kr.co.studystory.admin.vo.RefuseVO;
+import kr.co.studystory.admin.vo.UserBoardVO;
 
 @Component
 public class StudyAndUserService {
@@ -23,6 +25,11 @@ public class StudyAndUserService {
 	private AdCommonDAO ac_dao;
 	
 	
+	/**
+	 * NewStudy의 List 읽어오기
+	 * @param nb_vo
+	 * @return
+	 */
 	public List<NewStudyInfo> searchNewStudy(NsBoardVO nb_vo) {
 		List<NewStudyInfo> list =new ArrayList<NewStudyInfo>();
 		NewStudyInfo nsi=null;
@@ -58,6 +65,20 @@ public class StudyAndUserService {
 		deleteFlag =sau_dao.updateDeleteFlag(r_vo.getsNum());
 		return deleteFlag;
 	}
+	
+	/**
+	 * User의 List 읽어오기
+	 * @param ub_vo
+	 * @return
+	 */
+	public List<UserInfo> searchUserInfo(UserBoardVO ub_vo) {
+		List<UserInfo> list =new ArrayList<UserInfo>();
+		UserInfo ui=null;
+		list= sau_dao.selectUserInfo(ub_vo);
+		
+		return list;
+	}
+	
 	
 	public static void main(String[] args) {
 //		 StudyAndUserService saus= new StudyAndUserService();

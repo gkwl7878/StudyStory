@@ -38,7 +38,7 @@
 	from user_table
 </select>
 
-<select id="nsTotalCnt" resultType="Integer">
+<select id="nsTotalCnt" resultType="int">
 	select count(*)
 	from study 
 	where accept_flag='N' and delete_flag='N'
@@ -47,17 +47,15 @@
 <select id="uTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.UserBoardVO">
 	select count(*)
 	from user_table
-	<where>
-		<if test="'id'.equals(searchCondition)">
-			id#{searchWord}
-		</if>
-		<if test="'name'.equals(searchCondition)">
-			name=#{searchWord}
-		</if>
-		<if test="'nick'.equals(searchCondition)">
-			nick=#{searchWord}
-		</if>
-	</where>
+	<if test="'아이디'.equals(searchCondition)">
+		where id like '%'||#{searchWord}||'%' 
+	</if>
+	<if test="'이름'.equals(searchCondition)">
+		where name like '%'||#{searchWord}||'%' 
+	</if>
+	<if test="'닉네임'.equals(searchCondition)">
+		where nick like '%'||#{searchWord}||'%' 
+	</if>
 </select>
 
 <select id="sTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.StudyBoardVO">
@@ -102,9 +100,10 @@
 <select id="nTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.NoticeBoardVO">
 	select count(*)
 	from notice
-	where subject like '%'||'#{searchWord}'||'%'
+	where subject like '%'||#{searchWord}||'%'
 </select>
 
+<!-- NewStudy -->
 <resultMap type="kr.co.studystory.admin.domain.NewStudyInfo" id="newStudyResult">
 	<result column="s_num" property="sNum"/>
 	<result column="id" property="id"/>
@@ -122,6 +121,7 @@
 		where accept_flag='N' and delete_flag='N'
 	)
 	where r_num between #{begin} and #{end}
+	
 </select>
 
 <resultMap type="kr.co.studystory.admin.domain.DetailNewStudyInfo" id="nsDetailResult">
@@ -156,6 +156,39 @@
 	set delete_flag='Y'
 	where s_num= #{sNum}
 </update>
+
+<!-- User -->
+
+<resultMap type="kr.co.studystory.admin.domain.UserInfo" id="userInfoResult">
+	<result column="id" property="id"/>
+	<result column="nick" property="nick"/>
+	<result column="name" property="name"/>
+	<result column="tel" property="tel"/>
+	<result column="email" property="email"/>
+	<result column="reg_date" property="regDate"/>
+</resultMap>
+<select id="userInfoList" resultMap="userInfoResult" parameterType="kr.co.studystory.admin.vo.UserBoardVO">
+
+	<!-- id, nick, name, tel , email, regDate -->
+	select id, nick, name, tel , email, reg_date
+	from(
+		select id, nick, name, tel , email, reg_date,
+		row_number() over(order by reg_date desc) r_num
+		from user_table
+	)
+	<if test="''.equals(searchWord)||searchWord==null">
+		where r_num between #{begin} and #{end}
+	</if>
+	<if test="'아이디'.equals(searchCondition)">
+		where r_num between #{begin} and #{end} and( id like '%'||#{searchWord}||'%' )
+	</if>
+	<if test="'닉네임'.equals(searchCondition)">
+		where r_num between #{begin} and #{end} and( nick like '%'||#{searchWord}||'%' )
+	</if>
+	<if test="'이름'.equals(searchCondition)">
+		where r_num between #{begin} and #{end} and ( name like'%'||#{searchWord}||'%' )
+	</if>
+</select>
 
 	
 </mapper>

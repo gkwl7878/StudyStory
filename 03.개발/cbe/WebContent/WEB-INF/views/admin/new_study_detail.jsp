@@ -34,11 +34,6 @@
 <script type="text/javascript">
 	$(function() {
 		
-		<c:if test="${ acceptFlag }">
-			alert(${param.sNum}+"번 스터디가 수락되었습니다.");
-			location.href="new_study.do";
-		</c:if>
-		
 		<c:if test="${ !loginSession }">
 		location.replace("login.do");
 		</c:if>
@@ -140,7 +135,7 @@
 			<!--알람: id,subject, category, content  -->
 			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}
 				&id=${requestScope.id }" role="button" style="margin-left: 10px;">수락</a> 
-			<a class="btn btn-secondary btn" href="study_del.do?sNum=${param.sNum}&id=${requestScope.id }" role="button" style="margin-left: 10px;">거절</a>
+			<a class="btn btn-secondary btn" href="study_reject.do?sNum=${param.sNum}&id=${requestScope.id }" role="button" style="margin-left: 10px;">거절</a>
 		</div>
 	</div>
 

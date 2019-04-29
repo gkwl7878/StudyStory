@@ -24,11 +24,7 @@
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$("#deleteBtn").click(function() {
-			$("#frm").submit();
-		})
-	})
+	
 </script>
 </head>
 
@@ -50,7 +46,7 @@
 	<!-- sidebar 끝 -->
 
 	<div id="wrap">
-		<form id="frm" action="study_del_proc.do?sNum=${param.sNum}&id=${param.id}&msg=${param.msg}" method="get">
+		<form >
 			<br />
 			<br />
 			<br />
@@ -65,7 +61,7 @@
 			<br />
 			<br />
 			<br />
-			<a class="btn btn-secondary btn-lg" href="ns_detail.do?sNum=${param.sNum}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<a class="btn btn-secondary btn-lg" href="#" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
 			<input type="button" class="btn btn-secondary btn-lg" value="삭제" id="deleteBtn" />
 		</form>
 	</div>

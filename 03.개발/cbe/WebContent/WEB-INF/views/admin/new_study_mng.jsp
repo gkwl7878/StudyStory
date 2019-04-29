@@ -29,7 +29,7 @@
 			alert("정상적으로 수락처리 되었습니다");
 		</c:if>
 		
-		<c:if test="${ deleteFlag }">
+		<c:if test="${ rejectFlag }">
 			alert("정상적으로 거절처리 되었습니다");
 		</c:if>
 		
@@ -46,12 +46,26 @@
 		<div class="row">
 
 			<!-- sidebar 시작 -->
+			<c:if test="${empty param.weekUser}">
 			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
 				<c:param name="weekUser" value="${requestScope.weekUser}"></c:param>
 				<c:param name="weekStudy" value="${requestScope.weekStudy}"></c:param>
 				<c:param name="allUser" value="${requestScope.allUser}"></c:param>
 				<c:param name="allStudy" value="${requestScope.allStudy}"></c:param>
+				<c:param name="activeFlag" value="${requestScope.activeFlag}"></c:param>
 			</c:import>
+			</c:if>
+			
+			<c:if test="${not empty param.weekUser}">
+			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
+				<c:param name="weekUser" value="${param.weekUser}"></c:param>
+				<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
+				<c:param name="allUser" value="${param.allUser}"></c:param>
+				<c:param name="allStudy" value="${param.allStudy}"></c:param>
+				<c:param name="activeFlag" value="${requestScope.activeFlag}"></c:param>
+			</c:import>
+			</c:if>
+				
 			
 			<%-- <c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"></c:import> --%>
 			<!-- sidebar 끝 -->
@@ -79,7 +93,7 @@
 						<c:forEach var="nsList" items="${nsList }">
 						<c:set var="i" value="${i+1 }"/>
 							<tr>
-								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/><br/></td>
+								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
 								<td class="text-center"><c:out value="${nsList.id }"/></td>
 								<td><a href="ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}&weekUser=${requestScope.weekUser}
 									&weekStudy=${requestScope.weekStudy}&allUser=${requestScope.allUser}

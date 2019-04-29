@@ -128,7 +128,6 @@ public class AdCommonDAO {
 	}
 	
 	
-	
 	/**
 	 * NewStudy totalcount
 	 * @return
@@ -147,7 +146,7 @@ public class AdCommonDAO {
 	public int selectUserTotal(UserBoardVO ub_vo) {
 		SqlSession ss= getSessionFactory().openSession();
 		int totalCount= ss.selectOne("uTotalCnt",ub_vo);
-		System.out.println("유저");
+		System.out.println("+++++++토탈카운트++++++++"+totalCount);
 		ss.close();
 		return totalCount;
 	}
