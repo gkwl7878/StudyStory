@@ -62,7 +62,7 @@
 		<!-- 점보트론 : 전광판 -->
   <section class="text-center bg-white mb-0" style="margin-top:90px; margin-bottom:20px;">
      <div class="container">
-        <h1 class="jumbotron-heading">영어공부스터뒹</h1>
+        <h1 class="jumbotron-heading">영어공부스터뒹</h1><!--스터디 이름 띄어오기. sn_num을 받아서 스터디명?  -->
      </div>
   </section>
   <div style="height:20px;"></div>
@@ -76,34 +76,41 @@
 	      <div class="row">
 	      	<div class="col-3 font20bold">스터디 공지</div>
 	   			<div class="col-6">
-	   				블라블라블라 공지명입니다.
+	   				${ snDetailList.subject }
 	   			</div>
 	     		<div class="col-3 text-right">
-	     			2019-00-00
+	     			${ snDetailList.input_date }
 	     		</div>
 	     	</div>	
 	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3">
-	     			누군가<br/>
-	     			<img src="http://localhost:8080/third_prj/resources/images/no_profile.png" width="50" height="60"/>
+	     			${ snDetailList.nick }<br/>
+	     			<img src="http://localhost:8080/third_prj/resources/images/${ snDetailList.img }" width="50" height="60"/>
 	     		</div>
 	     		<div class="col-9">
-	     			<textarea style="width:100%;" readonly="readonly"></textarea>
+	     			<textarea style="width:100%;" readonly="readonly" >"${ snDetailList.content }"</textarea>
 	     		</div>
 	      </div>
 	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3 font20bold">과제</div>
-	      	<div class="col-2">
-	      		<span class="font12bold">스터디원1</span>
+					   	 <c:if test="${ empty hwList  }">
+					     <div	style="text-align: center; ">
+					      	<strong>등록된 과제가 없습니다.</strong>
+					      	</div>
+					      </c:if>
+	      	<c:forEach var="hwdata" items="${hwList }">
+	      	<div class="col-2" style="font-size: 26px">
+	      		<span class="font12bold">${hwdata.id}</span>
 	      	</div>
 	      	<div class="col-6">
-	      		<span class="font12bold">이런거 해오세요~</span>
+	      		<span class="font16bold">${hwdata.workload}</span>
 	      	</div>
 	      	<div class="col-1 form-check">
 	      		<input type="checkbox" class="form-check-input"/>
 	      	</div>
 	      	<div class="col-3"></div><!-- 추가시 공백칼럼 -->
-	      	<div class="col-2">
+	      	</c:forEach>
+	      	<!-- <div class="col-2">
 	      		<span class="font12bold">스터디원1</span>
 	      	</div>
 	      	<div class="col-6">
@@ -111,7 +118,7 @@
 	      	</div>
 	      	<div class="col-1 form-check">
 	      		<input type="checkbox" class="form-check-input"/>
-	      	</div>
+	      	</div> -->
 	      </div>
 	      <div class="row" style="margin-top:30px;">
 		      <div class="col-3 font20bold">장소</div>
@@ -121,21 +128,25 @@
 	      </div>
 	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3 font20bold">시간</div>
-	      	<div class="col-9">어디어디 몇일 몇시 어디서 봅시다</div>
+	      	<div class="col-9">${ snDetailList.meetingInfo }</div>
 	      </div>
 	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3 font20bold">댓글</div>
+	      	
+	      	<c:forEach var="sncmtList" items="${snCmt }">
+	      	
 	      	<div class="col-2">
-	      		<span class="font12bold">스터디원1</span>
+	      		<span class="font12bold">${sncmtList.nick}<!-- 스터디원1 --></span>
 	      	</div>
 	      	<div class="col-5">
-	      		<span class="font12bold">이런거 해오세요~</span>
+	      		<span class="font12bold">${sncmtList.snComment}<!-- 이런거 해오세요~ --></span>
 	      	</div>
 	      	<div class="col-2 font12bold text-center">
-	      		2019-03-02 PM 02:11
+	      		${sncmtList.inputDate}<!-- 2019-03-02 PM 02:11 -->
 	      	</div>
 	      	<div class="col-3"></div><!-- 추가될때마다 공백칼럼 넣어줘야 함 -->
-	      	<div class="col-2">
+	      	</c:forEach>
+	      	<!-- <div class="col-2">
 	      		<span class="font12bold">스터디원1</span>
 	      	</div>
 	      	<div class="col-5">
@@ -143,10 +154,10 @@
 	      	</div>
 	      	<div class="col-2 font12bold text-center">
 	      		2019-03-02 PM 02:11
-	      	</div>
+	      	</div> -->
 	      	<div class="col-3"></div><!-- 마지막 줄은 댓글창 공백칼럼 넣어줘야 함 -->
 	      	<div class="col-2">
-	      		<span class="font12bold">내닉넴</span>
+	      		<span class="font12bold">내닉넴<!--????  --></span>
 	      	</div>
 	      	<div class="col-5" style="padding-right:0px;">
 	      		<input type="text" placeholder="내용을 입력해주세요." class="form-control form-control-sm" size="25"/>

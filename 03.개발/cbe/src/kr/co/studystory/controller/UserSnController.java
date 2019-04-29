@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.studystory.domain.DetailStudyNotice;
+import kr.co.studystory.domain.Homework;
+import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.service.StudyNoticeService;
 
@@ -32,6 +35,13 @@ public class UserSnController {
 	
 	@RequestMapping(value="/study_notice/notice_detail.do", method=GET)
 	public String userDetailSn(String sn_num, Model model) {
+		DetailStudyNotice dsn= sns.getDetailSn(sn_num);
+		List<Homework> hwList = sns.getHomework(sn_num);
+		List<SnComment> snCmt=sns.getComment(sn_num);
+		
+		model.addAttribute("snDetailList", dsn);
+		model.addAttribute("hwList", hwList);
+		model.addAttribute("snCmt", snCmt);
 		
 		System.out.println("---------------------------------------------"+sn_num);
 		

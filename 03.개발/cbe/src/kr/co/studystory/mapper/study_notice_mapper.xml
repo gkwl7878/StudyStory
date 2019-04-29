@@ -32,7 +32,7 @@ order by input_date desc
 	<result column="input_date" property="input_date"/>
 </resultMap>
 <select id="studyDetailNoticeList" resultMap="snDtList" parameterType="String">
-select sn.subject, to_char(sn.content) , sn.meeting_info, sn.addr, sn.input_date, ut.nick, ut.img
+select sn.subject, to_char(sn.content) , sn.meeting_info, sn.addr, to_char(sn.input_date,'yyyy-MM-dd') input_date, ut.nick, ut.img
 from study_notice sn, study s, user_table ut
 where  s.id=ut.id and s.s_num=sn.s_num and sn.sn_num=#{snNum}	
 	

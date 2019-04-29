@@ -94,9 +94,9 @@ public class StudyNoticeDAO {
 	public static void main(String[] args) {//테스트
 		StudyNoticeDAO sn_dao= new StudyNoticeDAO();
 		//sn_dao.selectSnList("s_000041");//카티션 곱 
-		//sn_dao.selectDetailSn("sn_000042");//
-		//sn_dao.selectHomework("sn_000041");
-		//sn_dao.selectComment("sn_000084");
+		sn_dao.selectDetailSn("sn_000042");// 
+		//sn_dao.selectHomework("sn_000041"); //과제
+		//sn_dao.selectComment("sn_000084");// 댓글
 		
 	}
 	
