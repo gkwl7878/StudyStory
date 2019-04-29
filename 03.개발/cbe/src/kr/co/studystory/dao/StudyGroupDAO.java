@@ -15,6 +15,7 @@ import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.vo.ConditionVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
+import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
 
@@ -148,7 +149,19 @@ public class StudyGroupDAO {
 		
 	}//insertLeaveAlarm
 	
-	
+	public boolean deleteMember(LeaveStudyVO ls_vo) {
+		boolean flag=false;
+		
+		SqlSession ss=getSqlSessionFactory().openSession();
+		
+		int cnt=ss.update("deleteStudy",ls_vo);
+		if(cnt==1) {
+			flag=true;
+			ss.commit();
+		}
+		ss.close();
+		return flag;
+	}
 	
 	public static void main(String[] args) {
 		NewStudyVO ns_vo=new NewStudyVO();

@@ -76,9 +76,9 @@
 		where u.id=#{ id } and j.id = u.id and j.s_num = s.s_num;
   </select>
   
-  <select id="selectLeaderId">
-  
-  </select>
+  <!-- <select id="selectLeaderId">
+  		
+  </select> -->
   
   <insert id="insertLeaveAlarm" parameterType="kr.co.studystory.vo.LeaveAlarmVO">
    insert into alarm(leaderId, reason, category, subject, content)

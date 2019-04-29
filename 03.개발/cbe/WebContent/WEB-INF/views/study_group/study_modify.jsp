@@ -95,10 +95,8 @@
 <body>
 	<!-- header -->
 	<c:import url="/third_prj/layout/navbar.jsp"></c:import>
-
+<form action="modify_study.do" method="post" enctype="multipart/form-data">	
 	<div id="wrap">
-
-
 		  <!-- 점보트론 : 전광판 -->
     <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
        <div class="container">
@@ -178,7 +176,7 @@
 			<a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 250px;">취소</a> <a class="btn btn-primary btn-lg" href="#void" role="button" id="request" style="right: 100; margin-left: 10px;">수정</a>
 		</div>
 	</div>
-
+</form>
 	<!-- footer -->
 	<c:import url="/third_prj/layout/footer.jsp"></c:import>
 
