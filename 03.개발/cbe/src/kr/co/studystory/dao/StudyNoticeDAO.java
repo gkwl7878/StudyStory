@@ -8,7 +8,6 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.domain.DetailStudyNotice;
@@ -19,21 +18,20 @@ import kr.co.studystory.domain.StudyNotice;
 ////스터디 노티스 dao 정미
 @Component
 public class StudyNoticeDAO {
-	@Autowired
+	
 	private static StudyNoticeDAO sn_dao;
 	private SqlSessionFactory ssf=null;
 	
-	/////////////주입해줬으니 얘는???얘도 지워야하나
-/*	public StudyNoticeDAO() {
+	private StudyNoticeDAO() {
 	}//StudyNoticeDAO
-*/	
-/*	public static StudyNoticeDAO getInstance() {
+	
+	public static StudyNoticeDAO getInstance() {
 		if(sn_dao==null) {
 			sn_dao=new StudyNoticeDAO();
 		}//end if
 		return sn_dao;
 	}//getInstance
-*/	
+	
 	public synchronized SqlSessionFactory getSessionFactory() {
 		if(ssf==null) {
 		Reader reader=null;
