@@ -122,7 +122,7 @@ public class NewStudyMngController {
 		return "/admin/study_del";
 	}
 	
-	@RequestMapping(value="/admin/study_del_proc.do")
+	@RequestMapping(value="/admin/study_del_proc.do",method=RequestMethod.GET)
 	public String refuseNsProcess(RefuseVO r_vo, Model model) {
 		boolean delectFlag=saus.refuseStudy(r_vo);
 		AlarmVO al_vo= new AlarmVO();

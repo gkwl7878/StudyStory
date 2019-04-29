@@ -41,7 +41,7 @@
 <select id="nsTotalCnt" resultType="Integer">
 	select count(*)
 	from study 
-	where accept_flag='N' or delete_flag='N'
+	where accept_flag='N' and delete_flag='N'
 </select>
 
 <select id="uTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.UserBoardVO">
@@ -119,7 +119,7 @@
 		select s_num, id, study_name, category, loc, input_date,
 		row_number() over( order by input_date desc) r_num
 		from STUDY
-		where accept_flag='N' or delete_flag='N'
+		where accept_flag='N' and delete_flag='N'
 	)
 	where r_num between #{begin} and #{end}
 </select>

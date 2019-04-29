@@ -65,16 +65,16 @@ public class StudyAndUserDAO {
 	}
 	
 	public boolean updeteAccept(AcceptVO a_vo) {
-		boolean acceptFlag= false;
+		boolean updateAcceptFlag= false;
 		int cnt=0;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
 		cnt =ss.update("updateNsAccept",a_vo);
 		if(cnt>0) {
-			acceptFlag=true;
+			updateAcceptFlag=true;
 			ss.commit();
 		}
 		ss.close();
-		return acceptFlag;
+		return updateAcceptFlag;
 	}
 	
 	public boolean insertFirstMember(AcceptVO a_vo) {
@@ -94,7 +94,7 @@ public class StudyAndUserDAO {
 		boolean updateDeleteFlag = false; 
 		int cnt=0;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		cnt= ss.insert("deleteNewStudy", sNum);
+		cnt= ss.update("deleteNewStudy", sNum);
 		if(cnt>0) {
 			updateDeleteFlag=true;
 			ss.commit();
@@ -102,7 +102,6 @@ public class StudyAndUserDAO {
 		ss.close();
 		return updateDeleteFlag;
 	}
-	
 	
 	public static void main(String[] args) {
 		StudyAndUserDAO sau_dao= new StudyAndUserDAO();

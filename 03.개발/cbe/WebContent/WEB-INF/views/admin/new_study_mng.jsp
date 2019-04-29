@@ -32,10 +32,7 @@
 		<c:if test="${ deleteFlag }">
 			alert("정상적으로 거절처리 되었습니다");
 		</c:if>
-		/* var loginSession= "${loginSession}";
-		if(loginSession==""){
-			window.location.href = "login.do";
-		} */
+		
 	});//ready
 </script>
 </head>

@@ -24,7 +24,11 @@
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-	
+	$(function() {
+		$("#deleteBtn").click(function() {
+			$("#frm").submit();
+		})
+	})
 </script>
 </head>
 
@@ -46,7 +50,7 @@
 	<!-- sidebar 끝 -->
 
 	<div id="wrap">
-		<form>
+		<form id="frm" action="study_del_proc.do?sNum=${param.sNum}&id=${param.id}&msg=${param.msg}" method="get">
 			<br />
 			<br />
 			<br />
@@ -59,11 +63,10 @@
 			<br />
 			<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="내용을 입력해주세요." name="msg" >
 			<br />
-
 			<br />
 			<br />
-
-			<a class="btn btn-secondary btn-lg" href="ns_detail.do?sNum=${param.sNum}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-secondary btn-lg" href="study_del_proc.do?sNum=${param.sNum}&id=${param.id}" role="button">삭제</a>
+			<a class="btn btn-secondary btn-lg" href="ns_detail.do?sNum=${param.sNum}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<input type="button" class="btn btn-secondary btn-lg" value="삭제" id="deleteBtn" />
 		</form>
 	</div>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

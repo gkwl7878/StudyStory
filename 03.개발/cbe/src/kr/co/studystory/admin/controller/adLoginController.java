@@ -21,8 +21,8 @@ import kr.co.studystory.admin.vo.LoginVO;
 public class adLoginController {
 	@Autowired
 	private CommonMngService cms;
-	/**
-	 * 로그인 페이지 띄워주기
+	 /**
+	  * 로그인 페이지 띄워주기
 	 * @return
 	 */
 	@RequestMapping(value="/admin/login.do",method=RequestMethod.GET)
