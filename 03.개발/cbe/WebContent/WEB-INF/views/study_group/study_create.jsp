@@ -119,7 +119,7 @@
 	<!-- header -->
 	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
-<form action="/request_study.do" method="post" enctype="multipart/form-data">	
+<form action="request_study.do" method="post" enctype="multipart/form-data">	
 	<div id="wrap">
 
 		 <!-- 점보트론 : 전광판 -->
