@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import kr.co.studystory.domain.DetailStudyNotice;
 import kr.co.studystory.domain.Homework;
+import kr.co.studystory.domain.NickAndId;
 import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.vo.RecruitVO;
@@ -88,6 +89,10 @@ public class StudyNoticeDAO {
 		return list;
 	}//selectComment
 	
+	/**
+	 * 리더, 모집상태 변경
+	 * by 영근
+	 */
 	public boolean updateRecruit(RecruitVO rvo) {
 		boolean flag = false;
 		
@@ -100,6 +105,20 @@ public class StudyNoticeDAO {
 		ss.close();
 		
 		return flag;
+	}
+	
+	/**
+	 * 해당 스터디의 전체 맴버를 조회하는 메서드
+	 * by 영근
+	 */
+	public List<NickAndId> selectMember(String sNum) {
+		List<NickAndId> list = null;
+		
+		SqlSession ss= getSessionFactory().openSession();
+		list = ss.selectList("selectAllMember",sNum);
+		ss.close();
+		
+		return list;
 	}
 	
 	

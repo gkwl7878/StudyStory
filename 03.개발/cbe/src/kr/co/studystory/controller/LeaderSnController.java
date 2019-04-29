@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.co.studystory.domain.NickAndId;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.service.StudyNoticeService;
 import kr.co.studystory.vo.NewStudyNoticeVO;
@@ -41,7 +42,11 @@ public class LeaderSnController {
 	}
 	
 	@RequestMapping(value="/study_notice/wrtie.do", method= { GET, POST })
-	public String leaderWrite() {
+	public String leaderWrite(String sNum, Model model) {
+		
+		List<NickAndId> list = sns.getMember(sNum);
+		model.addAttribute("nickAndIdList", list);
+		
 		return "study_notice/notice_write";
 	}
 	

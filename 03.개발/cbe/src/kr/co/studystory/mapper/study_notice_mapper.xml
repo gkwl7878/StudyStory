@@ -63,4 +63,10 @@ where  s.id=ut.id and s.s_num=sn.s_num and sn.sn_num=#{snNum}
 	WHERE s_num=#{ sNum }
 </update>
 
+<select id="selectAllMember" parameterType="String" resultType="kr.co.studystory.domain.NickAndId">
+	SELECT nick, m.id
+	FROM user_table u, member m
+	WHERE m.s_num=#{ id } AND m.id = u.id
+</select>
+
 </mapper>

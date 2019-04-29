@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import kr.co.studystory.dao.StudyNoticeDAO;
 import kr.co.studystory.domain.DetailStudyNotice;
 import kr.co.studystory.domain.Homework;
+import kr.co.studystory.domain.NickAndId;
 import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.vo.RecruitVO;
@@ -56,6 +57,14 @@ public class StudyNoticeService {
 		boolean flag = false;
 		flag = sn_dao.updateRecruit(rvo);
 		return flag;
+	}
+	
+	/**
+	 * 스터디 참가자의 아이디, 닉네임을 반환하는 메서드
+	 * by 영근
+	 */
+	public List<NickAndId> getMember(String sNum) {
+		return sn_dao.selectMember(sNum);
 	}
 	
 }//class
