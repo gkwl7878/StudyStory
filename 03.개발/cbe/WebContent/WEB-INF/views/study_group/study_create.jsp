@@ -22,26 +22,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
 
 
 <title>스터디그룹 개설하기</title>
 
-<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
 
-<script type="text/javascript">
-	$(function() {
-		$('#summernote').summernote({
-			placeholder : '공지사항입니다  :)',
-			tabsize : 2,
-			height : 200,
-			lang : 'ko-KR',
-		});
-	});
-</script>
 
 <script type="text/javascript">
 	$(function() {
@@ -177,7 +164,7 @@
 				<img alt="" src="http://localhost:8080/third_prj/resources/images/detail.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label style="font-size: 26px;">스터디 <strong>주제</strong>와 이 방의 <strong>규칙</strong>등을 자세히 설명해주세요
 				</label>
 				<div style="resize: none; width: 700px; height: 300px;">
-					<input type="text" class="form-control" id="summernote">
+					<textarea class="form-control" id="summernote"></textarea>
 					<!-- <textarea id="detail" class="form-control" rows="3"
 					style="resize: none; width: 700px; height: 300px;"
 					class="form_control" name="contents"
@@ -196,7 +183,18 @@
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
 	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
+
+<script type="text/javascript">
+	$('#summernote').summernote({
+		placeholder : '공지사항입니다  :)',
+		tabsize : 2,
+		height : 200,
+		lang : 'ko-KR',
+	});
+</script>
 
 </body>
 </html>

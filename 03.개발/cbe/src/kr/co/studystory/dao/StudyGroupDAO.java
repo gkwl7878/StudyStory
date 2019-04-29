@@ -135,8 +135,20 @@ public class StudyGroupDAO {
 	
 	public boolean insertLeaveAlarm(LeaveAlarmVO la_vo) {
 		boolean flag=false;
+		
+		SqlSession ss=getSqlSessionFactory().openSession();
+		
+		int cnt=ss.update("insertLeaveAlarm",la_vo);
+		if(cnt==1) {
+			flag=true;
+			ss.commit();
+		}
+		ss.close();
 		return flag;
-	}
+		
+	}//insertLeaveAlarm
+	
+	
 	
 	public static void main(String[] args) {
 		NewStudyVO ns_vo=new NewStudyVO();

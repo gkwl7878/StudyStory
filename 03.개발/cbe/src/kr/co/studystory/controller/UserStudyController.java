@@ -13,13 +13,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
 import kr.co.studystory.domain.MyStudy;
+import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.service.StudyGroupService;
 import kr.co.studystory.vo.ConditionVO;
+import kr.co.studystory.vo.LeaveAlarmVO;
+import kr.co.studystory.vo.LeaveVO;
+import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
+import oracle.net.aso.l;
 
 @Controller
 @Component
@@ -76,9 +82,26 @@ public class UserStudyController {
 	
 	//내 스터디 수정하기
 	@RequestMapping(value="study_group/modify_study.do", method=GET )
-	public String modifyStudyPage() {
+	public String modifyStudyPage(String sNum,Model model ) {
+		
+		PrevStudyInfo psInfo=sgs.getPrevStudy(sNum);
+		model.addAttribute("ps_Info",psInfo);
+		
 		return "study_group/study_modify";
 	}//createStudyPage
+	
+	public String modifyStudyProcess(ModifiedStudyVO ms_vo, HttpServletRequest request, Model model) {
+
+		String url="study_group/study_modify";
+		
+		if(sgs.modifyStudy(ms_vo)) {
+		model.addAttribute("");
+		}else {
+			
+		}
+		return "";
+	}
+	
 	
 	@RequestMapping(value="study_group/my_study.do", method=GET)
 	public String myStudyPage(ConditionVO c_vo, HttpSession session, Model model) {
@@ -94,9 +117,31 @@ public class UserStudyController {
 		return "study_group/my_study";
 	}//myStudyPage
 	
-/*	public String leaveStudyPage(String ) {
+	//내 스터디 탈퇴하기
+		@RequestMapping(value="study_group/leave_study.do", method=GET )
+			public String leaveStudyPage(String id) {
+			return "study_group/study_out";
+		}//leaveStudyPage
 		
-	}*/
+		@RequestMapping(value="study_group/leave_study.do" , method=POST )
+		public String leaveStudyProcess(LeaveAlarmVO la_vo,LeaveVO l_vo, HttpSession session, Model model) {
+			
+			String id=(String)session.getAttribute("id");
+			la_vo.setLeaderId(id);			
+			la_vo.setReason("이유");
+			sgs.sendLeaveAlarm(la_vo);
+			
+			
+			l_vo.setId(id);
+			l_vo.setsNum("s_0000041");
+			l_vo.setReason("이유");
+
+			
+			model.addAttribute("id",l_vo.getId());
+
+			
+			return "";
+		}
 }//class
 
 

@@ -55,7 +55,7 @@
   <select id="selectPrevStudyInfo" resultMap="studyResult" >
  	select study_name, loc, category, content, img
 	from study
-	where study_name=#{name}
+	where id=#{id}
   </select>
   
 <update id="updateStudy" parameterType="kr.co.studystory.vo.ModifiedStudyVO">
@@ -76,11 +76,17 @@
 		where u.id=#{ id } and j.id = u.id and j.s_num = s.s_num;
   </select>
   
+  <select id="selectLeaderId">
+  
+  </select>
+  
   <insert id="insertLeaveAlarm" parameterType="kr.co.studystory.vo.LeaveAlarmVO">
-   insert	leaderId, reason, category, subject, content
+   insert into alarm(leaderId, reason, category, subject, content)
+   values (#{leaderId}, #{reason}, #{category}, #{subject}, #{content})
   </insert>
-  <!-- <delete id="deleteStudy" parameterType="int">
-  DELETE FROM study
-  WHERE DEPTNO=#{deptno}
-  </delete> -->
+  
+  <delete id="deleteStudy" parameterType="kr.co.studystory.vo.LeaveStudyVO">
+  delete from study
+  where id=#{id}
+  </delete> 
 </mapper>

@@ -11,6 +11,7 @@ import kr.co.studystory.domain.AppliedStudy;
 import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.vo.ConditionVO;
+import kr.co.studystory.vo.LeaveAlarmVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
 
@@ -74,6 +75,17 @@ public class StudyGroupService {
 		list=sg_dao.selectAppliedStudy(c_vo);
 		return list;
 	}//getMyApplied
+	
+	//½ºÅÍµð Å»Åð
+	public String getLeaderId(String id) {
+		return "";
+	}//getLeaderId
+	
+	public boolean sendLeaveAlarm(LeaveAlarmVO la_vo) {
+		boolean flag=false;
+		
+		return flag;
+	}
 	
 }
 
