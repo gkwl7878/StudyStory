@@ -12,26 +12,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
+<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 
 <!-- Bootstrap core CSS -->
-<link href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
+<link href="/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
-<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/admin_dashboard.js"></script>
+<link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
+<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
+<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="http://localhost:8080/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/third_prj/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
 
 	<!-- sidebar 시작 -->
-	<c:import url="http://localhost:8080/third_prj/admin/layout/sidebar.jsp"></c:import>
+	<c:import url="/third_prj/admin/layout/sidebar.jsp"></c:import>
 	<!-- sidebar 끝 -->
 
 	<div id="wrap">
@@ -61,9 +61,9 @@
 	</div>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="/third_prj/resources/js/popper.min.js"></script>
+	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>

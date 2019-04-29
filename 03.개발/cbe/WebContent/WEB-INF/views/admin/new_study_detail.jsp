@@ -12,7 +12,6 @@
 /* #link{margin-left: 1000px; margin-top: 20px} */
 #loginTitle {
 	text-align: center;
-	st
 }
 
 .font20bold {
@@ -22,25 +21,44 @@
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
 
 <title>새 스터디 상세 정보</title>
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
-<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/admin_dashboard.js"></script>
+<link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
+<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
+<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script type="text/javascript">
+	$(function() {
+		
+		<c:if test="${ acceptFlag }">
+			alert(${param.sNum}+"번 스터디가 수락되었습니다.");
+			location.href="new_study.do";
+		</c:if>
+		
+		<c:if test="${ !loginSession }">
+		location.replace("login.do");
+		</c:if>
+	});//ready
+</script>
+
 </head>
 
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="http://localhost:8080/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
 
 	<!-- sidebar 시작 -->
-	<c:import url="http://localhost:8080/third_prj/admin/layout/sidebar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
+				<c:param name="weekUser" value="${param.weekUser}"></c:param>
+				<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
+				<c:param name="allUser" value="${param.allUser}"></c:param>
+				<c:param name="allStudy" value="${param.allStudy}"></c:param>
+	</c:import>
 	<!-- sidebar 끝 -->
 
 	<div class="container form-group" id="wrap">
@@ -54,7 +72,7 @@
 				<strong>번호</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${param.sNum }">
 			</div>
 		</div>
 
@@ -63,7 +81,7 @@
 				<strong>리더</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${requestScope.id }">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;">
@@ -71,7 +89,7 @@
 				<strong>주제</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${requestScope.category }">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;">
@@ -79,7 +97,7 @@
 				<strong>지역</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${requestScope.loc }">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;">
@@ -87,7 +105,7 @@
 				<strong>스터디명</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${requestScope.studyName }">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 15px;">
@@ -95,7 +113,7 @@
 				<strong>생성일</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" readonly="readonly">
+				<input type="text" class="form-control" readonly="readonly" value="${requestScope.inputDate }">
 			</div>
 		</div>
 
@@ -104,7 +122,8 @@
 				<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>스터디 썸네일</strong></label>&nbsp;
 			</div>
 			<div class="col-7 font20bold">
-				<img width="440" height="300" id="img" src="../resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'>
+				<img width="440" height="300" id="img" src="../resources/images/${requestScope.img }" border="0" title='찾아보기' alt='찾아보기'>
+				
 			</div>
 		</div>
 
@@ -113,18 +132,21 @@
 				<strong>상세설명</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<textarea class="form-control" rows="3" style="resize: none; width: 440px; height: 300px; margin-top: 20px;" name="contents" readonly="readonly"></textarea>
+				<textarea class="form-control" rows="3" style="resize: none; width: 440px; height: 300px; margin-top: 20px;" name="contents" readonly="readonly" >${requestScope.content}</textarea>
 			</div>
 		</div>
-
-		<div class="row" style="margin-top: 30px;">
-			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 180px;">목록으로</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">수락</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">거절</a>
+		<div class="row" style="margin-top: 30px; margin-left: 116px">
+			<a class="btn btn-secondary btn" href="new_study.do?sNum=${param.sNum}&acceptFlag=${acceptFlag}"  role="button" style="margin-left: 180px;">목록으로</a> 
+			<!--알람: id,subject, category, content  -->
+			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}
+				&id=${requestScope.id }" role="button" style="margin-left: 10px;">수락</a> 
+			<a class="btn btn-secondary btn" href="study_del.do?sNum=${param.sNum}&id=${requestScope.id }" role="button" style="margin-left: 10px;">거절</a>
 		</div>
 	</div>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="/third_prj/resources/js/popper.min.js"></script>
+	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>
