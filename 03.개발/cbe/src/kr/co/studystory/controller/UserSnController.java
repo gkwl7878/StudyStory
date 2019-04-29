@@ -11,11 +11,15 @@ import kr.co.studystory.domain.Homework;
 import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.service.StudyNoticeService;
+import kr.co.studystory.vo.NewCommentVO;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
@@ -47,6 +51,23 @@ public class UserSnController {
 		
 		return "study_notice/notice_detail";
 	}//userDetailSn
+	
+	public String finishHomework(String num, Model model) {
+	
+		
+		
+		return  "study_notice/notice_detail";//?????맞나
+		
+	}//finishHomework
+	
+	@RequestMapping(value="/study_notice/add_reply.do",method=GET)
+	public String addComment(NewCommentVO ncvo, HttpSession hs,  Model model) {
+		JSONObject json=null;
+		/*json=sns.writeReply();*/
+		
+		return "study_notice/notice_detail";
+	}//addComment
+	
 	
 						//혜원이 코드랑 합치지못해서 일단 임시로 매핑해놈
 					@RequestMapping(value="/study_group/my_study.do", method=GET)

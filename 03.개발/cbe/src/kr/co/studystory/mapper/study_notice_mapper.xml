@@ -57,5 +57,12 @@ where  s.id=ut.id and s.s_num=sn.s_num and sn.sn_num=#{snNum}
 	where sc.id= ut.id and sn_num=#{snNum}
 </select>
 
+<insert id="insertSnComment" parameterType="kr.co.studystory.vo.NewCommentVO">
+	insert into SN_COMMENT (SN_NUM, SN_COMMENT, ID)
+	values('sn_000042','반가워요 ^^ 책 추천 : 위대한 개츠비, 제가 첫 스터디 멤버네요 ~ 참여자가 언능 늘어서 스터디 참여하고싶어요 !','gohome1')
+
+
+
+</insert>
 
 </mapper>

@@ -14,6 +14,7 @@ import kr.co.studystory.domain.DetailStudyNotice;
 import kr.co.studystory.domain.Homework;
 import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
+import kr.co.studystory.vo.NewCommentVO;
 
 ////스터디 노티스 dao 정미
 @Component
@@ -87,12 +88,30 @@ public class StudyNoticeDAO {
 		return list;
 	}//selectComment
 	
+	public boolean updateHomework(String s) {
+		boolean flag= false;
+		
+		
+		return flag;
+	}//updateHomework
+	
+	public void insertComment(NewCommentVO nc_vo) {
+		int cnt=0;
+		
+		SqlSession ss= getSessionFactory().openSession();
+		cnt=ss.insert("insertSnComment", nc_vo);
+		if(cnt==1) {
+			ss.commit();
+		}//end if
+		ss.close();
+		
+	}//insertComment
 	
 	
 	public static void main(String[] args) {//테스트
 		StudyNoticeDAO sn_dao= new StudyNoticeDAO();
 		//sn_dao.selectSnList("s_000041");//카티션 곱 
-		sn_dao.selectDetailSn("sn_000042");// 
+		//sn_dao.selectDetailSn("sn_000042");// 
 		//sn_dao.selectHomework("sn_000041"); //과제
 		//sn_dao.selectComment("sn_000084");// 댓글
 		

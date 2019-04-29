@@ -51,7 +51,22 @@
 
 	  // 마커가 지도 위에 표시되도록 설정합니다
 	  marker.setMap(map);
-  })
+  
+  $(".btn").click(function(){
+	  var reply=$("[name='reply']").val();
+	  
+	  if(reply==""){
+		  alert("내용을 입력해주세요!");
+		  $("[name='reply']").focus();
+		  return
+	  }//end if
+	  
+	  
+  });//click
+  
+  
+   //$("textarea[name=txtarea]").text("${snDetailList.content}");////textarea에 값?
+  })//ready
   </script>
 </head>
 <body>
@@ -62,7 +77,7 @@
 		<!-- 점보트론 : 전광판 -->
   <section class="text-center bg-white mb-0" style="margin-top:90px; margin-bottom:20px;">
      <div class="container">
-        <h1 class="jumbotron-heading">영어공부스터뒹</h1><!--스터디 이름 띄어오기. sn_num을 받아서 스터디명?  -->
+        <h1 class="jumbotron-heading">영어공부스터뒹</h1><!--스터디 이름 띄어오기. sn_num을 받아서 스터디명? select 하나 더 추가 -->
      </div>
   </section>
   <div style="height:20px;"></div>
@@ -88,7 +103,7 @@
 	     			<img src="http://localhost:8080/third_prj/resources/images/${ snDetailList.img }" width="50" height="60"/>
 	     		</div>
 	     		<div class="col-9">
-	     			<textarea style="width:100%;" readonly="readonly" >"${ snDetailList.content }"</textarea>
+	     			<textarea style="width:100%; resize: none;" readonly="readonly" ><c:out value="${snDetailList.content}"/></textarea>
 	     		</div>
 	      </div>
 	      <div class="row" style="margin-top:30px;">
@@ -141,7 +156,7 @@
 	      	<div class="col-5">
 	      		<span class="font12bold">${sncmtList.snComment}<!-- 이런거 해오세요~ --></span>
 	      	</div>
-	      	<div class="col-2 font12bold text-center">
+	      	<div class="col-2 font12bold text-center" >
 	      		${sncmtList.inputDate}<!-- 2019-03-02 PM 02:11 -->
 	      	</div>
 	      	<div class="col-3"></div><!-- 추가될때마다 공백칼럼 넣어줘야 함 -->
@@ -155,19 +170,19 @@
 	      	<div class="col-2 font12bold text-center">
 	      		2019-03-02 PM 02:11
 	      	</div> -->
-	      	<div class="col-3"></div><!-- 마지막 줄은 댓글창 공백칼럼 넣어줘야 함 -->
+	      	<!-- 마지막 줄은 댓글창 공백칼럼 넣어줘야 함 -->
 	      	<div class="col-2">
 	      		<span class="font12bold">내닉넴<!--????  --></span>
 	      	</div>
-	      	<div class="col-5" style="padding-right:0px;">
-	      		<input type="text" placeholder="내용을 입력해주세요." class="form-control form-control-sm" size="25"/>
+	      	<div class="col-5" style="padding-right:0px; ">
+	      		<input type="text" placeholder="내용을 입력해주세요." name="reply" class="form-control form-control-sm" size="25"/>
 	      	</div>
 	      	<div class="col-2 justify-content-center">
 		      	<button type="button" class="btn btn-secondary btn-sm" style="font-size:12px; width:80%">댓글달기</button>
 	      	</div>
 	      </div>
 	      <div class="row justify-content-center" style="min-height:100px; margin-top:30px;">
-	      	<button type="button" class="btn btn-secondary" style="height:40px;">목록으로</button>
+	      	<button type="button" class="btn btn-secondary" style="height:40px; " onclick="location.href='notice_list.do'">목록으로</button>
 	      </div>
 	   	 </div>
       </div>

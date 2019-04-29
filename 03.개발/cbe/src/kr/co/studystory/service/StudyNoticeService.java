@@ -10,6 +10,7 @@ import kr.co.studystory.domain.DetailStudyNotice;
 import kr.co.studystory.domain.Homework;
 import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
+import kr.co.studystory.vo.NewCommentVO;
 @Component
 public class StudyNoticeService {
 	@Autowired
@@ -46,5 +47,19 @@ public class StudyNoticeService {
 		
 		return list; 
 	}//getComment
+	
+	public boolean checkHomework(String sn_num) {
+		boolean flag= false;
+		
+		flag=sn_dao.updateHomework(sn_num);
+		
+		return flag;
+	}//checkHomework
+	
+	public void insertComment(NewCommentVO nc_vo) {
+		
+		sn_dao.insertComment(nc_vo);
+		
+	}//insertComment
 	
 }//class
