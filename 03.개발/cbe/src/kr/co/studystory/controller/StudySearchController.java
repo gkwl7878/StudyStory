@@ -31,6 +31,7 @@ public class StudySearchController {
 	 */
 	@RequestMapping(value = "/study_info/main.do", method = GET)
 	public String mainPage(Model model) {
+
 		StudyInfoService sis = new StudyInfoService();
 		// 썸네일 리스트 생성.
 		List<ThumbnailDomain> list = sis.getThumbnailList();
@@ -65,15 +66,11 @@ public class StudySearchController {
 	@RequestMapping(value = "study_info/show_interest_study.do", method = GET)
 	public String studyLikedPage(Model model, HttpSession session) {
 		String my_id = (String) session.getAttribute("id");
-
 		StudyInfoService sis = new StudyInfoService();
-
 		// 썸네일 리스트 생성.
 		List<ThumbnailDomain> list = sis.getMyInterestStudy(my_id);
-
 		// model 객체에 값 저장.
 		model.addAttribute("thumbnail_list", list);
-
 		return "study_info/show_interest_study";
 	}// studyLikedPage
 

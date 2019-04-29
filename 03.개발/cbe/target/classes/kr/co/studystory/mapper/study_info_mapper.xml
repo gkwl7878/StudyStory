@@ -38,4 +38,16 @@
 	</select>
 	<!-- 스터디 참여하기 페이지의 기본 정보 조회. -->
 	
+	<!-- 댓글 인서트 -->
+	<insert id="insertComment" parameterType="kr.co.studystory.vo.ReplyVO">
+		insert into s_comment(s_num, s_comment, id, input_date)
+		values(#{ sNum }, #{ reply }, #{ id }, SYSDATE)
+	</insert>
+	<!-- 댓글 인서트 -->
+
+	<!-- JoinFormVO 인서트 -->
+	<!-- <insert id="insertJoinFormVO" parameterType="">
+	</insert> -->
+	<!-- JoinFormVO 인서트 -->
+	
 </mapper>

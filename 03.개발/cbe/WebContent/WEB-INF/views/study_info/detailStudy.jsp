@@ -5,9 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+
+<!-- Custom styles for this template -->
+<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/popper.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.min.js"></script>
@@ -47,16 +50,60 @@
 }
 </style>
 
-<!-- Custom styles for this template -->
-<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
-
 <!-- CDN : jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+
+		// 스터디 참여하기 버튼 클릭 시 동작.
 		$("#study_join_btn").click(function() {
-			$("#detail_study_frm").submit(); // submit
+			$("#join_study_frm").submit(); // submit
 		});// click
+
+		// 댓글 달기 버튼 클릭 시 동작.
+		$("#reply_btn").click( function() {
+					var input_reply = $("#reply_inputBox").val();
+
+					// 댓글을 입력하지 않고 댓글달기 버튼을 눌렀을 경우.
+					if (input_reply == "") {
+						alert("먼저 댓글을 입력해 주세요.");
+						return;
+					}// end if
+					
+					
+					
+					// 댓글을 입력된 경우.
+					if (input_reply != "") {
+						
+						$.ajax({
+							//var query_string = "sNum=" + $("[name='ref_num']").val() + "&reply=" + input_reply;
+							
+							url : "../detail/add_reply.do?",
+							data : "sNum=" + $("[name='ref_num']").val() + "&reply=" + input_reply,
+							type : "get",
+							dataType : "json", // 응답 받을 데이터.
+							error : function(xhr) {
+								alert("댓글 작성 실패" + $("[name='num_ref']").val() );
+								console.log(xhr.status + " / " + xhr.statusText);
+							},
+							success : function(json) {
+								if (json.result) {
+									alert("댓글이 정상적으로 동록 되었습니다.");
+									
+									// 첫 번쨰 리플의 태그를 가져오기.
+									var new_reply = $("#reply_row1").html();
+									
+									// new_reply.find("#writer").text("${ sessionScope.nick }");
+									// new_reply.find("#content").text(input_reply);
+									$("#reply_list").prepend("<li id='reply_row' class='media' style='padding-bottom: 20px'>" + new_reply + "</li>");
+								}// end if
+							}// success
+						}); // ajax */
+
+					}// end if
+
+				}); // click
+
 	}); // ready
 </script>
 
@@ -64,8 +111,6 @@
 <body>
 	<!-- header -->
 	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
-	<main role="main">
-
 
 	<div class="container" style="min-height: 2000px">
 		<div class="row">
@@ -127,7 +172,7 @@
 							<div class="col-lg-3" style="padding-left: 18px;">
 								<!-- 리더 이미지 -->
 								<div style="width: 100px; height: 100px; background-color: #F0F0F0">
-									<img src="http://localhost:8080/third_prj/resources/images/${ s_Info.leaderImg }">
+									<%-- <img src="/third_prj/resources/images/${ s_Info.leaderImg }"> --%>
 								</div>
 							</div>
 							<div class="col-lg-9" style="font-size: 20px; padding: 30px">
@@ -149,34 +194,40 @@
 						<div class="row" style="margin-bottom: 20px; font-weight: bold">
 							<!-- 댓글의 총 갯수. -->
 							<div class="col-lg-10">댓글 1</div>
-							<div class="col-lg-2 text-right">내 댓글</div>
 						</div>
+						<!-- 댓글 입력 폼 -->
 						<div class="row">
 							<div class="col-lg-10">
-								<input type="text" class="form-control" maxlength="100" placeholder="댓글은 100자까지 입력하실 수 있습니다." />
+								<input id="reply_inputBox" type="text" class="form-control" maxlength="100" placeholder="댓글은 100자 까지 입력하실 수 있습니다." />
 							</div>
 							<div class="col-lg-2">
-								<button type="button" class="btn btn btn-secondary btn-adjust" id="searchZip">확인</button>
+								<button id="reply_btn" type="button" class="btn btn btn-secondary btn-adjust">댓글달기</button>
 							</div>
+							<input type="hidden" name="ref_num" value=${ param.sNum }>
 						</div>
+						<!-- 댓글 입력 폼 -->
 
+						<!-- 댓글 읽기  -->
 						<div class="row">
 							<div class="col-lg-12" style="margin-top: 60px">
-								<ul class="list-unstyled">
+								<ul id="reply_list" class="list-unstyled">
 									<c:forEach var="s_comment" items="${ sCommentList }">
+									<c:set var="i" value="${ i + 1 }"/>
 										<!-- 댓글 하나 -->
-										<li class="media" style="padding-bottom: 20px">
+										<li id="reply_row${ i }" class="media" style="padding-bottom: 20px">
 											<!-- 댓글을 쓴 사용자의 이미지 -->
-											<div style="width: 100px; height: 100px; background-color: #F0F0F0; margin-right: 20px"></div>
+											<div style="width: 100px; height: 100px; background-color: #F0F0F0; margin-right: 20px">
+												<img id="writer_img" alt="" src="">
+											</div>
 											<div class="media-body row">
 												<div class="col-lg-10">
 													<!-- 댓글 쓴 사용자의 이름. -->
-													<h5 class="mt-0 mb-1">${ s_comment.id }</h5>
+													<h5 id="writer" class="mt-0 mb-1">${ s_comment.id }</h5>
 													<!-- 댓글의 내용. -->
-													<div>${ s_comment.s_comment }</div>
+													<div id="content">${ s_comment.s_comment }</div>
 												</div>
 												<!-- 댓글의 입력일 -->
-												<div class="col-lg-2" style="font-size: 12px;">${ s_comment.input_date }</div>
+												<div id="w_date" class="col-lg-2" style="font-size: 12px;">${ s_comment.input_date }</div>
 											</div>
 										</li>
 										<!-- 댓글 하나 -->
@@ -184,6 +235,7 @@
 								</ul>
 							</div>
 						</div>
+						<!-- 댓글 읽기  -->
 					</div>
 				</div>
 				<!-- 댓글 -->
@@ -211,7 +263,7 @@
 									<div class="row">
 										<div class="col-lg-2"></div>
 										<div class="col-lg-8" style="margin-top: 40px">
-											<form id="detail_study_frm" action="../study_info/study_req_join.do">
+											<form id="join_study_frm" action="../study_info/study_req_join.do">
 												<button id="study_join_btn" type="button" class="btn btn-secondary btn-sm">스터디 참여하기</button>
 												<input type="hidden" name="sNum" value="${ param.sNum }">
 											</form>
@@ -226,8 +278,6 @@
 
 		</div>
 	</div>
-
-	</main>
 
 	<!-- footer -->
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
