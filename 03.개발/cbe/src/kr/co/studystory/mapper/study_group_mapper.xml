@@ -15,6 +15,7 @@
 		<result column="img" property="img"/>
 	</resultMap>
 	
+	<!-- sNum, studyName, loc, category, img, recruitment, inputdate, nick, deacivation; -->
 	<resultMap type="kr.co.studystory.domain.MyStudy" id="myStudyResult">
 		<result column="s_num" property="sNum"/>
 		<result column="study_name" property="studyName"/>
@@ -24,7 +25,7 @@
 		<result column="recruitment" property="recruitment"/>
 		<result column="input_date" property="inputdate"/>
 		<result column="nick" property="nick"/>
-		<result column="deacivation" property="deacivation"/>
+		<result column="deactivation" property="deactivation"/>
 	</resultMap>
 	
 	<resultMap type="kr.co.studystory.domain.AppliedStudy" id="appliedStudyResult">
@@ -63,10 +64,10 @@
   where s_num=#{sNum}
   </update>
   
-  <select id="selectMyStudies" resultMap="myStudyResult" parameterType=""><!--??  -->
-   select st.s_num, st.study_name, st.loc, st.category, st.img, st.recruitment, st.input_date, ut.nick, st.deactivation
-  from  study st, user_table ut
-  where  st.id=ut.id and id=#{id}<!--???????  -->
+  <select id="selectMyStudies" resultMap="myStudyResult" parameterType="String">
+	select s.s_num, study_name, loc, category, s.img, recruitment, input_date, s.deactivation, u.nick
+	from study s, user_table u, member m
+	where u.id=#{ id } and m.id=u.id and m.s_num=s.s_num;
   </select>
   
   <select id="SelectAppliedStudies" resultMap="appliedStudyResult" >
