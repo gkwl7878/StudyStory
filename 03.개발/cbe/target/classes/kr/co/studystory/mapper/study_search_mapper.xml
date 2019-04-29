@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.studystory.studyinfo">
+
+
+	<!-- 메인 페이지 썸네일 조회. -->
+	<!-- private String sNum, studyName, loc, category, img, recruitment, inputDate, nick, userImg; -->
+	<resultMap type="kr.co.studystory.domain.ThumbnailDomain" id="ThumbnailDomain">
+		<result column="S_NUM" property="sNum" />
+		<result column="STUDY_NAME" property="studyName" />
+		<result column="LOC" property="loc" />
+		<result column="CATEGORY" property="category" />
+		<result column="IMG" property="img" />
+		<result column="RECRUITMENT" property="recruitment" />
+		<result column="INPUT_DATE" property="inputDate" />
+		<result column="NICK" property="nick" />
+		<result column="USERIMG" property="userImg" />
+	</resultMap>
+
+	<select id="selectThumbnailList" resultMap="ThumbnailDomain">
+		SELECT STD.S_NUM, STD.STUDY_NAME, STD.LOC, STD.CATEGORY, STD.IMG, STD.RECRUITMENT, TO_CHAR(STD.INPUT_DATE, 'YYYY/MM/DD') INPUT_DATE, UT.NICK, UT.IMG USERIMG
+		FROM STUDY STD, USER_TABLE UT
+		WHERE ( STD.ID=UT.ID )
+	</select>
+	<!-- 메인 페이지 썸네일 조회. -->
+
+	<!-- 내 관심 스터디 조회. -->
+	<select id="selectFavStudy" resultMap="ThumbnailDomain" parameterType="String">
+		SELECT  FSTD.ID, STD.S_NUM, STD.STUDY_NAME, STD.LOC, STD.CATEGORY, STD.IMG, STD.RECRUITMENT, TO_CHAR(STD.INPUT_DATE, 'YYYY/MM/DD') INPUT_DATE, UT.NICK, UT.IMG USERIMG
+		FROM STUDY STD, USER_TABLE UT, FAV_STUDY FSTD
+		WHERE ( STD.S_NUM=FSTD.S_NUM ) and ( STD.ID=UT.ID ) and FSTD.ID = #{ my_id }
+	</select>
+	<!-- 내 관심 스터디 조회. -->
+
+</mapper>

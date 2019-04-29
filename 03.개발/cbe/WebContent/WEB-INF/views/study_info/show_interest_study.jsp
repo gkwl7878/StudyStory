@@ -32,7 +32,7 @@
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 
 	<!-- body -->
 	<div role="main" style="min-height: 900px">
@@ -92,50 +92,61 @@
 
 					<!-- 썸네일 row -->
 					<div class="row">
-						<!-- 1번째 줄 시작 -->
-						<div class="col-md-4">
-							<div class="card mb-4 shadow-sm">
-								<img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/no_img.png">
-								<div class="card-body text-center p-3">
+						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
+						<c:forEach var="thumbnail" items="${ thumbnail_list }">
 
-									<div class="d-flex justify-content-end align-items-center mb-3">
-										<div class="mr-5">
-											<small class="text-muted">2019/00/00</small>
+							<div class="col-md-4">
+								<div class="card mb-4 shadow-sm">
+
+									<!-- 썸네일 스터디 이미지 -->
+									<img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }">
+									<div class="card-body text-center p-3">
+
+										<div class="d-flex justify-content-end align-items-center mb-3">
+											<div class="mr-5">
+												<!-- 썸네일 들록일 -->
+												<small class="text-muted">${ thumbnail.inputDate }</small>
+											</div>
+											<!-- 썸네일 모집상태 - 진행중. -->
+											<small class="pr-1">모집상태</small>
 										</div>
-										<small class="pr-1">모집상태</small>
-									</div>
-									<div class="px-3 border-bottom">
-										<p class="card-text pb-3">
-											<strong>제목부분</strong>
-										</p>
-									</div>
-									<div class="d-flex justify-content-between align-items-center mt-3 px-2">
-
-										<div class="border border-secondary rounded-circle" style="width: 45px; height: 45px;">
-											<img src="http://localhost:8080/third_prj/resources/images/no_img.png" class="card-img-top w-100 rounded-circle">
+										<div class="px-3 border-bottom">
+											<p class="card-text pb-3">
+												<!-- 썸네일 제목부분 -->
+												<strong>${ thumbnail.studyName }</strong>
+											</p>
 										</div>
+										<div class="d-flex justify-content-between align-items-center mt-3 px-2">
 
-										<div class="border-right p-2">
-											<small>닉네임</small>
+											<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
+												<!-- 썸네일 리더의 이미지 -->
+												<img src="http://localhost:8080/third_prj/resources/images/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle">
+											</div>
+
+											<div class="border-right p-2">
+												<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
+												<small>${ thumbnail.nick }</small>
+											</div>
+
+											<div class="border-right p-2">
+												<!-- 썸네일 리더의 닉네임 -->
+												<small>${ thumbnail.loc }</small>
+											</div>
+
+											<div class="p-2">
+												<!-- 썸네일 리더의 닉네임 -->
+												<small>${ thumbnail.category }</small>
+											</div>
+
+											<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
+											<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">좋아요</button>
+
 										</div>
-
-										<div class="border-right p-2">
-											<small>위치</small>
-										</div>
-
-										<div class="p-2">
-											<small>종류</small>
-										</div>
-
-
-										<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
-										<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">좋아요</button>
-
 									</div>
 								</div>
 							</div>
-						</div>
-						<!-- 1번째 줄 시작 -->
+						</c:forEach>
+						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 					</div>
 					<!-- 썸네일 row -->
 				</div>
@@ -168,7 +179,7 @@
 
 
 	<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

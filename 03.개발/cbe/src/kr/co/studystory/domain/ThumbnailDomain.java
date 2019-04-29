@@ -91,4 +91,9 @@ public class ThumbnailDomain {
 		this.favFlag = favFlag;
 	}
 
+	@Override
+	public String toString() {
+		return "ThumbnailDomain [sNum=" + sNum + ", studyName=" + studyName + ", loc=" + loc + ", category=" + category + ", img=" + img + ", recruitment=" + recruitment + ", inputDate=" + inputDate + ", nick=" + nick + ", userImg=" + userImg + ", favFlag=" + favFlag + "]";
+	}
+
 }// class

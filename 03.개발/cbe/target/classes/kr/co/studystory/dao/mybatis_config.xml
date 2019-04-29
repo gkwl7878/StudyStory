@@ -18,6 +18,7 @@
   <mappers>
     <mapper resource="kr/co/studystory/mapper/study_notice_mapper.xml"/> 
   	<!-- 재현 -->
+	 <mapper resource="kr/co/studystory/mapper/study_search_mapper.xml" />
     <mapper resource="kr/co/studystory/mapper/study_info_mapper.xml"/> 
     <mapper resource="kr/co/studystory/mapper/login_mapper.xml"/> 
     <mapper resource="kr/co/studystory/mapper/signup_mapper.xml"/> 
