@@ -2,7 +2,7 @@ package kr.co.studystory.domain;
 
 public class MyStudy {
 
-	private String sNum, studyName, loc, category, img, recruitment, inputdate, nick, deacivation;
+	private String sNum, studyName, loc, category, img, recruitment, inputdate, nick, deactivation;
 
 	public String getsNum() {
 		return sNum;
@@ -68,12 +68,12 @@ public class MyStudy {
 		this.nick = nick;
 	}
 
-	public String getDeacivation() {
-		return deacivation;
+	public String getDeactivation() {
+		return deactivation;
 	}
 
-	public void setDeacivation(String deacivation) {
-		this.deacivation = deacivation;
+	public void setDeactivation(String deacivation) {
+		this.deactivation = deacivation;
 	}
 	
 	
