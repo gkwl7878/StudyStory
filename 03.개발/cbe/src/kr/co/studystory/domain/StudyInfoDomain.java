@@ -83,9 +83,7 @@ public class StudyInfoDomain {
 
 	@Override
 	public String toString() {
-		return "StudyInfoDomain [studyName=" + studyName + ", loc=" + loc + ", category=" + category + ", content="
-				+ content + ", studyImg=" + studyImg + ", leaderImg=" + leaderImg + ", inputDate=" + inputDate
-				+ ", nick=" + nick + ", introduce=" + introduce + "]";
+		return "StudyInfoDomain [studyName=" + studyName + ", loc=" + loc + ", category=" + category + ", content=" + content + ", studyImg=" + studyImg + ", leaderImg=" + leaderImg + ", inputDate=" + inputDate + ", nick=" + nick + ", introduce=" + introduce + "]";
 	}
 
 }// class
