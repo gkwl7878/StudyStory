@@ -22,6 +22,7 @@ import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.service.StudyGroupService;
 import kr.co.studystory.vo.ConditionVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
+import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
@@ -124,17 +125,29 @@ public class UserStudyController {
 		}//leaveStudyPage
 		
 		@RequestMapping(value="study_group/leave_study.do" , method=POST )
-		public String leaveStudyProcess(LeaveAlarmVO la_vo,LeaveVO l_vo, HttpSession session, Model model) {
+		public String leaveStudyProcess(LeaveVO l_vo , HttpSession session, Model model) {
+			boolean alarmFlag=false;
+			LeaveStudyVO ls_vo=new LeaveStudyVO();
+			boolean leaveFlag=sgs.leaveStudy(ls_vo);
+			LeaveAlarmVO la_vo=new LeaveAlarmVO();
 			
 			String id=(String)session.getAttribute("id");
-			la_vo.setLeaderId(id);			
-			la_vo.setReason("이유");
-			sgs.sendLeaveAlarm(la_vo);
+			if(leaveFlag) {
+				la_vo.setLeaderId(id);			
+				la_vo.setReason("탈퇴이유");
+				la_vo.setCategory("취업");
+				la_vo.setContent("내용");
+				la_vo.setSubject("제목");
+				alarmFlag=sgs.sendLeaveAlarm(la_vo);
+			}
+			String url="forward:";
+			if(alarmFlag&&leaveFlag) {
+				model.addAttribute("acceptFlag",true);
+				url="forward:index.do";
+			}
 			
-			
-			l_vo.setId(id);
-			l_vo.setsNum("s_0000041");
-			l_vo.setReason("이유");
+			ls_vo.setId(id);
+			ls_vo.setsNum("s_0000041");
 
 			
 			model.addAttribute("id",l_vo.getId());

@@ -174,7 +174,8 @@
 
 			<div class="row" style="margin-bottom: 60px;">
 				<a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 250px; margin-right: 10px;">취소</a> 
-				<input type="submit" value="승인요청" class="btn btn-primary btn-lg" name="request" id="request" style="right: 100">
+				<a class="btn btn-secondary btn-lg" href="#void" role="button" style="right: 100; margin-right: 10px;">승인요청</a> 
+				<input type="submit" value="승인요청" class="btn btn-primary btn-lg" name="request" id="request" >
 			</div>
 	</div>
 </form>

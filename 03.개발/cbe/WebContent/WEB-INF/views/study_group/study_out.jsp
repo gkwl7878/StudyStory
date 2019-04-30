@@ -20,7 +20,9 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript">
-  
+  	$("#out").click(function() {
+  		document.frm.action="leave_study.do";
+  	})
   </script>
 </head>
 <body>
@@ -31,7 +33,7 @@
 	
 	
 	<div id="wrap" >
-		<form action="study_group/leave_study.do" method="post">
+		<form action="study_group/leave_study.do" method="post" id="frm" name="frm">
 		 <br/><br/>
 		 <div style="border:1px solid #D7D7D7; padding:40px"><br/><br/>
 		<h1 ><Strong>정말 이 스터디를 탈퇴하시겠어요?</Strong></h1>
@@ -45,7 +47,7 @@
   </div>
 	
   <a class="btn btn-secondary btn-lg" href="#void" role="button" >돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-secondary btn-lg" href="#void" role="button">스터디 탈퇴</a>
+  <a class="btn btn-secondary btn-lg" href="#void" role="button" id="out">스터디 탈퇴</a>
   </div>
 </form>
 	</div>

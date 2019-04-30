@@ -12,6 +12,7 @@ import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.vo.ConditionVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
+import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
 
@@ -83,6 +84,20 @@ public class StudyGroupService {
 	
 	public boolean sendLeaveAlarm(LeaveAlarmVO la_vo) {
 		boolean flag=false;
+		
+		if(sg_dao.insertLeaveAlarm(la_vo)) {
+			flag=true;
+		}
+		
+		return flag;
+	}//sendLeaveAlarm
+	
+	public boolean leaveStudy(LeaveStudyVO ls_vo) {
+		boolean flag=false;
+		
+		if(sg_dao.deleteMember(ls_vo)) {
+			flag=true;
+		}
 		
 		return flag;
 	}
