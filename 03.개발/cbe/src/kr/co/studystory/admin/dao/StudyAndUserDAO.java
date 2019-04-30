@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
+import kr.co.studystory.admin.domain.DetailUser;
 import kr.co.studystory.admin.domain.NewStudyInfo;
 import kr.co.studystory.admin.domain.UserInfo;
 import kr.co.studystory.admin.vo.AcceptVO;
@@ -142,8 +143,23 @@ public class StudyAndUserDAO {
 		return list;
 	}
 	
+	public DetailUser selectDatailUserInfo(String id) {
+		DetailUser du=null;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		du= ss.selectOne("userDetail",id);
+		ss.close();
+		return du;
+	}
+	
 	public static void main(String[] args) {
-		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
+/*		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
+		UserBoardVO ub_vo= new UserBoardVO();
+		ub_vo.setBegin(1);
+		ub_vo.setCurrPage(1);
+		ub_vo.setEnd(10);
+		ub_vo.setSearchCondition("´Ð³×ÀÓ");
+		ub_vo.setSearchWord("user");
+		sau_dao.selectUserInfo(ub_vo);*/
 	}
 	
 }

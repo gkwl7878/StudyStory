@@ -53,10 +53,10 @@
 				</div>
 				<div class="col-2" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
 					<select class="form-control" name="searchCondition" style="font-size: 12px;">
-						<option>--검색조건--</option>
-						<option>아이디</option>
-						<option>이름</option>
-						<option>닉네임</option>
+						<option ${param.searchCondition eq  ""?"selected='selected'":"" }>--검색조건--</option>
+						<option ${param.searchCondition eq  "아이디"?"selected='selected'":"" }>아이디</option>
+						<option ${param.searchCondition eq  "이름"?"selected='selected'":"" }>이름</option>
+						<option ${param.searchCondition eq  "닉네임"?"selected='selected'":"" }>닉네임</option>
 					</select>
 				</div>
 				<div class="col-1" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
@@ -86,7 +86,10 @@
 						<c:set var="i" value="${i+1 }"/>
 							<tr>
 								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
-								<td class="text-center"><c:out value="${uList.id }"/></td>
+								<td class="text-center"><a href="user_detail.do?currPage=${currPage}&id=${uList.id}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
+									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
+									><c:out value="${uList.id }"/></a></td>
 								<td class="text-center"><c:out value="${uList.nick }"/></td>
 								<td class="text-center"><c:out value="${uList.name}"/></td>
 								<td class="text-center"><c:out value="${uList.tel }"/></td>

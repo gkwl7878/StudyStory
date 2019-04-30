@@ -9,9 +9,11 @@ import org.springframework.stereotype.Component;
 import kr.co.studystory.admin.dao.AdCommonDAO;
 import kr.co.studystory.admin.dao.StudyAndUserDAO;
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
+import kr.co.studystory.admin.domain.DetailUser;
 import kr.co.studystory.admin.domain.NewStudyInfo;
 import kr.co.studystory.admin.domain.UserInfo;
 import kr.co.studystory.admin.vo.AcceptVO;
+import kr.co.studystory.admin.vo.DetailUserVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
 import kr.co.studystory.admin.vo.RefuseVO;
 import kr.co.studystory.admin.vo.UserBoardVO;
@@ -67,7 +69,7 @@ public class StudyAndUserService {
 	}
 	
 	/**
-	 * User의 List 읽어오기
+	 * User의 List 조회
 	 * @param ub_vo
 	 * @return
 	 */
@@ -77,6 +79,20 @@ public class StudyAndUserService {
 		list= sau_dao.selectUserInfo(ub_vo);
 		
 		return list;
+	}
+	
+	/**
+	 * User 상세정보 조회
+	 * @param id
+	 * @return
+	 */
+	public DetailUser searchDetailUser(String id) {
+		DetailUser du=sau_dao.selectDatailUserInfo(id);
+		return du;
+	}
+	
+	public boolean updateModifyUser(DetailUserVO du_vo) {
+		
 	}
 	
 	

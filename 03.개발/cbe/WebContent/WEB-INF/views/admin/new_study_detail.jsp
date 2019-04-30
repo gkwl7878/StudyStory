@@ -131,11 +131,13 @@
 			</div>
 		</div>
 		<div class="row" style="margin-top: 30px; margin-left: 116px">
-			<a class="btn btn-secondary btn" href="new_study.do?sNum=${param.sNum}&acceptFlag=${acceptFlag}"  role="button" style="margin-left: 180px;">목록으로</a> 
+			<a class="btn btn-secondary btn" href="new_study.do?currPage=${param.currPage}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+									&allStudy=${param.allStudy}"  role="button" style="margin-left: 180px;">목록으로</a> 
 			<!--알람: id,subject, category, content  -->
-			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}
+			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}&currPage=${param.currPage}
 				&id=${requestScope.id }" role="button" style="margin-left: 10px;">수락</a> 
-			<a class="btn btn-secondary btn" href="study_reject.do?sNum=${param.sNum}&id=${requestScope.id }" role="button" style="margin-left: 10px;">거절</a>
+			<a class="btn btn-secondary btn" href="study_reject.do?sNum=${param.sNum}&currPage=${param.currPage}&id=${requestScope.id }" role="button" style="margin-left: 10px;">거절</a>
 		</div>
 	</div>
 

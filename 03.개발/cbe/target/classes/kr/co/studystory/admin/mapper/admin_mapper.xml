@@ -103,7 +103,7 @@
 	where subject like '%'||#{searchWord}||'%'
 </select>
 
-<!-- NewStudy -->
+<!--//////////////////////////////////////////// NewStudy Mapper////////////////////////////////////////////////// -->
 <resultMap type="kr.co.studystory.admin.domain.NewStudyInfo" id="newStudyResult">
 	<result column="s_num" property="sNum"/>
 	<result column="id" property="id"/>
@@ -133,7 +133,6 @@
 	<result column="img" property="img"/>
 	<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String"/>
 </resultMap>
-
 <select id="nsDetail" resultMap="nsDetailResult" parameterType="String">
 	select id, category, loc, study_name, input_date, img, content
 	from study
@@ -157,8 +156,7 @@
 	where s_num= #{sNum}
 </update>
 
-<!-- User -->
-
+<!--//////////////////////////////////////////// User Mapper////////////////////////////////////////////////// -->
 <resultMap type="kr.co.studystory.admin.domain.UserInfo" id="userInfoResult">
 	<result column="id" property="id"/>
 	<result column="nick" property="nick"/>
@@ -175,19 +173,33 @@
 		select id, nick, name, tel , email, reg_date,
 		row_number() over(order by reg_date desc) r_num
 		from user_table
+		<if test="'아이디'.equals(searchCondition)">
+			where id like '%'||#{searchWord}||'%' 
+		</if>
+		<if test="'닉네임'.equals(searchCondition)">
+			where nick like '%'||#{searchWord}||'%' 
+		</if>
+		<if test="'이름'.equals(searchCondition)">
+			where name like'%'||#{searchWord}||'%' 
+		</if>
 	)
-	<if test="''.equals(searchWord)||searchWord==null">
-		where r_num between #{begin} and #{end}
-	</if>
-	<if test="'아이디'.equals(searchCondition)">
-		where r_num between #{begin} and #{end} and( id like '%'||#{searchWord}||'%' )
-	</if>
-	<if test="'닉네임'.equals(searchCondition)">
-		where r_num between #{begin} and #{end} and( nick like '%'||#{searchWord}||'%' )
-	</if>
-	<if test="'이름'.equals(searchCondition)">
-		where r_num between #{begin} and #{end} and ( name like'%'||#{searchWord}||'%' )
-	</if>
+		where r_num between #{begin} and #{end}	
+</select>
+
+<!-- name, tel, zipcode, addr1, addr2, question, answer; -->
+<resultMap type="kr.co.studystory.admin.domain.DetailUser" id="userDetailResult">
+	<result column="name" property="name"/>
+	<result column="tel" property="tel"/>
+	<result column="zipcode" property="zipcode"/>
+	<result column="addr1" property="addr1"/>
+	<result column="addr2" property="addr2"/>
+	<result column="question" property="question" />
+	<result column="answer" property="answer"/>
+</resultMap>
+<select id="userDetail" resultMap="userDetailResult" parameterType="String">
+	select name, tel, zipcode, addr1, addr2, question, answer
+	from user_table
+	where id= #{id}
 </select>
 
 	
