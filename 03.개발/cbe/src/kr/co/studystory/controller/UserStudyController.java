@@ -1,5 +1,10 @@
 package kr.co.studystory.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,11 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.util.List;
-
 import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.service.StudyGroupService;
@@ -26,7 +26,6 @@ import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
-import oracle.net.aso.l;
 
 @Controller
 @Component
@@ -41,39 +40,38 @@ public class UserStudyController {
 	}//createStudyPage
 	
 	@ResponseBody
-	@RequestMapping(value="/check_dup_study_name.do", method=GET)
-	public String checkDupStudyName(String studyName) {
-		JSONObject json=new JSONObject();
+	@RequestMapping(value="study_group/check_dup_study_name.do", method=GET, produces="text/plain;charset=UTF-8")
+	public String checkDupStudyName(String study_name) {
 		
-		if(sgs.checkDupStudyName(studyName)) {
+		System.out.println("-----"+study_name);
+		JSONObject json = new JSONObject();
+		
+		if(sgs.checkDupStudyName(study_name)) {
 			json.put("dupFlag", true);
+			json.put("msg", "중복된 스터디명이 존재합니다");
 		}else {
 			json.put("dupFlag", false);
-			
+			json.put("msg", "사용가능한 스터디명입니다");
 		}
+		
 		return json.toJSONString();
 	}//checkDupStudyName
 	
-	@RequestMapping(value="study_group/create_study_process.do", method=GET)
+	@RequestMapping(value="study_group/create_study_process.do", method=POST)
 	public String createStudyProcess(NewStudyVO ns_vo,HttpSession session,HttpServletRequest request, Model model) {
-		
 		
 		String id=(String)session.getAttribute("id");
 		ns_vo.setId(id);
 		
-		String url="study_group/study_create";//???요청완료페이지
+		String url= "forward:../study_group/create_study.do";
 		
-		//이미지업로드
-		
-		if(sgs.addNewStudy(ns_vo)) {
-			url = "forword:request_study.do";
-			model.addAttribute("id",ns_vo.getId());
+		if(sgs.addNewStudy(ns_vo, request)) {
+			url = "study_group/study_create_request";
 		}else{
-			//????
+			model.addAttribute("createFailFlag", true);
 		}
-		return url;
-		//session:아이디얻기
 		
+		return url;
 	}//createStudyProcess
 	
 	@RequestMapping(value="study_group/request_study.do", method=RequestMethod.POST )
@@ -103,8 +101,7 @@ public class UserStudyController {
 		return "";
 	}
 	
-	
-	@RequestMapping(value="study_group/my_study.do", method=GET)
+	// @RequestMapping(value="study_group/my_study.do", method=GET)
 	public String myStudyPage(ConditionVO c_vo, HttpSession session, Model model) {
 		List<MyStudy> list=null;
 		
@@ -149,12 +146,12 @@ public class UserStudyController {
 			ls_vo.setId(id);
 			ls_vo.setsNum("s_0000041");
 
-			
-			model.addAttribute("id",l_vo.getId());
+		
+		model.addAttribute("id",l_vo.getId());
 
-			
-			return "";
-		}
+		
+		return "";
+	}
 }//class
 
 

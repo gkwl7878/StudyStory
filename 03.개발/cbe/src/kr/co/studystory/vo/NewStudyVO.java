@@ -2,14 +2,14 @@ package kr.co.studystory.vo;
 
 public class NewStudyVO {
 	
-	public String studyName, loc, category, content, img, id;
+	public String study_name, loc, category, content, img, id;
 
-	public String getStudyName() {
-		return studyName;
+	public String getStudy_name() {
+		return study_name;
 	}
 
-	public void setStudyName(String studyName) {
-		this.studyName = studyName;
+	public void setStudy_name(String study_name) {
+		this.study_name = study_name;
 	}
 
 	public String getLoc() {
@@ -51,6 +51,10 @@ public class NewStudyVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "NewStudyVO [study_name=" + study_name + ", loc=" + loc + ", category=" + category + ", content="
+				+ content + ", img=" + img + ", id=" + id + "]";
+	}
 }

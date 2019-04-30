@@ -10,7 +10,6 @@
 	min-height: 800px;
 	
 }
-/* #link{margin-left: 1000px; margin-top: 20px} */
 #loginTitle {
 	text-align: center;
 }
@@ -19,14 +18,9 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="./Resources/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
 <title>요청 완료</title>
-<!-- Custom styles for this template -->
-
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 	
 </script>
@@ -35,8 +29,6 @@
 	<!-- header -->
 	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
-
-
 
 	<div id="wrap">
 		<form>
@@ -56,7 +48,7 @@
 			</label>
 
 			<div class="row" style="margin-top: 50px; margin-left: 80px;">
-			<a class="btn btn-secondary btn-lg" href="#void"
+			<a class="btn btn-secondary btn-lg" href="../study_info/main.do"
 				role="button" >메인으로 가기</a> 
 				<a class="btn btn-primary btn-lg"
 				href="#void" role="button" style="margin-left: 30px;">마이페이지로 가기</a>
@@ -69,11 +61,9 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="./Resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="./Resources/js/popper.min.js"></script>
-	<script src="./Resources/js/bootstrap.min.js"></script>
-
-
+	<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="/third_prj/resources/js/popper.min.js"></script>
+	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>

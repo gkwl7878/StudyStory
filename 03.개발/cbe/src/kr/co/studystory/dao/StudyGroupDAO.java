@@ -24,7 +24,7 @@ public class StudyGroupDAO {
 	private static StudyGroupDAO sg_dao;
 	private SqlSessionFactory ssf=null;
 	
-	public StudyGroupDAO() {
+	private StudyGroupDAO() {
 
 	}
 	
@@ -54,13 +54,14 @@ public class StudyGroupDAO {
 		return ssf;
 	}//getSqlSessionFactory
 
-	//내 스터디 개설하기
-	public boolean selectDupStudyName(String studyName) {
+	/**
+	 * 스터디명 중복체크
+	 */
+	public boolean selectDupStudyName(String study_name) {
 		boolean flag=false;
 		
-		StudyGroupDAO sg_dao=StudyGroupDAO.sg_dao;
-		SqlSession ss=sg_dao.getSqlSessionFactory().openSession();
-		int cnt=ss.selectOne("selectDupStudyName",studyName);
+		SqlSession ss=StudyGroupDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.selectOne("selectDupStudyName", study_name);
 		ss.close();
 		
 		if(cnt==1) {
@@ -72,14 +73,15 @@ public class StudyGroupDAO {
 	
 	public boolean insertNewStudy(NewStudyVO ns_vo) {
 		boolean flag=false;
-		SqlSession ss=getSqlSessionFactory().openSession();
 		
+		SqlSession ss=StudyGroupDAO.getInstance().getSqlSessionFactory().openSession();
 		int cnt=ss.insert("insertStudy", ns_vo);
 		if(cnt==1) {
 			flag=true;
 			ss.commit();
 		}
 		ss.close();
+		
 		return flag;
 	}//insertNewStudy
 	
@@ -87,7 +89,7 @@ public class StudyGroupDAO {
 	public PrevStudyInfo selectPrevStudyInfo(String sNum) {
 		PrevStudyInfo psi=null;
 		
-		SqlSession ss=getSqlSessionFactory().openSession();
+		SqlSession ss=StudyGroupDAO.getInstance().getSqlSessionFactory().openSession();
 		psi=ss.selectOne("selectPrevStudyInfo", sNum);
 		ss.close();
 		
@@ -113,7 +115,7 @@ public class StudyGroupDAO {
 	public List<MyStudy> selectMyStudies(ConditionVO c_vo) {
 		List<MyStudy> list=null;
 		
-		SqlSession ss=getSqlSessionFactory().openSession();
+		SqlSession ss=StudyGroupDAO.getInstance().getSqlSessionFactory().openSession();
 		list=ss.selectList("selectMyStudies",c_vo);
 		
 		return list;
@@ -137,7 +139,7 @@ public class StudyGroupDAO {
 	public boolean insertLeaveAlarm(LeaveAlarmVO la_vo) {
 		boolean flag=false;
 		
-		SqlSession ss=getSqlSessionFactory().openSession();
+		SqlSession ss=StudyGroupDAO.getInstance().getSqlSessionFactory().openSession();
 		
 		int cnt=ss.update("insertLeaveAlarm",la_vo);
 		if(cnt==1) {
@@ -152,7 +154,7 @@ public class StudyGroupDAO {
 	public boolean deleteMember(LeaveStudyVO ls_vo) {
 		boolean flag=false;
 		
-		SqlSession ss=getSqlSessionFactory().openSession();
+		SqlSession ss=StudyGroupDAO.getInstance().getSqlSessionFactory().openSession();
 		
 		int cnt=ss.update("deleteStudy",ls_vo);
 		if(cnt==1) {
@@ -161,18 +163,6 @@ public class StudyGroupDAO {
 		}
 		ss.close();
 		return flag;
-	}
-	
-	public static void main(String[] args) {
-		NewStudyVO ns_vo=new NewStudyVO();
-		ns_vo.setStudyName("스터디이름");
-		ns_vo.setCategory("취업");
-		ns_vo.setContent("만나서반가워요");
-		ns_vo.setId("아이디");
-		ns_vo.setImg("img.jpg");
-		ns_vo.setLoc("강남");
-		
-		System.out.println(sg_dao.insertNewStudy(ns_vo));
 	}
 }//class
 
