@@ -8,9 +8,11 @@ import org.springframework.stereotype.Component;
 import kr.co.studystory.dao.StudyNoticeDAO;
 import kr.co.studystory.domain.DetailStudyNotice;
 import kr.co.studystory.domain.Homework;
+import kr.co.studystory.domain.NickAndId;
 import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.vo.NewCommentVO;
+import kr.co.studystory.vo.RecruitVO;
 @Component
 public class StudyNoticeService {
 	@Autowired
@@ -61,5 +63,22 @@ public class StudyNoticeService {
 		sn_dao.insertComment(nc_vo);
 		
 	}//insertComment
+	/**
+	 * 모집상태 변경
+	 * by 영근
+	 */
+	public boolean changeRecruit(RecruitVO rvo) {
+		boolean flag = false;
+		flag = sn_dao.updateRecruit(rvo);
+		return flag;
+	}
+	
+	/**
+	 * 스터디 참가자의 아이디, 닉네임을 반환하는 메서드
+	 * by 영근
+	 */
+	public List<NickAndId> getMember(String sNum) {
+		return sn_dao.selectMember(sNum);
+	}
 	
 }//class
