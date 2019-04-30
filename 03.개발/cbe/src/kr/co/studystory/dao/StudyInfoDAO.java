@@ -168,14 +168,14 @@ public class StudyInfoDAO {
 		i_cnt = ss.insert("insertJoinFormVO", jf_vo);
 
 		if (i_cnt == 1) {
-			
+
 			ja_vo.setContent(ja_vo.getStudyName() + "에 참여신청이 있습니다.");
 			i_cnt = i_cnt + (ss.insert("insertJoinAlarm", ja_vo));
-			
+
 			if (i_cnt == 2) {
 				ss.commit();
 			} // end if
-			
+
 		} // end if
 
 		return i_cnt;
@@ -195,7 +195,11 @@ public class StudyInfoDAO {
 		return list;
 	}// selectMyFavStudy
 
+	public List<ThumbnailDomain> selectThumbLatest() {
+		List<ThumbnailDomain> list = null;
+		SqlSession ss = getSessionFatory().openSession();
+		list = ss.selectList("selectThumbLatest");
+		return list;
+	}// selectThumbLatest
 
-	//public List<ThumbnailDomain> select
-	
 }// class

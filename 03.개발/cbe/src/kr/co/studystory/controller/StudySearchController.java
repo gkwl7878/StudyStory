@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.studystory.domain.ThumbnailDomain;
 import kr.co.studystory.service.StudyInfoService;
@@ -88,10 +89,11 @@ public class StudySearchController {
 	 * 
 	 * @return
 	 */
-	// @RequestMapping(value = "../search/search_order_process.do", method = GET)
+	@ResponseBody
+	@RequestMapping(value = "../search/search_order_process.do", method = GET)
 	public String searchOrderProccess(String order) {
 		JSONObject json = null;
-
+		json = sis.getOrderedList(order);
 		return json.toJSONString();
 	}// searchOrderProccess
 

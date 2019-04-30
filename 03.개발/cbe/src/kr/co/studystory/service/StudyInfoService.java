@@ -2,6 +2,7 @@ package kr.co.studystory.service;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import kr.co.studystory.dao.StudyInfoDAO;
@@ -129,8 +130,22 @@ public class StudyInfoService {
 		return list;
 	}// getThumbnailList
 
-	public JSONObject getLatestThumbList() {
+	/**
+	 * 정 렬의 종류에 따라 세롭게 정렬된 썸네일을 얻는 메서드.
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public JSONObject getOrderedList(String order) {
 		JSONObject json = null;
+		JSONArray jArr = null;
+		
+		if ("최신순".equals(order)) {
+			List<ThumbnailDomain> list = si_dao.selectThumbLatest();
+			json = new JSONObject();
+			json.put("LatestList", list);
+		} // end if
+
 		return json;
 	}// getLatestThumbList
 

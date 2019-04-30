@@ -51,15 +51,15 @@
 				url : "../search/search_order_process.do",
 				data :"order=" + order_select,
 				type : "get",
-				dataType : "json", // 응답 받을 데이터.
+				dataType : "JSON", // 응답 받을 데이터.
 				error : function(xhr) {
-					alert("요류발생.");
+					alert("오류발생" + xhr.status + " / " + xhr.statusText);
 					console.log(xhr.status + " / " + xhr.statusText);
 				},
 				success : function(json) {
 					if (json.result) {
-						alert("정상동작.");
-						
+						alert("정상동작");
+						alert(json);
 					}// end if
 				}// success
 			}); // ajax
