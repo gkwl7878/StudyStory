@@ -1,6 +1,7 @@
 package kr.co.studystory.dao;
 
 import java.io.IOException;
+
 import java.io.Reader;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.vo.NewHomeworkVO;
 import kr.co.studystory.vo.NewStudyNoticeVO;
+import kr.co.studystory.vo.NewCommentVO;
 import kr.co.studystory.vo.RecruitVO;
 import kr.co.studystory.vo.SnAlarmVO;
 
@@ -92,6 +94,24 @@ public class StudyNoticeDAO {
 		return list;
 	}//selectComment
 	
+	public boolean updateHomework(String s) {
+		boolean flag= false;
+		
+		
+		return flag;
+	}//updateHomework
+	
+	public void insertComment(NewCommentVO nc_vo) {
+		int cnt=0;
+		
+		SqlSession ss= getSessionFactory().openSession();
+		cnt=ss.insert("insertSnComment", nc_vo);
+		if(cnt==1) {
+			ss.commit();
+		}//end if
+		ss.close();
+		
+	}//insertComment
 	/**
 	 * 리더, 모집상태 변경
 	 * by 영근
@@ -212,7 +232,7 @@ public class StudyNoticeDAO {
 	public static void main(String[] args) {//테스트
 		StudyNoticeDAO sn_dao= new StudyNoticeDAO();
 		//sn_dao.selectSnList("s_000041");//카티션 곱 
-		sn_dao.selectDetailSn("sn_000042");// 
+		//sn_dao.selectDetailSn("sn_000042");// 
 		//sn_dao.selectHomework("sn_000041"); //과제
 		//sn_dao.selectComment("sn_000084");// 댓글
 		

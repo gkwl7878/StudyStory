@@ -13,6 +13,7 @@ import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.vo.NewHomeworkVO;
 import kr.co.studystory.vo.NewStudyNoticeVO;
+import kr.co.studystory.vo.NewCommentVO;
 import kr.co.studystory.vo.RecruitVO;
 import kr.co.studystory.vo.SnAlarmVO;
 @Component
@@ -52,6 +53,19 @@ public class StudyNoticeService {
 		return list; 
 	}//getComment
 	
+	public boolean checkHomework(String sn_num) {
+		boolean flag= false;
+		
+		flag=sn_dao.updateHomework(sn_num);
+		
+		return flag;
+	}//checkHomework
+	
+	public void insertComment(NewCommentVO nc_vo) {
+		
+		sn_dao.insertComment(nc_vo);
+		
+	}//insertComment
 	/**
 	 * 모집상태 변경
 	 * by 영근
