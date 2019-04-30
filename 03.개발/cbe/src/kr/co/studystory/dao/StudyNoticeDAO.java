@@ -16,8 +16,11 @@ import kr.co.studystory.domain.Homework;
 import kr.co.studystory.domain.NickAndId;
 import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNotice;
+import kr.co.studystory.vo.NewHomeworkVO;
+import kr.co.studystory.vo.NewStudyNoticeVO;
 import kr.co.studystory.vo.NewCommentVO;
 import kr.co.studystory.vo.RecruitVO;
+import kr.co.studystory.vo.SnAlarmVO;
 
 ////스터디 노티스 dao 정미
 @Component
@@ -140,6 +143,90 @@ public class StudyNoticeDAO {
 		
 		return list;
 	}
+	
+	/**
+	 * nick으로 id 조회하는 메서드
+	 * by 영근
+	 */
+	public String selectIdByNick(String nick) {
+		
+		SqlSession ss= getSessionFactory().openSession();
+		String id = ss.selectOne("selectIdByNick", nick);
+		ss.close();
+		
+		return id;
+	}
+	
+	/**
+	 * 스터디 공지 등록 시 과제 등록하기
+	 * by 영근
+	 */
+	public boolean insertNewHw(NewHomeworkVO nhwvo) {
+		boolean flag = false;
+		
+		SqlSession ss= getSessionFactory().openSession();
+		int cnt = ss.insert("insertNewHw",nhwvo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
+	/**
+	 * 스터디 공지를 작성하는 메서드
+	 * by 영근
+	 */
+	public boolean insertNewSn(NewStudyNoticeVO nsnvo) {
+		boolean flag = false;
+		
+		SqlSession ss= getSessionFactory().openSession();
+		int cnt = ss.insert("insertNewSn", nsnvo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
+	/**
+	 * 가장 최근 스터디공지가 등록되었을 때
+	 * sn_num을 반환하는 메서드
+	 * by 영근
+	 */
+	public String selectLatestSnNum(String s_num) {
+		String sn_num = "";
+		
+		SqlSession ss= getSessionFactory().openSession();
+		sn_num = ss.selectOne("selectLatestSnNum", s_num);
+		ss.close();
+		
+		return sn_num;
+	}
+	
+	/**
+	 * 알람을 추가하는 메서드
+	 * by 영근
+	 */
+	public boolean insertNewSnAlarm(SnAlarmVO savo) {
+		boolean flag = false;
+		
+		SqlSession ss= getSessionFactory().openSession();
+		int cnt = ss.insert("insertNewSnAlarm",savo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
+	}
+	
+	
 	
 	
 	public static void main(String[] args) {//테스트

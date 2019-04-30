@@ -82,12 +82,6 @@
 			            map: map,
 			            position: coords
 			        });
-			        
-			       /*  // 인포윈도우로 장소에 대한 설명을 표시합니다
-			        var infowindow = new daum.maps.InfoWindow({
-			            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-			        });
-			        infowindow.open(map, marker); */
 			
 			        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 			        map.setCenter(coords);
@@ -97,6 +91,10 @@
   </script>
   <script type="text/javascript">
   	$(function() {
+  		nickArr = new Array(); // 전역변수화
+  		workloadArr = new Array();
+  		var i = 0;
+  		
   		$("#writeBtn").click(function() {
   			
   			var subject = $("#subject").val();
@@ -132,10 +130,28 @@
   				return;
   			}
   			
-  			
   			// 과제를 먼저 AJAX로 등록 후, submit을 수행하자
+  			/////////// 먼저 숙제데이터를넣으려 했으나 sn_num이 생기려면 공지를 먼저 추가해야 함
+  			// 때문에 javascript array변수에 담긴 값을 submit할때 같이 전송하는 방법이 있는지??
+  			// 그냥 
   			
+  			var sendingNick = new Array();
+  			var sendingWorkload = new Array();
+  			var k = 0;
+  			for(var j=0; j<nickArr.length; j++) {
+  				if(nickArr[j] != "") {
+  					sendingNick[k] = nickArr[j];
+  					sendingWorkload[k] = workloadArr[j];
+  					k++;
+  				}
+  			}
   			
+  			$("[name='hwNick']").val(sendingNick);
+  			console.log(sendingNick);
+  			$("[name='hwWorkload']").val(sendingWorkload);
+  			console.log(sendingWorkload);
+  			
+  			$("#writeFrm").submit();
   		});
   		
   		
@@ -148,7 +164,14 @@
   				return;
   			}
   			
-  			var workload = $("#worklad").val();
+  			for(var j=0; j<nickArr.length; j++) {
+  				if(nickArr[j] == nick) {
+  					alert("이미 과제를 등록하신 스터디원입니다");
+  					return;
+  				}
+  			}
+  			
+  			var workload = $("#workload").val();
   			
   			if (workload == "") {
   				alert("과제내용을 입력해주세요");
@@ -157,13 +180,29 @@
   			}
   			
   			$("#hwTab:last").append(
-  					"<tr><td width='100' style='text-align:right;'><span class='font12bold'>"+nick+"</span></td>"
+  					"<tr><td width='100' style='text-align:center;'><span class='font12bold'>"+nick+"</span></td>"
   		  		+"<td width='400'><span class='font12bold' style='padding-left:20px;'>"+workload+"</span></td>"
-  		  		+"<td width='100' style='text-align:right;'><a href='#'><img onclick='$(this).closest('tr').remove();' src='/third_prj/resources/images/minus.png' style='width:20px; height:20px;'/></a></td></tr>"
+  		  		+"<td width='100' style='text-align:right;'><a href='#'><img onclick='deleteHw(this)' src='/third_prj/resources/images/minus.png' style='width:20px; height:20px;'/></a></td></tr>"
+  		  		//+"<td width='100' style='text-align:right;'><a href='#'><img onclick='$(this).closest(\"tr\").remove();' src='/third_prj/resources/images/minus.png' style='width:20px; height:20px;'/></a></td></tr>"
   			);
   			
+  			nickArr[i] = nick;
+  			workloadArr[i] = workload;
+  			i++;
   		});
   	});
+  	
+		function deleteHw(imgTag) {
+ 			deleteNick = $(imgTag).closest("tr").children('td:first').text();
+ 			
+ 			for(var j=0; j<nickArr.length; j++) {
+ 				if (nickArr[j] == deleteNick) {
+ 					nickArr[j] = "";
+ 					workloadArr[j] = "";
+ 				}
+ 			}
+ 			$(imgTag).closest("tr").remove();
+ 		}
   </script>
 </head>
 <body>
@@ -180,7 +219,11 @@
   <div style="height:20px;"></div>
   <!-- 점보트론 : 전광판 -->
 
-	<form>
+	<form action="wrtie_process.do" method="post" id="writeFrm">
+	<input type="hidden" name="hwNick"/>
+	<input type="hidden" name="hwWorkload"/>
+	<input type="hidden" name="s_num" value="${ param.sNum }"/>
+	
 	<div class="container col-10" style="margin:0px auto; width:800px;">
     <div class="row">
    		<div class="col-3 font20bold text-center">제목</div>
@@ -214,15 +257,10 @@
    	
    	
    	
-	  <div class="row" style="margin-top:30px;">
+	  <div class="row" style="margin-top:10px;">
 	  	<div class="col-3"></div>
 	  	<div class="col-9">
 	  	<table id="hwTab">
-	  		<tr>
-	  			<td width="100" style="text-align:right;"><span class="font12bold">스터디원1</span></td>
-	  			<td width="400"><span class="font12bold" style="padding-left:20px;">이런거 해오세요~</span></td>
-	  			<td width="100" style="text-align:right;"><a href="#"><img onclick="$(this).closest('tr').remove();" src="/third_prj/resources/images/minus.png" style="width:20px; height:20px;"/></a></td>
-	  		</tr>
 	  	</table>
 	  	</div>
 	  </div>

@@ -80,4 +80,34 @@ where  s.id=ut.id and s.s_num=sn.s_num and sn.sn_num=#{snNum}
 	WHERE m.s_num=#{ id } AND m.id = u.id
 </select>
 
+<select id="selectIdByNick" parameterType="String" resultType="String">
+	SELECT id
+	FROM user_table
+	WHERE nick=#{ nick }
+</select>
+
+<insert id="insertNewHw" parameterType="kr.co.studystory.vo.NewHomeworkVO">
+	INSERT INTO homework(id, workload, sn_num)
+	VALUES(#{ id }, #{ workload }, #{ sn_num })
+</insert>
+
+<insert id="insertNewSn" parameterType="kr.co.studystory.vo.NewStudyNoticeVO">
+	INSERT INTO study_notice(sn_num, s_num, subject, meeting_info, content, addr)
+	VALUES(sn_code, #{ s_num }, #{ subject }, #{ meeting_info }, #{ content }, #{ addr })
+</insert>
+
+<select id="selectLatestSnNum" parameterType="String" resultType="String">
+	SELECT sn_num
+	FROM (SELECT sn_num
+		   	FROM study_notice
+		   	WHERE s_num = #{ s_num }
+				ORDER BY input_date DESC)
+	WHERE rownum=1
+</select>
+
+<insert id="insertNewSnAlarm" parameterType="kr.co.studystory.vo.SnAlarmVO">
+	INSERT INTO ALARM(a_num, category, subject, content, id)
+	VALUES(a_code, #{ category }, #{ subject }, #{ content }, #{ id })
+</insert>
+
 </mapper>
