@@ -20,9 +20,14 @@
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#searchBtn").click(function() {
-			
-		})
+		<c:if test="${ !loginSession }">
+			location.replace("login.do");
+		</c:if>
+		
+		<c:if test="${removeFlag }">
+			alert("${param.id}님이 삭제처리 되었습니다");
+		</c:if>
+		
 	});//ready
 </script>
 </head>

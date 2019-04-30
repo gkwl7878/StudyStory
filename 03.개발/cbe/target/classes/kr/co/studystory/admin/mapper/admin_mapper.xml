@@ -173,17 +173,18 @@
 		select id, nick, name, tel , email, reg_date,
 		row_number() over(order by reg_date desc) r_num
 		from user_table
+		where deactivation is null
 		<if test="'아이디'.equals(searchCondition)">
-			where id like '%'||#{searchWord}||'%' 
+			and id like '%'||#{searchWord}||'%' 
 		</if>
 		<if test="'닉네임'.equals(searchCondition)">
-			where nick like '%'||#{searchWord}||'%' 
+			and nick like '%'||#{searchWord}||'%' 
 		</if>
 		<if test="'이름'.equals(searchCondition)">
-			where name like'%'||#{searchWord}||'%' 
+			and name like'%'||#{searchWord}||'%' 
 		</if>
 	)
-		where r_num between #{begin} and #{end}	
+		where r_num between #{begin} and #{end}
 </select>
 
 <!-- name, tel, zipcode, addr1, addr2, question, answer; -->
@@ -201,6 +202,30 @@
 	from user_table
 	where id= #{id}
 </select>
+
+<update id="updateModUser" parameterType="kr.co.studystory.admin.vo.DetailUserVO">
+	<!-- id,name,pass,tel,zipcode,addr1,addr2 -->
+	update user_table
+	set pass=#{pass}, tel=#{tel}, zipcode=#{zipcode}, addr1=#{addr1}, addr2=#{addr2}
+	where id= #{id}
+</update>
+
+<update id="updateDelUser" parameterType="String">
+	update user_table
+	set deactivation='Y'
+	where id= #{id}
+</update>
+
+<delete id="delJoinRecord" parameterType="String">
+	delete from join
+	where id=#{id}
+</delete>
+
+<delete id="delMemRecord" parameterType="String">
+	delete from member
+	where id=#{id}
+</delete>
+
 
 	
 </mapper>

@@ -126,8 +126,12 @@
 			<div class="col-3 font20bold">
 				<strong>상세설명</strong>
 			</div>
-			<div class="col-7 font20bold">
-				<textarea class="form-control" rows="3" style="resize: none; width: 440px; height: 300px; margin-top: 20px;" name="contents" readonly="readonly" >${requestScope.content}</textarea>
+			<div class="col-7 ">
+				<div class=" rounded-sm text-dark " style="min-height: 300px; margin-top: 20px; background-color:#E9ECEF; border: 1px solid #CED4DA; font-size: 17px; padding: 10px">
+					<c:out value="${requestScope.content}" escapeXml="false" />
+				</div>
+				<%-- <textarea class="form-control" rows="3" style="resize: none; width: 440px; height: 300px; margin-top: 20px;" 
+				name="contents" readonly="readonly" >${requestScope.content}</textarea> --%>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 30px; margin-left: 116px">

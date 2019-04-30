@@ -1,20 +1,23 @@
 package kr.co.studystory.admin.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.DetailUser;
 import kr.co.studystory.admin.domain.UserInfo;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.service.StudyAndUserService;
+import kr.co.studystory.admin.vo.DetailUserVO;
 import kr.co.studystory.admin.vo.UserBoardVO;
 import kr.co.studystory.admin.vo.UserDetailVO;
+import kr.co.studystory.util.ShaUtil;
 @Controller
 public class UserMngController {
 	
@@ -29,7 +32,7 @@ public class UserMngController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/admin/user_mng.do", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/user_mng.do", method= GET)
 	private String userMngPage(UserBoardVO ub_vo,Model model) {
 		int totalCount=cms.uTotalCount(ub_vo);
 		int pageScale=cms.pageScale();
@@ -75,7 +78,6 @@ public class UserMngController {
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
 		model.addAttribute("activeFlag","uActiveFlag");
-		System.out.println(list);
 		
 		return "/admin/user_mng";
 	}
@@ -86,7 +88,7 @@ public class UserMngController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/admin/user_detail.do",method=RequestMethod.GET)
+	@RequestMapping(value="/admin/user_detail.do",method= {GET,POST})
 	public String userDetailPage(UserDetailVO ud_vo, Model model) {
 		DetailUser du= saus.searchDetailUser(ud_vo.getId());
 		if("1".equals(du.getQuestion())) {
@@ -103,6 +105,28 @@ public class UserMngController {
 		model.addAttribute("answer",du.getAnswer());
 		
 		return "/admin/detail_member_info";
+	}
+	
+	/**
+	 * 유저 정보 수정
+	 * @param du_vo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/admin/user_modify.do", method=POST)
+	public String modifyUserProcess(DetailUserVO du_vo, Model model) {
+		du_vo.setPass(ShaUtil.shaEncoding(du_vo.getPass()));
+		boolean modifyFlag= saus.modifyUser(du_vo);
+		model.addAttribute("modifyFlag", modifyFlag);
+
+		return "forward:user_detail.do";
+	}
+	
+	@RequestMapping(value="/admin/user_delete.do", method=GET)
+	public String removeUserProcess(String id, Model model) {
+		boolean removeFlag= saus.removeUser(id);
+		model.addAttribute("removeFlag", removeFlag);
+		return "forward:user_mng.do";
 	}
 	
 }

@@ -54,6 +54,123 @@
 	        }
 	    }).open();
 	}
+	
+	$(function() {
+		
+		<c:if test="${ !loginSession }">
+			location.replace("login.do");
+		</c:if>
+		
+		<c:if test="${modifyFlag }">
+			alert("${param.id}님의 정보가 수정 되었습니다");
+		</c:if>
+		
+		$("#modifyBtn").click(function() {
+			
+			// 이름 한글 10자까지 입력 가능
+  			var name = $("#name").val();
+  			
+  			if(name == "") {
+  				alert("이름을 입력해주세요");
+  				$("#name").focus();
+  				return;
+  			}
+  			
+  			var pass= $("#pass").val();
+  			if (pass.length < 6) {
+  				alert("비밀번호는 6자보다 적을 수 없습니다");
+  				$("#pass").val("");
+  				$("#pass").focus();
+  				return;
+  			}
+  			
+  			if(!checkPassPattern(pass)) {
+  				alert("비밀번호는 영어 대소문자, 숫자를 포함해야 합니다");
+  				$("#pass").val("");
+  				$("#pass").focus();
+  				return;
+  			}
+  			
+  			var zipcode = $("#zipcode").val();
+  			var addr1 = $("#addr1").val();
+  			
+  			if (zipcode == "" || addr1 == "") {
+  				alert("주소검색을 이용하여 주소를 입력해주세요");
+  				return;
+  			}
+  			
+  			var addr2 = $("#addr2").val();
+  			
+  			if (addr2 == "") {
+  				alert("상세 주소를 입력해주세요");
+  				$("#addr2").focus();
+  				return;
+  			}
+  			
+  			var tel=$("#tel").val();
+  			var telArray=$("#tel").val().split("-");
+  			
+  			var tel1= telArray[0];
+  			var tel2 = telArray[1];
+  			var tel3 = telArray[2];
+  			
+  			if (tel == "") {
+  				alert("연락처를 입력해주세요");
+  				$("#tel").focus();
+  				return;
+  			}
+  			
+  			if(telArray.length<3){
+  				alert("연락처 형식이 잘못되었습니다.");
+  				$("#tel").focus();
+  				return;
+  			}
+  			
+  			var tempTel2 = tel2.replace(/[ㄱ-힣a-zA-Z~!@#$%^&*()_+={}\[\];:]/g, "");
+  			var tempTel3 = tel3.replace(/[ㄱ-힣a-zA-Z~!@#$%^&*()_+={}\[\];:]/g, "");
+  			
+  			if ((tempTel2 == "" || (tempTel2.length < 3))
+  					|| (tempTel3 == "" || (tempTel3.length !=4))) {
+  				alert("입력하신 연락처를 확인해주세요");
+  				$("#tel").focus();
+  				return;
+  			}
+  			
+			$("#userDetailFrm").submit();
+			$("#pass").val("");
+		})
+		
+		function checkPassPattern(pass) {
+  			var flag = false;
+  			
+  			// 비밀번호가 올바른 패턴인지 확인, 영문소,대문자,숫자 혼합
+  			// 소문자 지웠을 때 원래 길이랑 다르면 소문자 존재
+  			// 대문자 지웠을 때 원래 길이랑 다르면 대문자 존재
+  			// 숫자 지웠을 때 원래 길이랑 다르면 숫자 존재
+  			var temp = pass.replace(/[a-z]/g, "");
+  			
+  			if (pass.length == temp.length) { // 소문자 없음
+  				return flag;
+  			}
+  			
+  			temp = pass.replace(/[A-Z]/g, "");
+  			
+  			if (pass.length == temp.length) { // 대문자 없음
+  				return flag;
+  			}
+  			
+  			temp = pass.replace(/[0-9]/g, "");
+  			
+  			if (pass.length == temp.length) { // 대문자 없음
+  				return flag;
+  			}
+  			
+  			flag = true; // 세 조건 모두 만족
+  			return flag;
+  		}
+		
+		
+	});//ready
 </script>
 
 </head>
@@ -70,7 +187,7 @@
 				<c:param name="allStudy" value="${param.allStudy}"></c:param>
 	</c:import>
 	<!-- sidebar 끝 -->
-
+	<form id="userDetailFrm" action="user_modify.do" method="post">
 	<div class="container form-group" id="wrap">
 		<div class="row">
 			<div class="col-12 justify-content-left" style="margin-bottom: 20px; margin-top: 20px;">
@@ -84,6 +201,7 @@
 			</div>
 			<div class="col-9 " style="margin-top: 10px;">
 				<label>${param.id }</label>
+				<input type="hidden" name="id" value="${param.id }">
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 10px;">
@@ -91,7 +209,7 @@
 				<strong>이름</strong>
 			</div>
 			<div class="col-7 font20bold">
-				<input type="text" class="form-control" value="${requestScope.name }">
+				<input type="text" class="form-control" name="name" id="name" value="${requestScope.name }">
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 10px;">
@@ -99,7 +217,7 @@
 				<strong>비밀번호</strong>
 			</div>
 			<div class="col-7 font20bold" style="margin-top: 10px;">
-				<input type="password" class="form-control" >
+				<input type="password" class="form-control" name="pass"  id="pass">
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 10px;">
@@ -107,7 +225,7 @@
 				<strong>연락처</strong>
 			</div>
 			<div class="col-7 font20bold" style="margin-top: 10px;">
-				<input type="text" class="form-control"  value="${requestScope.tel }">
+				<input type="text" class="form-control" name="tel" id="tel" value="${requestScope.tel }">
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 10px;">
@@ -115,7 +233,7 @@
 				<strong>주소</strong>
 			</div>
 			<div class="col-5 font20bold" style="margin-top: 10px;">
-				<input type="text" class="form-control" readonly="readonly" id="zipcode" value="${requestScope.zipcode }">
+				<input type="text" class="form-control" readonly="readonly" id="zipcode" name="zipcode" value="${requestScope.zipcode }">
 			</div>
 			<div class="font20bold" style="margin-top: 10px;">
 				<input type="button" class="btn btn-secondary btn" id="searchZip" value="주소검색" placeholder="스터디명" style="margin-left: 12px;">
@@ -124,7 +242,7 @@
 		<div class="row" style="margin-bottom: 10px;">
 			<div class="col-3 font20bold" style="margin-top: 10px;"></div>
 			<div class="col-7 font20bold" style="margin-top: 10px;">
-				<input type="text" class="form-control" readonly="readonly" id="addr1" value="${requestScope.addr1 }">
+				<input type="text" class="form-control" readonly="readonly" id="addr1" name="addr1" value="${requestScope.addr1 }">
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 10px;">
@@ -132,7 +250,7 @@
 				<strong>상세주소</strong>
 			</div>
 			<div class="col-7 font20bold" style="margin-top: 10px;">
-				<input type="text" class="form-control"  value="${requestScope.addr2 }">
+				<input type="text" class="form-control" name="addr2" id="addr2" value="${requestScope.addr2 }">
 			</div>
 		</div>
 		<div class="row" style="margin-bottom: 10px;">
@@ -157,10 +275,13 @@
 			<a class="btn btn-secondary btn" href="user_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
 									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
 									&allStudy=${param.allStudy}" role="button" style="margin-left: 180px;">목록으로</a>
-			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">수정</a> 
-			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">탈퇴</a>
+			<input type="button" class="btn btn-secondary btn" value="수정" id="modifyBtn" style="margin-left: 10px;" />
+			<a class="btn btn-secondary btn" href="user_delete.do?id=${param.id }&currPage=${param.currPage}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+									&allStudy=${param.allStudy}" role="button" style="margin-left: 10px;">탈퇴</a>
 		</div>
 	</div>
+	</form>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="/third_prj/resources/js/popper.min.js"></script>

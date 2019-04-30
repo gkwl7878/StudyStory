@@ -91,8 +91,24 @@ public class StudyAndUserService {
 		return du;
 	}
 	
-	public boolean updateModifyUser(DetailUserVO du_vo) {
-		
+	/**
+	 * User 정보 수정
+	 * @param du_vo
+	 * @return
+	 */
+	public boolean modifyUser(DetailUserVO du_vo) {
+		boolean modifyUser=sau_dao.updateModifyUser(du_vo);
+		return modifyUser;
+	}
+	
+	/**
+	 * User삭제
+	 * @param id
+	 * @return
+	 */
+	public boolean removeUser(String id) {
+		boolean removeUser=sau_dao.transactionRemoveUser(id);
+		return removeUser;
 	}
 	
 	
