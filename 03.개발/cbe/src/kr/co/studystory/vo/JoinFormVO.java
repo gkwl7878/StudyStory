@@ -1,9 +1,32 @@
 package kr.co.studystory.vo;
 
+/**
+ * JOIN 테이블에 인서트 하기위한 정보를 가지는 VO.
+ * 
+ * @author owner
+ *
+ */
 public class JoinFormVO {
-	private String introduce_ta, apply_ta, id, s_num;
+
+	private String joinerId, sNum, introduce_ta, apply_ta;
 
 	/* setter & getter */
+
+	public String getJoinerId() {
+		return joinerId;
+	}
+
+	public void setJoinerId(String joinerId) {
+		this.joinerId = joinerId;
+	}
+
+	public String getsNum() {
+		return sNum;
+	}
+
+	public void setsNum(String sNum) {
+		this.sNum = sNum;
+	}
 
 	public String getIntroduce_ta() {
 		return introduce_ta;
@@ -21,28 +44,11 @@ public class JoinFormVO {
 		this.apply_ta = apply_ta;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getS_num() {
-		return s_num;
-	}
-
-	public void setS_num(String s_num) {
-		this.s_num = s_num;
-	}
-
 	/* setter & getter */
 
 	@Override
 	public String toString() {
-		return "JoinFormVO [introduce_ta=" + introduce_ta + ", apply_ta=" + apply_ta + ", id=" + id + ", s_num=" + s_num
-				+ "]";
+		return "JoinFormVO [joinerId=" + joinerId + ", sNum=" + sNum + ", introduce_ta=" + introduce_ta + ", apply_ta=" + apply_ta + "]";
 	}// toString
 
 }// class
