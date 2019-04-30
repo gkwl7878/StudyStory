@@ -78,7 +78,7 @@
 						<img class="rounded-circle" src="/third_prj/resources/images/nav_icon_my_page.png" style="width: 35px; height: 35px;">
 					</a>
 					<div class="dropdown-menu" aria-labelledby="my_menu">
-						<a class="dropdown-item" href="#">내 스터디</a>
+						<a class="dropdown-item" href="../study_group/my_study.do">내 스터디</a>
 						<a class="dropdown-item" href="#">내가 만든 스터디</a>
 						<a class="dropdown-item" href="#">관심 스터디 보기</a>
 						<a class="dropdown-item" href="../common_bbs/alarm.do">알림보기</a>
