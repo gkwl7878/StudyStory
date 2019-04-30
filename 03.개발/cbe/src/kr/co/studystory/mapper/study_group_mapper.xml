@@ -6,7 +6,7 @@
   	namespace : XML내에서 중복된 id를 사용할 수 있도록 구분하는 것.
   					(패키지와 비슷한 용도)
   -->
-<mapper namespace="kr.co.studystory">
+<mapper namespace="kr.co.studystory.study_group">
 	<resultMap type="kr.co.studystory.domain.PrevStudyInfo" id="studyResult">
 		<result column="study_name" property="name"/>
 		<result column="loc" property="loc"/>
@@ -40,16 +40,16 @@
 		<result column="accept_flag" property="joinAcceptFlag"/>
 	</resultMap>
 	
-<select id="selectDupStudyName" parameterType="String" resultType="int">
-	select count(*) cnt
-	from study
-	where s_num=#{s_num}
-</select>	
+	<select id="selectDupStudyName" parameterType="String" resultType="int">
+		select count(*) cnt
+		from study
+		where study_name=#{ study_name }
+	</select>	
 	
 	
   <insert id="insertStudy" parameterType="kr.co.studystory.vo.NewStudyVO">
-  insert into study(img,recruitment,accept_flag,input_date,deactivation,id,delete_flag,s_num,study_name,loc,category,content) 
-  values(#{img},'Y' ,'N' ,sysdate ,'N' ,#{id},'N' ,s_num.nextval,#{studyName},#{loc},#{category},#{content})
+    insert into study(s_num, study_name, loc, category, content, img, id, deactivation, delete_flag)
+	  values(s_code, #{ study_name }, #{ loc }, #{ category }, #{ content }, #{ img }, #{ id }, 'N', 'N')
   </insert>
   
   <select id="selectPrevStudyInfo" resultMap="studyResult" >
