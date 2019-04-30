@@ -23,6 +23,12 @@
 	  	<c:if test="${ recruitChanged }">
 	  		alert("모집상태가 변경되었습니다");
 	  	</c:if>
+	  	<c:if test="${ snAddSuccessFlag }">
+	  		alert("새로운 스터디 공지를 추가했습니다");
+	  	</c:if>
+	  	<c:if test="${ snAddFailFlag }">
+	  		alert("스터디 공지 등록에 실패했습니다");
+	  	</c:if>
 	  	
 	  	$("#recruitChangeBtn").click(function() {
 	  		$("#recruitChangeFrm").submit();
@@ -38,7 +44,7 @@
 	<!-- 점보트론 : 전광판 -->
   <section class="text-center bg-white mb-0" style="margin-top:90px; margin-bottom:20px;">
      <div class="container">
-        <h1 class="jumbotron-heading"><c:out value="${ param.study_name }"/></h1>
+        <h1 class="jumbotron-heading"><c:out value="${ study_name }"/></h1>
      </div>
   </section>
   <div style="height:20px;"></div>
@@ -56,7 +62,7 @@
 	    	<option value="Y" ${ recruitment eq 'Y' ? "selected" : "" }>모집중</option>
 	    	<option value="N" ${ recruitment eq 'Y' ? "" : "selected" }>모집종료</option>
 	    </select>
-	  	<input type="hidden" name="sNum" value="${ param.sNum }"/>
+	  	<input type="hidden" name="sNum" value="${ sNum }"/>
 	    <button type="button" class="btn btn-sm btn-outline-secondary" id="recruitChangeBtn">모집상태 변경</button>
     </form>
     </div>
