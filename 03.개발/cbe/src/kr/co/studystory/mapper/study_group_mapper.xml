@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.co.studystory.studygroup">
+
+<select id="selectMemberList"  resultType="kr.co.studystory.domain.MemberWithImg" parameterType="String">
+select ut.nick, ut.tel, ut.img
+from user_table ut, member m
+where ut.id=m.id and m.s_num=#{sNum}<!-- 's_000041'; -->
+
+</select>
+
+
+
+</mapper>
