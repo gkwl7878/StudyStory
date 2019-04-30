@@ -82,7 +82,7 @@ public class LeaderSnController {
 				// 알림 추가
 				savo = new SnAlarmVO();
 				savo.setCategory("스터디");
-				savo.setContent(nicks[i]+"님 ["+nsnvo.getSubject()+"]의 새로운 스터디 모임공지가 등록되었습니다. 확인 부탁드립니다.");
+				savo.setContent(nicks[i]+"님 ["+nsnvo.getSubject()+"]란 새로운 스터디 공지가 등록되었습니다. 확인해주세요~.");
 				savo.setId(tempId);
 				savo.setSubject("새로운 스터디 모임공지가 등록되었습니다.");
 				
