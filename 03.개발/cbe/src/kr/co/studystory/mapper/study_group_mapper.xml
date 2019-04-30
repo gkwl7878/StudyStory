@@ -87,4 +87,21 @@
   delete from study
   where id=#{id}
   </delete> 
+  
+  <!--스터디 활동 종료  -->
+  <select id="selectMemberId" resultType="String">
+  select m.id
+	from user_table u, study s, member m
+	where s.s_num=#{s_num} and u.id=m.id and m.s_num=s.s_num
+  </select>
+  
+  <update id="updateCloseAlarm" parameterType="kr.co.studystory.vo.CloseAlarmVO">
+  
+  </update>
+  
+  <update id="updateDeactivation" parameterType="">
+  	update study
+  	set delete_flag='Y'
+  	where s_num=
+  </update>
 </mapper>
