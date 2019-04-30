@@ -58,7 +58,7 @@
 					</div>
 				</li>
 				<li class="nav-item"><a class="nav-link text-secondary" href="../search/search.do">스터디 찾기</a></li>
-				<li class="nav-item"><a class="nav-link text-secondary" href="#">스터디 만들기</a></li>
+				<li class="nav-item"><a class="nav-link text-secondary" href="../study_group/create_study.do">스터디 만들기</a></li>
 			</ul>
 			<a class="navbar-brand mx-auto text-dark" href="../study_info/main.do"><img src="/third_prj/resources/images/study_story_logo2.png" width="140" height="40"/></a>
 			<form class="form-inline my-2 my-lg-0">
