@@ -63,7 +63,8 @@ public class UserSnController {
 	@RequestMapping(value="/study_notice/add_reply.do",method=GET)
 	public String addComment(NewCommentVO ncvo, HttpSession hs,  Model model) {
 		JSONObject json=null;
-		/*json=sns.writeReply();*/
+	//	json=sns.insertComment(ncvo);
+		
 		
 		return "study_notice/notice_detail";
 	}//addComment

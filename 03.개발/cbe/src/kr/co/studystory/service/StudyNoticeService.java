@@ -2,6 +2,7 @@ package kr.co.studystory.service;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -50,6 +51,11 @@ public class StudyNoticeService {
 		return list; 
 	}//getComment
 	
+	/**
+	 * 정미 숙제 확인
+	 * @param sn_num
+	 * @return
+	 */
 	public boolean checkHomework(String sn_num) {
 		boolean flag= false;
 		
@@ -58,10 +64,16 @@ public class StudyNoticeService {
 		return flag;
 	}//checkHomework
 	
-	public void insertComment(NewCommentVO nc_vo) {
+	/**
+	 * 정미 -댓글 달기
+	 * @param nc_vo
+	 * @return
+	 */
+	public boolean insertComment(NewCommentVO nc_vo) {
+		boolean flag =false;
 		
-		sn_dao.insertComment(nc_vo);
-		
+		//flag= sn_dao.insertComment(nc_vo);
+		return flag;
 	}//insertComment
 	/**
 	 * 모집상태 변경
