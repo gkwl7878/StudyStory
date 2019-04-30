@@ -32,25 +32,25 @@
 
 	<div id="wrap">
 		<form>
-			<label style="font-size: 60px; margin-top: 150px; text-align: center;">
+			<label style="font-size: 30px; margin-top: 150px; text-align: center;">
 				요청이 <strong>완료</strong>되었습니다.
 			</label>
-			<label style="font-size: 30px; margin-top: 100px; text-align: center;">
+			<label style="font-size: 15px; margin-top: 100px; text-align: center;">
 				빠른 시일 내에 승인요청 처리를 완료하겠습니다.
 			</label>
-			<label style="font-size: 40px; margin-top: 50px; text-align: left;">
+			<label style="font-size: 20px; margin-top: 50px; text-align: left;">
 				<strong>마이페이지</strong>에서 확인해주세요
 			</label>
-			<label style="font-size: 20px; margin-top: 50px; text-align: left;">
+			<label style="font-size: 13px; margin-top: 50px; text-align: left;">
 				궁금한 사항이 있으실 경우 <a id="" href="#void" class="link" target="_blank">자주묻는
 					질문</a>을 확인해주세요. <br/>그 외 추가적인 문의사항은 <a id="" href="#void" class="link"
 					target="_blank">관리자의 문의사항</a>을 이용해주세요.
 			</label>
 
 			<div class="row" style="margin-top: 50px; margin-left: 80px;">
-			<a class="btn btn-secondary btn-lg" href="../study_info/main.do"
+			<a class="btn btn-secondary" href="../study_info/main.do"
 				role="button" >메인으로 가기</a> 
-				<a class="btn btn-primary btn-lg"
+				<a class="btn btn-primary"
 				href="#void" role="button" style="margin-left: 30px;">마이페이지로 가기</a>
 			</div>	
 		</form>
