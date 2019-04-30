@@ -41,13 +41,22 @@
 	<!-- 댓글 인서트 -->
 	<insert id="insertComment" parameterType="kr.co.studystory.vo.ReplyVO">
 		insert into s_comment(s_num, s_comment, id, input_date)
-		values(#{ sNum }, #{ reply }, #{ id }, SYSDATE)
+		values(#{ sNum }, #{ reply }, #{ joinerId }, SYSDATE)
 	</insert>
 	<!-- 댓글 인서트 -->
 
-	<!-- JoinFormVO 인서트 -->
-	<!-- <insert id="insertJoinFormVO" parameterType="">
-	</insert> -->
-	<!-- JoinFormVO 인서트 -->
+	<!-- JoinFormVO & alarmVO 인서트 -->
+	<insert id="insertJoinFormVO" parameterType="kr.co.studystory.vo.JoinFormVO">
+		INSERT INTO JOIN(ID, S_NUM, INTRODUCE, MOTIVE, ACCEPT_FLAG, INPUT_DATE)
+		VALUES(#{joinerId}, #{sNum}, #{introduce_ta}, #{apply_ta}, 'N', SYSDATE)
+	</insert>
+
+ 	<insert id="insertJoinAlarm" parameterType="kr.co.studystory.vo.JoinAlarmVO">
+ 		INSERT INTO ALARM(A_NUM, CATEGORY, SUBJECT, CONTENT, INPUT_DATE,  READ_FLAG, ID)
+		VALUES(A_CODE, '스터디', '스터디 참여신청', #{content}, SYSDATE, 'N', ( select id from study where study_name = #{studyName} ) )
+ 	</insert>
+	
+	
+	<!-- JoinFormVO & alarmVO 인서트 -->
 	
 </mapper>

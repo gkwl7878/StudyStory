@@ -5,9 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+
 <!-- 폰트 CSS -->
 <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
+<!-- Custom styles for this template -->
+<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
+<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 
 <title>Bootstrap Template By Young</title>
 <style>
@@ -26,8 +33,41 @@
 	}
 }
 </style>
-<!-- Custom styles for this template -->
-<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
+
+<!-- CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+
+		$("#order_select").change(function() {
+
+			//<option>정렬</option>
+			//<option>최신순</option>
+			//<option>인기순</option>
+
+			var order_select = $("#order_select").val();
+			
+			$.ajax({
+				url : "../search/search_order_process.do",
+				data :"order=" + order_select,
+				type : "get",
+				dataType : "json", // 응답 받을 데이터.
+				error : function(xhr) {
+					alert("요류발생.");
+					console.log(xhr.status + " / " + xhr.statusText);
+				},
+				success : function(json) {
+					if (json.result) {
+						alert("정상동작.");
+						
+					}// end if
+				}// success
+			}); // ajax
+			
+		});//change
+
+	}); // ready
+</script>
 
 </head>
 <body>
@@ -46,7 +86,6 @@
 		<div style="height: 20px;"></div>
 		<!-- 점보트론 : 전광판 -->
 
-
 		<!-- CONTAINER DIV -->
 		<div class="container-fluid">
 			<!-- row -->
@@ -56,16 +95,18 @@
 					<!-- 정렬바 row -->
 					<div class="row mb-3" style="height: 4em;">
 						<div class="row mx-3 w-100 border-top border-bottom align-items-center">
-							<form class="form-row w-100" action="">
+							
+							<!-- 필터검색 폼 -->
+							<form class="form-row w-100" action="../search/search_process.do" method="get">
 								<div class="col-auto mr-auto">
-									<select class="form-control-sm">
-										<option>정렬</option>
-										<option>최신순</option>
-										<option>인기순</option>
+									<select id="order_select" class="form-control-sm">
+										<option value="정렬">정렬</option>
+										<option value="최신순">최신순</option>
+										<option value="인기순">인기순</option>
 									</select>
 								</div>
 								<div class="col-auto">
-									<select class="form-control-sm">
+									<select id="loc_select" class="form-control-sm">
 										<option>지 역</option>
 										<option>신 촌</option>
 										<option>홍 대</option>
@@ -76,7 +117,7 @@
 									</select>
 								</div>
 								<div class="col-auto">
-									<select class="form-control-sm">
+									<select id="kind_select" class="form-control-sm">
 										<option>종 류</option>
 										<option>언 어</option>
 										<option>취 업</option>
@@ -84,8 +125,10 @@
 										<option>기 타</option>
 									</select>
 								</div>
-								<input type="button" class="btn btn-sm btn-secondary ml-1" value="필터 검색" />
+								<input id="search_btn" type="button" class="btn btn-sm btn-secondary ml-1" value="필터 검색" />
 							</form>
+							<!-- 필터검색 폼 -->
+
 						</div>
 					</div>
 					<!-- 정렬바 row -->
@@ -98,51 +141,50 @@
 							<div class="col-md-4">
 								<div class="card mb-4 shadow-sm">
 
-									<!-- 썸네일 스터디 이미지 -->
-									<img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }">
-									<div class="card-body text-center p-3">
-
-										<div class="d-flex justify-content-end align-items-center mb-3">
-											<div class="mr-5">
-												<!-- 썸네일 들록일 -->
-												<small class="text-muted">${ thumbnail.inputDate }</small>
+									<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
+									<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }">
+										<div class="card-body text-center p-3">
+											<div class="d-flex justify-content-end align-items-center mb-3">
+												<div class="mr-5">
+													<!-- 썸네일 들록일 -->
+													<small class="text-muted">${ thumbnail.inputDate }</small>
+												</div>
+												<!-- 썸네일 모집상태 - 진행중. -->
+												<small class="pr-1">모집상태</small>
 											</div>
-											<!-- 썸네일 모집상태 - 진행중. -->
-											<small class="pr-1">모집상태</small>
+											<div class="px-3 border-bottom">
+												<p class="card-text pb-3">
+													<!-- 썸네일 제목부분 -->
+													<strong>${ thumbnail.studyName }</strong>
+												</p>
+											</div>
+											<div class="d-flex justify-content-between align-items-center mt-3 px-2">
+
+												<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
+													<!-- 썸네일 리더의 이미지 -->
+													<img src="http://localhost:8080/third_prj/resources/images/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle">
+												</div>
+
+												<div class="border-right p-2">
+													<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
+													<small>${ thumbnail.nick }</small>
+												</div>
+
+												<div class="border-right p-2">
+													<!-- 썸네일 리더의 닉네임 -->
+													<small>${ thumbnail.loc }</small>
+												</div>
+
+												<div class="p-2">
+													<!-- 썸네일 리더의 닉네임 -->
+													<small>${ thumbnail.category }</small>
+												</div>
+
+												<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
+												<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">좋아요</button>
+											</div>
 										</div>
-										<div class="px-3 border-bottom">
-											<p class="card-text pb-3">
-												<!-- 썸네일 제목부분 -->
-												<strong>${ thumbnail.studyName }</strong>
-											</p>
-										</div>
-										<div class="d-flex justify-content-between align-items-center mt-3 px-2">
-
-											<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
-												<!-- 썸네일 리더의 이미지 -->
-												<img src="http://localhost:8080/third_prj/resources/images/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle">
-											</div>
-
-											<div class="border-right p-2">
-												<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-												<small>${ thumbnail.nick }</small>
-											</div>
-
-											<div class="border-right p-2">
-												<!-- 썸네일 리더의 닉네임 -->
-												<small>${ thumbnail.loc }</small>
-											</div>
-
-											<div class="p-2">
-												<!-- 썸네일 리더의 닉네임 -->
-												<small>${ thumbnail.category }</small>
-											</div>
-
-											<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
-											<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">좋아요</button>
-
-										</div>
-									</div>
+									</a>
 								</div>
 							</div>
 						</c:forEach>
@@ -180,10 +222,5 @@
 	<!-- footer -->
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
-
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
