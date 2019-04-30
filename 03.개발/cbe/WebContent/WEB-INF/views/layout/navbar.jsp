@@ -57,7 +57,7 @@
 						<a class="dropdown-item" href="../common_bbs/question.do">내 문의내역</a>
 					</div>
 				</li>
-				<li class="nav-item"><a class="nav-link text-secondary" href="#">스터디 찾기</a></li>
+				<li class="nav-item"><a class="nav-link text-secondary" href="../search/search.do">스터디 찾기</a></li>
 				<li class="nav-item"><a class="nav-link text-secondary" href="../study_group/create_study.do">스터디 만들기</a></li>
 			</ul>
 			<a class="navbar-brand mx-auto text-dark" href="../study_info/main.do"><img src="/third_prj/resources/images/study_story_logo2.png" width="140" height="40"/></a>
@@ -80,7 +80,7 @@
 					<div class="dropdown-menu" aria-labelledby="my_menu">
 						<a class="dropdown-item" href="../study_group/my_study.do">내 스터디</a>
 						<a class="dropdown-item" href="#">내가 만든 스터디</a>
-						<a class="dropdown-item" href="#">관심 스터디 보기</a>
+						<a class="dropdown-item" href="../study_info/show_interest_study.do">관심 스터디 보기</a>
 						<a class="dropdown-item" href="../common_bbs/alarm.do">알림보기</a>
 						<a class="dropdown-item" href="../common/profile.do">프로필 관리</a>
 						<a class="dropdown-item" href="../common/user_modify_menu.do">회원정보 관리</a>
