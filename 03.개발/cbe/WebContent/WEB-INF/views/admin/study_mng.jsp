@@ -88,12 +88,12 @@
 						<c:set var="i" value="${i+1 }"/>
 							<tr>
 								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
-								<td class="text-center"><a href="study_detail.do?currPage=${currPage}&id=${sList.id}&weekUser=${param.weekUser}
+								<td class="text-center"><c:out value="${sList.id }"/></td>
+								<td class="text-center"><c:out value="${sList.nick }"/></td>
+								<td class="text-center"><a href="study_detail.do?currPage=${currPage}&sNum=${sList.sNum}&weekUser=${param.weekUser}
 									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
 									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
-									><c:out value="${sList.id }"/></a></td>
-								<td class="text-center"><c:out value="${sList.nick }"/></td>
-								<td class="text-center"><c:out value="${sList.studyName}"/></td>
+									><c:out value="${sList.studyName}"/></a></td>
 								<td class="text-center"><c:out value="${sList.category }"/></td>
 								<td class="text-center"><c:out value="${sList.loc }"/></td>
 								<td class="text-center"><c:out value="${sList.inputDate }"/></td>

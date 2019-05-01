@@ -11,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kr.co.studystory.admin.domain.DetailUser;
+import kr.co.studystory.admin.domain.DetailStudy;
 import kr.co.studystory.admin.domain.StudyInfo;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.service.StudyAndUserService;
+import kr.co.studystory.admin.vo.DeleteStudyVO;
+import kr.co.studystory.admin.vo.DetailStudyVO;
 import kr.co.studystory.admin.vo.StudyBoardVO;
+import kr.co.studystory.admin.vo.StudyDetailVO;
 
 @Controller
 public class StudyMngController {
@@ -77,18 +80,56 @@ public class StudyMngController {
 	}
 	
 	@RequestMapping(value="/admin/study_detail.do",method=GET)
-	public String studyDetailPage(StudyBoardVO sd_vo, Model model,HttpServletRequest request) {
-		DetailUser du= saus.searchDetailUser(ud_vo.getId());
+	public String studyDetailPage(StudyDetailVO sd_vo, Model model,HttpServletRequest request) {
+		DetailStudy ds= saus.searchDetailStudy(sd_vo.getsNum());
 		
-		model.addAttribute("name",du.getName());
-		model.addAttribute("tel", du.getTel());
-		model.addAttribute("zipcode",du.getZipcode());
-		model.addAttribute("addr1",du.getAddr1());
-		model.addAttribute("addr2",du.getAddr2());
-		model.addAttribute("question",du.getQuestion());
-		model.addAttribute("answer",du.getAnswer());
+		//studyName, id, nick, category,loc,inputDate, img, content, memberNum
+		model.addAttribute("studyName",ds.getStudyName());
+		model.addAttribute("id",ds.getId());
+		model.addAttribute("nick",ds.getNick());
+		model.addAttribute("category",ds.getCategory());
+		model.addAttribute("loc",ds.getLoc());
+		model.addAttribute("inputDate",ds.getInputDate());
+		model.addAttribute("img",ds.getImg());
+		model.addAttribute("content",ds.getContent());
+		model.addAttribute("memberNum",ds.getMemberNum());
 		
-		return "/admin/detail_member_info";
+		return "/admin/detail_study_info";
+	}
+	
+	/**
+	 * 스터디 수정
+	 * @param ds_vo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/admin/mod_study_proc.do", method=GET)
+	public String modifyStudyProcess(DetailStudyVO ds_vo,Model model) {
+		
+		
+		return "/admin/detail_study_info";
+	}
+	
+	/**
+	 * 스터디 삭제 페이지
+	 * @param sNum
+	 * @return
+	 */
+	@RequestMapping(value="/admin/remove_study_page.do/", method=GET)
+	public String removeStudyPage(String sNum) {
+		
+		return "/admin/study_del";
+	}
+	
+	/**
+	 * 스터디 삭제 작업
+	 * @param ds_vo
+	 * @return
+	 */
+	@RequestMapping(value="/admin/remove_study_proc.do",method=GET)
+	public String removeStudyProcess(DeleteStudyVO ds_vo) {
+		
+		return "/admin/study_mng";
 	}
 	
 }

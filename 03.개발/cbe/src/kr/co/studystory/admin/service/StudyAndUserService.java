@@ -3,17 +3,21 @@ package kr.co.studystory.admin.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.dao.AdCommonDAO;
 import kr.co.studystory.admin.dao.StudyAndUserDAO;
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
+import kr.co.studystory.admin.domain.DetailStudy;
 import kr.co.studystory.admin.domain.DetailUser;
 import kr.co.studystory.admin.domain.NewStudyInfo;
 import kr.co.studystory.admin.domain.StudyInfo;
 import kr.co.studystory.admin.domain.UserInfo;
 import kr.co.studystory.admin.vo.AcceptVO;
+import kr.co.studystory.admin.vo.DetailStudyVO;
 import kr.co.studystory.admin.vo.DetailUserVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
 import kr.co.studystory.admin.vo.RefuseVO;
@@ -121,7 +125,7 @@ public class StudyAndUserService {
 	}
 	
 	/**
-	 * study 리스트 조회
+	 * 스터디 리스트 조회
 	 * @param sb_vo
 	 * @return
 	 */
@@ -131,6 +135,26 @@ public class StudyAndUserService {
 		return list;
 	}
 	
+	/**
+	 * 스터디 상세정보 조회
+	 * @param sNum
+	 * @return
+	 */
+	public DetailStudy searchDetailStudy(String sNum) {
+		DetailStudy ds=sau_dao.selectDetailStudyInfo(sNum);
+		return ds;
+	}
+	
+	public boolean modifyStudy(DetailStudyVO ds_vo) {
+		boolean modifyStudy= false;
+		
+		
+		return modifyStudy;
+	}
+	
+	public void updateNewIng(HttpServletRequest request) {
+		
+	}
 	
 	
 	

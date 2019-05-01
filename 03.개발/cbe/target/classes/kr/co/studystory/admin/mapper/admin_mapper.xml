@@ -257,6 +257,24 @@
 		where r_num between #{begin} and #{end}
 </select>
 
+<!-- studyName, id, nick, category, loc,inputDate, img, content, memberNum -->
+<resultMap type="kr.co.studystory.admin.domain.DetailStudy" id="studyDetailResult">
+	<result column="study_name" property="studyName"/>
+	<result column="id" property="id"/>
+	<result column="nick" property="nick"/>
+	<result column="category" property="category"/>
+	<result column="loc" property="loc"/>
+	<result column="input_date" property="inputDate" />
+	<result column="img" property="img"/>
+	<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String"/>
+	<result column="member_num" property="memberNum"/>
+</resultMap>
+<select id="studyDetail" resultMap="studyDetailResult" parameterType="String">
+	select study_name, ut.id, nick, category, loc, input_date, s.img, content, (select count(*) from member where s_num=#{sNum}) member_num
+	from study s, user_table ut
+	where s.id=ut.id and s.s_num=#{sNum}
+</select>
+
 
 	
 </mapper>

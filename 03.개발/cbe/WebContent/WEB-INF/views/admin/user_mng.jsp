@@ -58,10 +58,10 @@
 				</div>
 				<div class="col-2" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
 					<select class="form-control" name="searchCondition" style="font-size: 12px;">
-						<option ${param.searchCondition eq  ""?"selected='selected'":"" }>--검색조건--</option>
-						<option ${param.searchCondition eq  "아이디"?"selected='selected'":"" }>아이디</option>
-						<option ${param.searchCondition eq  "이름"?"selected='selected'":"" }>이름</option>
-						<option ${param.searchCondition eq  "닉네임"?"selected='selected'":"" }>닉네임</option>
+						<option ${param.searchCondition eq  ""?"selected='selected'":"" } value="--검색조건--">--검색조건--</option>
+						<option ${param.searchCondition eq  "아이디"?"selected='selected'":"" } value="아이디">아이디</option>
+						<option ${param.searchCondition eq  "이름"?"selected='selected'":"" } value="이름">이름</option>
+						<option ${param.searchCondition eq  "닉네임"?"selected='selected'":"" } value="닉네임">닉네임</option>
 					</select>
 				</div>
 				<div class="col-1" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">

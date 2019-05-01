@@ -39,11 +39,13 @@
 <script type="text/javascript">
 	$(function() {
 		$('#summernote').summernote({
-
 			tabsize : 2,
 			height : 200,
 			lang : 'ko-KR'
+			
 		});
+		
+		$('#summernote').code("{content}");
 	});
 </script>
 
@@ -73,11 +75,16 @@
 </head>
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
 
 	<!-- sidebar 시작 -->
-	<c:import url="/third_prj/admin/layout/sidebar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
+				<c:param name="weekUser" value="${param.weekUser}"></c:param>
+				<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
+				<c:param name="allUser" value="${param.allUser}"></c:param>
+				<c:param name="allStudy" value="${param.allStudy}"></c:param>
+	</c:import>
 	<!-- sidebar 끝 -->
 
 	<div class="container form-group" id="wrap">
@@ -92,7 +99,7 @@
 				<label>스터디명</label>
 			</div>
 			<div class="col-7 " style="margin-bottom: 10px;">
-				<label>스터디명스터디명</label>
+				<label>${studyName}</label>
 			</div>
 		</div>
 
@@ -101,7 +108,7 @@
 				<strong>리더</strong>
 			</div>
 			<div class="col-7 ">
-				<label>리더뽀로로</label>
+				<label>${id }(${nick })</label>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 10px;">
@@ -110,10 +117,10 @@
 			</div>
 			<div class="col-7 font20bold">
 				<select class="form-control" id="subject">
-					<option value="언어">언어</option>
-					<option value="취업">취업</option>
-					<option value="취미">취미</option>
-					<option value="기타">기타</option>
+					<option ${category eq  "언어"?"selected='selected'":"" } value="언어">언어</option>
+					<option ${category eq  "취업"?"selected='selected'":"" } value="취업">취업</option>
+					<option ${category eq  "취미"?"selected='selected'":"" } value="취미">취미</option>
+					<option ${category eq  "기타"?"selected='selected'":"" } value="기타">기타</option>
 				</select>
 			</div>
 		</div>
@@ -123,12 +130,12 @@
 			</div>
 			<div class="col-7 font20bold">
 				<select class="form-control" id="loc">
-					<option value="신촌">신촌</option>
-					<option value="홍대">홍대</option>
-					<option value="종각">종각</option>
-					<option value="건대">건대</option>
-					<option value="노원">노원</option>
-					<option value="강남">강남</option>
+					<option ${loc eq  "신촌"?"selected='selected'":"" } value="신촌">신촌</option>
+					<option ${loc eq  "홍대"?"selected='selected'":"" } value="홍대">홍대</option>
+					<option ${loc eq  "종각"?"selected='selected'":"" } value="종각">종각</option>
+					<option ${loc eq  "건대"?"selected='selected'":"" } value="건대">건대</option>
+					<option ${loc eq  "노원"?"selected='selected'":"" } value="노원">노원</option>
+					<option ${loc eq  "강남"?"selected='selected'":"" } value="강남">강남</option>
 				</select>
 			</div>
 		</div>
@@ -137,7 +144,7 @@
 				<strong>참여자 수</strong>
 			</div>
 			<div class="col-7 ">
-				<label>25명 </label>
+				<label>${memberNum} 명 </label>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 10px;">
@@ -145,7 +152,7 @@
 				<strong>생성일</strong>
 			</div>
 			<div class="col-7 ">
-				<label>2019년</label>
+				<label>${inputDate}</label>
 
 			</div>
 		</div>
@@ -165,13 +172,14 @@
 				<strong>상세설명</strong>
 			</div>
 			<div class="col-7 font20bold" style="width: 440px; height: 300px">
-				<input type="text" class="form-control" id="summernote">
-				<!-- <textarea class="form-control" rows="3"
-					style="resize: none; width: 440px; height: 300px;" name="contents"></textarea> -->
+				<!-- <input type="text" class="form-control" id="summernote" /> -->
+				<div id="summernote"><c:out value="${content }"/></div>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 30px;">
-			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 250px;">목록으로</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">수정</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">탈퇴</a>
+			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 250px;">목록으로</a> 
+			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">수정</a> 
+			<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">탈퇴</a>
 		</div>
 	</div>
 

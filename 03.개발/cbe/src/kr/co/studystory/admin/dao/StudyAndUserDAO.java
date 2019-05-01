@@ -2,6 +2,7 @@ package kr.co.studystory.admin.dao;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -11,11 +12,13 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
+import kr.co.studystory.admin.domain.DetailStudy;
 import kr.co.studystory.admin.domain.DetailUser;
 import kr.co.studystory.admin.domain.NewStudyInfo;
 import kr.co.studystory.admin.domain.StudyInfo;
 import kr.co.studystory.admin.domain.UserInfo;
 import kr.co.studystory.admin.vo.AcceptVO;
+import kr.co.studystory.admin.vo.DetailStudyVO;
 import kr.co.studystory.admin.vo.DetailUserVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
 import kr.co.studystory.admin.vo.StudyBoardVO;
@@ -246,5 +249,39 @@ public class StudyAndUserDAO {
 		sb_vo.setEnd(10);
 		sau_dao.selectStudyInfo(sb_vo);
 	}
+	
+	public DetailStudy selectDetailStudyInfo(String sNum) {
+		DetailStudy ds=null;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		ds= ss.selectOne("studyDetail",sNum);
+		ss.close();
+		return ds;
+	}
+	
+	public boolean updateDetailStudyInfo(DetailStudyVO ds_vo) {
+		boolean updateDetailStudyInfo= false;
+		
+		return updateDetailStudyInfo;
+	}
+	
+	public List<String> selectStudyMember(String sNum) {
+		List<String> list= new ArrayList<String>();
+		
+		return list;
+	}
+	
+	public boolean deleteStudy(String sNum) {
+		boolean deleteStudy =false;
+		
+		return deleteStudy;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
