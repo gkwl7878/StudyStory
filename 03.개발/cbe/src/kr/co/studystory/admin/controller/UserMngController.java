@@ -51,10 +51,6 @@ public class UserMngController {
 		ub_vo.setBegin(startNum);
 		ub_vo.setEnd(endNum);
 		List<UserInfo> list= saus.searchUserInfo(ub_vo);
-		System.out.println(" 검색조건: "+ub_vo.getSearchCondition()+" 검색내용: "+ub_vo.getSearchWord()+
-				" 시작넘버: "+startNum+" 끝넘버: "+endNum+
-				" 시작페이지:"+startPage+" 끝페이지: "+endPage+" 현재페이지: "+ub_vo.getCurrPage()+
-				" 검색갯수: "+list.size()+"토탈카운트"+totalCount);
 		
 		model.addAttribute("forwardFlag", false);
 		model.addAttribute("backwardFlag", false);
@@ -82,7 +78,6 @@ public class UserMngController {
 		return "/admin/user_mng";
 	}
 	
-	//name, tel, zipcode, addr1, addr2, question, answer
 	/**유저 detail정보 띄우기
 	 * @param ud_vo
 	 * @param model
@@ -128,6 +123,7 @@ public class UserMngController {
 		model.addAttribute("removeFlag", removeFlag);
 		return "forward:user_mng.do";
 	}
+	
 	
 }
 

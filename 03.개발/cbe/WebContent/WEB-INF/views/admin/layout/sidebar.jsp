@@ -18,7 +18,8 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link ${activeFlag=='sActiveFlag'? 'active':''}" href="#">
+        <a class="nav-link ${activeFlag=='sActiveFlag'? 'active':''}" href="study_mng.do?weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}">
           <span data-feather="shopping-cart"></span>
           	스터디 정보 관리
         </a>

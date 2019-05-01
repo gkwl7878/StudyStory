@@ -11,11 +11,13 @@ import kr.co.studystory.admin.dao.StudyAndUserDAO;
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.DetailUser;
 import kr.co.studystory.admin.domain.NewStudyInfo;
+import kr.co.studystory.admin.domain.StudyInfo;
 import kr.co.studystory.admin.domain.UserInfo;
 import kr.co.studystory.admin.vo.AcceptVO;
 import kr.co.studystory.admin.vo.DetailUserVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
 import kr.co.studystory.admin.vo.RefuseVO;
+import kr.co.studystory.admin.vo.StudyBoardVO;
 import kr.co.studystory.admin.vo.UserBoardVO;
 
 @Component
@@ -75,7 +77,6 @@ public class StudyAndUserService {
 	 */
 	public List<UserInfo> searchUserInfo(UserBoardVO ub_vo) {
 		List<UserInfo> list =new ArrayList<UserInfo>();
-		UserInfo ui=null;
 		list= sau_dao.selectUserInfo(ub_vo);
 		
 		return list;
@@ -107,9 +108,30 @@ public class StudyAndUserService {
 	 * @return
 	 */
 	public boolean removeUser(String id) {
-		boolean removeUser=sau_dao.transactionRemoveUser(id);
+		boolean removeUser=false;
+		boolean updateRemoveUser=sau_dao.updateRemoveUser(id);
+		
+		if(updateRemoveUser) {
+			boolean deleteJoinRecord=sau_dao.deleteJoinRecord(id);
+			boolean deleteMemberRecord = sau_dao.deleteMemberRecord(id);
+			removeUser = true;
+		}
+		System.out.println(removeUser);
 		return removeUser;
 	}
+	
+	/**
+	 * study 리스트 조회
+	 * @param sb_vo
+	 * @return
+	 */
+	public List<StudyInfo> searchStudyInfo(StudyBoardVO sb_vo){
+		List<StudyInfo> list =new ArrayList<StudyInfo>();
+		list= sau_dao.selectStudyInfo(sb_vo);
+		return list;
+	}
+	
+	
 	
 	
 	public static void main(String[] args) {

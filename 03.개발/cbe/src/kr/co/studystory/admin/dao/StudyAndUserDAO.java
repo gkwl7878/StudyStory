@@ -13,10 +13,12 @@ import org.springframework.stereotype.Component;
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.DetailUser;
 import kr.co.studystory.admin.domain.NewStudyInfo;
+import kr.co.studystory.admin.domain.StudyInfo;
 import kr.co.studystory.admin.domain.UserInfo;
 import kr.co.studystory.admin.vo.AcceptVO;
 import kr.co.studystory.admin.vo.DetailUserVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
+import kr.co.studystory.admin.vo.StudyBoardVO;
 import kr.co.studystory.admin.vo.UserBoardVO;
 
 @Component
@@ -173,21 +175,17 @@ public class StudyAndUserDAO {
 	}
 	
 	/**
-	 * 삭제 시 decativation 'Y'로 변경, join레코드에서 삭제, member 레코드에서 삭제 트랜잭션처리
+	 * 삭제 시 decativation 'Y'로 변경
 	 * @param id
 	 * @return
 	 */
-	public boolean transactionRemoveUser(String id) {
+	public boolean updateRemoveUser(String id) {
 		boolean updateRemoveUser= false;
-		boolean deleteJoinRecord= false;
-		boolean deleteMemberRecord= false;
 		boolean transaction=false;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
 		updateRemoveUser =ss.update("updateDelUser",id)==1;
-		deleteJoinRecord =ss.delete("delJoinRecord",id)==1;
-		deleteMemberRecord=ss.delete("delMemRecord",id)==1;
 		
-		if(updateRemoveUser&&deleteJoinRecord&&updateRemoveUser) {
+		if(updateRemoveUser) {
 			transaction=true;
 			ss.commit();
 		}
@@ -195,15 +193,58 @@ public class StudyAndUserDAO {
 		return transaction;
 	}
 	
+	/**
+	 * join레코드에서 유저 삭제
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteJoinRecord(String id) {
+		boolean deleteJoinRecord= false;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		deleteJoinRecord =ss.delete("delJoinRecord",id)==1;
+		if(deleteJoinRecord) {
+			deleteJoinRecord=true;
+			ss.commit();
+		}
+		return deleteJoinRecord;
+	}
+	
+	/**
+	 * member 레코드에서 유저 삭제 
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteMemberRecord(String id) {
+		boolean deleteMemberRecord= false;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		deleteMemberRecord =ss.delete("delJoinRecord",id)==1;
+		if(deleteMemberRecord) {
+			deleteMemberRecord=true;
+			ss.commit();
+		}
+		return deleteMemberRecord;
+	}
+	
+	/**
+	 * 유저 리스트 조회
+	 * @param sb_vo
+	 * @return
+	 */
+	public List<StudyInfo> selectStudyInfo(StudyBoardVO sb_vo){
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		List<StudyInfo> list =ss.selectList("studyInfoList",sb_vo);
+		ss.close();
+		return list;
+	}
+	
+	
 	public static void main(String[] args) {
-/*		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
-		UserBoardVO ub_vo= new UserBoardVO();
-		ub_vo.setBegin(1);
-		ub_vo.setCurrPage(1);
-		ub_vo.setEnd(10);
-		ub_vo.setSearchCondition("닉네임");
-		ub_vo.setSearchWord("user");
-		sau_dao.selectUserInfo(ub_vo);*/
+		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
+		StudyBoardVO sb_vo= new StudyBoardVO();
+		sb_vo.setBegin(1);
+		sb_vo.setCurrPage(1);
+		sb_vo.setEnd(10);
+		sau_dao.selectStudyInfo(sb_vo);
 	}
 	
 }

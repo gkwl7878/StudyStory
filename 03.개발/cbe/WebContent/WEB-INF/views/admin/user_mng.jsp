@@ -25,7 +25,7 @@
 		</c:if>
 		
 		<c:if test="${removeFlag }">
-			alert("${param.id}님이 삭제처리 되었습니다");
+			alert("${param.id}님이 탈퇴처리 되었습니다");
 		</c:if>
 		
 	});//ready

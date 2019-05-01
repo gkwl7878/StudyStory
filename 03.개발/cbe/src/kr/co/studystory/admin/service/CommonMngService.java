@@ -101,7 +101,18 @@ public class CommonMngService {
 		int cnt=0;
 		cnt = c_dao.selectUserTotal(ub_vo);
 		return cnt;
-	}//nsTotalCount
+	}//uTotalCount
+	
+	/**
+	 * study 총 게시물 수 얻기
+	 * @param sb_vo
+	 * @return
+	 */
+	public int sTotalCount(StudyBoardVO sb_vo) {
+		int cnt=0;
+		cnt = c_dao.selectStudyTotal(sb_vo);
+		return cnt;
+	}//sTotalCount
 	
 	/**
 	 * 한페이지에 보여줄 게시물의 수 
