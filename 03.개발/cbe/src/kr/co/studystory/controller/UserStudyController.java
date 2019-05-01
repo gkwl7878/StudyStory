@@ -27,7 +27,6 @@ import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
 
 @Controller
-@Component
 public class UserStudyController {
 	@Autowired
 	private StudyGroupService sgs;

@@ -26,6 +26,9 @@ public class ConditionVO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "ConditionVO [id=" + id + ", loc=" + loc + ", category=" + category + "]";
+	}
 }
