@@ -42,7 +42,7 @@
 		<div class="row" style="margin-top: 50px;">
 			<div class="col text-center">
 				<a class="btn btn-secondary" href="../study_info/main.do" role="button" >메인으로 가기</a> 
-				<a class="btn btn-primary" href="#void" role="button" style="margin-left: 30px;">마이페이지로 가기</a>
+				<a class="btn btn-primary" href="../study_group/study_i_made.do" role="button" style="margin-left: 30px;">내가 만든 스터디로 가기</a>
 			</div>
 		</div>	
 	</div>

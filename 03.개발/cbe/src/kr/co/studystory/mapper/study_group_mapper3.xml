@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.studystory.study_group3">
+	<select id="selectStudyIMade" parameterType="kr.co.studystory.vo.ConditionVO" resultType="kr.co.studystory.domain.StudyIMade">
+		SELECT s_num, study_name, loc, category, img, recruitment, TO_CHAR(input_date, 'yyyy-mm-dd') input_date, accept_flag, deactivation
+		FROM study
+		<where>
+			<choose>
+				<when test="loc != 'none' and category != 'none'">
+					id = #{ id } AND loc = #{ loc } AND category = #{ category }
+				</when>
+				<when test="loc != 'none' and category == 'none'">
+					id = #{ id } AND loc = #{ loc } 
+				</when>
+				<when test="loc == 'none' and category != 'none'">
+					id = #{ id } AND category = #{ category }
+				</when>
+				<otherwise>
+					id = #{ id }
+				</otherwise>
+			</choose>
+		</where>
+		ORDER BY input_date DESC, accept_flag desc, deactivation
+	</select>
+</mapper>

@@ -79,7 +79,7 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="my_menu">
 						<a class="dropdown-item" href="../study_group/my_study.do">내 스터디</a>
-						<a class="dropdown-item" href="#">내가 만든 스터디</a>
+						<a class="dropdown-item" href="../study_group/study_i_made.do">내가 만든 스터디</a>
 						<a class="dropdown-item" href="../study_info/show_interest_study.do">관심 스터디 보기</a>
 						<a class="dropdown-item" href="../common_bbs/alarm.do">알림보기</a>
 						<a class="dropdown-item" href="../common/profile.do">프로필 관리</a>
