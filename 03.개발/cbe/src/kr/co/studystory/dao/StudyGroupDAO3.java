@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
+import kr.co.studystory.domain.AppliedStudy;
+import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.StudyIMade;
 import kr.co.studystory.vo.ConditionVO;
 
@@ -29,6 +31,36 @@ public class StudyGroupDAO3 {
 		
 		return list;
 	}
+	
+	/**
+	 * 내 스터디 조회(참가중)
+	 * by 영근
+	 */
+	public List<MyStudy> selectMyStudies(ConditionVO c_vo) {
+		List<MyStudy> list=null;
+		
+		SqlSession ss = sg_dao.getSqlSessionFactory().openSession();
+		list=ss.selectList("selectMyStudies",c_vo);
+		ss.close();
+		
+		return list;
+	}//selectMyStudies
+	
+	/**
+	 * 내 스터디 조회(참가신청중)
+	 * by 영근
+	 */
+	public List<AppliedStudy> selectAppliedStudy(ConditionVO c_vo) {
+		List<AppliedStudy> list=null;
+		
+		SqlSession ss = sg_dao.getSqlSessionFactory().openSession();
+		list=ss.selectList("appliedStudyResult",c_vo);
+		ss.close();
+		
+		return list;
+	}//selectAppliedStudy
+	
+	
 	
 	/*public static void main(String[] args) {
 		

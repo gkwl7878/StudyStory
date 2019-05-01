@@ -99,20 +99,6 @@ public class UserStudyController {
 		return "";
 	}
 	
-	// @RequestMapping(value="study_group/my_study.do", method=GET)
-	public String myStudyPage(ConditionVO c_vo, HttpSession session, Model model) {
-		List<MyStudy> list=null;
-		
-		String id=(String)session.getAttribute("id");
-		c_vo.setId(id);
-		
-		list=sgs.getMyStudy(c_vo);
-		
-		model.addAttribute("id", c_vo.getId());
-		model.addAttribute("mystudyList", list);
-		return "study_group/my_study";
-	}//myStudyPage
-	
 	// ³» ½ºÅÍµð Å»ÅðÇÏ±â
 	@RequestMapping(value="study_group/leave_study.do", method=GET )
 		public String leaveStudyPage(String id) {

@@ -58,24 +58,12 @@
 	where id=#{id}
   </select>
   
-<update id="updateStudy" parameterType="kr.co.studystory.vo.ModifiedStudyVO">
+  <update id="updateStudy" parameterType="kr.co.studystory.vo.ModifiedStudyVO">
   update study
   set 		content=#{content}, img=#{img}
   where s_num=#{sNum}
   </update>
-  
-  <select id="selectMyStudies" resultMap="myStudyResult" parameterType="String">
-	select s.s_num, study_name, loc, category, s.img, recruitment, input_date, s.deactivation, u.nick
-	from study s, user_table u, member m
-	where u.id=#{ id } and m.id=u.id and m.s_num=s.s_num;
-  </select>
-  
-  <select id="selectAppliedStudies" resultMap="appliedStudyResult" parameterType="String">
-		select s.s_num, study_name, loc, category, s.img, recruitment, s.input_date, s.deactivation, u.nick
-		from user_table u, study s, join j
-		where u.id=#{ id } and j.id = u.id and j.s_num = s.s_num;
-  </select>
-  
+
   <!-- <select id="selectLeaderId">
   		
   </select> -->

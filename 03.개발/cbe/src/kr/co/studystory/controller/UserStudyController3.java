@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.StudyIMade;
 import kr.co.studystory.service.StudyGroupService3;
 import kr.co.studystory.vo.ConditionVO;
@@ -20,6 +21,20 @@ import kr.co.studystory.vo.ConditionVO;
 public class UserStudyController3 {
 	@Autowired
 	private StudyGroupService3 sgs3;
+	
+	@RequestMapping(value="study_group/my_study.do", method= { GET,POST })
+	public String myStudyPage(ConditionVO c_vo, HttpSession session, Model model) {
+		List<MyStudy> list=null;
+		
+		String id=(String)session.getAttribute("id");
+		c_vo.setId(id);
+		
+		list=sgs3.getMyStudy(c_vo);
+		
+		model.addAttribute("id", c_vo.getId());
+		model.addAttribute("mystudyList", list);
+		return "study_group/my_study";
+	}//myStudyPage
 
 	@RequestMapping(value="/study_group/study_i_made.do", method= { GET, POST })
 	public String studyImadePage(HttpSession session, ConditionVO cvo, Model model) {
