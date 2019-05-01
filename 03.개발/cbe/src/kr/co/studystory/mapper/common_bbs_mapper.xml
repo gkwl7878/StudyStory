@@ -4,18 +4,120 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.studystory.common_bbs">
 
-	<select id="selectTotalCnt" resultType="int" parameterType="String">
-		SELECT COUNT(*)
-		FROM ${ tableName }
-		WHERE id=#{ id }
-	</select>
-
 	<select id="selectNewAlarms" resultType="kr.co.studystory.domain.NewAlarm" parameterType="String">
-		SELECT A_NUM, CATEGORY, SUBJECT, INPUT_DATE
+		SELECT A_NUM, CATEGORY, SUBJECT, TO_CHAR(INPUT_DATE, 'yyyy-mm-dd') INPUT_DATE
 		FROM ( SELECT A_NUM, CATEGORY, SUBJECT, INPUT_DATE, ROW_NUMBER() OVER( ORDER BY INPUT_DATE DESC ) R_NUM
 		       FROM ALARM
 		       WHERE ID=#{ id } AND READ_FLAG ='N')
 		WHERE R_NUM BETWEEN 1 AND 3
 	</select>
+	
+	<select id="selectAlarmTotal" resultType="int" parameterType="String">
+		SELECT COUNT(*) cnt
+		FROM alarm
+		WHERE id=#{ id }
+	</select>
+	
+	<select id="selectAlarmBbs" parameterType="kr.co.studystory.vo.AlarmBbsVO" 
+		resultType="kr.co.studystory.domain.Alarm">
+		SELECT a_num, category, subject, TO_CHAR(INPUT_DATE, 'yyyy-mm-dd') input_date, read_flag
+		FROM ( SELECT A_NUM, CATEGORY, SUBJECT, INPUT_DATE, READ_FLAG, ROW_NUMBER() OVER( ORDER BY READ_FLAG, INPUT_DATE DESC ) R_NUM
+		       FROM ALARM
+		       WHERE ID=#{ id })
+		WHERE R_NUM BETWEEN #{ begin } AND #{ end }
+	</select>
+	
+	<select id="selectDetailAlarm" parameterType="String" resultType="kr.co.studystory.domain.DetailAlarm">
+		SELECT  subject, category, content, input_date
+		FROM alarm
+		WHERE a_num=#{ a_num }
+	</select>
+	
+	<update id="updateReadFlag" parameterType="String">
+		UPDATE alarm
+		SET read_flag='Y'
+		WHERE a_num=#{ a_num }
+	</update>
+	
+	<select id="selectNoticeTotal" resultType="int" parameterType="String">
+		SELECT COUNT(*) cnt
+		FROM notice
+		<where>
+			<if test='value != ""'>
+				subject LIKE '%'||#{ value }||'%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectNoticeBbs" parameterType="kr.co.studystory.vo.NoticeBbsVO"  resultType="kr.co.studystory.domain.Notice">
+		SELECT n_num, subject, TO_CHAR(INPUT_DATE, 'yyyy-mm-dd') input_date, view_cnt
+		FROM ( SELECT n_num, subject, INPUT_DATE, view_cnt, ROW_NUMBER() OVER( ORDER BY INPUT_DATE DESC ) R_NUM
+		       FROM notice
+		       <choose>
+						<when test='searchWord == ""'>
+							)
+						</when>
+						<otherwise>
+							<where>
+								subject LIKE '%'||#{ searchWord }||'%')
+							</where>	
+						</otherwise>
+			 		 </choose>
+		<where>
+			R_NUM BETWEEN #{ begin } AND #{ end }
+		</where>
+	</select>
+	
+	<resultMap type="kr.co.studystory.domain.DetailNotice" id="dnResult">
+		<result column="subject" property="subject"/>
+		<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result column="input_date" property="input_date"/>
+		<result column="view_cnt" property="view_cnt"/>
+	</resultMap>
+	<select id="selectDetailNotice" parameterType="String" resultMap="dnResult">
+		SELECT  subject, content, input_date, view_cnt
+		FROM notice
+		WHERE n_num=#{ n_num }
+	</select>
 
+	<update id="updateViewCnt" parameterType="String">
+		UPDATE notice
+		SET view_cnt=view_cnt+1
+		WHERE n_num=#{ n_num }
+	</update>
+
+	<insert id="insertNewQuestion" parameterType="kr.co.studystory.vo.QuestionVO">
+		INSERT INTO question(q_num, id, subject, category, content)
+		values(q_code, #{ id }, #{ subject }, #{ category }, #{ content })
+	</insert>
+	
+	<select id="selectMyQuestions" parameterType="kr.co.studystory.vo.QuestionBbsVO" resultType="kr.co.studystory.domain.MyQuestion">
+		SELECT q_num, category, subject, answer_flag, TO_CHAR(INPUT_DATE, 'yyyy-mm-dd') input_date
+		FROM ( SELECT q_num, category, subject, answer_flag, input_date, ROW_NUMBER() OVER( ORDER BY INPUT_DATE DESC ) R_NUM
+		       FROM question
+		       WHERE ID=#{ id })
+		WHERE R_NUM BETWEEN #{ begin } AND #{ end }
+	</select>
+	
+	<!-- subject, category, input_date, answer_flag, content, answer_content; -->
+	<resultMap type="kr.co.studystory.domain.DetailQuestion" id="dqResult">
+		<result column="subject" property="subject"/>
+		<result column="category" property="category"/>
+		<result column="input_date" property="input_date"/>
+		<result column="answer_flag" property="answer_flag"/>
+		<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result column="answer_content" property="answer_content" jdbcType="CLOB" javaType="java.lang.String"/>
+	</resultMap>
+	<select id="selectDetailQuestion" parameterType="String" resultMap="dqResult">
+		SELECT  subject, category, TO_CHAR(input_date, 'yyyy-mm-dd') 
+			input_date, answer_flag, content, answer_content, TO_CHAR(answer_date, 'yyyy-mm-dd') answer_date
+		FROM question
+		WHERE q_num=#{ q_num }
+	</select>
+	
+	<select id="selectQuestionTotal" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM question
+		WHERE id=#{ id }
+	</select>
 </mapper>

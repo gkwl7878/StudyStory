@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.studystory.admin">
+
+<select id="loginValid" resultType="Integer" parameterType="kr.co.studystory.admin.vo.LoginVO" >
+	select count(*)
+	from ADMIN_USER 
+	where id=#{id} and pass=#{pass}
+</select>
+
+<insert id="insertAlarm" parameterType="kr.co.studystory.admin.vo.AlarmVO">
+	insert into alarm(a_num,category,subject,content,id)
+	values(a_code,#{category},#{subject},#{content},#{id})
+</insert>
+
+<select id="countWeekUser" resultType="Integer" >
+	select count(*)
+	from study
+	where input_date between (SYSDATE-7) and SYSDATE
+</select>
+
+<select id="countWeekStudy" resultType="Integer" >
+	select count(*)
+	from user_table
+	where reg_date between (SYSDATE-7) and SYSDATE
+</select>
+
+<select id="countAllUser" resultType="Integer" >
+	select count(*)
+	from study
+</select>
+
+<select id="countAllStudy" resultType="Integer" >
+	select count(*)
+	from user_table
+</select>
+
+<select id="nsTotalCnt" resultType="Integer">
+	select count(*)
+	from study 
+	where accept_flag='N' or delete_flag='N'
+</select>
+
+<select id="uTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.UserBoardVO">
+	select count(*)
+	from user_table
+	<where>
+		<if test="'id'.equals(searchCondition)">
+			id#{searchWord}
+		</if>
+		<if test="'name'.equals(searchCondition)">
+			name=#{searchWord}
+		</if>
+		<if test="'nick'.equals(searchCondition)">
+			nick=#{searchWord}
+		</if>
+	</where>
+</select>
+
+<select id="sTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.StudyBoardVO">
+	select count(*)
+	from(
+		select s.id,s.study_name,ut.nick
+		from study s, user_table ut
+		where s.id=ut.id
+	)
+	<where>
+		<if test="'studyName'.equals(searchCondition)">
+			study_name=#{searchWord}
+		</if>
+		<if test="'id'.equals(searchCondition)">
+			id=#{searchWord}
+		</if>
+		<if test="'nick'.equals(searchCondition)">
+			nick=#{searchWord}
+		</if>
+	</where>
+</select>
+
+<select id="qTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.QuestionBoardVO">
+	select count(*)
+	from question
+	<where>
+		<if test="'userInfo'.equals(searchCondition)">
+			category='회원정보'
+		</if>
+		<if test="'study'.equals(searchCondition)">
+			category='스터디'
+		</if>
+		<if test="'homepage'.equals(searchCondition)">
+			category='홈페이지'
+		</if>
+		<if test="'etc'.equals(searchCondition)">
+			category='기타'
+		</if>
+	</where>
+</select>
+
+<select id="nTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.NoticeBoardVO">
+	select count(*)
+	from notice
+	where subject like '%'||'#{searchWord}'||'%'
+</select>
+
+<resultMap type="kr.co.studystory.admin.domain.NewStudyInfo" id="newStudyResult">
+	<result column="s_num" property="sNum"/>
+	<result column="id" property="id"/>
+	<result column="study_name" property="studyName"/>
+	<result column="category" property="category"/>
+	<result column="loc" property="loc"/>
+	<result column="input_date" property="inputDate"/>
+</resultMap>
+<select id="newStudyList" resultMap="newStudyResult" parameterType="kr.co.studystory.admin.vo.NsBoardVO">
+	select s_num, id, study_name, category, loc, input_date
+	from(
+		select s_num, id, study_name, category, loc, input_date,
+		row_number() over( order by input_date desc) r_num
+		from STUDY
+		where accept_flag='N' or delete_flag='N'
+	)
+	where r_num between #{begin} and #{end}
+</select>
+
+<resultMap type="kr.co.studystory.admin.domain.DetailNewStudyInfo" id="nsDetailResult">
+	<result column="id" property="id"/>
+	<result column="study_name" property="studyName"/>
+	<result column="category" property="category"/>
+	<result column="loc" property="loc"/>
+	<result column="input_date" property="inputDate"/>
+	<result column="img" property="img"/>
+	<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String"/>
+</resultMap>
+
+<select id="nsDetail" resultMap="nsDetailResult" parameterType="String">
+	select id, category, loc, study_name, input_date, img, content
+	from study
+	where s_num= #{snum}
+</select>
+
+<update id="updateNsAccept" parameterType="kr.co.studystory.admin.vo.AcceptVO">
+	update study
+	set accept_flag='Y'
+	where s_num= #{sNum}
+</update>
+
+<insert id="insertNsMember" parameterType="kr.co.studystory.admin.vo.AcceptVO">
+	insert into member(id,s_num)
+	values(#{id}, #{sNum})
+</insert>
+
+<update id="deleteNewStudy" parameterType="String">
+	update study
+	set delete_flag='Y'
+	where s_num= #{sNum}
+</update>
+
+	
+</mapper>

@@ -6,9 +6,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.studystory.domain.ThumbnailDomain;
 import kr.co.studystory.service.StudyInfoService;
@@ -23,6 +25,12 @@ import kr.co.studystory.service.StudyInfoService;
 @Controller
 public class StudySearchController {
 
+	private StudyInfoService sis;
+
+	public StudySearchController() {
+		sis = new StudyInfoService();
+	}// 생성자
+
 	/**
 	 * 메인 페이지으로 부터의 요청 처리.
 	 * 
@@ -32,7 +40,6 @@ public class StudySearchController {
 	@RequestMapping(value = "/study_info/main.do", method = GET)
 	public String mainPage(Model model) {
 
-		StudyInfoService sis = new StudyInfoService();
 		// 썸네일 리스트 생성.
 		List<ThumbnailDomain> list = sis.getThumbnailList();
 		// model 객체에 값 저장.
@@ -46,10 +53,9 @@ public class StudySearchController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "search/search.do", method = GET)
+	@RequestMapping(value = "/search/search.do", method = GET)
 	public String conditionSearchPage(Model model) {
 
-		StudyInfoService sis = new StudyInfoService();
 		// 썸네일 리스트 생성.
 		List<ThumbnailDomain> list = sis.getThumbnailList();
 		// model 객체에 값 저장.
@@ -66,7 +72,6 @@ public class StudySearchController {
 	@RequestMapping(value = "study_info/show_interest_study.do", method = GET)
 	public String studyLikedPage(Model model, HttpSession session) {
 		String my_id = (String) session.getAttribute("id");
-		StudyInfoService sis = new StudyInfoService();
 		// 썸네일 리스트 생성.
 		List<ThumbnailDomain> list = sis.getMyInterestStudy(my_id);
 		// model 객체에 값 저장.
@@ -79,8 +84,22 @@ public class StudySearchController {
 		return "";
 	}// likeOrDislikeProcess
 
-	public String WordSearchedPage() {
+	/**
+	 * 스터디 찾기 페이지에서 정렬으로 부터의 요청 처리.
+	 * 
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "../search/search_order_process.do", method = GET)
+	public String searchOrderProccess(String order) {
+		JSONObject json = null;
+		json = sis.getOrderedList(order);
+		return json.toJSONString();
+	}// searchOrderProccess
 
+	/////////////////////////////////////////// 이하 진행 해야 할 부분.
+
+	public String WordSearchedPage() {
 		return "";
 	}// WordSearchedPage
 

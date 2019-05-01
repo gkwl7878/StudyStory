@@ -13,6 +13,8 @@ import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
+import kr.co.studystory.vo.JoinAlarmVO;
+import kr.co.studystory.vo.JoinFormVO;
 import kr.co.studystory.vo.ReplyVO;
 
 /**
@@ -111,7 +113,7 @@ public class StudyInfoDAO {
 	}// selectStudyInfo
 
 	/**
-	 * 상세 스터디의 댓들 List를 조회하는 메서드.
+	 * 상세 스터디의 댓글 List를 조회하는 메서드.
 	 * 
 	 * @return List<StudyCommentDomain>
 	 */
@@ -155,6 +157,31 @@ public class StudyInfoDAO {
 	}// selectLeaderOfJoin
 
 	/**
+	 * 스터디 참여하기 insert
+	 * 
+	 * @return
+	 */
+	public int insertJoinForm(JoinFormVO jf_vo, JoinAlarmVO ja_vo) {
+		int i_cnt = 0; // 정상적으로 1 행이 추가 된 값을 저장할 변수
+
+		SqlSession ss = getSessionFatory().openSession();
+		i_cnt = ss.insert("insertJoinFormVO", jf_vo);
+
+		if (i_cnt == 1) {
+
+			ja_vo.setContent(ja_vo.getStudyName() + "에 참여신청이 있습니다.");
+			i_cnt = i_cnt + (ss.insert("insertJoinAlarm", ja_vo));
+
+			if (i_cnt == 2) {
+				ss.commit();
+			} // end if
+
+		} // end if
+
+		return i_cnt;
+	}// insertJoin
+
+	/**
 	 * 내 관심 스터디 썸네일 조회.
 	 * 
 	 * @param my_id
@@ -168,13 +195,11 @@ public class StudyInfoDAO {
 		return list;
 	}// selectMyFavStudy
 
-	////////////////// 단위 테스트
-	public static void main(String[] args) {
-		ReplyVO a = new ReplyVO();
-		a.setId("gohome1");
-		a.setsNum("s_000042");
-		a.setReply("테스트2");
-		System.out.println(StudyInfoDAO.getInstance().insertComment(a));
-	}// main
+	public List<ThumbnailDomain> selectThumbLatest() {
+		List<ThumbnailDomain> list = null;
+		SqlSession ss = getSessionFatory().openSession();
+		list = ss.selectList("selectThumbLatest");
+		return list;
+	}// selectThumbLatest
 
 }// class
