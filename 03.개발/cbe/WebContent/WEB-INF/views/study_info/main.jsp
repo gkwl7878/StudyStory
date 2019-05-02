@@ -5,14 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
 <!-- 폰트 CSS -->
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
+<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
+<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/third_prj/resources/js/popper.min.js"></script>
+<script src="/third_prj/resources/js/bootstrap.min.js"></script>
 
 <title>스터디 스토리</title>
 <style>
@@ -34,7 +34,7 @@
 .custom_jumbo {
 	min-height: 350px;
 	background-image:
-		url('http://localhost:8080/third_prj/resources/images/main_page_jumbotron.jpg');
+		url('/third_prj/resources/images/main_page_jumbotron.jpg');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 100%;
@@ -42,12 +42,13 @@
 }
 </style>
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
+<link href="/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 
 <!-- CDN -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		
 	}); // ready
 </script>
 </head>
@@ -78,7 +79,7 @@
 							<div class="card mb-4 shadow-sm">
 
 								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-								<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }" />
+								<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="height:200px;"/>
 									<div class="card-body text-center p-3">
 										<div class="d-flex justify-content-end align-items-center mb-3">
 											<div class="mr-5">
@@ -98,7 +99,7 @@
 
 											<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
 												<!-- 썸네일 리더의 이미지 -->
-												<img src="http://localhost:8080/third_prj/resources/images/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle">
+												<img src="/third_prj/profile_img/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle" style="width:40px; height:50px;">
 											</div>
 
 											<div class="border-right p-2">
