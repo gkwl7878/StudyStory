@@ -11,6 +11,8 @@ public class ThumbnailDomain {
 	private String sNum, studyName, loc, category, img, recruitment, inputDate, nick, userImg;
 	private boolean favFlag;
 
+	/* setter & getter */
+
 	public String getsNum() {
 		return sNum;
 	}
@@ -91,9 +93,13 @@ public class ThumbnailDomain {
 		this.favFlag = favFlag;
 	}
 
+	/* setter & getter */
+
 	@Override
 	public String toString() {
-		return "ThumbnailDomain [sNum=" + sNum + ", studyName=" + studyName + ", loc=" + loc + ", category=" + category + ", img=" + img + ", recruitment=" + recruitment + ", inputDate=" + inputDate + ", nick=" + nick + ", userImg=" + userImg + ", favFlag=" + favFlag + "]";
-	}
+		return "ThumbnailDomain [sNum=" + sNum + ", studyName=" + studyName + ", loc=" + loc + ", category=" + category
+				+ ", img=" + img + ", recruitment=" + recruitment + ", inputDate=" + inputDate + ", nick=" + nick
+				+ ", userImg=" + userImg + ", favFlag=" + favFlag + "]";
+	}// toString
 
 }// class

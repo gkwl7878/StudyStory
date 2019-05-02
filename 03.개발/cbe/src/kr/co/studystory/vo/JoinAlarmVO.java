@@ -1,16 +1,32 @@
 package kr.co.studystory.vo;
 
-/**
- * 참여 신청가 정상적으로 인서트 되었을 때. ALARM 테이블에 인서트 하기 위한 정보를 가지는 VO
- * 
- * @author owner
- *
- */
 public class JoinAlarmVO {
 
-	private String content, studyName;
 
-	/* setter & getter */
+	private String category, subject, content, id;
+	
+	public JoinAlarmVO(String category, String subject, String content, String id) {
+		this.category = category;
+		this.subject = subject;
+		this.content = content;
+		this.id = id;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 
 	public String getContent() {
 		return content;
@@ -20,19 +36,13 @@ public class JoinAlarmVO {
 		this.content = content;
 	}
 
-	public String getStudyName() {
-		return studyName;
+	public String getId() {
+		return id;
 	}
 
-	public void setStudyName(String studyName) {
-		this.studyName = studyName;
+	public void setId(String id) {
+		this.id = id;
 	}
-
-	/* setter & getter */
-
-	@Override
-	public String toString() {
-		return "JoinAlarmVO [content=" + content + ", studyName=" + studyName + "]";
-	}// toString
-
-}// class
+	
+	
+}
