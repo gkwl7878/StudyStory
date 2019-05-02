@@ -89,7 +89,7 @@
 		</div>
 		<c:choose>
 			<c:when test="${ empty currPage }">
-				<a class="btn btn-secondary btn" href="javascript:history.back()"
+				<a class="btn btn-secondary btn" href="alarm.do"
 					role="button" style="margin-left: 340px; margin-top: 15px;">목록으로</a>
 			</c:when>
 			<c:otherwise>

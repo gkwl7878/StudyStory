@@ -8,11 +8,13 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
 import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
+import kr.co.studystory.vo.DetailMenuVO;
 import kr.co.studystory.vo.JoinAlarmVO;
 import kr.co.studystory.vo.JoinFormVO;
 import kr.co.studystory.vo.ReplyVO;
@@ -24,6 +26,7 @@ import kr.co.studystory.vo.SearchSelectVO;
  * @author 재현
  *
  */
+@Component
 public class StudyInfoDAO {
 
 	private static StudyInfoDAO si_dao;
@@ -89,6 +92,56 @@ public class StudyInfoDAO {
 		ss.close();
 		return s_info;
 	}// selectStudyInfo
+	
+	/**
+	 * 가입된 멤버인지 확인하는 메서드
+	 * by 영근
+	 */
+	public boolean selectAmIMember(DetailMenuVO dmvo) {
+		boolean flag = false;
+		
+		SqlSession ss = getSessionFatory().openSession();
+		int cnt = ss.selectOne("selectAmIMember",dmvo);
+		if (cnt == 1) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	/**
+	 * 가입신청 했는지 확인하는 메서드
+	 * by 영근
+	 */
+	public boolean selectAmIPended(DetailMenuVO dmvo) {
+		boolean flag = false;
+		
+		SqlSession ss = getSessionFatory().openSession();
+		int cnt = ss.selectOne("selectAmIPended",dmvo);
+		if (cnt == 1) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	/**
+	 * 스터디 리더인지 (만들었는지) 확인하는지 메서드
+	 * by 영근
+	 */
+	public boolean selectDidIMade(DetailMenuVO dmvo) {
+		boolean flag = false;
+		
+		SqlSession ss = getSessionFatory().openSession();
+		int cnt = ss.selectOne("selectDidIMade",dmvo);
+		if (cnt == 1) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	
 
 	/**
 	 * 상세 스터디의 댓글 List를 조회하는 메서드.
@@ -139,24 +192,33 @@ public class StudyInfoDAO {
 	 * 
 	 * @return
 	 */
-	public int insertJoinForm(JoinFormVO jf_vo, JoinAlarmVO ja_vo) {
-		int i_cnt = 0; // 정상적으로 1 행이 추가 된 값을 저장할 변수
-
+	public boolean insertJoinForm(JoinFormVO jf_vo) {
+		boolean flag = false;
+		
 		SqlSession ss = getSessionFatory().openSession();
-		i_cnt = ss.insert("insertJoinFormVO", jf_vo);
+		
+		JoinAlarmVO ja_vo = new JoinAlarmVO("스터디", "스터디 신청완료",
+			"\""+jf_vo.getStudyName()+"\"에 가입 신청이 완료되었습니다.\n가입 신청이 수락되면 알림으로 알려드리겠습니다.",
+			jf_vo.getJoinerId());
+		
+		String joinerNick = ss.selectOne("selectJoinerNick", jf_vo.getJoinerId());
+		
+		JoinAlarmVO ja_vo2 = new JoinAlarmVO("스터디", "스터디 가입요청",
+			"\""+joinerNick+"\"님께서 "+jf_vo.getStudyName()+"에 가입 신청을 하셨습니다.",
+			jf_vo.getLeaderNick());
+		
+		int cnt = ss.insert("insertJoinFormVO", jf_vo);
+		cnt += ss.insert("insertJoinerAlarm", ja_vo);
+		cnt += ss.insert("insertLeaderAlarm", ja_vo2);
+		
+		if (cnt == 3) {
+			ss.commit();
+			flag = true;
+		}
+		
+		ss.close();
 
-		if (i_cnt == 1) {
-
-			ja_vo.setContent(ja_vo.getStudyName() + "에 참여신청이 있습니다.");
-			i_cnt = i_cnt + (ss.insert("insertJoinAlarm", ja_vo));
-
-			if (i_cnt == 2) {
-				ss.commit();
-			} // end if
-
-		} // end if
-
-		return i_cnt;
+		return flag;
 	}// insertJoin
 
 	/************************************************ 메인 / 썸네일 / 검색. **/

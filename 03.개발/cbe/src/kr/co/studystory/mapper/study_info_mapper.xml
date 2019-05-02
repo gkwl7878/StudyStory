@@ -32,6 +32,23 @@
 		FROM member
 		WHERE s_num=#{ s_num }
 	</select>
+	
+	<select id="selectAmIMember" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM member
+		WHERE s_num=#{ s_num } AND id=#{ id } 
+	</select>
+	<select id="selectAmIPended" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM join
+		WHERE s_num=#{ s_num } AND id=#{ id } 
+	</select>
+	<select id="selectDidIMade" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM study
+		WHERE s_num = #{ s_num } AND id=#{ id }
+	</select>
+	
 	<!-- 스터디 상세 정보 조회. -->
 
 	<!-- 스터디 상세 정보의 댓글 조회 -->
@@ -60,13 +77,24 @@
 
 	<!-- JoinFormVO & alarmVO 인서트 -->
 	<insert id="insertJoinFormVO" parameterType="kr.co.studystory.vo.JoinFormVO">
-		INSERT INTO JOIN(ID, S_NUM, INTRODUCE, MOTIVE, ACCEPT_FLAG, INPUT_DATE)
-		VALUES(#{joinerId}, #{sNum}, #{introduce_ta}, #{apply_ta}, 'N', SYSDATE)
+		INSERT INTO JOIN(ID, S_NUM, INTRODUCE, MOTIVE)
+		VALUES(#{joinerId}, #{sNum}, #{introduce}, #{motive})
 	</insert>
+	
+	<select id="selectJoinerNick" parameterType="String" resultType="String">
+		SELECT nick
+		FROM user_table
+		WHERE id=#{ id }
+	</select>
 
- 	<insert id="insertJoinAlarm" parameterType="kr.co.studystory.vo.JoinAlarmVO">
- 		INSERT INTO ALARM(A_NUM, CATEGORY, SUBJECT, CONTENT, INPUT_DATE,  READ_FLAG, ID)
-		VALUES(A_CODE, '스터디', '스터디 참여신청', #{content}, SYSDATE, 'N', ( select id from study where study_name = #{studyName} ) )
+ 	<insert id="insertJoinerAlarm" parameterType="kr.co.studystory.vo.JoinAlarmVO">
+ 		INSERT INTO ALARM(A_NUM, CATEGORY, SUBJECT, CONTENT, ID)
+		VALUES(A_CODE, #{ category }, #{ subject }, #{content}, #{ id })
+ 	</insert>
+
+ 	<insert id="insertLeaderAlarm" parameterType="kr.co.studystory.vo.JoinAlarmVO">
+ 		INSERT INTO ALARM(A_NUM, CATEGORY, SUBJECT, CONTENT, ID)
+		VALUES(A_CODE, #{ category }, #{ subject }, #{content}, (SELECT id FROM user_table WHERE nick=#{ id }))
  	</insert>
 	<!-- JoinFormVO & alarmVO 인서트 -->
 	

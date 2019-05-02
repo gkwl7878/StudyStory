@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.service.StudyInfoService;
-import kr.co.studystory.vo.JoinAlarmVO;
+import kr.co.studystory.vo.DetailMenuVO;
 import kr.co.studystory.vo.JoinFormVO;
 import kr.co.studystory.vo.ReplyVO;
 
@@ -30,11 +31,8 @@ import kr.co.studystory.vo.ReplyVO;
 @Controller
 public class StudyInfoController {
 
+	@Autowired
 	private StudyInfoService sis;
-
-	public StudyInfoController() {
-		sis = new StudyInfoService();
-	}
 
 	/**
 	 * 스터디 상세 정보 페이지로 부터의 요청 처리.
@@ -46,6 +44,19 @@ public class StudyInfoController {
 	 */
 	@RequestMapping(value = "/detail/detail_study.do", method = GET)
 	public String studyInfoPage(String sNum, HttpSession session, Model model) {
+		
+		// 내 아이디로 이미 가입했는지, 가입수락대기중인지, 내가 만든 스터디인지 조회
+		// 조회 결과에 따라 오른쪽 상단 화면을 다르게 보여줘야 함
+		
+		
+		DetailMenuVO dmvo = new DetailMenuVO((String)session.getAttribute("id"), sNum);
+		if (sis.didIrequest(dmvo)) { // 만든 유저인지
+			model.addAttribute("memberFlag", true);
+		} else if (sis.amIMember(dmvo)) { // 가입한 멤버인지
+			model.addAttribute("joinerFlag", true);
+		} else if (sis.didIrequest(dmvo)) { // 스터디 신청했는지
+			model.addAttribute("leaderFlag", true);
+		}
 		
 		StudyInfoDomain sInfo = sis.getStudyInfo(sNum); // 스터디 상세 정보 가져오기.
 		List<StudyCommentDomain> sCommentList = sis.getStudyComment(sNum); // 스터디 상세정보의 댓글 List 가져오기.
@@ -84,7 +95,7 @@ public class StudyInfoController {
 
 	/**
 	 * 스터디 가입 요청 페이지으로 부터의 요청 처리.
-	 * 
+	 * 보완수정 by 영근 190502
 	 * @return
 	 */
 	@RequestMapping(value = "/study_info/study_req_join.do", method = GET)
@@ -104,15 +115,19 @@ public class StudyInfoController {
 
 	/**
 	 * 스터디 참여 페이지의 Form으로 부터의 요청 처리.
-	 * 
+	 * 보완수정 by 영근 190502
 	 * @return
 	 */
 	@RequestMapping(value = "/study_info/join_process.do", method = POST)
-	public String joinProcess(JoinFormVO jf_vo, JoinAlarmVO ja_vo) {
+	public String joinProcess(JoinFormVO jf_vo, Model model) {
 
-		sis.addJoinForm(jf_vo, ja_vo); // 정상작동에 대한 메시지 반환.
+		if(sis.addJoinStudy(jf_vo)) {
+			model.addAttribute("joinReqSuccess", true);
+		} else {
+			model.addAttribute("joinReqFail",true);
+		}
 
-		return "forward:study_info/main.do";
+		return "forward:../study_info/main.do";
 	}// joinProcess()
 
 }// class

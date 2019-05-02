@@ -4,24 +4,24 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import kr.co.studystory.dao.StudyInfoDAO;
 import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
-import kr.co.studystory.vo.JoinAlarmVO;
+import kr.co.studystory.vo.DetailMenuVO;
 import kr.co.studystory.vo.JoinFormVO;
 import kr.co.studystory.vo.ReplyVO;
 import kr.co.studystory.vo.SearchSelectVO;
 
+@Component
 public class StudyInfoService {
 
+	@Autowired
 	private StudyInfoDAO si_dao;
-
-	public StudyInfoService() {
-		si_dao = StudyInfoDAO.getInstance();
-	}// 생성자.
 
 	/******************* Info 페이지들 서비스. *******************/
 
@@ -36,6 +36,25 @@ public class StudyInfoService {
 		s_info = si_dao.selectStudyInfo(s_num);
 		return s_info;
 	}// getStudyInfo
+	
+	/**
+	 * 상세 페이지에서 가입한 유저인지 확인하는 메서드
+	 */
+	public boolean amIMember(DetailMenuVO dmvo) {
+		return si_dao.selectAmIMember(dmvo);
+	}
+	/**
+	 * 상세 페이지에서 가입신청한 유저인지 확인하는 메서드
+	 */
+	public boolean didIrequest(DetailMenuVO dmvo) {
+		return si_dao.selectAmIPended(dmvo);
+	}
+	/**
+	 * 상세 페이지에서 스터디를 만든 유저인지 확인하는 메서드
+	 */
+	public boolean amILeader(DetailMenuVO dmvo) {
+		return si_dao.selectDidIMade(dmvo);
+	}
 
 	/**
 	 * 스터디 상세 페이지의 댓글을 입력하기.
@@ -79,12 +98,14 @@ public class StudyInfoService {
 	 * 
 	 * @return
 	 */
-	public String addJoinForm(JoinFormVO jf_vo, JoinAlarmVO ja_vo) {
-		String msg = "";
-		if (si_dao.insertJoinForm(jf_vo, ja_vo) == 2) {
-			msg = "참여 신청이 정상적으로 이루어 졌습니다.";
+	public boolean addJoinStudy(JoinFormVO jf_vo) {
+		boolean flag = false;
+		
+		if (si_dao.insertJoinForm(jf_vo)) {
+			flag = true;
 		} // end if
-		return msg;
+		
+		return flag;
 	}// addJoinForm
 
 	/**
