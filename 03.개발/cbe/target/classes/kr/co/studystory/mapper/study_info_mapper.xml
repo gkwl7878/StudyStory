@@ -41,7 +41,7 @@
 	<!-- 댓글 인서트 -->
 	<insert id="insertComment" parameterType="kr.co.studystory.vo.ReplyVO">
 		insert into s_comment(s_num, s_comment, id, input_date)
-		values(#{ sNum }, #{ reply }, #{ joinerId }, SYSDATE)
+		values(#{ sNum }, #{ reply }, #{ id }, SYSDATE)
 	</insert>
 	<!-- 댓글 인서트 -->
 
@@ -55,8 +55,6 @@
  		INSERT INTO ALARM(A_NUM, CATEGORY, SUBJECT, CONTENT, INPUT_DATE,  READ_FLAG, ID)
 		VALUES(A_CODE, '스터디', '스터디 참여신청', #{content}, SYSDATE, 'N', ( select id from study where study_name = #{studyName} ) )
  	</insert>
-	
-	
 	<!-- JoinFormVO & alarmVO 인서트 -->
 	
 </mapper>

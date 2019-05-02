@@ -109,7 +109,7 @@ public class StudyInfoController {
 
 		sis.addJoinForm(jf_vo, ja_vo); // 정상작동에 대한 메시지 반환.
 
-		return "study_info/join_success";
+		return "forward:study_info/main.do";
 	}// joinProcess()
 
 }// class

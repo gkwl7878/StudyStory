@@ -242,7 +242,7 @@
 			</div>
 
 			<!-- 따라다니는 사이드바 -->
-			<div class="col-lg-2" style="position: fixed; margin-left: 940px;">
+			<div class="col-lg-2" style="position: fixed; margin-top:50px; margin-left: 940px;">
 				<div id="sidebar" style="width: 300px; height: 300px">
 					<div class="row  border border-secondary" style="padding: 30px; margin-left: 10px">
 						<div class="col-lg-12">
