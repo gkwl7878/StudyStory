@@ -180,6 +180,7 @@ public class StudyMngController {
 				al_vo.setCategory("스터디");
 				al_vo.setSubject("스터디가 삭제되었습니다.");
 				al_vo.setContent("["+studyName+"]  스터디가 삭제되었습니다. 삭제사유: [" +ds_vo.getMsg()+"]");
+				cms.sendAlarm(al_vo);
 			}
 		}
 		model.addAttribute("sDeleteFlag", sDeleteFlag);

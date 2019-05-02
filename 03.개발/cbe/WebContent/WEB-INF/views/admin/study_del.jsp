@@ -51,6 +51,7 @@
 	<div id="wrap">
 		<form id="removeFrm" action="remove_study_proc.do?" method="get">
 			<input type="hidden" name="sNum" value="${param.sNum }"/>
+			<input type="hidden" name="studyName" value="${param.studyName }"/>
 			<br />
 			<br />
 			<br />
