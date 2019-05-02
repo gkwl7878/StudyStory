@@ -17,8 +17,8 @@
 select img, sn_num, subject, input_date
 from (select s.s_num, ut.img
        from study s, user_table ut
-       where s_num=#{snNum} AND s.id = ut.id) ss, study_notice sn
-where sn.s_num = #{snNum}
+       where s_num=#{ sNum } AND s.id = ut.id) ss, study_notice sn
+where sn.s_num = #{ sNum }
 order by input_date desc
 </select>
 
@@ -57,5 +57,27 @@ where  s.id=ut.id and s.s_num=sn.s_num and sn.sn_num=#{snNum}
 	where sc.id= ut.id and sn_num=#{snNum}
 </select>
 
+<!-- <update id="updateHomework" parameterType="kr.co.studystory.vo.">
+	update
+
+</update> -->
+
+
+<insert id="insertSnComment" parameterType="kr.co.studystory.vo.NewCommentVO">
+	insert into SN_COMMENT (SN_NUM, SN_COMMENT, ID)
+	values(#{ snNum },#{ snComment} ,#{ id })
+
+</insert>
+<update id="updateRecruit" parameterType="kr.co.studystory.vo.RecruitVO">
+	UPDATE study
+	SET recruitment=#{ status }
+	WHERE s_num=#{ sNum }
+</update>
+
+<select id="selectAllMember" parameterType="String" resultType="kr.co.studystory.domain.NickAndId">
+	SELECT nick, m.id
+	FROM user_table u, member m
+	WHERE m.s_num=#{ id } AND m.id = u.id
+</select>
 
 </mapper>
