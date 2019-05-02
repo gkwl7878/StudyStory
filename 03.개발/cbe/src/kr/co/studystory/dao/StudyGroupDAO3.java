@@ -19,6 +19,19 @@ public class StudyGroupDAO3 {
 	}
 	
 	/**
+	 * 내 스터디, 내가 만든 스터디, 관심 스터디 프로필란에 사용할 이미지를 가져오는 메서드
+	 * by 영근
+	 */
+	public String selectMyProfileImg(String id) {
+		String img = "";
+		
+		SqlSession ss = sg_dao.getSqlSessionFactory().openSession();
+		img = ss.selectOne("selectMyProfileImg", id);
+		
+		return img;
+	}
+	
+	/**
 	 * 내가만든 스터디
 	 * by 영근
 	 */
@@ -54,7 +67,7 @@ public class StudyGroupDAO3 {
 		List<AppliedStudy> list=null;
 		
 		SqlSession ss = sg_dao.getSqlSessionFactory().openSession();
-		list=ss.selectList("appliedStudyResult",c_vo);
+		list=ss.selectList("selectAppliedStudies",c_vo);
 		ss.close();
 		
 		return list;

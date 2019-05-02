@@ -55,7 +55,7 @@ $(function() {
 	});
 	
 	$(".pending").click(function(){
-		alert("수락대기 중인 스터디는 활동하실 수 없습니다");
+		alert("리더의 수락대기 중인 스터디는 활동하실 수 없습니다");
 	});
 });
 
@@ -76,7 +76,7 @@ function moveToDetail(pendingFlag, sNum) {
 		<!-- 점보트론 : 전광판 -->
 		<section class="text-center bg-white mb-0" style="margin-top: 90px; margin-bottom: 20px;">
 			<div class="container">
-				<h1 class="jumbotron-heading">내가 만든 스터디</h1>
+				<h1 class="jumbotron-heading">내 스터디</h1>
 			</div>
 		</section>
 		<div style="height: 30px;"></div>
@@ -90,7 +90,7 @@ function moveToDetail(pendingFlag, sNum) {
 				<!-- 왼쪽 사용자 상태 -->
 				<div class="col-auto">
 					<div class="card" style="width: 250px;">
-						<img src="/third_prj/profile_img/no_user_img.png" class="card-img-top w-75 mx-auto d-block rounded-circle mt-3">
+						<img src="/third_prj/profile_img/${ myImg }" style="width:200px; height:200px;" class="card-img-top w-75 mx-auto d-block rounded-circle mt-3">
 						<div class="card-body text-center pt-0">
 							<h6 class="card-title text-center my-3">
 								<strong>닉네임</strong>
@@ -109,7 +109,7 @@ function moveToDetail(pendingFlag, sNum) {
 								</div>
 								<div class="d-flex flex-row p-2 border-bottom">
 									<div class="mr-auto">
-										<small>오픈 대기 스터디</small>
+										<small>참여 대기 스터디</small>
 									</div>
 									<div class="text-right">
 										<small><c:out value="${ pendingStudy }"/></small>
@@ -149,7 +149,7 @@ function moveToDetail(pendingFlag, sNum) {
 							</div>
 
 							<div class="col-auto">
-								<form class="form-row align-item-center" action="study_i_made.do" id="conditionFrm" method="post">
+								<form class="form-row align-item-center" action="my_study.do" id="conditionFrm" method="post">
 									<div class="col-auto">
 										<select class="form-control-sm" id="loc" name="loc">
 											<option value="none" ${ selectedLoc eq 'none' ? 'selected' : '' }>지 역</option>
@@ -177,22 +177,16 @@ function moveToDetail(pendingFlag, sNum) {
 					</div>
 					<!-- 정렬바 row -->
 
-
-					<div>
-						<a> </a>
-					</div>
-
 					<!-- 썸네일 row -->
 					<div class="row">
 
-						<c:forEach var="study" items="${ studyIMadeList }">
+						<c:forEach var="study" items="${ appliedList }">
 						<div class="col-md-4" style="height:400px;">
-							<div class="card mb-4 shadow-sm ${ study.accept_flag eq 'N' ? 'pending' : '' } ${ study.deactivation eq 'Y' ? 'deactive' : ''}"
-								onclick="moveToDetail('${ study.accept_flag eq 'N' ? 'pending' : 'active' }','${ study.s_num }')">
+							<div class="card mb-4 shadow-sm pending" onclick="moveToDetail('pending','${ study.s_num }')">
 								<img width="100%" height="350" style="display:none"/>
 								<div>
-									<img class="card-img-top" src="/third_prj/study_img/${ study.img }" width="100%" height="200">
-									<div class="card-body text-center p-3" style="height:150px;">
+									<img class="card-img-top" src="/third_prj/study_img/${ study.study_img }" width="100%" height="200">
+									<div class="card-body text-center p-3" style="min-height:150px;">
 	
 										<div class="d-flex justify-content-end align-items-center mb-3">
 											<div class="mr-5">
@@ -207,50 +201,73 @@ function moveToDetail(pendingFlag, sNum) {
 										</div>
 										<div class="d-flex justify-content-center align-items-center mt-1 px-2">
 	
-											<div class="border-right p-2 pr-4">
-												<small>${ study.loc }</small>
-											</div>
-	
-											<div class="p-2 pl-4">
-												<small>${ study.category }</small>
-											</div>
-										</div>
-										<!-- <div class="d-flex justify-content-between align-items-center mt-3 px-2">
-
 											<div class="border border-secondary rounded-circle" style="width: 45px; height: 45px;">
-												<img src="http://localhost:8080/third_prj/resources/images/no_img.png" class="card-img-top w-100 rounded-circle">
+												<img src="/third_prj/profile_img/${ study.user_img }" class="card-img-top w-100 rounded-circle">
+											</div>
+											
+											<div class="border-right p-2">
+												<small><c:out value="${ study.nick }"/></small>
 											</div>
 	
 											<div class="border-right p-2">
-												<small>닉네임</small>
-											</div>
-	
-											<div class="border-right p-2">
-												<small>위치</small>
+												<small><c:out value="${ study.loc }"/></small>
 											</div>
 	
 											<div class="p-2">
-												<small>종류</small>
+												<small><c:out value="${ study.category }"/></small>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</c:forEach>
+						<c:forEach var="study" items="${ myStudyList }">
+						<div class="col-md-4" style="height:400px;">
+							<div class="card mb-4 shadow-sm ${ study.deactivation eq 'Y' ? 'deactive' : ''}"
+								onclick="moveToDetail('active','${ study.s_num }')">
+								<img width="100%" height="350" style="display:none"/>
+								<div>
+									<img class="card-img-top" src="/third_prj/study_img/${ study.study_img }" width="100%" height="200">
+									<div class="card-body text-center p-3" style="min-height:150px;">
+	
+										<div class="d-flex justify-content-end align-items-center mb-3">
+											<div class="mr-5">
+												<small class="text-muted"><c:out value="${ study.input_date }"/></small>
+											</div>
+											<small class="pr-1"><c:out value="${ study.recruitment eq 'Y' ? '모집중' : '모집종료' }"/></small>
+										</div>
+										<div class="px-3 border-bottom">
+											<p class="card-text pb-3">
+												<strong>${ study.study_name }</strong>
+											</p>
+										</div>
+										<div class="d-flex justify-content-center align-items-center mt-1 px-2">
+										
+											<div class="border border-secondary rounded-circle" style="width: 45px; height: 45px;">
+												<img src="/third_prj/profile_img/${ study.user_img }" class="card-img-top w-100 h-100 rounded-circle">
+											</div>
+											
+											<div class="border-right p-2">
+												<small><c:out value="${ study.nick }"/></small>
 											</div>
 	
+											<div class="border-right p-2">
+												<small>${ study.loc }</small>
+											</div>
 	
-											토글버튼 : 좋아요를 누르면  .active를 주세요.
-											<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">좋아요</button>
-										</div> -->
+											<div class="p-2">
+												<small>${ study.category }</small>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						</c:forEach>
 						
-						<!-- 추가하기 버튼 -->
-						<div class="col-md-4" style="min-height:400px;">
-							<div class="roounded" style="height:350px; border: 1.5px dashed #EAEAEA; border-radius: 5px;">
-								<button class="d-flex justify-content-center btn h-100 btn-outline-secondary btn-block text-center border-0" onclick="location.href='create_study.do'">+추가하기</button>
-							</div>
-						</div>
-						<!-- 추가하기 버튼 -->
-						<!-- 1번째 줄 시작 -->
+						
+						
 					</div>
 					<!-- 썸네일 row -->
 				</div>

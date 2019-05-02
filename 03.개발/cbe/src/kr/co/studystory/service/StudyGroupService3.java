@@ -16,6 +16,15 @@ public class StudyGroupService3 {
 	
 	@Autowired
 	private StudyGroupDAO3 sg_dao3;
+	
+	/**
+	 * 내 스터디, 내가 만든 스터디, 관심 스터디에서 사용할
+	 * 프로필 이미지를 반환하는 메서드
+	 * by 영근
+	 */
+	public String getMyProfileImg(String id) {
+		return sg_dao3.selectMyProfileImg(id);
+	}
 
 	/**
 	 * 내가 만든 스터디정보를 반환하는 메서드
@@ -25,17 +34,19 @@ public class StudyGroupService3 {
 		return sg_dao3.selectStudyImade(cvo);
 	}
 	
-	//내 스터디
-	//프로필 정보는 StudyInfoService의 getMyProfile 사용
+	/**
+	 * 진행중인 스터디 정보를 반환하는 메서드
+	 * by 혜원
+	 */
 	public List<MyStudy> getMyStudy(ConditionVO c_vo) {
-		List<MyStudy> list=null;
-		list=sg_dao3.selectMyStudies(c_vo);
-		return list;
+		return sg_dao3.selectMyStudies(c_vo);
 	}//getMyStudy
 	
+	/**
+	 * 신청한 스터디 정보를 반환하는 메서드
+	 * by 혜원
+	 */
 	public List<AppliedStudy> getMyApplied(ConditionVO c_vo) {
-		List<AppliedStudy> list=null;
-		list=sg_dao.selectAppliedStudy(c_vo);
-		return list;
+		return sg_dao3.selectAppliedStudy(c_vo);
 	}//getMyApplied
 }
