@@ -44,17 +44,6 @@ public class StudyGroupDAO2 {
 	}//getSessionFactory
 		
 	
-	//스터디 참여자 보기 -참여자 수 - 정미 
-	public int selectAllMember(String sNum) {
-		int cnt=0;
-		
-		SqlSession ss= getSessionFactory().openSession();
-		cnt=ss.selectOne("selectMemberCnt",sNum);
-		ss.close();
-		
-		return cnt;
-	}//selectAllMember
-	
 	/**
 	 * 스터디 참여자 보기 ( 이미지띄우기 ) - 정미
 	 * @param sNum
