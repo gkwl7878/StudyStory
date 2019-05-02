@@ -15,6 +15,7 @@ import kr.co.studystory.domain.ThumbnailDomain;
 import kr.co.studystory.vo.DetailMenuVO;
 import kr.co.studystory.vo.JoinFormVO;
 import kr.co.studystory.vo.ReplyVO;
+import kr.co.studystory.vo.SearchSelectVO;
 
 @Component
 public class StudyInfoService {
@@ -158,16 +159,69 @@ public class StudyInfoService {
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject getOrderedList(String order) {
-		JSONObject json = null;
-		JSONArray jArr = null;
-		
+
+		JSONObject oneJsonObj = null; // 썸네일Domain의 각 값을 저장할 JSON객체.
+		JSONArray jsonArr = null; // JSON객체를 담을 JSON배열.
+		JSONObject typeJson = null; // JSON배열을 저장하고 리턴할 JSON객체.
+
+		// 최신순으로 정렬.
 		if ("최신순".equals(order)) {
+
+			// DB에서 최신순으로 조회하기.
 			List<ThumbnailDomain> list = si_dao.selectThumbLatest();
-			json = new JSONObject();
-			json.put("LatestList", list);
+
+			// JSONObject에 담을 썸네일 선언.
+			ThumbnailDomain thumb = null;
+
+			// JSONObject를 담을 JSONArray
+			jsonArr = new JSONArray();
+
+			// list의 값을 JSONObject로 변환후 JSONArray에 담기.
+			for (int i = 0; i < list.size(); i++) {
+				oneJsonObj = new JSONObject();
+
+				thumb = list.get(i);
+
+				oneJsonObj.put("sNum", thumb.getsNum());
+				oneJsonObj.put("studyName", thumb.getStudyName());
+				oneJsonObj.put("loc", thumb.getLoc());
+				oneJsonObj.put("category", thumb.getCategory());
+				oneJsonObj.put("img", thumb.getImg());
+				oneJsonObj.put("recruitment", thumb.getRecruitment());
+				oneJsonObj.put("inputDate", thumb.getInputDate());
+				oneJsonObj.put("nick", thumb.getNick());
+				oneJsonObj.put("userImg", thumb.getUserImg());
+				oneJsonObj.put("favFlag", thumb.isFavFlag());
+
+				jsonArr.add(oneJsonObj);
+			} // end for
+
+			// 리턴할 JSON객체 생성.
+			typeJson = new JSONObject();
+
+			// JSON배열 담기.
+			typeJson.put("latest_order", jsonArr);
+
+			// 단위 테스트.
+			System.out.println("/////////////////////// 서비스 json배열의 크기 : " + jsonArr.size());
+
 		} // end if
 
-		return json;
+		return typeJson;
 	}// getLatestThumbList
+
+	/**
+	 * 검색 조건 VO를 받아 해당 썸네일 List를 얻는 메서드.
+	 * 
+	 * @param ss_vo
+	 * @return
+	 */
+	public List<ThumbnailDomain> getConditionalThumbList(SearchSelectVO ss_vo) {
+		List<ThumbnailDomain> list = null;
+
+		list = si_dao.selectConditionalThumbList(ss_vo);
+		
+		return list;
+	}// getConditionalThumbList
 
 }// class

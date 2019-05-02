@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.studystory.domain.ThumbnailDomain;
 import kr.co.studystory.service.StudyInfoService;
+import kr.co.studystory.vo.SearchSelectVO;
 
 /**
  * 
@@ -89,12 +90,25 @@ public class StudySearchController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "../search/search_order_process.do", method = GET)
+	@RequestMapping(value = "/search/search_order_process.do", method = GET)
 	public String searchOrderProccess(String order) {
 		JSONObject json = null;
 		json = sis.getOrderedList(order);
 		return json.toJSONString();
 	}// searchOrderProccess
+
+	/**
+	 * 검색 페이지에서 조건 검색에 따른 요청 처리.
+	 * 
+	 * @param ss_vo
+	 * @return
+	 */
+	@RequestMapping(value = "/search/search_process.do", method = GET)
+	public String searchBtnProcess(SearchSelectVO ss_vo, Model model) {
+		List<ThumbnailDomain> list = sis.getConditionalThumbList(ss_vo);
+		model.addAttribute("thumbnail_list", list);
+		return "study_info/search";
+	}// searchBtnProcess
 
 	/////////////////////////////////////////// 이하 진행 해야 할 부분.
 

@@ -71,7 +71,7 @@
 	<!-- 댓글 인서트 -->
 	<insert id="insertComment" parameterType="kr.co.studystory.vo.ReplyVO">
 		insert into s_comment(s_num, s_comment, id, input_date)
-		values(#{ sNum }, #{ reply }, #{ joinerId }, SYSDATE)
+		values(#{ sNum }, #{ reply }, #{ id }, SYSDATE)
 	</insert>
 	<!-- 댓글 인서트 -->
 
