@@ -1,5 +1,7 @@
 package kr.co.studystory.admin.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.studystory.admin.dao.AdCommonDAO;
 import kr.co.studystory.admin.dao.StudyAndUserDAO;
@@ -55,11 +60,21 @@ public class StudyAndUserService {
 		return list;
 	}
 	
+	/**
+	 * 새스터디 상세조회
+	 * @param sNum
+	 * @return
+	 */
 	public DetailNewStudyInfo detailNewStudy(String sNum) {
 		DetailNewStudyInfo dnsi=sau_dao.selectDetailNewStudy(sNum);
 		return dnsi;
 	}
 	
+	/**
+	 * 새스터디 수락
+	 * @param a_vo
+	 * @return
+	 */
 	public boolean acceptStudy(AcceptVO a_vo) {
 		boolean acceptFlag= false;
 		boolean mInsertFlag= false;
@@ -68,6 +83,11 @@ public class StudyAndUserService {
 		return acceptFlag;
 	}
 	
+	/**
+	 * 새스터디 거절
+	 * @param r_vo
+	 * @return
+	 */
 	public boolean refuseStudy(RefuseVO r_vo) {
 		boolean deleteFlag= false;
 		deleteFlag =sau_dao.updateDeleteFlag(r_vo.getsNum());
@@ -145,17 +165,54 @@ public class StudyAndUserService {
 		return ds;
 	}
 	
+	/**
+	 * 상세스터디 수정
+	 * @param ds_vo
+	 * @return
+	 */
 	public boolean modifyStudy(DetailStudyVO ds_vo) {
-		boolean modifyStudy= false;
-		
-		
+		boolean modifyStudy= sau_dao.updateDetailStudyInfo(ds_vo);
 		return modifyStudy;
 	}
 	
-	public void updateNewIng(HttpServletRequest request) {
-		
+	/**
+	 * 전에 갖고있는 이미지 삭제를 위한 조회
+	 * @param sNum
+	 * @return
+	 */
+	public String searchPreImg(String sNum) {
+		String preImg= sau_dao.selectPreImg(sNum);
+		return preImg;
 	}
 	
+	/**
+	 * 새 이미지명 받아오기
+	 * @param request
+	 * @throws IOException 
+	 */
+	public	 void updateNewIng(HttpServletRequest request, String file) throws IOException {
+
+	}
+	
+	/**
+	 * 삭제할 멤버 조회
+	 * @param sNum
+	 * @return
+	 */
+	public List<String> getMember(String sNum){
+		List<String> list= sau_dao.selectStudyMember(sNum);
+		return list;
+	}
+	
+	/**
+	 * 스터디 삭제
+	 * @param sNum
+	 * @return
+	 */
+	public boolean removeStudy(String sNum) {
+		boolean removeFlag= sau_dao.deleteStudy(sNum);
+		return removeFlag;
+	}
 	
 	
 	public static void main(String[] args) {

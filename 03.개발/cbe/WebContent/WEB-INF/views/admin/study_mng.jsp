@@ -21,10 +21,11 @@
 <script type="text/javascript">
 	$(function() {
 		<c:if test="${ !loginSession }">
-			location.replace("login.do");
+		location.replace("login.do");
 		</c:if>
-		
-		
+		<c:if test="${ sDeleteFlag }">
+		alert("정상적으로 삭제처리 되었습니다");
+		</c:if>
 	});//ready
 </script>
 </head>

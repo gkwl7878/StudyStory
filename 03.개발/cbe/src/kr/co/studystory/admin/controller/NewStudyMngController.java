@@ -94,7 +94,7 @@ public class NewStudyMngController {
 	}
 	
 	@RequestMapping(value="/admin/ns_accept.do", method=RequestMethod.GET)
-	public String acceptNsProcess(AcceptVO a_vo,Model model) {
+	public String acceptNsProcess(AcceptVO a_vo,String studyName,Model model) {
 		boolean alarmFlag = false;
 		boolean acceptFlag= saus.acceptStudy(a_vo);
 		AlarmVO al_vo= new AlarmVO();
@@ -103,7 +103,7 @@ public class NewStudyMngController {
 			al_vo.setId(a_vo.getId());
 			al_vo.setCategory("스터디");
 			al_vo.setSubject("새 스터디가 수락되었습니다.");
-			al_vo.setContent(a_vo.getsNum()+" 번 스터디가 수락되었습니다.");
+			al_vo.setContent("["+studyName+"] 스터디가 수락되었습니다.");
 			alarmFlag= cms.sendAlarm(al_vo);
 		}
 		
@@ -122,14 +122,14 @@ public class NewStudyMngController {
 	}
 	
 	@RequestMapping(value="/admin/study_reject_proc.do",method=RequestMethod.GET)
-	public String refuseNsProcess(RefuseVO r_vo, Model model) {
+	public String refuseNsProcess(RefuseVO r_vo,String studyName, Model model) {
 		boolean rejectFlag=saus.refuseStudy(r_vo);
 		AlarmVO al_vo= new AlarmVO();
 		if(rejectFlag) {
 			al_vo.setId(r_vo.getId());
 			al_vo.setCategory("스터디");
 			al_vo.setSubject("새 스터디가 거절되었습니다.");
-			al_vo.setContent(r_vo.getsNum()+" 번 스터디가 거절되었습니다. 거절사유:" +r_vo.getMsg());
+			al_vo.setContent("["+studyName+"] 스터디가 거절 되었습니다. 거절사유: [" +r_vo.getMsg()+"]");
 			rejectFlag= cms.sendAlarm(al_vo);
 		}
 		

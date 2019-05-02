@@ -24,7 +24,11 @@
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-	
+	$(function() {
+		$("#removeBtn").click(function() {
+			$("#removeFrm").submit();
+		})
+	})
 </script>
 </head>
 
@@ -42,11 +46,11 @@
 				<c:param name="allStudy" value="${requestScope.allStudy}"></c:param>
 			</c:import>
 			
-	<%-- <c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"></c:import> --%>
 	<!-- sidebar 끝 -->
 
 	<div id="wrap">
-		<form >
+		<form id="removeFrm" action="remove_study_proc.do?" method="get">
+			<input type="hidden" name="sNum" value="${param.sNum }"/>
 			<br />
 			<br />
 			<br />
@@ -61,8 +65,8 @@
 			<br />
 			<br />
 			<br />
-			<a class="btn btn-secondary btn-lg" href="#" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
-			<input type="button" class="btn btn-secondary btn-lg" value="삭제" id="deleteBtn" />
+			<a class="btn btn-secondary btn-lg" href="study_detail.do?sNum=${param.sNum}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<input type="button" class="btn btn-secondary btn-lg" value="삭제" id="removeBtn" />
 		</form>
 	</div>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

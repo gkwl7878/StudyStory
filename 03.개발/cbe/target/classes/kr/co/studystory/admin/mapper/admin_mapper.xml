@@ -64,7 +64,7 @@
 	from(
 		select s.id,s.study_name,ut.nick
 		from study s, user_table ut
-		where s.id=ut.id
+		where s.id=ut.id and (delete_flag!='Y')
 		<if test="'스터디명'.equals(searchCondition)">
 			and s.study_name like '%'||#{searchWord}||'%' 
 		</if>
@@ -72,7 +72,7 @@
 			and s.id like '%'||#{searchWord}||'%' 
 		</if>
 		<if test="'닉네임'.equals(searchCondition)">
-			and s.nick like '%'||#{searchWord}||'%' 
+			and ut.nick like '%'||#{searchWord}||'%' 
 		</if>
 	)
 </select>
@@ -243,7 +243,7 @@
 		select s.s_num s_num, s.id, ut.nick, s.study_name, s.category, s.loc, s.input_date,
 		row_number() over(order by s.input_date desc) r_num
 		from study s, user_table ut
-		where s.id=ut.id
+		where s.id=ut.id and (delete_flag!='Y')
 		<if test="'스터디명'.equals(searchCondition)">
 			and s.study_name like '%'||#{searchWord}||'%'
 		</if>
@@ -275,6 +275,29 @@
 	where s.id=ut.id and s.s_num=#{sNum}
 </select>
 
+<select id="selectPreImg" resultType="String" parameterType="String">
+	select img
+	from   study
+	where  s_num=#{sNum}
+</select>
 
+<update id="updateStudy" parameterType="kr.co.studystory.admin.vo.DetailStudyVO">
+	update study
+	set category=#{category}, loc= #{loc}, img= #{img}, content=#{content}
+	where s_num= #{sNum}
+</update>
+
+<select id="selectStudyMember" resultType="String" parameterType="String">
+	select id
+	from   member
+	where  s_num=#{sNum}
+</select>
+
+
+<update id="deleteStudy" parameterType="String">
+	update study
+	set delete_flag='Y'
+	where s_num= #{sNum}
+</update>
 	
 </mapper>

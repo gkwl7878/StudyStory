@@ -1,7 +1,10 @@
 package kr.co.studystory.admin.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,10 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import kr.co.studystory.admin.domain.DetailStudy;
 import kr.co.studystory.admin.domain.StudyInfo;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.service.StudyAndUserService;
+import kr.co.studystory.admin.vo.AlarmVO;
 import kr.co.studystory.admin.vo.DeleteStudyVO;
 import kr.co.studystory.admin.vo.DetailStudyVO;
 import kr.co.studystory.admin.vo.StudyBoardVO;
@@ -79,11 +86,10 @@ public class StudyMngController {
 		return "/admin/study_mng";
 	}
 	
-	@RequestMapping(value="/admin/study_detail.do",method=GET)
-	public String studyDetailPage(StudyDetailVO sd_vo, Model model,HttpServletRequest request) {
+	@RequestMapping(value="/admin/study_detail.do",method= {GET,POST})
+	public String studyDetailPage(StudyDetailVO sd_vo, Model model) {
+
 		DetailStudy ds= saus.searchDetailStudy(sd_vo.getsNum());
-		
-		//studyName, id, nick, category,loc,inputDate, img, content, memberNum
 		model.addAttribute("studyName",ds.getStudyName());
 		model.addAttribute("id",ds.getId());
 		model.addAttribute("nick",ds.getNick());
@@ -103,11 +109,48 @@ public class StudyMngController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/admin/mod_study_proc.do", method=GET)
-	public String modifyStudyProcess(DetailStudyVO ds_vo,Model model) {
+	@RequestMapping(value="/admin/study_modify.do", method= {POST,GET})
+	public String modifyStudyProcess(DetailStudyVO ds_vo,Model model,HttpServletRequest request) {
+		// 파일 업로드
+		MultipartRequest mr=null;
+		try {
+			mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/resources/test/",
+					1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String img= mr.getFilesystemName("file");
+		String sNum = mr.getParameter("sNum");
+		String category= mr.getParameter("category");
+		String loc= mr.getParameter("loc");
+		String content= mr.getParameter("content");
+		
+		String preImg= saus.searchPreImg(sNum);
 		
 		
-		return "/admin/detail_study_info";
+		File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/resources/test/"+preImg);
+		
+		if(file.exists()&&img!=null) {
+			file.delete();
+		}else {
+			System.out.println("파일이 존재하지 않습니다.");
+		}
+		
+		if(img==null) {
+			img ="no_study_img.png";
+		}
+		
+		ds_vo.setCategory(category);
+		ds_vo.setLoc(loc);
+		ds_vo.setContent(content);
+		ds_vo.setImg(img);
+		ds_vo.setsNum(sNum);
+		
+		boolean sModifyFlag= saus.modifyStudy(ds_vo);
+		
+		model.addAttribute("sModifyFlag", sModifyFlag);
+		
+		return "forward:study_detail.do?sNum="+sNum;
 	}
 	
 	/**
@@ -115,9 +158,9 @@ public class StudyMngController {
 	 * @param sNum
 	 * @return
 	 */
-	@RequestMapping(value="/admin/remove_study_page.do/", method=GET)
-	public String removeStudyPage(String sNum) {
-		
+	@RequestMapping(value="/admin/remove_study_page.do", method=GET)
+	public String removeStudyPage(String sNum,Model model) {
+		model.addAttribute(sNum);
 		return "/admin/study_del";
 	}
 	
@@ -127,9 +170,20 @@ public class StudyMngController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin/remove_study_proc.do",method=GET)
-	public String removeStudyProcess(DeleteStudyVO ds_vo) {
-		
-		return "/admin/study_mng";
+	public String removeStudyProcess(DeleteStudyVO ds_vo,String studyName ,Model model) {
+		AlarmVO al_vo= new AlarmVO();
+		boolean sDeleteFlag= saus.removeStudy(ds_vo.getsNum());
+		List<String> list=saus.getMember(ds_vo.getsNum());
+		if(sDeleteFlag) {
+			for(int i=0; i<list.size();i++) {
+				al_vo.setId(list.get(i));
+				al_vo.setCategory("스터디");
+				al_vo.setSubject("스터디가 삭제되었습니다.");
+				al_vo.setContent("["+studyName+"]  스터디가 삭제되었습니다. 삭제사유: [" +ds_vo.getMsg()+"]");
+			}
+		}
+		model.addAttribute("sDeleteFlag", sDeleteFlag);
+		return "forward:study_mng.do";
 	}
 	
 }

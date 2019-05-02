@@ -240,16 +240,11 @@ public class StudyAndUserDAO {
 		return list;
 	}
 	
-	
-	public static void main(String[] args) {
-		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
-		StudyBoardVO sb_vo= new StudyBoardVO();
-		sb_vo.setBegin(1);
-		sb_vo.setCurrPage(1);
-		sb_vo.setEnd(10);
-		sau_dao.selectStudyInfo(sb_vo);
-	}
-	
+	/**
+	 * 상세 스터디 정보 조회
+	 * @param sNum
+	 * @return
+	 */
 	public DetailStudy selectDetailStudyInfo(String sNum) {
 		DetailStudy ds=null;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
@@ -258,30 +253,60 @@ public class StudyAndUserDAO {
 		return ds;
 	}
 	
+	/**
+	 * 스터디 수정
+	 * @param ds_vo
+	 * @return
+	 */
 	public boolean updateDetailStudyInfo(DetailStudyVO ds_vo) {
-		boolean updateDetailStudyInfo= false;
-		
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		boolean updateDetailStudyInfo= ss.update("updateStudy", ds_vo)==1;
+		if(updateDetailStudyInfo) {
+			ss.commit();
+		}
 		return updateDetailStudyInfo;
 	}
 	
+	/**
+	 * 전에 갖고 있는 이미지 삭제를 위한 조회
+	 * @param sNum
+	 * @return
+	 */
+	public String selectPreImg(String sNum) {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		String preImg= ss.selectOne("selectPreImg",sNum);
+		return preImg;
+	}
+	
+	/**
+	 * 스터디 삭제 전 알림을 보낼 멤버 조회
+	 * @param sNum
+	 * @return
+	 */
 	public List<String> selectStudyMember(String sNum) {
 		List<String> list= new ArrayList<String>();
-		
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		list= ss.selectList("selectStudyMember",sNum);
 		return list;
 	}
 	
+	/**
+	 * 스터디 삭제
+	 * @param sNum
+	 * @return
+	 */
 	public boolean deleteStudy(String sNum) {
-		boolean deleteStudy =false;
-		
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		boolean deleteStudy= ss.update("deleteStudy", sNum)==1;
+		if(deleteStudy) {
+			ss.commit();
+		}
 		return deleteStudy;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
+	public static void main(String[] args) {
+		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
+		System.out.println(sau_dao.selectStudyMember("s_000041"));
+	}
 	
 }

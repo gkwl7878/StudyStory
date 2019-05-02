@@ -71,11 +71,9 @@ public class adLoginController {
 	 */
 	@RequestMapping(value="/admin/logout.do")
 	public String LogOut(SessionStatus ss,Model model){
-		boolean logoutFlag=false;
 		ss.setComplete();
-		logoutFlag=true;
-		model.addAttribute("logoutFlag",logoutFlag);
-		return "admin/logout";
+		model.addAttribute("logoutFlag",true);
+		return "/admin/logout";
 	}
 	
 	

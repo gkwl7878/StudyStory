@@ -65,9 +65,7 @@
 				<c:param name="activeFlag" value="${requestScope.activeFlag}"></c:param>
 			</c:import>
 			</c:if>
-				
 			
-			<%-- <c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"></c:import> --%>
 			<!-- sidebar 끝 -->
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -95,9 +93,17 @@
 							<tr>
 								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
 								<td class="text-center"><c:out value="${nsList.id }"/></td>
+								<c:if test="${empty param.weekUser}">
 								<td><a href="ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}&weekUser=${requestScope.weekUser}
 									&weekStudy=${requestScope.weekStudy}&allUser=${requestScope.allUser}
-									&allStudy=${requestScope.allStudy}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
+									&allStudy=${requestScope.allStudy}&activeFlag=${requestScope.activeFlag}" style="color: black">
+									<c:out value="${nsList.studyName}"/></a></td>
+								</c:if>
+								<c:if test="${not empty param.weekUser}">
+								<td><a href="ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&activeFlag=${requestScope.activeFlag}
+									&allStudy=${param.allStudy}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
+								</c:if>
 								<td class="text-center"><c:out value="${nsList.category }"/></td>
 								<td class="text-center"><c:out value="${nsList.loc }"/></td>
 								<td class="text-center"><c:out value="${nsList.inputDate }"/></td>

@@ -27,6 +27,10 @@
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script type="text/javascript">
 	$(function() {
+		<c:if test="${ !loginSession }">
+			location.replace("login.do");
+		</c:if>
+		
 		$("#rejectBtn").click(function() {
 			$("#rejFrm").submit();
 		})
@@ -50,7 +54,6 @@
 		<form id="rejFrm" action="study_reject_proc.do" method="get">
 			<input type="hidden" name="sNum" value="${param.sNum }"/>
 			<input type="hidden" name="id" value="${param.id}"/>
-			<input type="hidden" name="msg" value="${param.msg}""/>
 			<br />
 			<br />
 			<br />

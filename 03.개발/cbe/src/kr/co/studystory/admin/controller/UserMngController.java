@@ -117,6 +117,12 @@ public class UserMngController {
 		return "forward:user_detail.do";
 	}
 	
+	/**
+	 * À¯ÀúÅ»Åð
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/admin/user_delete.do", method=GET)
 	public String removeUserProcess(String id, Model model) {
 		boolean removeFlag= saus.removeUser(id);

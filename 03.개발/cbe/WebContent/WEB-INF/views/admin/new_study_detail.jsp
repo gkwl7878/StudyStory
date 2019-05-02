@@ -33,7 +33,6 @@
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script type="text/javascript">
 	$(function() {
-		
 		<c:if test="${ !loginSession }">
 		location.replace("login.do");
 		</c:if>
@@ -53,6 +52,7 @@
 				<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
 				<c:param name="allUser" value="${param.allUser}"></c:param>
 				<c:param name="allStudy" value="${param.allStudy}"></c:param>
+				<c:param name="activeFlag" value="${param.activeFlag}"></c:param>
 	</c:import>
 	<!-- sidebar 끝 -->
 
@@ -139,9 +139,13 @@
 									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
 									&allStudy=${param.allStudy}"  role="button" style="margin-left: 180px;">목록으로</a> 
 			<!--알람: id,subject, category, content  -->
-			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}&currPage=${param.currPage}
-				&id=${requestScope.id }" role="button" style="margin-left: 10px;">수락</a> 
-			<a class="btn btn-secondary btn" href="study_reject.do?sNum=${param.sNum}&currPage=${param.currPage}&id=${requestScope.id }" role="button" style="margin-left: 10px;">거절</a>
+			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}&currPage=${param.currPage}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+									&allStudy=${param.allStudy}
+				&id=${requestScope.id }&studyName=${requestScope.studyName }" role="button" style="margin-left: 10px;">수락</a> 
+			<a class="btn btn-secondary btn" href="study_reject.do?sNum=${param.sNum}&currPage=${param.currPage}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+									&allStudy=${param.allStudy}&id=${requestScope.id }&studyName=${requestScope.studyName }" role="button" style="margin-left: 10px;">거절</a>
 		</div>
 	</div>
 

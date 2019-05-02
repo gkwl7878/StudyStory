@@ -1,14 +1,14 @@
 package kr.co.studystory.admin.vo;
 
 public class DetailStudyVO {
-	private String sNUm, category, loc, img, content;
+	private String sNum, category, loc, img, content;
 
-	public String getsNUm() {
-		return sNUm;
+	public String getsNum() {
+		return sNum;
 	}
 
-	public void setsNUm(String sNUm) {
-		this.sNUm = sNUm;
+	public void setsNum(String sNum) {
+		this.sNum = sNum;
 	}
 
 	public String getCategory() {
