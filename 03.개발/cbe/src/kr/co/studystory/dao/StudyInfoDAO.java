@@ -220,8 +220,7 @@ public class StudyInfoDAO {
 	public List<ThumbnailDomain> selectConditionalThumbList(SearchSelectVO ss_vo) {
 		List<ThumbnailDomain> list = null;
 		SqlSession ss = getSessionFatory().openSession();
-		System.out.println("//////////////////// ´Ù¿À : loc = " + ss_vo.getLoc_select());
-		list = ss.selectList("selectThumbCon", ss_vo.getLoc_select());
+		list = ss.selectList("selectThumbCon", ss_vo);
 		return list;
 	}// selectConditionThumb
 
