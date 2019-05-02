@@ -5,6 +5,7 @@ import java.io.Reader;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
@@ -43,10 +44,13 @@ public class StudyGroupDAO2 {
 	}//getSessionFactory
 		
 	
-	//스터디 참여자 보기 - 정미
+	//스터디 참여자 보기 -참여자 수 - 정미 
 	public int selectAllMember(String sNum) {
 		int cnt=0;
 		
+		SqlSession ss= getSessionFactory().openSession();
+		cnt=ss.selectOne("selectMemberCnt",sNum);
+		ss.close();
 		
 		return cnt;
 	}//selectAllMember
@@ -58,8 +62,9 @@ public class StudyGroupDAO2 {
 	 */
 	public List<MemberWithImg> selectMemberWithImg(String sNum){
 		List<MemberWithImg> list=null;
-		
-		
+		SqlSession ss=getSessionFactory().openSession();
+		list=ss.selectList("selectMemberList",sNum);
+		ss.close();
 		return list;
 	}//selectMemberWithImg
 	

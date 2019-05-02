@@ -19,8 +19,7 @@ public class StudyGroupService2 {
 	
 	public List<MemberWithImg> getMemberWithImg(String sNum){
 		List<MemberWithImg> list=null;
-		
-		
+		list=sg_dao.selectMemberWithImg(sNum);
 		
 		return list;
 	}//getMemberWithImg

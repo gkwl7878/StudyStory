@@ -5,11 +5,17 @@
   
 <mapper namespace="kr.co.studystory.studygroup">
 
-<select id="selectMemberList"  resultType="kr.co.studystory.domain.MemberWithImg" parameterType="String">
-select ut.nick, ut.tel, ut.img
-from user_table ut, member m
-where ut.id=m.id and m.s_num=#{sNum}<!-- 's_000041'; -->
+<select id="selectMemberCnt" parameterType="String"><!-- resultType을 뭘로?? -->
+  select count(*)
+from member
+where s_num=#{sNum}<!-- 's_000041'; -->
+</select>
 
+
+<select id="selectMemberList"  resultType="kr.co.studystory.domain.MemberWithImg" parameterType="String">
+select ut.nick nick, ut.tel tel, ut.img img
+from user_table ut, member m
+where m.s_num=#{sNum} and ut.id=m.id 
 </select>
 
 
