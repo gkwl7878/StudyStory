@@ -22,6 +22,7 @@ public class UserStudyController2 {
 		List<MemberWithImg> mbwi=sgs.getMemberWithImg(sNum);
 		
 		
+		model.addAttribute("total",mbwi.size());
 		model.addAttribute("mbwi",mbwi );//멤버 (사진) 리스트
 		//model.addAttribute("")//총 멤버수 dao에서 구해오기 
 		
