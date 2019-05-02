@@ -25,4 +25,8 @@ public class DetailMenuVO {
 		this.s_num = s_num;
 	}
 
+	@Override
+	public String toString() {
+		return "DetailMenuVO [id=" + id + ", s_num=" + s_num + "]";
+	}
 }

@@ -230,7 +230,7 @@
 						<div class="col-lg-12">
 							
 						<c:choose>
-							<c:when test="leaderFlag"><!-- 스터디장일 때 -->
+							<c:when test="${ leaderFlag }"><!-- 스터디장일 때 -->
 						
 								<div class="row">
 									<div class="col-lg-12">
@@ -241,38 +241,38 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-lg-12" style="font-size: 12px;  text-align:center; margin-top: 10px; height: 40px">
-										<p>
-											<c:out value="${ s_Info.favNum }"/>명이 좋아하는 스터디!<br/>
-											<c:if test="${ s_Info.memberNum ne 20 }">
-												<c:out value="${ 20 - s_Info.memberNum }"/>명 더 가입가능한 상태입니다!
-											</c:if>
-											<c:if test="${ s_Info.recruitment eq 'N' }">
-												아쉽지만 모집이 마감되었습니다..<br/>다음 기회에 가입해주세요
-											</c:if>
-											<c:if test="${ s_Info.deactivation eq 'Y' }">
-												활동이 종료된 스터디입니다.<br/>다른 스터디를 이용해주세요
-											</c:if>
-										</p>
-									</div>
-								</div>
-								<c:if test="${ s_Info.recruitment eq 'Y' }">
-								<div class="row">
 									<div class="col-lg-12">
 										<div class="row">
 											<div class="col text-center" style="margin-top: 30px">
-												<form id="join_study_frm" action="../study_info/study_req_join.do">
-													<button id="study_join_btn" type="button" class="btn btn-secondary btn-sm">스터디 참여하기</button>
-													<input type="hidden" name="sNum" value="${ param.sNum }">
-												</form>
+												<button onclick="location.href='../study_notice/notice_list_leader.do?sNum=${ param.sNum }'" type="button" class="btn btn-secondary btn-sm">스터디 관리하기</button>
 											</div>
 										</div>
 									</div>
 								</div>
-								</c:if>
 							
 							</c:when>
-							<c:when test="memberFlag"><!-- 이미 가입된 멤버일때 -->
+							<c:when test="${ memberFlag }"><!-- 이미 가입된 멤버일때 -->
+							
+								<div class="row">
+									<div class="col-lg-12">
+										<!-- 스터디명 -->
+										<div style="font-size: 17px; text-align:center; font-weight: bold; height: 40px;">
+											<c:out value="${ s_Info.studyName }"/>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="row">
+											<div class="col text-center" style="margin-top: 30px">
+												<button onclick="location.href='../study_notice/notice_list.do?s_num=${ param.sNum }'" type="button" class="btn btn-secondary btn-sm">스터디 공지보기</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							
+							</c:when>
+							<c:when test="${ joinerFlag }"><!-- 신청자일 때 -->
 							
 								<div class="row">
 									<div class="col-lg-12">
@@ -285,75 +285,11 @@
 								<div class="row">
 									<div class="col-lg-12" style="font-size: 12px;  text-align:center; margin-top: 10px; height: 40px">
 										<p>
-											<c:out value="${ s_Info.favNum }"/>명이 좋아하는 스터디!<br/>
-											<c:if test="${ s_Info.memberNum ne 20 }">
-												<c:out value="${ 20 - s_Info.memberNum }"/>명 더 가입가능한 상태입니다!
-											</c:if>
-											<c:if test="${ s_Info.recruitment eq 'N' }">
-												아쉽지만 모집이 마감되었습니다..<br/>다음 기회에 가입해주세요
-											</c:if>
-											<c:if test="${ s_Info.deactivation eq 'Y' }">
-												활동이 종료된 스터디입니다.<br/>다른 스터디를 이용해주세요
-											</c:if>
+											스터디장의 수락을 기다리고 있습니다<br/>
+											수락 이후에 정상적인 활동이 가능합니다
 										</p>
 									</div>
 								</div>
-								<c:if test="${ s_Info.recruitment eq 'Y' }">
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="row">
-											<div class="col text-center" style="margin-top: 30px">
-												<form id="join_study_frm" action="../study_info/study_req_join.do">
-													<button id="study_join_btn" type="button" class="btn btn-secondary btn-sm">스터디 참여하기</button>
-													<input type="hidden" name="sNum" value="${ param.sNum }">
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-								</c:if>
-							
-							</c:when>
-							<c:when test="joinerFlag"><!-- 신청자일 때 -->
-							
-								<div class="row">
-									<div class="col-lg-12">
-										<!-- 스터디명 -->
-										<div style="font-size: 17px; text-align:center; font-weight: bold; height: 40px;">
-											<c:out value="${ s_Info.studyName }"/>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12" style="font-size: 12px;  text-align:center; margin-top: 10px; height: 40px">
-										<p>
-											<c:out value="${ s_Info.favNum }"/>명이 좋아하는 스터디!<br/>
-											<c:if test="${ s_Info.memberNum ne 20 }">
-												<c:out value="${ 20 - s_Info.memberNum }"/>명 더 가입가능한 상태입니다!
-											</c:if>
-											<c:if test="${ s_Info.recruitment eq 'N' }">
-												아쉽지만 모집이 마감되었습니다..<br/>다음 기회에 가입해주세요
-											</c:if>
-											<c:if test="${ s_Info.deactivation eq 'Y' }">
-												활동이 종료된 스터디입니다.<br/>다른 스터디를 이용해주세요
-											</c:if>
-										</p>
-									</div>
-								</div>
-								<c:if test="${ s_Info.recruitment eq 'Y' }">
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="row">
-											<div class="col text-center" style="margin-top: 30px">
-												<form id="join_study_frm" action="../study_info/study_req_join.do">
-													<button id="study_join_btn" type="button" class="btn btn-secondary btn-sm">스터디 참여하기</button>
-													<input type="hidden" name="sNum" value="${ param.sNum }">
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-								</c:if>
 							
 							</c:when>
 							<c:otherwise><!-- 가입한, 신청한, 리더가 아니라면 -->
