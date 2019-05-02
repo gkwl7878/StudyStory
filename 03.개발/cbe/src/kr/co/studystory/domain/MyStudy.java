@@ -2,22 +2,22 @@ package kr.co.studystory.domain;
 
 public class MyStudy {
 
-	private String sNum, studyName, loc, category, img, recruitment, inputdate, nick, deactivation;
+	private String s_num, study_name, loc, category, study_img, user_img, recruitment, input_date, nick, deactivation;
 
-	public String getsNum() {
-		return sNum;
+	public String getS_num() {
+		return s_num;
 	}
 
-	public void setsNum(String sNum) {
-		this.sNum = sNum;
+	public void setS_num(String s_num) {
+		this.s_num = s_num;
 	}
 
-	public String getStudyName() {
-		return studyName;
+	public String getStudy_name() {
+		return study_name;
 	}
 
-	public void setStudyName(String studyName) {
-		this.studyName = studyName;
+	public void setStudy_name(String study_name) {
+		this.study_name = study_name;
 	}
 
 	public String getLoc() {
@@ -36,12 +36,20 @@ public class MyStudy {
 		this.category = category;
 	}
 
-	public String getImg() {
-		return img;
+	public String getStudy_img() {
+		return study_img;
 	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setStudy_img(String study_img) {
+		this.study_img = study_img;
+	}
+
+	public String getUser_img() {
+		return user_img;
+	}
+
+	public void setUser_img(String user_img) {
+		this.user_img = user_img;
 	}
 
 	public String getRecruitment() {
@@ -52,12 +60,12 @@ public class MyStudy {
 		this.recruitment = recruitment;
 	}
 
-	public String getInputdate() {
-		return inputdate;
+	public String getInput_date() {
+		return input_date;
 	}
 
-	public void setInputdate(String inputdate) {
-		this.inputdate = inputdate;
+	public void setInput_date(String input_date) {
+		this.input_date = input_date;
 	}
 
 	public String getNick() {
@@ -72,9 +80,14 @@ public class MyStudy {
 		return deactivation;
 	}
 
-	public void setDeactivation(String deacivation) {
-		this.deactivation = deacivation;
+	public void setDeactivation(String deactivation) {
+		this.deactivation = deactivation;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "MyStudy [s_num=" + s_num + ", study_name=" + study_name + ", loc=" + loc + ", category=" + category
+				+ ", study_img=" + study_img + ", user_img=" + user_img + ", recruitment=" + recruitment
+				+ ", input_date=" + input_date + ", nick=" + nick + ", deactivation=" + deactivation + "]";
+	}
 }

@@ -90,7 +90,7 @@ function moveToDetail(pendingFlag, sNum) {
 				<!-- 왼쪽 사용자 상태 -->
 				<div class="col-auto">
 					<div class="card" style="width: 250px;">
-						<img src="/third_prj/profile_img/no_user_img.png" class="card-img-top w-75 mx-auto d-block rounded-circle mt-3">
+						<img src="/third_prj/profile_img/${ myImg }"  style="width:200px; height:200px;" class="card-img-top w-75 mx-auto d-block rounded-circle mt-3">
 						<div class="card-body text-center pt-0">
 							<h6 class="card-title text-center my-3">
 								<strong>닉네임</strong>
@@ -192,7 +192,7 @@ function moveToDetail(pendingFlag, sNum) {
 								<img width="100%" height="350" style="display:none"/>
 								<div>
 									<img class="card-img-top" src="/third_prj/study_img/${ study.img }" width="100%" height="200">
-									<div class="card-body text-center p-3" style="height:150px;">
+									<div class="card-body text-center p-3" style="min-height:150px;">
 	
 										<div class="d-flex justify-content-end align-items-center mb-3">
 											<div class="mr-5">
@@ -202,17 +202,17 @@ function moveToDetail(pendingFlag, sNum) {
 										</div>
 										<div class="px-3 border-bottom">
 											<p class="card-text pb-3">
-												<strong>${ study.study_name }</strong>
+												<strong><c:out value="${ study.study_name }"/></strong>
 											</p>
 										</div>
 										<div class="d-flex justify-content-center align-items-center mt-1 px-2">
 	
 											<div class="border-right p-2 pr-4">
-												<small>${ study.loc }</small>
+												<small><c:out value="${ study.loc }"/></small>
 											</div>
 	
 											<div class="p-2 pl-4">
-												<small>${ study.category }</small>
+												<small><c:out value="${ study.category }"/></small>
 											</div>
 										</div>
 									</div>
@@ -222,7 +222,7 @@ function moveToDetail(pendingFlag, sNum) {
 						</c:forEach>
 						
 						<!-- 추가하기 버튼 -->
-						<div class="col-md-4" style="min-height:400px;">
+						<div class="col-md-4" style="height:400px;">
 							<div class="roounded" style="height:350px; border: 1.5px dashed #EAEAEA; border-radius: 5px;">
 								<button class="d-flex justify-content-center btn h-100 btn-outline-secondary btn-block text-center border-0" onclick="location.href='create_study.do'">+추가하기</button>
 							</div>
