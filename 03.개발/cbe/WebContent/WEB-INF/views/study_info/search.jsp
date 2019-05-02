@@ -54,7 +54,7 @@
 				},
 				success : function(json) {
 					alert("정상동작");
-					
+					$("#thumb_view").html("");
 				 	
 					
 				}// success
@@ -144,16 +144,15 @@
 					<!-- 정렬바 row -->
 
 					<!-- 썸네일 row -->
-					<div class="row">
+					<div id="thumb_view" class="row">
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 						<c:forEach var="thumbnail" items="${ thumbnail_list }">
-
 							<div class="col-md-4">
 								<div class="card mb-4 shadow-sm">
-
 									<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-									<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top"
-										src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }">
+									<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }">
+										<!-- 썸네일 스터디 이미지 --> 
+										<img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }">
 										<div class="card-body text-center p-3">
 											<div class="d-flex justify-content-end align-items-center mb-3">
 												<div class="mr-5">
