@@ -84,6 +84,8 @@ public class StudyInfoDAO {
 		StudyInfoDomain s_info = null;
 		SqlSession ss = getSessionFatory().openSession();
 		s_info = ss.selectOne("selectDetailStudy", s_num);
+		s_info.setFavNum(ss.selectOne("selectFavNum", s_num));
+		s_info.setMemberNum(ss.selectOne("selectMemberNum", s_num));
 		ss.close();
 		return s_info;
 	}// selectStudyInfo
@@ -218,7 +220,7 @@ public class StudyInfoDAO {
 	public List<ThumbnailDomain> selectConditionalThumbList(SearchSelectVO ss_vo) {
 		List<ThumbnailDomain> list = null;
 		SqlSession ss = getSessionFatory().openSession();
-		System.out.println("//////////////////// 다오 : loc = " + ss_vo.getLoc_select() );
+		System.out.println("//////////////////// 다오 : loc = " + ss_vo.getLoc_select());
 		list = ss.selectList("selectThumbCon", ss_vo.getLoc_select());
 		return list;
 	}// selectConditionThumb

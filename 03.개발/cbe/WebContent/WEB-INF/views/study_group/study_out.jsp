@@ -31,7 +31,7 @@
 	
 	
 	<div id="wrap" >
-		<form>
+		<form action="study_group/leave_study.do" method="post">
 		 <br/><br/>
 		 <div style="border:1px solid #D7D7D7; padding:40px"><br/><br/>
 		<h1 ><Strong>정말 이 스터디를 탈퇴하시겠어요?</Strong></h1>
@@ -39,7 +39,7 @@
 		<h5>이 스터디를 탈퇴하는 이유가 무엇인지 리더에게 알려주세요.</h5>
 		<br/>
 		  <div class="form-group">
-		  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+		  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="reason"
 				placeholder="내용을 입력해주세요.">
     <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="내용을 입력해주세요.";></textarea> -->
   </div>

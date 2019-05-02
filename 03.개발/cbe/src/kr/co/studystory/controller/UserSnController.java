@@ -47,16 +47,4 @@ public class UserSnController {
 		
 		return "study_notice/notice_detail";
 	}//userDetailSn
-	
-						//혜원이 코드랑 합치지못해서 일단 임시로 매핑해놈
-					@RequestMapping(value="/study_group/my_study.do", method=GET)
-					public String myStudyPage(String s, Model model) {
-						
-						
-						
-						return "study_group/my_study";
-					}//myStudyPage
-	
-	
-	
 }//class
