@@ -78,7 +78,7 @@ public class StudyInfoDAO {
 	////////////////// Singleton
 
 	/**
-	 * 스터디의 상세 정보를 조회하는 메서드. - 수정 필요할 수도 있음...
+	 * 스터디의 상세 정보를 조회하는 메서드.
 	 * 
 	 * @param id
 	 * @return StudyInfoDomain
@@ -86,62 +86,64 @@ public class StudyInfoDAO {
 	public StudyInfoDomain selectStudyInfo(String s_num) {
 		StudyInfoDomain s_info = null;
 		SqlSession ss = getSessionFatory().openSession();
+		
 		s_info = ss.selectOne("selectDetailStudy", s_num);
+		
 		s_info.setFavNum(ss.selectOne("selectFavNum", s_num));
+		
 		s_info.setMemberNum(ss.selectOne("selectMemberNum", s_num));
+		
 		ss.close();
 		return s_info;
 	}// selectStudyInfo
-	
+
 	/**
-	 * 가입된 멤버인지 확인하는 메서드
-	 * by 영근
+	 * 가입된 멤버인지 확인하는 메서드 by 영근
 	 */
 	public boolean selectAmIMember(DetailMenuVO dmvo) {
 		boolean flag = false;
-		
+
 		SqlSession ss = getSessionFatory().openSession();
-		int cnt = ss.selectOne("selectAmIMember",dmvo);
+		int cnt = ss.selectOne("selectAmIMember", dmvo);
+
 		if (cnt == 1) {
 			flag = true;
 		}
-		
+
 		return flag;
-	}
-	
+	}// selectAmIMember
+
 	/**
-	 * 가입신청 했는지 확인하는 메서드
-	 * by 영근
+	 * 가입신청 했는지 확인하는 메서드 by 영근
 	 */
 	public boolean selectAmIPended(DetailMenuVO dmvo) {
 		boolean flag = false;
-		
+
 		SqlSession ss = getSessionFatory().openSession();
-		int cnt = ss.selectOne("selectAmIPended",dmvo);
+		int cnt = ss.selectOne("selectAmIPended", dmvo);
+
 		if (cnt == 1) {
 			flag = true;
 		}
-		
+
 		return flag;
-	}
-	
+	}// selectAmIPended
+
 	/**
-	 * 스터디 리더인지 (만들었는지) 확인하는지 메서드
-	 * by 영근
+	 * 스터디 리더인지 (만들었는지) 확인하는지 메서드 by 영근
 	 */
 	public boolean selectDidIMade(DetailMenuVO dmvo) {
 		boolean flag = false;
-		
+
 		SqlSession ss = getSessionFatory().openSession();
-		int cnt = ss.selectOne("selectDidIMade",dmvo);
+		int cnt = ss.selectOne("selectDidIMade", dmvo);
+
 		if (cnt == 1) {
 			flag = true;
 		}
-		
+
 		return flag;
-	}
-	
-	
+	}// selectDidIMade
 
 	/**
 	 * 상세 스터디의 댓글 List를 조회하는 메서드.
@@ -194,28 +196,26 @@ public class StudyInfoDAO {
 	 */
 	public boolean insertJoinForm(JoinFormVO jf_vo) {
 		boolean flag = false;
-		
+
 		SqlSession ss = getSessionFatory().openSession();
-		
+
 		JoinAlarmVO ja_vo = new JoinAlarmVO("스터디", "스터디 신청완료",
-			"\""+jf_vo.getStudyName()+"\"에 가입 신청이 완료되었습니다.\n가입 신청이 수락되면 알림으로 알려드리겠습니다.",
-			jf_vo.getJoinerId());
-		
+				"\"" + jf_vo.getStudyName() + "\"에 가입 신청이 완료되었습니다.\n가입 신청이 수락되면 알림으로 알려드리겠습니다.", jf_vo.getJoinerId());
+
 		String joinerNick = ss.selectOne("selectJoinerNick", jf_vo.getJoinerId());
-		
+
 		JoinAlarmVO ja_vo2 = new JoinAlarmVO("스터디", "스터디 가입요청",
-			"\""+joinerNick+"\"님께서 "+jf_vo.getStudyName()+"에 가입 신청을 하셨습니다.",
-			jf_vo.getLeaderNick());
-		
+				"\"" + joinerNick + "\"님께서 " + jf_vo.getStudyName() + "에 가입 신청을 하셨습니다.", jf_vo.getLeaderNick());
+
 		int cnt = ss.insert("insertJoinFormVO", jf_vo);
 		cnt += ss.insert("insertJoinerAlarm", ja_vo);
 		cnt += ss.insert("insertLeaderAlarm", ja_vo2);
-		
+
 		if (cnt == 3) {
 			ss.commit();
 			flag = true;
 		}
-		
+
 		ss.close();
 
 		return flag;
