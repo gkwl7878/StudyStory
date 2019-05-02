@@ -1,8 +1,7 @@
 package kr.co.studystory.vo;
 
 public class LeaveVO {
-	
-	private String id, pass;
+	private String id, reason, sNum;
 
 	public String getId() {
 		return id;
@@ -12,11 +11,19 @@ public class LeaveVO {
 		this.id = id;
 	}
 
-	public String getPass() {
-		return pass;
+	public String getReason() {
+		return reason;
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	public String getsNum() {
+		return sNum;
+	}
+
+	public void setsNum(String sNum) {
+		this.sNum = sNum;
 	}
 }
