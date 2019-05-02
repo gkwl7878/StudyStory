@@ -8,8 +8,11 @@
 
 <style>
 #wrap {
-	margin: 100px auto;
-	min-height: 800px
+	margin:0px auto;
+	margin-top:100px;
+	margin-bottom:40px;
+	
+	min-height: 700px
 }
 
 table {
@@ -57,11 +60,11 @@ div {
 </style>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
+<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/third_prj/resources/js/popper.min.js"></script>
+<script src="/third_prj/resources/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <title>스터디 참여 신청</title>
 <!-- Custom styles for this template -->
 
@@ -70,30 +73,28 @@ div {
 <script type="text/javascript">
 	$(function() {
 		$("#apply_btn").click(function() {
-			var introduce = $("#introduce_ta").val();
-			var apply = $("#apply_ta").val();
+			var introduce = $("#introduce").val();
+			var motive = $("#motive").val();
 
 			// 자기소개란이 비어 있다면.
 			if (introduce == "") {
-				alert("먼저 자기소개를 부탁드립니다.");
+				alert("먼저 자기소개를 부탁드립니다");
+				$("#introduce").focus();
 				return;
 			} // end if
 
 			// 지원동기란이 비어 있다면.
-			if (apply == "") {
-				alert("먼저 지원한 동기를 작성해주세요.");
+			if (motive == "") {
+				alert("먼저 지원한 동기를 작성해주세요");
+				$("#motive").focus();
 				return;
 			} // end if
 
 			// 모두 작성을 완료 했을 때.
-			if (introduce != "" && apply != "") {
-				$("#join_frm").submit();
-			}// end if
-
+			$("#join_frm").submit();
 		}); // click
 	}); // ready
 </script>
-
 </head>
 <body>
 	<!-- header -->
@@ -122,7 +123,7 @@ div {
 				<tbody>
 					<tr style="vertical-align: middle;">
 						<td scope="row">
-							<img src="/third_prj/resources/images/${ leader.leaderImg }">
+							<img src="/third_prj/profile_img/${ leader.leaderImg }" width="100" height="100">
 							<br />${ leader.nick }</td>
 						<td style="vertical-align: middle;">${ leader.studyName }</td>
 					</tr>
@@ -130,27 +131,25 @@ div {
 			</table>
 
 			<form id="join_frm" action="../study_info/join_process.do" method="POST">
-
 				<!-- 보내기 위한 가입신청자의 정보 -->
-				<label class="info">${ my_nick }님 자기소개를 부탁드립니다.</label>
-				<textarea class="form-control" id="introduce_ta" name="introduce_ta" rows="4" style="resize: none; height: 180px;" placeholder="자기소개는 100자 이하로 입력해주세요."></textarea>
+				<label class="info">"<c:out value="${ my_nick }"/>"님 자기소개를 부탁드립니다</label>
+				<textarea maxlength="100" class="form-control" id="introduce" name="introduce" rows="4" style="resize: none; height: 180px;" placeholder="자기소개는 100자 이하로 입력해주세요."></textarea>
 
-				<label class="info">${ leader.studyName }에 지원한 동기를 작성해주세요.</label>
-				<textarea class="form-control" id="apply_ta" name="apply_ta" rows="4" style="resize: none; height: 180px;" placeholder="지원동기는 100자 이하로 입력해주세요."></textarea>
-
+				<label class="info">"<c:out value="${ leader.studyName }"/>"에 지원한 동기를 작성해주세요</label>
+				<textarea maxlength="100" class="form-control" id="motive" name="motive" rows="4" style="resize: none; height: 180px;" placeholder="지원동기는 100자 이하로 입력해주세요."></textarea>
 
 				<!-- 조인폼 vo를 위한 설정  -->
 				<input type="hidden" name="joinerId" value="${ sessionScope.id }"> 
 				<input type="hidden" name="sNum" value="${ param.sNum }">
 				<!-- 조인알람 vo를 위한 설정  -->
 				<input type="hidden" name="studyName" value="${ leader.studyName }">
-
-
+				<input type="hidden" name="leaderNick" value="${ leader.nick }">
 			</form>
 		</div>
 
-		<div>
-			<input id="back_btn" type="button" class="btn btn-secondary btn-lg" role="button" style="margin-left: 40%; margin-top: 15px;" value="돌아가기" /> <input id="apply_btn" type="button" class="btn btn-secondary btn-lg" role="button" style="margin-left: 10px; margin-top: 15px" value="참여하기" />
+		<div style="text-align:center">
+			<input onclick="history.back()" type="button" class="btn btn-secondary btn-lg" role="button" style="margin-top: 15px;" value="돌아가기" />
+			<input id="apply_btn" type="button" class="btn btn-secondary btn-lg" role="button" style="margin-left: 10px; margin-top: 15px" value="참여하기" />
 		</div>
 	</div>
 

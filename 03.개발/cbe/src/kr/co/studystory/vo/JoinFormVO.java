@@ -8,9 +8,7 @@ package kr.co.studystory.vo;
  */
 public class JoinFormVO {
 
-	private String joinerId, sNum, introduce_ta, apply_ta;
-
-	/* setter & getter */
+	private String joinerId, sNum, introduce, motive, leaderNick, studyName;
 
 	public String getJoinerId() {
 		return joinerId;
@@ -28,27 +26,41 @@ public class JoinFormVO {
 		this.sNum = sNum;
 	}
 
-	public String getIntroduce_ta() {
-		return introduce_ta;
+	public String getIntroduce() {
+		return introduce;
 	}
 
-	public void setIntroduce_ta(String introduce_ta) {
-		this.introduce_ta = introduce_ta;
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
 	}
 
-	public String getApply_ta() {
-		return apply_ta;
+	public String getMotive() {
+		return motive;
 	}
 
-	public void setApply_ta(String apply_ta) {
-		this.apply_ta = apply_ta;
+	public void setMotive(String motive) {
+		this.motive = motive;
 	}
 
-	/* setter & getter */
+	public String getLeaderNick() {
+		return leaderNick;
+	}
+
+	public void setLeaderNick(String leaderNick) {
+		this.leaderNick = leaderNick;
+	}
+
+	public String getStudyName() {
+		return studyName;
+	}
+
+	public void setStudyName(String studyName) {
+		this.studyName = studyName;
+	}
 
 	@Override
 	public String toString() {
-		return "JoinFormVO [joinerId=" + joinerId + ", sNum=" + sNum + ", introduce_ta=" + introduce_ta + ", apply_ta=" + apply_ta + "]";
-	}// toString
-
+		return "JoinFormVO [joinerId=" + joinerId + ", sNum=" + sNum + ", introduce=" + introduce + ", motive=" + motive
+				+ ", leaderNick=" + leaderNick + ", studyName=" + studyName + "]";
+	}
 }// class

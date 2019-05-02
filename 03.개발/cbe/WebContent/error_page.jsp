@@ -9,8 +9,8 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/resources/css/font.css"/>
   <title>페이지 찾을 수 없음</title>
   <!-- Custom styles for this template -->
 
@@ -22,7 +22,7 @@
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
 
 	
@@ -32,7 +32,7 @@
 		 <br/><br/>
 		 <div style= "width: 800px; padding:40px ; "><br/><br/>
 		<h3 style="color: #F77027"><Strong>페이지를 찾을 수 없습니다.</Strong></h3><br/>
-		<img src="http://localhost:8080/third_prj/resources/images/error.JPG"  style="float: left;">
+		<img src="/resources/images/error.JPG"  style="float: left;">
 		<div style="margin-left: 200px">
 		<span style="text-align: left; font-weight:bold; color: #626262">
 		<h6>죄송합니다. <br/> 페이지 주소가 잘못 입력되었거나, 변경 혹은 삭제되어<br/>
@@ -50,13 +50,13 @@
 	</div>
 	
 		<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
+  <script src="/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="/resources/js/popper.min.js" ></script>
+  <script src="/resources/js/bootstrap.min.js" ></script>
 	
 
 	

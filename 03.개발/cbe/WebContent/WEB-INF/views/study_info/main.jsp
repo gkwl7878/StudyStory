@@ -48,6 +48,12 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		<c:if test="${ joinReqSuccess }">
+			alert("스터디 신청이 완료되었습니다");
+		</c:if>
+		<c:if test="${ joinReqFail }">
+			alert("스터디 참여신청에 실패했습니다. 잠시 후에 다시 시도해주세요");
+		</c:if>
 		
 	}); // ready
 </script>

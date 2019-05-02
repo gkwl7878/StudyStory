@@ -1,12 +1,14 @@
 package kr.co.studystory.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +27,8 @@ import kr.co.studystory.service.StudyInfoService;
 @Controller
 public class StudySearchController {
 
+	@Autowired
 	private StudyInfoService sis;
-
-	public StudySearchController() {
-		sis = new StudyInfoService();
-	}// 생성자
 
 	/**
 	 * 메인 페이지으로 부터의 요청 처리.
@@ -37,7 +36,7 @@ public class StudySearchController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/study_info/main.do", method = GET)
+	@RequestMapping(value = "/study_info/main.do", method = { GET, POST })
 	public String mainPage(Model model) {
 
 		// 썸네일 리스트 생성.
