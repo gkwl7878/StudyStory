@@ -9,11 +9,6 @@
 
 <mapper namespace="kr.co.studystory.study_group">
 	
-	<select id="selectMemberCnt" parameterType="String"><!-- resultType을 뭘로?? -->
-	  select count(*)
-	from member
-	where s_num=#{sNum}<!-- 's_000041'; -->
-	</select>
 	
 	
 	<select id="selectMemberList"  resultType="kr.co.studystory.domain.MemberWithImg" parameterType="String">

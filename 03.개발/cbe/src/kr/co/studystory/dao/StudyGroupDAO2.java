@@ -10,7 +10,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
+import kr.co.studystory.domain.JoinBbs;
 import kr.co.studystory.domain.MemberWithImg;
+import kr.co.studystory.vo.ApplicantBbsVO;
 @Component
 public class StudyGroupDAO2 {
 
@@ -56,5 +58,14 @@ public class StudyGroupDAO2 {
 		ss.close();
 		return list;
 	}//selectMemberWithImg
+	
+	public List<JoinBbs> selectJoinerList(ApplicantBbsVO abvo){
+		List<JoinBbs> list= null;
+		SqlSession ss=getSessionFactory().openSession();
+		list=ss.selectList("selectJoinerList",abvo);
+		ss.close();
+		
+		return list;
+	}//selectJoinerList
 	
 }
