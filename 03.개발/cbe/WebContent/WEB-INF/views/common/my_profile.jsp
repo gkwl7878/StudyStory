@@ -34,7 +34,6 @@ $(function() {
 	var nickChangeFlag = false;
 	
 	$("#uploadImgBtn").click(function() { //이미지 업로드
-		alert("${prevProfile.img}");
 		window.open("upload_img.do?prevImg=${ prevProfile.img }","uploadImg","width=500,height=200,top=200,left=500");
 	});
 	
