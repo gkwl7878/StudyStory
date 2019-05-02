@@ -99,8 +99,8 @@ public class StudyInfoDAO {
 	}// insertLikeStudy
 
 	/**
-	 * 스터디의 상세 정보를 조회하는 메서드. - 수정 필요할 수도 있음...
-	 * 
+	 * 스터디의 상세 정보를 조회하는 메서드.
+	 * 보완수정 by 영근(190502)
 	 * @param id
 	 * @return StudyInfoDomain
 	 */
@@ -108,6 +108,8 @@ public class StudyInfoDAO {
 		StudyInfoDomain s_info = null;
 		SqlSession ss = getSessionFatory().openSession();
 		s_info = ss.selectOne("selectDetailStudy", s_num);
+		s_info.setFavNum(ss.selectOne("selectFavNum", s_num));
+		s_info.setMemberNum(ss.selectOne("selectMemberNum",s_num));
 		ss.close();
 		return s_info;
 	}// selectStudyInfo

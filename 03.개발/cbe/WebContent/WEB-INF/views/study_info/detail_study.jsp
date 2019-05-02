@@ -17,15 +17,6 @@
 
 <title>스터디 상세 정보</title>
 <style>
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
 .bigBtn {
 	height: 50px;
 }
@@ -33,20 +24,6 @@
 .btn-adjust {
 	height: 37px;
 	width: 120px
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-	.title {
-		width: 500px;
-		margin: 0px auto;
-		text-align: center;
-	}
-	.likeLabel {
-		text-align: right;
-	}
 }
 </style>
 
@@ -115,19 +92,21 @@
 	<div class="container" style="min-height: 2000px">
 		<div class="row">
 			<div class="col-lg-10">
-				<div class="row justify-content-center" style="padding: 100px; margin-bottom: 60px; margin-top: 60px">
+				<div class="row justify-content-center" style="padding: 50px; margin-bottom: 20px; margin-top: 20px">
 					<!-- 스터디 제목 -->
 					<h2>${ s_Info.studyName }</h2>
 				</div>
 				<div class="row">
 					<div class="col-lg-8"></div>
-					<div class="col-lg-4" style="font-size: 17px; font-weight: bold; margin-bottom: 20px">현재 00명이 이 스터디를 좋아합니다.</div>
+					<div class="col-lg-4" style="font-size: 17px; font-weight: bold; margin-bottom: 20px">
+						현재 <c:out value="${ s_Info.favNum eq '0' ? '0' : s_Info.favNum }"/>명이 이 스터디를 좋아합니다
+					</div>
 				</div>
 				<div class="row" style="margin-bottom: 20px">
 					<div class="col-lg-12">
 						<!-- 스터디 이미지 -->
 						<div style="height: 450px; background-color: #F0F0F0">
-							<img src="/third_prj/resources/images/${ s_Info.studyImg }">
+							<img src="/third_prj/study_img/${ s_Info.studyImg }" style="width:100%; height:100%;">
 						</div>
 					</div>
 				</div>
@@ -141,14 +120,14 @@
 
 						<div class="row">
 							<!-- 스터디 지역 -->
-							<div class="col-lg-6">지역: ${ s_Info.loc }</div>
+							<div class="col-lg-6">지역 : <c:out value="${ s_Info.loc }"/></div>
 							<!-- 스터디 모집 인원 -->
-							<div class="col-lg-6">인원: 추가하기.</div>
+							<div class="col-lg-6">참여인원 : <c:out value="${ s_Info.memberNum }"/></div>
 						</div>
 
 						<div class="row">
-							<div class="col-lg-6">종류: ${ s_Info.category }</div>
-							<div class="col-lg-6">등록일: ${ s_Info.inputDate }</div>
+							<div class="col-lg-6">종류 : <c:out value="${ s_Info.category }"/></div>
+							<div class="col-lg-6">등록일 : <c:out value="${ s_Info.inputDate }"/></div>
 						</div>
 					</div>
 				</div>
@@ -157,7 +136,9 @@
 						<strong>스터디 소개</strong>
 					</div>
 					<!-- 스터디 소개. -->
-					<div class="col-lg-9">${ s_Info.content }</div>
+					<div class="col-lg-9">
+						<c:out value="${ s_Info.content }" escapeXml="false"/>
+					</div>
 				</div>
 				<div class="row" style="padding: 50px; border: 1px solid #F0F0F0">
 					<div class="col-lg-12">
@@ -171,19 +152,18 @@
 						<div class="row">
 							<div class="col-lg-3" style="padding-left: 18px;">
 								<!-- 리더 이미지 -->
-								<div style="width: 100px; height: 100px; background-color: #F0F0F0">
-									<%-- <img src="/third_prj/resources/images/${ s_Info.leaderImg }"> --%>
+								<div style="width: 150px; height: 150px;">
+									<img src="/third_prj/profile_img/${ s_Info.leaderImg }"class="card-img-top w-75 mx-auto d-block rounded-circle mt-3">
 								</div>
 							</div>
 							<div class="col-lg-9" style="font-size: 20px; padding: 30px">
 								<!-- 리더(스터디 개설자의 nick)-->
 								<strong>${ s_Info.nick }</strong>
+								<br/>
+								<p style="font-size:13px;">
+									<c:out value="${ s_Info.introduce }"/>
+								</p>
 							</div>
-						</div>
-						<div class="row" style="padding-bottom: 30px; padding-top: 20px">
-							<div class="col-lg-3"></div>
-							<!-- 리더 소개글. -->
-							<div class="col-lg-9">${ s_Info.introduce }</div>
 						</div>
 					</div>
 				</div>
@@ -242,35 +222,48 @@
 			</div>
 
 			<!-- 따라다니는 사이드바 -->
-			<div class="col-lg-2" style="position: fixed; margin-left: 940px;">
+			<div class="col-lg-2" style="position: fixed; margin-left: 940px; margin-top:100px;">
 				<div id="sidebar" style="width: 300px; height: 300px">
-					<div class="row  border border-secondary" style="padding: 30px; margin-left: 10px">
+					<div class="row  border border-secondary" style="padding: 20px; margin-left: 10px; border-radius:10px;">
 						<div class="col-lg-12">
 							<div class="row">
 								<div class="col-lg-12">
 									<!-- 스터디명 -->
-									<div style="font-size: 17px; font-weight: bold; height: 70px;">${ s_Info.studyName }</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-12" style="font-size: 12px; margin-top: 10px; height: 60px">
-									<!-- 스터디 참여인원 및 ... 생각해 보기. -->
-									<div>현재 인원,</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="row">
-										<div class="col-lg-2"></div>
-										<div class="col-lg-8" style="margin-top: 40px">
-											<form id="join_study_frm" action="../study_info/study_req_join.do">
-												<button id="study_join_btn" type="button" class="btn btn-secondary btn-sm">스터디 참여하기</button>
-												<input type="hidden" name="sNum" value="${ param.sNum }">
-											</form>
-										</div>
+									<div style="font-size: 17px; text-align:center; font-weight: bold; height: 40px;">
+										<c:out value="${ s_Info.studyName }"/>
 									</div>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-lg-12" style="font-size: 12px;  text-align:center; margin-top: 10px; height: 40px">
+									<p>
+										<c:out value="${ s_Info.favNum }"/>명이 좋아하는 스터디!<br/>
+										<c:if test="${ s_Info.memberNum ne 20 }">
+											<c:out value="${ 20 - s_Info.memberNum }"/>명 더 가입가능한 상태입니다!
+										</c:if>
+										<c:if test="${ s_Info.recruitment eq 'N' }">
+											아쉽지만 모집이 마감되었습니다..<br/>다음 기회에 가입해주세요
+										</c:if>
+										<c:if test="${ s_Info.deactivation eq 'Y' }">
+											활동이 종료된 스터디입니다.<br/>다른 스터디를 이용해주세요
+										</c:if>
+									</p>
+								</div>
+							</div>
+							<c:if test="${ s_Info.recruitment eq 'Y' }">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="row">
+											<div class="col text-center" style="margin-top: 30px">
+												<form id="join_study_frm" action="../study_info/study_req_join.do">
+													<button id="study_join_btn" type="button" class="btn btn-secondary btn-sm">스터디 참여하기</button>
+													<input type="hidden" name="sNum" value="${ param.sNum }">
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:if>
 						</div>
 					</div>
 				</div>

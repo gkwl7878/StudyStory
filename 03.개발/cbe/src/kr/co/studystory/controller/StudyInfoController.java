@@ -38,7 +38,7 @@ public class StudyInfoController {
 
 	/**
 	 * 스터디 상세 정보 페이지로 부터의 요청 처리.
-	 * 
+	 * 보완수정 by 영근 190502
 	 * @param sNum
 	 * @param session
 	 * @param model
@@ -46,11 +46,14 @@ public class StudyInfoController {
 	 */
 	@RequestMapping(value = "/detail/detail_study.do", method = GET)
 	public String studyInfoPage(String sNum, HttpSession session, Model model) {
+		
 		StudyInfoDomain sInfo = sis.getStudyInfo(sNum); // 스터디 상세 정보 가져오기.
 		List<StudyCommentDomain> sCommentList = sis.getStudyComment(sNum); // 스터디 상세정보의 댓글 List 가져오기.
+		
 		model.addAttribute("s_Info", sInfo); // 스터디 상세정보 model에 담기.
 		model.addAttribute("sCommentList", sCommentList); // 댓글 list 모델에 담기.
-		return "study_info/detailStudy";
+		
+		return "study_info/detail_study";
 	}// studyInfoPage()
 
 	/*********************************** 진행중 ****/
