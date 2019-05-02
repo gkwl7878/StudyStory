@@ -11,6 +11,7 @@ import kr.co.studystory.domain.DetailStudyNotice;
 import kr.co.studystory.domain.Homework;
 import kr.co.studystory.domain.NickAndId;
 import kr.co.studystory.domain.SnComment;
+import kr.co.studystory.domain.StudyNameAndRecruit;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.vo.NewHomeworkVO;
 import kr.co.studystory.vo.NewStudyNoticeVO;
@@ -138,6 +139,14 @@ public class StudyNoticeService {
 		}
 		
 		return flag;
+	}
+	
+	/**
+	 * 리더의 스터디 공지 리스트페이지에서 보여줄 제목과 모집상태를 반환하는 메서드
+	 * by 영근
+	 */
+	public StudyNameAndRecruit getStudyNameAndRecruit(String s_num) {
+		return sn_dao.selectStudyNameAndRecruit(s_num);
 	}
 	
 	/**

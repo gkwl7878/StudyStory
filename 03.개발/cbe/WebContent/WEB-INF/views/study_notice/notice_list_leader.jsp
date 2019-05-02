@@ -62,7 +62,7 @@
 	    	<option value="Y" ${ recruitment eq 'Y' ? "selected" : "" }>모집중</option>
 	    	<option value="N" ${ recruitment eq 'Y' ? "" : "selected" }>모집종료</option>
 	    </select>
-	  	<input type="hidden" name="sNum" value="${ sNum }"/>
+	  	<input type="hidden" name="sNum" value="${ param.sNum }"/>
 	    <button type="button" class="btn btn-sm btn-outline-secondary" id="recruitChangeBtn">모집상태 변경</button>
     </form>
     </div>
