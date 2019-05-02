@@ -3,6 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.studystory.study_group3">
+
+	<select id="selectMyProfileImg" parameterType="String" resultType="String"> 
+		SELECT img
+		FROM user_table
+		WHERE id=#{ id }
+	</select>
+
 	<select id="selectStudyIMade" parameterType="kr.co.studystory.vo.ConditionVO" resultType="kr.co.studystory.domain.StudyIMade">
 		SELECT s_num, study_name, loc, category, img, recruitment, TO_CHAR(input_date, 'yyyy-mm-dd') input_date, accept_flag, deactivation
 		FROM study
@@ -24,4 +31,57 @@
 		</where>
 		ORDER BY input_date DESC, accept_flag desc, deactivation
 	</select>
+	
+  <select id="selectMyStudies" resultType="kr.co.studystory.domain.MyStudy" parameterType="kr.co.studystory.vo.ConditionVO">
+		SELECT s.s_num, study_name, loc, category, s.img study_img, recruitment, TO_CHAR(s.input_date, 'yyyy-mm-dd') input_date, s.deactivation, u.nick, u.img user_img
+		FROM study s, user_table u, member m
+		<where>
+			<choose>
+				<when test="loc != 'none' and category != 'none'">
+					u.id = #{ id } AND loc = #{ loc } AND category = #{ category }
+						AND m.id=u.id AND m.s_num=s.s_num
+				</when>
+				<when test="loc != 'none' and category == 'none'">
+					u.id = #{ id } AND loc = #{ loc }
+						AND m.id=u.id AND m.s_num=s.s_num 
+				</when>
+				<when test="loc == 'none' and category != 'none'">
+					u.id = #{ id } AND category = #{ category }
+						AND m.id=u.id AND m.s_num=s.s_num
+				</when>
+				<otherwise>
+					u.id = #{ id }
+						AND m.id=u.id AND m.s_num=s.s_num
+				</otherwise>
+			</choose>
+		</where>
+		ORDER BY s.input_date DESC, s.deactivation
+  </select>
+  
+  <!-- s_num, study_name, loc, category, study_img, user_img, recruitment, input_date, nick, join_accept_flag; -->
+  <select id="selectAppliedStudies" resultType="kr.co.studystory.domain.AppliedStudy" parameterType="kr.co.studystory.vo.ConditionVO">
+  	SELECT s.s_num, study_name, loc, category, s.img study_img, u.img user_img, recruitment, TO_CHAR(s.input_date, 'yyyy-mm-dd') input_date, u.nick, j.accept_flag join_accept_flag
+		FROM study s, user_table u, join j
+		<where>
+			<choose>
+				<when test="loc != 'none' and category != 'none'">
+					u.id = #{ id } AND loc = #{ loc } AND category = #{ category }
+						AND j.id=u.id AND j.s_num=s.s_num
+				</when>
+				<when test="loc != 'none' and category == 'none'">
+					u.id = #{ id } AND loc = #{ loc }
+						AND j.id=u.id AND j.s_num=s.s_num 
+				</when>
+				<when test="loc == 'none' and category != 'none'">
+					u.id = #{ id } AND category = #{ category }
+						AND j.id=u.id AND j.s_num=s.s_num
+				</when>
+				<otherwise>
+					u.id = #{ id }
+						AND j.id=u.id AND j.s_num=s.s_num
+				</otherwise>
+			</choose>
+		</where>
+		ORDER BY j.input_date DESC
+  </select>
 </mapper>

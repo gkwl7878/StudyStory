@@ -110,27 +110,6 @@ public class StudyGroupDAO {
 		return flag;
 	}
 	
-	//³» ½ºÅÍµð
-	
-	public List<MyStudy> selectMyStudies(ConditionVO c_vo) {
-		List<MyStudy> list=null;
-		
-		SqlSession ss=StudyGroupDAO.getInstance().getSqlSessionFactory().openSession();
-		list=ss.selectList("selectMyStudies",c_vo);
-		
-		return list;
-	}//selectMyStudies
-	
-	
-	public List<AppliedStudy> selectAppliedStudy(ConditionVO c_vo) {
-		List<AppliedStudy> list=null;
-		
-		SqlSession ss=getSqlSessionFactory().openSession();
-		list=ss.selectList("appliedStudyResult",c_vo);
-		
-		return list;
-	}//selectAppliedStudy
-	
 	//½ºÅÍµð Å»Åð
 	public String selectLeaderId(String id) {
 		return "";
