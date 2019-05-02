@@ -27,32 +27,54 @@
 	</select>
 	<!-- 메인 페이지 썸네일 조회. -->
 	
-	<!-- 썸네일 최신순으로 조회 -->
+	<!-- 검색에서 썸네일 최신순으로 조회 -->
 	<select id="selectThumbLatest" resultMap="ThumbnailDomain">
 		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'YYYY/MM/DD') INPUT_DATE, NICK, USER_IMG
 		FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
 	         FROM STUDY S, USER_TABLE U
-	         WHERE S.ID=U.ID AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N')
-		WHERE R_NUM BETWEEN 1 AND 9;
+	         WHERE S.ID=U.ID)<!--  AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N')
+		WHERE R_NUM BETWEEN 1 AND 9; -->
 	</select>
-	<!-- 썸네일 최신순으로 조회 -->
+	<!-- 검색에서 썸네일 최신순으로 조회 -->
 
-	<!-- 썸네일 인기순으로 조회 -->
+	<!-- 검색에서 썸네일 인기순으로 조회 -->
 	<select id="selectThumbFav" resultMap="ThumbnailDomain">
 		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'YYYY/MM/DD') INPUT_DATE, NICK, USER_IMG
 		FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
-	         FROM STUDY S, USER_TABLE U
-	         WHERE S.ID=U.ID AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N')
-		WHERE R_NUM BETWEEN 1 AND 9;
+	      	   FROM STUDY S, USER_TABLE U
+	      	   WHERE S.ID=U.ID)
 	</select>
-	<!-- 썸네일 인기순으로 조회 -->
+	<!-- 검색에서 썸네일 인기순으로 조회 -->
+
+	<!-- 검색 조건에 따른 썸네일 검색 -->
+	<select id="selectThumbCon" resultMap="ThumbnailDomain" parameterType="kr.co.studystory.vo.SearchSelectVO">
+		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG
+		FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
+        		FROM STUDY S, USER_TABLE U
+        		WHERE S.ID=U.ID)
+		<where>
+			<choose>
+				<when test="loc_select != 'none' and kind_select == 'none'">
+					LOC = #{ loc_select }			
+				</when>
+				<when test="kind_select != 'none' and loc_select == 'none'">
+					CATEGORY = #{ kind_select }			
+				</when>
+				<when test="kind_select != 'none' and loc_select != 'none'">
+					LOC = #{ loc_select } and CATEGORY = #{ kind_select }
+				</when>
+	
+			</choose>
+		</where>
+	</select>
+	<!-- 검색 조건에 따른 썸네일 검색 -->
 
 	<!-- 내 관심 스터디 조회. -->
 	<select id="selectFavStudy" resultMap="ThumbnailDomain" parameterType="String">
-		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG
+		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'YYYY/MM/DD') INPUT_DATE, NICK, USER_IMG
 		FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
-        		 FROM STUDY S, USER_TABLE U
-        		 WHERE ( STD.S_NUM=FSTD.S_NUM ) and ( STD.ID=UT.ID ) and FSTD.ID = #{ my_id })
+        		FROM FAV_STUDY FS, STUDY S, USER_TABLE U
+        		WHERE ( FS.S_NUM = S.S_NUM ) AND ( S.ID=U.ID ) AND FS.ID = #{ my_id })
 	</select>
 	<!-- 내 관심 스터디 조회. -->
 

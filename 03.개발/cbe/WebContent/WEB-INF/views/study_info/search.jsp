@@ -39,32 +39,43 @@
 <script type="text/javascript">
 	$(function() {
 
+		// 정렬이 바뛰었을 때.
 		$("#order_select").change(function() {
-
-			//<option>정렬</option>
-			//<option>최신순</option>
-			//<option>인기순</option>
-
 			var order_select = $("#order_select").val();
-			
+
 			$.ajax({
 				url : "../search/search_order_process.do",
-				data :"order=" + order_select,
+				data : "order=" + order_select,
 				type : "get",
 				dataType : "json", // 응답 받을 데이터.
 				error : function(xhr) {
-					alert("요류발생.");
+					alert("오류발생" + xhr.status + " / " + xhr.statusText);
 					console.log(xhr.status + " / " + xhr.statusText);
 				},
 				success : function(json) {
-					if (json.result) {
-						alert("정상동작.");
-						
-					}// end if
+					alert("정상동작");
+					$("#thumb_view").html("");
+				 	
+					
 				}// success
 			}); // ajax
-			
 		});//change
+
+		// 필터 검색 버튼 눌렀을 때.
+		$("#search_btn").click(function() {
+
+			var loc_param = $("#loc_select").val();
+			var kind_param = $("#kind_select").val();
+
+			// 둘다 선택을 하지 않았을 때.
+			if (loc_param == "none" && kind_param == "none") {
+				location.href = "../search/search.do";
+				return;
+			}// end if
+			
+			$("#search_frm").submit();
+
+		}); // click
 
 	}); // ready
 </script>
@@ -95,34 +106,33 @@
 					<!-- 정렬바 row -->
 					<div class="row mb-3" style="height: 4em;">
 						<div class="row mx-3 w-100 border-top border-bottom align-items-center">
-							
+
 							<!-- 필터검색 폼 -->
-							<form class="form-row w-100" action="../search/search_process.do" method="get">
+							<form id="search_frm" class="form-row w-100" action="../search/search_process.do" method="get">
 								<div class="col-auto mr-auto">
 									<select id="order_select" class="form-control-sm">
-										<option value="정렬">정렬</option>
 										<option value="최신순">최신순</option>
 										<option value="인기순">인기순</option>
 									</select>
 								</div>
 								<div class="col-auto">
-									<select id="loc_select" class="form-control-sm">
-										<option>지 역</option>
-										<option>신 촌</option>
-										<option>홍 대</option>
-										<option>종 각</option>
-										<option>건 대</option>
-										<option>노 원</option>
-										<option>강 남</option>
+									<select id="loc_select" name="loc_select" class="form-control-sm">
+										<option value="none">지 역</option>
+										<option value="신촌">신 촌</option>
+										<option value="홍대">홍 대</option>
+										<option value="종각">종 각</option>
+										<option value="건대">건 대</option>
+										<option value="노원">노 원</option>
+										<option value="강남">강 남</option>
 									</select>
 								</div>
 								<div class="col-auto">
-									<select id="kind_select" class="form-control-sm">
-										<option>종 류</option>
-										<option>언 어</option>
-										<option>취 업</option>
-										<option>취 미</option>
-										<option>기 타</option>
+									<select id="kind_select" name="kind_select" class="form-control-sm">
+										<option value="none">종 류</option>
+										<option value="언어">언 어</option>
+										<option value="취업">취 업</option>
+										<option value="취미">취 미</option>
+										<option value="기타">기 타</option>
 									</select>
 								</div>
 								<input id="search_btn" type="button" class="btn btn-sm btn-secondary ml-1" value="필터 검색" />
@@ -134,15 +144,15 @@
 					<!-- 정렬바 row -->
 
 					<!-- 썸네일 row -->
-					<div class="row">
+					<div id="thumb_view" class="row">
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 						<c:forEach var="thumbnail" items="${ thumbnail_list }">
-
 							<div class="col-md-4">
 								<div class="card mb-4 shadow-sm">
-
 									<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-									<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }">
+									<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }">
+										<!-- 썸네일 스터디 이미지 --> 
+										<img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }">
 										<div class="card-body text-center p-3">
 											<div class="d-flex justify-content-end align-items-center mb-3">
 												<div class="mr-5">
@@ -162,7 +172,7 @@
 
 												<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
 													<!-- 썸네일 리더의 이미지 -->
-													<img src="http://localhost:8080/third_prj/resources/images/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle">
+													<%-- <img src="http://localhost:8080/third_prj/resources/images/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle"> --%>
 												</div>
 
 												<div class="border-right p-2">
