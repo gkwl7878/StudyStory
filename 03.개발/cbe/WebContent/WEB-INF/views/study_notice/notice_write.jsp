@@ -130,11 +130,6 @@
   				return;
   			}
   			
-  			// 과제를 먼저 AJAX로 등록 후, submit을 수행하자
-  			/////////// 먼저 숙제데이터를넣으려 했으나 sn_num이 생기려면 공지를 먼저 추가해야 함
-  			// 때문에 javascript array변수에 담긴 값을 submit할때 같이 전송하는 방법이 있는지??
-  			// 그냥 
-  			
   			var sendingNick = new Array();
   			var sendingWorkload = new Array();
   			var k = 0;

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.studystory.domain.NickAndId;
+import kr.co.studystory.domain.StudyNameAndRecruit;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.service.StudyNoticeService;
 import kr.co.studystory.vo.NewHomeworkVO;
@@ -27,7 +28,14 @@ public class LeaderSnController {
 	
 	@RequestMapping(value="/study_notice/notice_list_leader.do", method= { GET, POST })
 	public String leaderSnList(String sNum, Model model) {
+		
 		List<StudyNotice> list = sns.getSnList(sNum);
+		
+		// 스터디명과 모집상태를 반환해서 보여줘야 함
+		StudyNameAndRecruit snar = sns.getStudyNameAndRecruit(sNum);
+		
+		model.addAttribute("study_name", snar.getStudy_name());
+		model.addAttribute("recruitment", snar.getRecruitment());
 		model.addAttribute("snList", list);
 		return "study_notice/notice_list_leader";
 	}//leaderSnList
@@ -35,12 +43,12 @@ public class LeaderSnController {
 	@RequestMapping(value="/study_notice/change_recruit.do", method=POST)
 	public String changeRecruit(RecruitVO rvo, Model model) {
 		
+		
 		if(sns.changeRecruit(rvo)) {
 			model.addAttribute("recruitChanged", true);
-			model.addAttribute("recruitment", rvo.getStatus());
 		}
 		
-		return "study_notice/notice_list_leader";
+		return "forward:../study_notice/notice_list_leader.do";
 	}
 	
 	@RequestMapping(value="/study_notice/wrtie.do", method= { GET, POST })
@@ -55,6 +63,8 @@ public class LeaderSnController {
 	
 	@RequestMapping(value="/study_notice/wrtie_process.do", method=POST)
 	public String leaderWriteProcess(NewStudyNoticeVO nsnvo, String hwNick, String hwWorkload, Model model) {
+		
+		System.out.println("============================nsnvo : "+nsnvo);
 		
 		if(sns.addNewSn(nsnvo)) {
 			System.out.println("-------공지정보 추가완료");
