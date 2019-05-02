@@ -48,14 +48,13 @@ public class StudyInfoController {
 		// 내 아이디로 이미 가입했는지, 가입수락대기중인지, 내가 만든 스터디인지 조회
 		// 조회 결과에 따라 오른쪽 상단 화면을 다르게 보여줘야 함
 		
-		
 		DetailMenuVO dmvo = new DetailMenuVO((String)session.getAttribute("id"), sNum);
-		if (sis.didIrequest(dmvo)) { // 만든 유저인지
-			model.addAttribute("memberFlag", true);
-		} else if (sis.amIMember(dmvo)) { // 가입한 멤버인지
-			model.addAttribute("joinerFlag", true);
-		} else if (sis.didIrequest(dmvo)) { // 스터디 신청했는지
+		if (sis.amILeader(dmvo)) { // 만든 유저인지
 			model.addAttribute("leaderFlag", true);
+		} else if (sis.amIMember(dmvo)) { // 가입한 멤버인지
+			model.addAttribute("memberFlag", true);
+		} else if (sis.didIrequest(dmvo)) { // 스터디 신청했는지
+			model.addAttribute("joinerFlag", true);
 		}
 		
 		StudyInfoDomain sInfo = sis.getStudyInfo(sNum); // 스터디 상세 정보 가져오기.

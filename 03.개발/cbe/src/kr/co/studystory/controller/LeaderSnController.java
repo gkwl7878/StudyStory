@@ -1,15 +1,15 @@
 package kr.co.studystory.controller;
 //리더 공지사항 컨트롤러 정미
 
-import java.util.ArrayList;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.util.List;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.studystory.domain.NickAndId;
 import kr.co.studystory.domain.StudyNotice;
@@ -19,9 +19,6 @@ import kr.co.studystory.vo.NewStudyNoticeVO;
 import kr.co.studystory.vo.RecruitVO;
 import kr.co.studystory.vo.SnAlarmVO;
 import kr.co.studystory.vo.SnModifiedVO;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class LeaderSnController {
