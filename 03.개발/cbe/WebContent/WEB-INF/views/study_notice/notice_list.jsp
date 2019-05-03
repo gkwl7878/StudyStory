@@ -27,73 +27,45 @@
 		<!-- 점보트론 : 전광판 -->
   <section class="text-center bg-white mb-0" style="margin-top:90px; margin-bottom:20px;">
      <div class="container">
-        <h1 class="jumbotron-heading">스터디명스터디명스터디명</h1>
+        <h1 class="jumbotron-heading"><c:out value="${ study_name }"/></h1>
      </div>
   </section>
   <div style="height:20px;"></div>
   <!-- 점보트론 : 전광판 -->
 	
-
-	    <main role="main" class="col-lg-10 px-4" style="margin:0px auto;">
-      <hr>
-      <div class="col-lg-12">
-      	<a href="#">스터디 탈퇴하기</a>
+		  <div class="row justify-content-center">
+		  	<div class="col-6 border-top border-bottom" style="padding:15px;">
+	      	<a href="#">스터디 탈퇴하기</a>
+      	</div>
       </div>
-      <hr>
       
-      <!-- 공지가 존재하지 않을 경우 공지사항이 없다고 보여주기  -->
-      <c:if test="${ empty snList  }">
-      <div	style="text-align: center; margin-top: 200px">
-      	<strong>등록된 공지사항이 없습니다.</strong>
-      	</div>
-      </c:if>
+  		<div class="container-fluid" style="min-height:500px; width:450px;">
+	  	<div class="row col-sm justify-content-center">
+	      <!-- 공지가 존재하지 않을 경우 공지사항이 없다고 보여주기  -->
+	      <c:if test="${ empty snList  }">
+		   	<div class="card select-card border-dark m-3 p-2" style="width:250px; height:150px;" onclick="location.href='#'">
+		   		<div class="card-body">
+		   			 <h6 class="card-title"><strong>등록된 스터디 공지가 없습니다</strong></h6>
+		   		</div>
+		 		</div>
+	      </c:if>
       	<!--공지사항이 있으면 표시  -->
-      <div class="container-fluid" style="min-height:500px;">
-      	<c:forEach var="sndata" items="${ snList }">
-      	<div class="row col-sm justify-content-center">
-      	
-	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
-	      		<div class="card-body">
-	      			 <h6 class="card-title"><a href="../study_notice/notice_detail.do?sn_num=${ sndata.snNum }"><strong><c:out value="${ sndata.subject }"/></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#void"><img src="http://localhost:8080/third_prj/resources/images/setting.png" width="20" height="20" align="right" /></strong></a></h6>
-						    <p class="card-text">
-						    	<p class="text-left">
-						    		<span style="font-size:12px; vertical-align:text-bottom;"><c:out value="${ sndata.inputDate }"/></span>
-						    		<img src="http://localhost:8080/third_prj/resources/images/${ sndata.img }"width="50" height="60" style="float:right;"/>
-<%-- 						    		<img src="/resources/images/"${ sndata.img }" width="50" height="60" style="float:right;"/> --%>
-						    	</p>
-					    	</p>
-	      		</div>
-      		</div>
-      	</div>
-      	</c:forEach>
-<!--       	<div class="row col-sm justify-content-center">
-	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
-	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong>공지명2.&nbsp;&nbsp;&nbsp;&nbsp;<img src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
-						    <p class="card-text">
-						    	<p class="text-left">
-						    		<span style="font-size:12px;">2019-03-00</span>
-						    		<img src="/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
-						    	</p>
-					    	</p>
-	      		</div>
-      		</div>
-      	</div>
-      	<div class="row col-sm justify-content-center">
-	      	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
-	      		<div class="card-body">
-	      			 <h6 class="card-title"><strong>공지명1.&nbsp;&nbsp;&nbsp;&nbsp;<img src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
-						    <p class="card-text">
-						    	<p class="text-left">
-						    		<span style="font-size:12px;">2019-03-00</span>
-						    		<img src="/third_prj/resources/images/no_profile.png" width="50" height="60" style="float:right;"/>
-						    	</p>
-					    	</p>
-	      		</div>
-      		</div>
-      	</div> -->
+		    <c:forEach items="${ snList }" var="studyNotice">
+		   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;" onclick="location.href='######?sNum=${ studyNotice.snNum }">
+		   		<div class="card-body">
+		   			 <div style="float:left;" class="card-title"><strong>${ studyNotice.subject }</strong></div>
+		   			 <br/>
+				    <p class="card-text">
+				    	<p class="text-left">
+				    		<span style="font-size:12px;"><c:out value="${ studyNotice.inputDate }"/></span>
+				    		<img src="/third_prj/profile_img/${ studyNotice.img }" width="50" height="60" style="float:right;"/>
+				    	</p>
+			    	</p>
+		   		</div>
+		 		</div>
+		 		</c:forEach>
+		 	</div>
       </div>
-    </main>
 
 	<!-- footer -->
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
