@@ -49,13 +49,13 @@
 	from user_table
 	where deactivation is null
 	<if test="'아이디'.equals(searchCondition)">
-		where id like '%'||#{searchWord}||'%' 
+		and id like '%'||#{searchWord}||'%' 
 	</if>
 	<if test="'이름'.equals(searchCondition)">
-		where name like '%'||#{searchWord}||'%' 
+		and name like '%'||#{searchWord}||'%' 
 	</if>
 	<if test="'닉네임'.equals(searchCondition)">
-		where nick like '%'||#{searchWord}||'%' 
+		and nick like '%'||#{searchWord}||'%' 
 	</if>
 </select>
 
@@ -81,17 +81,17 @@
 	select count(*)
 	from question
 	<where>
-		<if test="'userInfo'.equals(searchCondition)">
-			category='회원정보'
+		<if test="'회원정보'.equals(searchCondition)">
+			category ='회원정보'
 		</if>
-		<if test="'study'.equals(searchCondition)">
-			category='스터디'
+		<if test="'스터디'.equals(searchCondition)">
+			category ='스터디'
 		</if>
-		<if test="'homepage'.equals(searchCondition)">
-			category='홈페이지'
+		<if test="'홈페이지'.equals(searchCondition)">
+			category ='홈페이지'
 		</if>
-		<if test="'etc'.equals(searchCondition)">
-			category='기타'
+		<if test="'기타'.equals(searchCondition)">
+			category ='기타'
 		</if>
 	</where>
 </select>
@@ -299,5 +299,72 @@
 	set delete_flag='Y'
 	where s_num= #{sNum}
 </update>
+
+<!--//////////////////////////////////////////// Question Mapper////////////////////////////////////////////////// -->
+<resultMap type="kr.co.studystory.admin.domain.Question" id="questionResult">
+	<result column="q_num" property="qNum"/>
+	<result column="name" property="name"/>
+	<result column="category" property="category"/>
+	<result column="subject" property="subject"/>
+	<result column="answer_flag" property="answerFlag"/>
+	<result column="input_date" property="inputDate"/>
+</resultMap>
+<select id="questionList" resultMap="questionResult" parameterType="kr.co.studystory.admin.vo.QuestionBoardVO">
+
+	<!--qNum, name, category, subject, answerFlag, inputDate -->
+	select q_num, name, category, subject, answer_flag, input_date
+	from(
+		select q.q_num, ut.name, q.category, q.subject, q.answer_flag, q.input_date,
+		row_number() over(order by q.input_date desc) r_num
+		from question q, user_table ut
+		where q.id=ut.id
+		<if test="'회원정보'.equals(searchCondition)">
+			and q.category ='회원정보'
+		</if>
+		<if test="'스터디'.equals(searchCondition)">
+			and q.category ='스터디'
+		</if>
+		<if test="'홈페이지'.equals(searchCondition)">
+			and q.category ='홈페이지'
+		</if>
+		<if test="'기타'.equals(searchCondition)">
+			and q.category ='기타'
+		</if>
+	)
+		where r_num between #{begin} and #{end}
+	
+</select>
+
+<!-- name, category, input_date, subject, content -->
+<resultMap type="kr.co.studystory.admin.domain.DetailQuestion" id="questionDetailResult">
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	<result column="category" property="category"/>
+	<result column="input_date" property="inputDate"/>
+	<result column="subject" property="subject"/>
+	<result column="content" property="content"/>
+</resultMap>
+<select id="questionDetail" resultMap="questionDetailResult" parameterType="String">
+	select q.id, ut.name, q.category, q.input_date, q.subject, q.content
+	from question q, user_table ut
+	where q.id=ut.id and q.q_num=#{qNum}
+</select>
+
+<resultMap type="kr.co.studystory.admin.domain.Answer" id="answerDetailResult">
+	<result column="answer_content" property="content"/>
+	<result column="answer_date" property="aDate"/>
+</resultMap>
+<select id="answerDetail" resultMap="answerDetailResult" parameterType="String">
+	select answer_content, answer_date
+	from question
+	where q_num=#{qNum}
+</select>
+
+<update id="updateAns" parameterType="kr.co.studystory.admin.vo.AnswerVO">
+	update question
+	set answer_content=#{answerContent}, answer_flag='Y', answer_date=SYSDATE
+	where q_num= #{qNum}
+</update>
+
 	
 </mapper>

@@ -18,35 +18,55 @@
 <script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
 <script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script type="text/javascript">
+$(function() {
+	
+	<c:if test="${ !loginSession }">
+		location.replace("login.do");
+	</c:if>
+	
+	$("#search").change(function() {
+		$("#searchFrm").submit();
+	})
+	
+});//ready	
+</script>
 </head>
 
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
-
+	
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
+			<c:param name="weekUser" value="${param.weekUser}"></c:param>
+			<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
+			<c:param name="allUser" value="${param.allUser}"></c:param>
+			<c:param name="allStudy" value="${param.allStudy}"></c:param>
+			<c:param name="activeFlag" value="${param.activeFlag}"></c:param>
+	</c:import>
+	
 	<div class="container-fluid">
 		<div class="row">
 
-			<!-- sidebar 시작 -->
-			<c:import url="/third_prj/admin/layout/sidebar.jsp"></c:import>
-			<!-- sidebar 끝 -->
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+			<form action="question_mng.do?searchCondition=${searchCondition}" method="get" id="searchFrm">
 			<div class="row justify-content-between" style="margin-top: 40px; margin-bottom: 10px;">
 				<div class="col-10">
 					<h1 class="h2">문의사항</h1>
 				</div>
 				<div class="col-2 justify-content-right" style="padding-top: 15px;">
-					<select class="form-control" style="font-size: 12px;">
-						<option>--분류--</option>
-						<option>회원정보</option>
-						<option>스터디</option>
-						<option>홈페이지</option>
-						<option>기타</option>
+					<select class="form-control" name="searchCondition" id="search" style="font-size: 12px;">
+						<option ${param.searchCondition eq  ""?"selected='selected'":"" }>--분류--</option>
+						<option ${param.searchCondition eq  "회원정보"?"selected='selected'":"" }>회원정보</option>
+						<option ${param.searchCondition eq  "스터디"?"selected='selected'":"" }>스터디</option>
+						<option ${param.searchCondition eq  "홈페이지"?"selected='selected'":"" }>홈페이지</option>
+						<option ${param.searchCondition eq  "기타"?"selected='selected'":"" }>기타</option>
 					</select>
 				</div>
 			</div>
+			</form>
 
 			<div class="table-responsive">
 				<table class="table table-striped table-sm border-bottom">
@@ -61,28 +81,44 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach begin="1" end="10" step="1">
-							<tr class="text-center">
-								<td>123</td>
-								<td>someId</td>
-								<td>회원정보</td>
-								<td class="text-left">스터디명 블라블라블라</td>
-								<td>미완료</td>
-								<td>2019-03-00</td>
+					
+						<c:if test="${empty qList}">
+							<td colspan="6" align="center">
+                                  조회결과가 없습니다.
+                     		</td>
+						</c:if>
+						<c:forEach var="qList" items="${qList }">
+						<c:set var="i" value="${i+1 }"/>
+							<tr>
+								<!--qNum, name, category, subject, answerFlag, inputDate -->
+								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
+								<td class="text-center"><c:out value="${qList.name }"/></td>
+								<td class="text-center"><c:out value="${qList.category}"/></td>
+								<td class="text-center"><a href="answer.do?currPage=${currPage}&qNum=${qList.qNum}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
+									&searchCondition=${searchCondition}&searchWord=${searchWord}&answerFlag=${qList.answerFlag}" style="color: black"
+									><c:out value="${qList.subject }"/></a></td>
+								<td class="text-center">${qList.answerFlag eq "N"?"<div style='color: #e74c3c'>답변예정</div>":"<div style='color: #3498db'>답변완료</div>" }</td>
+								<td class="text-center"><c:out value="${qList.inputDate }"/></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 				<div class="d-flex justify-content-center">
 					<ul class="pagination">
-						<li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a></li>
-						<li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-						<li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a></li>
+						<li class="paginate_button page-item previous ${ forwardFlag ? '' : 'disabled' }" id="dataTable_previous">
+							<a href="question_mng.do?currPage=${ startPage-1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a>
+						</li>
+						<c:forEach var="i" step="1" begin="${ startPage }" end="${ endPage }">
+							<li class="paginate_button page-item ${ currPage == i ? 'active' : '' }">
+								<a href="question_mng.do?currPage=${ i }&searchCondition=${searchCondition}" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+									<c:out value="${ i }"/>
+								</a>
+							</li>
+						</c:forEach>
+						<li class="paginate_button page-item next ${ backwardFlag ? '' : 'disabled' }" id="dataTable_next">
+							<a href="question_mng.do?currPage=${ endPage+1 }" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
+						</li>
 					</ul>
 				</div>
 			</div>

@@ -77,6 +77,7 @@ public class CommonMngService {
 		int totalPage=c_dao.selectQuestionTotal(qb_vo);
 		return totalPage;
 	}
+	
 	public int noticeCount(NoticeBoardVO nb_vo) {
 		
 		int totalPage=c_dao.selectNoticeTotal(nb_vo);

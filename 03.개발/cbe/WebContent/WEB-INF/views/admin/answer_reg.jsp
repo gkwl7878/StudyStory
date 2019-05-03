@@ -47,18 +47,35 @@
 		});
 	});
 </script>
-
+<script type="text/javascript">
+	$(function () {
+		<c:if test="${ qModifyFlag }">
+			alert("답변이 등록되었습니다.");
+		</c:if>
+		
+		$("#answerBtn").click(function() {
+			$("#answerFrm").submit();
+		})
+	});
+</script>
 </head>
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
+	
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
+			<c:param name="weekUser" value="${param.weekUser}"></c:param>
+			<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
+			<c:param name="allUser" value="${param.allUser}"></c:param>
+			<c:param name="allStudy" value="${param.allStudy}"></c:param>
+			<c:param name="activeFlag" value="${param.activeFlag}"></c:param>
+	</c:import>
 
-	<!-- sidebar 시작 -->
-	<c:import url="/third_prj/admin/layout/sidebar.jsp"></c:import>
-	<!-- sidebar 끝 -->
-
-	<form action="create_request.jsp" name="createFrm">
+	<form action="answer_proc.do" method="get" id="answerFrm" >
+		<input type="hidden" value="${qNum}" name="qNum"/>
+		<input type="hidden" value="${id}" name="id"/>
+		<input type="hidden" value="${subject}" name="subject"/>
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-3"></div>
@@ -68,27 +85,27 @@
 			</div>
 			<div class=" row">
 				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
-					<label style="width: 50px;" class="font17bold"><strong>번호</strong> : </label> <label style="width: 200px;">1</label>
+					<label style="width: 50px;" class="font17bold"><strong>번호</strong> : </label> <label style="width: 200px;">${qNum}</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<label class="font17bold"><strong>글쓴이</strong> : </label> <label>홍길동</label>
+					<label class="font17bold"><strong>글쓴이</strong> : </label> <label>${name}</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<label class="font17bold"><strong>분류명</strong> : </label> <label>회원정보 관련 문의</label>
+					<label class="font17bold"><strong>분류명</strong> : </label> <label>${category}</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<label class="font17bold"><strong>등록시간</strong> : </label> <label>2019 </label>
+					<label class="font17bold"><strong>등록시간</strong> : </label> <label>${inputDate} </label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<label class="font17bold"><strong>제목</strong> : </label> <label>회원정보 문의합니다. </label>
+					<label class="font17bold"><strong>제목</strong> : </label> <label>${subject} </label>
 				</div>
 			</div>
 			<div class="row">
@@ -96,18 +113,20 @@
 					<label class=" font17bold"><strong>문의내용 </strong> : </label>
 				</div>
 				<div class="col-7" style="margin-top: 10px;">
-					<textarea class=" form-control" rows="3" style="resize: none; width: 480px; height: 180px;" name="contents" readonly="readonly"></textarea>
+					<c:out value="${content }" escapeXml="false"/>
 				</div>
 			</div>
 
 
 			<div class=" row">
 				<div class="col-9" style="margin-top: 30px; margin-left: 100px;">
-					<input type="text" class="form-control" id="summernote">
+					<textarea name="answerContent" class="answerContent" id="summernote" ></textarea>
 				</div>
 			</div>
 			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 400px;">돌아가기</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">답변등록</a> <a class="btn btn-secondary btn " href="#void" role="button" style="margin-left: 10px;">삭제</a>
+				<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 400px;">돌아가기</a> 
+				<input type="button" class="btn btn-secondary btn" value="답변등록" id="answerBtn" style="margin-left: 10px;" />
+				<a class="btn btn-secondary btn " href="#void" role="button" style="margin-left: 10px;">삭제</a>
 			</div>
 		</div>
 	</form>

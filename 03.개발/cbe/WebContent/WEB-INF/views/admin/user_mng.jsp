@@ -87,6 +87,11 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:if test="${empty uList}">
+							<td colspan="7" align="center">
+                                  조회결과가 없습니다.
+                     		</td>
+						</c:if>
 						<c:forEach var="uList" items="${uList }">
 						<c:set var="i" value="${i+1 }"/>
 							<tr>
@@ -95,8 +100,14 @@
 									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
 									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
 									><c:out value="${uList.id }"/></a></td>
-								<td class="text-center"><c:out value="${uList.nick }"/></td>
-								<td class="text-center"><c:out value="${uList.name}"/></td>
+								<td class="text-center"><a href="user_detail.do?currPage=${currPage}&id=${uList.id}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
+									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
+									><c:out value="${uList.nick }"/></a></td>
+								<td class="text-center"><a href="user_detail.do?currPage=${currPage}&id=${uList.id}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
+									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
+									><c:out value="${uList.name}"/></a></td>
 								<td class="text-center"><c:out value="${uList.tel }"/></td>
 								<td class="text-center"><c:out value="${uList.email }"/></td>
 								<td class="text-center"><c:out value="${uList.regDate }"/></td>

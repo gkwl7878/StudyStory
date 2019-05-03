@@ -25,7 +25,8 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link ${activeFlag=='qActiveFlag'? 'active':''}" href="#">
+        <a class="nav-link ${activeFlag=='qActiveFlag'? 'active':''}" href="question_mng.do?weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}">
           <span data-feather="users"></span>
           	문의사항
         </a>

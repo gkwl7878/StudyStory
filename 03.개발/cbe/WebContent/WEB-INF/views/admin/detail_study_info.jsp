@@ -93,6 +93,8 @@
 	</c:import>
 	<!-- sidebar 끝 -->
 	<form id="studyDetailFrm" action="study_modify.do" method="post" enctype="multipart/form-data" >
+	<input type="hidden" name="sNum" value="${param.sNum }">
+	<input type="hidden" name="content" value="${content}">
 	<div class="container form-group" id="wrap">
 		<div class="row">
 			<div class="col-2"></div>
@@ -103,8 +105,6 @@
 		<div class="row" style="margin-top: 10px;">
 			<div class="col-3 font20bold">
 				<label>스터디명</label>
-				<input type="hidden" name="sNum" value="${param.sNum }">
-				<input type="hidden" name="content" value="${content}">
 			</div>
 			<div class="col-7 " style="margin-bottom: 10px;">
 				<label>${studyName}</label>
@@ -185,7 +185,7 @@
 			</div>
 			<div class="col-7 font20bold" style="width: 440px; height: 300px">
 				<!-- <input type="text" class="form-control" id="summernote" /> -->
-				<textarea name="content" id="summernote" ><c:out value="${content }" escapeXml="false"/></textarea>
+				<textarea name="content" class="content" id="summernote" ><c:out value="${content }" escapeXml="false"/></textarea>
 				<%-- <div id="summernote"><c:out value="${content }" escapeXml="false"/></div> --%>
 			</div>
 		</div>

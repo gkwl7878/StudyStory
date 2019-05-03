@@ -86,6 +86,11 @@ public class StudyMngController {
 		return "/admin/study_mng";
 	}
 	
+	/** 상세 스터디 조회
+	 * @param sd_vo
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/admin/study_detail.do",method= {GET,POST})
 	public String studyDetailPage(StudyDetailVO sd_vo, Model model) {
 

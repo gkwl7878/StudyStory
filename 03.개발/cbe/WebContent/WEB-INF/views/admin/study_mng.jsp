@@ -49,7 +49,7 @@
 		<div class="row">
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-			<form action="study_mng.do?searchCondition=${param.condition}&searchWord=${param.word}">
+			<form action="study_mng.do?searchCondition=${param.condition}&searchWord=${param.word}" method="get">
 			<div class="row justify-content-between" style="margin-top: 40px; margin-bottom: 10px;">
 				<div class="col-8">
 					<h1 class="h2">스터디 정보 관리</h1>
@@ -57,9 +57,9 @@
 				<div class="col-2" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
 					<select class="form-control" name="searchCondition" style="font-size: 12px;">
 						<option ${param.searchCondition eq  ""?"selected='selected'":"" }>--검색조건--</option>
-						<option ${param.searchCondition eq  "아이디"?"selected='selected'":"" }>아이디</option>
-						<option ${param.searchCondition eq  "이름"?"selected='selected'":"" }>이름</option>
-						<option ${param.searchCondition eq  "닉네임"?"selected='selected'":"" }>닉네임</option>
+						<option ${param.searchCondition eq  "스터디명"?"selected='selected'":"" } value="스터디명">스터디명</option>
+						<option ${param.searchCondition eq  "아이디"?"selected='selected'":"" } value="아이디">아이디</option>
+						<option ${param.searchCondition eq  "닉네임"?"selected='selected'":"" } value="닉네임">닉네임</option>
 					</select>
 				</div>
 				<div class="col-1" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
@@ -85,6 +85,11 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:if test="${empty sList}">
+							<td colspan="7" align="center">
+                                  조회결과가 없습니다.
+                     		</td>
+						</c:if>
 						<c:forEach var="sList" items="${sList }">
 						<c:set var="i" value="${i+1 }"/>
 							<tr>
