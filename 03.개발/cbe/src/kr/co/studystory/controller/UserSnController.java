@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.co.studystory.domain.DetailStudyNotice;
 import kr.co.studystory.domain.Homework;
 import kr.co.studystory.domain.SnComment;
+import kr.co.studystory.domain.StudyNameAndRecruit;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.service.StudyNoticeService;
 import kr.co.studystory.vo.NewCommentVO;
@@ -32,6 +33,9 @@ public class UserSnController {
 		
 		List<StudyNotice>snList= sns.getSnList(s_num);
 		
+		StudyNameAndRecruit snar = sns.getStudyNameAndRecruit(s_num);
+		
+		model.addAttribute("study_name", snar.getStudy_name());
 		model.addAttribute("snList", snList);
 		
 		return "study_notice/notice_list";
