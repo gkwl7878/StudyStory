@@ -11,7 +11,7 @@
 
 <mapper namespace="kr.co.studystory.study_group">
 	
-<select id="selectJoinerList" resultType="kr.co.studystory.domain.JoinBbs" parameterType="String">
+<select id="selectJoinerList" resultType="kr.co.studystory.domain.JoinBbs" parameterType="kr.co.studystory.vo.ApplicantBbsVO">
 	select j.id, ut.nick, ut.img, j.motive
 	from join j, user_table ut
 	where s_num=#{sNum} and ut.id=j.id

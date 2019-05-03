@@ -7,7 +7,7 @@
   					(패키지와 비슷한 용도)
   -->
 
-<mapper namespace="kr.co.studystory.study_group">
+<mapper namespace="kr.co.studystory.study_group2">
 	
 	
 	

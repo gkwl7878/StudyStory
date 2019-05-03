@@ -52,7 +52,7 @@
 
   <div class="row justify-content-center">
   <div class="col-lg-8 border-top border-bottom" style="padding:15px;">
-  	<a href="#">신청자 보기</a>&nbsp;&nbsp;
+  	<a href="../study_group/new_joiner.do?sNum=${ param.sNum }&begin=${param.begin}&end=${param.end}&currPage=${param.currPage}">신청자 보기</a>&nbsp;&nbsp;
   	<a href="../study_group/show_participants.do?sNum=${ param.sNum }">참여자 보기</a>&nbsp;&nbsp;
   	<a href="#">스터디 수정하기</a>&nbsp;&nbsp;
   	<a href="#">스터디 활동종료</a>&nbsp;&nbsp;
