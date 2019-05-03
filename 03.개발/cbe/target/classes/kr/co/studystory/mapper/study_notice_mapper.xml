@@ -32,11 +32,17 @@ order by input_date desc
 	<result column="input_date" property="input_date"/>
 </resultMap>
 <select id="studyDetailNoticeList" resultMap="snDtList" parameterType="String">
-select sn.subject, to_char(sn.content) , sn.meeting_info, sn.addr, to_char(sn.input_date,'yyyy-MM-dd') input_date, ut.nick, ut.img
-from study_notice sn, study s, user_table ut
-where  s.id=ut.id and s.s_num=sn.s_num and sn.sn_num=#{snNum}	
-	
+	select sn.subject, sn.content , sn.meeting_info, sn.addr, to_char(sn.input_date,'yyyy-mm-dd') input_date, ut.nick, ut.img
+	from study_notice sn, study s, user_table ut
+	where  sn.sn_num=#{snNum} and	s.s_num=sn.s_num and s.id=ut.id
+	order by s.input_date desc 
 </select> 
+
+<select id="selectStudyNameBySnNum" parameterType="String" resultType="String">
+	SELECT s.study_name
+	FROM study s, study_notice sn
+	WHERE sn.sn_num = #{ sn_num } AND sn.s_num = s.s_num 
+</select>
 
 <select id="HomeworkList" resultType="kr.co.studystory.domain.Homework" parameterType="String">
 	select hw.id, hw.workload, hw.finish_flag, ut.nick
@@ -52,15 +58,17 @@ where  s.id=ut.id and s.s_num=sn.s_num and sn.sn_num=#{snNum}
 </resultMap>
 
 <select id="SnCommentList" resultMap="snCommentList">
-	select sc.sn_comment, sc.input_date, ut.nick
+	select sc.sn_comment, TO_CHAR(sc.input_date, 'yyyy-mm-dd') input_date, ut.nick
 	from sn_comment sc, user_table ut
 	where sc.id= ut.id and sn_num=#{snNum}
+	order by sc.input_date
 </select>
 
-<!-- <update id="updateHomework" parameterType="kr.co.studystory.vo.">
-	update
-
-</update> -->
+<update id="updateHomework" parameterType="kr.co.studystory.vo.FinishHwVO">
+	UPDATE homework
+	SET finish_flag='Y'
+	WHERE id=#{ id } AND sn_num = #{ sn_num }
+</update>
 
 <select id="selectStudyNameAndRecruit" parameterType="String" resultType="kr.co.studystory.domain.StudyNameAndRecruit">
 	SELECT study_name, recruitment
@@ -100,8 +108,7 @@ where  s.id=ut.id and s.s_num=sn.s_num and sn.sn_num=#{snNum}
 
 <insert id="insertSnComment" parameterType="kr.co.studystory.vo.NewCommentVO">
 	insert into SN_COMMENT (SN_NUM, SN_COMMENT, ID)
-	values(#{ snNum },#{ snComment} ,#{ id })
-
+	values(#{ snNum },#{ snComment },#{ id })
 </insert>
 <update id="updateRecruit" parameterType="kr.co.studystory.vo.RecruitVO">
 	UPDATE study

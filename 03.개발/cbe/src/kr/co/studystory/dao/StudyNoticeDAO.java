@@ -19,6 +19,7 @@ import kr.co.studystory.domain.StudyNameAndRecruit;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.vo.NewHomeworkVO;
 import kr.co.studystory.vo.NewStudyNoticeVO;
+import kr.co.studystory.vo.FinishHwVO;
 import kr.co.studystory.vo.NewCommentVO;
 import kr.co.studystory.vo.RecruitVO;
 import kr.co.studystory.vo.SnAlarmVO;
@@ -58,6 +59,32 @@ public class StudyNoticeDAO {
 		return ssf;
 	}//getSessionFactory
 	
+	/**
+	 * sn_num으로 스터디명을 조회하기
+	 * by 영근
+	 */
+	public String selectStudyNameBySnNum(String sn_num) {
+		
+		SqlSession ss=getSessionFactory().openSession();
+		String studyName = ss.selectOne("selectStudyNameBySnNum", sn_num);
+		ss.close();
+		
+		return studyName;
+	}
+	
+	public boolean addComment(NewCommentVO ncvo) {
+		boolean flag = false;
+		
+		SqlSession ss=getSessionFactory().openSession();
+		int cnt = ss.insert("insertSnComment", ncvo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		
+		return flag;
+	}
+	
 	//스터디 공지사항 페이지(참여자)
 	public List<StudyNotice> selectSnList(String studyNum){
 		List<StudyNotice> list=null;
@@ -95,24 +122,24 @@ public class StudyNoticeDAO {
 		return list;
 	}//selectComment
 	
-	public boolean updateHomework(String s) {
+	/**
+	 * 숙제 업데이트
+	 * by 영근
+	 */
+	public boolean updateHomework(FinishHwVO fvo) {
 		boolean flag= false;
 		
+		SqlSession ss= getSessionFactory().openSession();
+		int cnt = ss.update("updateHomework",fvo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
 		
 		return flag;
 	}//updateHomework
 	
-	public void insertComment(NewCommentVO nc_vo) {
-		int cnt=0;
-		
-		SqlSession ss= getSessionFactory().openSession();
-		cnt=ss.insert("insertSnComment", nc_vo);
-		if(cnt==1) {
-			ss.commit();
-		}//end if
-		ss.close();
-		
-	}//insertComment
 	/**
 	 * 리더, 모집상태 변경
 	 * by 영근
