@@ -74,14 +74,14 @@
 	</div>
   	<div class="row col-sm justify-content-center">
   	<c:if test="${ empty snList }">
-   	<div class="card select-card border-dark m-3 p-2" style="width:250px; height:150px;" onclick="location.href='#'">
+   	<div class="card select-card border-dark m-3 p-2 text-center" style="width:300px; height:80px;" onclick="location.href='#'">
    		<div class="card-body">
    			 <h6 class="card-title"><strong>등록된 스터디 공지가 없습니다</strong></h6>
    		</div>
  		</div>
   	</c:if>
   	<c:forEach items="${ snList }" var="studyNotice">
-   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;" onclick="location.href='######?sNum=${ studyNotice.snNum }">
+   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;" onclick="location.href='notice_detail.do?sn_num=${ studyNotice.snNum }'">
    		<div class="card-body">
    			 <div style="float:left;" class="card-title"><strong>${ studyNotice.subject }</strong></div>
    			 <div style="float:right;"><img src="/third_prj/resources/images/setting.png" width="20" height="20"/></div>

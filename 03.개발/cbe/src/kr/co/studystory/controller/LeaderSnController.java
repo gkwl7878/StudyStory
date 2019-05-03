@@ -4,6 +4,7 @@ package kr.co.studystory.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,6 @@ public class LeaderSnController {
 	@RequestMapping(value="/study_notice/change_recruit.do", method=POST)
 	public String changeRecruit(RecruitVO rvo, Model model) {
 		
-		
 		if(sns.changeRecruit(rvo)) {
 			model.addAttribute("recruitChanged", true);
 		}
@@ -67,43 +67,49 @@ public class LeaderSnController {
 		if(sns.addNewSn(nsnvo)) {
 			String sn_num = sns.getLatestSnNum(nsnvo.getS_num());
 			
-			String[] nicks = hwNick.split(",");
-			String[] workloads = hwWorkload.split(",");
-			
-			String tempId = "";
-			NewHomeworkVO nhwvo = null;
-			SnAlarmVO savo = null;
-			for(int i=0; i<nicks.length; i++) {
-				nhwvo = new NewHomeworkVO();
-				tempId = sns.getIdByNick(nicks[i]);
+			// 전달받는 hwNick이나 hwWorkload가 존재하면 과제 추가
+			if (!("".equals(hwNick) || "".equals(hwWorkload))) {
+				String[] nicks = hwNick.split(",");
+				String[] workloads = hwWorkload.split(",");
 				
+				String tempId = "";
+				NewHomeworkVO nhwvo = null;
 				
-				if (workloads.length != 0) {
-					nhwvo.setId(tempId);
-					nhwvo.setWorkload(workloads[i]);
-					nhwvo.setSn_num(sn_num);
-					
-					sns.addNewHw(nhwvo); // 과제 추가
+				if (nicks.length != 0) {
+					for(int i=0; i<nicks.length; i++) {
+						nhwvo = new NewHomeworkVO();
+						tempId = sns.getIdByNick(nicks[i]);
+						
+						nhwvo.setId(tempId);
+						nhwvo.setWorkload(workloads[i]);
+						nhwvo.setSn_num(sn_num);
+						
+						sns.addNewHw(nhwvo); // 과제 추가
+					}
 				}
-				
-				// 알림 추가
+			}
+			
+			SnAlarmVO savo = null;
+			List<NickAndId> memberList = sns.getMember(nsnvo.getS_num());
+			
+			// 모든 멤버에게 알림 추가
+			NickAndId temp = null;
+			for(int i=0; i<memberList.size(); i++) {
+				temp = memberList.get(i);
 				savo = new SnAlarmVO();
 				savo.setCategory("스터디");
-				savo.setContent(nicks[i]+"님 ["+nsnvo.getSubject()+"]란 새로운 스터디 공지가 등록되었습니다. 확인해주세요~.");
-				savo.setId(tempId);
+				savo.setContent(temp.getNick()+"님 ["+nsnvo.getSubject()+"]란 새로운 스터디 공지가 등록되었습니다. 확인해주세요~.");
+				savo.setId(temp.getId());
 				savo.setSubject("새로운 스터디 모임공지가 등록되었습니다.");
-				
-				System.out.println("추가할 알림------------------"+savo);
-				
 				sns.sendAlarm(savo);
 			}
+			
 			model.addAttribute("snAddSuccessFlag", true);
 		} else {
 			model.addAttribute("snAddFailFlag", true);
 		}
-		model.addAttribute("sNum", nsnvo.getS_num());
 		
-		return "forward:../study_notice/notice_list_leader.do";
+		return "forward:../study_notice/notice_list_leader.do?sNum="+nsnvo.getS_num();
 	}
 	
 	@RequestMapping(value="/study_notice/modify.do", method=GET)

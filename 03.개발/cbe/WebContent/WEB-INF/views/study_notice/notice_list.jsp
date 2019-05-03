@@ -51,7 +51,7 @@
 	      </c:if>
       	<!--공지사항이 있으면 표시  -->
 		    <c:forEach items="${ snList }" var="studyNotice">
-		   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;" onclick="location.href='######?sNum=${ studyNotice.snNum }">
+		   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;" onclick="location.href='notice_detail.do?sn_num=${ studyNotice.snNum }'">
 		   		<div class="card-body">
 		   			 <div style="float:left;" class="card-title"><strong>${ studyNotice.subject }</strong></div>
 		   			 <br/>
