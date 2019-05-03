@@ -2,7 +2,6 @@ package kr.co.studystory.service;
 
 import java.util.List;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +10,12 @@ import kr.co.studystory.domain.DetailStudyNotice;
 import kr.co.studystory.domain.Homework;
 import kr.co.studystory.domain.NickAndId;
 import kr.co.studystory.domain.SnComment;
+import kr.co.studystory.domain.StudyNameAndRecruit;
 import kr.co.studystory.domain.StudyNotice;
+import kr.co.studystory.vo.FinishHwVO;
+import kr.co.studystory.vo.NewCommentVO;
 import kr.co.studystory.vo.NewHomeworkVO;
 import kr.co.studystory.vo.NewStudyNoticeVO;
-import kr.co.studystory.vo.NewCommentVO;
 import kr.co.studystory.vo.RecruitVO;
 import kr.co.studystory.vo.SnAlarmVO;
 @Component
@@ -22,6 +23,13 @@ public class StudyNoticeService {
 	@Autowired
 	private StudyNoticeDAO sn_dao;
 	
+	
+	/**
+	 * snNum으로 스터디명 조회하기
+	 */
+	public String getStudyNameBySnNum(String sn_num) {
+		return sn_dao.selectStudyNameBySnNum(sn_num);
+	}
 	
 	//스터디 공지사항 페이지
 	public List<StudyNotice> getSnList(String studyNum){
@@ -59,10 +67,10 @@ public class StudyNoticeService {
 	 * @param sn_num
 	 * @return
 	 */
-	public boolean checkHomework(String sn_num) {
+	public boolean checkHomework(FinishHwVO fvo) {
 		boolean flag= false;
 		
-		flag=sn_dao.updateHomework(sn_num);
+		flag=sn_dao.updateHomework(fvo);
 		
 		return flag;
 	}//checkHomework
@@ -72,10 +80,13 @@ public class StudyNoticeService {
 	 * @param nc_vo
 	 * @return
 	 */
-	public boolean insertComment(NewCommentVO nc_vo) {
+	public boolean addComment(NewCommentVO nc_vo) {
 		boolean flag =false;
 		
-		//flag= sn_dao.insertComment(nc_vo);
+		if (sn_dao.addComment(nc_vo)) {
+			flag = true;
+		}
+		
 		return flag;
 	}//insertComment
 	/**
@@ -138,6 +149,14 @@ public class StudyNoticeService {
 		}
 		
 		return flag;
+	}
+	
+	/**
+	 * 리더의 스터디 공지 리스트페이지에서 보여줄 제목과 모집상태를 반환하는 메서드
+	 * by 영근
+	 */
+	public StudyNameAndRecruit getStudyNameAndRecruit(String s_num) {
+		return sn_dao.selectStudyNameAndRecruit(s_num);
 	}
 	
 	/**

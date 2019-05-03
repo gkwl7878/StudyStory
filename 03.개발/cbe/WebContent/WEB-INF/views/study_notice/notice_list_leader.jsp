@@ -62,7 +62,7 @@
 	    	<option value="Y" ${ recruitment eq 'Y' ? "selected" : "" }>모집중</option>
 	    	<option value="N" ${ recruitment eq 'Y' ? "" : "selected" }>모집종료</option>
 	    </select>
-	  	<input type="hidden" name="sNum" value="${ sNum }"/>
+	  	<input type="hidden" name="sNum" value="${ param.sNum }"/>
 	    <button type="button" class="btn btn-sm btn-outline-secondary" id="recruitChangeBtn">모집상태 변경</button>
     </form>
     </div>
@@ -74,20 +74,22 @@
 	</div>
   	<div class="row col-sm justify-content-center">
   	<c:if test="${ empty snList }">
-   	<div class="card select-card border-dark mb-3" onclick="location.href='#'">
+   	<div class="card select-card border-dark m-3 p-2 text-center" style="width:300px; height:80px;" onclick="location.href='#'">
    		<div class="card-body">
    			 <h6 class="card-title"><strong>등록된 스터디 공지가 없습니다</strong></h6>
    		</div>
  		</div>
   	</c:if>
   	<c:forEach items="${ snList }" var="studyNotice">
-   	<div class="card select-card border-dark mb-3" onclick="location.href='######?sNum=${ studyNotice.snNum }">
+   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;" onclick="location.href='notice_detail.do?sn_num=${ studyNotice.snNum }'">
    		<div class="card-body">
-   			 <h6 class="card-title"><strong>${ studyNotice.subject }&nbsp;&nbsp;&nbsp;&nbsp;<img src="/third_prj/resources/images/setting.png" width="20" height="20"/></strong></h6>
+   			 <div style="float:left;" class="card-title"><strong>${ studyNotice.subject }</strong></div>
+   			 <div style="float:right;"><img src="/third_prj/resources/images/setting.png" width="20" height="20"/></div>
+   			 <br/>
 		    <p class="card-text">
 		    	<p class="text-left">
 		    		<span style="font-size:12px;"><c:out value="${ studyNotice.inputDate }"/></span>
-		    		<img src="/third_prj/resources/images/${ studyNotice.img }" width="50" height="60" style="float:right;"/>
+		    		<img src="/third_prj/profile_img/${ studyNotice.img }" width="50" height="60" style="float:right;"/>
 		    	</p>
 	    	</p>
    		</div>
