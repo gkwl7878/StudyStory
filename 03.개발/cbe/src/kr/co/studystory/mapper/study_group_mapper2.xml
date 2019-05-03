@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!--쿼리문을 정의  
+  	namespace : XML내에서 중복된 id를 사용할 수 있도록 구분하는 것.
+  					(패키지와 비슷한 용도)
+  					
+  					신청자 보기 / 신청자 상세보기 
+  -->
+
+<mapper namespace="kr.co.studystory.study_group">
+	
+<select id="selectJoinerList" resultType="kr.co.studystory.domain.JoinBbs" parameterType="kr.co.studystory.vo.ApplicantBbsVO">
+	select j.id, ut.nick, ut.img, j.motive
+	from join j, user_table ut
+	where s_num=#{sNum} and ut.id=j.id
+</select>
+	
+	
+
+</mapper>
