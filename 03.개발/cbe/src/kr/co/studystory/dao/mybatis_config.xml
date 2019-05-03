@@ -21,6 +21,7 @@
 	 <mapper resource="kr/co/studystory/mapper/study_search_mapper.xml" />
     <mapper resource="kr/co/studystory/mapper/study_info_mapper.xml"/> 
     <mapper resource="kr/co/studystory/mapper/study_group_mapper.xml"/> 
+    <mapper resource="kr/co/studystory/mapper/study_group_mapper3.xml"/> 
     <mapper resource="kr/co/studystory/mapper/login_mapper.xml"/> 
     <mapper resource="kr/co/studystory/mapper/signup_mapper.xml"/> 
     <mapper resource="kr/co/studystory/mapper/common_bbs_mapper.xml"/> 

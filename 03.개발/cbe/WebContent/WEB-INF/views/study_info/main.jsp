@@ -48,6 +48,12 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		<c:if test="${ joinReqSuccess }">
+			alert("스터디 신청이 완료되었습니다");
+		</c:if>
+		<c:if test="${ joinReqFail }">
+			alert("스터디 참여신청에 실패했습니다. 잠시 후에 다시 시도해주세요");
+		</c:if>
 		
 	}); // ready
 </script>
@@ -79,7 +85,7 @@
 							<div class="card mb-4 shadow-sm">
 
 								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-								<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top" src="/third_prj/resources/images/${ thumbnail.img }" />
+								<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="height:200px;"/>
 									<div class="card-body text-center p-3">
 										<div class="d-flex justify-content-end align-items-center mb-3">
 											<div class="mr-5">
@@ -99,7 +105,7 @@
 
 											<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
 												<!-- 썸네일 리더의 이미지 -->
-												<img src="/study_img/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle">
+												<img src="/third_prj/profile_img/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle" style="width:40px; height:50px;">
 											</div>
 
 											<div class="border-right p-2">

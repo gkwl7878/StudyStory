@@ -89,7 +89,7 @@
 				return;
 			}//end if
 			
-			var file = $("#file_sub").val();
+			var file = $("#real_file").val();
 			
 			if (file == "") {
 				alert("파일을 선택해주세요");
@@ -109,8 +109,7 @@
 <script type="text/javascript">
 	function schfile() {
 		document.getElementById("real_file").click();
-		document.getElementById("file_sub").value = document
-				.getElementById("real_file").value;
+		document.getElementById("file_sub").value = document.getElementById("real_file").value;
 	}
 	function previewFile() {
 		var preview = document.querySelector('#img');
@@ -179,7 +178,7 @@
 				<img alt="" src="/third_prj/resources/images/Image.png" style="width: 50px; height: 50px; margin-bottom: 20px; margin-right: 15px;"> <label for="exampleFormControlTextarea1" style="font-size: 30px;"> <strong>대표이미지</strong>를 선택해주세요
 				</label>
 				<div class="input-group mb-3">
-					<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> <input type="text" id='file_sub' style="width: 700px; border: 0px; display: none" readonly="readonly"> <a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img width="700" height="300" id="img" src="/third_prj/resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'></a>
+					<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> <input type="text" id='file_sub' style="width: 700px; border: 0px; display: none" readonly="readonly"><a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;"><img width="700" height="300" id="img" src="/third_prj/resources/images/preview_Image.png" border="0" title='찾아보기' alt='찾아보기'></a>
 				</div>
 			</div>
 

@@ -6,7 +6,27 @@
   	namespace : XML내에서 중복된 id를 사용할 수 있도록 구분하는 것.
   					(패키지와 비슷한 용도)
   -->
+
 <mapper namespace="kr.co.studystory.study_group">
+	
+	<select id="selectMemberCnt" parameterType="String"><!-- resultType을 뭘로?? -->
+	  select count(*)
+	from member
+	where s_num=#{sNum}<!-- 's_000041'; -->
+	</select>
+	
+	
+	<select id="selectMemberList"  resultType="kr.co.studystory.domain.MemberWithImg" parameterType="String">
+<!-- 	 select nick, tel, img
+	from user_table  -->
+	
+ 	 select ut.nick nick, ut.tel tel, ut.img img
+	from user_table ut, member m
+	where m.s_num=#{sNum} and ut.id=m.id 
+	<!-- 화면 띄우기 뷰 수정을 위해 조건을 막아줌 . member가 별로 없어서  -->  
+	</select>
+	  
+
 	<resultMap type="kr.co.studystory.domain.PrevStudyInfo" id="studyResult">
 		<result column="study_name" property="name"/>
 		<result column="loc" property="loc"/>
@@ -15,68 +35,34 @@
 		<result column="img" property="img"/>
 	</resultMap>
 	
-	<!-- sNum, studyName, loc, category, img, recruitment, inputdate, nick, deacivation; -->
-	<resultMap type="kr.co.studystory.domain.MyStudy" id="myStudyResult">
-		<result column="s_num" property="sNum"/>
-		<result column="study_name" property="studyName"/>
-		<result column="loc" property="loc"/>
-		<result column="category" property="category"/>
-		<result column="img" property="img"/>
-		<result column="recruitment" property="recruitment"/>
-		<result column="input_date" property="inputdate"/>
-		<result column="nick" property="nick"/>
-		<result column="deactivation" property="deactivation"/>
-	</resultMap>
-	
-	<resultMap type="kr.co.studystory.domain.AppliedStudy" id="appliedStudyResult">
-		<result column="s_num" property="sNum"/>
-		<result column="study_name" property="studyName"/>
-		<result column="loc" property="loc"/>
-		<result column="category" property="category"/>
-		<result column="img" property="img"/>
-		<result column="recruitment" property="recruitment"/>
-		<result column="input_date" property="inputDate"/>
-		<result column="nick" property="nick"/>
-		<result column="accept_flag" property="joinAcceptFlag"/>
-	</resultMap>
-	
 	<select id="selectDupStudyName" parameterType="String" resultType="int">
 		select count(*) cnt
 		from study
 		where study_name=#{ study_name }
 	</select>	
 	
-	
   <insert id="insertStudy" parameterType="kr.co.studystory.vo.NewStudyVO">
     insert into study(s_num, study_name, loc, category, content, img, id, deactivation, delete_flag)
 	  values(s_code, #{ study_name }, #{ loc }, #{ category }, #{ content }, #{ img }, #{ id }, 'N', 'N')
   </insert>
   
-  
-  <select id="selectPrevStudyInfo" resultMap="studyResult" >
+
+  <!-- <select id="selectPrevStudyInfo" resultMap="studyResult" >
  	select study_name, loc, category, content, img
 	from study
 	where id=#{id}
-  </select>
+  </select> -->
   
-<update id="updateStudy" parameterType="kr.co.studystory.vo.ModifiedStudyVO">
+  <update id="updateStudy" parameterType="kr.co.studystory.vo.ModifiedStudyVO">
   update study
   set 		content=#{content}, img=#{img}
   where s_num=#{sNum}
   </update>
-  
-  <select id="selectMyStudies" resultMap="myStudyResult" parameterType="String">
-	select s.s_num, study_name, loc, category, s.img, recruitment, input_date, s.deactivation, u.nick
-	from study s, user_table u, member m
-	where u.id=#{ id } and m.id=u.id and m.s_num=s.s_num;
-  </select>
-  
-  <select id="selectAppliedStudies" resultMap="appliedStudyResult" parameterType="String">
-		select s.s_num, study_name, loc, category, s.img, recruitment, s.input_date, s.deactivation, u.nick
-		from user_table u, study s, join j
-		where u.id=#{ id } and j.id = u.id and j.s_num = s.s_num;
-  </select>
-  
+
+
+  <!-- <select id="selectLeaderId">
+  		
+  </select> -->
   
   <insert id="insertLeaveAlarm" parameterType="kr.co.studystory.vo.LeaveAlarmVO">
    insert into alarm(leaderId, reason, category, subject, content)

@@ -28,7 +28,6 @@ import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
 
 @Controller
-@Component
 public class UserStudyController {
 	@Autowired
 	private StudyGroupService sgs;
@@ -101,50 +100,25 @@ public class UserStudyController {
 		return "";
 	}
 	
-	// @RequestMapping(value="study_group/my_study.do", method=GET)
-	public String myStudyPage(ConditionVO c_vo, HttpSession session, Model model) {
-		List<MyStudy> list=null;
+
+	// 내 스터디 탈퇴하기
+	@RequestMapping(value="study_group/leave_study.do", method=GET )
+		public String leaveStudyPage(String id) {
+		return "study_group/study_out";
+	}//leaveStudyPage
+	
+	@RequestMapping(value="study_group/leave_study_process.do" , method=POST )
+	public String leaveStudyProcess(LeaveAlarmVO la_vo,LeaveVO l_vo, HttpSession session, Model model) {
 		
 		String id=(String)session.getAttribute("id");
-		c_vo.setId(id);
+		la_vo.setLeaderId(id);			
+		la_vo.setReason("이유");
+		sgs.sendLeaveAlarm(la_vo);
 		
-		list=sgs.getMyStudy(c_vo);
 		
-		model.addAttribute("id", c_vo.getId());
-		model.addAttribute("mystudyList", list);
-		return "study_group/my_study";
-	}//myStudyPage
-	
-	//내 스터디 탈퇴하기
-		@RequestMapping(value="study_group/leave_study.do", method=GET )
-			public String leaveStudyPage(String id) {
-			return "study_group/study_out";
-		}//leaveStudyPage
-		
-		@RequestMapping(value="study_group/leave_study.do" , method=POST )
-		public String leaveStudyProcess(LeaveVO l_vo , HttpSession session, Model model) {
-			boolean alarmFlag=false;
-			LeaveStudyVO ls_vo=new LeaveStudyVO();
-			boolean leaveFlag=sgs.leaveStudy(ls_vo);
-			LeaveAlarmVO la_vo=new LeaveAlarmVO();
-			
-			String id=(String)session.getAttribute("id");
-			if(leaveFlag) {
-				la_vo.setLeaderId(id);			
-				la_vo.setReason("탈퇴이유");
-				la_vo.setCategory("취업");
-				la_vo.setContent("내용");
-				la_vo.setSubject("제목");
-				alarmFlag=sgs.sendLeaveAlarm(la_vo);
-			}
-			String url="forward:";
-			if(alarmFlag&&leaveFlag) {
-				model.addAttribute("acceptFlag",true);
-				url="forward:index.do";
-			}
-			
-			ls_vo.setId(id);
-			ls_vo.setsNum("s_0000041");
+		l_vo.setId(id);
+		l_vo.setsNum("s_0000041");
+		l_vo.setReason("이유");
 
 		
 		model.addAttribute("id",l_vo.getId());

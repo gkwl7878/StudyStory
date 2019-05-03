@@ -41,7 +41,6 @@ public class StudyGroupService {
 	
 	/**
 	 * 스터디 생성(DB추가) + 이미지 업로드
-	 * 
 	 */
 	public boolean addNewStudy(NewStudyVO ns_vo, HttpServletRequest request) {
 		boolean flag=false;
@@ -55,8 +54,6 @@ public class StudyGroupService {
 			ns_vo.setImg(mr.getFilesystemName("file"));
 			ns_vo.setLoc(mr.getParameter("loc"));
 			ns_vo.setStudy_name(mr.getParameter("study_name"));
-			
-			System.out.println("추가할 스터디 정보 -------------------------"+ns_vo);
 			
 			if(sg_dao.insertNewStudy(ns_vo)) {
 				flag = true;
@@ -88,20 +85,6 @@ public class StudyGroupService {
 		return flag;
 	}//modifyStudy
 	
-	//내 스터디
-	//프로필 정보는 StudyInfoService의 getMyProfile 사용
-	public List<MyStudy> getMyStudy(ConditionVO c_vo) {
-		List<MyStudy> list=null;
-		list=sg_dao.selectMyStudies(c_vo);
-		return list;
-	}//getMyStudy
-	
-	public List<AppliedStudy> getMyApplied(ConditionVO c_vo) {
-		List<AppliedStudy> list=null;
-		list=sg_dao.selectAppliedStudy(c_vo);
-		return list;
-	}//getMyApplied
-	
 	//스터디 탈퇴
 	public String getLeaderId(String id) {
 		return "";
@@ -126,7 +109,6 @@ public class StudyGroupService {
 		
 		return flag;
 	}
-	
 }
 
 
