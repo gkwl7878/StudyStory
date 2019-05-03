@@ -64,10 +64,7 @@ public class LeaderSnController {
 	@RequestMapping(value="/study_notice/wrtie_process.do", method=POST)
 	public String leaderWriteProcess(NewStudyNoticeVO nsnvo, String hwNick, String hwWorkload, Model model) {
 		
-		System.out.println("============================nsnvo : "+nsnvo);
-		
 		if(sns.addNewSn(nsnvo)) {
-			System.out.println("-------공지정보 추가완료");
 			String sn_num = sns.getLatestSnNum(nsnvo.getS_num());
 			
 			String[] nicks = hwNick.split(",");
@@ -80,12 +77,15 @@ public class LeaderSnController {
 				nhwvo = new NewHomeworkVO();
 				tempId = sns.getIdByNick(nicks[i]);
 				
-				nhwvo.setId(tempId);
-				nhwvo.setWorkload(workloads[i]);
-				nhwvo.setSn_num(sn_num);
-				System.out.println("추가할 과제 -------------"+nhwvo);
 				
-				sns.addNewHw(nhwvo); // 과제 추가
+				if (workloads.length != 0) {
+					nhwvo.setId(tempId);
+					nhwvo.setWorkload(workloads[i]);
+					nhwvo.setSn_num(sn_num);
+					
+					sns.addNewHw(nhwvo); // 과제 추가
+				}
+				
 				// 알림 추가
 				savo = new SnAlarmVO();
 				savo.setCategory("스터디");
@@ -103,7 +103,7 @@ public class LeaderSnController {
 		}
 		model.addAttribute("sNum", nsnvo.getS_num());
 		
-		return "study_notice/notice_list_leader";
+		return "forward:../study_notice/notice_list_leader.do";
 	}
 	
 	@RequestMapping(value="/study_notice/modify.do", method=GET)
