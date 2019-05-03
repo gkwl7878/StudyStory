@@ -15,6 +15,7 @@ import kr.co.studystory.dao.StudyGroupDAO;
 import kr.co.studystory.domain.AppliedStudy;
 import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
+import kr.co.studystory.vo.CloseAlarmVO;
 import kr.co.studystory.vo.ConditionVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
 import kr.co.studystory.vo.LeaveStudyVO;
@@ -27,8 +28,9 @@ public class StudyGroupService {
 	@Autowired
 	private StudyGroupDAO sg_dao;
 	
-	//새 스터디 개설하기
-	//스터디명 중복확인은 ajax로 구현
+	/**
+	 * 	새 스터디 개설하기-혜원
+	 */
 	public boolean checkDupStudyName(String study_name) {
 		boolean flag=false;
 		
@@ -65,11 +67,18 @@ public class StudyGroupService {
 		return flag;
 	}//addNewStudy
 	
-	//내 스터디 수정하기
-	public PrevStudyInfo getPrevStudy(String sNum) {
+	/**
+	 * 내 스터디 수정하기 -혜원
+	 */
+	public void deletePreView(String s_num) {
 		
-		StudyGroupDAO sg_dao=StudyGroupDAO.getInstance();
-		PrevStudyInfo psi=sg_dao.selectPrevStudyInfo(sNum);
+	}
+	
+	
+	public PrevStudyInfo getPrevStudy(String s_num) {
+		PrevStudyInfo psi=null;
+		psi=sg_dao.selectPrevStudyInfo(s_num);
+		
 		return psi;
 	}//getPrevStudy
 	
@@ -85,9 +94,14 @@ public class StudyGroupService {
 		return flag;
 	}//modifyStudy
 	
-	//스터디 탈퇴
-	public String getLeaderId(String id) {
-		return "";
+
+	
+	/**
+	 * 스터디 탈퇴 -혜원
+	 */
+	public String getLeaderId(String s_num) {
+		return sg_dao.selectLeaderId(s_num);
+		
 	}//getLeaderId
 	
 	public boolean sendLeaveAlarm(LeaveAlarmVO la_vo) {
@@ -108,7 +122,27 @@ public class StudyGroupService {
 		}
 		
 		return flag;
-	}
+	}//leaveStudy
+	
+	
+	
+	/**
+	 * 스터디 활동 종료 -혜원
+	 */
+	public List<String> getMemberId(String s_num) {
+		return sg_dao.selectMemberId(s_num);
+	}//getMemberId
+	
+	public boolean closeStudy(CloseAlarmVO ca_vo) {
+		boolean flag=false;
+		
+		if(sg_dao.insertCloseAlarm(ca_vo)) {
+			flag=true;
+		}
+		return flag;
+	}//closeStudy
+	
+	
 }
 
 

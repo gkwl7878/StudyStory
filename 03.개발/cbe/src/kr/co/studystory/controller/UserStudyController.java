@@ -10,22 +10,21 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.service.StudyGroupService;
-import kr.co.studystory.vo.ConditionVO;
+import kr.co.studystory.vo.CloseVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
 import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
+import oracle.net.aso.l;
 
 @Controller
 public class UserStudyController {
@@ -73,59 +72,117 @@ public class UserStudyController {
 		return url;
 	}//createStudyProcess
 	
-	@RequestMapping(value="study_group/request_study.do", method=RequestMethod.POST )
+	@RequestMapping(value="study_group/request_study.do", method=POST )
 	public String RequestStudyPage() {
 		return "study_group/study_create_request";
 	}//createStudyPage
 	
 	//내 스터디 수정하기
-	@RequestMapping(value="study_group/modify_study.do", method=GET )
-	public String modifyStudyPage(String sNum,Model model ) {
+	@RequestMapping(value="study_group/modify_study.do", method= {POST,GET})
+	public String modifyStudyPage(String s_num,Model model ) {
 		
-		PrevStudyInfo psInfo=sgs.getPrevStudy(sNum);
-		model.addAttribute("ps_Info",psInfo);
+		PrevStudyInfo psi=sgs.getPrevStudy(s_num);
+		String name=psi.getName();
+		String loc=psi.getLoc();
+		String category=psi.getCategory();
+		String content=psi.getContent();
+		String img=psi.getImg();
+		
+		model.addAttribute("name",name);
+		model.addAttribute("loc",loc);
+		model.addAttribute("category",category);
+		model.addAttribute("content",content);
+		model.addAttribute("img",img);
+		
+		model.addAttribute("ps_Info",psi);
 		
 		return "study_group/study_modify";
 	}//createStudyPage
 	
+	@RequestMapping(value="study_group/modify_study_process.do", method= RequestMethod.POST)
 	public String modifyStudyProcess(ModifiedStudyVO ms_vo, HttpServletRequest request, Model model) {
 
+		
 		String url="study_group/study_modify";
 		
+		String s_num=request.getParameter("s_num");//
+		String content= ms_vo.getContent();
+		String img= ms_vo.getImg();
+		
+		ms_vo.setsNum(s_num);
+		ms_vo.setContent(content);
+		ms_vo.setImg(img);
+		
+		
 		if(sgs.modifyStudy(ms_vo)) {
-		model.addAttribute("");
+			url="study_group/study_modify";
+			model.addAttribute("successFlag",true);
 		}else {
-			
+			model.addAttribute("failFlag",true);
 		}
-		return "";
+		return url;
 	}
 	
 
 	// 내 스터디 탈퇴하기
-	@RequestMapping(value="study_group/leave_study.do", method=GET )
+	@RequestMapping(value="study_group/leave_study.do", method= {GET,POST} )
 		public String leaveStudyPage(String id) {
 		return "study_group/study_out";
 	}//leaveStudyPage
 	
 	@RequestMapping(value="study_group/leave_study_process.do" , method=POST )
-	public String leaveStudyProcess(LeaveAlarmVO la_vo,LeaveVO l_vo, HttpSession session, Model model) {
-		
+	public String leaveStudyProcess(LeaveStudyVO ls_vo,LeaveAlarmVO la_vo,LeaveVO l_vo, HttpSession session, Model model) {
+		//vo ????
 		String id=(String)session.getAttribute("id");
-		la_vo.setLeaderId(id);			
-		la_vo.setReason("이유");
-		sgs.sendLeaveAlarm(la_vo);
-		
-		
 		l_vo.setId(id);
-		l_vo.setsNum("s_0000041");
-		l_vo.setReason("이유");
-
 		
-		model.addAttribute("id",l_vo.getId());
-
+		String s_num=l_vo.getsNum();
+		String reason=l_vo.getReason();
+		l_vo.setsNum(s_num);
+		l_vo.setReason(reason);
 		
-		return "";
-	}
+		String url="study_group/study_out";
+		
+		if(sgs.leaveStudy(ls_vo)) {//???
+			url="redirect:../index.do";
+			model.addAttribute("id","");
+			
+		}else {
+			model.addAttribute("failFlag",true);
+		}
+
+		return url;
+	}//leaveStudyProcess
+	
+	//스터디 활동 종료
+		@RequestMapping(value="study_group/end_study.do", method= {GET,POST} )
+			public String closeStudyPage(String id) {
+			return "study_group/end_study";
+		}//leaveStudyPage
+		
+		@RequestMapping(value="study_group/end_study_process.do" , method=POST )
+		public String closeStudyProcess(CloseVO l_vo, HttpSession session, Model model) {
+			//vo ????
+			String id=(String)session.getAttribute("id");
+			l_vo.setId(id);
+			
+			String s_num=l_vo.getsNum();
+			String reason=l_vo.getReason();
+			l_vo.setsNum(s_num);
+			l_vo.setReason(reason);
+			
+			String url="study_group/study_out";
+			
+			/*if(sgs.leaveStudy(l_vo)) {//???
+				url="redirect:../index.do";
+				model.addAttribute("id","");
+				
+			}else {
+				model.addAttribute("failFlag",true);
+			}*/
+
+			return url;
+		}
 }//class
 
 
