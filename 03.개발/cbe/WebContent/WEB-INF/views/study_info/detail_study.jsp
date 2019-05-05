@@ -244,7 +244,7 @@
 									<div class="col-lg-12">
 										<div class="row">
 											<div class="col text-center" style="margin-top: 30px">
-												<button onclick="location.href='../study_notice/notice_list_leader.do?sNum=${ param.sNum }'" type="button" class="btn btn-secondary btn-sm">스터디 관리하기</button>
+												<button onclick="location.href='../study_notice/notice_list_leader.do?s_num=${ param.sNum }'" type="button" class="btn btn-secondary btn-sm">스터디 관리하기</button>
 											</div>
 										</div>
 									</div>

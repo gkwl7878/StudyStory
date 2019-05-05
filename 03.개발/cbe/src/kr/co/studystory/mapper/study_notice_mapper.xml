@@ -19,7 +19,13 @@ from (select s.s_num, ut.img
        from study s, user_table ut
        where s_num=#{ sNum } AND s.id = ut.id) ss, study_notice sn
 where sn.s_num = #{ sNum }
-order by input_date desc
+order by sn.input_date desc
+</select>
+
+<select id="selectCommentNum" parameterType="String" resultType="int">
+	select count(*) cnt
+	from sn_comment
+	where sn_num=#{ sn_num }
 </select>
 
 <resultMap type="kr.co.studystory.domain.DetailStudyNotice" id="snDtList">

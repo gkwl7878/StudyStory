@@ -36,8 +36,10 @@ public class StudyNoticeService {
 		List<StudyNotice> list=null;
 		list=sn_dao.selectSnList(studyNum);
 		
-		//StudyNotice sn_do=null;                --제목 줄이기 좀 나중에
-		//String 
+		for(StudyNotice sn : list) {
+			sn.setCommentNum(sn_dao.selectCommentNum(sn.getSnNum()));
+		}
+		
 		return list;
 	}//getSnList
 

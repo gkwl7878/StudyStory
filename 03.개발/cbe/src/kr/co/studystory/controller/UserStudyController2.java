@@ -26,8 +26,8 @@ public class UserStudyController2 {
 	 * @return
 	 */
 	@RequestMapping(value="/study_group/show_participants.do",method=RequestMethod.GET)
-	public String studyMemberPage(String sNum, Model model) {
-		List<MemberWithImg> mbwi=sgs.getMemberWithImg(sNum);
+	public String studyMemberPage(String s_num, Model model) {
+		List<MemberWithImg> mbwi=sgs.getMemberWithImg(s_num);
 		
 		
 		model.addAttribute("total",mbwi.size());
@@ -51,3 +51,4 @@ public class UserStudyController2 {
 	
 	
 }
+

@@ -151,7 +151,7 @@
 	      <div class="row" style="margin-top:30px;">
 	      	<div class="col-3 font20bold text-center">과제</div>
 			   	<c:if test="${ empty hwList  }">
-				    <div	class="col-9" >
+				    <div class="col-9">
 				     	<strong>등록된 과제가 없습니다</strong> 
 			     	</div>
 			    </c:if>
@@ -197,6 +197,7 @@
 	      		<c:out value="${ sessionScope.nick }"/>
 	      		<input type="hidden" name="id" value="${ sessionScope.id }"/>
 	      		<input type="hidden" name="snNum" value="${ param.sn_num }"/>
+	      		<input type="hidden" name="sNum" value="${ param.s_num }"/>
 	      	</div>
 	      	<div style="padding-right:0px; float:left; width:70%; margin-left:10px; ">
 	      		<input type="text" placeholder="내용을 입력해주세요." name="snComment" id="comment" class="form-control form-control-sm" size="25" maxlength="100"/>
@@ -207,14 +208,7 @@
 		      </form>
 	      </div>
 	      <div class="row justify-content-center" style="min-height:100px; margin-top:30px;">
-	      <c:choose>
-	      	<c:when test="${ empty sNum }">
-		      	<button type="button" class="btn btn-secondary" style="height:40px; " onclick="history.back()">목록으로</button>
-	      	</c:when>
-	      	<c:when test="${ not empty sNum }">
-		      	<button type="button" class="btn btn-secondary" style="height:40px; " onclick="location.href='notice_list.do?sNum=${ sNum }'">목록으로</button>
-	      	</c:when>
-	      </c:choose>
+	      	<button type="button" class="btn btn-secondary" style="height:40px; " onclick="location.href='notice_list.do?s_num=${ param.s_num }'">목록으로</button>
 	      </div>
    	 </div>
 

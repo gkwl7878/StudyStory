@@ -28,12 +28,12 @@ public class LeaderSnController {
 	private StudyNoticeService sns;
 	
 	@RequestMapping(value="/study_notice/notice_list_leader.do", method= { GET, POST })
-	public String leaderSnList(String sNum, Model model) {
+	public String leaderSnList(String s_num, Model model) {
 		
-		List<StudyNotice> list = sns.getSnList(sNum);
+		List<StudyNotice> list = sns.getSnList(s_num);
 		
 		// 스터디명과 모집상태를 반환해서 보여줘야 함
-		StudyNameAndRecruit snar = sns.getStudyNameAndRecruit(sNum);
+		StudyNameAndRecruit snar = sns.getStudyNameAndRecruit(s_num);
 		
 		model.addAttribute("study_name", snar.getStudy_name());
 		model.addAttribute("recruitment", snar.getRecruitment());
@@ -52,9 +52,9 @@ public class LeaderSnController {
 	}
 	
 	@RequestMapping(value="/study_notice/wrtie.do", method= { GET, POST })
-	public String leaderWrite(String sNum, Model model) {
+	public String leaderWrite(String s_num, Model model) {
 		
-		List<NickAndId> list = sns.getMember(sNum);
+		List<NickAndId> list = sns.getMember(s_num);
 		model.addAttribute("nickAndIdList", list);
 		
 		return "study_notice/notice_write";
@@ -109,7 +109,7 @@ public class LeaderSnController {
 			model.addAttribute("snAddFailFlag", true);
 		}
 		
-		return "forward:../study_notice/notice_list_leader.do?sNum="+nsnvo.getS_num();
+		return "forward:../study_notice/notice_list_leader.do?s_num="+nsnvo.getS_num();
 	}
 	
 	@RequestMapping(value="/study_notice/modify.do", method=GET)
