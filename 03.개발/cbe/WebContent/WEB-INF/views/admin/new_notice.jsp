@@ -32,9 +32,8 @@
 <script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
 
-
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 
 
 <script type="text/javascript">
@@ -48,19 +47,32 @@
 		});
 	});
 </script>
+<script type="text/javascript">
+	$(function () {
+		
+		$("#newNoticeBtn").click(function() {
+			$("#newNoticeFrm").submit();
+		})
+	});
+</script>
 
 </head>
 <body>
 
 	<!-- navbar 시작 -->
-	<c:import url="/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
+	
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
+			<c:param name="weekUser" value="${param.weekUser}"></c:param>
+			<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
+			<c:param name="allUser" value="${param.allUser}"></c:param>
+			<c:param name="allStudy" value="${param.allStudy}"></c:param>
+			<c:param name="activeFlag" value="${param.activeFlag}"></c:param>
+	</c:import>
 
-	<!-- sidebar 시작 -->
-	<c:import url="/third_prj/admin/layout/sidebar.jsp"></c:import>
-	<!-- sidebar 끝 -->
 
-	<form>
+	<form action="write_notice_proc.do" method="get" id="newNoticeFrm">
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-12 justify-content-left">
@@ -70,17 +82,20 @@
 
 			<div class="row">
 				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
-					<input type="text" class="form-control" placeholder="제목을 입력해주세요(최대 100자)">
+					<input type="text" name="subject" class="form-control" placeholder="제목을 입력해주세요(최대 100자)">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<input type="text" class="form-control" id="summernote">
+					<textarea name="content" class="content" id="summernote" ></textarea>
 				</div>
 			</div>
 
 			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 320px;">목록으로</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">작성</a>
+				<a class="btn btn-secondary btn" href="notice_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+									&allStudy=${param.allStudy}&searchWord=${param.searchWord}" role="button" style="margin-left: 320px;">목록으로</a>
+				<input type="button" class="btn btn-secondary btn" value="작성" id="newNoticeBtn" style="margin-left: 10px;" />
 			</div>
 		</div>
 	</form>

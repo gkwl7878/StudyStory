@@ -32,7 +32,8 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link ${activeFlag=='nActiveFlag'? 'active':''} href="#">
+        <a class="nav-link ${activeFlag=='nActiveFlag'? 'active':''}" href="notice_mng.do?weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}">
           <span data-feather="bar-chart-2"></span>
           	공지사항
         </a>

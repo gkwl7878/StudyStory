@@ -5,7 +5,7 @@
 
 <mapper namespace="kr.co.studystory.admin">
 
-<select id="loginValid" resultType="Integer" parameterType="kr.co.studystory.admin.vo.LoginVO" >
+<select id="loginValid" resultType="int" parameterType="kr.co.studystory.admin.vo.LoginVO" >
 	select count(*)
 	from ADMIN_USER 
 	where id=#{id} and pass=#{pass}
@@ -16,26 +16,26 @@
 	values(a_code,#{category},#{subject},#{content},#{id})
 </insert>
 
-<select id="countWeekUser" resultType="Integer" >
-	select count(*)
-	from study
-	where input_date between (SYSDATE-7) and SYSDATE
-</select>
-
-<select id="countWeekStudy" resultType="Integer" >
+<select id="countWeekUser" resultType="int" >
 	select count(*)
 	from user_table
 	where reg_date between (SYSDATE-7) and SYSDATE
 </select>
 
-<select id="countAllUser" resultType="Integer" >
+<select id="countWeekStudy" resultType="int" >
 	select count(*)
 	from study
+	where input_date between (SYSDATE-7) and SYSDATE
 </select>
 
-<select id="countAllStudy" resultType="Integer" >
+<select id="countAllUser" resultType="int" >
 	select count(*)
 	from user_table
+</select>
+
+<select id="countAllStudy" resultType="int" >
+	select count(*)
+	from study
 </select>
 
 <select id="nsTotalCnt" resultType="int">
@@ -99,7 +99,9 @@
 <select id="nTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.NoticeBoardVO">
 	select count(*)
 	from notice
-	where subject like '%'||#{searchWord}||'%'
+	<if test="searchWord!=null">
+		where subject like '%'||#{searchWord}||'%'
+	</if>
 </select>
 
 <!--//////////////////////////////////////////// NewStudy Mapper////////////////////////////////////////////////// -->
@@ -365,6 +367,69 @@
 	set answer_content=#{answerContent}, answer_flag='Y', answer_date=SYSDATE
 	where q_num= #{qNum}
 </update>
+
+<delete id="delQuestion" parameterType="String">
+	delete from question
+	where q_num=#{qNum}
+</delete>
+
+<!--//////////////////////////////////////////// Notice Mapper////////////////////////////////////////////////// -->
+<resultMap type="kr.co.studystory.admin.domain.Notice" id="noticeResult">
+	<result column="n_num" property="nNum"/>
+	<result column="subject" property="subject"/>
+	<result column="input_date" property="inputDate"/>
+	<result column="view_cnt" property="viewCnt"/>
+</resultMap>
+<select id="noticeList" resultMap="noticeResult" parameterType="kr.co.studystory.admin.vo.NoticeBoardVO">
+
+	<!-- nNum, subject, inputDate; int viewCnt; -->
+	select n_num, subject, input_date, view_cnt
+	from(
+		select n_num, subject, input_date, view_cnt,
+		row_number() over(order by input_date desc) r_num
+		from notice
+		<if test="searchWord!=null">
+			where subject like '%'||#{searchWord}||'%'
+		</if>
+	)
+	where r_num between #{begin} and #{end}
+	
+</select>
+
+<!-- subject, input_date, content, view_cnt; -->
+<resultMap type="kr.co.studystory.admin.domain.DetailNotice" id="noticeDetailResult">
+	<result column="subject" property="subject"/>
+	<result column="input_date" property="inputDate"/>
+	<result column="content" property="content"/>
+	<result column="view_cnt" property="viewCnt"/>
+</resultMap>
+<select id="noticeDetail" resultMap="noticeDetailResult" parameterType="String">
+	select subject, input_date, content, view_cnt
+	from notice
+	where n_num=#{nNum}
+</select>
+
+<update id="updateNotice" parameterType="kr.co.studystory.admin.vo.NoticeModifyVO">
+	update notice
+	set content=#{content}, subject=#{subject}
+	where n_num= #{nNum}
+</update>
+
+<delete id="deleteNotice" parameterType="String">
+	delete from notice
+	where n_num=#{nNum}
+</delete>
+
+<insert id="insertNotice" parameterType="kr.co.studystory.admin.vo.NewNoticeVO">
+	insert into notice(n_num,subject,content)
+	values(n_code,#{subject},#{content})
+</insert>
+
+
+<select id="selectAllUser" resultType="String">
+	select id
+	from user_table
+</select>
 
 	
 </mapper>

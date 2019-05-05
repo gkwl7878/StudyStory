@@ -25,6 +25,10 @@ $(function() {
 		location.replace("login.do");
 	</c:if>
 	
+	<c:if test="${ qDeleteFlag }">
+		alert("문의사항글이 삭제되었습니다.")
+	</c:if>
+	
 	$("#search").change(function() {
 		$("#searchFrm").submit();
 	})
@@ -48,7 +52,6 @@ $(function() {
 	
 	<div class="container-fluid">
 		<div class="row">
-
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 			<form action="question_mng.do?searchCondition=${searchCondition}" method="get" id="searchFrm">
@@ -84,7 +87,7 @@ $(function() {
 					
 						<c:if test="${empty qList}">
 							<td colspan="6" align="center">
-                                  조회결과가 없습니다.
+                                 	 조회결과가 없습니다.
                      		</td>
 						</c:if>
 						<c:forEach var="qList" items="${qList }">

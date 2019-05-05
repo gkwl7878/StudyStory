@@ -49,9 +49,6 @@
 </script>
 <script type="text/javascript">
 	$(function () {
-		<c:if test="${ qModifyFlag }">
-			alert("답변이 등록되었습니다.");
-		</c:if>
 		
 		$("#answerBtn").click(function() {
 			$("#answerFrm").submit();
@@ -76,6 +73,7 @@
 		<input type="hidden" value="${qNum}" name="qNum"/>
 		<input type="hidden" value="${id}" name="id"/>
 		<input type="hidden" value="${subject}" name="subject"/>
+		<input type="hidden" name="currPage" value="${param.currPage}">  
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-3"></div>
@@ -119,14 +117,19 @@
 
 
 			<div class=" row">
-				<div class="col-9" style="margin-top: 30px; margin-left: 100px;">
+				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
+					<label class="font17bold"><strong>답변</strong> : </label>
 					<textarea name="answerContent" class="answerContent" id="summernote" ></textarea>
 				</div>
 			</div>
 			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 400px;">돌아가기</a> 
+				<a class="btn btn-secondary btn" href="question_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+									&allStudy=${param.allStudy}&searchCondition=${param.searchCondition }" role="button" style="margin-left: 400px;">돌아가기</a> 
 				<input type="button" class="btn btn-secondary btn" value="답변등록" id="answerBtn" style="margin-left: 10px;" />
-				<a class="btn btn-secondary btn " href="#void" role="button" style="margin-left: 10px;">삭제</a>
+				<a class="btn btn-secondary btn " href="del_question.do?currPage=${param.currPage}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+									&allStudy=${param.allStudy}&searchCondition=${param.searchCondition}&qNum=${qNum}" role="button" style="margin-left: 10px;">삭제</a>
 			</div>
 		</div>
 	</form>

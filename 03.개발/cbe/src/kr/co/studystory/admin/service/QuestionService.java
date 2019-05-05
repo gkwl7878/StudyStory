@@ -10,8 +10,10 @@ import kr.co.studystory.admin.dao.AdCommonDAO;
 import kr.co.studystory.admin.dao.QnDAO;
 import kr.co.studystory.admin.domain.Answer;
 import kr.co.studystory.admin.domain.DetailQuestion;
+import kr.co.studystory.admin.domain.Notice;
 import kr.co.studystory.admin.domain.Question;
 import kr.co.studystory.admin.vo.AnswerVO;
+import kr.co.studystory.admin.vo.NoticeBoardVO;
 import kr.co.studystory.admin.vo.QuestionBoardVO;
 
 @Component
@@ -53,4 +55,10 @@ public class QuestionService {
 		boolean answerFlag= qn_dao.updateAnswerFlag(a_vo);
 		return answerFlag;
 	}
+	
+	public boolean removeQuestion(String qNum) {
+		boolean deleteFlag= qn_dao.deleteQuestion(qNum);
+		return deleteFlag;
+	}
+	
 }

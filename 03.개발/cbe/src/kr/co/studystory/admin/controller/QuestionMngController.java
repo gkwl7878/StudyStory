@@ -32,7 +32,7 @@ public class QuestionMngController {
 		int totalCount=cms.questionCount(qb_vo);
 		int pageScale=cms.pageScale();
 		int totalPage=cms.totalPage(totalCount);
-		if(qb_vo.getCurrPage()==0) {
+		if(qb_vo.getCurrPage()==0){
 			qb_vo.setCurrPage(1);
 		}
 		
@@ -101,7 +101,6 @@ public class QuestionMngController {
 		boolean answerFlag= qs.modifyAnswerFlag(a_vo);
 		AlarmVO al_vo= new AlarmVO();
 		String qNum= a_vo.getqNum();
-		System.out.println();
 		model.addAttribute("qModifyFlag", answerFlag);
 		model.addAttribute("qNum", qNum);
 		if(answerFlag) {
@@ -113,5 +112,17 @@ public class QuestionMngController {
 		}
 		return "forward:answer.do";
 	}
+	
+	@RequestMapping(value="/admin/del_question.do",method=GET)
+	public String removeQuestionProcess(String qNum,Model model) {
+		boolean deleteFlag= qs.removeQuestion(qNum);
+		if(deleteFlag) {
+			model.addAttribute("qDeleteFlag",deleteFlag);
+		}
+		return "forward:question_mng.do";
+	}
+	
+	
+	
 	
 }

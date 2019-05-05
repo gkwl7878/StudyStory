@@ -11,9 +11,14 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.domain.Answer;
+import kr.co.studystory.admin.domain.DetailNotice;
 import kr.co.studystory.admin.domain.DetailQuestion;
+import kr.co.studystory.admin.domain.Notice;
 import kr.co.studystory.admin.domain.Question;
 import kr.co.studystory.admin.vo.AnswerVO;
+import kr.co.studystory.admin.vo.NewNoticeVO;
+import kr.co.studystory.admin.vo.NoticeBoardVO;
+import kr.co.studystory.admin.vo.NoticeModifyVO;
 import kr.co.studystory.admin.vo.QuestionBoardVO;
 
 @Component
@@ -79,15 +84,57 @@ public class QnDAO {
 		return updateAnsFlag;
 	}
 	
-	public static void main(String[] args) {
-		QnDAO qn_dao= new QnDAO();
-//		QuestionBoardVO qb_vo= new QuestionBoardVO();
-//		qb_vo.setBegin(1);
-//		qb_vo.setCurrPage(1);
-//		qb_vo.setEnd(10);
-//		qb_vo.setSearchCondition("½ºÅÍµð");
-//		System.out.println(qn_dao.selectQuestion(qb_vo));
-		System.out.println(qn_dao.selectDetailQuestion("q_000041"));
-		
+	public boolean deleteQuestion(String qNum) {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		boolean deleteFlag=ss.delete("delQuestion",qNum)==1;
+		if(deleteFlag) {
+			ss.commit();
+		}
+		return deleteFlag;
 	}
+	
+	public List<Notice> selectNotice(NoticeBoardVO nb_vo){
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		List<Notice> list =ss.selectList("noticeList",nb_vo);
+		ss.close();
+		return list;
+	}
+	
+	public DetailNotice  selectDetailNotice(String nNum) {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		DetailNotice dq= ss.selectOne("noticeDetail",nNum);
+		ss.close();
+		return dq;
+	}
+	
+	public boolean updateNotice(NoticeModifyVO nm_vo) {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		boolean updateNotice=ss.update("updateNotice",nm_vo)==1;
+		if(updateNotice) {
+			ss.commit();
+		}
+		return updateNotice;
+	}
+	
+	public boolean deleteNotice(String nNum) {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		boolean deleteNotice=ss.delete("deleteNotice", nNum)==1;
+		if(deleteNotice) {
+			ss.commit();
+		}
+		return deleteNotice;
+	}
+	
+	public List<String> selectAllUser() {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		List<String> list= ss.selectList("selectAllUser");
+		return list;
+	}
+	
+	public void insertNotice(NewNoticeVO nn_vo) {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		ss.insert("insertNotice",nn_vo);
+		ss.commit();
+	}
+	
 }

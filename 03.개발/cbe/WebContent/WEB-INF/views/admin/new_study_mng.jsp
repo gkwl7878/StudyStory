@@ -88,6 +88,11 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:if test="${empty nsList}">
+							<td colspan="6" align="center">
+                               	   새로운 스터디가 없습니다.
+                     		</td>
+						</c:if>
 						<c:forEach var="nsList" items="${nsList }">
 						<c:set var="i" value="${i+1 }"/>
 							<tr>
