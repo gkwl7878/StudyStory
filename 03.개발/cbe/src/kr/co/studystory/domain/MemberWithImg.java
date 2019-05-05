@@ -1,7 +1,7 @@
 package kr.co.studystory.domain;
 
 public class MemberWithImg {
-	String nick, tel,img;
+	private String nick, tel,img;
 
 	public String getNick() {
 		return nick;

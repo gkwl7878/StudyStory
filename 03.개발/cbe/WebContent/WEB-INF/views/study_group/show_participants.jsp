@@ -22,7 +22,6 @@
  a:visited { color: black; text-decoration: none;}
  a:hover { color: blue; text-decoration: underline;}
 /*       위의 a내용은 링크가 파랗게 되는걸 막아주고   */
-출처: https://it77.tistory.com/126 [시원한물냉의 사람사는 이야기]
 @media ( min-width : 768px) {
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
@@ -81,7 +80,7 @@
 					<a href="#">
 								<div class="col-2.5">
 									<div class="card mb-4 shadow-sm text-center " style="margin-left: 20px">
-										<img class="card-img-top" src="/third_prj/resources/images/${mbwiList.img }" onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img">
+										<img class="card-img-top" src="third_prj/WebContent/profile_img/${mbwiList.img }" onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img">
 										<div class="card-body">
 											<strong import!><p class="card-title">${ mbwiList.nick }</p></strong>
 											<p class="card-text">${ mbwiList.tel }</p>
