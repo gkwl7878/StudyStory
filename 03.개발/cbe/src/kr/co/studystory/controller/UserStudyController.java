@@ -3,24 +3,19 @@ package kr.co.studystory.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.service.StudyGroupService;
-import kr.co.studystory.vo.ConditionVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
 import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
@@ -41,7 +36,6 @@ public class UserStudyController {
 	@RequestMapping(value="study_group/check_dup_study_name.do", method=GET, produces="text/plain;charset=UTF-8")
 	public String checkDupStudyName(String study_name) {
 		
-		System.out.println("-----"+study_name);
 		JSONObject json = new JSONObject();
 		
 		if(sgs.checkDupStudyName(study_name)) {
@@ -79,9 +73,9 @@ public class UserStudyController {
 	
 	//내 스터디 수정하기
 	@RequestMapping(value="study_group/modify_study.do", method=GET )
-	public String modifyStudyPage(String sNum,Model model ) {
+	public String modifyStudyPage(String s_num, Model model ) {
 		
-		PrevStudyInfo psInfo=sgs.getPrevStudy(sNum);
+		PrevStudyInfo psInfo=sgs.getPrevStudy(s_num);
 		model.addAttribute("ps_Info",psInfo);
 		
 		return "study_group/study_modify";

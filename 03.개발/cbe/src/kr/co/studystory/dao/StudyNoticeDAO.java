@@ -72,6 +72,18 @@ public class StudyNoticeDAO {
 		return studyName;
 	}
 	
+	/**
+	 * 공지 코멘트 수를 조회하는 메서드
+	 */
+	public int selectCommentNum(String sn_num) {
+		
+		SqlSession ss=getSessionFactory().openSession();
+		int cnt = ss.selectOne("selectCommentNum",sn_num);
+		ss.close();
+		
+		return cnt;
+	}
+	
 	public boolean addComment(NewCommentVO ncvo) {
 		boolean flag = false;
 		

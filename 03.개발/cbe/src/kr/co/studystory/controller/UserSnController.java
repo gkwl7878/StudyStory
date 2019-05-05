@@ -75,11 +75,11 @@ public class UserSnController {
 	}//finishHomework
 	
 	@RequestMapping(value="/study_notice/add_sn_comment.do",method=POST)
-	public String addComment(NewCommentVO ncvo,  Model model) {
+	public String addComment(NewCommentVO ncvo, String sNum, Model model) {
 		
 		sns.addComment(ncvo);
 		
-		return "forward:../study_notice/notice_detail.do?sn_num="+ncvo.getSnNum();
+		return "forward:../study_notice/notice_detail.do?sn_num="+ncvo.getSnNum()+"&s_num="+sNum;
 	}//addComment
 	
 }//class
