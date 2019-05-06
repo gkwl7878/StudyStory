@@ -49,14 +49,45 @@
 <script type="text/javascript">
 	$(function() {
 		<c:if test="${ joinReqSuccess }">
-			alert("스터디 신청이 완료되었습니다");
+		alert("스터디 신청이 완료되었습니다");
 		</c:if>
 		<c:if test="${ joinReqFail }">
-			alert("스터디 참여신청에 실패했습니다. 잠시 후에 다시 시도해주세요");
+		alert("스터디 참여신청에 실패했습니다. 잠시 후에 다시 시도해주세요");
 		</c:if>
-		
 	}); // ready
 </script>
+<!-- 좋아요 -->
+<script type="text/javascript">
+	function likeProcess(sNum) {
+		var add_flag = confirm("관심 스터디에 추가 하시겠습니까?");
+
+		// '예' - 관심 스터디를 추가 할 경우.
+		if (add_flag) {
+			$.ajax({
+				url : "../likeProcess/likeProcess.do?",
+				data : "sNum=" + sNum,
+				type : "get",
+				dataType : "json", // 응답 받을 데이터.
+				error : function(xhr) {
+					console.log(xhr.status + " / " + xhr.statusText);
+				},
+				success : function(json) {
+					// 정삭적으로 추가 되었다면 true가 반환된다.
+					if(json.resultFlag) {
+						$("#" + sNum + "_thumb").remove();
+
+						var moveFlag = confirm("관심 페이지로 이동 하시겠습니까?");
+						// '예'일 경우 이동하기.
+						if(moveFlag){
+							location.href = "../interest/show_interest_study.do";
+						}// end if
+					}// end if
+				}// success
+			}); // ajax
+		}// end if
+	}// likeProcess
+</script>
+<!-- 좋아요 -->
 </head>
 <body>
 	<!-- header -->
@@ -76,21 +107,22 @@
 		<!-- row -->
 		<div class="row justify-content-center">
 			<div class="col-auto" style="width: 1000px;">
+
 				<!-- 썸네일 row -->
 				<div class="row">
+
 					<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 					<c:forEach var="thumbnail" items="${ thumbnail_list }">
-
-						<div class="col-md-4">
+						<div id="${ thumbnail.s_num }_thumb" class="col-md-4">
 							<div class="card mb-4 shadow-sm">
-
 								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-								<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="height:200px;"/>
+								<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top"
+									src="/third_prj/study_img/${ thumbnail.img }" style="height: 200px;" />
 									<div class="card-body text-center p-3">
 										<div class="d-flex justify-content-end align-items-center mb-3">
 											<div class="mr-5">
 												<!-- 썸네일 들록일 -->
-												<small class="text-muted">${ thumbnail.inputDate }</small>
+												<small class="text-muted">${ thumbnail.input_date }</small>
 											</div>
 											<!-- 썸네일 모집상태 - 진행중. -->
 											<small class="pr-1">모집상태</small>
@@ -98,14 +130,14 @@
 										<div class="px-3 border-bottom">
 											<p class="card-text pb-3">
 												<!-- 썸네일 제목부분 -->
-												<strong>${ thumbnail.studyName }</strong>
+												<strong>${ thumbnail.study_name }</strong>
 											</p>
 										</div>
 										<div class="d-flex justify-content-between align-items-center mt-3 px-2">
 
 											<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
 												<!-- 썸네일 리더의 이미지 -->
-												<img src="/third_prj/profile_img/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle" style="width:40px; height:50px;">
+												<img src="/third_prj/profile_img/${ thumbnail.user_img }" class="card-img-top w-100 rounded-circle" style="width: 40px; height: 50px;">
 											</div>
 
 											<div class="border-right p-2">
@@ -124,8 +156,7 @@
 											</div>
 
 											<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
-											<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">좋아요</button>
-
+											<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button" autocomplete="off" onclick="likeProcess('${ thumbnail.s_num }')">좋아요</button>
 										</div>
 									</div>
 								</a>
@@ -135,6 +166,7 @@
 					<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 				</div>
 				<!-- 썸네일 row -->
+
 			</div>
 		</div>
 		<!-- row -->

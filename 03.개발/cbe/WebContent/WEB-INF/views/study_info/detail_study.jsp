@@ -75,7 +75,7 @@
 									$("#reply_list").prepend("<li id='reply_row' class='media' style='padding-bottom: 20px'>" + new_reply + "</li>");
 								}// end if
 							}// success
-						}); // ajax */
+						}); // ajax
 
 					}// end if
 
