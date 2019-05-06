@@ -47,12 +47,14 @@
 <script type="text/javascript">
 	$(function() {
 		$("#modifyBtn").click(function() {
-			if(!($("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="png"||
-					$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="jpg"||
-					$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="jpeg"||
-					$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="bmp")){
-				alert("이미지 파일형식이 아닙니다.");
-				return;
+			if($("#real_file").val()!=""){
+				if(!($("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="png"||
+						$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="jpg"||
+						$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="jpeg"||
+						$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="bmp")){
+					alert("이미지 파일형식이 아닙니다.");
+					return;
+				}
 			}
 			$("#studyDetailFrm").submit();
 		})
