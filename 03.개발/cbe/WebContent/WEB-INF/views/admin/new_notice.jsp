@@ -64,11 +64,6 @@
 	<!-- navbar 끝 -->
 	
 	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-			<c:param name="weekUser" value="${param.weekUser}"></c:param>
-			<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
-			<c:param name="allUser" value="${param.allUser}"></c:param>
-			<c:param name="allStudy" value="${param.allStudy}"></c:param>
-			<c:param name="activeFlag" value="${param.activeFlag}"></c:param>
 	</c:import>
 
 
@@ -92,9 +87,7 @@
 			</div>
 
 			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="notice_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchWord=${param.searchWord}" role="button" style="margin-left: 320px;">목록으로</a>
+				<a class="btn btn-secondary btn" href="notice_mng.do?currPage=${param.currPage}&searchWord=${param.searchWord}" role="button" style="margin-left: 320px;">목록으로</a>
 				<input type="button" class="btn btn-secondary btn" value="작성" id="newNoticeBtn" style="margin-left: 10px;" />
 			</div>
 		</div>

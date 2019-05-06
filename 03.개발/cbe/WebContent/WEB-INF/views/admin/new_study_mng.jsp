@@ -39,34 +39,15 @@
 <body>
 
 	<!-- navbar 시작 -->
-	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"/>
 	<!-- navbar 끝 -->
+	<!-- sidebar 시작 -->
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"/>
+	<!-- sidebar 끝 -->
 	
 	<div class="container-fluid">
 		<div class="row">
 
-			<!-- sidebar 시작 -->
-			<c:if test="${empty param.weekUser}">
-			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-				<c:param name="weekUser" value="${requestScope.weekUser}"></c:param>
-				<c:param name="weekStudy" value="${requestScope.weekStudy}"></c:param>
-				<c:param name="allUser" value="${requestScope.allUser}"></c:param>
-				<c:param name="allStudy" value="${requestScope.allStudy}"></c:param>
-				<c:param name="activeFlag" value="${requestScope.activeFlag}"></c:param>
-			</c:import>
-			</c:if>
-			
-			<c:if test="${not empty param.weekUser}">
-			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-				<c:param name="weekUser" value="${param.weekUser}"></c:param>
-				<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
-				<c:param name="allUser" value="${param.allUser}"></c:param>
-				<c:param name="allStudy" value="${param.allStudy}"></c:param>
-				<c:param name="activeFlag" value="${requestScope.activeFlag}"></c:param>
-			</c:import>
-			</c:if>
-			
-			<!-- sidebar 끝 -->
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 			<div class="row justify-content-between" style="margin-top: 40px; margin-bottom: 10px;">
@@ -99,15 +80,11 @@
 								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
 								<td class="text-center"><c:out value="${nsList.id }"/></td>
 								<c:if test="${empty param.weekUser}">
-								<td><a href="ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}&weekUser=${requestScope.weekUser}
-									&weekStudy=${requestScope.weekStudy}&allUser=${requestScope.allUser}
-									&allStudy=${requestScope.allStudy}&activeFlag=${requestScope.activeFlag}" style="color: black">
+								<td><a href="ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}" style="color: black">
 									<c:out value="${nsList.studyName}"/></a></td>
 								</c:if>
 								<c:if test="${not empty param.weekUser}">
-								<td><a href="ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&activeFlag=${requestScope.activeFlag}
-									&allStudy=${param.allStudy}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
+								<td><a href="ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
 								</c:if>
 								<td class="text-center"><c:out value="${nsList.category }"/></td>
 								<td class="text-center"><c:out value="${nsList.loc }"/></td>

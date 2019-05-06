@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.studystory.admin.domain.Answer;
 import kr.co.studystory.admin.domain.DetailQuestion;
@@ -19,6 +20,7 @@ import kr.co.studystory.admin.vo.AnswerVO;
 import kr.co.studystory.admin.vo.QuestionBoardVO;
 import kr.co.studystory.admin.vo.QuestionDetailVO;
 
+@SessionAttributes("activeFlag")
 @Controller
 public class QuestionMngController {
 	

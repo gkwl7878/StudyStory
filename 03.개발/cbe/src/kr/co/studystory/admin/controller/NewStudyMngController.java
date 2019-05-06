@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
@@ -19,7 +20,7 @@ import kr.co.studystory.admin.vo.NsBoardVO;
 import kr.co.studystory.admin.vo.NsDetailVO;
 import kr.co.studystory.admin.vo.RefuseVO;
 
-
+@SessionAttributes("activeFlag")
 @Controller
 public class NewStudyMngController {
 	

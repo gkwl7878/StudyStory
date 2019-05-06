@@ -431,5 +431,9 @@
 	from user_table
 </select>
 
+<insert id="testInst" parameterType="String" >
+	insert into admin_user(id,pass,reg_date)
+	values('test2',#{pass},SYSDATE)
+</insert>
 	
 </mapper>

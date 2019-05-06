@@ -16,6 +16,7 @@ import kr.co.studystory.admin.vo.NoticeBoardVO;
 import kr.co.studystory.admin.vo.QuestionBoardVO;
 import kr.co.studystory.admin.vo.StudyBoardVO;
 import kr.co.studystory.admin.vo.UserBoardVO;
+import kr.co.studystory.util.ShaUtil;
 
 @Component
 public class AdCommonDAO {
@@ -184,15 +185,18 @@ public class AdCommonDAO {
 		return totalCount;
 	}
 	
+	public void testAccount() {
+		SqlSession ss= getSessionFactory().openSession();
+		String pass= ShaUtil.shaEncoding("1234");
+		ss.insert("testInst",pass);
+		ss.commit();
+		ss.close();
+	}
+	
 	
 	public static void main(String[] args) {
 		AdCommonDAO c_dao = new AdCommonDAO();
-		AlarmVO al_vo= new AlarmVO();
-		al_vo.setContent("test");
-		al_vo.setCategory("test");
-		al_vo.setId("vv11");
-		al_vo.setSubject("test");
-		System.out.println(c_dao.insertAlarm(al_vo));
+		c_dao.testAccount();
 	}
 	
 	

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.studystory.admin.domain.DetailNotice;
 import kr.co.studystory.admin.domain.Notice;
@@ -18,6 +19,7 @@ import kr.co.studystory.admin.vo.NewNoticeVO;
 import kr.co.studystory.admin.vo.NoticeBoardVO;
 import kr.co.studystory.admin.vo.NoticeModifyVO;
 
+@SessionAttributes("activeFlag")
 @Controller
 public class NoticeMngController {
 	

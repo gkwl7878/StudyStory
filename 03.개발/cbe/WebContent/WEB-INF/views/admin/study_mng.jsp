@@ -32,17 +32,11 @@
 
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"/>
 	<!-- navbar 끝 -->
 
 	<!-- sidebar 시작 -->
-	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-				<c:param name="weekUser" value="${param.weekUser}"></c:param>
-				<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
-				<c:param name="allUser" value="${param.allUser}"></c:param>
-				<c:param name="allStudy" value="${param.allStudy}"></c:param>
-				<c:param name="activeFlag" value="${requestScope.activeFlag}"></c:param>
-	</c:import>
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"/>
 	<!-- sidebar 끝 -->
 
 	<div class="container-fluid">
@@ -96,8 +90,7 @@
 								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
 								<td class="text-center"><c:out value="${sList.id }"/></td>
 								<td class="text-center"><c:out value="${sList.nick }"/></td>
-								<td class="text-center"><a href="study_detail.do?currPage=${currPage}&sNum=${sList.sNum}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
+								<td class="text-center"><a href="study_detail.do?currPage=${currPage}&sNum=${sList.sNum}
 									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
 									><c:out value="${sList.studyName}"/></a></td>
 								<td class="text-center"><c:out value="${sList.category }"/></td>

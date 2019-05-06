@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.studystory.admin.domain.DetailUser;
 import kr.co.studystory.admin.domain.UserInfo;
@@ -18,6 +19,8 @@ import kr.co.studystory.admin.vo.DetailUserVO;
 import kr.co.studystory.admin.vo.UserBoardVO;
 import kr.co.studystory.admin.vo.UserDetailVO;
 import kr.co.studystory.util.ShaUtil;
+
+@SessionAttributes("activeFlag")
 @Controller
 public class UserMngController {
 	

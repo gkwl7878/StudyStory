@@ -80,18 +80,13 @@
 </head>
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"/>
 	<!-- navbar 끝 -->
 
 	<!-- sidebar 시작 -->
-	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-				<c:param name="weekUser" value="${param.weekUser}"></c:param>
-				<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
-				<c:param name="allUser" value="${param.allUser}"></c:param>
-				<c:param name="allStudy" value="${param.allStudy}"></c:param>
-				<c:param name="activeFlag" value="${requestScope.activeFlag}"></c:param>
-	</c:import>
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"/>
 	<!-- sidebar 끝 -->
+	
 	<form id="studyDetailFrm" action="study_modify.do" method="post" enctype="multipart/form-data" >
 	<input type="hidden" name="sNum" value="${param.sNum }">
 	<input type="hidden" name="content" value="${content}">
@@ -186,18 +181,12 @@
 			<div class="col-7 font20bold" style="width: 440px; height: 300px">
 				<!-- <input type="text" class="form-control" id="summernote" /> -->
 				<textarea name="content" class="content" id="summernote" ><c:out value="${content }" escapeXml="false"/></textarea>
-				<%-- <div id="summernote"><c:out value="${content }" escapeXml="false"/></div> --%>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 30px;">
-			<a class="btn btn-secondary btn" href="study_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchCondition=${param.searchCondition }&searchWord=${param.searchWord}" role="button" style="margin-left: 250px;">목록으로</a> 
+			<a class="btn btn-secondary btn" href="study_mng.do?currPage=${param.currPage}&searchCondition=${param.searchCondition }&searchWord=${param.searchWord}" role="button" style="margin-left: 250px;">목록으로</a> 
 			<input type="button" class="btn btn-secondary btn" value="수정" id="modifyBtn" style="margin-left: 10px;" />
-			<a class="btn btn-secondary btn" href="remove_study_page.do?sNum=${param.sNum}&currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchCondition=${param.searchCondition }&searchWord=${param.searchWord}
-									&studyName=${studyName}" role="button" style="margin-left: 10px;">삭제</a>
+			<a class="btn btn-secondary btn" href="remove_study_page.do?sNum=${param.sNum}&currPage=${param.currPage}&searchCondition=${param.searchCondition }&searchWord=${param.searchWord}&studyName=${studyName}" role="button" style="margin-left: 10px;">삭제</a>
 		</div>
 	</div>
 	</form>

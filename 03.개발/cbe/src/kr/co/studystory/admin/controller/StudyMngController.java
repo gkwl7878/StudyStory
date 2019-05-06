@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -27,6 +28,7 @@ import kr.co.studystory.admin.vo.DetailStudyVO;
 import kr.co.studystory.admin.vo.StudyBoardVO;
 import kr.co.studystory.admin.vo.StudyDetailVO;
 
+@SessionAttributes("activeFlag")
 @Controller
 public class StudyMngController {
 	

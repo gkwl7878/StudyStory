@@ -39,16 +39,9 @@ $(function() {
 
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"/>
 	<!-- navbar 끝 -->
-	
-	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-			<c:param name="weekUser" value="${param.weekUser}"></c:param>
-			<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
-			<c:param name="allUser" value="${param.allUser}"></c:param>
-			<c:param name="allStudy" value="${param.allStudy}"></c:param>
-			<c:param name="activeFlag" value="${param.activeFlag}"></c:param>
-	</c:import>
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"/>
 	
 	<div class="container-fluid">
 		<div class="row">

@@ -48,11 +48,6 @@
 
 	<!-- sidebar 시작 -->
 	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-				<c:param name="weekUser" value="${param.weekUser}"></c:param>
-				<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
-				<c:param name="allUser" value="${param.allUser}"></c:param>
-				<c:param name="allStudy" value="${param.allStudy}"></c:param>
-				<c:param name="activeFlag" value="${param.activeFlag}"></c:param>
 	</c:import>
 	<!-- sidebar 끝 -->
 
@@ -135,17 +130,10 @@
 			</div>
 		</div>
 		<div class="row" style="margin-top: 30px; margin-left: 116px">
-			<a class="btn btn-secondary btn" href="new_study.do?currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}"  role="button" style="margin-left: 180px;">목록으로</a> 
-			<!--알람: id,subject, category, content  -->
-			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}&currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}
+			<a class="btn btn-secondary btn" href="new_study.do?currPage=${param.currPage}"  role="button" style="margin-left: 180px;">목록으로</a> 
+			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}&currPage=${param.currPage}
 				&id=${requestScope.id }&studyName=${requestScope.studyName }" role="button" style="margin-left: 10px;">수락</a> 
-			<a class="btn btn-secondary btn" href="study_reject.do?sNum=${param.sNum}&currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&id=${requestScope.id }&studyName=${requestScope.studyName }" role="button" style="margin-left: 10px;">거절</a>
+			<a class="btn btn-secondary btn" href="study_reject.do?sNum=${param.sNum}&currPage=${param.currPage}&id=${requestScope.id }&studyName=${requestScope.studyName }" role="button" style="margin-left: 10px;">거절</a>
 		</div>
 	</div>
 

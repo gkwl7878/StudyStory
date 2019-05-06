@@ -35,17 +35,11 @@
 <body>
 
 	<!-- navbar 시작 -->
-	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"/>
 	<!-- navbar 끝 -->
 	
 	<!-- sidebar 시작 -->
-			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-				<c:param name="weekUser" value="${requestScope.weekUser}"></c:param>
-				<c:param name="weekStudy" value="${requestScope.weekStudy}"></c:param>
-				<c:param name="allUser" value="${requestScope.allUser}"></c:param>
-				<c:param name="allStudy" value="${requestScope.allStudy}"></c:param>
-			</c:import>
-			
+			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"/>
 	<!-- sidebar 끝 -->
 
 	<div id="wrap">
