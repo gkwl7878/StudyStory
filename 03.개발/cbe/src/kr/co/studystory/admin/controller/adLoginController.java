@@ -44,7 +44,6 @@ public class adLoginController {
 		boolean loginSession=false;
 		UserAndStudy uas= new UserAndStudy();
 		uas=cms.getCountUserAndStudy();
-		
 		//l_vo.setPass(ShaUtil.shaEncoding(l_vo.getPass()));
 		loginFlag= cms.login(l_vo);
 		

@@ -47,12 +47,22 @@
 <script type="text/javascript">
 	$(function() {
 		$("#modifyBtn").click(function() {
+			if(!($("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="png"||
+					$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="jpg"||
+					$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="jpeg"||
+					$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="bmp")){
+				alert("이미지 파일형식이 아닙니다.");
+				return;
+			}
 			$("#studyDetailFrm").submit();
 		})
+		
 	});
 	<c:if test="${sModifyFlag }">
 	alert("스터디 정보가 수정 되었습니다");
 	</c:if>
+	
+	
 	
 </script>
 
@@ -75,6 +85,7 @@
 			reader.readAsDataURL(file);
 		}
 	}
+	
 </script>
 
 </head>
@@ -88,13 +99,14 @@
 	<!-- sidebar 끝 -->
 	
 	<form id="studyDetailFrm" action="study_modify.do" method="post" enctype="multipart/form-data" >
-	<input type="hidden" name="sNum" value="${param.sNum }">
-	<input type="hidden" name="content" value="${content}">
+	<input type="hidden" name="sNum" value="${param.sNum }"/>
+	<input type="hidden" name="content" value="${content}"/>
+	<input type="hidden" name="currPage" value="${param.currPage}"/>
 	<div class="container form-group" id="wrap">
 		<div class="row">
 			<div class="col-2"></div>
 			<div class="col-10 justify-content-left" style="margin-bottom: 20px;">
-				<strong style="font-size: 45px;">상세 스터디 정보</strong><img src="../resources/images/create.png" style="width: 150px; height: 120px; margin-left: 30px;">
+				<strong style="font-size: 45px;">상세 스터디 정보 </strong><img src="../resources/images/create.png" style="width: 150px; height: 120px; margin-left: 30px;">
 			</div>
 		</div>
 		<div class="row" style="margin-top: 10px;">
@@ -169,7 +181,7 @@
 				<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> 
 				<input type="text" id='file_sub' style="width: 600px; border: 0px; display: none"> 
 				<a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;">
-				<img width="440" height="300" id="img" src="../resources/test/${img}" border="0" title='찾아보기' alt='찾아보기'>
+				<img width="440" height="300" id="img" src="../resources/images/${img}" border="0" title='찾아보기' alt='찾아보기'>
 				</a>
 			</div>
 		</div>

@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>관리자 - 유저정보 관리</title>
+<title>관리자 - 회원정보 관리</title>
 
 <!-- Bootstrap core CSS -->
 <link href="/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">

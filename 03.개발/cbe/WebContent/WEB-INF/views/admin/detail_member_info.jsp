@@ -77,19 +77,22 @@
   			}
   			
   			var pass= $("#pass").val();
-  			if (pass.length < 6) {
-  				alert("비밀번호는 6자보다 적을 수 없습니다");
-  				$("#pass").val("");
-  				$("#pass").focus();
-  				return;
+  			if(pass!=""){
+  				if (pass.length < 6) {
+  	  				alert("비밀번호는 6자보다 적을 수 없습니다");
+  	  				$("#pass").val("");
+  	  				$("#pass").focus();
+  	  				return;
+  	  			}
+  	  			
+  	  			if(!checkPassPattern(pass)) {
+  	  				alert("비밀번호는 영어 대소문자, 숫자를 포함해야 합니다");
+  	  				$("#pass").val("");
+  	  				$("#pass").focus();
+  	  				return;
+  	  			}
   			}
   			
-  			if(!checkPassPattern(pass)) {
-  				alert("비밀번호는 영어 대소문자, 숫자를 포함해야 합니다");
-  				$("#pass").val("");
-  				$("#pass").focus();
-  				return;
-  			}
   			
   			var zipcode = $("#zipcode").val();
   			var addr1 = $("#addr1").val();
@@ -188,6 +191,7 @@
 	</c:import>
 	<!-- sidebar 끝 -->
 	<form id="userDetailFrm" action="user_modify.do" method="post">
+	<input type="hidden" value="${param.currPage}" name="currPage">
 	<div class="container form-group" id="wrap">
 		<div class="row">
 			<div class="col-12 justify-content-left" style="margin-bottom: 20px; margin-top: 20px;">
@@ -272,13 +276,10 @@
 		</div>
 
 		<div class="row" style="margin-top: 70px;">
-			<a class="btn btn-secondary btn" href="user_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+			<a class="btn btn-secondary btn" href="user_mng.do?currPage=${param.currPage}
 									&allStudy=${param.allStudy}" role="button" style="margin-left: 180px;">목록으로</a>
 			<input type="button" class="btn btn-secondary btn" value="수정" id="modifyBtn" style="margin-left: 10px;" />
-			<a class="btn btn-secondary btn" href="user_delete.do?id=${param.id }&currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}" role="button" style="margin-left: 10px;">탈퇴</a>
+			<a class="btn btn-secondary btn" href="user_delete.do?id=${param.id }&currPage=${param.currPage}" role="button" style="margin-left: 10px;">탈퇴</a>
 		</div>
 	</div>
 	</form>

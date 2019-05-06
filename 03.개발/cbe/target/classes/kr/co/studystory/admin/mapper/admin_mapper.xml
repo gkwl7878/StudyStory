@@ -19,23 +19,25 @@
 <select id="countWeekUser" resultType="int" >
 	select count(*)
 	from user_table
-	where reg_date between (SYSDATE-7) and SYSDATE
+	where reg_date between (SYSDATE-7) and SYSDATE and deactivation is null
 </select>
 
 <select id="countWeekStudy" resultType="int" >
 	select count(*)
 	from study
-	where input_date between (SYSDATE-7) and SYSDATE
+	where input_date between (SYSDATE-7) and SYSDATE and delete_flag !='Y'
 </select>
 
 <select id="countAllUser" resultType="int" >
 	select count(*)
 	from user_table
+	where deactivation is null
 </select>
 
 <select id="countAllStudy" resultType="int" >
 	select count(*)
 	from study
+	where delete_flag !='Y'
 </select>
 
 <select id="nsTotalCnt" resultType="int">
@@ -207,7 +209,7 @@
 <update id="updateModUser" parameterType="kr.co.studystory.admin.vo.DetailUserVO">
 	<!-- id,name,pass,tel,zipcode,addr1,addr2 -->
 	update user_table
-	set pass=#{pass}, tel=#{tel}, zipcode=#{zipcode}, addr1=#{addr1}, addr2=#{addr2}
+	set name=#{name},pass=#{pass}, tel=#{tel}, zipcode=#{zipcode}, addr1=#{addr1}, addr2=#{addr2}
 	where id= #{id}
 </update>
 

@@ -117,11 +117,11 @@ public class StudyMngController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin/study_modify.do", method= {POST,GET})
-	public String modifyStudyProcess(DetailStudyVO ds_vo,Model model,HttpServletRequest request) {
+	public String modifyStudyProcess(DetailStudyVO ds_vo, Model model,HttpServletRequest request) {
 		// 파일 업로드
 		MultipartRequest mr=null;
 		try {
-			mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/resources/test/",
+			mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/resources/images/",
 					1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -131,11 +131,12 @@ public class StudyMngController {
 		String category= mr.getParameter("category");
 		String loc= mr.getParameter("loc");
 		String content= mr.getParameter("content");
+		String currPage= mr.getParameter("currPage");
 		
 		String preImg= saus.searchPreImg(sNum);
 		
 		
-		File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/resources/test/"+preImg);
+		File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/resources/images/"+preImg);
 		
 		if(file.exists()&&img!=null) {
 			file.delete();
@@ -157,7 +158,7 @@ public class StudyMngController {
 		
 		model.addAttribute("sModifyFlag", sModifyFlag);
 		
-		return "forward:study_detail.do?sNum="+sNum;
+		return "forward:study_detail.do?sNum="+sNum+"&currPage="+currPage;
 	}
 	
 	/**

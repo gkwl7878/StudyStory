@@ -2,6 +2,17 @@ package kr.co.studystory.admin.vo;
 
 public class DetailStudyVO {
 	private String sNum, category, loc, img, content;
+	private int currPage;
+	
+	
+
+	public int getCurrPage() {
+		return currPage;
+	}
+
+	public void setCurrPage(int currPage) {
+		this.currPage = currPage;
+	}
 
 	public String getsNum() {
 		return sNum;
