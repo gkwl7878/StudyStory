@@ -45,11 +45,7 @@ public class adLoginController {
 		UserAndStudy uas= new UserAndStudy();
 		uas=cms.getCountUserAndStudy();
 		
-		l_vo.setPass(ShaUtil.shaEncoding(l_vo.getPass()));
-		System.out.println(ShaUtil.shaEncoding(l_vo.getPass()));
-		System.out.println(ShaUtil.shaEncoding(l_vo.getPass()));
-		System.out.println(ShaUtil.shaEncoding(l_vo.getPass()));
-		System.out.println(ShaUtil.shaEncoding(l_vo.getPass()));
+		//l_vo.setPass(ShaUtil.shaEncoding(l_vo.getPass()));
 		loginFlag= cms.login(l_vo);
 		
 		int weekUser= uas.getWeekUser();
