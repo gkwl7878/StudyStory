@@ -23,6 +23,7 @@ import kr.co.studystory.vo.FinishHwVO;
 import kr.co.studystory.vo.NewCommentVO;
 import kr.co.studystory.vo.RecruitVO;
 import kr.co.studystory.vo.SnAlarmVO;
+import kr.co.studystory.vo.SnModifiedVO;
 
 ////스터디 노티스 dao 정미
 @Component
@@ -280,16 +281,37 @@ public class StudyNoticeDAO {
 		return snar;
 	}
 	
-	
-	
-	
-	public static void main(String[] args) {//테스트
-		StudyNoticeDAO sn_dao= new StudyNoticeDAO();
-		//sn_dao.selectSnList("s_000041");//카티션 곱 
-		//sn_dao.selectDetailSn("sn_000042");// 
-		//sn_dao.selectHomework("sn_000041"); //과제
-		//sn_dao.selectComment("sn_000084");// 댓글
+	/**
+	 * 스터디 공지사항을 수정하는 메서드
+	 * by 영근
+	 */
+	public boolean updateSn(SnModifiedVO smvo) {
+	boolean flag = false;
 		
+		SqlSession ss= getSessionFactory().openSession();
+		int cnt = ss.insert("updateSn",smvo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
 	}
+	
+	/**
+	 * 스터디 공지사항을 수정 시 
+	 * 기존 숙제를 삭제하는 메서드
+	 * by 영근
+	 */
+	public void deletePrevHw(String sn_num) {
+		SqlSession ss= getSessionFactory().openSession();
+		int cnt = ss.delete("deletePrevHw",sn_num);
+		if (cnt == 1) {
+			ss.commit();
+		}
+		ss.close();
+	}
+	
 	
 }//class

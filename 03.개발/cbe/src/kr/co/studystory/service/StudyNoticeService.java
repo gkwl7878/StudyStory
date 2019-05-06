@@ -18,6 +18,7 @@ import kr.co.studystory.vo.NewHomeworkVO;
 import kr.co.studystory.vo.NewStudyNoticeVO;
 import kr.co.studystory.vo.RecruitVO;
 import kr.co.studystory.vo.SnAlarmVO;
+import kr.co.studystory.vo.SnModifiedVO;
 @Component
 public class StudyNoticeService {
 	@Autowired
@@ -174,5 +175,26 @@ public class StudyNoticeService {
 		return flag;
 	}
 	
+	/**
+	 * 스터디 공지사항을 수정하는 메서드
+	 * by 영근
+	 */
+	public boolean modifySn(SnModifiedVO smvo) {
+		boolean flag = false;
+		
+		if(sn_dao.updateSn(smvo)) {
+			flag = true;
+		}
+		
+		return flag;
+	}
 	
+	/**
+	 * 스터디 공지사항 수정 후
+	 * 기존 숙제를 삭제하는 작업(삭제 후 새로 추가작업 수행)
+	 * by 영근
+	 */
+	public void removePrevHw(String sn_num) {
+		sn_dao.deletePrevHw(sn_num);
+	}
 }//class

@@ -14,12 +14,12 @@
 </resultMap>
 
 <select id="studyNoticeList" resultMap="snList" parameterType="String">
-select img, sn_num, subject, TO_CHAR(input_date, 'yyyy-mm-dd') input_date
-from (select s.s_num, ut.img
-       from study s, user_table ut
-       where s_num=#{ sNum } AND s.id = ut.id) ss, study_notice sn
-where sn.s_num = #{ sNum }
-order by sn.input_date desc
+	select img, sn_num, subject, TO_CHAR(input_date, 'yyyy-mm-dd') input_date
+	from (select s.s_num, ut.img
+	       from study s, user_table ut
+	       where s_num=#{ sNum } AND s.id = ut.id) ss, study_notice sn
+	where sn.s_num = #{ sNum }
+	order by sn.input_date desc
 </select>
 
 <select id="selectCommentNum" parameterType="String" resultType="int">
@@ -127,5 +127,16 @@ order by sn.input_date desc
 	FROM user_table u, member m
 	WHERE m.s_num=#{ id } AND m.id = u.id
 </select>
+
+<update id="updateSn" parameterType="kr.co.studystory.vo.SnModifiedVO">
+	UPDATE study_notice
+	SET subject=#{ subject }, meeting_info=#{ meeting_info }, content=#{ content }, addr=#{ addr }
+	WHERE sn_num = #{ sn_num }
+</update>
+
+<delete id="deletePrevHw" parameterType="String">
+	DELETE FROM study_notice
+	WHERE sn_num=#{ sn_num }
+</delete>
 
 </mapper>
