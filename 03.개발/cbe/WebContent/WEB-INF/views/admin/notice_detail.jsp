@@ -24,9 +24,7 @@
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 
 
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
@@ -77,7 +75,7 @@
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-12 justify-content-left" style="margin-bottom: 20px;">
-					<label style="font-size: 40px;"><strong>세부 공지사항</strong></label> <img alt="" src="resources/images/notice.png" style="width: 100px; height: 100px; margin-left: 15px; margin-bottom: 30px;">
+					<label style="font-size: 40px;"><strong>세부 공지사항</strong></label> <img alt="" src="../resources/images/notice.png" style="width: 100px; height: 100px; margin-left: 15px; margin-bottom: 30px;">
 				</div>
 			</div>
 

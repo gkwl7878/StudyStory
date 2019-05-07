@@ -29,9 +29,7 @@
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
@@ -67,10 +65,6 @@
 	<!-- navbar 끝 -->
 	
 	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-			<c:param name="weekUser" value="${param.weekUser}"></c:param>
-			<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
-			<c:param name="allUser" value="${param.allUser}"></c:param>
-			<c:param name="allStudy" value="${param.allStudy}"></c:param>
 			<c:param name="activeFlag" value="${param.activeFlag}"></c:param>
 	</c:import>
 
@@ -83,7 +77,7 @@
 			<div class="row">
 				<div class="col-3"></div>
 				<div class="col-9 justify-content-left" style="margin-bottom: 20px; margin-top: 20px;">
-					<label style="font-size: 40px;"><strong>문의 답변하기</strong></label> <img alt="" src="resources/images/qa.png" style="width: 130px; height: 100px; margin-left: 0px;">
+					<label style="font-size: 40px;"><strong>문의 답변하기</strong></label> <img alt="" src="../resources/images/qa.png" style="width: 130px; height: 100px; margin-left: 0px;">
 				</div>
 			</div>
 			<div class=" row">
