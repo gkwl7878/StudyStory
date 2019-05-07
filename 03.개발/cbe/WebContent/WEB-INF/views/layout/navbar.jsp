@@ -36,8 +36,34 @@
 	});
 </script>
 
+<!-- 검색창 -->
+<script type="text/javascript">
+	$(function() {   // <input>요소에 문자가 입력될 때마다 호출됨.
+       
+		// 검색버튼 눌렀을 때.
+        $("#word_search_btn").click(function() {
+        	
+        	var search_val = $("#word_search_inputBox").val();
+        	var move_search_flag = false;
+        	
+        	// 검색창에 아무것도 입력하지 않았을 때.
+        	if(search_val == "") {
+        		move_search_flag = confirm("스터디 찾기로 이동하시겠습니까?");
+        	}// end if
+        	
+        	if(move_search_flag) {
+        		$("#word_search_frm").submit();
+        	}// end if
+        	
+        }); // click
+        
+    }); // ready
+</script>
+<!-- 검색창 -->
+
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+
 	<div class="container">
 
 		<!-- 로고 -->
@@ -58,13 +84,22 @@
 					</div>
 				</li>
 				<li class="nav-item"><a class="nav-link text-secondary" href="../search/search.do">스터디 찾기</a></li>
-				<li class="nav-item"><a class="nav-link text-secondary" href="#">스터디 만들기</a></li>
+				<li class="nav-item"><a class="nav-link text-secondary" href="../study_group/create_study.do">스터디 만들기</a></li>
 			</ul>
 			<a class="navbar-brand mx-auto text-dark" href="../study_info/main.do"><img src="/third_prj/resources/images/study_story_logo2.png" width="140" height="40"/></a>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="스터디명으로 찾아보세요" aria-label="Search">
-				<button class="btn btn-outline-info my-2 my-sm-0 mr-sm-2" type="submit">검색</button>
+			
+			<!-- 검색창 : 엔터 서브밋 막기. -->
+			<form id="word_search_frm" class="form-inline my-2 my-lg-0" action="../search/search.do" method="get">
+				<input name="search_inputBox" id="word_search_inputBox"class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+				<button id="word_search_btn" class="btn btn-outline-info my-2 my-sm-0 mr-sm-2" type="button">검색</button> 
+				<!-- 제안  -->
+				<div id="word_search_show" class="dropdown-menu" style="display: block;">
+				  <a id="word_suggest_item" class="dropdown-item" href="#">Action</a>
+				</div>
+				<!-- 제안  -->
 			</form>
+			<!-- 검색창 -->
+			
 			<ul class="navbar-nav text-center">
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" id="my_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -79,8 +114,8 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="my_menu">
 						<a class="dropdown-item" href="../study_group/my_study.do">내 스터디</a>
-						<a class="dropdown-item" href="#">내가 만든 스터디</a>
-						<a class="dropdown-item" href="../study_info/show_interest_study.do">관심 스터디 보기</a>
+						<a class="dropdown-item" href="../study_group/study_i_made.do">내가 만든 스터디</a>
+						<a class="dropdown-item" href="../interest/show_interest_study.do">관심 스터디 보기</a>
 						<a class="dropdown-item" href="../common_bbs/alarm.do">알림보기</a>
 						<a class="dropdown-item" href="../common/profile.do">프로필 관리</a>
 						<a class="dropdown-item" href="../common/user_modify_menu.do">회원정보 관리</a>

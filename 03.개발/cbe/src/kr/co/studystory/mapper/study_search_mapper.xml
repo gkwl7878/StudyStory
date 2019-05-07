@@ -4,56 +4,110 @@
 <mapper namespace="kr.co.studystory.studyinfo">
 
 
-	<!-- 메인 페이지 썸네일 조회. -->
-	<!-- private String sNum, studyName, loc, category, img, recruitment, inputDate, nick, userImg; -->
+	<!-- 썸네일 resultMap -->
 	<resultMap type="kr.co.studystory.domain.ThumbnailDomain" id="ThumbnailDomain">
-		<result column="S_NUM" property="sNum" />
-		<result column="STUDY_NAME" property="studyName" />
-		<result column="LOC" property="loc" />
-		<result column="CATEGORY" property="category" />
-		<result column="IMG" property="img" />
-		<result column="RECRUITMENT" property="recruitment" />
-		<result column="INPUT_DATE" property="inputDate" />
-		<result column="NICK" property="nick" />
-		<result column="USERIMG" property="userImg" />
+		<result column="s_num" property="s_num" />
+		<result column="study_name" property="study_name" />
+		<result column="loc" property="loc" />
+		<result column="category" property="category" />
+		<result column="img" property="img" />
+		<result column="recruitment" property="recruitment" />
+		<result column="input_date" property="input_date" />
+		<result column="nick" property="nick" />
+		<result column="user_img" property="user_img" />
+		<!-- <result column="favFlag" property="favFlag" /> -->
 	</resultMap>
+	<!-- 썸네일 resultMap -->
 
+	
+	<!-- 메인 페이지 썸네일 조회. -->
 	<select id="selectThumbnailList" resultMap="ThumbnailDomain">
-		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG
+		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT,TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG
 		FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
-        		 FROM STUDY S, USER_TABLE U
-        		 WHERE S.ID=U.ID)
-        		<!-- AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N') -->
+	    	     FROM STUDY S, USER_TABLE U
+	        	WHERE S.ID=U.ID AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N' )
+		ORDER BY R_NUM ASC
 	</select>
 	<!-- 메인 페이지 썸네일 조회. -->
+
+
+	<!-- 내 관심 스터디 조회. -->
+	<select id="selectFavStudy" resultMap="ThumbnailDomain" parameterType="kr.co.studystory.vo.FavStudyOrderVO">
+	SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'YYYY/MM/DD') INPUT_DATE, NICK, USER_IMG
+	FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
+        	FROM FAV_STUDY FS, STUDY S, USER_TABLE U
+    		WHERE ( FS.S_NUM = S.S_NUM ) AND ( S.ID=U.ID ) AND FS.ID = #{ my_id }
+			<choose>
+				<when test="fav_loc_select != 'none' and fav_kind_select == 'none'">
+					AND LOC = '${fav_loc_select}'
+				</when>
+				<when test="fav_kind_select != 'none' and fav_loc_select == 'none'">
+					AND CATEGORY = '${fav_kind_select}'
+				</when>
+				<when test="fav_loc_select != 'none' and fav_kind_select != 'none'">
+					AND LOC = '${fav_loc_select}' and CATEGORY = '${fav_kind_select}'
+				</when>
+			</choose>    		
+    		)
+	</select>
+	<!-- 내 관심 스터디 조회. -->
 	
-	<!-- 썸네일 최신순으로 조회 -->
-	<select id="selectThumbLatest" resultMap="ThumbnailDomain">
-		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'YYYY/MM/DD') INPUT_DATE, NICK, USER_IMG
-		FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
-	         FROM STUDY S, USER_TABLE U
-	         WHERE S.ID=U.ID)<!--  AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N')
-		WHERE R_NUM BETWEEN 1 AND 9; -->
-	</select>
-	<!-- 썸네일 최신순으로 조회 -->
+	<!-- 관심 스터디 추가. -->
+	<delete id="insertFavStudy" parameterType="kr.co.studystory.vo.AddFavStudyVO">
+		INSERT INTO FAV_STUDY(S_NUM, ID)
+		VALUES(#{sNum}, #{my_id})
+	</delete>
+	<!-- 관심 스터디 추가. -->
 
-	<!-- 썸네일 인기순으로 조회 -->
-	<select id="selectThumbFav" resultMap="ThumbnailDomain">
-		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'YYYY/MM/DD') INPUT_DATE, NICK, USER_IMG
-		FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
-	         FROM STUDY S, USER_TABLE U
-	         WHERE S.ID=U.ID AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N')
-		WHERE R_NUM BETWEEN 1 AND 9;
-	</select>
-	<!-- 썸네일 인기순으로 조회 -->
+	<!-- 관심 스터디 제거. -->
+	<delete id="deleteFavStudy" parameterType="kr.co.studystory.vo.RemoveFavStudyVO">
+		DELETE FROM FAV_STUDY
+		WHERE S_NUM = #{sNum} AND ID=#{id}
+	</delete>
+	<!-- 관심 스터디 제거. -->
 
-	<!-- 내 관심 스터디 조회. -->
-	<select id="selectFavStudy" resultMap="ThumbnailDomain" parameterType="String">
-		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG
-		FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
-        		 FROM STUDY S, USER_TABLE U
-        		 WHERE ( STD.S_NUM=FSTD.S_NUM ) and ( STD.ID=UT.ID ) and FSTD.ID = #{ my_id })
+	<!-- 검색 조건에 따라 썸네일의 갯수 조회. -->
+	<select id="selectSearchListCnt" resultType="int" parameterType="kr.co.studystory.vo.SearchListVO">
+		SELECT COUNT(*) CNT
+		FROM STUDY
+		WHERE ACCEPT_FLAG='Y' AND DEACTIVATION='N' AND DELETE_FLAG='N' AND STUDY_NAME Like '%${search_inputBox}%'
+		<choose>
+			<when test="loc_select != 'none' and kind_select == 'none'">
+				AND LOC = '${loc_select}'
+			</when>
+			<when test="kind_select != 'none' and loc_select == 'none'">
+				AND CATEGORY = '${kind_select}'
+			</when>
+			<when test="loc_select != 'none' and kind_select != 'none'  ">
+				AND LOC = '${loc_select}' and CATEGORY = '${kind_select}'
+			</when>
+		</choose>
 	</select>
-	<!-- 내 관심 스터디 조회. -->
+	<!-- 검색 조건에 따라 썸네일의 갯수 조회. -->
+	
+
+	<!-- 검색 조건에 따라 썸네일 조회. -->
+	<select id="selectSearchList" resultMap="ThumbnailDomain" parameterType="kr.co.studystory.vo.SearchListVO">
+		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT,TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG
+		FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
+	    	    FROM STUDY S, USER_TABLE U
+	        	WHERE S.ID=U.ID AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N' AND STUDY_NAME Like '%${search_inputBox}%'
+				<choose>
+					<when test="loc_select != 'none' and kind_select == 'none'">
+						AND LOC = '${loc_select}'
+					</when>
+					<when test="kind_select != 'none' and loc_select == 'none'">
+						AND CATEGORY = '${kind_select}'			
+					</when>
+					<when test="loc_select != 'none' and kind_select != 'none'  ">
+						AND LOC = '${loc_select}' and CATEGORY = '${kind_select}'
+					</when>
+				</choose>	
+	        	)
+	   	WHERE R_NUM BETWEEN #{startNum} and #{endNum}
+		ORDER BY R_NUM ASC
+	</select>
+	<!-- 검색 조건에 따라 썸네일 조회. -->
+
 
 </mapper>

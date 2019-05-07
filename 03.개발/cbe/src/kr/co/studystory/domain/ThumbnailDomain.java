@@ -7,24 +7,23 @@ package kr.co.studystory.domain;
  *
  */
 public class ThumbnailDomain {
-
-	private String sNum, studyName, loc, category, img, recruitment, inputDate, nick, userImg;
+	private String s_num, study_name, loc, category, img, recruitment, input_date, nick, user_img;
 	private boolean favFlag;
 
-	public String getsNum() {
-		return sNum;
+	public String getS_num() {
+		return s_num;
 	}
 
-	public void setsNum(String sNum) {
-		this.sNum = sNum;
+	public void setS_num(String s_num) {
+		this.s_num = s_num;
 	}
 
-	public String getStudyName() {
-		return studyName;
+	public String getStudy_name() {
+		return study_name;
 	}
 
-	public void setStudyName(String studyName) {
-		this.studyName = studyName;
+	public void setStudy_name(String study_name) {
+		this.study_name = study_name;
 	}
 
 	public String getLoc() {
@@ -59,12 +58,12 @@ public class ThumbnailDomain {
 		this.recruitment = recruitment;
 	}
 
-	public String getInputDate() {
-		return inputDate;
+	public String getInput_date() {
+		return input_date;
 	}
 
-	public void setInputDate(String inputDate) {
-		this.inputDate = inputDate;
+	public void setInput_date(String input_date) {
+		this.input_date = input_date;
 	}
 
 	public String getNick() {
@@ -75,12 +74,12 @@ public class ThumbnailDomain {
 		this.nick = nick;
 	}
 
-	public String getUserImg() {
-		return userImg;
+	public String getUser_img() {
+		return user_img;
 	}
 
-	public void setUserImg(String userImg) {
-		this.userImg = userImg;
+	public void setUser_img(String user_img) {
+		this.user_img = user_img;
 	}
 
 	public boolean isFavFlag() {
@@ -93,7 +92,9 @@ public class ThumbnailDomain {
 
 	@Override
 	public String toString() {
-		return "ThumbnailDomain [sNum=" + sNum + ", studyName=" + studyName + ", loc=" + loc + ", category=" + category + ", img=" + img + ", recruitment=" + recruitment + ", inputDate=" + inputDate + ", nick=" + nick + ", userImg=" + userImg + ", favFlag=" + favFlag + "]";
-	}
+		return "ThumbnailDomain [s_num=" + s_num + ", study_name=" + study_name + ", loc=" + loc + ", category="
+				+ category + ", img=" + img + ", recruitment=" + recruitment + ", input_date=" + input_date + ", nick="
+				+ nick + ", user_img=" + user_img + ", favFlag=" + favFlag + "]";
+	}// toString
 
 }// class

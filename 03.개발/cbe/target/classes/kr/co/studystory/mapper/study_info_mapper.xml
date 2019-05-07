@@ -3,22 +3,52 @@
 
 <mapper namespace="kr.co.studystory.studyinfo">
 	<!-- 스터디 상세 정보 조회. - 진행중. -->
-	<resultMap type="kr.co.studystory.domain.StudyInfoDomain" id="StudyInfoDomain">
+	<resultMap type="kr.co.studystory.domain.StudyInfoDomain" id="studyInfoResult">
 		<result column="STUDY_NAME" property="studyName" />
 		<result column="LOC" property="loc" />
 		<result column="CATEGORY" property="category" />
 		<result column="CONTENT" property="content" />
-		<result column="IMG" property="studyImg" />
+		<result column="study_img" property="studyImg" />
+		<result column="user_img" property="leaderImg" />
 		<result column="INPUT_DATE" property="inputDate" />
 		<result column="NICK" property="nick" />
 		<result column="INTRODUCE" property="introduce" />
+		<result column="recruitment" property="recruitment" />
+		<result column="deactivation" property="deactivation" />
 	</resultMap>
 
-	<select id="selectDetailStudy" parameterType="String" resultMap="StudyInfoDomain">
-		SELECT STD.STUDY_NAME, STD.LOC, STD.CATEGORY, STD.CONTENT, STD.IMG , TO_CHAR(STD.INPUT_DATE,'YYYY/MM/DD') INPUT_DATE, UT.NICK, UT.INTRODUCE
-		FROM STUDY STD, USER_TABLE UT
-		WHERE ( STD.ID = UT.ID ) AND S_NUM = #{ sNum }
+	<select id="selectDetailStudy" parameterType="String" resultMap="studyInfoResult">
+		SELECT S.STUDY_NAME, LOC, CATEGORY, CONTENT, S.IMG STUDY_IMG, TO_CHAR(S.INPUT_DATE,'YYYY/MM/DD') INPUT_DATE, U.NICK, U.INTRODUCE, U.IMG USER_IMG, s.recruitment, s.deactivation
+		FROM STUDY S, USER_TABLE U
+		WHERE S_NUM = #{ sNum } AND ( S.ID = U.ID ) 
 	</select>
+	<select id="selectFavNum" parameterType="String" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM fav_study
+		WHERE s_num=#{ s_num }
+	</select>
+	<select id="selectMemberNum" parameterType="String" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM member
+		WHERE s_num=#{ s_num }
+	</select>
+	
+	<select id="selectAmIMember" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM member
+		WHERE s_num=#{ s_num } AND id=#{ id } 
+	</select>
+	<select id="selectAmIPended" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM join
+		WHERE s_num=#{ s_num } AND id=#{ id } 
+	</select>
+	<select id="selectDidIMade" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM study
+		WHERE s_num = #{ s_num } AND id=#{ id }
+	</select>
+	
 	<!-- 스터디 상세 정보 조회. -->
 
 	<!-- 스터디 상세 정보의 댓글 조회 -->
@@ -41,22 +71,31 @@
 	<!-- 댓글 인서트 -->
 	<insert id="insertComment" parameterType="kr.co.studystory.vo.ReplyVO">
 		insert into s_comment(s_num, s_comment, id, input_date)
-		values(#{ sNum }, #{ reply }, #{ joinerId }, SYSDATE)
+		values(#{ sNum }, #{ reply }, #{ id }, SYSDATE)
 	</insert>
 	<!-- 댓글 인서트 -->
 
 	<!-- JoinFormVO & alarmVO 인서트 -->
 	<insert id="insertJoinFormVO" parameterType="kr.co.studystory.vo.JoinFormVO">
-		INSERT INTO JOIN(ID, S_NUM, INTRODUCE, MOTIVE, ACCEPT_FLAG, INPUT_DATE)
-		VALUES(#{joinerId}, #{sNum}, #{introduce_ta}, #{apply_ta}, 'N', SYSDATE)
+		INSERT INTO JOIN(ID, S_NUM, INTRODUCE, MOTIVE)
+		VALUES(#{joinerId}, #{sNum}, #{introduce}, #{motive})
 	</insert>
+	
+	<select id="selectJoinerNick" parameterType="String" resultType="String">
+		SELECT nick
+		FROM user_table
+		WHERE id=#{ id }
+	</select>
 
- 	<insert id="insertJoinAlarm" parameterType="kr.co.studystory.vo.JoinAlarmVO">
- 		INSERT INTO ALARM(A_NUM, CATEGORY, SUBJECT, CONTENT, INPUT_DATE,  READ_FLAG, ID)
-		VALUES(A_CODE, '스터디', '스터디 참여신청', #{content}, SYSDATE, 'N', ( select id from study where study_name = #{studyName} ) )
+ 	<insert id="insertJoinerAlarm" parameterType="kr.co.studystory.vo.JoinAlarmVO">
+ 		INSERT INTO ALARM(A_NUM, CATEGORY, SUBJECT, CONTENT, ID)
+		VALUES(A_CODE, #{ category }, #{ subject }, #{content}, #{ id })
  	</insert>
-	
-	
+
+ 	<insert id="insertLeaderAlarm" parameterType="kr.co.studystory.vo.JoinAlarmVO">
+ 		INSERT INTO ALARM(A_NUM, CATEGORY, SUBJECT, CONTENT, ID)
+		VALUES(A_CODE, #{ category }, #{ subject }, #{content}, (SELECT id FROM user_table WHERE nick=#{ id }))
+ 	</insert>
 	<!-- JoinFormVO & alarmVO 인서트 -->
 	
 </mapper>
