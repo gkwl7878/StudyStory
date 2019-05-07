@@ -12,9 +12,18 @@
 <mapper namespace="kr.co.studystory.study_group">
 	
 <select id="selectJoinerList" resultType="kr.co.studystory.domain.JoinBbs" parameterType="kr.co.studystory.vo.ApplicantBbsVO">
-	select j.id, ut.nick, ut.img, j.motive
+	select j.id, ut.nick, ut.img, j.motive, j.input_date, j.accept_flag
 	from join j, user_table ut
-	where s_num=#{sNum} and ut.id=j.id
+	where j.id=ut.id
+	<!-- where s_num=#{s_num} and ut.id=j.id -->
+</select>
+	
+<select id="selectJoinerTotal" resultType="int" parameterType="String">
+	select count(*) cnt
+	from join
+<!-- 	where s_num=#{s_num}  //테스트를 위해서 위아래 다 조건지워줌-->
+	
+
 </select>
 	
 	

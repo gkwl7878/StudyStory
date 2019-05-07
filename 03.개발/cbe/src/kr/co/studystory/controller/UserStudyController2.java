@@ -13,6 +13,8 @@ import kr.co.studystory.domain.JoinBbs;
 import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.service.StudyGroupService2;
 import kr.co.studystory.vo.ApplicantBbsVO;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class UserStudyController2 {
@@ -37,12 +39,50 @@ public class UserStudyController2 {
 		return "study_group/show_participants";
 	}//studyMemberPage
 	
-	@RequestMapping(value="/study_group/new_joiner.do",method=RequestMethod.GET)
+	@RequestMapping(value="/study_group/new_joiner.do",method= {GET, POST})
 	public String appliedMemberPage(ApplicantBbsVO abvo, Model model) {
+		
+		if(abvo.getCurrPage()==0) {
+			abvo.setCurrPage(1);
+		}
+		String s_num=abvo.getS_num();
+		
+		int currPage= abvo.getCurrPage();
+		
+		int totalCnt=sgs.getJoinerTotal(s_num);            //
+		int begin = sgs.beginNum(currPage);
+		int end = sgs.endNum(begin);
+		
+		int pageScale=sgs.pageScale();
+		
+		abvo.setBegin(begin);
+		abvo.setEnd(end);
+		
 		List<JoinBbs> jb=sgs.getJoinerList(abvo);
 		
-		model.addAttribute("total",jb.size());
+		int totalPage=sgs.getTotalPage(totalCnt);
+		int pageIndexNum =sgs.pageIndexNum();
+		int startPage= sgs.startPage(currPage, pageIndexNum);
+		int endPage=sgs.endPage(startPage, pageIndexNum, totalPage);
+		
+		model.addAttribute("forwardFlag", false);
+		model.addAttribute("backwardFlag", false);
+		
+		if(currPage>pageIndexNum) {
+			model.addAttribute("forwardFlag",true);
+		}
+		if(totalPage>endPage) {
+			model.addAttribute("backwardFlag",true);
+		}
+		
+		model.addAttribute("total",jb.size());///??필요없는건지
 		model.addAttribute("jb",jb);
+		
+		model.addAttribute("pageScale", pageScale);
+		model.addAttribute("totalCnt", totalCnt);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("currPage", currPage);
 		
 		return "study_group/new_joiner";
 	}//appliedMemberPage

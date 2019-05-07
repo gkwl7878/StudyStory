@@ -59,6 +59,9 @@ public class StudyGroupDAO2 {
 		return list;
 	}//selectMemberWithImg
 	
+	/**
+	 * 신청자 조회해오는 메서드
+	 */
 	public List<JoinBbs> selectJoinerList(ApplicantBbsVO abvo){
 		List<JoinBbs> list= null;
 		
@@ -69,6 +72,15 @@ public class StudyGroupDAO2 {
 		return list;
 	}//selectJoinerList
 	
+	public int selectJoinerTotal(String s_num) {
+		int jTotal=0;
+		
+		SqlSession ss= StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		jTotal=ss.selectOne("selectJoinerTotal", s_num);
+		ss.close();
+		
+		return jTotal;
+	}
 	
 	//단위테스트
 	/*public static void main(String[] args) {
