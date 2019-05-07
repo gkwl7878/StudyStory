@@ -93,7 +93,15 @@
   	$(function() {
   		nickArr = new Array(); // 전역변수화
   		workloadArr = new Array();
+  		
+  		// 처음 페이지를 불러올 때 hwList의 값을 nickArr와 workloadArr에 할당
   		var i = 0;
+  		
+  		<c:forEach items="${ hwList }" var="hw">
+  			nickArr[i] = '${ hw.nick }';
+  			workloadArr[i] = '${ hw.workload }';
+  			i++;
+  		</c:forEach>
   		
   		$("#modifyBtn").click(function() {
   			
@@ -142,9 +150,7 @@
   			}
   			
   			$("[name='hwNick']").val(sendingNick);
-  			console.log(sendingNick);
   			$("[name='hwWorkload']").val(sendingWorkload);
-  			console.log(sendingWorkload);
   			
   			$("#modifyFrm").submit();
   		});
@@ -254,13 +260,27 @@
    	
 	  <div class="row" style="margin-top:10px;">
 	  	<div class="col-3"></div>
-	  	<div class="col-9">
-	  	<table id="hwTab">
-	  	</table>
-	  	</div>
+	  	<c:if test="${ empty hwList  }">
+		    <div class="col-9">
+		     	<strong>등록된 과제가 없습니다</strong> 
+	     	</div>
+	    </c:if>
+	    <c:if test="${ not empty hwList }">
+		  	<div class="col-9">
+		     	<table id="hwTab">
+		     	<c:forEach var="hwdata" items="${ hwList }">
+		     		<tr>
+		     			<td width='100' style='text-align:center;'><span class='font12bold'><c:out value="${ hwdata.nick }"/></span></td>
+		     			<td width='400'><span class='font12bold' style='padding-left:20px;'><c:out value="${ hwdata.workload }"/></span></td>
+		     			<td width='100' style='text-align:right;'>
+		     				<a href='#'><img onclick='deleteHw(this)' src='/third_prj/resources/images/minus.png' style='width:20px; height:20px;'/></a>
+		     			</td>
+		     		</tr>
+		     	</c:forEach>
+		     	</table>
+		  	</div>
+	  	</c:if>
 	  </div>
-	  
-	  
 	  
 	  <div class="row" style="margin-top:30px;">
 	    <div class="col-3 font20bold text-center">장소</div>

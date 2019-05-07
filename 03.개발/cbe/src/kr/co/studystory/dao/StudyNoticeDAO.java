@@ -322,10 +322,8 @@ public class StudyNoticeDAO {
 	 */
 	public void deletePrevHw(String sn_num) {
 		SqlSession ss= getSessionFactory().openSession();
-		int cnt = ss.delete("deletePrevHw",sn_num);
-		if (cnt == 1) {
-			ss.commit();
-		}
+		ss.delete("deletePrevHw",sn_num);
+		ss.commit();
 		ss.close();
 	}
 	
