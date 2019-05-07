@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<head>
 <style>
 #wrap {
 	margin: 100px auto;
@@ -24,7 +25,6 @@
 	border:1px solid #C0C0C0;
 }
 </style>
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
@@ -89,7 +89,7 @@
 		</div>
 		<c:choose>
 			<c:when test="${ empty currPage }">
-				<a class="btn btn-secondary btn" href="javascript:history.back()"
+				<a class="btn btn-secondary btn" href="alarm.do"
 					role="button" style="margin-left: 340px; margin-top: 15px;">목록으로</a>
 			</c:when>
 			<c:otherwise>

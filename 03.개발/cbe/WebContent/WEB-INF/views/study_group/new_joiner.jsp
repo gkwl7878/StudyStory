@@ -23,7 +23,7 @@
 <body>
 
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 
 
 	<div class="container-fluid">
@@ -52,15 +52,16 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach var="jbList" items="${jb }"></c:forEach>
 						<c:forEach begin="1" end="10" step="1">
 							<tr class="text-center">
 								<td class="align-middle">123</td>
 								<td>
-									<img src="http://localhost:8080/third_prj/resources/img/no_profile.png" width="100" height="120" />
+									<img src="/third_prj/resources/profile_img/${jbList.img }"  width="100" height="120" />
 									<br />
-									<span class="text-center"><strong>닉네임</strong></span>
+									<span class="text-center"><strong>${jbList.nick }</strong></span>
 								</td>
-								<td class="text-left align-middle">공부공부공부하고싶어서..동기부여...</td>
+								<td class="text-left align-middle">${jbList.motive }</td>
 								<td class="align-middle">대기</td>
 								<td class="align-middle">2019-03-00</td>
 							</tr>

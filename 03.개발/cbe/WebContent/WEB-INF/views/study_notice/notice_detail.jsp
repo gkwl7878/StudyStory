@@ -6,162 +6,213 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
 	<title>스터디 공지 리스트</title>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
+  <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="/third_prj/resources/js/popper.min.js" ></script>
+  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
   <style type="text/css">
-  
-  .font20bold {
-  	font-size:20px;
-  	font-weight: bold;
-  }
-  
-  .font12bold {
-  	font-size:12px;
-  	font-weight: bold;
-  }
-  
-  
+	  .font20bold {
+	  	font-size:20px;
+	  	font-weight: bold;
+	  }
+	  .font12bold {
+	  	font-size:12px;
+	  	font-weight: bold;
+	  }
   </style>
-  
-  
   <!-- daum map api -->
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=556561d449900c23e674c88c88f33ce6"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=556561d449900c23e674c88c88f33ce6&libraries=services"></script>
   <script type="text/javascript">
   $(function() {
-	  var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-	  var options = { //지도를 생성할 때 필요한 기본 옵션
-	  	center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-	  	level: 3 //지도의 레벨(확대, 축소 정도)
-	  };
-	
-	  var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
-	  
-		// 마커가 표시될 위치입니다 
-	  var markerPosition  = new daum.maps.LatLng(33.450701, 126.570667); 
-
-	  // 마커를 생성합니다
-	  var marker = new daum.maps.Marker({
-	      position: markerPosition
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };  
+		
+		// 지도를 생성합니다    
+		var map = new daum.maps.Map(mapContainer, mapOption); 
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new daum.maps.services.Geocoder();
+		
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch('${ snDetailList.addr }', function(result, status) {
+		
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === daum.maps.services.Status.OK) {
+		
+		        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+		
+		        // 결과값으로 받은 위치를 마커로 표시합니다
+		        var marker = new daum.maps.Marker({
+		            map: map,
+		            position: coords
+		        });
+		
+		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+		    } 
+			});    
 	  });
-
-	  // 마커가 지도 위에 표시되도록 설정합니다
-	  marker.setMap(map);
-  })
+	</script>
+  <script type="text/javascript">
+	  $(function() {
+		  
+		  $(".finishHw").click(function() {
+			  
+			  if (!$(this).is(":checked")) {
+				  alert("이미 완료하신 과제입니다");
+				  $(this).prop('checked',true);
+				  return;
+			  }
+			  
+			  var mynick = '${ sessionScope.nick }';
+			  var nick = $(this).parent().parent().children("td:first").first().text();
+			  
+			  if (mynick != nick) {
+				  $(this).attr('checked',false);
+				  alert('회원님의 과제가 아닙니다');
+				  return;
+			  }
+			  
+			  // 과제수행 업데이트 처리
+			  
+			  $.ajax({
+				  url:"finish_hw.do",
+				  type:"post",
+				  data:"sn_num="+'${ param.sn_num }'+"&id="+'${ sessionScope.id }',
+				  dataType:"json",
+				  error:function(xhr) {
+					  console.log("에러코드 : "+xhr.status+", 에러 메시지 : "+xhr.statusText);
+				  },
+				  success:function(json) {
+					  if (json.checkHw) {
+						  alert("과제 완료 처리를 했습니다");
+						  $(this).prop('checked', true);
+					  }
+				  }
+			  });
+			  
+		  });
+		  
+		  $("#commentBtn").click(function(){
+			  var comment=$("#comment").val();
+			  
+			  if(comment == ""){
+				  alert("내용을 입력해주세요!");
+				  $("#comment").focus();
+				  return
+			  }//end if
+			  
+			  $("#commentFrm").submit();
+			  
+		  });//click
+	  })//ready
   </script>
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  header  끝 -->
 
 		<!-- 점보트론 : 전광판 -->
   <section class="text-center bg-white mb-0" style="margin-top:90px; margin-bottom:20px;">
      <div class="container">
-        <h1 class="jumbotron-heading">영어공부스터뒹</h1>
+        <h1 class="jumbotron-heading"><c:out value="${ study_name }"/></h1>
      </div>
   </section>
   <div style="height:20px;"></div>
   <!-- 점보트론 : 전광판 -->
-	
 
-	    <main role="main" class="col-lg-10 px-4" style="margin:0px auto;">
       <hr>
-      
       <div class="container" style="min-height:500px;">
 	      <div class="row">
-	      	<div class="col-3 font20bold">스터디 공지</div>
-	   			<div class="col-6">
-	   				블라블라블라 공지명입니다.
+	      	<div class="col-3 font20bold text-center">스터디 공지</div>
+	   			<div class="col-7 font20bold">
+	   				<c:out value="${ snDetailList.subject }"/>
 	   			</div>
-	     		<div class="col-3 text-right">
-	     			2019-00-00
+	     		<div class="col-2 text-center" style="width:80%;">
+	     			<c:out value="${ snDetailList.input_date }"/>
 	     		</div>
 	     	</div>	
-	      <div class="row" style="margin-top:30px;">
-	      	<div class="col-3">
-	     			누군가<br/>
-	     			<img src="http://localhost:8080/third_prj/resources/images/no_profile.png" width="50" height="60"/>
+	      <div class="row" style="margin-top:30px;  min-height:250px;">
+	      	<div class="col-3 text-center">
+	     			<c:out value="${ snDetailList.nick }"/><br/>
+	     			<img src="/third_prj/profile_img/${ snDetailList.img }" width="50" height="60"/>
 	     		</div>
 	     		<div class="col-9">
-	     			<textarea style="width:100%;" readonly="readonly"></textarea>
+	     			<c:out value="${ snDetailList.content}" escapeXml="false"/>
 	     		</div>
 	      </div>
 	      <div class="row" style="margin-top:30px;">
-	      	<div class="col-3 font20bold">과제</div>
-	      	<div class="col-2">
-	      		<span class="font12bold">스터디원1</span>
-	      	</div>
-	      	<div class="col-6">
-	      		<span class="font12bold">이런거 해오세요~</span>
-	      	</div>
-	      	<div class="col-1 form-check">
-	      		<input type="checkbox" class="form-check-input"/>
-	      	</div>
-	      	<div class="col-3"></div><!-- 추가시 공백칼럼 -->
-	      	<div class="col-2">
-	      		<span class="font12bold">스터디원1</span>
-	      	</div>
-	      	<div class="col-6">
-	      		<span class="font12bold">이런거 해오세요~</span>
-	      	</div>
-	      	<div class="col-1 form-check">
-	      		<input type="checkbox" class="form-check-input"/>
-	      	</div>
+	      	<div class="col-3 font20bold text-center">과제</div>
+			   	<c:if test="${ empty hwList  }">
+				    <div class="col-9">
+				     	<strong>등록된 과제가 없습니다</strong> 
+			     	</div>
+			    </c:if>
+	      	<table  class="col-9" style="width:780px;">
+	      	<c:forEach var="hwdata" items="${ hwList }">
+	      		<tr>
+	      			<td style="padding-left:17px; width:80px;"><strong><c:out value="${ hwdata.nick }"/></strong></td>
+	      			<td style="width:400px;"><c:out value="${ hwdata.workload }"/></td>
+	      			<td style="width:100px;">
+	      				<strong>완료여부</strong>&nbsp;&nbsp;&nbsp;
+	      				<input class="finishHw" type="checkbox" ${ hwdata.finishFlag eq 'N' ? '' : 'checked="checked"' }/>
+	      			</td>
+	      		</tr>
+	      	</c:forEach>
+	      	</table>
 	      </div>
 	      <div class="row" style="margin-top:30px;">
-		      <div class="col-3 font20bold">장소</div>
+		      <div class="col-3 font20bold text-center">장소</div>
 		      <div class="col-9">
-		      	<div id="map" style="width:100%;height:400px;"></div>
+		      	<div id="map" style="width:96%;height:400px;"></div>
 		      </div>
 	      </div>
 	      <div class="row" style="margin-top:30px;">
-	      	<div class="col-3 font20bold">시간</div>
-	      	<div class="col-9">어디어디 몇일 몇시 어디서 봅시다</div>
+	      	<div class="col-3 font20bold text-center">모임시간</div>
+	      	<div class="col-9">${ snDetailList.meetingInfo }</div>
 	      </div>
 	      <div class="row" style="margin-top:30px;">
-	      	<div class="col-3 font20bold">댓글</div>
-	      	<div class="col-2">
-	      		<span class="font12bold">스터디원1</span>
+	      	<div class="col-3 font20bold text-center">댓글</div>
+	      	
+	      	<table  class="col-9" style="width:780px;">
+	      	<c:forEach var="sncmtList" items="${ snCmt }">
+	      		<tr>
+	      			<td style="padding-left:17px; width:80px;"><strong><c:out value="${ sncmtList.nick }"/></strong></td>
+	      			<td style="width:400px;"><c:out value="${ sncmtList.snComment }"/></td>
+	      			<td style="width:100px;"><c:out value="${ sncmtList.inputDate }"/></td>
+	      		</tr>
+	      	</c:forEach>
+	      	</table>
+	   
+	      	<div class="col-3"></div> 
+	      	<form action="add_sn_comment.do" id="commentFrm" method="post" class="col-9" style="margin-top:20px;">
+	      	<div class="font-weight-bold" style="float:left; width:100px;">
+	      		<c:out value="${ sessionScope.nick }"/>
+	      		<input type="hidden" name="id" value="${ sessionScope.id }"/>
+	      		<input type="hidden" name="snNum" value="${ param.sn_num }"/>
+	      		<input type="hidden" name="sNum" value="${ param.s_num }"/>
 	      	</div>
-	      	<div class="col-5">
-	      		<span class="font12bold">이런거 해오세요~</span>
+	      	<div style="padding-right:0px; float:left; width:70%; margin-left:10px; ">
+	      		<input type="text" placeholder="내용을 입력해주세요." name="snComment" id="comment" class="form-control form-control-sm" size="25" maxlength="100"/>
 	      	</div>
-	      	<div class="col-2 font12bold text-center">
-	      		2019-03-02 PM 02:11
+	      	<div class="justify-content-center" style="float:left; margin-left:10px; width:100px;">
+		      	<button type="button" id="commentBtn" class="btn btn-secondary" style="font-size:12px; width:100%">댓글달기</button>
 	      	</div>
-	      	<div class="col-3"></div><!-- 추가될때마다 공백칼럼 넣어줘야 함 -->
-	      	<div class="col-2">
-	      		<span class="font12bold">스터디원1</span>
-	      	</div>
-	      	<div class="col-5">
-	      		<span class="font12bold">이런거 해오세요~</span>
-	      	</div>
-	      	<div class="col-2 font12bold text-center">
-	      		2019-03-02 PM 02:11
-	      	</div>
-	      	<div class="col-3"></div><!-- 마지막 줄은 댓글창 공백칼럼 넣어줘야 함 -->
-	      	<div class="col-2">
-	      		<span class="font12bold">내닉넴</span>
-	      	</div>
-	      	<div class="col-5" style="padding-right:0px;">
-	      		<input type="text" placeholder="내용을 입력해주세요." class="form-control form-control-sm" size="25"/>
-	      	</div>
-	      	<div class="col-2 justify-content-center">
-		      	<button type="button" class="btn btn-secondary btn-sm" style="font-size:12px; width:80%">댓글달기</button>
-	      	</div>
+		      </form>
 	      </div>
 	      <div class="row justify-content-center" style="min-height:100px; margin-top:30px;">
-	      	<button type="button" class="btn btn-secondary" style="height:40px;">목록으로</button>
+	      	<button type="button" class="btn btn-secondary" style="height:40px; " onclick="location.href='notice_list.do?s_num=${ param.s_num }'">목록으로</button>
 	      </div>
-	   	 </div>
-      </div>
+   	 </div>
 
 	<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 </body>
 </html>

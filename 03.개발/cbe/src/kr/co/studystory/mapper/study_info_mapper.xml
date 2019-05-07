@@ -2,45 +2,100 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.co.studystory.studyinfo">
-
-
-
 	<!-- 스터디 상세 정보 조회. - 진행중. -->
-	<resultMap type="kr.co.studystory.domain.StudyInfoDomain" id="StudyInfoDomain">
-
-		<!-- private String studyName, loc, category, content, studyImg, leaderImg, 
-			inputDate, nick, introduce; private int favNum, memberNum; // 좋아요 갯수, 스터디 
-			참여자 수. -->
-
+	<resultMap type="kr.co.studystory.domain.StudyInfoDomain" id="studyInfoResult">
 		<result column="STUDY_NAME" property="studyName" />
 		<result column="LOC" property="loc" />
 		<result column="CATEGORY" property="category" />
 		<result column="CONTENT" property="content" />
-		<result column="IMG" property="studyImg" />
+		<result column="study_img" property="studyImg" />
+		<result column="user_img" property="leaderImg" />
 		<result column="INPUT_DATE" property="inputDate" />
 		<result column="NICK" property="nick" />
 		<result column="INTRODUCE" property="introduce" />
-
+		<result column="recruitment" property="recruitment" />
+		<result column="deactivation" property="deactivation" />
 	</resultMap>
 
-	<select id="selectDetailStudy" parameterType="String" resultMap="StudyInfoDomain">
-		SELECT STD.STUDY_NAME, STD.LOC, STD.CATEGORY, STD.CONTENT, STD.IMG , TO_CHAR(STD.INPUT_DATE,'YYYY/MM/DD') INPUT_DATE, UT.NICK, UT.INTRODUCE
-		FROM STUDY STD, USER_TABLE UT
-		WHERE ( STD.ID = UT.ID ) AND S_NUM = #{ study_num }
+	<select id="selectDetailStudy" parameterType="String" resultMap="studyInfoResult">
+		SELECT S.STUDY_NAME, LOC, CATEGORY, CONTENT, S.IMG STUDY_IMG, TO_CHAR(S.INPUT_DATE,'YYYY/MM/DD') INPUT_DATE, U.NICK, U.INTRODUCE, U.IMG USER_IMG, s.recruitment, s.deactivation
+		FROM STUDY S, USER_TABLE U
+		WHERE S_NUM = #{ sNum } AND ( S.ID = U.ID ) 
 	</select>
+	<select id="selectFavNum" parameterType="String" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM fav_study
+		WHERE s_num=#{ s_num }
+	</select>
+	<select id="selectMemberNum" parameterType="String" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM member
+		WHERE s_num=#{ s_num }
+	</select>
+	
+	<select id="selectAmIMember" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM member
+		WHERE s_num=#{ s_num } AND id=#{ id } 
+	</select>
+	<select id="selectAmIPended" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM join
+		WHERE s_num=#{ s_num } AND id=#{ id } 
+	</select>
+	<select id="selectDidIMade" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM study
+		WHERE s_num = #{ s_num } AND id=#{ id }
+	</select>
+	
 	<!-- 스터디 상세 정보 조회. -->
 
 	<!-- 스터디 상세 정보의 댓글 조회 -->
 	<select id="selectStudyCommentList" resultType="kr.co.studystory.domain.StudyCommentDomain" parameterType="String">
 		SELECT SC.S_COMMENT, TO_CHAR(SC.INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, SC.ID 
 		FROM STUDY STD, S_COMMENT SC
-		WHERE STD.S_NUM=SC.S_NUM AND SC.S_NUM=#{ study_num }
+		WHERE STD.S_NUM=SC.S_NUM AND SC.S_NUM= #{ sNum }
 		ORDER BY INPUT_DATE DESC
 	</select>
 	<!-- 스터디 상세 정보의 댓글 조회 -->
+	
+	<!-- 스터디 참여하기 페이지의 기본 정보 조회. -->
+	<select id="selectLeaderOfJoin" resultType="kr.co.studystory.domain.LeaderOfJoinDomain" parameterType="String">
+		SELECT UT.IMG leaderImg, UT.NICK nick, STD.STUDY_NAME studyName
+		FROM USER_TABLE UT, STUDY STD
+		WHERE UT.ID = STD.ID AND STD.S_NUM = #{SNUM}
+	</select>
+	<!-- 스터디 참여하기 페이지의 기본 정보 조회. -->
+	
+	<!-- 댓글 인서트 -->
+	<insert id="insertComment" parameterType="kr.co.studystory.vo.ReplyVO">
+		insert into s_comment(s_num, s_comment, id, input_date)
+		values(#{ sNum }, #{ reply }, #{ id }, SYSDATE)
+	</insert>
+	<!-- 댓글 인서트 -->
 
+	<!-- JoinFormVO & alarmVO 인서트 -->
+	<insert id="insertJoinFormVO" parameterType="kr.co.studystory.vo.JoinFormVO">
+		INSERT INTO JOIN(ID, S_NUM, INTRODUCE, MOTIVE)
+		VALUES(#{joinerId}, #{sNum}, #{introduce}, #{motive})
+	</insert>
+	
+	<select id="selectJoinerNick" parameterType="String" resultType="String">
+		SELECT nick
+		FROM user_table
+		WHERE id=#{ id }
+	</select>
 
-	<!-- 메인 페이지의 썸네일들 조회. - 진행중. -->
-	<!-- 메인 페이지의 썸네일들 조회. -->
+ 	<insert id="insertJoinerAlarm" parameterType="kr.co.studystory.vo.JoinAlarmVO">
+ 		INSERT INTO ALARM(A_NUM, CATEGORY, SUBJECT, CONTENT, ID)
+		VALUES(A_CODE, #{ category }, #{ subject }, #{content}, #{ id })
+ 	</insert>
 
+ 	<insert id="insertLeaderAlarm" parameterType="kr.co.studystory.vo.JoinAlarmVO">
+ 		INSERT INTO ALARM(A_NUM, CATEGORY, SUBJECT, CONTENT, ID)
+		VALUES(A_CODE, #{ category }, #{ subject }, #{content}, (SELECT id FROM user_table WHERE nick=#{ id }))
+ 	</insert>
+	<!-- JoinFormVO & alarmVO 인서트 -->
+	
 </mapper>
