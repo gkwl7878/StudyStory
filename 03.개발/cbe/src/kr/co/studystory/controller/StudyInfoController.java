@@ -45,6 +45,10 @@ public class StudyInfoController {
 	@RequestMapping(value = "/detail/detail_study.do", method = GET)
 	public String studyInfoPage(String sNum, HttpSession session, Model model) {
 		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		// 내 아이디로 이미 가입했는지, 가입수락대기중인지, 내가 만든 스터디인지 조회
 		// 조회 결과에 따라 오른쪽 상단 화면을 다르게 보여줘야 함
 		

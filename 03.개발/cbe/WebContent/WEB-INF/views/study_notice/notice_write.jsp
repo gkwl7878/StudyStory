@@ -217,7 +217,7 @@
 	<form action="wrtie_process.do" method="post" id="writeFrm">
 	<input type="hidden" name="hwNick"/>
 	<input type="hidden" name="hwWorkload"/>
-	<input type="hidden" name="s_num" value="${ param.sNum }"/>
+	<input type="hidden" name="s_num" value="${ param.s_num }"/>
 	
 	<div class="container col-10" style="margin:0px auto; width:800px;">
     <div class="row">

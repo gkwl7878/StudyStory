@@ -20,6 +20,7 @@ import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.vo.NewHomeworkVO;
 import kr.co.studystory.vo.NewStudyNoticeVO;
 import kr.co.studystory.vo.FinishHwVO;
+import kr.co.studystory.vo.LeaderVO;
 import kr.co.studystory.vo.NewCommentVO;
 import kr.co.studystory.vo.RecruitVO;
 import kr.co.studystory.vo.SnAlarmVO;
@@ -59,6 +60,21 @@ public class StudyNoticeDAO {
 		}//end if
 		return ssf;
 	}//getSessionFactory
+	
+	/**
+	 * 리더 페이지에 접근한 유저가 스터디장인지 판단하는 메서드
+	 * by 영근
+	 */
+	public boolean selectAmILeader(LeaderVO lvo) {
+		boolean flag = false;
+		
+		SqlSession ss=getSessionFactory().openSession();
+		int cnt = ss.selectOne("amILeader",lvo);
+		flag = cnt == 1;
+		ss.close();
+		
+		return flag;
+	}
 	
 	/**
 	 * sn_num으로 스터디명을 조회하기

@@ -2,6 +2,8 @@ package kr.co.studystory.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +28,12 @@ public class UserStudyController2 {
 	 * @return
 	 */
 	@RequestMapping(value="/study_group/show_participants.do",method=RequestMethod.GET)
-	public String studyMemberPage(String s_num, Model model) {
+	public String studyMemberPage(HttpSession session, String s_num, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		List<MemberWithImg> mbwi=sgs.getMemberWithImg(s_num);
 		
 		
@@ -38,7 +45,12 @@ public class UserStudyController2 {
 	}//studyMemberPage
 	
 	@RequestMapping(value="/study_group/new_joiner.do",method=RequestMethod.GET)
-	public String appliedMemberPage(ApplicantBbsVO abvo, Model model) {
+	public String appliedMemberPage(HttpSession session, ApplicantBbsVO abvo, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		List<JoinBbs> jb=sgs.getJoinerList(abvo);
 		
 		model.addAttribute("total",jb.size());
