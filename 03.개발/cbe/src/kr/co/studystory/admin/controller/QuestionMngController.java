@@ -1,6 +1,7 @@
 package kr.co.studystory.admin.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.studystory.admin.domain.Answer;
@@ -73,7 +75,7 @@ public class QuestionMngController {
 		return "/admin/question";
 	}
 	
-	@RequestMapping(value="/admin/answer.do",method= GET)
+	@RequestMapping(value="/admin/answer.do",method= {GET,POST})
 	public String answerProcess(QuestionDetailVO qd_vo, String answerFlag, Model model) {
 		String url= "admin/answer_view";
 		String qNum= qd_vo.getqNum();
@@ -98,7 +100,7 @@ public class QuestionMngController {
 		return url;
 	}
 	
-	@RequestMapping(value="/admin/answer_proc.do",method=GET)
+	@RequestMapping(value="/admin/answer_proc.do",method=POST)
 	public String answerProcess(AnswerVO a_vo,String id, String subject, Model model) {
 		boolean answerFlag= qs.modifyAnswerFlag(a_vo);
 		AlarmVO al_vo= new AlarmVO();

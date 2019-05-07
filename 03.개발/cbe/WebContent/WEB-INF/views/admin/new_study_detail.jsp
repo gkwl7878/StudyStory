@@ -112,7 +112,7 @@
 				<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>스터디 썸네일</strong></label>&nbsp;
 			</div>
 			<div class="col-7 font20bold">
-				<img width="440" height="300" id="img" src="../resources/images/${requestScope.img }" border="0" title='찾아보기' alt='찾아보기'>
+				<img width="440" height="300" id="img" src="../study_img/${requestScope.img}" border="0" title='찾아보기' alt='찾아보기'>
 				
 			</div>
 		</div>

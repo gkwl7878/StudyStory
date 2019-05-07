@@ -56,6 +56,9 @@
 			$("#answerFrm").submit();
 		})
 	});
+	function delete_confirm(){
+		return confirm("정말 이 문의사항을 삭제하시겠습니까?");
+	}
 </script>
 </head>
 <body>
@@ -71,7 +74,7 @@
 			<c:param name="activeFlag" value="${param.activeFlag}"></c:param>
 	</c:import>
 
-	<form action="answer_proc.do" method="get" id="answerFrm" >
+	<form action="answer_proc.do" method="post" id="answerFrm" >
 		<input type="hidden" value="${qNum}" name="qNum"/>
 		<input type="hidden" value="${id}" name="id"/>
 		<input type="hidden" value="${subject}" name="subject"/>
@@ -109,11 +112,11 @@
 				</div>
 			</div>
 			<div class="row">
-				<div style="margin-top: 10px; margin-left: 115px;">
-					<label class=" font17bold"><strong>문의내용 </strong> : </label>
-				</div>
-				<div class="col-7" style="margin-top: 10px;">
-					<c:out value="${content }" escapeXml="false"/>
+				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
+					<label class="font17bold"><strong>문의내용</strong> : </label>
+					<div class=" rounded-sm text-dark " style="min-height: 300px; margin-top: 10px; background-color:#E9ECEF; border: 1px solid #CED4DA; font-size: 17px; padding: 10px">
+						<c:out value="${content}" escapeXml="false"/>
+					</div>
 				</div>
 			</div>
 
@@ -125,13 +128,9 @@
 				</div>
 			</div>
 			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="question_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchCondition=${param.searchCondition }" role="button" style="margin-left: 400px;">돌아가기</a> 
+				<a class="btn btn-secondary btn" href="question_mng.do?currPage=${param.currPage}&searchCondition=${param.searchCondition }" role="button" style="margin-left: 400px;">돌아가기</a> 
 				<input type="button" class="btn btn-secondary btn" value="답변등록" id="answerBtn" style="margin-left: 10px;" />
-				<a class="btn btn-secondary btn " href="del_question.do?currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchCondition=${param.searchCondition}&qNum=${qNum}" role="button" style="margin-left: 10px;">삭제</a>
+				<a class="btn btn-secondary btn " onclick="return delete_confirm();" href="del_question.do?currPage=${param.currPage}&searchCondition=${param.searchCondition}&qNum=${qNum}" role="button" style="margin-left: 10px;">삭제</a>
 			</div>
 		</div>
 	</form>

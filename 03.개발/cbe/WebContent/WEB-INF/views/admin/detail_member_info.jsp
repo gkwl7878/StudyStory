@@ -17,6 +17,7 @@
 	font-size: 20px;
 	font-weight: bold;
 }
+
 </style>
 <head>
 <meta charset="UTF-8">
@@ -174,6 +175,11 @@
 		
 		
 	});//ready
+	
+	function delete_confirm(){
+		return confirm("정말 탈퇴 처리하시겠습니까?");
+	}
+	
 </script>
 
 </head>
@@ -279,7 +285,7 @@
 			<a class="btn btn-secondary btn" href="user_mng.do?currPage=${param.currPage}
 									&allStudy=${param.allStudy}" role="button" style="margin-left: 180px;">목록으로</a>
 			<input type="button" class="btn btn-secondary btn" value="수정" id="modifyBtn" style="margin-left: 10px;" />
-			<a class="btn btn-secondary btn" href="user_delete.do?id=${param.id }&currPage=${param.currPage}" role="button" style="margin-left: 10px;">탈퇴</a>
+			 <a class="btn btn-secondary btn"  onclick="return delete_confirm();" href="user_delete.do?id=${param.id }&currPage=${param.currPage}" role="button" style="margin-left: 10px;">탈퇴</a>
 		</div>
 	</div>
 	</form>

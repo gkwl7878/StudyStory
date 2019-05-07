@@ -56,6 +56,10 @@
 	alert("스터디 정보가 수정 되었습니다");
 	</c:if>
 	
+	function delete_confirm(){
+		return confirm("정말 이 공지사항을 삭제하시겠습니까?");
+	}
+	
 </script>
 </head>
 <body>
@@ -67,7 +71,7 @@
 	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
 	</c:import>
 
-	<form id="noticeDetailFrm" action="update_notice.do" method="get">
+	<form id="noticeDetailFrm" action="update_notice.do" method="post">
 	<input type="hidden" name="nNum" value="${param.nNum }">  
 	<input type="hidden" name="currPage" value="${param.currPage}">  
 		<div class="container form-group" id="wrap">
@@ -80,7 +84,6 @@
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
 					<input type="text" name="subject" size="46"  style="font-size: 25px;" value="${subject }" />
-					<%-- <label style="font-size: 25px;">${subject }</label> --%>
 				</div>
 			</div>
 			<div class="row">
@@ -99,13 +102,9 @@
 			</div>
 
 			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="notice_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchWord=${param.searchWord}" role="button" style="margin-left: 250px;">목록으로</a> 
+				<a class="btn btn-secondary btn" href="notice_mng.do?currPage=${param.currPage}&searchWord=${param.searchWord}" role="button" style="margin-left: 250px;">목록으로</a> 
 			<input type="button" class="btn btn-secondary btn" value="수정" id="modifyBtn" style="margin-left: 10px;" />
-			<a class="btn btn-secondary btn" href="del_notice.do?nNum=${param.nNum}&currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchWord=${param.searchWord}" role="button" style="margin-left: 10px;">삭제</a>
+			<a class="btn btn-secondary btn" onclick="return delete_confirm();" href="del_notice.do?nNum=${param.nNum}&currPage=${param.currPage}&searchWord=${param.searchWord}" role="button" style="margin-left: 10px;">삭제</a>
 			</div>
 		</div>
 	</form>
