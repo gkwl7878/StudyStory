@@ -6,9 +6,9 @@ package kr.co.studystory.vo;
  * @author owner
  *
  */
-public class SearchSelectVO {
+public class WordSearchVO {
 
-	private String order_select, loc_select, kind_select;
+	private String order_select, loc_select, kind_select, search_inputBox;
 	private int startNum, endNum, currentPage;
 
 	public String getOrder_select() {
@@ -33,6 +33,14 @@ public class SearchSelectVO {
 
 	public void setKind_select(String kind_select) {
 		this.kind_select = kind_select;
+	}
+
+	public String getSearch_inputBox() {
+		return search_inputBox;
+	}
+
+	public void setSearch_inputBox(String search_inputBox) {
+		this.search_inputBox = search_inputBox;
 	}
 
 	public int getStartNum() {
@@ -61,8 +69,9 @@ public class SearchSelectVO {
 
 	@Override
 	public String toString() {
-		return "SearchSelectVO [order_select=" + order_select + ", loc_select=" + loc_select + ", kind_select="
-				+ kind_select + ", startNum=" + startNum + ", endNum=" + endNum + ", currentPage=" + currentPage + "]";
+		return "WordSearchVO [order_select=" + order_select + ", loc_select=" + loc_select + ", kind_select="
+				+ kind_select + ", search_inputBox=" + search_inputBox + ", startNum=" + startNum + ", endNum=" + endNum
+				+ ", currentPage=" + currentPage + "]";
 	}
 
 }// class
