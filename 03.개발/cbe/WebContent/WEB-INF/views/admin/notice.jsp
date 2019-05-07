@@ -21,9 +21,7 @@
 </style>
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 <script type="text/javascript">
 $(function() {
 	<c:if test="${ !loginSession }">
@@ -74,7 +72,7 @@ $(function() {
 			</div>
 			</form>
 
-			<div class="table-responsive">
+			<div class="table">
 				<table class="table table-striped table-sm border-bottom">
 					<thead>
 						<tr class="text-center">
