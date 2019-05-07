@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
 
 import kr.co.studystory.dao.StudyGroupDAO2;
 import kr.co.studystory.domain.JoinBbs;
+import kr.co.studystory.domain.Joiner;
 import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.vo.ApplicantBbsVO;
+import kr.co.studystory.vo.DetailJoinerVO;
 
 /**
  * 스터디 참여자 보기 - 정미 
@@ -86,7 +88,7 @@ public class StudyGroupService2 {
 	 * 페이지 인덱스를 반환하는 메서드
 	 */
 	public int pageIndexNum() {
-		return 10;
+		return 3;
 	}
 	
 	/**
@@ -105,6 +107,16 @@ public class StudyGroupService2 {
 		endPage = totalPage;
 		}
 		return endPage;
+	}
+	
+	/**
+	 * 신청자 상세보기 
+	 */
+	public Joiner getJoiner(DetailJoinerVO djvo) {
+		Joiner jr=null;
+		jr=sg_dao.selectJoiner(djvo);
+		
+		return jr;
 	}
 
 }//class

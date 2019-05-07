@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.studystory.domain.JoinBbs;
+import kr.co.studystory.domain.Joiner;
 import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.service.StudyGroupService2;
 import kr.co.studystory.vo.ApplicantBbsVO;
+import kr.co.studystory.vo.DetailJoinerVO;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -59,11 +62,11 @@ public class UserStudyController2 {
 		String s_num=abvo.getS_num();
 		
 		int currPage= abvo.getCurrPage();
-		
 		int totalCnt=sgs.getJoinerTotal(s_num);            //
 		int begin = sgs.beginNum(currPage);
 		int end = sgs.endNum(begin);
 		
+		System.out.println(totalCnt+"ÅäÅ» cnt");//ÅäÅ» cnt´Â Àß ³ª¿È
 		int pageScale=sgs.pageScale();
 		
 		abvo.setBegin(begin);
@@ -94,11 +97,25 @@ public class UserStudyController2 {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("currPage", currPage);
+		model.addAttribute("s_num",s_num);
 		
 		return "study_group/new_joiner";
 	}//appliedMemberPage
 	
-	
+	@RequestMapping(value="/study_group/req_detail.do", method=RequestMethod.GET)
+	public String detailAppliedMember(HttpSession session, DetailJoinerVO djvo, Model model) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
+		Joiner jr=sgs.getJoiner(djvo);
+		
+		model.addAttribute("jrInfo",jr);
+		
+		
+		
+		return "study_group/req_detail";
+	}
 	
 	
 }

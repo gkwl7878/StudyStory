@@ -14,18 +14,25 @@
 <select id="selectJoinerList" resultType="kr.co.studystory.domain.JoinBbs" parameterType="kr.co.studystory.vo.ApplicantBbsVO">
 	select j.id, ut.nick, ut.img, j.motive, j.input_date, j.accept_flag
 	from join j, user_table ut
-	where j.id=ut.id
-	<!-- where s_num=#{s_num} and ut.id=j.id -->
+	<!-- where j.id=ut.id -->
+	where s_num=#{s_num} and ut.id=j.id
+	order by j.input_date asc
 </select>
 	
 <select id="selectJoinerTotal" resultType="int" parameterType="String">
 	select count(*) cnt
 	from join
-<!-- 	where s_num=#{s_num}  //테스트를 위해서 위아래 다 조건지워줌-->
+	where s_num=#{s_num}  <!-- 테스트를 위해서 위아래 다 조건지워줌 -->
 	
 
 </select>
 	
+<select id="selectDetailJoiner" parameterType="kr.co.studystory.vo.DetailJoinerVO" resultType="kr.co.studystory.domain.Joiner">
+	select ut.id, ut.nick, ut.img, j.introduce, j.motive
+	from join j, user_table ut
+	where ut.id=#{id} and j.s_num=#{s_num} and ut.id=j.id;
+
+</select>	
 	
 
 </mapper>

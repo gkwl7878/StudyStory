@@ -56,14 +56,14 @@
 						<tr class="text-center">	
 							<td colspan="5">신청자가 없습니다.</td>
 						</tr>
-						</c:if>
+						</c:if> }
 					
 					<c:forEach var="jbList" items="${jb }">
-							<tr class="text-center">
+							<tr class="text-center" onclick="location.href='req_detail.do?id=${jbList.id}&s_num=${s_num }'"><!--  보완-->
 								<c:set var="i" value="${ i+1 }"/>
 								<td><c:out value="${ (totalCnt-(currPage-1)*pageScale-i)+1 }"/></td>
 								<td>
-									<img src="/third_prj/profile_img/${jbList.img }"  width="100" height="120" onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img"/>
+									<img src="/third_prj/profile_img/${jbList.img}"  width="100" height="120" onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img"/>
 									<br />
 									<span class="text-center"><strong>${jbList.nick }</strong></span>
 								</td>
