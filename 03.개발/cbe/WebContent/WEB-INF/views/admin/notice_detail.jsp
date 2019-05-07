@@ -24,9 +24,7 @@
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 
 
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
@@ -56,6 +54,10 @@
 	alert("스터디 정보가 수정 되었습니다");
 	</c:if>
 	
+	function delete_confirm(){
+		return confirm("정말 이 공지사항을 삭제하시겠습니까?");
+	}
+	
 </script>
 </head>
 <body>
@@ -67,20 +69,19 @@
 	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
 	</c:import>
 
-	<form id="noticeDetailFrm" action="update_notice.do" method="get">
+	<form id="noticeDetailFrm" action="update_notice.do" method="post">
 	<input type="hidden" name="nNum" value="${param.nNum }">  
 	<input type="hidden" name="currPage" value="${param.currPage}">  
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-12 justify-content-left" style="margin-bottom: 20px;">
-					<label style="font-size: 40px;"><strong>세부 공지사항</strong></label> <img alt="" src="resources/images/notice.png" style="width: 100px; height: 100px; margin-left: 15px; margin-bottom: 30px;">
+					<label style="font-size: 40px;"><strong>세부 공지사항</strong></label> <img alt="" src="../resources/images/notice.png" style="width: 100px; height: 100px; margin-left: 15px; margin-bottom: 30px;">
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
 					<input type="text" name="subject" size="46"  style="font-size: 25px;" value="${subject }" />
-					<%-- <label style="font-size: 25px;">${subject }</label> --%>
 				</div>
 			</div>
 			<div class="row">
@@ -99,13 +100,9 @@
 			</div>
 
 			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="notice_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchWord=${param.searchWord}" role="button" style="margin-left: 250px;">목록으로</a> 
+				<a class="btn btn-secondary btn" href="notice_mng.do?currPage=${param.currPage}&searchWord=${param.searchWord}" role="button" style="margin-left: 250px;">목록으로</a> 
 			<input type="button" class="btn btn-secondary btn" value="수정" id="modifyBtn" style="margin-left: 10px;" />
-			<a class="btn btn-secondary btn" href="del_notice.do?nNum=${param.nNum}&currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchWord=${param.searchWord}" role="button" style="margin-left: 10px;">삭제</a>
+			<a class="btn btn-secondary btn" onclick="return delete_confirm();" href="del_notice.do?nNum=${param.nNum}&currPage=${param.currPage}&searchWord=${param.searchWord}" role="button" style="margin-left: 10px;">삭제</a>
 			</div>
 		</div>
 	</form>

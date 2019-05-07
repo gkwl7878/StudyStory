@@ -25,6 +25,21 @@ public class CommonBbsService {
 	private CommonBbsDAO cb_dao;
 	
 	/**
+	 * 읽지않은 알람의 여부를 확인하는 메소드
+	 * (네비바에 이미지를 변경하기 위해 사용)
+	 * by 영근 0507
+	 */
+	public boolean getNewAlarmFlag(String id) {
+		boolean flag = false;
+		
+		if (cb_dao.selectNewAlarmFlag(id)) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	/**
 	 * 10개의 게시글을 한 페이지에 보여줄 것
 	 */
 	public int pageScale() {

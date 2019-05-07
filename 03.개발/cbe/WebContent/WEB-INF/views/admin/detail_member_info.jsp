@@ -17,6 +17,7 @@
 	font-size: 20px;
 	font-weight: bold;
 }
+
 </style>
 <head>
 <meta charset="UTF-8">
@@ -28,9 +29,7 @@
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 <!--daum 주소검색  -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -174,6 +173,11 @@
 		
 		
 	});//ready
+	
+	function delete_confirm(){
+		return confirm("정말 탈퇴 처리하시겠습니까?");
+	}
+	
 </script>
 
 </head>
@@ -279,7 +283,7 @@
 			<a class="btn btn-secondary btn" href="user_mng.do?currPage=${param.currPage}
 									&allStudy=${param.allStudy}" role="button" style="margin-left: 180px;">목록으로</a>
 			<input type="button" class="btn btn-secondary btn" value="수정" id="modifyBtn" style="margin-left: 10px;" />
-			<a class="btn btn-secondary btn" href="user_delete.do?id=${param.id }&currPage=${param.currPage}" role="button" style="margin-left: 10px;">탈퇴</a>
+			 <a class="btn btn-secondary btn"  onclick="return delete_confirm();" href="user_delete.do?id=${param.id }&currPage=${param.currPage}" role="button" style="margin-left: 10px;">탈퇴</a>
 		</div>
 	</div>
 	</form>

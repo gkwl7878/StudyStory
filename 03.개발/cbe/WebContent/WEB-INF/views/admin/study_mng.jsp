@@ -13,11 +13,14 @@
 <link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <!-- Custom styles for this template -->
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+<style type="text/css">
+#mouseOver:hover {
+	color: #3498db
+}
+</style>
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		<c:if test="${ !loginSession }">
@@ -86,13 +89,11 @@
 						</c:if>
 						<c:forEach var="sList" items="${sList }">
 						<c:set var="i" value="${i+1 }"/>
-							<tr>
+							<tr id="mouseOver" onclick="location.href='study_detail.do?currPage=${currPage}&sNum=${sList.sNum}&searchCondition=${searchCondition}&searchWord=${searchWord}'" style="cursor:pointer; " >
 								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
 								<td class="text-center"><c:out value="${sList.id }"/></td>
 								<td class="text-center"><c:out value="${sList.nick }"/></td>
-								<td class="text-center"><a href="study_detail.do?currPage=${currPage}&sNum=${sList.sNum}
-									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
-									><c:out value="${sList.studyName}"/></a></td>
+								<td class="text-center"><c:out value="${sList.studyName}"/></td>
 								<td class="text-center"><c:out value="${sList.category }"/></td>
 								<td class="text-center"><c:out value="${sList.loc }"/></td>
 								<td class="text-center"><c:out value="${sList.inputDate }"/></td>

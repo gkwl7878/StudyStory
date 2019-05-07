@@ -13,11 +13,14 @@
 <link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <!-- Custom styles for this template -->
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+<style type="text/css">
+#mouseOver:hover {
+	color: #3498db
+}
+</style>
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
 <script src="/third_prj/resources/js/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script type="text/javascript">
 	$(function() {
 		
@@ -34,7 +37,9 @@
 		</c:if>
 		
 	});//ready
+	
 </script>
+
 </head>
 <body>
 
@@ -76,16 +81,10 @@
 						</c:if>
 						<c:forEach var="nsList" items="${nsList }">
 						<c:set var="i" value="${i+1 }"/>
-							<tr>
+							<tr id="mouseOver" onclick="location.href='ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}'" style="cursor:pointer; " >
 								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
 								<td class="text-center"><c:out value="${nsList.id }"/></td>
-								<c:if test="${empty param.weekUser}">
-								<td><a href="ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}" style="color: black">
-									<c:out value="${nsList.studyName}"/></a></td>
-								</c:if>
-								<c:if test="${not empty param.weekUser}">
-								<td><a href="ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
-								</c:if>
+								<td class="text-center"><c:out value="${nsList.studyName}"/></td>
 								<td class="text-center"><c:out value="${nsList.category }"/></td>
 								<td class="text-center"><c:out value="${nsList.loc }"/></td>
 								<td class="text-center"><c:out value="${nsList.inputDate }"/></td>

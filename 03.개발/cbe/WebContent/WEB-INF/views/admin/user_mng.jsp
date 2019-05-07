@@ -13,11 +13,14 @@
 <link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <!-- Custom styles for this template -->
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+<style type="text/css">
+#mouseOver:hover {
+	color: #3498db
+}
+</style>
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		<c:if test="${ !loginSession }">
@@ -89,20 +92,11 @@
 						</c:if>
 						<c:forEach var="uList" items="${uList }">
 						<c:set var="i" value="${i+1 }"/>
-							<tr>
+							<tr id="mouseOver" onclick="location.href='user_detail.do?currPage=${currPage}&id=${uList.id}&searchCondition=${searchCondition}&searchWord=${searchWord}'" style="cursor:pointer; ">
 								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
-								<td class="text-center"><a href="user_detail.do?currPage=${currPage}&id=${uList.id}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
-									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
-									><c:out value="${uList.id }"/></a></td>
-								<td class="text-center"><a href="user_detail.do?currPage=${currPage}&id=${uList.id}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
-									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
-									><c:out value="${uList.nick }"/></a></td>
-								<td class="text-center"><a href="user_detail.do?currPage=${currPage}&id=${uList.id}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
-									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
-									><c:out value="${uList.name}"/></a></td>
+								<td class="text-center"><c:out value="${uList.id }"/></td>
+								<td class="text-center"><c:out value="${uList.nick }"/></td>
+								<td class="text-center"><c:out value="${uList.name}"/></td>
 								<td class="text-center"><c:out value="${uList.tel }"/></td>
 								<td class="text-center"><c:out value="${uList.email }"/></td>
 								<td class="text-center"><c:out value="${uList.regDate }"/></td>

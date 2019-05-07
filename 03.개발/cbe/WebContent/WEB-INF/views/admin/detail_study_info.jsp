@@ -28,9 +28,7 @@
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
@@ -54,7 +52,7 @@
 				if(!($("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="png"||
 						$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="jpg"||
 						$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="jpeg"||
-						$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="bmp")){
+						$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="gif")){
 					alert("이미지 파일형식이 아닙니다.");
 					return;
 				}
@@ -67,6 +65,9 @@
 	alert("스터디 정보가 수정 되었습니다");
 	</c:if>
 	
+	function delete_confirm(){
+		return confirm("정말 이 스터디를 삭제하시겠습니까?");
+	}
 	
 	
 </script>
@@ -183,10 +184,10 @@
 				<div style="font-size: 12px; color: #FF0000"><strong>*이미지를 클릭해서 변경</strong></div>
 			</div>
 			<div class="col-7 font20bold">
-				<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> 
+				<input type='file' name='file' accept=".png,.jpg,.jpeg,.gif" id='real_file' onchange="previewFile()" style='display: none;' /> 
 				<input type="text" id='file_sub' style="width: 600px; border: 0px; display: none"> 
 				<a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;">
-				<img width="440" height="300" id="img" src="../resources/images/${img}" border="0" title='찾아보기' alt='찾아보기'>
+				<img width="440" height="300" id="img" src="../study_img/${img}" border="0" title='찾아보기' alt='찾아보기'>
 				</a>
 			</div>
 		</div>
@@ -203,7 +204,7 @@
 		<div class="row" style="margin-top: 30px;">
 			<a class="btn btn-secondary btn" href="study_mng.do?currPage=${param.currPage}&searchCondition=${param.searchCondition }&searchWord=${param.searchWord}" role="button" style="margin-left: 250px;">목록으로</a> 
 			<input type="button" class="btn btn-secondary btn" value="수정" id="modifyBtn" style="margin-left: 10px;" />
-			<a class="btn btn-secondary btn" href="remove_study_page.do?sNum=${param.sNum}&currPage=${param.currPage}&searchCondition=${param.searchCondition }&searchWord=${param.searchWord}&studyName=${studyName}" role="button" style="margin-left: 10px;">삭제</a>
+			<a class="btn btn-secondary btn" onclick="return delete_confirm();" href="remove_study_page.do?sNum=${param.sNum}&currPage=${param.currPage}&searchCondition=${param.searchCondition }&searchWord=${param.searchWord}&studyName=${studyName}" role="button" style="margin-left: 10px;">삭제</a>
 		</div>
 	</div>
 	</form>
