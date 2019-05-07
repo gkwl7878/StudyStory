@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
 <style>
 #wrap {
 	margin: 100px auto;
@@ -20,6 +19,7 @@
 	font-weight: bold;
 }
 </style>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
@@ -46,17 +46,31 @@
 			lang : 'ko-KR'
 		});
 	});
+	
+	$(function () {
+		<c:if test="${ !loginSession }">
+		location.replace("login.do");
+		</c:if>
+		<c:if test="${ qModifyFlag }">
+			alert("답변이 등록되었습니다.");
+		</c:if>
+		
+	});
 </script>
 
 </head>
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
-
-	<!-- sidebar 시작 -->
-	<c:import url="/third_prj/admin/layout/sidebar.jsp"></c:import>
-	<!-- sidebar 끝 -->
+	
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
+			<c:param name="weekUser" value="${param.weekUser}"></c:param>
+			<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
+			<c:param name="allUser" value="${param.allUser}"></c:param>
+			<c:param name="allStudy" value="${param.allStudy}"></c:param>
+			<c:param name="activeFlag" value="${param.activeFlag}"></c:param>
+	</c:import>
 
 	<form action="create_request.jsp" name="createFrm">
 		<div class="container form-group" id="wrap">
@@ -68,27 +82,27 @@
 			</div>
 			<div class=" row">
 				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
-					<label style="width: 50px;" class="font17bold"><strong>번호</strong> : </label> <label style="width: 200px;">1</label>
+					<label style="width: 50px;" class="font17bold"><strong>번호</strong> : </label> <label style="width: 200px;">${qNum}</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<label class="font17bold"><strong>글쓴이</strong> : </label> <label>홍길동</label>
+					<label class="font17bold"><strong>글쓴이</strong> : </label> <label>${name }</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<label class="font17bold"><strong>분류명</strong> : </label> <label>회원정보 관련 문의</label>
+					<label class="font17bold"><strong>분류명</strong> : </label> <label>${category}</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<label class="font17bold"><strong>등록시간</strong> : </label> <label>2019 </label>
+					<label class="font17bold"><strong>등록시간</strong> : </label> <label>${inputDate} </label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<label class="font17bold"><strong>제목</strong> : </label> <label>회원정보 문의합니다. </label>
+					<label class="font17bold"><strong>제목</strong> : </label> <label>${subject}</label>
 				</div>
 			</div>
 			<div class="row">
@@ -96,18 +110,35 @@
 					<label class=" font17bold"><strong>문의내용 </strong> : </label>
 				</div>
 				<div class="col-7" style="margin-top: 10px;">
-					<textarea class=" form-control" rows="3" style="resize: none; width: 480px; height: 180px;" name="contents" readonly="readonly"></textarea>
+					<textarea class=" form-control" rows="3" style="resize: none; width: 480px; height: 180px;" name="contents" readonly="readonly">${content}</textarea>
 				</div>
 			</div>
 
+			<div class="row">
+				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
+					<label class="font17bold"><strong>답변 시간</strong> : </label> <label>${answerDate}</label>
+				</div>
+			</div>
 
 			<div class=" row">
-				<div class="col-9" style="margin-top: 30px; margin-left: 100px;">
-					<input type="text" class="form-control" id="summernote">
+				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
+					<%-- <textarea class=" form-control" rows="3" style="resize: none; width: 580px; min-height: 380px;" name="answerContent" readonly="readonly">
+					<c:out value="${answerContent}" escapeXml="false"/>
+					</textarea> --%>
+					<label class="font17bold"><strong>답변</strong> : </label>
+					<div class=" rounded-sm text-dark " style="min-height: 300px; margin-top: 10px; background-color:#E9ECEF; border: 1px solid #CED4DA; font-size: 17px; padding: 10px">
+					<c:out value="${answerContent}" escapeXml="false" />
+					</div>
 				</div>
 			</div>
+			
 			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 400px;">돌아가기</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">답변등록</a> <a class="btn btn-secondary btn " href="#void" role="button" style="margin-left: 10px;">삭제</a>
+				<a class="btn btn-secondary btn" href="question_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+									&allStudy=${param.allStudy}&searchCondition=${param.searchCondition }" role="button" style="margin-left: 400px;">돌아가기</a> 
+				<a class="btn btn-secondary btn " href="del_question.do?currPage=${param.currPage}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+									&allStudy=${param.allStudy}&searchCondition=${param.searchCondition}&qNum=${qNum}" role="button" style="margin-left: 10px;">삭제</a>
 			</div>
 		</div>
 	</form>
