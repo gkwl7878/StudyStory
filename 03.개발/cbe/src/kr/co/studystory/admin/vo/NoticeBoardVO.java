@@ -1,9 +1,16 @@
 package kr.co.studystory.admin.vo;
 
 public class NoticeBoardVO {
-	private String searchWord;
+	private String searchWord ,nNum;
 	private int begin, end,currPage;
 	
+	
+	public String getnNum() {
+		return nNum;
+	}
+	public void setnNum(String nNum) {
+		this.nNum = nNum;
+	}
 	public String getSearchWord() {
 		return searchWord;
 	}

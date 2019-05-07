@@ -43,19 +43,33 @@
 		});
 	});
 </script>
-
+<script type="text/javascript">
+	$(function() {
+		<c:if test="${ !loginSession }">
+		location.replace("login.do");
+		</c:if>
+		$("#modifyBtn").click(function() {
+			$("#noticeDetailFrm").submit();
+		})
+	});
+	<c:if test="${nModifyFlag }">
+	alert("스터디 정보가 수정 되었습니다");
+	</c:if>
+	
+</script>
 </head>
 <body>
 
 	<!-- navbar 시작 -->
-	<c:import url="/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
 	<!-- navbar 끝 -->
+	
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
+	</c:import>
 
-	<!-- sidebar 시작 -->
-	<c:import url="/third_prj/admin/layout/sidebar.jsp"></c:import>
-	<!-- sidebar 끝 -->
-
-	<form action="create_request.jsp" name="createFrm">
+	<form id="noticeDetailFrm" action="update_notice.do" method="get">
+	<input type="hidden" name="nNum" value="${param.nNum }">  
+	<input type="hidden" name="currPage" value="${param.currPage}">  
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-12 justify-content-left" style="margin-bottom: 20px;">
@@ -65,23 +79,33 @@
 
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<label style="font-size: 25px;">제목제목</label>
+					<input type="text" name="subject" size="46"  style="font-size: 25px;" value="${subject }" />
+					<%-- <label style="font-size: 25px;">${subject }</label> --%>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<label style="width: 50px;">등록일</label> <label style="width: 200px; margin-left: 30px;">2019</label> <label style="width: 50px; margin-left: 20px;">조회수</label> <label style="width: 100px; margin-left: 30px;">0000</label>
+					<label style="width: 50px;">등록일</label> 
+					<label style="width: 200px; margin-left: 30px;">${inputDate}</label> 
+					<label style="width: 50px; margin-left: 20px;">조회수</label> 
+					<label style="width: 100px; margin-left: 30px;">${viewCnt }</label>
 				</div>
 
 			</div>
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<input type="text" class="form-control" id="summernote">
+					<textarea name="content" class="content" id="summernote" ><c:out value="${content }" escapeXml="false"/></textarea>
 				</div>
 			</div>
 
 			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 250px;">목록으로</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">수정</a> <a class="btn btn-secondary btn" href="#void" role="button" style="margin-left: 10px;">삭제</a>
+				<a class="btn btn-secondary btn" href="notice_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+									&allStudy=${param.allStudy}&searchWord=${param.searchWord}" role="button" style="margin-left: 250px;">목록으로</a> 
+			<input type="button" class="btn btn-secondary btn" value="수정" id="modifyBtn" style="margin-left: 10px;" />
+			<a class="btn btn-secondary btn" href="del_notice.do?nNum=${param.nNum}&currPage=${param.currPage}&weekUser=${param.weekUser}
+									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
+									&allStudy=${param.allStudy}&searchWord=${param.searchWord}" role="button" style="margin-left: 10px;">삭제</a>
 			</div>
 		</div>
 	</form>

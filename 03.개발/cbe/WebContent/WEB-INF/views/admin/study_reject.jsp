@@ -25,19 +25,31 @@
 <script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
 <script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
 <script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script type="text/javascript">
+	$(function() {
+		<c:if test="${ !loginSession }">
+			location.replace("login.do");
+		</c:if>
+		
+		$("#rejectBtn").click(function() {
+			$("#rejFrm").submit();
+		})
+	})
+</script>
 <body>
 	<!-- navbar 시작 -->
-	<c:import url="/third_prj/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"/>
 	<!-- navbar 끝 -->
 
 	<!-- sidebar 시작 -->
-	<c:import url="/third_prj/admin/layout/sidebar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"/>
 	<!-- sidebar 끝 -->
 
 	<div id="wrap">
-
-
-		<form>
+		<form id="rejFrm" action="study_reject_proc.do" method="get">
+			<input type="hidden" name="sNum" value="${param.sNum }"/>
+			<input type="hidden" name="id" value="${param.id}"/>
+			<input type="hidden" name="currPage" value="${param.currPage}"/>
 			<br />
 			<br />
 			<br />
@@ -49,14 +61,15 @@
 			<h5>스터디 생성 요청자에게 보여줄 메세지를 입력하세요.</h5>
 			<br />
 			<!--input typt text  -->
-			<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="내용을 입력해주세요.">
-			<!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="내용을 입력해주세요.";></textarea> -->
+			<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="내용을 입력해주세요." name="msg">
+			
 			<br />
 
 			<br />
 			<br />
 
-			<a class="btn btn-secondary btn-lg" href="#void" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-secondary btn-lg" href="#void" role="button">보내기</a>
+			<a class="btn btn-secondary btn-lg" href="ns_detail.do?sNum=${param.sNum}&currPage=${param.currPage}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<input type="button" class="btn btn-secondary btn-lg" value="삭제" id="rejectBtn" />
 		</form>
 	</div>
 
