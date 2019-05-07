@@ -136,7 +136,7 @@ public class LeaderSnController {
 			model.addAttribute("snAddFailFlag", true);
 		}
 		
-		return "forward:../study_notice/notice_list_leader.do?s_num="+nsnvo.getS_num();
+		return "forward:../study_notice/notice_list_leader.do";
 	}
 	
 	@RequestMapping(value="/study_notice/modify.do", method=GET)
