@@ -21,7 +21,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function () {
-  	$("#end").click(function() {
+	
+	<c:if test="${failFlag}">
+		alert("활동종료에 실패했습니다.");
+	</c:if>
+	
+  	$("#endBtn").click(function() {
   		var reason=$("#reason").val();
   		
   		if(reason=="") {
@@ -38,13 +43,11 @@ $(function () {
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
 
-
-
 	<div id="wrap">
-		<form action="study_group/end_study_process.do" method="post" id="endFrm" >
+		<form action="../study_group/end_study_process.do" method="post" id="endFrm" >
 			<br />
 			<br />
 			<div style="width: 920px; border: 1px solid #D7D7D7; padding: 40px;">
@@ -56,17 +59,18 @@ $(function () {
 				<hr color="gray">
 				<h5>스터디의 활동 종료 이유를 참여한 회원들에게 알려주세요.</h5>
 				<br />
-				<input name="reason" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="내용을 입력해주세요.">
+				<textarea id="reason" name="reason" class="form-control" rows="4" style="resize: none; height: 180px;" placeholder="내용을 입력해주세요."></textarea>
 				<br />
 
 				<br />
-				<a class="btn btn-secondary btn-lg" href="#void" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-secondary btn-lg" href="#void" role="button" id="end">스터디 활동종료</a>
+				<a class="btn btn-secondary btn-lg" href="#void" role="button" onclick="location.href='study_group/my_study.do'">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+				<input type="button" class="btn btn-secondary btn-lg" id="endBtn" value="스터디 활동종료"/>
 			</div>
 		</form>
 	</div>
 
 	<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

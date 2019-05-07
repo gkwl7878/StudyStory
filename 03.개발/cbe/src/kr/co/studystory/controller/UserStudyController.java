@@ -83,7 +83,27 @@ public class UserStudyController {
 	public String modifyStudyPage(String s_num, Model model ) {
 		
 		PrevStudyInfo psInfo=sgs.getPrevStudy(s_num);
-		model.addAttribute("ps_Info",psInfo);
+		if(psInfo !=null) {
+			String name=psInfo.getName();
+			String loc=psInfo.getLoc();
+			String category=psInfo.getCategory();
+			String content=psInfo.getContent();
+			String img=psInfo.getImg();
+			
+			model.addAttribute("name",name);
+			model.addAttribute("loc",loc);
+			model.addAttribute("category",category);
+			model.addAttribute("content",content);
+			model.addAttribute("img",img);
+			
+			model.addAttribute("ps_info",psInfo);
+		}
+		
+		/*model.addAttribute("name",psInfo.getName());
+		model.addAttribute("loc",psInfo.getLoc());
+		model.addAttribute("category",psInfo.getCategory());
+		model.addAttribute("content",psInfo.getContent());
+		model.addAttribute("img",psInfo.getImg());*/
 		
 		return "study_group/study_modify";
 	}//createStudyPage
@@ -104,7 +124,7 @@ public class UserStudyController {
 		
 		
 		if(sgs.modifyStudy(ms_vo)) {
-			url="study_group/study_modify";
+			url="/study_notice/notice_list_leader";
 			model.addAttribute("successFlag",true);
 		}else {
 			model.addAttribute("failFlag",true);
@@ -120,24 +140,31 @@ public class UserStudyController {
 	}//leaveStudyPage
 	
 	@RequestMapping(value="study_group/leave_study_process.do" , method=POST )
-	public String leaveStudyProcess(LeaveStudyVO ls_vo,LeaveAlarmVO la_vo,LeaveVO l_vo, HttpSession session, Model model) {
+	public String leaveStudyProcess(LeaveVO l_vo, HttpSession session, Model model) {
 		//vo ????
 		String id=(String)session.getAttribute("id");
 		l_vo.setId(id);
 		
-		String s_num=l_vo.getsNum();
-		String reason=l_vo.getReason();
-		l_vo.setsNum(s_num);
-		l_vo.setReason(reason);
+		String url="study_group/my_study";
 		
-		String url="study_group/study_out";
-		
-		if(sgs.leaveStudy(ls_vo)) {
-			url="redirect:../index.do";
-			model.addAttribute("id","");
+		if(sgs.leaveStudy(l_vo)) {
+			
+			LeaveAlarmVO la_vo=new LeaveAlarmVO();
+			
+			la_vo.setCategory("스터디");
+			la_vo.setSubject("스터디에서 탈퇴하였습니다.");
+			// snum이용해서 스터디명을 조회해서 content내용으로 추가
+			la_vo.setContent(l_vo.getsNum()+"가 탈퇴되었습니다.: "+l_vo.getReason());
+			la_vo.setsNum(l_vo.getsNum());
+			//
+			sgs.sendLeaveAlarm(la_vo);
+			
+				url="redirect:../index.do";
+				model.addAttribute("id","");
 			
 		}else {
 			model.addAttribute("failFlag",true);
+			url="study_group/study_out";
 		}
 
 		return url;
@@ -151,28 +178,34 @@ public class UserStudyController {
 		
 		@RequestMapping(value="study_group/end_study_process.do" , method=POST )
 		public String closeStudyProcess(CloseVO c_vo, HttpSession session, Model model) {
-			//vo ????
+
 			String id=(String)session.getAttribute("id");
 			c_vo.setId(id);
 			
-			CloseAlarmVO ca_vo=new CloseAlarmVO();
+			String url="study_group/my_study";
+
+			if(sgs.closeStudy(c_vo)) {
 			
-			String s_num=c_vo.getsNum();
-			String reason=c_vo.getReason();
-			c_vo.setsNum(s_num);
-			c_vo.setReason(reason);
+				CloseAlarmVO ca_vo=new CloseAlarmVO();
+				
+				ca_vo.setCategory("스터디");
+				ca_vo.setSubject("스터디가 종료되었습니다.");
+				// snum이용해서 스터디명을 조회해서 content내용으로 추가
+				ca_vo.setContent("ooo스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
+				ca_vo.setsNum(c_vo.getsNum());
+				//
+				sgs.sendCloseAlarm(ca_vo);
 			
-			String url="study_group/study_out";
-			
-			if(sgs.closeStudy(ca_vo)) {
-				url="redirect:../index.do";
-				model.addAttribute("id","");
+				
+					url="redirect:../index.do";
+					model.addAttribute("id","");
 				
 			}else {
 				model.addAttribute("failFlag",true);
+				url="study_group/end_study";
 			}
 
-			return url;
+			return url ;
 		}
 }//class
 

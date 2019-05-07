@@ -21,7 +21,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript">
  $(function () {
-  	$("#out").click(function() {
+	 
+	 <c:if test="${failFlag}">
+		alert("탈퇴에 실패했습니다.");
+	</c:if>
+	 
+  	$("#outBtn").click(function() {
   		var reason=$("#reason").val();
   		
   		if(reason=="") {
@@ -38,11 +43,11 @@
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
 	
 	<div id="wrap" >
-		<form action="study_group/leave_study_process.do" method="post" id="outFrm" >
+		<form action="../study_group/leave_study_process.do" method="post" id="outFrm" >
 		 <br/><br/>
 		 <div style="border:1px solid #D7D7D7; padding:40px"><br/><br/>
 		<h1 ><Strong>정말 이 스터디를 탈퇴하시겠어요?</Strong></h1>
@@ -56,13 +61,13 @@
   </div>
 	
   <a class="btn btn-secondary btn-lg" href="#void" role="button" onclick="location.href='study_group/my_study.do'">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-secondary btn-lg" href="#void" role="button" id="out">스터디 탈퇴</a>
+  <input type="button" class="btn btn-secondary btn-lg" id="outBtn" value="스터디 탈퇴"/>
   </div>
 </form>
 	</div>
 	
 		<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

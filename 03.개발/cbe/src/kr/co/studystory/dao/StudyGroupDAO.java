@@ -138,12 +138,12 @@ public class StudyGroupDAO {
 		
 	}//insertLeaveAlarm
 	
-	public boolean deleteMember(LeaveStudyVO ls_vo) {
+	public boolean deleteMember(String id) {
 		boolean flag=false;
 		
 		SqlSession ss=StudyGroupDAO.getInstance().getSqlSessionFactory().openSession();
 		
-		int cnt=ss.update("deleteStudy",ls_vo);
+		int cnt=ss.delete("deleteStudyMember",id);
 		if(cnt==1) {
 			flag=true;
 			ss.commit();

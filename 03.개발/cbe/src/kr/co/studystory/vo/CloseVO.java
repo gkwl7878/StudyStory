@@ -26,6 +26,11 @@ public class CloseVO {
 	public void setsNum(String sNum) {
 		this.sNum = sNum;
 	}
+
+	@Override
+	public String toString() {
+		return "CloseVO [id=" + id + ", reason=" + reason + ", sNum=" + sNum + "]";
+	}
 	
 	
 }
