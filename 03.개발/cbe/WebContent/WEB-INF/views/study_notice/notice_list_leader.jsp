@@ -27,7 +27,13 @@
 	  		alert("새로운 스터디 공지를 추가했습니다");
 	  	</c:if>
 	  	<c:if test="${ snAddFailFlag }">
-	  		alert("스터디 공지 등록에 실패했습니다");
+	  		alert("스터디 공지 등록에 실패했습니다. 잠시 후에 다시 시도해주세요");
+	  	</c:if>
+	  	<c:if test="${ snModifySuccessFlag }">
+	  		alert("스터디 공지 수정에 성공했습니다");
+	  	</c:if>
+	  	<c:if test="${ snModifyFailFlag }">
+	  		alert("스터디 공지 수정에 실패했습니다. 잠시 후에 다시 시도해주세요");
 	  	</c:if>
 	  	
 	  	$("#recruitChangeBtn").click(function() {
@@ -88,15 +94,15 @@
  		</div>
   	</c:if>
   	<c:forEach items="${ snList }" var="studyNotice">
-   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;" onclick="location.href='notice_detail.do?sn_num=${ studyNotice.snNum }&s_num=${ param.s_num }'">
+   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;">
    		<div class="card-body">
    			 <div style="float:left;" class="card-title">
-   			 	<strong>${ studyNotice.subject }</strong>&nbsp;&nbsp;
+   			 	<a href="javascript:location.href='notice_detail.do?sn_num=${ studyNotice.snNum }&s_num=${ param.s_num }'"><strong>${ studyNotice.subject }</strong></a>&nbsp;&nbsp;
    			 	<span style="color:#E36539">
    			 		<c:out value="${ studyNotice.commentNum eq '0' ? '' : studyNotice.commentNum}"/>
    			 	</span>
    			 </div>
-   			 <div style="float:right;"><img src="/third_prj/resources/images/setting.png" width="20" height="20"/></div>
+   			 <div style="float:right;"><a href="javascript:location.href='../study_notice/modify.do?sn_num=${ studyNotice.snNum }&s_num=${ param.s_num }'"><img src="/third_prj/resources/images/setting.png" width="20" height="20"/></a></div>
    			 <br/>
 		    <p class="card-text">
 		    	<p class="text-left">

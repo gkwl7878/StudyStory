@@ -239,7 +239,7 @@
 	  			<option value="none">--스터디원--</option>
 	  			<c:forEach var="member" items="${ nickAndIdList }">
 	  				<option value="${ member.nick }"><c:out value="${ member.nick }"/></option>
-	  			</c:forEach><!-- 아이디는 어떻게 전달하노..? -->
+	  			</c:forEach>
 	   		</select>
 	  	</div>
    		<div class="col-6" style="padding-left:0px; padding-right:0px;">
@@ -284,7 +284,11 @@
 	   	</div>
 	  </div>
 	   <div class="row justify-content-center" style="min-height:100px; margin-top:30px;">
-	   	<span style="padding-right:10px;"><button type="button" class="btn btn-secondary" style="height:40px; width:120px;">취소</button></span>
+	   	<span style="padding-right:10px;">
+	   		<button type="button" class="btn btn-secondary" 
+	   			style="height:40px; width:120px;" 
+	   			onclick="location.href='notice_list_leader.do?s_num=${ param.s_num }'">취소</button>
+	   	</span>
 	   	<button id="writeBtn" type="button" class="btn btn-secondary" style="height:40px; width:120px;">작성</button>
 	   </div>
 		</div>
