@@ -31,6 +31,12 @@
 				}
 			}
 			
+			 $("#inputPassword").keypress(function (e) {
+			        if (e.which == 13){
+			        	$("#frm").submit();
+			        }
+			    });
+			
 			$("#loginBtn").click(function() {
 				
 				$("#frm").submit();

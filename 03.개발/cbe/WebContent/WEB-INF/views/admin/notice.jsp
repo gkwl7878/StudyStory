@@ -117,7 +117,7 @@ $(function() {
 						</li>
 						<c:forEach var="i" step="1" begin="${ startPage }" end="${ endPage }">
 							<li class="paginate_button page-item ${ currPage == i ? 'active' : '' }">
-								<a href="notice_mng.do?currPage=${ i }" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+								<a href="notice_mng.do?currPage=${ i }&searchWord=${param.searchWord}" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
 									<c:out value="${ i }"/>
 								</a>
 							</li>
