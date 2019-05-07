@@ -26,15 +26,20 @@ public class QuestionController {
 	private CommonBbsService cbs;
 
 	@RequestMapping(value="/common_bbs/ask.do", method=GET)
-	public String ask() {
+	public String ask(HttpSession session) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		return "common_bbs/ask";
 	}
 	
 	@RequestMapping(value="/common_bbs/add_question.do", method=POST)
 	public String askProcess(QuestionVO qvo, HttpSession session, Model model) {
 		
-		System.out.println("등록 가즈아!!!! "+qvo.getSubject());
-		System.out.println("등록 가즈아!!!! "+qvo.getCategory());
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		qvo.setId((String)session.getAttribute("id"));
 		
@@ -51,6 +56,10 @@ public class QuestionController {
 	
 	@RequestMapping(value="common_bbs/question.do", method= { GET, POST })
 	public String questionBbs(QuestionBbsVO qbvo, HttpSession session, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		if(qbvo.getCurrPage() == 0) {
 			qbvo.setCurrPage(1);
@@ -99,7 +108,11 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(value="common_bbs/detail_question.do", method=GET)
-	public String questionDetail(QuestionPagingVO qpvo, Model model) {
+	public String questionDetail(HttpSession session, QuestionPagingVO qpvo, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		String q_num = qpvo.getQ_num();
 		String currPage = qpvo.getCurrPage();

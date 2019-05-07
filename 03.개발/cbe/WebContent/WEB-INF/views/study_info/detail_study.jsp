@@ -225,7 +225,7 @@
 
 	
 			<div class="col-lg-2" style="position: fixed; margin-left: 940px; margin-top:100px;">
-				<div id="sidebar" style="width: 300px; height: 300px">
+				<div id="sidebar" style="width: 300px; min-height: 300px">
 					<div class="row  border border-secondary" style="padding: 20px; margin-left: 10px; border-radius:10px;">
 						<div class="col-lg-12">
 							
@@ -244,7 +244,7 @@
 									<div class="col-lg-12">
 										<div class="row">
 											<div class="col text-center" style="margin-top: 30px">
-												<button onclick="location.href='../study_notice/notice_list_leader.do?sNum=${ param.sNum }'" type="button" class="btn btn-secondary btn-sm">스터디 관리하기</button>
+												<button onclick="location.href='../study_notice/notice_list_leader.do?s_num=${ param.sNum }'" type="button" class="btn btn-secondary btn-sm">스터디 관리하기</button>
 											</div>
 										</div>
 									</div>
@@ -305,16 +305,18 @@
 								<div class="row">
 									<div class="col-lg-12" style="font-size: 12px;  text-align:center; margin-top: 10px; height: 40px">
 										<p>
-											<c:out value="${ s_Info.favNum }"/>명이 좋아하는 스터디!<br/>
-											<c:if test="${ s_Info.memberNum ne 20 }">
-												<c:out value="${ 20 - s_Info.memberNum }"/>명 더 가입가능한 상태입니다!
-											</c:if>
-											<c:if test="${ s_Info.recruitment eq 'N' }">
-												아쉽지만 모집이 마감되었습니다..<br/>다음 기회에 가입해주세요
-											</c:if>
-											<c:if test="${ s_Info.deactivation eq 'Y' }">
-												활동이 종료된 스터디입니다.<br/>다른 스터디를 이용해주세요
-											</c:if>
+											<c:choose>
+												<c:when test="${ s_Info.memberNum ne 20 and s_Info.recruitment eq 'Y' }">
+													<c:out value="${ s_Info.favNum }"/>명이 좋아하는 스터디!<br/>
+													<c:out value="${ 20 - s_Info.memberNum }"/>명 더 가입가능한 상태입니다!<br/>
+												</c:when>
+												<c:when test="${ s_Info.recruitment eq 'N' }">
+													아쉽지만 모집이 마감되었습니다..<br/>다음 기회에 가입해주세요<br/>
+												</c:when>
+												<c:when test="${ s_Info.deactivation eq 'Y' }">
+													활동이 종료된 스터디입니다.<br/>다른 스터디를 이용해주세요<br/>
+												</c:when>
+											</c:choose>
 										</p>
 									</div>
 								</div>

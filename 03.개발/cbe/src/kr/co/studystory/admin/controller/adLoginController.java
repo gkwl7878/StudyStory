@@ -15,14 +15,15 @@ import org.springframework.web.bind.support.SessionStatus;
 import kr.co.studystory.admin.domain.UserAndStudy;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.vo.LoginVO;
+import kr.co.studystory.util.ShaUtil;
 
-@SessionAttributes("loginSession")
+@SessionAttributes({"loginSession","weekUser","weekStudy","allUser","allStudy"})
 @Controller
 public class adLoginController {
 	@Autowired
 	private CommonMngService cms;
-	/**
-	 * 로그인 페이지 띄워주기
+	 /**
+	  * 로그인 페이지 띄워주기
 	 * @return
 	 */
 	@RequestMapping(value="/admin/login.do",method=RequestMethod.GET)
@@ -43,7 +44,7 @@ public class adLoginController {
 		boolean loginSession=false;
 		UserAndStudy uas= new UserAndStudy();
 		uas=cms.getCountUserAndStudy();
-		
+		//l_vo.setPass(ShaUtil.shaEncoding(l_vo.getPass()));
 		loginFlag= cms.login(l_vo);
 		
 		int weekUser= uas.getWeekUser();
@@ -71,11 +72,9 @@ public class adLoginController {
 	 */
 	@RequestMapping(value="/admin/logout.do")
 	public String LogOut(SessionStatus ss,Model model){
-		boolean logoutFlag=false;
 		ss.setComplete();
-		logoutFlag=true;
-		model.addAttribute("logoutFlag",logoutFlag);
-		return "admin/logout";
+		model.addAttribute("logoutFlag",true);
+		return "/admin/logout";
 	}
 	
 	

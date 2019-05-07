@@ -1,5 +1,9 @@
 package kr.co.studystory.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
@@ -16,11 +20,6 @@ import kr.co.studystory.domain.NewAlarm;
 import kr.co.studystory.service.CommonBbsService;
 import kr.co.studystory.vo.AlarmBbsVO;
 import kr.co.studystory.vo.AlarmPagingVO;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.util.List;
 
 @Controller
 public class AlarmController {
@@ -61,6 +60,10 @@ public class AlarmController {
 	
 	@RequestMapping(value="common_bbs/alarm.do", method=GET)
 	public String alarmBbs(AlarmBbsVO abvo, HttpSession session, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		if(abvo.getCurrPage() == 0) {
 			abvo.setCurrPage(1);
@@ -109,7 +112,11 @@ public class AlarmController {
 	}
 	
 	@RequestMapping(value="common_bbs/detail_alarm.do", method=GET)
-	public String detailAlarm(AlarmPagingVO apvo, Model model) {
+	public String detailAlarm(HttpSession session, AlarmPagingVO apvo, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		String a_num = apvo.getA_num();
 		String currPage = apvo.getCurrPage();

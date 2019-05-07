@@ -41,8 +41,12 @@ public class StudySearchController {
 	 * @return
 	 */
 	@RequestMapping(value = "/study_info/main.do", method = { GET, POST })
-	public String mainPage(Model model) {
+	public String mainPage(Model model, HttpSession session) {
 
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		// 썸네일 리스트 생성.
 		List<ThumbnailDomain> list = sis.getThumbnailList();
 		// model 객체에 값 저장.

@@ -37,7 +37,7 @@ a:hover {
 <script type="text/javascript">
 $(function() {
 	$(".pending").hover(function() { 
-		$(this).children("img:first").prop("src","/third_prj/resources/images/pending.png");
+		$(this).children("img:first").prop("src","/third_prj/resources/images/pending_leader.png");
 		$(this).children("img:first").show();
 		$(this).children("div:first").hide();
 	}, function() {

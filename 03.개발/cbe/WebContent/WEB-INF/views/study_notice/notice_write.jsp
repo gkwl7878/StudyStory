@@ -130,11 +130,6 @@
   				return;
   			}
   			
-  			// 과제를 먼저 AJAX로 등록 후, submit을 수행하자
-  			/////////// 먼저 숙제데이터를넣으려 했으나 sn_num이 생기려면 공지를 먼저 추가해야 함
-  			// 때문에 javascript array변수에 담긴 값을 submit할때 같이 전송하는 방법이 있는지??
-  			// 그냥 
-  			
   			var sendingNick = new Array();
   			var sendingWorkload = new Array();
   			var k = 0;
@@ -222,7 +217,7 @@
 	<form action="wrtie_process.do" method="post" id="writeFrm">
 	<input type="hidden" name="hwNick"/>
 	<input type="hidden" name="hwWorkload"/>
-	<input type="hidden" name="s_num" value="${ param.sNum }"/>
+	<input type="hidden" name="s_num" value="${ param.s_num }"/>
 	
 	<div class="container col-10" style="margin:0px auto; width:800px;">
     <div class="row">
@@ -244,7 +239,7 @@
 	  			<option value="none">--스터디원--</option>
 	  			<c:forEach var="member" items="${ nickAndIdList }">
 	  				<option value="${ member.nick }"><c:out value="${ member.nick }"/></option>
-	  			</c:forEach><!-- 아이디는 어떻게 전달하노..? -->
+	  			</c:forEach>
 	   		</select>
 	  	</div>
    		<div class="col-6" style="padding-left:0px; padding-right:0px;">
@@ -289,7 +284,11 @@
 	   	</div>
 	  </div>
 	   <div class="row justify-content-center" style="min-height:100px; margin-top:30px;">
-	   	<span style="padding-right:10px;"><button type="button" class="btn btn-secondary" style="height:40px; width:120px;">취소</button></span>
+	   	<span style="padding-right:10px;">
+	   		<button type="button" class="btn btn-secondary" 
+	   			style="height:40px; width:120px;" 
+	   			onclick="location.href='notice_list_leader.do?s_num=${ param.s_num }'">취소</button>
+	   	</span>
 	   	<button id="writeBtn" type="button" class="btn btn-secondary" style="height:40px; width:120px;">작성</button>
 	   </div>
 		</div>

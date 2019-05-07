@@ -7,19 +7,18 @@
   					(패키지와 비슷한 용도)
   -->
 
-<mapper namespace="kr.co.studystory.study_group">
+<mapper namespace="kr.co.studystory.study_group2">
 	
-	<select id="selectMemberCnt" parameterType="String"><!-- resultType을 뭘로?? -->
-	  select count(*)
-	from member
-	where s_num=#{sNum}<!-- 's_000041'; -->
-	</select>
 	
 	
 	<select id="selectMemberList"  resultType="kr.co.studystory.domain.MemberWithImg" parameterType="String">
-	select ut.nick nick, ut.tel tel, ut.img img
+<!-- 	 select nick, tel, img
+	from user_table  -->
+	
+ 	 select ut.nick nick, ut.tel tel, ut.img img
 	from user_table ut, member m
 	where m.s_num=#{sNum} and ut.id=m.id 
+	<!-- 화면 띄우기 뷰 수정을 위해 조건을 막아줌 . member가 별로 없어서  -->  
 	</select>
 	  
 

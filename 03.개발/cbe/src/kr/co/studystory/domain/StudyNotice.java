@@ -2,6 +2,15 @@ package kr.co.studystory.domain;
 
 public class StudyNotice {
 	private String snNum, subject, img, inputDate;
+	private int commentNum;
+
+	public int getCommentNum() {
+		return commentNum;
+	}
+
+	public void setCommentNum(int commentNum) {
+		this.commentNum = commentNum;
+	}
 
 	public String getSnNum() {
 		return snNum;

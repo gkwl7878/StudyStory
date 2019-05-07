@@ -5,7 +5,7 @@
 
 <mapper namespace="kr.co.studystory.admin">
 
-<select id="loginValid" resultType="Integer" parameterType="kr.co.studystory.admin.vo.LoginVO" >
+<select id="loginValid" resultType="int" parameterType="kr.co.studystory.admin.vo.LoginVO" >
 	select count(*)
 	from ADMIN_USER 
 	where id=#{id} and pass=#{pass}
@@ -16,48 +16,49 @@
 	values(a_code,#{category},#{subject},#{content},#{id})
 </insert>
 
-<select id="countWeekUser" resultType="Integer" >
-	select count(*)
-	from study
-	where input_date between (SYSDATE-7) and SYSDATE
-</select>
-
-<select id="countWeekStudy" resultType="Integer" >
+<select id="countWeekUser" resultType="int" >
 	select count(*)
 	from user_table
-	where reg_date between (SYSDATE-7) and SYSDATE
+	where reg_date between (SYSDATE-7) and SYSDATE and deactivation is null
 </select>
 
-<select id="countAllUser" resultType="Integer" >
+<select id="countWeekStudy" resultType="int" >
 	select count(*)
 	from study
+	where input_date between (SYSDATE-7) and SYSDATE and delete_flag !='Y'
 </select>
 
-<select id="countAllStudy" resultType="Integer" >
+<select id="countAllUser" resultType="int" >
 	select count(*)
 	from user_table
+	where deactivation is null
 </select>
 
-<select id="nsTotalCnt" resultType="Integer">
+<select id="countAllStudy" resultType="int" >
+	select count(*)
+	from study
+	where delete_flag !='Y'
+</select>
+
+<select id="nsTotalCnt" resultType="int">
 	select count(*)
 	from study 
-	where accept_flag='N' or delete_flag='N'
+	where accept_flag='N' and delete_flag='N'
 </select>
 
 <select id="uTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.UserBoardVO">
 	select count(*)
 	from user_table
-	<where>
-		<if test="'id'.equals(searchCondition)">
-			id#{searchWord}
-		</if>
-		<if test="'name'.equals(searchCondition)">
-			name=#{searchWord}
-		</if>
-		<if test="'nick'.equals(searchCondition)">
-			nick=#{searchWord}
-		</if>
-	</where>
+	where deactivation is null
+	<if test="'아이디'.equals(searchCondition)">
+		and id like '%'||#{searchWord}||'%' 
+	</if>
+	<if test="'이름'.equals(searchCondition)">
+		and name like '%'||#{searchWord}||'%' 
+	</if>
+	<if test="'닉네임'.equals(searchCondition)">
+		and nick like '%'||#{searchWord}||'%' 
+	</if>
 </select>
 
 <select id="sTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.StudyBoardVO">
@@ -65,36 +66,34 @@
 	from(
 		select s.id,s.study_name,ut.nick
 		from study s, user_table ut
-		where s.id=ut.id
+		where s.id=ut.id and (delete_flag!='Y')
+		<if test="'스터디명'.equals(searchCondition)">
+			and s.study_name like '%'||#{searchWord}||'%' 
+		</if>
+		<if test="'아이디'.equals(searchCondition)">
+			and s.id like '%'||#{searchWord}||'%' 
+		</if>
+		<if test="'닉네임'.equals(searchCondition)">
+			and ut.nick like '%'||#{searchWord}||'%' 
+		</if>
 	)
-	<where>
-		<if test="'studyName'.equals(searchCondition)">
-			study_name=#{searchWord}
-		</if>
-		<if test="'id'.equals(searchCondition)">
-			id=#{searchWord}
-		</if>
-		<if test="'nick'.equals(searchCondition)">
-			nick=#{searchWord}
-		</if>
-	</where>
 </select>
 
 <select id="qTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.QuestionBoardVO">
 	select count(*)
 	from question
 	<where>
-		<if test="'userInfo'.equals(searchCondition)">
-			category='회원정보'
+		<if test="'회원정보'.equals(searchCondition)">
+			category ='회원정보'
 		</if>
-		<if test="'study'.equals(searchCondition)">
-			category='스터디'
+		<if test="'스터디'.equals(searchCondition)">
+			category ='스터디'
 		</if>
-		<if test="'homepage'.equals(searchCondition)">
-			category='홈페이지'
+		<if test="'홈페이지'.equals(searchCondition)">
+			category ='홈페이지'
 		</if>
-		<if test="'etc'.equals(searchCondition)">
-			category='기타'
+		<if test="'기타'.equals(searchCondition)">
+			category ='기타'
 		</if>
 	</where>
 </select>
@@ -102,9 +101,12 @@
 <select id="nTotalCnt" resultType="int" parameterType="kr.co.studystory.admin.vo.NoticeBoardVO">
 	select count(*)
 	from notice
-	where subject like '%'||'#{searchWord}'||'%'
+	<if test="searchWord!=null">
+		where subject like '%'||#{searchWord}||'%'
+	</if>
 </select>
 
+<!--//////////////////////////////////////////// NewStudy Mapper////////////////////////////////////////////////// -->
 <resultMap type="kr.co.studystory.admin.domain.NewStudyInfo" id="newStudyResult">
 	<result column="s_num" property="sNum"/>
 	<result column="id" property="id"/>
@@ -119,9 +121,10 @@
 		select s_num, id, study_name, category, loc, input_date,
 		row_number() over( order by input_date desc) r_num
 		from STUDY
-		where accept_flag='N' or delete_flag='N'
+		where accept_flag='N' and delete_flag='N'
 	)
 	where r_num between #{begin} and #{end}
+	
 </select>
 
 <resultMap type="kr.co.studystory.admin.domain.DetailNewStudyInfo" id="nsDetailResult">
@@ -133,7 +136,6 @@
 	<result column="img" property="img"/>
 	<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String"/>
 </resultMap>
-
 <select id="nsDetail" resultMap="nsDetailResult" parameterType="String">
 	select id, category, loc, study_name, input_date, img, content
 	from study
@@ -157,5 +159,283 @@
 	where s_num= #{sNum}
 </update>
 
+<!--//////////////////////////////////////////// User Mapper////////////////////////////////////////////////// -->
+<resultMap type="kr.co.studystory.admin.domain.UserInfo" id="userInfoResult">
+	<result column="id" property="id"/>
+	<result column="nick" property="nick"/>
+	<result column="name" property="name"/>
+	<result column="tel" property="tel"/>
+	<result column="email" property="email"/>
+	<result column="reg_date" property="regDate"/>
+</resultMap>
+<select id="userInfoList" resultMap="userInfoResult" parameterType="kr.co.studystory.admin.vo.UserBoardVO">
+
+	<!-- id, nick, name, tel , email, regDate -->
+	select id, nick, name, tel , email, reg_date
+	from(
+		select id, nick, name, tel , email, reg_date,
+		row_number() over(order by reg_date desc) r_num
+		from user_table
+		where deactivation is null
+		<if test="'아이디'.equals(searchCondition)">
+			and id like '%'||#{searchWord}||'%' 
+		</if>
+		<if test="'닉네임'.equals(searchCondition)">
+			and nick like '%'||#{searchWord}||'%' 
+		</if>
+		<if test="'이름'.equals(searchCondition)">
+			and name like'%'||#{searchWord}||'%' 
+		</if>
+	)
+		where r_num between #{begin} and #{end}
+</select>
+
+<!-- name, tel, zipcode, addr1, addr2, question, answer; -->
+<resultMap type="kr.co.studystory.admin.domain.DetailUser" id="userDetailResult">
+	<result column="name" property="name"/>
+	<result column="tel" property="tel"/>
+	<result column="zipcode" property="zipcode"/>
+	<result column="addr1" property="addr1"/>
+	<result column="addr2" property="addr2"/>
+	<result column="question" property="question" />
+	<result column="answer" property="answer"/>
+</resultMap>
+<select id="userDetail" resultMap="userDetailResult" parameterType="String">
+	select name, tel, zipcode, addr1, addr2, question, answer
+	from user_table
+	where id= #{id}
+</select>
+
+<update id="updateModUser" parameterType="kr.co.studystory.admin.vo.DetailUserVO">
+	<!-- id,name,pass,tel,zipcode,addr1,addr2 -->
+	update user_table
+	set name=#{name},pass=#{pass}, tel=#{tel}, zipcode=#{zipcode}, addr1=#{addr1}, addr2=#{addr2}
+	where id= #{id}
+</update>
+
+<update id="updateDelUser" parameterType="String">
+	update user_table
+	set deactivation='Y'
+	where id= #{id}
+</update>
+
+<delete id="delJoinRecord" parameterType="String">
+	delete from join
+	where id=#{id}
+</delete>
+
+<delete id="delMemRecord" parameterType="String">
+	delete from member
+	where id=#{id}
+</delete>
+
+<!--//////////////////////////////////////////// Study Mapper////////////////////////////////////////////////// -->
+<resultMap type="kr.co.studystory.admin.domain.StudyInfo" id="studyInfoResult">
+	<result column="s_num" property="sNum"/>
+	<result column="id" property="id"/>
+	<result column="nick" property="nick"/>
+	<result column="study_name" property="studyName"/>
+	<result column="category" property="category"/>
+	<result column="loc" property="loc"/>
+	<result column="input_date" property="inputDate"/>
+</resultMap>
+<select id="studyInfoList" resultMap="studyInfoResult" parameterType="kr.co.studystory.admin.vo.StudyBoardVO">
+
+	<!--sNum, id, nick, studyName, category, loc, inputDate -->
+	select s_num, id, nick, study_name, category, loc, input_date
+	from(
+		select s.s_num s_num, s.id, ut.nick, s.study_name, s.category, s.loc, s.input_date,
+		row_number() over(order by s.input_date desc) r_num
+		from study s, user_table ut
+		where s.id=ut.id and (delete_flag!='Y')
+		<if test="'스터디명'.equals(searchCondition)">
+			and s.study_name like '%'||#{searchWord}||'%'
+		</if>
+		<if test="'아이디'.equals(searchCondition)">
+			and s.id like '%'||#{searchWord}||'%'
+		</if>
+		<if test="'닉네임'.equals(searchCondition)">
+			and ut.nick like '%'||#{searchWord}||'%'
+		</if>
+	)
+		where r_num between #{begin} and #{end}
+</select>
+
+<!-- studyName, id, nick, category, loc,inputDate, img, content, memberNum -->
+<resultMap type="kr.co.studystory.admin.domain.DetailStudy" id="studyDetailResult">
+	<result column="study_name" property="studyName"/>
+	<result column="id" property="id"/>
+	<result column="nick" property="nick"/>
+	<result column="category" property="category"/>
+	<result column="loc" property="loc"/>
+	<result column="input_date" property="inputDate" />
+	<result column="img" property="img"/>
+	<result column="content" property="content" jdbcType="CLOB" javaType="java.lang.String"/>
+	<result column="member_num" property="memberNum"/>
+</resultMap>
+<select id="studyDetail" resultMap="studyDetailResult" parameterType="String">
+	select study_name, ut.id, nick, category, loc, input_date, s.img, content, (select count(*) from member where s_num=#{sNum}) member_num
+	from study s, user_table ut
+	where s.id=ut.id and s.s_num=#{sNum}
+</select>
+
+<select id="selectPreImg" resultType="String" parameterType="String">
+	select img
+	from   study
+	where  s_num=#{sNum}
+</select>
+
+<update id="updateStudy" parameterType="kr.co.studystory.admin.vo.DetailStudyVO">
+	update study
+	set category=#{category}, loc= #{loc}, img= #{img}, content=#{content}
+	where s_num= #{sNum}
+</update>
+
+<select id="selectStudyMember" resultType="String" parameterType="String">
+	select id
+	from   member
+	where  s_num=#{sNum}
+</select>
+
+
+<update id="deleteStudy" parameterType="String">
+	update study
+	set delete_flag='Y'
+	where s_num= #{sNum}
+</update>
+
+<!--//////////////////////////////////////////// Question Mapper////////////////////////////////////////////////// -->
+<resultMap type="kr.co.studystory.admin.domain.Question" id="questionResult">
+	<result column="q_num" property="qNum"/>
+	<result column="name" property="name"/>
+	<result column="category" property="category"/>
+	<result column="subject" property="subject"/>
+	<result column="answer_flag" property="answerFlag"/>
+	<result column="input_date" property="inputDate"/>
+</resultMap>
+<select id="questionList" resultMap="questionResult" parameterType="kr.co.studystory.admin.vo.QuestionBoardVO">
+
+	<!--qNum, name, category, subject, answerFlag, inputDate -->
+	select q_num, name, category, subject, answer_flag, input_date
+	from(
+		select q.q_num, ut.name, q.category, q.subject, q.answer_flag, q.input_date,
+		row_number() over(order by q.input_date desc) r_num
+		from question q, user_table ut
+		where q.id=ut.id
+		<if test="'회원정보'.equals(searchCondition)">
+			and q.category ='회원정보'
+		</if>
+		<if test="'스터디'.equals(searchCondition)">
+			and q.category ='스터디'
+		</if>
+		<if test="'홈페이지'.equals(searchCondition)">
+			and q.category ='홈페이지'
+		</if>
+		<if test="'기타'.equals(searchCondition)">
+			and q.category ='기타'
+		</if>
+	)
+		where r_num between #{begin} and #{end}
+	
+</select>
+
+<!-- name, category, input_date, subject, content -->
+<resultMap type="kr.co.studystory.admin.domain.DetailQuestion" id="questionDetailResult">
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	<result column="category" property="category"/>
+	<result column="input_date" property="inputDate"/>
+	<result column="subject" property="subject"/>
+	<result column="content" property="content"/>
+</resultMap>
+<select id="questionDetail" resultMap="questionDetailResult" parameterType="String">
+	select q.id, ut.name, q.category, q.input_date, q.subject, q.content
+	from question q, user_table ut
+	where q.id=ut.id and q.q_num=#{qNum}
+</select>
+
+<resultMap type="kr.co.studystory.admin.domain.Answer" id="answerDetailResult">
+	<result column="answer_content" property="content"/>
+	<result column="answer_date" property="aDate"/>
+</resultMap>
+<select id="answerDetail" resultMap="answerDetailResult" parameterType="String">
+	select answer_content, answer_date
+	from question
+	where q_num=#{qNum}
+</select>
+
+<update id="updateAns" parameterType="kr.co.studystory.admin.vo.AnswerVO">
+	update question
+	set answer_content=#{answerContent}, answer_flag='Y', answer_date=SYSDATE
+	where q_num= #{qNum}
+</update>
+
+<delete id="delQuestion" parameterType="String">
+	delete from question
+	where q_num=#{qNum}
+</delete>
+
+<!--//////////////////////////////////////////// Notice Mapper////////////////////////////////////////////////// -->
+<resultMap type="kr.co.studystory.admin.domain.Notice" id="noticeResult">
+	<result column="n_num" property="nNum"/>
+	<result column="subject" property="subject"/>
+	<result column="input_date" property="inputDate"/>
+	<result column="view_cnt" property="viewCnt"/>
+</resultMap>
+<select id="noticeList" resultMap="noticeResult" parameterType="kr.co.studystory.admin.vo.NoticeBoardVO">
+
+	<!-- nNum, subject, inputDate; int viewCnt; -->
+	select n_num, subject, input_date, view_cnt
+	from(
+		select n_num, subject, input_date, view_cnt,
+		row_number() over(order by input_date desc) r_num
+		from notice
+		<if test="searchWord!=null">
+			where subject like '%'||#{searchWord}||'%'
+		</if>
+	)
+	where r_num between #{begin} and #{end}
+	
+</select>
+
+<!-- subject, input_date, content, view_cnt; -->
+<resultMap type="kr.co.studystory.admin.domain.DetailNotice" id="noticeDetailResult">
+	<result column="subject" property="subject"/>
+	<result column="input_date" property="inputDate"/>
+	<result column="content" property="content"/>
+	<result column="view_cnt" property="viewCnt"/>
+</resultMap>
+<select id="noticeDetail" resultMap="noticeDetailResult" parameterType="String">
+	select subject, input_date, content, view_cnt
+	from notice
+	where n_num=#{nNum}
+</select>
+
+<update id="updateNotice" parameterType="kr.co.studystory.admin.vo.NoticeModifyVO">
+	update notice
+	set content=#{content}, subject=#{subject}
+	where n_num= #{nNum}
+</update>
+
+<delete id="deleteNotice" parameterType="String">
+	delete from notice
+	where n_num=#{nNum}
+</delete>
+
+<insert id="insertNotice" parameterType="kr.co.studystory.admin.vo.NewNoticeVO">
+	insert into notice(n_num,subject,content)
+	values(n_code,#{subject},#{content})
+</insert>
+
+
+<select id="selectAllUser" resultType="String">
+	select id
+	from user_table
+</select>
+
+<insert id="testInst" parameterType="String" >
+	insert into admin_user(id,pass,reg_date)
+	values('test2',#{pass},SYSDATE)
+</insert>
 	
 </mapper>
