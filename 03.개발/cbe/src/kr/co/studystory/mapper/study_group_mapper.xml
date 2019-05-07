@@ -87,10 +87,10 @@ from member
 where s_num=#{sNum}		
   </select>
   
-  <update id="insertCloseAlarm" parameterType="kr.co.studystory.vo.CloseAlarmVO">
+ <!--  <update id="insertCloseAlarm" parameterType="kr.co.studystory.vo.CloseAlarmVO">
   	insert into alarm(a_num,id, category, subject, content )
   	value (a_code,#{memberId}, #{category}, #{subject}, #{content})
-  </update>
+  </update> -->
   
   <update id="updateDeactivation" parameterType="String">
   	update study

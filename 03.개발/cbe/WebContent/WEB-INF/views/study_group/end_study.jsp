@@ -20,7 +20,20 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-	
+$(function () {
+  	$("#end").click(function() {
+  		var reason=$("#reason").val();
+  		
+  		if(reason=="") {
+  			alert("스터디 종료 이유를 입력해주세요");
+  			$("#reason").focus();
+  			return
+  		}
+  		if(confirm("정말 스터디 활동을 종료하시겠습니까?")) {
+  			$("#endFrm").submit();
+  		}
+  	});
+});
 </script>
 </head>
 <body>
@@ -31,7 +44,7 @@
 
 
 	<div id="wrap">
-		<form>
+		<form action="study_group/end_study_process.do" method="post" id="endFrm" >
 			<br />
 			<br />
 			<div style="width: 920px; border: 1px solid #D7D7D7; padding: 40px;">
@@ -43,11 +56,11 @@
 				<hr color="gray">
 				<h5>스터디의 활동 종료 이유를 참여한 회원들에게 알려주세요.</h5>
 				<br />
-				<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="내용을 입력해주세요.">
+				<input name="reason" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="내용을 입력해주세요.">
 				<br />
 
 				<br />
-				<a class="btn btn-secondary btn-lg" href="#void" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-secondary btn-lg" href="#void" role="button">스터디 활동종료</a>
+				<a class="btn btn-secondary btn-lg" href="#void" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-secondary btn-lg" href="#void" role="button" id="end">스터디 활동종료</a>
 			</div>
 		</form>
 	</div>

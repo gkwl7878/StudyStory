@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.service.StudyGroupService;
+import kr.co.studystory.vo.CloseAlarmVO;
 import kr.co.studystory.vo.CloseVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
 import kr.co.studystory.vo.LeaveStudyVO;
@@ -143,7 +144,7 @@ public class UserStudyController {
 		
 		String url="study_group/study_out";
 		
-		if(sgs.leaveStudy(ls_vo)) {//???
+		if(sgs.leaveStudy(ls_vo)) {
 			url="redirect:../index.do";
 			model.addAttribute("id","");
 			
@@ -161,25 +162,27 @@ public class UserStudyController {
 		}//leaveStudyPage
 		
 		@RequestMapping(value="study_group/end_study_process.do" , method=POST )
-		public String closeStudyProcess(CloseVO l_vo, HttpSession session, Model model) {
+		public String closeStudyProcess(CloseVO c_vo, HttpSession session, Model model) {
 			//vo ????
 			String id=(String)session.getAttribute("id");
-			l_vo.setId(id);
+			c_vo.setId(id);
 			
-			String s_num=l_vo.getsNum();
-			String reason=l_vo.getReason();
-			l_vo.setsNum(s_num);
-			l_vo.setReason(reason);
+			CloseAlarmVO ca_vo=new CloseAlarmVO();
+			
+			String s_num=c_vo.getsNum();
+			String reason=c_vo.getReason();
+			c_vo.setsNum(s_num);
+			c_vo.setReason(reason);
 			
 			String url="study_group/study_out";
 			
-			/*if(sgs.leaveStudy(l_vo)) {//???
+			if(sgs.closeStudy(ca_vo)) {
 				url="redirect:../index.do";
 				model.addAttribute("id","");
 				
 			}else {
 				model.addAttribute("failFlag",true);
-			}*/
+			}
 
 			return url;
 		}
