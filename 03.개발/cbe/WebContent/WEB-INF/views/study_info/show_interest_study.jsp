@@ -36,9 +36,9 @@
 <!-- CDN -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-	
 	// 좋아요 해제 실행.
 	function dislikeProcess(sNum) {
+
 		var remove_flag = confirm("관심 스터디를 해제 하시겠습니까?");
 
 		// '예' - 관심 스터디를 해제 할 경우.
@@ -53,23 +53,29 @@
 				},
 				success : function(json) {
 					// 정삭적으로 제거가 되었다면 true가 반환된다.
-					if(json.resultFlag) {
-						$("#" + sNum + "_thumb").remove();	
+					if (json.resultFlag) {
+						$("#" + sNum + "_thumb").remove();
 					}// end if
 				}// success
 			}); // ajax
 		}
+
+		if (remove_flag == false) {
+			alert("#" + sNum + "_like_btn");
+			$("#" + sNum + "_like_btn").attr("class",
+					"btn btn-sm btn-outline-secondary active");
+		}// end if
+
 	}// dislikeProcess
-	
+
 	// ready 입니다.
 	$(function() {
-		
+
 		$("#fav_search_btn").click(function() {
 			$("#fav_search_frm").submit();
 		});// click
-		
+
 	}); // ready
-	
 </script>
 
 </head>
@@ -143,10 +149,12 @@
 
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 						<c:forEach var="thumbnail" items="${ thumbnail_list }">
-							<div id="${ thumbnail.s_num }_thumb" class="col-md-4">
-								<div class="card mb-4 shadow-sm">
-									<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-									<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="height: 200px;" />
+							<div id="${ thumbnail.s_num }_thumb" class="thumb col-md-4">
+								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
+								<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }" style="color: #333;">
+									<div class="card mb-4 shadow-sm">
+										<!-- 썸네일 스터디 이미지 -->
+										<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="height: 200px;" />
 										<div class="card-body text-center p-3">
 											<div class="d-flex justify-content-end align-items-center mb-3">
 												<div class="mr-5">
@@ -163,33 +171,32 @@
 												</p>
 											</div>
 											<div class="d-flex justify-content-between align-items-center mt-3 px-2">
-
+	
 												<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
 													<!-- 썸네일 리더의 이미지 -->
 													<img src="/third_prj/profile_img/${ thumbnail.user_img }" class="card-img-top w-100 rounded-circle" style="width: 40px; height: 50px;">
 												</div>
-
+	
 												<div class="border-right p-2">
 													<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
 													<small>${ thumbnail.nick }</small>
 												</div>
-
+	
 												<div class="border-right p-2">
 													<!-- 썸네일 리더의 닉네임 -->
 													<small>${ thumbnail.loc }</small>
 												</div>
-
+	
 												<div class="p-2">
 													<!-- 썸네일 리더의 닉네임 -->
 													<small>${ thumbnail.category }</small>
 												</div>
-
 												<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
-												<button type="button" class="btn btn-sm btn-outline-secondary active" data-toggle="button" onclick="dislikeProcess('${ thumbnail.s_num }')">좋아요</button>
+												<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active" data-toggle="button" onclick="dislikeProcess('${ thumbnail.s_num }')">좋아요</button>
 											</div>
 										</div>
-									</a>
-								</div>
+									</div>
+								</a>
 							</div>
 						</c:forEach>
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->

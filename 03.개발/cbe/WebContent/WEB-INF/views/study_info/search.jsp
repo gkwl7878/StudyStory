@@ -42,13 +42,11 @@
 
 		// 찾기 버튼 눌렀을 때.
 		$("#search_btn").click(function() {
-			alert("aaaaaa");
 			$("#search_frm").submit();
 		});//click
 
 		// 정렬이 바뛰었을 때.
 		$("#order_select").change(function() {
-			alert("bbbbbb");
 			$("#search_frm").submit();
 		});//change
 		
