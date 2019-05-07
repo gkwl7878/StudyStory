@@ -13,6 +13,11 @@
 <link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <!-- Custom styles for this template -->
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+<style type="text/css">
+#mouseOver:hover {
+	color: #3498db
+}
+</style>
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
 <script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
@@ -85,15 +90,11 @@ $(function() {
 						</c:if>
 						<c:forEach var="qList" items="${qList }">
 						<c:set var="i" value="${i+1 }"/>
-							<tr>
-								<!--qNum, name, category, subject, answerFlag, inputDate -->
+							<tr id="mouseOver" onclick="location.href='answer.do?currPage=${currPage}&qNum=${qList.qNum}&searchCondition=${searchCondition}&searchWord=${searchWord}&answerFlag=${qList.answerFlag}'" style="cursor:pointer; " >
 								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
 								<td class="text-center"><c:out value="${qList.name }"/></td>
 								<td class="text-center"><c:out value="${qList.category}"/></td>
-								<td class="text-center"><a href="answer.do?currPage=${currPage}&qNum=${qList.qNum}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
-									&searchCondition=${searchCondition}&searchWord=${searchWord}&answerFlag=${qList.answerFlag}" style="color: black"
-									><c:out value="${qList.subject }"/></a></td>
+								<td class="text-center"><c:out value="${qList.subject }"/></td>
 								<td class="text-center">${qList.answerFlag eq "N"?"<div style='color: #e74c3c'>답변예정</div>":"<div style='color: #3498db'>답변완료</div>" }</td>
 								<td class="text-center"><c:out value="${qList.inputDate }"/></td>
 							</tr>

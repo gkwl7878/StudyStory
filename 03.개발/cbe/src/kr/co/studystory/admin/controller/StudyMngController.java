@@ -121,7 +121,7 @@ public class StudyMngController {
 		// 파일 업로드
 		MultipartRequest mr=null;
 		try {
-			mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/resources/images/",
+			mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/",
 					1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -136,12 +136,14 @@ public class StudyMngController {
 		String preImg= saus.searchPreImg(sNum);
 		
 		
-		File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/resources/images/"+preImg);
-		
-		if(file.exists()||img!=null||!(preImg.equals("no_study_img.png"))) {
-			file.delete();
-		}else {
-			System.out.println("파일이 존재하지 않습니다.");
+		File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
+		System.out.println(preImg+"+++++++++++++++++++++++++++++++++++++");
+		if(!(preImg.equals("no_study_img.png"))){
+				if(file.exists()||img!=null) {
+				file.delete();
+			}else {
+				System.out.println("파일이 존재하지 않습니다.");
+			}
 		}
 		
 		if(img==null) {

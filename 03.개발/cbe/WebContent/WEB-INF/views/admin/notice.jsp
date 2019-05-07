@@ -14,6 +14,11 @@
 <!-- Custom styles for this template -->
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
 <link rel="stylesheet" href="/third_prj/resources/css/font.css" />
+<style type="text/css">
+#mouseOver:hover {
+	color: #3498db
+}
+</style>
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
 <script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
@@ -87,14 +92,9 @@ $(function() {
 						</c:if>
 						<c:forEach var="nList" items="${nList }">
 						<c:set var="i" value="${i+1 }"/>
-							<tr>
-								<!--nNum, subject, inputDate;
-											private int viewCnt; -->
+							<tr id="mouseOver" onclick="location.href='notice_detail.do?currPage=${currPage}&nNum=${nList.nNum}&searchWord=${searchWord}'" style="cursor:pointer; " >
 								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
-								<td class="text-center"><a href="notice_detail.do?currPage=${currPage}&nNum=${nList.nNum}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
-									&searchWord=${searchWord}" style="color: black"
-									><c:out value="${nList.subject }"/></a></td>
+								<td class="text-center"><c:out value="${nList.subject }"/></td>
 								<td class="text-center"><c:out value="${nList.inputDate }"/></td>
 								<td class="text-center"><c:out value="${nList.viewCnt}"/></td>
 							</tr>
