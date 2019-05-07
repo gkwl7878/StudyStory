@@ -49,6 +49,7 @@
 		<form id="rejFrm" action="study_reject_proc.do" method="get">
 			<input type="hidden" name="sNum" value="${param.sNum }"/>
 			<input type="hidden" name="id" value="${param.id}"/>
+			<input type="hidden" name="currPage" value="${param.currPage}"/>
 			<br />
 			<br />
 			<br />
@@ -67,7 +68,7 @@
 			<br />
 			<br />
 
-			<a class="btn btn-secondary btn-lg" href="ns_detail.do?sNum=${param.sNum}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<a class="btn btn-secondary btn-lg" href="ns_detail.do?sNum=${param.sNum}&currPage=${param.currPage}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
 			<input type="button" class="btn btn-secondary btn-lg" value="삭제" id="rejectBtn" />
 		</form>
 	</div>

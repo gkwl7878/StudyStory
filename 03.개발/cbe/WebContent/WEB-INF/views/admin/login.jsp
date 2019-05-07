@@ -60,7 +60,7 @@
   </head>
   <body class="text-center">
    <form class="form-signin" action="login_proc.do" method="POST" id="frm">
-  <img class="mb-4" src="/third_prj/resources/images/no_logo.png" alt="" width="72" height="72">
+  <img class="mb-4" src="../resources/images/study_story_logo2.png" alt="" width="172" height="72">
   <h1 class="h3 mb-3 font-weight-normal">관리자 로그인</h1>
   <label class="sr-only">관리자 아이디</label>
   <input type="text" id="inputEmail" class="form-control" placeholder="관리자 아이디" name="id" required autofocus>

@@ -138,7 +138,7 @@ public class StudyMngController {
 		
 		File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/resources/images/"+preImg);
 		
-		if(file.exists()&&img!=null) {
+		if(file.exists()||img!=null||!(preImg.equals("no_study_img.png"))) {
 			file.delete();
 		}else {
 			System.out.println("파일이 존재하지 않습니다.");
@@ -167,8 +167,9 @@ public class StudyMngController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin/remove_study_page.do", method=GET)
-	public String removeStudyPage(String sNum,Model model) {
+	public String removeStudyPage(String sNum,String currPage, Model model) {
 		model.addAttribute(sNum);
+		model.addAttribute(currPage);
 		return "/admin/study_del";
 	}
 	

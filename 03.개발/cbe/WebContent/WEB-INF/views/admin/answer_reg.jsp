@@ -49,7 +49,9 @@
 </script>
 <script type="text/javascript">
 	$(function () {
-		
+		<c:if test="${ !loginSession }">
+		location.replace("login.do");
+		</c:if>
 		$("#answerBtn").click(function() {
 			$("#answerFrm").submit();
 		})

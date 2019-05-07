@@ -118,7 +118,8 @@ public class NewStudyMngController {
 	}
 	
 	@RequestMapping(value="/admin/study_reject.do", method=RequestMethod.GET)
-	public String refuseNsPage(String sNum, Model model) {
+	public String refuseNsPage(String sNum, String currPage, Model model) {
+		model.addAttribute("currPage",currPage);
 		return "/admin/study_reject";
 	}
 	

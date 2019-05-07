@@ -48,6 +48,9 @@
 	});
 	
 	$(function () {
+		<c:if test="${ !loginSession }">
+		location.replace("login.do");
+		</c:if>
 		<c:if test="${ qModifyFlag }">
 			alert("답변이 등록되었습니다.");
 		</c:if>

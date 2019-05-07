@@ -25,6 +25,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		<c:if test="${ !loginSession }">
+		location.replace("login.do");
+		</c:if>
 		$("#removeBtn").click(function() {
 			$("#removeFrm").submit();
 		})
@@ -60,7 +63,7 @@
 			<br />
 			<br />
 			<br />
-			<a class="btn btn-secondary btn-lg" href="study_detail.do?sNum=${param.sNum}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<a class="btn btn-secondary btn-lg" href="study_detail.do?sNum=${param.sNum}&currPage=${param.currPage}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
 			<input type="button" class="btn btn-secondary btn-lg" value="삭제" id="removeBtn" />
 		</form>
 	</div>

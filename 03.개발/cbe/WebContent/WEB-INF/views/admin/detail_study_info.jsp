@@ -46,6 +46,9 @@
 </script>
 <script type="text/javascript">
 	$(function() {
+		<c:if test="${ !loginSession }">
+		location.replace("login.do");
+		</c:if>
 		$("#modifyBtn").click(function() {
 			if($("#real_file").val()!=""){
 				if(!($("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="png"||

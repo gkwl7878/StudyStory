@@ -13,6 +13,7 @@
 
 <!-- Custom styles for this template -->
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
 <script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
