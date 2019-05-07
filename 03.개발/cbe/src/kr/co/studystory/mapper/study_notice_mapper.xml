@@ -59,7 +59,7 @@
 <select id="HomeworkList" resultType="kr.co.studystory.domain.Homework" parameterType="String">
 	select hw.id, hw.workload, hw.finish_flag, ut.nick
 	from homework hw, user_table ut
-	where hw.id = ut.id and sn_num=#{snNum}
+	where sn_num=#{snNum} and hw.id = ut.id 
 </select>
 
 <!--comment 조회  -->
@@ -141,7 +141,7 @@
 </update>
 
 <delete id="deletePrevHw" parameterType="String">
-	DELETE FROM study_notice
+	DELETE FROM homework
 	WHERE sn_num=#{ sn_num }
 </delete>
 
