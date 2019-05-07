@@ -27,12 +27,24 @@
 	  		alert("새로운 스터디 공지를 추가했습니다");
 	  	</c:if>
 	  	<c:if test="${ snAddFailFlag }">
-	  		alert("스터디 공지 등록에 실패했습니다");
+	  		alert("스터디 공지 등록에 실패했습니다. 잠시 후에 다시 시도해주세요");
+	  	</c:if>
+	  	<c:if test="${ snModifySuccessFlag }">
+	  		alert("스터디 공지 수정에 성공했습니다");
+	  	</c:if>
+	  	<c:if test="${ snModifyFailFlag }">
+	  		alert("스터디 공지 수정에 실패했습니다. 잠시 후에 다시 시도해주세요");
 	  	</c:if>
 	  	
 	  	$("#recruitChangeBtn").click(function() {
 	  		$("#recruitChangeFrm").submit();
 	  	});
+  	}
+  	
+  	function createSn() {
+  		if (confirm("새 공지사항을 추가하시겠습니까?")){
+  			location.href = "wrtie.do?s_num=${ param.s_num }";
+  		}
   	}
   </script>
 </head>
@@ -52,8 +64,9 @@
 
   <div class="row justify-content-center">
   <div class="col-lg-8 border-top border-bottom" style="padding:15px;">
-  	<a href="#">신청자 보기</a>&nbsp;&nbsp;
-  	<a href="../study_group/show_participants.do?sNum=${ param.sNum }">참여자 보기</a>&nbsp;&nbsp;
+  	<a href="../study_group/new_joiner.do?sNum=${ param.s_num }&begin=${param.begin}&end=${param.end}&currPage=${param.currPage}">신청자 보기</a>&nbsp;&nbsp;
+  	<a href="../study_group/show_participants.do?sNum=${ param.s_num }">참여자 보기</a>&nbsp;&nbsp;
+
   	<a href="#">스터디 수정하기</a>&nbsp;&nbsp;
   	<a href="#">스터디 활동종료</a>&nbsp;&nbsp;
   	<div style="float:right;">
@@ -62,7 +75,7 @@
 	    	<option value="Y" ${ recruitment eq 'Y' ? "selected" : "" }>모집중</option>
 	    	<option value="N" ${ recruitment eq 'Y' ? "" : "selected" }>모집종료</option>
 	    </select>
-	  	<input type="hidden" name="sNum" value="${ param.sNum }"/>
+	  	<input type="hidden" name="s_num" value="${ param.s_num }"/>
 	    <button type="button" class="btn btn-sm btn-outline-secondary" id="recruitChangeBtn">모집상태 변경</button>
     </form>
     </div>
@@ -70,21 +83,26 @@
   </div>
   <div class="container-fluid" style="min-height:500px; width:450px;">
 	<div class="row col-sm justify-content-center" style="margin-top:20px;">
- 		<a href="wrtie.do?sNum=${ param.sNum }">+새 공지 추가하기</a>
+ 		<a href="wrtie.do?s_num=${ param.s_num }">+새 공지 추가하기</a>
 	</div>
   	<div class="row col-sm justify-content-center">
   	<c:if test="${ empty snList }">
-   	<div class="card select-card border-dark m-3 p-2" style="width:250px; height:150px;" onclick="location.href='#'">
+   	<div class="card select-card border-dark m-3 p-2 text-center" style="width:300px; height:80px;" onclick="createSn()">
    		<div class="card-body">
    			 <h6 class="card-title"><strong>등록된 스터디 공지가 없습니다</strong></h6>
    		</div>
  		</div>
   	</c:if>
   	<c:forEach items="${ snList }" var="studyNotice">
-   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;" onclick="location.href='######?sNum=${ studyNotice.snNum }">
+   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;">
    		<div class="card-body">
-   			 <div style="float:left;" class="card-title"><strong>${ studyNotice.subject }</strong></div>
-   			 <div style="float:right;"><img src="/third_prj/resources/images/setting.png" width="20" height="20"/></div>
+   			 <div style="float:left;" class="card-title">
+   			 	<a href="javascript:location.href='notice_detail.do?sn_num=${ studyNotice.snNum }&s_num=${ param.s_num }'"><strong>${ studyNotice.subject }</strong></a>&nbsp;&nbsp;
+   			 	<span style="color:#E36539">
+   			 		<c:out value="${ studyNotice.commentNum eq '0' ? '' : studyNotice.commentNum}"/>
+   			 	</span>
+   			 </div>
+   			 <div style="float:right;"><a href="javascript:location.href='../study_notice/modify.do?sn_num=${ studyNotice.snNum }&s_num=${ param.s_num }'"><img src="/third_prj/resources/images/setting.png" width="20" height="20"/></a></div>
    			 <br/>
 		    <p class="card-text">
 		    	<p class="text-left">

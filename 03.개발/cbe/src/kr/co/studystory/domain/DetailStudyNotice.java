@@ -59,5 +59,4 @@ public class DetailStudyNotice {
 		this.input_date = input_date;
 	}
 	
-	
 }

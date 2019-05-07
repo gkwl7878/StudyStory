@@ -3,8 +3,6 @@ package kr.co.studystory.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -25,7 +23,6 @@ import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
-import oracle.net.aso.l;
 
 @Controller
 public class UserStudyController {
@@ -34,7 +31,12 @@ public class UserStudyController {
 	
 	//새 스터디 개설하기 
 	@RequestMapping(value="study_group/create_study.do", method=GET )
-	public String createStudyPage() {
+	public String createStudyPage(HttpSession session) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		return "study_group/study_create";
 	}//createStudyPage
 	
@@ -42,7 +44,6 @@ public class UserStudyController {
 	@RequestMapping(value="study_group/check_dup_study_name.do", method=GET, produces="text/plain;charset=UTF-8")
 	public String checkDupStudyName(String study_name) {
 		
-		System.out.println("-----"+study_name);
 		JSONObject json = new JSONObject();
 		
 		if(sgs.checkDupStudyName(study_name)) {
@@ -59,6 +60,10 @@ public class UserStudyController {
 	@RequestMapping(value="study_group/create_study_process.do", method=POST)
 	public String createStudyProcess(NewStudyVO ns_vo,HttpSession session,HttpServletRequest request, Model model) {
 		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		String id=(String)session.getAttribute("id");
 		ns_vo.setId(id);
 		
@@ -73,29 +78,12 @@ public class UserStudyController {
 		return url;
 	}//createStudyProcess
 	
-	@RequestMapping(value="study_group/request_study.do", method=POST )
-	public String RequestStudyPage() {
-		return "study_group/study_create_request";
-	}//createStudyPage
-	
 	//내 스터디 수정하기
-	@RequestMapping(value="study_group/modify_study.do", method= {POST,GET})
-	public String modifyStudyPage(String s_num,Model model ) {
+	@RequestMapping(value="study_group/modify_study.do", method=GET )
+	public String modifyStudyPage(String s_num, Model model ) {
 		
-		PrevStudyInfo psi=sgs.getPrevStudy(s_num);
-		String name=psi.getName();
-		String loc=psi.getLoc();
-		String category=psi.getCategory();
-		String content=psi.getContent();
-		String img=psi.getImg();
-		
-		model.addAttribute("name",name);
-		model.addAttribute("loc",loc);
-		model.addAttribute("category",category);
-		model.addAttribute("content",content);
-		model.addAttribute("img",img);
-		
-		model.addAttribute("ps_Info",psi);
+		PrevStudyInfo psInfo=sgs.getPrevStudy(s_num);
+		model.addAttribute("ps_Info",psInfo);
 		
 		return "study_group/study_modify";
 	}//createStudyPage

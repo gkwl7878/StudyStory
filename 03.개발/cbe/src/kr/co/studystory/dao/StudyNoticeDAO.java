@@ -19,9 +19,12 @@ import kr.co.studystory.domain.StudyNameAndRecruit;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.vo.NewHomeworkVO;
 import kr.co.studystory.vo.NewStudyNoticeVO;
+import kr.co.studystory.vo.FinishHwVO;
+import kr.co.studystory.vo.LeaderVO;
 import kr.co.studystory.vo.NewCommentVO;
 import kr.co.studystory.vo.RecruitVO;
 import kr.co.studystory.vo.SnAlarmVO;
+import kr.co.studystory.vo.SnModifiedVO;
 
 ////스터디 노티스 dao 정미
 @Component
@@ -57,6 +60,59 @@ public class StudyNoticeDAO {
 		}//end if
 		return ssf;
 	}//getSessionFactory
+	
+	/**
+	 * 리더 페이지에 접근한 유저가 스터디장인지 판단하는 메서드
+	 * by 영근
+	 */
+	public boolean selectAmILeader(LeaderVO lvo) {
+		boolean flag = false;
+		
+		SqlSession ss=getSessionFactory().openSession();
+		int cnt = ss.selectOne("amILeader",lvo);
+		flag = cnt == 1;
+		ss.close();
+		
+		return flag;
+	}
+	
+	/**
+	 * sn_num으로 스터디명을 조회하기
+	 * by 영근
+	 */
+	public String selectStudyNameBySnNum(String sn_num) {
+		
+		SqlSession ss=getSessionFactory().openSession();
+		String studyName = ss.selectOne("selectStudyNameBySnNum", sn_num);
+		ss.close();
+		
+		return studyName;
+	}
+	
+	/**
+	 * 공지 코멘트 수를 조회하는 메서드
+	 */
+	public int selectCommentNum(String sn_num) {
+		
+		SqlSession ss=getSessionFactory().openSession();
+		int cnt = ss.selectOne("selectCommentNum",sn_num);
+		ss.close();
+		
+		return cnt;
+	}
+	
+	public boolean addComment(NewCommentVO ncvo) {
+		boolean flag = false;
+		
+		SqlSession ss=getSessionFactory().openSession();
+		int cnt = ss.insert("insertSnComment", ncvo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		
+		return flag;
+	}
 	
 	//스터디 공지사항 페이지(참여자)
 	public List<StudyNotice> selectSnList(String studyNum){
@@ -95,24 +151,24 @@ public class StudyNoticeDAO {
 		return list;
 	}//selectComment
 	
-	public boolean updateHomework(String s) {
+	/**
+	 * 숙제 업데이트
+	 * by 영근
+	 */
+	public boolean updateHomework(FinishHwVO fvo) {
 		boolean flag= false;
 		
+		SqlSession ss= getSessionFactory().openSession();
+		int cnt = ss.update("updateHomework",fvo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
 		
 		return flag;
 	}//updateHomework
 	
-	public void insertComment(NewCommentVO nc_vo) {
-		int cnt=0;
-		
-		SqlSession ss= getSessionFactory().openSession();
-		cnt=ss.insert("insertSnComment", nc_vo);
-		if(cnt==1) {
-			ss.commit();
-		}//end if
-		ss.close();
-		
-	}//insertComment
 	/**
 	 * 리더, 모집상태 변경
 	 * by 영근
@@ -241,16 +297,37 @@ public class StudyNoticeDAO {
 		return snar;
 	}
 	
-	
-	
-	
-	public static void main(String[] args) {//테스트
-		StudyNoticeDAO sn_dao= new StudyNoticeDAO();
-		//sn_dao.selectSnList("s_000041");//카티션 곱 
-		//sn_dao.selectDetailSn("sn_000042");// 
-		//sn_dao.selectHomework("sn_000041"); //과제
-		//sn_dao.selectComment("sn_000084");// 댓글
+	/**
+	 * 스터디 공지사항을 수정하는 메서드
+	 * by 영근
+	 */
+	public boolean updateSn(SnModifiedVO smvo) {
+	boolean flag = false;
 		
+		SqlSession ss= getSessionFactory().openSession();
+		int cnt = ss.insert("updateSn",smvo);
+		if (cnt == 1) {
+			flag = true;
+			ss.commit();
+		}
+		ss.close();
+		
+		return flag;
 	}
+	
+	/**
+	 * 스터디 공지사항을 수정 시 
+	 * 기존 숙제를 삭제하는 메서드
+	 * by 영근
+	 */
+	public void deletePrevHw(String sn_num) {
+		SqlSession ss= getSessionFactory().openSession();
+		int cnt = ss.delete("deletePrevHw",sn_num);
+		if (cnt == 1) {
+			ss.commit();
+		}
+		ss.close();
+	}
+	
 	
 }//class

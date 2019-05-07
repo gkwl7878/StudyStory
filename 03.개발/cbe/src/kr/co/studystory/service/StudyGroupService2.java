@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.dao.StudyGroupDAO2;
+import kr.co.studystory.domain.JoinBbs;
 import kr.co.studystory.domain.MemberWithImg;
+import kr.co.studystory.vo.ApplicantBbsVO;
 
 /**
  * 스터디 참여자 보기 - 정미 
@@ -23,5 +25,12 @@ public class StudyGroupService2 {
 		
 		return list;
 	}//getMemberWithImg
+	
+	public List<JoinBbs> getJoinerList(ApplicantBbsVO abvo){
+		List<JoinBbs> list= null;
+		list=sg_dao.selectJoinerList(abvo);
+		
+		return list;
+	}//getJoinerList
 
 }
