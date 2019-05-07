@@ -19,6 +19,7 @@ import kr.co.studystory.domain.NickAndId;
 import kr.co.studystory.domain.StudyNameAndRecruit;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.service.StudyNoticeService;
+import kr.co.studystory.vo.LeaderVO;
 import kr.co.studystory.vo.NewHomeworkVO;
 import kr.co.studystory.vo.NewStudyNoticeVO;
 import kr.co.studystory.vo.RecruitVO;
@@ -35,6 +36,13 @@ public class LeaderSnController {
 		
 		if (session.getAttribute("id") == null) {
 			return "redirect:../index.do";
+		}
+		
+		// 리더인지 확인하고 리더가 아니면 접근을 막음(0507)
+		// id로 현재 스터디의 리더인지 조회
+		if (!sns.amILeader(new LeaderVO(s_num,(String)session.getAttribute("id")))) {
+			// 리더가 아니면 메인으로 이동
+			return "redirect:../study_info/main.do";
 		}
 		
 		List<StudyNotice> list = sns.getSnList(s_num);
