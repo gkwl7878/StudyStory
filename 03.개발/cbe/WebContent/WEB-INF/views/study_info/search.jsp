@@ -17,6 +17,7 @@
 <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 
 <title>Bootstrap Template By Young</title>
+
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;
@@ -39,42 +40,19 @@
 <script type="text/javascript">
 	$(function() {
 
+		// 찾기 버튼 눌렀을 때.
+		$("#search_btn").click(function() {
+			$("#search_frm").submit();
+		});//click
+
 		// 정렬이 바뛰었을 때.
 		$("#order_select").change(function() {
-			var order_select = $("#order_select").val();
-
-			$.ajax({
-				url : "../search/search_order_process.do",
-				data : "order=" + order_select,
-				type : "get",
-				dataType : "json", // 응답 받을 데이터.
-				error : function(xhr) {
-					alert("오류발생" + xhr.status + " / " + xhr.statusText);
-					console.log(xhr.status + " / " + xhr.statusText);
-				},
-				success : function(json) {
-					alert("정상동작");
-					$("#thumb_view").html("");
-				 	
-					
-				}// success
-			}); // ajax
-		});//change
-
-		// 필터 검색 버튼 눌렀을 때.
-		$("#search_btn").click(function() {
-
-			var loc_param = $("#loc_select").val();
-			var kind_param = $("#kind_select").val();
-
-			// 둘다 선택을 하지 않았을 때.
-			if (loc_param == "none" && kind_param == "none") {
-				location.href = "../search/search.do";
-				return;
-			}// end if
-			
 			$("#search_frm").submit();
-
+		});//change
+		
+		// 검색어 초기화.
+		$("#word_search_reset_btn").click(function() {
+			location.href = "../search/search.do";
 		}); // click
 
 	}); // ready
@@ -103,61 +81,78 @@
 			<div class="row justify-content-center">
 				<div class="col-auto" style="width: 1000px;">
 
+					<c:if test="${ not empty inputWord }">
+						<div class="row" style="height: 3em;">
+							<div class="row px-2 mx-3 w-100 border-top align-items-center">
+								<div class="mr-auto">
+									검색어 : <c:out value="${ inputWord }"/>
+								</div>
+								<input id="word_search_reset_btn" type="button" class="btn btn-sm btn-secondary ml-1" value="초기화"/>
+							</div>
+						</div>
+					</c:if>
 					<!-- 정렬바 row -->
 					<div class="row mb-3" style="height: 4em;">
 						<div class="row mx-3 w-100 border-top border-bottom align-items-center">
-
 							<!-- 필터검색 폼 -->
-							<form id="search_frm" class="form-row w-100" action="../search/search_process.do" method="get">
+							<form id="search_frm" class="form-row w-100" action="../search/search.do" method="get">
 								<div class="col-auto mr-auto">
-									<select id="order_select" class="form-control-sm">
-										<option value="최신순">최신순</option>
-										<option value="인기순">인기순</option>
+									<select id="order_select" name="order_select" class="form-control-sm">
+										<option value="최신순"${param.order_select eq '최신순'?"selected='selected'":""}>최신순</option>
+										<option value="인기순"${param.order_select eq '인기순'?"selected='selected'":""}>인기순</option>
 									</select>
 								</div>
+
 								<div class="col-auto">
 									<select id="loc_select" name="loc_select" class="form-control-sm">
 										<option value="none">지 역</option>
-										<option value="신촌">신 촌</option>
-										<option value="홍대">홍 대</option>
-										<option value="종각">종 각</option>
-										<option value="건대">건 대</option>
-										<option value="노원">노 원</option>
-										<option value="강남">강 남</option>
+										<option value="신촌"${param.loc_select eq '신촌'?"selected='selected'":""}>신 촌</option>
+										<option value="홍대"${param.loc_select eq '홍대'?"selected='selected'":""}>홍 대</option>
+										<option value="종각"${param.loc_select eq '종각'?"selected='selected'":""}>종 각</option>
+										<option value="건대"${param.loc_select eq '건대'?"selected='selected'":""}>건 대</option>
+										<option value="노원"${param.loc_select eq '노원'?"selected='selected'":""}>노 원</option>
+										<option value="강남"${param.loc_select eq '강남'?"selected='selected'":""}>강 남</option>
 									</select>
 								</div>
+
 								<div class="col-auto">
 									<select id="kind_select" name="kind_select" class="form-control-sm">
 										<option value="none">종 류</option>
-										<option value="언어">언 어</option>
-										<option value="취업">취 업</option>
-										<option value="취미">취 미</option>
-										<option value="기타">기 타</option>
+										<option value="언어"${param.kind_select eq '언어'?"selected='selected'":""}>언 어</option>
+										<option value="취업"${param.kind_select eq '취업'?"selected='selected'":""}>취 업</option>
+										<option value="취미"${param.kind_select eq '취미'?"selected='selected'":""}>취 미</option>
+										<option value="기타"${param.kind_select eq '기타'?"selected='selected'":""}>기 타</option>
 									</select>
 								</div>
-								<input id="search_btn" type="button" class="btn btn-sm btn-secondary ml-1" value="필터 검색" />
+								<c:if test="${ not empty inputWord }">
+									<input type="hidden" name="search_inputBox" value="${ inputWord }"/>
+								</c:if>
+								<input id="search_btn" type="button" class="btn btn-sm btn-secondary ml-1" value="찾기" />
 							</form>
 							<!-- 필터검색 폼 -->
-
 						</div>
 					</div>
 					<!-- 정렬바 row -->
 
 					<!-- 썸네일 row -->
-					<div id="thumb_view" class="row">
+					<div class="row">
+
+						<c:if test="${ empty thumbnail_list }">
+							조회할 수 있는 썸네일이 없습니다.
+						</c:if>
+
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 						<c:forEach var="thumbnail" items="${ thumbnail_list }">
 							<div class="col-md-4">
 								<div class="card mb-4 shadow-sm">
 									<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-									<a href="../detail/detail_study.do?sNum=${ thumbnail.sNum }">
-										<!-- 썸네일 스터디 이미지 --> 
-										<img class="card-img-top" src="http://localhost:8080/third_prj/resources/images/${ thumbnail.img }">
+									<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }"> <!-- 썸네일 스터디 이미지 --> <img class="card-img-top"
+										src="/third_prj/study_img/${ thumbnail.img }" style="height: 200px;" />
 										<div class="card-body text-center p-3">
 											<div class="d-flex justify-content-end align-items-center mb-3">
 												<div class="mr-5">
 													<!-- 썸네일 들록일 -->
-													<small class="text-muted">${ thumbnail.inputDate }</small>
+													<small class="text-muted">${ thumbnail.input_date }</small>
 												</div>
 												<!-- 썸네일 모집상태 - 진행중. -->
 												<small class="pr-1">모집상태</small>
@@ -165,14 +160,14 @@
 											<div class="px-3 border-bottom">
 												<p class="card-text pb-3">
 													<!-- 썸네일 제목부분 -->
-													<strong>${ thumbnail.studyName }</strong>
+													<strong>${ thumbnail.study_name }</strong>
 												</p>
 											</div>
 											<div class="d-flex justify-content-between align-items-center mt-3 px-2">
 
 												<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
 													<!-- 썸네일 리더의 이미지 -->
-													<%-- <img src="http://localhost:8080/third_prj/resources/images/${ thumbnail.userImg }" class="card-img-top w-100 rounded-circle"> --%>
+													<img src="/third_prj/profile_img/${ thumbnail.user_img }" class="card-img-top w-100 rounded-circle" style="width: 40px; height: 50px;">
 												</div>
 
 												<div class="border-right p-2">
@@ -191,7 +186,7 @@
 												</div>
 
 												<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
-												<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button" aria-pressed="false" autocomplete="off">좋아요</button>
+												<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="button">좋아요</button>
 											</div>
 										</div>
 									</a>
@@ -211,17 +206,32 @@
 		<!-- 페이지네이션 -->
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
-				<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
+				<!-- 이전 페이지 -->
+				<li class="page-item">
+					<a class="page-link" href="${ responseURL }&currentPage=${currentPage - 1}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<!-- 이전 페이지 -->
 
 				<!-- 페이지 번호 -->
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<c:forEach begin="1" end="${ totalPage }">
+					<c:set var="i" value="${ i + 1 }" />
+							<li class="page-item">
+								<a class="page-link" href="${ responseURL }&currentPage=${i}">
+									<c:out value="${ i }" />
+								</a>
+							</li>
+				</c:forEach>
 				<!-- 페이지 번호 -->
 
-				<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
+				<!-- 다음 페이지 -->
+				<li class="page-item">
+					<a class="page-link" href="${ responseURL }&currentPage=${currentPage + 1}" aria-label="Previous">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+				<!-- 다음 페이지 -->
 			</ul>
 		</nav>
 		<!-- 페이지네이션 -->

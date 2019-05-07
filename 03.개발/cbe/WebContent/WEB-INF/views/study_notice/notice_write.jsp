@@ -142,9 +142,7 @@
   			}
   			
   			$("[name='hwNick']").val(sendingNick);
-  			console.log(sendingNick);
   			$("[name='hwWorkload']").val(sendingWorkload);
-  			console.log(sendingWorkload);
   			
   			$("#writeFrm").submit();
   		});
@@ -178,7 +176,6 @@
   					"<tr><td width='100' style='text-align:center;'><span class='font12bold'>"+nick+"</span></td>"
   		  		+"<td width='400'><span class='font12bold' style='padding-left:20px;'>"+workload+"</span></td>"
   		  		+"<td width='100' style='text-align:right;'><a href='#'><img onclick='deleteHw(this)' src='/third_prj/resources/images/minus.png' style='width:20px; height:20px;'/></a></td></tr>"
-  		  		//+"<td width='100' style='text-align:right;'><a href='#'><img onclick='$(this).closest(\"tr\").remove();' src='/third_prj/resources/images/minus.png' style='width:20px; height:20px;'/></a></td></tr>"
   			);
   			
   			nickArr[i] = nick;
@@ -217,7 +214,7 @@
 	<form action="wrtie_process.do" method="post" id="writeFrm">
 	<input type="hidden" name="hwNick"/>
 	<input type="hidden" name="hwWorkload"/>
-	<input type="hidden" name="s_num" value="${ param.sNum }"/>
+	<input type="hidden" name="s_num" value="${ param.s_num }"/>
 	
 	<div class="container col-10" style="margin:0px auto; width:800px;">
     <div class="row">

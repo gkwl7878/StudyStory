@@ -14,11 +14,14 @@ import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
+import kr.co.studystory.vo.AddFavStudyVO;
 import kr.co.studystory.vo.DetailMenuVO;
+import kr.co.studystory.vo.FavStudyOrderVO;
 import kr.co.studystory.vo.JoinAlarmVO;
 import kr.co.studystory.vo.JoinFormVO;
+import kr.co.studystory.vo.RemoveFavStudyVO;
 import kr.co.studystory.vo.ReplyVO;
-import kr.co.studystory.vo.SearchSelectVO;
+import kr.co.studystory.vo.SearchListVO;
 
 /**
  * study_info에 관한 DAO.
@@ -86,13 +89,13 @@ public class StudyInfoDAO {
 	public StudyInfoDomain selectStudyInfo(String s_num) {
 		StudyInfoDomain s_info = null;
 		SqlSession ss = getSessionFatory().openSession();
-		
+
 		s_info = ss.selectOne("selectDetailStudy", s_num);
-		
+
 		s_info.setFavNum(ss.selectOne("selectFavNum", s_num));
-		
+
 		s_info.setMemberNum(ss.selectOne("selectMemberNum", s_num));
-		
+
 		ss.close();
 		return s_info;
 	}// selectStudyInfo
@@ -196,28 +199,20 @@ public class StudyInfoDAO {
 	 */
 	public boolean insertJoinForm(JoinFormVO jf_vo) {
 		boolean flag = false;
-
 		SqlSession ss = getSessionFatory().openSession();
-
 		JoinAlarmVO ja_vo = new JoinAlarmVO("스터디", "스터디 신청완료",
 				"\"" + jf_vo.getStudyName() + "\"에 가입 신청이 완료되었습니다.\n가입 신청이 수락되면 알림으로 알려드리겠습니다.", jf_vo.getJoinerId());
-
 		String joinerNick = ss.selectOne("selectJoinerNick", jf_vo.getJoinerId());
-
 		JoinAlarmVO ja_vo2 = new JoinAlarmVO("스터디", "스터디 가입요청",
 				"\"" + joinerNick + "\"님께서 " + jf_vo.getStudyName() + "에 가입 신청을 하셨습니다.", jf_vo.getLeaderNick());
-
 		int cnt = ss.insert("insertJoinFormVO", jf_vo);
 		cnt += ss.insert("insertJoinerAlarm", ja_vo);
 		cnt += ss.insert("insertLeaderAlarm", ja_vo2);
-
 		if (cnt == 3) {
 			ss.commit();
 			flag = true;
-		}
-
+		} // end if
 		ss.close();
-
 		return flag;
 	}// insertJoin
 
@@ -236,54 +231,83 @@ public class StudyInfoDAO {
 		return list;
 	}// selectHotStudies()
 
-	public boolean insertLikeStudy() {
-		SqlSession ss = getSessionFatory().openSession();
-		ss.close();
-		return false;
-	}// insertLikeStudy
-
-	public boolean deleteLikeStudy() {
-		SqlSession ss = getSessionFatory().openSession();
-		ss.close();
-		return false;
-	}// insertLikeStudy
-
 	/**
 	 * 내 관심 스터디 썸네일 조회.
 	 * 
 	 * @param my_id
 	 * @return List<ThumbnailDomain>
 	 */
-	public List<ThumbnailDomain> selectMyFavStudy(String my_id) {
+	public List<ThumbnailDomain> selectMyFavStudy(FavStudyOrderVO fso_vo) {
 		List<ThumbnailDomain> list = null;
 		SqlSession ss = getSessionFatory().openSession();
-		list = ss.selectList("selectFavStudy", my_id);
+		list = ss.selectList("selectFavStudy", fso_vo);
 		ss.close();
 		return list;
 	}// selectMyFavStudy
 
 	/**
-	 * 최신순으로 썸네일 조회.
+	 * 관심 스터디로 추가하기.
 	 * 
+	 * @param afs_vo
 	 * @return
 	 */
-	public List<ThumbnailDomain> selectThumbLatest() {
-		List<ThumbnailDomain> list = null;
+	public int insertFavStudy(AddFavStudyVO afs_vo) {
+		int resultCnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
-		list = ss.selectList("selectThumbLatest");
-		return list;
-	}// selectThumbLatest
+		resultCnt = ss.insert("insertFavStudy", afs_vo);
+		// 정상적으로 추가가 되었을 경우 커밋하기.
+		if (resultCnt == 1) {
+			ss.commit();
+		} // end if
+		ss.close();
+		return resultCnt;
+	}// insertFavStudy
 
 	/**
-	 * 검색 조건에 따흔 썸네일 조회.
+	 * 내 관심 스터디 제거.
+	 * 
+	 * @param sNum
+	 */
+	public int deleteFavStudy(RemoveFavStudyVO rfa_vo) {
+		int resultCnt = 0;
+		SqlSession ss = getSessionFatory().openSession();
+		resultCnt = ss.delete("deleteFavStudy", rfa_vo);
+		if (resultCnt == 1) {
+			ss.commit();
+		} // end if
+		ss.close();
+		return resultCnt;
+	}// deleteFavStudy
+
+	/////////////////////////// 스터디 찾기
+
+	/**
+	 * 검색되는 썸네일의 갯수 조회.
 	 * 
 	 * @return
 	 */
-	public List<ThumbnailDomain> selectConditionalThumbList(SearchSelectVO ss_vo) {
+	public int selectSearchListCnt(SearchListVO sl_vo) {
+		int cnt = 0;
+		SqlSession ss = getSessionFatory().openSession();
+		cnt = ss.selectOne("selectSearchListCnt", sl_vo);
+		ss.close();
+		return cnt;
+	}// selectTotalThumbCnt
+
+	/**
+	 * 검색되는 썸네일 조회.
+	 * 
+	 * @param sl_vo
+	 * @return
+	 */
+	public List<ThumbnailDomain> selectSearchList(SearchListVO sl_vo) {
 		List<ThumbnailDomain> list = null;
 		SqlSession ss = getSessionFatory().openSession();
-		list = ss.selectList("selectThumbCon", ss_vo);
+		list = ss.selectList("selectSearchList", sl_vo);
+		ss.close();
 		return list;
-	}// selectConditionThumb
+	}// selectSearchList
+
+	/////////////////////////// 스터디 찾기
 
 }// class

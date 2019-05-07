@@ -13,6 +13,7 @@ import kr.co.studystory.domain.SnComment;
 import kr.co.studystory.domain.StudyNameAndRecruit;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.vo.FinishHwVO;
+import kr.co.studystory.vo.LeaderVO;
 import kr.co.studystory.vo.NewCommentVO;
 import kr.co.studystory.vo.NewHomeworkVO;
 import kr.co.studystory.vo.NewStudyNoticeVO;
@@ -24,6 +25,19 @@ public class StudyNoticeService {
 	@Autowired
 	private StudyNoticeDAO sn_dao;
 	
+	/**
+	 * 스터디장인지 조회하는 메서드
+	 * by 영근
+	 */
+	public boolean amILeader(LeaderVO lvo) {
+		boolean flag = false;
+		
+		if(sn_dao.selectAmILeader(lvo)) {
+			flag = true;
+		}
+		
+		return flag;
+	}
 	
 	/**
 	 * snNum으로 스터디명 조회하기
@@ -53,8 +67,6 @@ public class StudyNoticeService {
 	public List<Homework> getHomework(String sn_num){
 		List<Homework> list= null;
 		list=sn_dao.selectHomework(sn_num);
-		
-		
 		return list;
 	}//getHomework
 	

@@ -33,6 +33,10 @@ public class UseModifyController {
 	@RequestMapping(value="/common/modify_info.do", method= { GET,POST })
 	public String userInfoModifyForm(HttpSession session, Model model) {
 		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		String id = (String)session.getAttribute("id");
 		
 		String url = "redirect:user_modify_menu.do";
@@ -58,7 +62,11 @@ public class UseModifyController {
 	}
 	
 	@RequestMapping(value="/common/modify_info_process.do", method=POST)
-	public String userInfoChange(ModifiedUserInfoVO muivo, Model model) {
+	public String userInfoChange(HttpSession session, ModifiedUserInfoVO muivo, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		String encPass = CommonService.shaEncoding(muivo.getPass());
 		muivo.setPass(encPass);
@@ -73,12 +81,22 @@ public class UseModifyController {
 	}
 	
 	@RequestMapping(value="/common/modify_pass.do", method= { GET, POST })
-	public String changePassForm() {
+	public String changePassForm(HttpSession session) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		return "common/modify_pass";
 	}
 	
 	@RequestMapping(value="/common/modify_pass_process.do", method=POST)
 	public String changePassProcess(ModifiedPassVO mpvo, HttpSession session, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		String url = "common/modify_pass";
 		
 		String encPass = CommonService.shaEncoding(mpvo.getPass());

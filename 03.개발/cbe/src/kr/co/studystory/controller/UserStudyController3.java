@@ -26,6 +26,10 @@ public class UserStudyController3 {
 	@RequestMapping(value="/study_group/my_study.do", method= { GET,POST })
 	public String myStudyPage(ConditionVO cvo, HttpSession session, Model model) {
 		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		if (cvo.getCategory() == null) {
 			cvo.setCategory("none");
 		}
@@ -69,6 +73,10 @@ public class UserStudyController3 {
 	@RequestMapping(value="/study_group/study_i_made.do", method= { GET, POST })
 	public String studyImadePage(HttpSession session, ConditionVO cvo, Model model) {
 
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		cvo.setId((String)session.getAttribute("id"));
 		
 		if (cvo.getCategory() == null) {

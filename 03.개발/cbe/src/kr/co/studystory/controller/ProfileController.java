@@ -1,5 +1,8 @@
 package kr.co.studystory.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,12 +18,6 @@ import kr.co.studystory.service.CommonService;
 import kr.co.studystory.vo.ProfileImgVO;
 import kr.co.studystory.vo.ProfileVO;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.io.File;
-import java.io.IOException;
-
 @Controller
 public class ProfileController {
 	
@@ -29,6 +26,11 @@ public class ProfileController {
 
 	@RequestMapping(value="common/profile.do",method= { GET, POST })
 	public String profileForm(HttpSession session, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		String url = "common/my_profile";
 		PrevProfile pv = cs.getProfile((String)session.getAttribute("id"));
 		model.addAttribute("prevProfile", pv);
@@ -44,6 +46,10 @@ public class ProfileController {
 	@RequestMapping(value="common/upload_img_process.do",method=POST)
 	public String profileUpload(ProfileImgVO pivo, HttpServletRequest request, HttpSession session, Model model) {
 
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		String newFileName = cs.uploadNewImg(request);
 		
 		model.addAttribute("uploadFlag", false);
@@ -66,6 +72,10 @@ public class ProfileController {
 	
 	@RequestMapping(value="common/profile_process.do",method=POST)
 	public String profileChange(ProfileVO pv, HttpSession session, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		pv.setId((String)session.getAttribute("id"));
 		

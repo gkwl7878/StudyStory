@@ -8,6 +8,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import javax.servlet.http.HttpSession;
+
 @SessionAttributes({ "id", "nick" })
 @Controller
 public class CommonController {
@@ -18,18 +20,36 @@ public class CommonController {
 	}
 	
 	@RequestMapping(value="common/agreement.do", method=GET)
-	public String agreement() {
-		return "common/agreement";
+	public String agreement(HttpSession session) {
+		
+		String url = "common/agreement";
+		if (session.getAttribute("id") == null) {
+			url="redirect:../index.do";
+		}
+		
+		return url;
 	}
 	
 	@RequestMapping(value="common/faq.do", method=GET)
-	public String faqPage() {
-		return "common/faq";
+	public String faqPage(HttpSession session) {
+		
+		String url = "common/faq";
+		if (session.getAttribute("id") == null) {
+			url="redirect:../index.do";
+		}
+		
+		return url;
 	}
 	
 	@RequestMapping(value="common/introduction.do", method=GET)
-	public String introduction() {
-		return "common/service_info";
+	public String introduction(HttpSession session) {
+		
+		String url = "common/service_info";
+		if (session.getAttribute("id") == null) {
+			url="redirect:../index.do";
+		}
+		
+		return url;
 	}
 	
 	@RequestMapping(value="/logout.do", method=GET)
