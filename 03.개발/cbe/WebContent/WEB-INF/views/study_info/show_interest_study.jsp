@@ -65,16 +65,13 @@
 			$("#" + sNum + "_like_btn").attr("class",
 					"btn btn-sm btn-outline-secondary active");
 		}// end if
-
 	}// dislikeProcess
 
 	// ready 입니다.
 	$(function() {
-
 		$("#fav_search_btn").click(function() {
 			$("#fav_search_frm").submit();
 		});// click
-
 	}); // ready
 </script>
 
@@ -151,7 +148,7 @@
 						<c:forEach var="thumbnail" items="${ thumbnail_list }">
 							<div id="${ thumbnail.s_num }_thumb" class="thumb col-md-4">
 								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-								<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }" style="color: #333;">
+								<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }" style="color: #333; text-decoration: none;">
 									<div class="card mb-4 shadow-sm">
 										<!-- 썸네일 스터디 이미지 -->
 										<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="height: 200px;" />

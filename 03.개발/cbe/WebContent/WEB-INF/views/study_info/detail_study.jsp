@@ -47,17 +47,13 @@
 						return;
 					}// end if
 					
-					
-					
 					// 댓글을 입력된 경우.
 					if (input_reply != "") {
 						
 						$.ajax({
-							//var query_string = "sNum=" + $("[name='ref_num']").val() + "&reply=" + input_reply;
-							
 							url : "../detail/add_reply.do?",
 							data : "sNum=" + $("[name='ref_num']").val() + "&reply=" + input_reply,
-							type : "get",
+							type : "post",
 							dataType : "json", // 응답 받을 데이터.
 							error : function(xhr) {
 								alert("댓글 작성 실패" + $("[name='num_ref']").val() );
@@ -65,14 +61,11 @@
 							},
 							success : function(json) {
 								if (json.result) {
-									alert("댓글이 정상적으로 동록 되었습니다.");
 									
+									alert("댓글이 정상적으로 동록 되었습니다.");
 									// 첫 번쨰 리플의 태그를 가져오기.
 									var new_reply = $("#reply_row1").html();
 									
-									// new_reply.find("#writer").text("${ sessionScope.nick }");
-									// new_reply.find("#content").text(input_reply);
-									$("#reply_list").prepend("<li id='reply_row' class='media' style='padding-bottom: 20px'>" + new_reply + "</li>");
 								}// end if
 							}// success
 						}); // ajax

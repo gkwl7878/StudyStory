@@ -78,7 +78,7 @@ public class StudyInfoController {
 	 * @return
 	 */
 	@ResponseBody // DispatcherServlet을 거치지 않고 바로 응답.
-	@RequestMapping(value = "/detail/add_reply.do", method = GET)
+	@RequestMapping(value = "/detail/add_reply.do", method = POST)
 	public String studyInfoReply(ReplyVO r_vo, HttpSession session) {
 		JSONObject json = null;
 

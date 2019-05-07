@@ -13,6 +13,7 @@ import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
 import kr.co.studystory.vo.AddFavStudyVO;
 import kr.co.studystory.vo.DetailMenuVO;
+import kr.co.studystory.vo.FavSNumFlagVO;
 import kr.co.studystory.vo.FavStudyOrderVO;
 import kr.co.studystory.vo.JoinFormVO;
 import kr.co.studystory.vo.RemoveFavStudyVO;
@@ -127,9 +128,10 @@ public class StudyInfoService {
 
 		String changedNick = "";
 		String changedStudyName = "";
+		
 		// 보여줄 글자 길이 조정.
 		for (ThumbnailDomain td : list) {
-
+			
 			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
 			if (td.getStudy_name().length() > 14) {
 				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
@@ -146,7 +148,7 @@ public class StudyInfoService {
 
 		return list;
 	}// getMyInterestStudy
-
+	
 	/**
 	 * 좋아요 눌렀을 때.
 	 * 
@@ -184,15 +186,22 @@ public class StudyInfoService {
 	 * 
 	 * @return List<ThumbnailDomain>
 	 */
-	public List<ThumbnailDomain> getThumbnailList() {
+	public List<ThumbnailDomain> getThumbnailList(FavSNumFlagVO fsf_vo) {
 		List<ThumbnailDomain> list = null;
 		list = si_dao.selectThumbnailList();
 
 		String changedNick = "";
 		String changedStudyName = "";
 
-		// 보여줄 글자 길이 조정.
 		for (ThumbnailDomain td : list) {
+			
+			fsf_vo.setMyFavSNum(td.getS_num());
+
+			System.out.println("//////////////////////////////// 서비스 : " + fsf_vo.getMyFavSNum());
+			
+			if(si_dao.selectMyFavSNum(fsf_vo)) {
+				td.setFavFlag(true);
+			}// end if
 
 			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
 			if (td.getStudy_name().length() > 14) {
@@ -230,7 +239,7 @@ public class StudyInfoService {
 	 * @param sl_vo
 	 * @return
 	 */
-	public List<ThumbnailDomain> getSearchList(SearchListVO sl_vo) {
+	public List<ThumbnailDomain> getSearchList(SearchListVO sl_vo, FavSNumFlagVO fsf_vo) {
 		List<ThumbnailDomain> list = null;
 		list = si_dao.selectSearchList(sl_vo);
 
@@ -239,6 +248,12 @@ public class StudyInfoService {
 
 		// 보여줄 글자 길이 조정.
 		for (ThumbnailDomain td : list) {
+			
+			fsf_vo.setMyFavSNum(td.getS_num());
+
+			if(si_dao.selectMyFavSNum(fsf_vo)) {
+				td.setFavFlag(true);
+			}// end if
 
 			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
 			if (td.getStudy_name().length() > 14) {
