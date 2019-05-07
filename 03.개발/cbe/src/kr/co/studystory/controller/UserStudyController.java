@@ -28,7 +28,12 @@ public class UserStudyController {
 	
 	//새 스터디 개설하기 
 	@RequestMapping(value="study_group/create_study.do", method=GET )
-	public String createStudyPage() {
+	public String createStudyPage(HttpSession session) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		return "study_group/study_create";
 	}//createStudyPage
 	
@@ -52,6 +57,10 @@ public class UserStudyController {
 	@RequestMapping(value="study_group/create_study_process.do", method=POST)
 	public String createStudyProcess(NewStudyVO ns_vo,HttpSession session,HttpServletRequest request, Model model) {
 		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		String id=(String)session.getAttribute("id");
 		ns_vo.setId(id);
 		
@@ -65,11 +74,6 @@ public class UserStudyController {
 		
 		return url;
 	}//createStudyProcess
-	
-	@RequestMapping(value="study_group/request_study.do", method=RequestMethod.POST )
-	public String RequestStudyPage() {
-		return "study_group/study_create_request";
-	}//createStudyPage
 	
 	//내 스터디 수정하기
 	@RequestMapping(value="study_group/modify_study.do", method=GET )

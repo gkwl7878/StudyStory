@@ -2,6 +2,8 @@ package kr.co.studystory.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,11 @@ public class NoticeController {
 	private CommonBbsService cbs;
 	
 	@RequestMapping("/common_bbs/notice.do")
-	public String noticeBbs(NoticeBbsVO nbvo, Model model) {
+	public String noticeBbs(HttpSession session, NoticeBbsVO nbvo, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		if(nbvo.getSearchWord() == null) {
 			nbvo.setSearchWord("");
@@ -70,7 +76,11 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/common_bbs/detail_notice.do")
-	public String noticeDetail(NoticePagingVO npvo, Model model) {
+	public String noticeDetail(HttpSession session, NoticePagingVO npvo, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		String n_num = npvo.getN_num();
 		String currPage = npvo.getCurrPage();

@@ -6,6 +6,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +31,11 @@ public class LeaderSnController {
 	private StudyNoticeService sns;
 	
 	@RequestMapping(value="/study_notice/notice_list_leader.do", method= { GET, POST })
-	public String leaderSnList(String s_num, Model model) {
+	public String leaderSnList(HttpSession session, String s_num, Model model) {
 		
-		System.out.println("==========="+s_num);
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		List<StudyNotice> list = sns.getSnList(s_num);
 		
@@ -45,7 +49,11 @@ public class LeaderSnController {
 	}//leaderSnList
 	
 	@RequestMapping(value="/study_notice/change_recruit.do", method=POST)
-	public String changeRecruit(RecruitVO rvo, Model model) {
+	public String changeRecruit(HttpSession session, RecruitVO rvo, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		if(sns.changeRecruit(rvo)) {
 			model.addAttribute("recruitChanged", true);
@@ -55,7 +63,11 @@ public class LeaderSnController {
 	}
 	
 	@RequestMapping(value="/study_notice/wrtie.do", method= { GET, POST })
-	public String leaderWrite(String s_num, Model model) {
+	public String leaderWrite(HttpSession session, String s_num, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		List<NickAndId> list = sns.getMember(s_num);
 		model.addAttribute("nickAndIdList", list);
@@ -65,7 +77,11 @@ public class LeaderSnController {
 	
 	
 	@RequestMapping(value="/study_notice/wrtie_process.do", method=POST)
-	public String leaderWriteProcess(NewStudyNoticeVO nsnvo, String hwNick, String hwWorkload, Model model) {
+	public String leaderWriteProcess(HttpSession session, NewStudyNoticeVO nsnvo, String hwNick, String hwWorkload, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		if(sns.addNewSn(nsnvo)) {
 			String sn_num = sns.getLatestSnNum(nsnvo.getS_num());
@@ -116,7 +132,11 @@ public class LeaderSnController {
 	}
 	
 	@RequestMapping(value="/study_notice/modify.do", method=GET)
-	public String leaderModifySn(String sn_num, String s_num, Model model) {
+	public String leaderModifySn(HttpSession session, String sn_num, String s_num, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		DetailStudyNotice dsn= sns.getDetailSn(sn_num);
 		List<Homework> hwList = sns.getHomework(sn_num);
@@ -132,7 +152,11 @@ public class LeaderSnController {
 	}
 	
 	@RequestMapping(value="/study_notice/modify_process.do", method=POST)
-	public String leaderModifyProcess(SnModifiedVO smvo, String s_num, String hwNick, String hwWorkload, Model model) {
+	public String leaderModifyProcess(HttpSession session, SnModifiedVO smvo, String s_num, String hwNick, String hwWorkload, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		if(sns.modifySn(smvo)) {
 			String sn_num = smvo.getSn_num();
