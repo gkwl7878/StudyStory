@@ -56,7 +56,7 @@
 		   			 <div style="float:left;" class="card-title">
 		   			 	<strong>${ studyNotice.subject }</strong>&nbsp;&nbsp;
 		   			 	<span style="color:#E36539">
-		   			 		<c:out value="${ studyNotice.commentNum }"/>
+		   			 		<c:out value="${ studyNotice.commentNum eq '0' ? '' : studyNotice.commentNum}"/>
 		   			 	</span>
 		   			 </div>
 		   			 <br/>
