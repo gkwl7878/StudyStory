@@ -54,6 +54,21 @@ public class CommonBbsDAO {
 	}
 	
 	/**
+	 * 네비바 이미지를 바꾸기 위해 새로운 알람이 있는지 확인하는 메서드
+	 * by 영근 0507
+	 */
+	public boolean selectNewAlarmFlag(String id) {
+		boolean flag = false;
+		
+		SqlSession ss = CommonBbsDAO.getInstance().getSqlSessionFactory().openSession();
+		int cnt = ss.selectOne("selectNewAlarmFlag", id);
+		flag = cnt != 0;
+		ss.close();
+		
+		return flag;
+	}
+	
+	/**
 	 * 새 알람(네비에 있는) 눌렀을 때 안읽은 알람을 조회하는 메서드
 	 * by 영근 190425
 	 */

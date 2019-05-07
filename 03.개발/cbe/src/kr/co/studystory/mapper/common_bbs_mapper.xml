@@ -11,6 +11,12 @@
 		       WHERE ID=#{ id } AND READ_FLAG ='N')
 		WHERE R_NUM BETWEEN 1 AND 3
 	</select>
+		
+	<select id="selectNewAlarmFlag" parameterType="String" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM alarm
+		WHERE id=#{ id } AND read_flag = 'N'
+	</select>
 	
 	<select id="selectAlarmTotal" resultType="int" parameterType="String">
 		SELECT COUNT(*) cnt
