@@ -64,7 +64,24 @@
 									
 									alert("댓글이 정상적으로 동록 되었습니다.");
 									// 첫 번쨰 리플의 태그를 가져오기.
-									var new_reply = $("#reply_row1").html();
+									/* <!-- 댓글 하나 -->
+									<li id="reply_row${ i }" class="media" style="padding-bottom: 20px">
+										<!-- 댓글을 쓴 사용자의 이미지 -->
+										<div style="width: 100px; height: 100px; background-color: #F0F0F0; margin-right: 20px">
+											<img id="writer_img" alt="" src="">
+										</div>
+										<div class="media-body row">
+											<div class="col-lg-10">
+												<!-- 댓글 쓴 사용자의 이름. -->
+												<h5 id="writer" class="mt-0 mb-1">${ s_comment.id }</h5>
+												<!-- 댓글의 내용. -->
+												<div id="content">${ s_comment.s_comment }</div>
+											</div>
+											<!-- 댓글의 입력일 -->
+											<div id="w_date" class="col-lg-2" style="font-size: 12px;">${ s_comment.input_date }</div>
+										</div>
+									</li>
+									<!-- 댓글 하나 --> */
 									
 								}// end if
 							}// success
@@ -108,8 +125,6 @@
 						<strong>상세 정보</strong>
 					</div>
 					<div class="col-lg-9">
-
-						<!-- private int favNum, memberNum; // 좋아요 갯수, 스터디 참여자 수. -->
 
 						<div class="row">
 							<!-- 스터디 지역 -->
