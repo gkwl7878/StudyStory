@@ -102,16 +102,14 @@ $(function() {
 				<div class="row">
 					<div class="col-11"></div>
 					<div class="col-1" >
-					<a class="btn btn-sm btn-secondary" href="write_notice_page.do?currPage=${currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchWord=${param.searchWord}
+					<a class="btn btn-sm btn-secondary" href="write_notice_page.do?currPage=${currPage}&searchWord=${param.searchWord}
 									" role="button" style="margin-left: 10px;">글쓰기</a>
 					</div>
 				</div>
 				<div class="d-flex justify-content-center">
 					<ul class="pagination">
 						<li class="paginate_button page-item previous ${ forwardFlag ? '' : 'disabled' }" id="dataTable_previous">
-							<a href="notice_mng.do?currPage=${ startPage-1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a>
+							<a href="notice_mng.do?currPage=${ startPage-1 }&searchWord=${param.searchWord}" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a>
 						</li>
 						<c:forEach var="i" step="1" begin="${ startPage }" end="${ endPage }">
 							<li class="paginate_button page-item ${ currPage == i ? 'active' : '' }">
@@ -121,7 +119,7 @@ $(function() {
 							</li>
 						</c:forEach>
 						<li class="paginate_button page-item next ${ backwardFlag ? '' : 'disabled' }" id="dataTable_next">
-							<a href="notice_mng.do?currPage=${ endPage+1 }" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
+							<a href="notice_mng.do?currPage=${ endPage+1 }&searchWord=${param.searchWord}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
 						</li>
 					</ul>
 				</div>
