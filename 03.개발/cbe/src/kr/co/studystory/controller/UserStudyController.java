@@ -82,6 +82,8 @@ public class UserStudyController {
 	@RequestMapping(value="study_group/modify_study.do", method=GET )
 	public String modifyStudyPage(String s_num, Model model ) {
 		
+	/*	String url="";*/
+		
 		PrevStudyInfo psInfo=sgs.getPrevStudy(s_num);
 		if(psInfo !=null) {
 			String name=psInfo.getName();
