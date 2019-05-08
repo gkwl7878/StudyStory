@@ -73,9 +73,10 @@ public class StudyGroupService {
 	/**
 	 * 내 스터디 수정하기 -혜원
 	 */
-	public void deletePreImg(String s_num) {
-		
-	}
+/*	public String deletePreImg(String sNum) {
+		String preImg= sg_dao.selectPreImg(sNum);
+		return preImg;
+	}*/
 	
 	
 	public PrevStudyInfo getPrevStudy(String s_num) {

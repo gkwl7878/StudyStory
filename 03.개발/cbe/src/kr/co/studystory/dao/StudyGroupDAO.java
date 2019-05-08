@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
+import kr.co.studystory.admin.dao.StudyAndUserDAO;
 import kr.co.studystory.domain.AppliedStudy;
 import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
@@ -113,6 +114,13 @@ public class StudyGroupDAO {
 		return flag;
 	}
 	
+/*	//전에갖고있는이미지 삭제
+	public String selectPreImg(String sNum) {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		String preImg= ss.selectOne("selectPreImage",sNum);
+		return preImg;
+	}
+	*/
 	//스터디 탈퇴
 	public String selectLeaderId(String s_num) {
 		String id="";

@@ -3,6 +3,9 @@ package kr.co.studystory.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.service.StudyGroupService;
@@ -79,10 +85,13 @@ public class UserStudyController {
 	}//createStudyProcess
 	
 	//내 스터디 수정하기
-	@RequestMapping(value="study_group/modify_study.do", method=GET )
-	public String modifyStudyPage(String s_num, Model model ) {
+	@RequestMapping(value="study_group/modify_study.do", method= {GET,POST} )
+//	public String modifyStudyPage(ModifiedStudyVO ms_vo, Model model ) {
+		public String modifyStudyPage(String sNum, Model model ) {
 		
-		PrevStudyInfo psInfo=sgs.getPrevStudy(s_num);
+	/*	String url="";*/
+		
+		PrevStudyInfo psInfo=sgs.getPrevStudy(sNum);
 		if(psInfo !=null) {
 			String name=psInfo.getName();
 			String loc=psInfo.getLoc();
@@ -99,12 +108,6 @@ public class UserStudyController {
 			model.addAttribute("ps_info",psInfo);
 		}
 		
-		/*model.addAttribute("name",psInfo.getName());
-		model.addAttribute("loc",psInfo.getLoc());
-		model.addAttribute("category",psInfo.getCategory());
-		model.addAttribute("content",psInfo.getContent());
-		model.addAttribute("img",psInfo.getImg());*/
-		
 		return "study_group/study_modify";
 	}//createStudyPage
 	
@@ -112,20 +115,44 @@ public class UserStudyController {
 	public String modifyStudyProcess(ModifiedStudyVO ms_vo, HttpServletRequest request, Model model) {
 
 		
-		String url="study_group/study_modify";
+		String url="forward:modify_study.do";
 		
-		String s_num=request.getParameter("s_num");//
-		String content= ms_vo.getContent();
-		String img= ms_vo.getImg();
-		
-		ms_vo.setsNum(s_num);
-		ms_vo.setContent(content);
-		ms_vo.setImg(img);
-		
-		
+		// 파일 업로드
+				MultipartRequest mr=null;
+				try {
+					mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/",
+							1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				String img= mr.getFilesystemName("file");
+				String sNum = mr.getParameter("sNum");
+				String content= mr.getParameter("content");
+				ms_vo.setContent(content);
+				ms_vo.setImg(img);
+				ms_vo.setsNum(sNum);
+			/*	String preImg= sgs.deletePreImg(sNum);
+				
+				
+				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
+				System.out.println(preImg+"+++++++++++++++++++++++++++++++++++++");
+				if(!(preImg.equals("no_study_img.png"))){
+						if(file.exists()||img!=null) {
+						file.delete();
+					}else {
+						System.out.println("파일이 존재하지 않습니다.");
+					}
+				}*/
+				
+			/*	if(img==null) {
+					img ="no_study_img.png";
+				}*/
+				
+				
 		if(sgs.modifyStudy(ms_vo)) {
-			url="/study_notice/notice_list_leader";
+			url="study_group/study_i_made";
 			model.addAttribute("successFlag",true);
+			System.out.println("----------");
 		}else {
 			model.addAttribute("failFlag",true);
 		}

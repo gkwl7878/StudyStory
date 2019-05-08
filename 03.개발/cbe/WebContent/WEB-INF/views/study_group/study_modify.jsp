@@ -44,6 +44,12 @@
 
 <script type="text/javascript">
 	$(function() {
+		
+		 <c:if test="${failFlag}">
+			alert("수정에 실패했습니다.");
+		</c:if>
+		
+		
 		$("#modifyBtn").click(function() {
 			
 			if ($("#detail").val() == "") {
@@ -75,24 +81,21 @@
 		}
 	}
 </script>
-
 </head>
 <body>
 	<!-- header -->
 	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 		  <!-- 점보트론 : 전광판 -->
-    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+    <section class="text-center bg-white mb-0" style="margin-top:100px; margin-bottom:20px;">
        <div class="container">
           <h1 class="jumbotron-heading">내 스터디 수정하기</h1>
        </div>
     </section>
-    <div style="height:20px;"></div>
     <!-- 점보트론 : 전광판 -->
-
 <form id="modifyFrm" action="modify_study_process.do" method="post" enctype="multipart/form-data">	
 	<div id="wrap">
 <input type="hidden" name="s_num" value="${ s_num }"/>
-		<div class="row" style="margin-top: 30px;">
+		<div class="row" style="margin-top: 0px;">
 			<img alt="" src="/third_prj/resources/images/name.png" style="width: 35px; height: 33px; margin-right: 12px;"><label style="font-size: 20px; margin-right: 20px;"><strong>이름</strong></label>
 			<div class="col-sm-10">
 				<input id="name" name="name" type="text" class="form-control" style="margin-bottom: 30px;" readonly="readonly" value="${name}">
@@ -132,7 +135,7 @@
 			</label>
 			<div class="font20bold">
 				<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> <input type="text" id='file_sub' style="width: 700px; border: 0px; display: none"> <a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;">
-				<img width="700" height="300" id="img" src="http://localhost:8080/third_prj/resources/images/${img }" border="0" title='찾아보기' alt='찾아보기'></a>
+				<img width="700" height="300" id="img" src="http://localhost:8080/third_prj/study_img/${img }" border="0" title='찾아보기' alt='찾아보기'></a>
 			</div>
 		</div>
 

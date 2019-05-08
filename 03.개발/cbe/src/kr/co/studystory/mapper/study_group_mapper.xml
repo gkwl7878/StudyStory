@@ -57,6 +57,12 @@
   where s_num=#{sNum}
   </update>
 
+<!-- <select id="selectPreImage" resultType="String" parameterType="String">
+	select img
+	from   study
+	where  s_num=#{sNum,jdbcType=VARCHAR}
+</select> -->
+
 <!--스터디 탈퇴  -->
 
  <select id="selectLeaderId">
