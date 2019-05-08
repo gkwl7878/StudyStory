@@ -121,7 +121,7 @@ public class StudyGroupDAO2 {
 		int cnt=0;
 		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
 		JoinAlarmVO ja_vo=new JoinAlarmVO("½ºÅÍµð","½ºÅÍµð °¡ÀÔ ½Â³«µÊ",
-			"\"" + javo.	)
+			"\"" + nmvo.getS_num()	)
 		cnt=ss.insert("insertJoinedAlarm",javo);
 		
 		
