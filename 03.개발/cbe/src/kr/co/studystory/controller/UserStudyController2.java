@@ -12,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.studystory.domain.JoinBbs;
+import kr.co.studystory.domain.Joiner;
 import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.service.StudyGroupService2;
 import kr.co.studystory.vo.ApplicantBbsVO;
+import kr.co.studystory.vo.DetailJoinerVO;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class UserStudyController2 {
@@ -44,22 +49,73 @@ public class UserStudyController2 {
 		return "study_group/show_participants";
 	}//studyMemberPage
 	
-	@RequestMapping(value="/study_group/new_joiner.do",method=RequestMethod.GET)
+	@RequestMapping(value="/study_group/new_joiner.do",method= {GET, POST})
 	public String appliedMemberPage(HttpSession session, ApplicantBbsVO abvo, Model model) {
 		
-		if (session.getAttribute("id") == null) {
-			return "redirect:../index.do";
+	if (session.getAttribute("id") == null) {
+		return "redirect:../index.do";
+	}
+	
+		if(abvo.getCurrPage()==0) {
+			abvo.setCurrPage(1);
 		}
+		String s_num=abvo.getS_num();
+		
+		int currPage= abvo.getCurrPage();
+		int totalCnt=sgs.getJoinerTotal(s_num);            //
+		int begin = sgs.beginNum(currPage);
+		int end = sgs.endNum(begin);
+		
+		System.out.println(totalCnt+"ÅäÅ» cnt");//ÅäÅ» cnt´Â Àß ³ª¿È
+		int pageScale=sgs.pageScale();
+		
+		abvo.setBegin(begin);
+		abvo.setEnd(end);
 		
 		List<JoinBbs> jb=sgs.getJoinerList(abvo);
 		
-		model.addAttribute("total",jb.size());
+		int totalPage=sgs.getTotalPage(totalCnt);
+		int pageIndexNum =sgs.pageIndexNum();
+		int startPage= sgs.startPage(currPage, pageIndexNum);
+		int endPage=sgs.endPage(startPage, pageIndexNum, totalPage);
+		
+		model.addAttribute("forwardFlag", false);
+		model.addAttribute("backwardFlag", false);
+		
+		if(currPage>pageIndexNum) {
+			model.addAttribute("forwardFlag",true);
+		}
+		if(totalPage>endPage) {
+			model.addAttribute("backwardFlag",true);
+		}
+		
+		model.addAttribute("total",jb.size());///??ÇÊ¿ä¾ø´Â°ÇÁö
 		model.addAttribute("jb",jb);
+		
+		model.addAttribute("pageScale", pageScale);
+		model.addAttribute("totalCnt", totalCnt);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("currPage", currPage);
+		model.addAttribute("s_num",s_num);
 		
 		return "study_group/new_joiner";
 	}//appliedMemberPage
 	
-	
+	@RequestMapping(value="/study_group/req_detail.do", method=RequestMethod.GET)
+	public String detailAppliedMember(HttpSession session, DetailJoinerVO djvo, Model model) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
+		Joiner jr=sgs.getJoiner(djvo);
+		
+		model.addAttribute("jrInfo",jr);
+		
+		
+		
+		return "study_group/req_detail";
+	}
 	
 	
 }

@@ -13,11 +13,14 @@
 <link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <!-- Custom styles for this template -->
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+<style type="text/css">
+#mouseOver:hover {
+	color: #3498db
+}
+</style>
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
 <script src="/third_prj/resources/js/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
 <script type="text/javascript">
 	$(function() {
 		
@@ -29,35 +32,27 @@
 			alert("정상적으로 수락처리 되었습니다");
 		</c:if>
 		
-		<c:if test="${ deleteFlag }">
+		<c:if test="${ rejectFlag }">
 			alert("정상적으로 거절처리 되었습니다");
 		</c:if>
-		/* var loginSession= "${loginSession}";
-		if(loginSession==""){
-			window.location.href = "login.do";
-		} */
+		
 	});//ready
+	
 </script>
+
 </head>
 <body>
 
 	<!-- navbar 시작 -->
-	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"/>
 	<!-- navbar 끝 -->
+	<!-- sidebar 시작 -->
+	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"/>
+	<!-- sidebar 끝 -->
 	
 	<div class="container-fluid">
 		<div class="row">
 
-			<!-- sidebar 시작 -->
-			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-				<c:param name="weekUser" value="${requestScope.weekUser}"></c:param>
-				<c:param name="weekStudy" value="${requestScope.weekStudy}"></c:param>
-				<c:param name="allUser" value="${requestScope.allUser}"></c:param>
-				<c:param name="allStudy" value="${requestScope.allStudy}"></c:param>
-			</c:import>
-			
-			<%-- <c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"></c:import> --%>
-			<!-- sidebar 끝 -->
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 			<div class="row justify-content-between" style="margin-top: 40px; margin-bottom: 10px;">
@@ -79,14 +74,17 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:if test="${empty nsList}">
+							<td colspan="6" align="center">
+                               	   새로운 스터디가 없습니다.
+                     		</td>
+						</c:if>
 						<c:forEach var="nsList" items="${nsList }">
 						<c:set var="i" value="${i+1 }"/>
-							<tr>
-								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/><br/></td>
+							<tr id="mouseOver" onclick="location.href='ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}'" style="cursor:pointer; " >
+								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
 								<td class="text-center"><c:out value="${nsList.id }"/></td>
-								<td><a href="ns_detail.do?currPage=${currPage}&sNum=${nsList.sNum}&weekUser=${requestScope.weekUser}
-									&weekStudy=${requestScope.weekStudy}&allUser=${requestScope.allUser}
-									&allStudy=${requestScope.allStudy}" style="color: black"><c:out value="${nsList.studyName}"/></a></td>
+								<td class="text-center"><c:out value="${nsList.studyName}"/></td>
 								<td class="text-center"><c:out value="${nsList.category }"/></td>
 								<td class="text-center"><c:out value="${nsList.loc }"/></td>
 								<td class="text-center"><c:out value="${nsList.inputDate }"/></td>

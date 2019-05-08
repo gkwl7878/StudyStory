@@ -52,32 +52,40 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach var="jbList" items="${jb }"></c:forEach>
-						<c:forEach begin="1" end="10" step="1">
-							<tr class="text-center">
-								<td class="align-middle">123</td>
+						<c:if test="${ empty jb }">
+						<tr class="text-center">	
+							<td colspan="5">신청자가 없습니다.</td>
+						</tr>
+						</c:if> }
+					
+					<c:forEach var="jbList" items="${jb }">
+							<tr class="text-center" onclick="location.href='req_detail.do?id=${jbList.id}&s_num=${s_num }'"><!--  보완-->
+								<c:set var="i" value="${ i+1 }"/>
+								<td><c:out value="${ (totalCnt-(currPage-1)*pageScale-i)+1 }"/></td>
 								<td>
-									<img src="/third_prj/resources/profile_img/${jbList.img }"  width="100" height="120" />
+									<img src="/third_prj/profile_img/${jbList.img}"  width="100" height="120" onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img"/>
 									<br />
 									<span class="text-center"><strong>${jbList.nick }</strong></span>
 								</td>
 								<td class="text-left align-middle">${jbList.motive }</td>
-								<td class="align-middle">대기</td>
-								<td class="align-middle">2019-03-00</td>
+								<td class="align-middle">${jbList.accept_flag=='N'?'대기':''}</td>
+								<td class="align-middle">${jbList.input_date }</td>
 							</tr>
-						</c:forEach>
+					</c:forEach>
 					</tbody>
 				</table>
 				<div class="d-flex justify-content-center">
 					<ul class="pagination">
-						<li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a></li>
-						<li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-						<li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-						<li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a></li>
+						<li class="paginate_button page-item previous disabled" id="dataTable_previous ${ forwardFlag?'':'disabled' }"><a href="new_joiner.do?currPage=${ startPage-1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a></li>
+						<c:forEach var="i" step="1" begin="${ startPage }" end="${ endPage }">
+						<li class="paginate_button page-item ${ currPage==i? 'active':''}">
+							<a href="new_joiner.do?currPage=${ i }" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
+								<c:out value="${ i }"/>
+							</a></li>
+						</c:forEach>
+						<li class="paginate_button page-item next" id="dataTable_next ${ backwardFlag ?'':'disabled' }">
+							<a href="new_joiner.do?currPage=${ endPage+1}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
+						</li>
 					</ul>
 				</div>
 			</div>

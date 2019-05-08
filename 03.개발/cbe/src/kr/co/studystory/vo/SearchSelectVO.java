@@ -8,9 +8,16 @@ package kr.co.studystory.vo;
  */
 public class SearchSelectVO {
 
-	private String loc_select, kind_select;
+	private String order_select, loc_select, kind_select;
+	private int startNum, endNum, currentPage;
 
-	/* setter & getter */
+	public String getOrder_select() {
+		return order_select;
+	}
+
+	public void setOrder_select(String order_select) {
+		this.order_select = order_select;
+	}
 
 	public String getLoc_select() {
 		return loc_select;
@@ -28,11 +35,34 @@ public class SearchSelectVO {
 		this.kind_select = kind_select;
 	}
 
-	/* setter & getter */
+	public int getStartNum() {
+		return startNum;
+	}
+
+	public void setStartNum(int startNum) {
+		this.startNum = startNum;
+	}
+
+	public int getEndNum() {
+		return endNum;
+	}
+
+	public void setEndNum(int endNum) {
+		this.endNum = endNum;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
 
 	@Override
 	public String toString() {
-		return "SearchSelectVO [loc_select=" + loc_select + "]";
-	}// toString
+		return "SearchSelectVO [order_select=" + order_select + ", loc_select=" + loc_select + ", kind_select="
+				+ kind_select + ", startNum=" + startNum + ", endNum=" + endNum + ", currentPage=" + currentPage + "]";
+	}
 
 }// class

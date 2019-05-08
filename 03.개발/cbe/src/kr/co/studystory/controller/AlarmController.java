@@ -27,6 +27,18 @@ public class AlarmController {
 	@Autowired
 	private CommonBbsService cbs;
 	
+	@ResponseBody
+	@RequestMapping(value="/check_alarm.do",method=GET, produces="text/plain;charset=UTF-8")
+	public String newAlarm(HttpSession session) {
+		
+		JSONObject json = new JSONObject();
+		
+		// 안 읽은 메시지가 있는지 확인해서 다른 우편함 이미지를 보여주는 작업
+		boolean newAlarmFlag = cbs.getNewAlarmFlag((String)session.getAttribute("id"));
+		json.put("newAlarmFlag", newAlarmFlag);
+		
+		return json.toJSONString();
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/new_alarm.do",method=GET, produces="text/plain;charset=UTF-8")
@@ -52,8 +64,6 @@ public class AlarmController {
 			
 			jsonArr.add(json);
 		}
-		
-		System.out.println(jsonArr.toJSONString());
 		
 		return jsonArr.toJSONString();
 	}

@@ -65,7 +65,7 @@
 		  $(".finishHw").click(function() {
 			  
 			  if (!$(this).is(":checked")) {
-				  alert("이미 완료하신 과제입니다");
+				  alert("이미 완료된 과제입니다");
 				  $(this).prop('checked',true);
 				  return;
 			  }
@@ -162,7 +162,7 @@
 	      			<td style="width:400px;"><c:out value="${ hwdata.workload }"/></td>
 	      			<td style="width:100px;">
 	      				<strong>완료여부</strong>&nbsp;&nbsp;&nbsp;
-	      				<input class="finishHw" type="checkbox" ${ hwdata.finishFlag eq 'N' ? '' : 'checked="checked"' }/>
+	      				<input class="finishHw" type="checkbox" ${ hwdata.finish_flag eq 'N' ? '' : 'checked="checked"' }/>
 	      			</td>
 	      		</tr>
 	      	</c:forEach>
@@ -208,7 +208,7 @@
 		      </form>
 	      </div>
 	      <div class="row justify-content-center" style="min-height:100px; margin-top:30px;">
-	      	<button type="button" class="btn btn-secondary" style="height:40px; " onclick="location.href='notice_list.do?s_num=${ param.s_num }'">목록으로</button>
+	      	<button type="button" class="btn btn-secondary" style="height:40px; " onclick="location.href='${ leaderFlag ? 'notice_list_leader.do' : 'notice_list.do' }?s_num=${ param.s_num }'">목록으로</button>
 	      </div>
    	 </div>
 

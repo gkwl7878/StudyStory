@@ -19,34 +19,35 @@
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
-	
+	$(function() {
+		<c:if test="${ !loginSession }">
+		location.replace("login.do");
+		</c:if>
+		$("#removeBtn").click(function() {
+			$("#removeFrm").submit();
+		})
+	})
 </script>
 </head>
 
 <body>
 
 	<!-- navbar 시작 -->
-	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/admin/layout/navbar.jsp"/>
 	<!-- navbar 끝 -->
 	
 	<!-- sidebar 시작 -->
-			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-				<c:param name="weekUser" value="${requestScope.weekUser}"></c:param>
-				<c:param name="weekStudy" value="${requestScope.weekStudy}"></c:param>
-				<c:param name="allUser" value="${requestScope.allUser}"></c:param>
-				<c:param name="allStudy" value="${requestScope.allStudy}"></c:param>
-			</c:import>
-			
-	<%-- <c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"></c:import> --%>
+			<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp"/>
 	<!-- sidebar 끝 -->
 
 	<div id="wrap">
-		<form>
+		<form id="removeFrm" action="remove_study_proc.do?" method="get">
+			<input type="hidden" name="sNum" value="${param.sNum }"/>
+			<input type="hidden" name="studyName" value="${param.studyName }"/>
 			<br />
 			<br />
 			<br />
@@ -59,11 +60,10 @@
 			<br />
 			<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="내용을 입력해주세요." name="msg" >
 			<br />
-
 			<br />
 			<br />
-
-			<a class="btn btn-secondary btn-lg" href="ns_detail.do?sNum=${param.sNum}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-secondary btn-lg" href="study_del_proc.do?sNum=${param.sNum}&id=${param.id}" role="button">삭제</a>
+			<a class="btn btn-secondary btn-lg" href="study_detail.do?sNum=${param.sNum}&currPage=${param.currPage}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<input type="button" class="btn btn-secondary btn-lg" value="삭제" id="removeBtn" />
 		</form>
 	</div>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

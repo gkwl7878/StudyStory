@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
@@ -19,7 +20,7 @@ import kr.co.studystory.admin.vo.NsBoardVO;
 import kr.co.studystory.admin.vo.NsDetailVO;
 import kr.co.studystory.admin.vo.RefuseVO;
 
-
+@SessionAttributes("activeFlag")
 @Controller
 public class NewStudyMngController {
 	
@@ -74,9 +75,8 @@ public class NewStudyMngController {
 		model.addAttribute("currPage",nb_vo.getCurrPage());
 		model.addAttribute("startPage",startPage);
 		model.addAttribute("endPage",endPage);
+		model.addAttribute("activeFlag","nsActiveFlag");
 		
-		//model.addAttribute("forwardFlag",forwardFlag);
-		//model.addAttribute("backwardFlag",backwardFlag);
 		return "/admin/new_study_mng";
 	}
 	
@@ -95,7 +95,7 @@ public class NewStudyMngController {
 	}
 	
 	@RequestMapping(value="/admin/ns_accept.do", method=RequestMethod.GET)
-	public String acceptNsProcess(AcceptVO a_vo,Model model) {
+	public String acceptNsProcess(AcceptVO a_vo,String studyName,Model model) {
 		boolean alarmFlag = false;
 		boolean acceptFlag= saus.acceptStudy(a_vo);
 		AlarmVO al_vo= new AlarmVO();
@@ -104,7 +104,7 @@ public class NewStudyMngController {
 			al_vo.setId(a_vo.getId());
 			al_vo.setCategory("스터디");
 			al_vo.setSubject("새 스터디가 수락되었습니다.");
-			al_vo.setContent(a_vo.getsNum()+" 번 스터디가 수락되었습니다.");
+			al_vo.setContent("["+studyName+"] 스터디가 수락되었습니다.");
 			alarmFlag= cms.sendAlarm(al_vo);
 		}
 		
@@ -117,26 +117,27 @@ public class NewStudyMngController {
 		return url;
 	}
 	
-	@RequestMapping(value="/admin/study_del.do", method=RequestMethod.GET)
-	public String refuseNsPage(String sNum, Model model) {
-		return "/admin/study_del";
+	@RequestMapping(value="/admin/study_reject.do", method=RequestMethod.GET)
+	public String refuseNsPage(String sNum, String currPage, Model model) {
+		model.addAttribute("currPage",currPage);
+		return "/admin/study_reject";
 	}
 	
-	@RequestMapping(value="/admin/study_del_proc.do")
-	public String refuseNsProcess(RefuseVO r_vo, Model model) {
-		boolean delectFlag=saus.refuseStudy(r_vo);
+	@RequestMapping(value="/admin/study_reject_proc.do",method=RequestMethod.GET)
+	public String refuseNsProcess(RefuseVO r_vo,String studyName, Model model) {
+		boolean rejectFlag=saus.refuseStudy(r_vo);
 		AlarmVO al_vo= new AlarmVO();
-		if(delectFlag) {
+		if(rejectFlag) {
 			al_vo.setId(r_vo.getId());
 			al_vo.setCategory("스터디");
 			al_vo.setSubject("새 스터디가 거절되었습니다.");
-			al_vo.setContent(r_vo.getsNum()+" 번 스터디가 거절되었습니다. 거절사유:" +r_vo.getMsg());
-			delectFlag= cms.sendAlarm(al_vo);
+			al_vo.setContent("["+studyName+"] 스터디가 거절 되었습니다. 거절사유: [" +r_vo.getMsg()+"]");
+			rejectFlag= cms.sendAlarm(al_vo);
 		}
 		
-		String url="forward:study_del.do";
-		if(delectFlag) {
-			model.addAttribute("deleteFlag", true);
+		String url="forward:study_reject.do";
+		if(rejectFlag) {
+			model.addAttribute("rejectFlag", true);
 			url="forward:new_study.do";
 		}
 		
