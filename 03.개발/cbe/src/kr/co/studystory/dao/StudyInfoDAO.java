@@ -156,21 +156,22 @@ public class StudyInfoDAO {
 	}// selectSCommentList
 
 	/**
-	 * 상세 스터디의 댓글을 insert하는 메서드.
+	 * 상세 스터디의 댓글을 insert하고 정상 동작시 입력한 유저의 이미지 파일명 반환 메서드.
 	 * 
 	 * @return int count
 	 */
-	public int insertComment(ReplyVO r_vo) {
+	public String insertComment(ReplyVO r_vo) {
+		String writerImg = "";
 		int cnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
 		cnt = ss.insert("insertComment", r_vo);
-
 		// 1개 행이 정상적으로 입력 되었을 때.
 		if (cnt == 1) {
+			writerImg = ss.selectOne("selectWriterImg", r_vo);
 			ss.commit();
 		} // end if
 		ss.close();
-		return cnt;
+		return writerImg;
 	}// insertComment
 
 	/**

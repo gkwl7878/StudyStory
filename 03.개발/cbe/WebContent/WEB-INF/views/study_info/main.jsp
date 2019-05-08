@@ -56,11 +56,12 @@
 		</c:if>
 	}); // ready
 </script>
+
 <!-- 좋아요 -->
 <script type="text/javascript">
-	// 좋아요 해제 실행.
+		
+	 // 좋아요 해제 실행.
 	function dislikeProcess(sNum) {
-
 		var remove_flag = confirm("관심 스터디를 해제 하시겠습니까?");
 
 		// '예' - 관심 스터디를 해제 할 경우.
@@ -74,6 +75,10 @@
 					console.log(xhr.status + " / " + xhr.statusText);
 				},
 				success : function(json) {
+					alert(sNum);
+					
+					$("#" + sNum + "_like_btn").removeClass("in active");
+				
 				}// success
 			}); // ajax
 		}// end if
@@ -96,17 +101,31 @@
 					if (moveFlag) {
 						location.replace("../interest/show_interest_study.do");
 					}// end if
-					
-					if(!moveFlag){
+
+					if (!moveFlag) {
 						location.reload();
 					}// end if
-					
+
 				}// end if
 			}// success
 		}); // ajax
-	}// likeProcess
+	}// likeProcess */
 </script>
 <!-- 좋아요 -->
+
+<!-- 상세페이지로 이동 -->
+<script type="text/javascript">
+/* 	$(function() {
+
+		$(".thumb").click(function(event){
+		    var id_check = $(this).attr("id");
+		    alert(id_check);
+		});
+		
+	}); // ready */
+</script>
+<!-- 상세페이지로 이동 -->
+
 </head>
 <body>
 	<!-- header -->
@@ -131,70 +150,68 @@
 				<div class="row">
 
 					<!-- 썸네일 row -->
-					<div class="row">
+					<div id="thumb_row" class="row">
 						<c:if test="${ empty thumbnail_list }">
 							조회할 수 있는 썸네일이 없습니다.
 						</c:if>
 
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 						<c:forEach var="thumbnail" items="${ thumbnail_list }">
-							<div id="${ thumbnail.s_num }_thumb" class="thumb col-md-4">
+							<div id="${ thumbnail.s_num }_space" class="col-md-4">
 								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-								<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }" style="color: #333; text-decoration: none;">
-									<div class="card mb-4 shadow-sm">
-										<!-- 썸네일 스터디 이미지 -->
-										<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="height: 200px;" />
-										<div class="card-body text-center p-3">
-											<div class="d-flex justify-content-end align-items-center mb-3">
-												<div class="mr-5">
-													<!-- 썸네일 들록일 -->
-													<small class="text-muted">${ thumbnail.input_date }</small>
-												</div>
-												<!-- 썸네일 모집상태 - 진행중. -->
-												<small class="pr-1">모집상태</small>
+								<div id="${ thumbnail.s_num }_thumb" class="thumb card mb-4 shadow-sm">
+									<!-- 썸네일 스터디 이미지 -->
+									<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="height: 200px;" />
+									<div class="card-body text-center p-3">
+										<div class="d-flex justify-content-end align-items-center mb-3">
+											<div class="mr-5">
+												<!-- 썸네일 들록일 -->
+												<small class="text-muted">${ thumbnail.input_date }</small>
 											</div>
-											<div class="px-3 border-bottom">
-												<p class="card-text pb-3">
-													<!-- 썸네일 제목부분 -->
-													<strong>${ thumbnail.study_name }</strong>
-												</p>
+											<!-- 썸네일 모집상태 - 진행중. -->
+											<small class="pr-1">모집상태</small>
+										</div>
+										<div class="px-3 border-bottom">
+											<p class="card-text pb-3">
+												<!-- 썸네일 제목부분 -->
+												<strong>${ thumbnail.study_name }</strong>
+											</p>
+										</div>
+										<div class="d-flex justify-content-between align-items-center mt-3 px-2">
+
+											<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
+												<!-- 썸네일 리더의 이미지 -->
+												<img src="/third_prj/profile_img/${ thumbnail.user_img }" class="card-img-top w-100 rounded-circle" style="width: 40px; height: 50px;">
 											</div>
-											<div class="d-flex justify-content-between align-items-center mt-3 px-2">
 
-												<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
-													<!-- 썸네일 리더의 이미지 -->
-													<img src="/third_prj/profile_img/${ thumbnail.user_img }" class="card-img-top w-100 rounded-circle" style="width: 40px; height: 50px;">
-												</div>
-
-												<div class="border-right p-2">
-													<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-													<small>${ thumbnail.nick }</small>
-												</div>
-
-												<div class="border-right p-2">
-													<!-- 썸네일 리더의 닉네임 -->
-													<small>${ thumbnail.loc }</small>
-												</div>
-
-												<div class="p-2">
-													<!-- 썸네일 리더의 닉네임 -->
-													<small>${ thumbnail.category }</small>
-												</div>
-												<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
-
-												<c:choose>
-													<c:when test="${ thumbnail.favFlag eq true }">
-														<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active" onclick="dislikeProcess('${ thumbnail.s_num }')">좋아요</button>
-													</c:when>
-													
-													<c:when test="${ thumbnail.favFlag eq false }">
-														<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary" onclick="likeProcess('${ thumbnail.s_num }')">좋아요</button>
-													</c:when>
-												</c:choose>
+											<div class="border-right p-2">
+												<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
+												<small>${ thumbnail.nick }</small>
 											</div>
+
+											<div class="border-right p-2">
+												<!-- 썸네일 리더의 닉네임 -->
+												<small>${ thumbnail.loc }</small>
+											</div>
+
+											<div class="p-2">
+												<!-- 썸네일 리더의 닉네임 -->
+												<small>${ thumbnail.category }</small>
+											</div>
+											<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
+
+											<c:choose>
+												<c:when test="${ thumbnail.favFlag eq true }">
+													<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active"  onclick="disLikeProcess('${ thumbnail.s_num }')">좋아요</button>
+												</c:when>
+
+												<c:when test="${ thumbnail.favFlag eq false }">
+													<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary" onclick="likeProcess('${ thumbnail.s_num }')">좋아요</button>
+												</c:when>
+											</c:choose>
 										</div>
 									</div>
-								</a>
+								</div>
 							</div>
 						</c:forEach>
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
