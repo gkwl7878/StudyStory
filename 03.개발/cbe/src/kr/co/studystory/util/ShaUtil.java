@@ -26,4 +26,9 @@ public class ShaUtil {
           
           return cipherText;
     }
+    
+    public static void main(String[] args) {
+		System.out.println(shaEncoding("tjdwn12Q"));
+    	
+	}
 }

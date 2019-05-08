@@ -2,6 +2,7 @@ package kr.co.studystory.admin.dao;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -11,9 +12,17 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
+import kr.co.studystory.admin.domain.DetailStudy;
+import kr.co.studystory.admin.domain.DetailUser;
 import kr.co.studystory.admin.domain.NewStudyInfo;
+import kr.co.studystory.admin.domain.StudyInfo;
+import kr.co.studystory.admin.domain.UserInfo;
 import kr.co.studystory.admin.vo.AcceptVO;
+import kr.co.studystory.admin.vo.DetailStudyVO;
+import kr.co.studystory.admin.vo.DetailUserVO;
 import kr.co.studystory.admin.vo.NsBoardVO;
+import kr.co.studystory.admin.vo.StudyBoardVO;
+import kr.co.studystory.admin.vo.UserBoardVO;
 
 @Component
 public class StudyAndUserDAO {
@@ -49,6 +58,11 @@ public class StudyAndUserDAO {
 		return ssf;
 	}//getSessionFactory
 	
+	/**
+	 * NewStudy 리스트 조회
+	 * @param nb_vo
+	 * @return
+	 */
 	public List<NewStudyInfo> selectNewStudy(NsBoardVO nb_vo){
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
 		List<NewStudyInfo> list =ss.selectList("newStudyList",nb_vo);
@@ -56,6 +70,11 @@ public class StudyAndUserDAO {
 		return list;
 	}
 	
+	/**
+	 * NewStudy Detail 조회
+	 * @param sNum
+	 * @return
+	 */
 	public DetailNewStudyInfo selectDetailNewStudy(String sNum) {
 		DetailNewStudyInfo dnsi=null;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
@@ -64,19 +83,29 @@ public class StudyAndUserDAO {
 		return dnsi;
 	}
 	
+	/**
+	 * New Study AcceptFlag 변환
+	 * @param a_vo
+	 * @return
+	 */
 	public boolean updeteAccept(AcceptVO a_vo) {
-		boolean acceptFlag= false;
+		boolean updateAcceptFlag= false;
 		int cnt=0;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
 		cnt =ss.update("updateNsAccept",a_vo);
 		if(cnt>0) {
-			acceptFlag=true;
+			updateAcceptFlag=true;
 			ss.commit();
 		}
 		ss.close();
-		return acceptFlag;
+		return updateAcceptFlag;
 	}
 	
+	/**
+	 * NewStudy의 멤버 넣기
+	 * @param a_vo
+	 * @return
+	 */
 	public boolean insertFirstMember(AcceptVO a_vo) {
 		boolean membInsertFlag = false; 
 		int cnt=0;
@@ -90,11 +119,16 @@ public class StudyAndUserDAO {
 		return membInsertFlag;
 	}
 	
+	/**
+	 * NewStudy DeleteFlag 변환
+	 * @param sNum
+	 * @return
+	 */
 	public boolean updateDeleteFlag(String sNum) {
 		boolean updateDeleteFlag = false; 
 		int cnt=0;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		cnt= ss.insert("deleteNewStudy", sNum);
+		cnt= ss.update("deleteNewStudy", sNum);
 		if(cnt>0) {
 			updateDeleteFlag=true;
 			ss.commit();
@@ -103,9 +137,176 @@ public class StudyAndUserDAO {
 		return updateDeleteFlag;
 	}
 	
+	/**
+	 * 유저 리스트 조회
+	 * @param nb_vo
+	 * @return
+	 */
+	public List<UserInfo> selectUserInfo(UserBoardVO ub_vo){
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		List<UserInfo> list =ss.selectList("userInfoList",ub_vo);
+		ss.close();
+		return list;
+	}
+	
+	/**
+	 * 유저 상세정보 조회
+	 * @param id
+	 * @return
+	 */
+	public DetailUser selectDatailUserInfo(String id) {
+		DetailUser du=null;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		du= ss.selectOne("userDetail",id);
+		ss.close();
+		return du;
+	}
+	
+	/**
+	 * User 상세정보 수정
+	 * @param du_vo
+	 * @return
+	 */
+	public boolean updateModifyUser(DetailUserVO du_vo) {
+		boolean updateModifyUser= false;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		updateModifyUser =ss.update("updateModUser",du_vo)==1;
+		if(updateModifyUser) {
+			ss.commit();
+		}
+		return updateModifyUser;
+	}
+	
+	/**
+	 * 삭제 시 decativation 'Y'로 변경
+	 * @param id
+	 * @return
+	 */
+	public boolean updateRemoveUser(String id) {
+		boolean updateRemoveUser= false;
+		boolean transaction=false;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		updateRemoveUser =ss.update("updateDelUser",id)==1;
+		
+		if(updateRemoveUser) {
+			transaction=true;
+			ss.commit();
+		}
+		
+		return transaction;
+	}
+	
+	/**
+	 * join레코드에서 유저 삭제
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteJoinRecord(String id) {
+		boolean deleteJoinRecord= false;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		deleteJoinRecord =ss.delete("delJoinRecord",id)==1;
+		if(deleteJoinRecord) {
+			deleteJoinRecord=true;
+			ss.commit();
+		}
+		return deleteJoinRecord;
+	}
+	
+	/**
+	 * member 레코드에서 유저 삭제 
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteMemberRecord(String id) {
+		boolean deleteMemberRecord= false;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		deleteMemberRecord =ss.delete("delJoinRecord",id)==1;
+		if(deleteMemberRecord) {
+			deleteMemberRecord=true;
+			ss.commit();
+		}
+		return deleteMemberRecord;
+	}
+	
+	/**
+	 * 유저 리스트 조회
+	 * @param sb_vo
+	 * @return
+	 */
+	public List<StudyInfo> selectStudyInfo(StudyBoardVO sb_vo){
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		List<StudyInfo> list =ss.selectList("studyInfoList",sb_vo);
+		ss.close();
+		return list;
+	}
+	
+	/**
+	 * 상세 스터디 정보 조회
+	 * @param sNum
+	 * @return
+	 */
+	public DetailStudy selectDetailStudyInfo(String sNum) {
+		DetailStudy ds=null;
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		ds= ss.selectOne("studyDetail",sNum);
+		ss.close();
+		return ds;
+	}
+	
+	/**
+	 * 스터디 수정
+	 * @param ds_vo
+	 * @return
+	 */
+	public boolean updateDetailStudyInfo(DetailStudyVO ds_vo) {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		boolean updateDetailStudyInfo= ss.update("updateStudy", ds_vo)==1;
+		if(updateDetailStudyInfo) {
+			ss.commit();
+		}
+		return updateDetailStudyInfo;
+	}
+	
+	/**
+	 * 전에 갖고 있는 이미지 삭제를 위한 조회
+	 * @param sNum
+	 * @return
+	 */
+	public String selectPreImg(String sNum) {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		String preImg= ss.selectOne("selectPreImg",sNum);
+		return preImg;
+	}
+	
+	/**
+	 * 스터디 삭제 전 알림을 보낼 멤버 조회
+	 * @param sNum
+	 * @return
+	 */
+	public List<String> selectStudyMember(String sNum) {
+		List<String> list= new ArrayList<String>();
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		list= ss.selectList("selectStudyMember",sNum);
+		return list;
+	}
+	
+	/**
+	 * 스터디 삭제
+	 * @param sNum
+	 * @return
+	 */
+	public boolean deleteStudy(String sNum) {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		boolean deleteStudy= ss.update("deleteStudy", sNum)==1;
+		if(deleteStudy) {
+			ss.commit();
+		}
+		return deleteStudy;
+	}
 	
 	public static void main(String[] args) {
 		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
+		System.out.println(sau_dao.selectStudyMember("s_000041"));
 	}
 	
 }

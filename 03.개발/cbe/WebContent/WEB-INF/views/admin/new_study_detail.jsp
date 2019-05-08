@@ -28,17 +28,9 @@
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		
-		<c:if test="${ acceptFlag }">
-			alert(${param.sNum}+"번 스터디가 수락되었습니다.");
-			location.href="new_study.do";
-		</c:if>
-		
 		<c:if test="${ !loginSession }">
 		location.replace("login.do");
 		</c:if>
@@ -54,10 +46,6 @@
 
 	<!-- sidebar 시작 -->
 	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-				<c:param name="weekUser" value="${param.weekUser}"></c:param>
-				<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
-				<c:param name="allUser" value="${param.allUser}"></c:param>
-				<c:param name="allStudy" value="${param.allStudy}"></c:param>
 	</c:import>
 	<!-- sidebar 끝 -->
 
@@ -122,7 +110,7 @@
 				<label for="exampleFormControlTextarea1" style="font-size: 20px;"><strong>스터디 썸네일</strong></label>&nbsp;
 			</div>
 			<div class="col-7 font20bold">
-				<img width="440" height="300" id="img" src="../resources/images/${requestScope.img }" border="0" title='찾아보기' alt='찾아보기'>
+				<img width="440" height="300" id="img" src="../study_img/${requestScope.img}" border="0" title='찾아보기' alt='찾아보기'>
 				
 			</div>
 		</div>
@@ -131,16 +119,19 @@
 			<div class="col-3 font20bold">
 				<strong>상세설명</strong>
 			</div>
-			<div class="col-7 font20bold">
-				<textarea class="form-control" rows="3" style="resize: none; width: 440px; height: 300px; margin-top: 20px;" name="contents" readonly="readonly" >${requestScope.content}</textarea>
+			<div class="col-7 ">
+				<div class=" rounded-sm text-dark " style="min-height: 300px; margin-top: 20px; background-color:#E9ECEF; border: 1px solid #CED4DA; font-size: 17px; padding: 10px">
+					<c:out value="${requestScope.content}" escapeXml="false" />
+				</div>
+				<%-- <textarea class="form-control" rows="3" style="resize: none; width: 440px; height: 300px; margin-top: 20px;" 
+				name="contents" readonly="readonly" >${requestScope.content}</textarea> --%>
 			</div>
 		</div>
 		<div class="row" style="margin-top: 30px; margin-left: 116px">
-			<a class="btn btn-secondary btn" href="new_study.do?sNum=${param.sNum}&acceptFlag=${acceptFlag}"  role="button" style="margin-left: 180px;">목록으로</a> 
-			<!--알람: id,subject, category, content  -->
-			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}
-				&id=${requestScope.id }" role="button" style="margin-left: 10px;">수락</a> 
-			<a class="btn btn-secondary btn" href="study_del.do?sNum=${param.sNum}&id=${requestScope.id }" role="button" style="margin-left: 10px;">거절</a>
+			<a class="btn btn-secondary btn" href="new_study.do?currPage=${param.currPage}"  role="button" style="margin-left: 180px;">목록으로</a> 
+			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}&currPage=${param.currPage}
+				&id=${requestScope.id }&studyName=${requestScope.studyName }" role="button" style="margin-left: 10px;">수락</a> 
+			<a class="btn btn-secondary btn" href="study_reject.do?sNum=${param.sNum}&currPage=${param.currPage}&id=${requestScope.id }&studyName=${requestScope.studyName }" role="button" style="margin-left: 10px;">거절</a>
 		</div>
 	</div>
 

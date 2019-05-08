@@ -41,7 +41,7 @@
 
   <insert id="insertStudy" parameterType="kr.co.studystory.vo.NewStudyVO">
     insert into study(s_num, study_name, loc, category, content, img, id, deactivation, delete_flag)
-	  values(s_code, #{ study_name }, #{ loc }, #{ category }, #{ content }, #{ img }, #{ id }, 'N', 'N')
+	values(s_code, #{ study_name }, #{ loc }, #{ category }, #{ content }, #{ img }, #{ id }, 'N', 'N')
   </insert>
   
 <!-- 내 스터디 수정하기  -->

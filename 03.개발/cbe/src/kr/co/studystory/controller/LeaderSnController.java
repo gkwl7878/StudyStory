@@ -4,6 +4,7 @@ package kr.co.studystory.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -136,7 +137,7 @@ public class LeaderSnController {
 			model.addAttribute("snAddFailFlag", true);
 		}
 		
-		return "forward:../study_notice/notice_list_leader.do?s_num="+nsnvo.getS_num();
+		return "forward:../study_notice/notice_list_leader.do";
 	}
 	
 	@RequestMapping(value="/study_notice/modify.do", method=GET)

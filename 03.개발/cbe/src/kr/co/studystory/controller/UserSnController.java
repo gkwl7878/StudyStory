@@ -22,6 +22,7 @@ import kr.co.studystory.domain.StudyNameAndRecruit;
 import kr.co.studystory.domain.StudyNotice;
 import kr.co.studystory.service.StudyNoticeService;
 import kr.co.studystory.vo.FinishHwVO;
+import kr.co.studystory.vo.LeaderVO;
 import kr.co.studystory.vo.NewCommentVO;
 
 @Controller
@@ -51,10 +52,15 @@ public class UserSnController {
 	}//userSnList
 	
 	@RequestMapping(value="/study_notice/notice_detail.do", method= { GET, POST })
-	public String userDetailSn(HttpSession session, String sn_num, Model model) {
+	public String userDetailSn(HttpSession session, String s_num, String sn_num, Model model) {
 		
 		if (session.getAttribute("id") == null) {
 			return "redirect:../index.do";
+		}
+		
+		// 리더일 경우 목록으로 클릭 시 리더페이지로 이동시키기 위한 장치
+		if(sns.amILeader(new LeaderVO(s_num, (String)session.getAttribute("id")))) { 
+			model.addAttribute("leaderFlag", true);
 		}
 		
 		DetailStudyNotice dsn= sns.getDetailSn(sn_num);
