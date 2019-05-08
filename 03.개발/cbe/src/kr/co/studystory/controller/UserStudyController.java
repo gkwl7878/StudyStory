@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.service.StudyGroupService;
+import kr.co.studystory.vo.CloseAlarmVO;
+import kr.co.studystory.vo.CloseVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
+import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
@@ -80,48 +83,130 @@ public class UserStudyController {
 	public String modifyStudyPage(String s_num, Model model ) {
 		
 		PrevStudyInfo psInfo=sgs.getPrevStudy(s_num);
-		model.addAttribute("ps_Info",psInfo);
+		if(psInfo !=null) {
+			String name=psInfo.getName();
+			String loc=psInfo.getLoc();
+			String category=psInfo.getCategory();
+			String content=psInfo.getContent();
+			String img=psInfo.getImg();
+			
+			model.addAttribute("name",name);
+			model.addAttribute("loc",loc);
+			model.addAttribute("category",category);
+			model.addAttribute("content",content);
+			model.addAttribute("img",img);
+			
+			model.addAttribute("ps_info",psInfo);
+		}
+		
+		/*model.addAttribute("name",psInfo.getName());
+		model.addAttribute("loc",psInfo.getLoc());
+		model.addAttribute("category",psInfo.getCategory());
+		model.addAttribute("content",psInfo.getContent());
+		model.addAttribute("img",psInfo.getImg());*/
 		
 		return "study_group/study_modify";
 	}//createStudyPage
 	
+	@RequestMapping(value="study_group/modify_study_process.do", method= RequestMethod.POST)
 	public String modifyStudyProcess(ModifiedStudyVO ms_vo, HttpServletRequest request, Model model) {
 
+		
 		String url="study_group/study_modify";
 		
+		String s_num=request.getParameter("s_num");//
+		String content= ms_vo.getContent();
+		String img= ms_vo.getImg();
+		
+		ms_vo.setsNum(s_num);
+		ms_vo.setContent(content);
+		ms_vo.setImg(img);
+		
+		
 		if(sgs.modifyStudy(ms_vo)) {
-		model.addAttribute("");
+			url="/study_notice/notice_list_leader";
+			model.addAttribute("successFlag",true);
 		}else {
-			
+			model.addAttribute("failFlag",true);
 		}
-		return "";
+		return url;
 	}
 	
+
 	// 내 스터디 탈퇴하기
-	@RequestMapping(value="study_group/leave_study.do", method=GET )
+	@RequestMapping(value="study_group/leave_study.do", method= {GET,POST} )
 		public String leaveStudyPage(String id) {
 		return "study_group/study_out";
 	}//leaveStudyPage
 	
 	@RequestMapping(value="study_group/leave_study_process.do" , method=POST )
-	public String leaveStudyProcess(LeaveAlarmVO la_vo,LeaveVO l_vo, HttpSession session, Model model) {
-		
+	public String leaveStudyProcess(LeaveVO l_vo, HttpSession session, Model model) {
+		//vo ????
 		String id=(String)session.getAttribute("id");
-		la_vo.setLeaderId(id);			
-		la_vo.setReason("이유");
-		sgs.sendLeaveAlarm(la_vo);
-		
-		
 		l_vo.setId(id);
-		l_vo.setsNum("s_0000041");
-		l_vo.setReason("이유");
-
 		
-		model.addAttribute("id",l_vo.getId());
-
+		String url="study_group/my_study";
 		
-		return "";
-	}
+		if(sgs.leaveStudy(l_vo)) {
+			
+			LeaveAlarmVO la_vo=new LeaveAlarmVO();
+			
+			la_vo.setCategory("스터디");
+			la_vo.setSubject("스터디에서 탈퇴하였습니다.");
+			// snum이용해서 스터디명을 조회해서 content내용으로 추가
+			la_vo.setContent(l_vo.getsNum()+"가 탈퇴되었습니다.: "+l_vo.getReason());
+			la_vo.setsNum(l_vo.getsNum());
+			//
+			sgs.sendLeaveAlarm(la_vo);
+			
+				url="redirect:../index.do";
+				model.addAttribute("id","");
+			
+		}else {
+			model.addAttribute("failFlag",true);
+			url="study_group/study_out";
+		}
+
+		return url;
+	}//leaveStudyProcess
+	
+	//스터디 활동 종료
+		@RequestMapping(value="study_group/end_study.do", method= {GET,POST} )
+			public String closeStudyPage(String id) {
+			return "study_group/end_study";
+		}//leaveStudyPage
+		
+		@RequestMapping(value="study_group/end_study_process.do" , method=POST )
+		public String closeStudyProcess(CloseVO c_vo, HttpSession session, Model model) {
+
+			String id=(String)session.getAttribute("id");
+			c_vo.setId(id);
+			
+			String url="study_group/my_study";
+
+			if(sgs.closeStudy(c_vo)) {
+			
+				CloseAlarmVO ca_vo=new CloseAlarmVO();
+				
+				ca_vo.setCategory("스터디");
+				ca_vo.setSubject("스터디가 종료되었습니다.");
+				// snum이용해서 스터디명을 조회해서 content내용으로 추가
+				ca_vo.setContent("ooo스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
+				ca_vo.setsNum(c_vo.getsNum());
+				//
+				sgs.sendCloseAlarm(ca_vo);
+			
+				
+					url="redirect:../index.do";
+					model.addAttribute("id","");
+				
+			}else {
+				model.addAttribute("failFlag",true);
+				url="study_group/end_study";
+			}
+
+			return url ;
+		}
 }//class
 
 
