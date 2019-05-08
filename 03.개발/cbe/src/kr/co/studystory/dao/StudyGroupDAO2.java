@@ -15,6 +15,8 @@ import kr.co.studystory.domain.Joiner;
 import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.vo.ApplicantBbsVO;
 import kr.co.studystory.vo.DetailJoinerVO;
+import kr.co.studystory.vo.JoinAlarmVO;
+import kr.co.studystory.vo.NewMemberVO;
 @Component
 public class StudyGroupDAO2 {
 
@@ -87,6 +89,9 @@ public class StudyGroupDAO2 {
 		return jTotal;
 	}
 	
+	/**
+	 * 신청자 디테일 정보 - 정미
+	 */
 	public Joiner selectJoiner(DetailJoinerVO djvo) {
 		Joiner jr=null;
 		
@@ -96,6 +101,33 @@ public class StudyGroupDAO2 {
 		
 		return jr;
 	}
+	
+	public boolean insertNewMember(NewMemberVO nmvo) {
+		boolean insertNewMemberflag=false;
+		int cnt=0;
+		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		cnt=ss.insert("insertNewMember",nmvo);
+		if(cnt>0) {
+			insertNewMemberflag = true;
+			ss.commit();
+			insertJoinAlarm(nmvo);
+		}
+		ss.close();
+		return insertNewMemberflag;
+	}
+	
+	public void insertJoinAlarm(NewMemberVO nmvo) {
+		
+		int cnt=0;
+		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		JoinAlarmVO ja_vo=new JoinAlarmVO("스터디","스터디 가입 승낙됨",
+			"\"" + javo.	)
+		cnt=ss.insert("insertJoinedAlarm",javo);
+		
+		
+	}
+	
+	
 	
 	//단위테스트
 	public static void main(String[] args) {

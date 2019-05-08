@@ -5,7 +5,14 @@ public class JoinAlarmVO {
 
 	private String category, subject, content, id;
 	
+	
+
+	public JoinAlarmVO() {
+		super();
+	}
+
 	public JoinAlarmVO(String category, String subject, String content, String id) {
+		super();
 		this.category = category;
 		this.subject = subject;
 		this.content = content;

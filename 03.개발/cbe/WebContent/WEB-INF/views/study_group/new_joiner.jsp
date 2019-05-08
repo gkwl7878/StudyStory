@@ -16,7 +16,8 @@
 <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="http://localhost:8080/third_prj/resources/js/bootstrap.bundle.min.js"></script>
 <script src="http://localhost:8080/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="http://localhost:8080/third_prj/resources/js/Chart
+.js/2.7.3/Chart.min.js"></script>
 <script src="http://localhost:8080/third_prj/resources/js/admin_dashboard.js"></script>
 </body>
 </head>
@@ -63,9 +64,11 @@
 								<c:set var="i" value="${ i+1 }"/>
 								<td><c:out value="${ (totalCnt-(currPage-1)*pageScale-i)+1 }"/></td>
 								<td>
-									<img src="/third_prj/profile_img/${jbList.img}"  width="100" height="120" onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img"/>
+									<img src="/third_prj/profile_img/${jbList.img}" width="100" height="120" onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img"/>
 									<br />
+								<div>
 									<span class="text-center"><strong>${jbList.nick }</strong></span>
+									</div>
 								</td>
 								<td class="text-left align-middle">${jbList.motive }</td>
 								<td class="align-middle">${jbList.accept_flag=='N'?'대기':''}</td>

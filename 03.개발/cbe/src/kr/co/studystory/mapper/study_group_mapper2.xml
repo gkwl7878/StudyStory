@@ -30,9 +30,20 @@
 <select id="selectDetailJoiner" parameterType="kr.co.studystory.vo.DetailJoinerVO" resultType="kr.co.studystory.domain.Joiner">
 	select ut.id, ut.nick, ut.img, j.introduce, j.motive
 	from join j, user_table ut
-	where ut.id=#{id} and j.s_num=#{s_num} and ut.id=j.id;
+	where ut.id=#{id} and j.s_num=#{s_num} and ut.id=j.id
 
 </select>	
 	
+<insert id="insertNewMember" parameterType="kr.co.studystory.vo.NewMemberVO" >
+	insert into member
+	values(#{id},#{s_num});
+
+</insert>
+
+<insert id="insertJoinedAlarm" parameterType="kr.co.studystory.vo.JoinAlarmVO">
+	insert into alarm(A_NUM, CATEGORY, SUBJECT, CONTENT, ID)
+	values(A_CODE,#{ category},#{ subject}, #{content}, (select id from user_table where nick=#{ id }))
+</insert>
+
 
 </mapper>

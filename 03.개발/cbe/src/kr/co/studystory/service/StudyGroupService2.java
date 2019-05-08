@@ -11,6 +11,7 @@ import kr.co.studystory.domain.Joiner;
 import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.vo.ApplicantBbsVO;
 import kr.co.studystory.vo.DetailJoinerVO;
+import kr.co.studystory.vo.NewMemberVO;
 
 /**
  * 스터디 참여자 보기 - 정미 
@@ -119,4 +120,13 @@ public class StudyGroupService2 {
 		return jr;
 	}
 
+	public boolean addNewMember(NewMemberVO nmvo) {
+		boolean acceptFlag=false;
+		acceptFlag=sg_dao.insertNewMember(nmvo);
+		
+		
+		return acceptFlag;
+	}
+	
+	
 }//class

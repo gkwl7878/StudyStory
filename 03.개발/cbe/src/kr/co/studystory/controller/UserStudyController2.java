@@ -17,6 +17,8 @@ import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.service.StudyGroupService2;
 import kr.co.studystory.vo.ApplicantBbsVO;
 import kr.co.studystory.vo.DetailJoinerVO;
+import kr.co.studystory.vo.JoinAlarmVO;
+import kr.co.studystory.vo.NewMemberVO;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -114,6 +116,20 @@ public class UserStudyController2 {
 		
 		
 		
+		return "study_group/req_detail";
+	}
+	
+	
+	public String acceptMember(HttpSession session, NewMemberVO nmvo, Model model) {
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
+		boolean acceptFlag=sgs.addNewMember(nmvo);
+		JoinAlarmVO ja_vo=new JoinAlarmVO();
+		
+			
+			
 		return "study_group/req_detail";
 	}
 	

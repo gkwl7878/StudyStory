@@ -24,7 +24,7 @@
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
 
 	
@@ -41,8 +41,10 @@
     </section>
     <div style="height:20px;"></div>
     <!-- 점보트론 : 전광판 -->
-		<img src="/third_prj/profile_img/${jrInfo.img}" style="float: inherit; margin-top: 20px onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" />
-		<span style="vertical-align: bottom;"><strong>${jrInfo.nick}<!-- 닉네임 : 신규에용 --></strong></span>
+		<div align="center">
+		<img src="/third_prj/profile_img/${jrInfo.img}" style="float: inherit; margin-top: 20px; margin-left: 30px ;="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" /><br/><br/>
+		<span style="vertical-align: bottom;"><h2>${jrInfo.nick}<!-- 닉네임 : 신규에용 --></h2></span>
+		</div>
 		<hr  color="gray" >
 		<!-- <h5>새로운 신청자를 확인 해주세요.</h5> -->
 		<!-- <span style="font-weight: bold;"><h3>자기소개</h3></span> -->
@@ -64,14 +66,23 @@
 		
   
   </div>
-  <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 250px; ">목록으로</a>
+  <c:choose>
+			<c:when test="${ empty currPage }">
+				<a class="btn btn-secondary btn-lg" href="new_joiner.do?s_num=${param.s_num}"
+					role="button" style="margin-left:250px;">목록으로</a>
+			</c:when>
+			<c:otherwise>
+				<a class="btn btn-secondary btn-lg" href="new_joiner.do?s_num=${param.s_num }"
+					role="button" style="margin-left:250px;">목록으로</a>
+			</c:otherwise>
+		</c:choose>
   <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 10px;">수락하기</a>
   <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 10px;">거절하기</a>
 </form>
 	</div>
 	
 		<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
