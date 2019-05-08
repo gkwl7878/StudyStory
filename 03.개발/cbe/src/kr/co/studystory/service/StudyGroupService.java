@@ -73,10 +73,10 @@ public class StudyGroupService {
 	/**
 	 * 내 스터디 수정하기 -혜원
 	 */
-/*	public String deletePreImg(String sNum) {
+	public String deletePreImg(String sNum) {
 		String preImg= sg_dao.selectPreImg(sNum);
 		return preImg;
-	}*/
+	}
 	
 	
 	public PrevStudyInfo getPrevStudy(String s_num) {
@@ -88,8 +88,6 @@ public class StudyGroupService {
 	
 	public boolean modifyStudy(ModifiedStudyVO ms_vo) {
 		boolean flag=false;
-		
-		StudyGroupDAO sg_dao=StudyGroupDAO.getInstance();
 		
 		if(sg_dao.updateStudy(ms_vo)) {
 			flag=true;

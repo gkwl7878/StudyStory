@@ -9,8 +9,6 @@
 
 <mapper namespace="kr.co.studystory.study_group2">
 	
-	
-	
 	<select id="selectMemberList"  resultType="kr.co.studystory.domain.MemberWithImg" parameterType="String">
 <!-- 	 select nick, tel, img
 	from user_table  -->
@@ -57,11 +55,11 @@
   where s_num=#{sNum}
   </update>
 
-<!-- <select id="selectPreImage" resultType="String" parameterType="String">
+<select id="selectPreImage" resultType="String" parameterType="String" >
 	select img
 	from   study
-	where  s_num=#{sNum,jdbcType=VARCHAR}
-</select> -->
+	where  s_num=#{sNum}
+</select> 
 
 <!--스터디 탈퇴  -->
 

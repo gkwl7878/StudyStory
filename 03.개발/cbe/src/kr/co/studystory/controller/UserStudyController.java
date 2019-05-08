@@ -111,11 +111,10 @@ public class UserStudyController {
 		return "study_group/study_modify";
 	}//createStudyPage
 	
-	@RequestMapping(value="study_group/modify_study_process.do", method= RequestMethod.POST)
+	@RequestMapping(value="study_group/modify_study_process.do", method= {RequestMethod.POST})
 	public String modifyStudyProcess(ModifiedStudyVO ms_vo, HttpServletRequest request, Model model) {
 
 		
-		String url="forward:modify_study.do";
 		
 		// 파일 업로드
 				MultipartRequest mr=null;
@@ -125,14 +124,15 @@ public class UserStudyController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				String url = "study_group/study_modify";
+				
 				String img= mr.getFilesystemName("file");
 				String sNum = mr.getParameter("sNum");
 				String content= mr.getParameter("content");
 				ms_vo.setContent(content);
 				ms_vo.setImg(img);
 				ms_vo.setsNum(sNum);
-			/*	String preImg= sgs.deletePreImg(sNum);
-				
+				String preImg= sgs.deletePreImg(sNum);
 				
 				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
 				System.out.println(preImg+"+++++++++++++++++++++++++++++++++++++");
@@ -142,17 +142,16 @@ public class UserStudyController {
 					}else {
 						System.out.println("파일이 존재하지 않습니다.");
 					}
-				}*/
+				}
 				
-			/*	if(img==null) {
+				if(img==null) {
 					img ="no_study_img.png";
-				}*/
+				}
 				
 				
 		if(sgs.modifyStudy(ms_vo)) {
 			url="study_group/study_i_made";
 			model.addAttribute("successFlag",true);
-			System.out.println("----------");
 		}else {
 			model.addAttribute("failFlag",true);
 		}
