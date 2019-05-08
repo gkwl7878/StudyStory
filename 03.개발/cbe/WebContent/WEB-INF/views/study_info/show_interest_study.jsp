@@ -41,6 +41,10 @@
 
 		var remove_flag = confirm("관심 스터디를 해제 하시겠습니까?");
 
+		if(!remove_flag){
+			return;
+		}// end if
+		
 		// '예' - 관심 스터디를 해제 할 경우.
 		if (remove_flag) {
 			$.ajax({
@@ -54,11 +58,11 @@
 				success : function(json) {
 					// 정삭적으로 제거가 되었다면 true가 반환된다.
 					if (json.resultFlag) {
-						$("#" + sNum + "_thumb").remove();
+						
 					}// end if
 				}// success
 			}); // ajax
-		}
+		}// end if
 
 		if (remove_flag == false) {
 			alert("#" + sNum + "_like_btn");
@@ -73,6 +77,9 @@
 			$("#fav_search_frm").submit();
 		});// click
 	}); // ready
+</script>
+
+<script type="text/javascript">
 </script>
 
 </head>
@@ -189,7 +196,8 @@
 													<small>${ thumbnail.category }</small>
 												</div>
 												<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
-												<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active" data-toggle="button" onclick="dislikeProcess('${ thumbnail.s_num }')">좋아요</button>
+												<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active">좋아요</button>
+												<%-- <button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active" onclick="dislikeProcess('${ thumbnail.s_num }')">좋아요</button> --%>
 											</div>
 										</div>
 									</div>
