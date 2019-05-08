@@ -35,7 +35,7 @@
 	
 		  <div class="row justify-content-center">
 		  	<div class="col-6 border-top border-bottom" style="padding:15px;">
-	      	<a href="#">스터디 탈퇴하기</a>
+	      	<a href="../study_group/leave_study.do?sNum=${ param.s_num}">스터디 탈퇴하기</a>
       	</div>
       </div>
       
