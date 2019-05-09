@@ -132,7 +132,7 @@ public class UserStudyController {
 				ms_vo.setContent(content);
 				ms_vo.setImg(img);
 				ms_vo.setsNum(sNum);
-				String preImg= sgs.deletePreImg(sNum);
+				/*String preImg= sgs.deletePreImg(sNum);
 				
 				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
 				System.out.println(preImg+"+++++++++++++++++++++++++++++++++++++");
@@ -142,7 +142,7 @@ public class UserStudyController {
 					}else {
 						System.out.println("파일이 존재하지 않습니다.");
 					}
-				}
+				}*/
 				
 				if(img==null) {
 					img ="no_study_img.png";
@@ -176,7 +176,7 @@ public class UserStudyController {
 		if(sgs.leaveStudy(l_vo)) {
 			
 			LeaveAlarmVO la_vo=new LeaveAlarmVO();
-			
+			la_vo.setLeaderId(id);
 			la_vo.setCategory("스터디");
 			la_vo.setSubject("스터디에서 탈퇴하였습니다.");
 			// snum이용해서 스터디명을 조회해서 content내용으로 추가
@@ -214,18 +214,15 @@ public class UserStudyController {
 			
 				CloseAlarmVO ca_vo=new CloseAlarmVO();
 				
+				ca_vo.setId(id);
 				ca_vo.setCategory("스터디");
 				ca_vo.setSubject("스터디가 종료되었습니다.");
-				// snum이용해서 스터디명을 조회해서 content내용으로 추가
-				ca_vo.setContent("ooo스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
+				ca_vo.setContent(c_vo.getsNum()+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
 				ca_vo.setsNum(c_vo.getsNum());
 				//
 				sgs.sendCloseAlarm(ca_vo);
 			
-				
-					url="redirect:../index.do";
-					model.addAttribute("id","");
-				
+				url="redirect:../study_i_made.do";
 			}else {
 				model.addAttribute("failFlag",true);
 				url="study_group/end_study";
