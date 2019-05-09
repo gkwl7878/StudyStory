@@ -45,9 +45,9 @@
 <script type="text/javascript">
 	$(function() {
 		
-		 <c:if test="${failFlag}">
-			alert("수정에 실패했습니다.");
-		</c:if>
+		<c:if test="${failFlag}">
+		alert("수정에 실패했습니다.");
+	</c:if>
 		
 		
 		$("#modifyBtn").click(function() {
