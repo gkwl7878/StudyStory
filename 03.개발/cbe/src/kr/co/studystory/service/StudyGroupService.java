@@ -97,7 +97,10 @@ public class StudyGroupService {
 		return flag;
 	}//modifyStudy
 	
-
+	public String searchPreImg(String sNum) {
+		String preImg= sg_dao.selectPreImg(sNum);
+		return preImg;
+	}
 	
 	/**
 	 * ½ºÅÍµð Å»Åð -Çý¿ø
@@ -128,7 +131,10 @@ public class StudyGroupService {
 		return flag;
 	}//leaveStudy
 	
-	
+	public String getStudyName(String s_num) {
+		return sg_dao.selectStudyName(s_num);
+		
+	}//getLeaderId
 	
 	/**
 	 * ½ºÅÍµð È°µ¿ Á¾·á -Çý¿ø

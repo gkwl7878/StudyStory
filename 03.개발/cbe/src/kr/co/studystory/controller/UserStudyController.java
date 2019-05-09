@@ -112,9 +112,8 @@ public class UserStudyController {
 	}//createStudyPage
 	
 	@RequestMapping(value="study_group/modify_study_process.do", method= {RequestMethod.POST})
-	public String modifyStudyProcess(ModifiedStudyVO ms_vo, HttpServletRequest request, Model model) {
-
-		
+	public String modifyStudyProcess(ModifiedStudyVO ms_vo, 
+			HttpServletRequest request, Model model) {
 		
 		// 파일 업로드
 				MultipartRequest mr=null;
@@ -124,37 +123,48 @@ public class UserStudyController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				String flag=mr.getParameter("imgChangeFlag");
+				String img="";
+				if("true".equals(flag)) {
+					img= mr.getFilesystemName("file");
+					
+				}else {
+					img=mr.getParameter("prevImg");
+				}
+				System.out.println("================="+img);
 				String url = "study_group/study_modify";
 				
-				String img= mr.getFilesystemName("file");
 				String sNum = mr.getParameter("sNum");
 				String content= mr.getParameter("content");
 				ms_vo.setContent(content);
 				ms_vo.setImg(img);
 				ms_vo.setsNum(sNum);
-				/*String preImg= sgs.deletePreImg(sNum);
+				
+				String preImg= sgs.searchPreImg(sNum);
+				
 				
 				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
-				System.out.println(preImg+"+++++++++++++++++++++++++++++++++++++");
 				if(!(preImg.equals("no_study_img.png"))){
 						if(file.exists()||img!=null) {
 						file.delete();
 					}else {
 						System.out.println("파일이 존재하지 않습니다.");
 					}
-				}*/
+				}
 				
 				if(img==null) {
 					img ="no_study_img.png";
 				}
 				
 				
+				System.out.println(ms_vo);
+				
 		if(sgs.modifyStudy(ms_vo)) {
 			url="study_group/study_i_made";
 			model.addAttribute("successFlag",true);
 		}else {
 			model.addAttribute("failFlag",true);
-		}
+		} 
 		return url;
 	}
 	
@@ -172,10 +182,8 @@ public class UserStudyController {
 		l_vo.setId(id);
 		
 		String url="study_group/my_study";
-		System.out.println("--------------------1111111111");
 		
 		if(sgs.leaveStudy(l_vo)) {
-			System.out.println("--------------------22222222");
 			
 			LeaveAlarmVO la_vo=new LeaveAlarmVO();
 			la_vo.setLeaderId(sgs.getLeaderId(l_vo.getsNum()));
@@ -185,14 +193,13 @@ public class UserStudyController {
 			// s_num을 받아서 study_name을 조회해 온 후 content에 
 			// id가 [스터디명]에서 탈퇴하셨습니다. \n탈퇴사유 : 
 			
-			la_vo.setContent(l_vo.getId()+"가 탈퇴되었습니다.: "+l_vo.getReason());
+			la_vo.setContent(l_vo.getId()+"가 ["+sgs.getStudyName(l_vo.getsNum())+"]에서 탈퇴되었습니다.: "+l_vo.getReason());
 			la_vo.setsNum(l_vo.getsNum());
 			
 			sgs.sendLeaveAlarm(la_vo);
 			
 			url="redirect:../study_info/main.do";
 		}else {
-			System.out.println("--------------------못들어옴");
 			model.addAttribute("failFlag",true);
 			url="study_group/study_out";
 		}
@@ -209,30 +216,29 @@ public class UserStudyController {
 	@RequestMapping(value="study_group/end_study_process.do" , method=POST )
 	public String closeStudyProcess(CloseVO c_vo, HttpSession session, Model model) {
 
-		String id=(String)session.getAttribute("id");
-		c_vo.setId(id);
 		
-		String url="study_group/my_study";
-
-		if(sgs.closeStudy(c_vo)) {
 		
-			CloseAlarmVO ca_vo=new CloseAlarmVO();
+			String id=(String)session.getAttribute("id");
+			c_vo.setId(id);
 			
-			ca_vo.setId(id);
-			ca_vo.setCategory("스터디");
-			ca_vo.setSubject("스터디가 종료되었습니다.");
-//////////////////// 탈퇴처리 때 만든 스터디명 가져오는 기능 사용//////////////////////
-///////////// content로 어떤 스터디가 활동 종료되었는지 content 내용 수정필요 ////////////
-			ca_vo.setContent(c_vo.getsNum()+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
-			ca_vo.setsNum(c_vo.getsNum());
-			//
-			sgs.sendCloseAlarm(ca_vo);
-		
-			url="redirect:../study_group/study_i_made.do";
-		}else {
-			model.addAttribute("failFlag",true);
-			url="study_group/end_study";
-		}
+			String url="study_group/my_study";
+			if(sgs.closeStudy(c_vo)) {
+			
+				CloseAlarmVO ca_vo=new CloseAlarmVO();
+				ca_vo.setId(id);
+				ca_vo.setCategory("스터디");
+				ca_vo.setSubject("스터디가 종료되었습니다.");
+				ca_vo.setContent(sgs.getStudyName(c_vo.getsNum())+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
+				ca_vo.setsNum(c_vo.getsNum());
+				//
+				sgs.sendCloseAlarm(ca_vo);
+			
+				System.out.println(c_vo);
+				url="redirect:study_i_made.do";
+			}else {
+				model.addAttribute("failFlag",true);
+				url="study_group/end_study";
+			}
 
 		return url ;
 	}

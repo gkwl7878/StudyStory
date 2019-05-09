@@ -54,11 +54,17 @@
   set 		content=#{content}, img=#{img}
   where s_num=#{sNum}
   </update>
+  
+  <select id="selectPreImg" resultType="String" parameterType="String">
+	select img
+	from   study
+	where  s_num=#{sNum}
+</select>
 
 
 <!--스터디 탈퇴  -->
 
- <select id="selectLeaderId">
+ <select id="selectLeaderId" resultType="String">
   	select id
   	from study
   	where s_num=#{sNum}		
@@ -73,6 +79,12 @@
   delete from member
   where id=#{id} and s_num=#{ s_num }
   </delete> 
+  
+  <select id="selectStudyName" resultType="String">
+  	select study_name
+  	from study
+  	where s_num=#{sNum}
+  </select>
   
   <!--스터디 활동 종료  -->
   <select id="selectMemberId" resultType="String">
