@@ -201,39 +201,41 @@ public class UserStudyController {
 	}//leaveStudyProcess
 	
 	//스터디 활동 종료
-		@RequestMapping(value="study_group/end_study.do", method= {GET,POST} )
-			public String closeStudyPage(String id) {
-			return "study_group/end_study";
-		}//leaveStudyPage
+	@RequestMapping(value="study_group/end_study.do", method= {GET,POST} )
+	public String closeStudyPage(String id) {
+		return "study_group/end_study";
+	}//leaveStudyPage
 		
-		@RequestMapping(value="study_group/end_study_process.do" , method=POST )
-		public String closeStudyProcess(CloseVO c_vo, HttpSession session, Model model) {
+	@RequestMapping(value="study_group/end_study_process.do" , method=POST )
+	public String closeStudyProcess(CloseVO c_vo, HttpSession session, Model model) {
 
-			String id=(String)session.getAttribute("id");
-			c_vo.setId(id);
-			
-			String url="study_group/my_study";
+		String id=(String)session.getAttribute("id");
+		c_vo.setId(id);
+		
+		String url="study_group/my_study";
 
-			if(sgs.closeStudy(c_vo)) {
+		if(sgs.closeStudy(c_vo)) {
+		
+			CloseAlarmVO ca_vo=new CloseAlarmVO();
 			
-				CloseAlarmVO ca_vo=new CloseAlarmVO();
-				
-				ca_vo.setId(id);
-				ca_vo.setCategory("스터디");
-				ca_vo.setSubject("스터디가 종료되었습니다.");
-				ca_vo.setContent(c_vo.getsNum()+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
-				ca_vo.setsNum(c_vo.getsNum());
-				//
-				sgs.sendCloseAlarm(ca_vo);
-			
-				url="redirect:../study_i_made.do";
-			}else {
-				model.addAttribute("failFlag",true);
-				url="study_group/end_study";
-			}
-
-			return url ;
+			ca_vo.setId(id);
+			ca_vo.setCategory("스터디");
+			ca_vo.setSubject("스터디가 종료되었습니다.");
+//////////////////// 탈퇴처리 때 만든 스터디명 가져오는 기능 사용//////////////////////
+///////////// content로 어떤 스터디가 활동 종료되었는지 content 내용 수정필요 ////////////
+			ca_vo.setContent(c_vo.getsNum()+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
+			ca_vo.setsNum(c_vo.getsNum());
+			//
+			sgs.sendCloseAlarm(ca_vo);
+		
+			url="redirect:../study_group/study_i_made.do";
+		}else {
+			model.addAttribute("failFlag",true);
+			url="study_group/end_study";
 		}
+
+		return url ;
+	}
 }//class
 
 

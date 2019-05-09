@@ -125,7 +125,7 @@
 <update id="updateRecruit" parameterType="kr.co.studystory.vo.RecruitVO">
 	UPDATE study
 	SET recruitment=#{ status }
-	WHERE s_num=#{ sNum }
+	WHERE s_num=#{ s_num }
 </update>
 
 <select id="selectAllMember" parameterType="String" resultType="kr.co.studystory.domain.NickAndId">
