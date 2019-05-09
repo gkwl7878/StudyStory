@@ -55,7 +55,7 @@
 				</otherwise>
 			</choose>
 		</where>
-		ORDER BY s.input_date DESC, s.deactivation
+		ORDER BY s.deactivation ASC, s.input_date DESC 
   </select>
   
   <!-- s_num, study_name, loc, category, study_img, user_img, recruitment, input_date, nick, join_accept_flag; -->
