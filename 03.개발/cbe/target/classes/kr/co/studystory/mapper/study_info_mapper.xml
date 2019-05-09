@@ -53,10 +53,12 @@
 
 	<!-- 스터디 상세 정보의 댓글 조회 -->
 	<select id="selectStudyCommentList" resultType="kr.co.studystory.domain.StudyCommentDomain" parameterType="String">
-		SELECT SC.S_COMMENT, TO_CHAR(SC.INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, SC.ID 
-		FROM STUDY STD, S_COMMENT SC
-		WHERE STD.S_NUM=SC.S_NUM AND SC.S_NUM= #{ sNum }
-		ORDER BY INPUT_DATE DESC
+		SELECT S_COMMENT, ID,TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, IMG
+		FROM (SELECT SC.S_COMMENT, SC.ID, UT.IMG, SC.INPUT_DATE, ROW_NUMBER() OVER( ORDER BY SC.INPUT_DATE DESC) R_NUM
+				FROM STUDY STD, S_COMMENT SC, USER_TABLE UT
+				WHERE STD.S_NUM=SC.S_NUM AND UT.ID = SC.ID AND SC.S_NUM= #{sNum}
+				)
+		ORDER BY R_NUM ASC
 	</select>
 	<!-- 스터디 상세 정보의 댓글 조회 -->
 	
@@ -73,6 +75,12 @@
 		insert into s_comment(s_num, s_comment, id, input_date)
 		values(#{ sNum }, #{ reply }, #{ id }, SYSDATE)
 	</insert>
+	
+	<select id="selectWriterImg" resultType="String" parameterType="kr.co.studystory.vo.ReplyVO">
+		SELECT IMG
+		FROM USER_TABLE
+		WHERE ID = #{id}
+	</select>
 	<!-- 댓글 인서트 -->
 
 	<!-- JoinFormVO & alarmVO 인서트 -->
