@@ -11,6 +11,7 @@ import kr.co.studystory.domain.Joiner;
 import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.vo.ApplicantBbsVO;
 import kr.co.studystory.vo.DetailJoinerVO;
+import kr.co.studystory.vo.JoinDeleteVO;
 import kr.co.studystory.vo.NewMemberVO;
 
 /**
@@ -126,6 +127,14 @@ public class StudyGroupService2 {
 		
 		
 		return acceptFlag;
+	}
+	
+	public boolean removeJoin(JoinDeleteVO jdvo) {
+		boolean deleteFlag=false;
+		deleteFlag=sg_dao.deleteJoin(jdvo);
+		
+		return deleteFlag;
+		
 	}
 	
 	

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.AlternativeJdkIdGenerator;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,9 @@ import kr.co.studystory.service.StudyGroupService2;
 import kr.co.studystory.vo.ApplicantBbsVO;
 import kr.co.studystory.vo.DetailJoinerVO;
 import kr.co.studystory.vo.JoinAlarmVO;
+import kr.co.studystory.vo.JoinDeleteVO;
 import kr.co.studystory.vo.NewMemberVO;
+import kr.co.studystory.vo.RefuseVO;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -119,18 +122,47 @@ public class UserStudyController2 {
 		return "study_group/req_detail";
 	}
 	
+	@RequestMapping(value="/study_group/req_accept.do", method=RequestMethod.GET)
+	public String acceptMember(HttpSession session, NewMemberVO nmvo, Model model, JoinDeleteVO jdvo) {
+		boolean acceptFlag =false;
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		System.out.println("================"+nmvo);
+		
+		System.out.println("========================="+acceptFlag);
+		 acceptFlag=sgs.addNewMember(nmvo);
+		System.out.println("========================="+acceptFlag);
+		//JoinAlarmVO ja_vo=new JoinAlarmVO();
+		if(acceptFlag) {
+			sgs.removeJoin(nmvo);
+		}
+		
+			
+		return "forward:../study_group/new_joiner.do";
+	}
 	
-	public String acceptMember(HttpSession session, NewMemberVO nmvo, Model model) {
+	@RequestMapping(value="/study_group/req_reject.do", method=RequestMethod.GET)
+	public String refuseApplicantPage(HttpSession session, String s) {
 		if (session.getAttribute("id") == null) {
 			return "redirect:../index.do";
 		}
 		
-		boolean acceptFlag=sgs.addNewMember(nmvo);
-		JoinAlarmVO ja_vo=new JoinAlarmVO();
+		return "study_group/req_reject";
+	}
+	
+	@RequestMapping(value="/study_group/req_reject_proc.do", method=RequestMethod.POST)
+	public String refuseApplicantProcess(HttpSession session, RefuseVO rfvo,JoinDeleteVO jdvo, Model model ) {
+		boolean refuseFlag=false;
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		refuseFlag=sgs.removeJoin(rfvo);
+		if(refuseFlag) {
+			//알람 보내기 - 거절 
+		}
 		
-			
-			
-		return "study_group/req_detail";
+		return "forward:../study_group/new_joiner.do";
 	}
 	
 	

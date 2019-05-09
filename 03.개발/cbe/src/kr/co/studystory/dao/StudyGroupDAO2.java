@@ -16,6 +16,7 @@ import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.vo.ApplicantBbsVO;
 import kr.co.studystory.vo.DetailJoinerVO;
 import kr.co.studystory.vo.JoinAlarmVO;
+import kr.co.studystory.vo.JoinDeleteVO;
 import kr.co.studystory.vo.NewMemberVO;
 @Component
 public class StudyGroupDAO2 {
@@ -120,13 +121,25 @@ public class StudyGroupDAO2 {
 		
 		int cnt=0;
 		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
-		JoinAlarmVO ja_vo=new JoinAlarmVO("½ºÅÍµð","½ºÅÍµð °¡ÀÔ ½Â³«µÊ",
-			"\"" + nmvo.getS_num()	)
-		cnt=ss.insert("insertJoinedAlarm",javo);
+//		JoinAlarmVO ja_vo=new JoinAlarmVO("½ºÅÍµð","½ºÅÍµð °¡ÀÔ ½Â³«µÊ",
+//			"\"" + nmvo.getS_num()	)
+//		cnt=ss.insert("insertJoinedAlarm",javo);
 		
 		
 	}
 	
+	public boolean deleteJoin(JoinDeleteVO jdvo) {
+		boolean deleteJoinerflag=false;
+		int cnt=0;
+		SqlSession ss= StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		cnt=ss.delete("deleteJoiner",jdvo);
+			if(cnt>0) {
+				deleteJoinerflag= true;
+				ss.commit();
+			}//end if
+			ss.close();
+		return deleteJoinerflag;
+	}
 	
 	
 	//´ÜÀ§Å×½ºÆ®

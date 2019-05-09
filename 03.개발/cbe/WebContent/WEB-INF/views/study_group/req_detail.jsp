@@ -19,10 +19,17 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript">
+  /* $(function() {
+	              ===================post 처리는 좀 나중에
+});//끝 */
   
   </script>
 </head>
 <body>
+  	<!-- <form action="" method="post" id="act_bt">
+  						===================post 처리는 좀 나중에
+  	
+  	</form> -->
 	<!-- header -->
 	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
@@ -76,8 +83,9 @@
 					role="button" style="margin-left:250px;">목록으로</a>
 			</c:otherwise>
 		</c:choose>
-  <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 10px;">수락하기</a>
-  <a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 10px;">거절하기</a>
+  <a class="btn btn-secondary btn-lg" href="req_accept.do?s_num=${ param.s_num }&id=${jrInfo.id}" role="button" style="margin-left: 10px;">수락하기</a>
+ <!--  <a class="btn btn-secondary btn-lg" href="#" id="act_bt" role="button" style="margin-left: 10px;">수락하기</a> -->
+  <a class="btn btn-secondary btn-lg" href="req_reject.do?s_num=${param.s_num}" role="button" style="margin-left: 10px;">거절하기</a>
 </form>
 	</div>
 	

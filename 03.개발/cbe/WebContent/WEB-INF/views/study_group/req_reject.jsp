@@ -17,18 +17,22 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript">
-  
+  	$(function(){
+  		$("#refuse_btn").click(function(){
+  			$("#rejFrm").submit();
+  		})
+  	})
   </script>
 </head>
 <body>
 	<!-- header -->
-	<c:import url="http://localhost:8080/third_prj/layout/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
 
 	
 	
 	<div id="wrap" >
-		<form>
+		<form id="rejFrm" action="req_reject_proc.do" method="post">
 		 <br/><br/>
 		 <div style="border:1px solid #D7D7D7; padding:40px"><br/><br/>
 		<h1 ><Strong>이 신청자를 거절하시겠습니까?</Strong></h1>
@@ -39,15 +43,15 @@
 				placeholder="내용을 입력해주세요.">
 		<br/>
 	
-	<br/>
-  <a class="btn btn-secondary btn-lg" href="#void" role="button" >돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-secondary btn-lg" href="#void" role="button">거절하기</a>
+	<br/><%-- req_detail.do?s_num=${param.s_num } --%>
+  <a class="btn btn-secondary btn-lg" href="javascript:history.back()" role="button" >돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a class="btn btn-secondary btn-lg" href="#void" id="refuse_btn" role="button">거절하기</a>
   </div>
 </form>
 	</div>
 	
 		<!-- footer -->
-	<c:import url="http://localhost:8080/third_prj/layout/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

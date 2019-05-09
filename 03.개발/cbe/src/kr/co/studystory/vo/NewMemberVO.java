@@ -18,6 +18,11 @@ public class NewMemberVO {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "NewMemberVO [s_num=" + s_num + ", id=" + id + "]";
+	}
 	
 	
 	
