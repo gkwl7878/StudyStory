@@ -79,15 +79,17 @@
 							output += "	</div>"
 							output += "	<div class='col-lg-10' style='margin-top: 5px; padding-right: 0px;'>"
 							output += "		<div style='overflow: hidden'>"
-							output += "			<div class='mt-0' style='float: left;'>"+json.id+"</div>"
+							output += "			<div class='mt-0' style='float: left;'>"+json.nick+"</div>"
 							output += "			<div style='float: right;'>" + date.getFullYear() + "/0" +(date.getMonth()+1) + "/0" + date.getDate() + "</div>"
 							output += "		</div>"
 							output += "		<div style='margin-top: 15px;'>"+ input_reply +"</div>"
 							output += "	</div>"
 							output += "</div>"
 							output += "<div class='my-3 border-bottom'></div>"
-						
-							$("#sc_cnt").text(${scomment_cnt} + 1);
+								
+							
+							var cnt = $("#sc_cnt").text();
+							$("#sc_cnt").text(Number(cnt) + 1);
 							$("#sComment_view").prepend(output);
 						}// end if
 					}
@@ -198,7 +200,7 @@
 					<div class="col-lg-12">
 						<div class="row" style="margin-bottom: 20px; font-weight: bold">
 							<!-- 댓글의 총 갯수. -->
-							<div class="col-lg-10">댓글 : <span id="sc_cnt">${scomment_cnt}</span>개</div>
+							<div class="col-lg-10">댓글 : <span id="sc_cnt"><c:out value="${scomment_cnt}"/></span>개</div>
 						</div>
 						<!-- 댓글 입력 폼 -->
 						<div class="row">
@@ -223,7 +225,7 @@
 											</div>
 											<div class="col-lg-10" style="margin-top: 5px; padding-right: 0px;">
 												<div style="overflow: hidden">
-													<div class="mt-0" style="float: left;">${ s_comment.id }</div>
+													<div class="mt-0" style="float: left;">${ s_comment.nick }</div>
 													<div style="float: right;">${ s_comment.input_date }</div>
 												</div>
 												<div style="margin-top: 15px;">${ s_comment.s_comment }</div>
