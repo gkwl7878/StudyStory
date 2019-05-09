@@ -35,6 +35,10 @@
 		location.replace("login.do");
 		</c:if>
 	});//ready
+	
+	function delete_confirm(){
+		return confirm("정말 이 스터디를 거절하시겠습니까?");
+	}
 </script>
 
 </head>
@@ -131,7 +135,7 @@
 			<a class="btn btn-secondary btn" href="new_study.do?currPage=${param.currPage}"  role="button" style="margin-left: 180px;">목록으로</a> 
 			<a class="btn btn-secondary btn" href="ns_accept.do?sNum=${param.sNum}&currPage=${param.currPage}
 				&id=${requestScope.id }&studyName=${requestScope.studyName }" role="button" style="margin-left: 10px;">수락</a> 
-			<a class="btn btn-secondary btn" href="study_reject.do?sNum=${param.sNum}&currPage=${param.currPage}&id=${requestScope.id }&studyName=${requestScope.studyName }" role="button" style="margin-left: 10px;">거절</a>
+			<a class="btn btn-secondary btn" onclick="return delete_confirm();" href="study_reject.do?sNum=${param.sNum}&currPage=${param.currPage}&id=${requestScope.id }&studyName=${requestScope.studyName }" role="button" style="margin-left: 10px;">거절</a>
 		</div>
 	</div>
 

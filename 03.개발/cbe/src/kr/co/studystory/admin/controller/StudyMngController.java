@@ -137,7 +137,6 @@ public class StudyMngController {
 		
 		
 		File file = new File("C:/dev/StudyStory/03.°³¹ß/cbe/WebContent/study_img/"+preImg);
-		System.out.println(preImg+"+++++++++++++++++++++++++++++++++++++");
 		if(!(preImg.equals("no_study_img.png"))){
 				if(file.exists()||img!=null) {
 				file.delete();

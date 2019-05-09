@@ -46,7 +46,7 @@
 							<th style="width: 150px">분류</th>
 							<th style="width: 500px">제목</th>
 							<th style="width: 100px">답변여부</th>
-							<th style="width: 100px">등록일</th>
+							<th style="width: 120px">등록일</th>
 						</tr>
 					</thead>
 					<tbody>

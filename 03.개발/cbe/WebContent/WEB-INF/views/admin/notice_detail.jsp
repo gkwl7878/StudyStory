@@ -72,6 +72,7 @@
 	<form id="noticeDetailFrm" action="update_notice.do" method="post">
 	<input type="hidden" name="nNum" value="${param.nNum }">  
 	<input type="hidden" name="currPage" value="${param.currPage}">  
+	<input type="hidden" name="searchWord" value="${param.searchWord}">  
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-12 justify-content-left" style="margin-bottom: 20px;">
