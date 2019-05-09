@@ -112,9 +112,8 @@ public class UserStudyController {
 	}//createStudyPage
 	
 	@RequestMapping(value="study_group/modify_study_process.do", method= {RequestMethod.POST})
-	public String modifyStudyProcess(ModifiedStudyVO ms_vo, HttpServletRequest request, Model model) {
-
-		
+	public String modifyStudyProcess(ModifiedStudyVO ms_vo, 
+			HttpServletRequest request, Model model) {
 		
 		// 파일 업로드
 				MultipartRequest mr=null;
@@ -124,14 +123,25 @@ public class UserStudyController {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				String flag=mr.getParameter("imgChangeFlag");
+				String img="";
+				if("true".equals(flag)) {
+					img= mr.getFilesystemName("file");
+					
+				}else {
+					img=mr.getParameter("prevImg");
+				}
+				System.out.println("================="+img);
 				String url = "study_group/study_modify";
 				
-				String img= mr.getFilesystemName("file");
 				String sNum = mr.getParameter("sNum");
 				String content= mr.getParameter("content");
 				ms_vo.setContent(content);
 				ms_vo.setImg(img);
 				ms_vo.setsNum(sNum);
+				
+			//	File file=new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
+				
 				
 				System.out.println(ms_vo);
 				
@@ -140,7 +150,7 @@ public class UserStudyController {
 			model.addAttribute("successFlag",true);
 		}else {
 			model.addAttribute("failFlag",true);
-		}
+		} 
 		return url;
 	}
 	
@@ -184,14 +194,16 @@ public class UserStudyController {
 	}//leaveStudyProcess
 	
 	//스터디 활동 종료
-		@RequestMapping(value="study_group/end_study.do", method= {GET,POST} )
-			public String closeStudyPage(String id) {
-			return "study_group/end_study";
-		}//leaveStudyPage
+	@RequestMapping(value="study_group/end_study.do", method= {GET,POST} )
+	public String closeStudyPage(String id) {
+		return "study_group/end_study";
+	}//leaveStudyPage
 		
-		@RequestMapping(value="study_group/end_study_process.do" , method=POST )
-		public String closeStudyProcess(CloseVO c_vo, HttpSession session, Model model) {
+	@RequestMapping(value="study_group/end_study_process.do" , method=POST )
+	public String closeStudyProcess(CloseVO c_vo, HttpSession session, Model model) {
 
+		
+		
 			String id=(String)session.getAttribute("id");
 			c_vo.setId(id);
 			
@@ -199,23 +211,23 @@ public class UserStudyController {
 			if(sgs.closeStudy(c_vo)) {
 			
 				CloseAlarmVO ca_vo=new CloseAlarmVO();
-				//멤버들아이디가져오기
 				ca_vo.setId(id);
 				ca_vo.setCategory("스터디");
 				ca_vo.setSubject("스터디가 종료되었습니다.");
-				ca_vo.setContent(c_vo.getsNum()+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
+				ca_vo.setContent(sgs.getStudyName(c_vo.getsNum())+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
 				ca_vo.setsNum(c_vo.getsNum());
 				//
 				sgs.sendCloseAlarm(ca_vo);
 			
+				System.out.println(c_vo);
 				url="redirect:study_i_made.do";
 			}else {
 				model.addAttribute("failFlag",true);
 				url="study_group/end_study";
 			}
 
-			return url ;
-		}
+		return url ;
+	}
 }//class
 
 
