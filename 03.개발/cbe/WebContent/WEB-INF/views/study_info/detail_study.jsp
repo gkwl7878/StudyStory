@@ -86,8 +86,6 @@
 							output += "	</div>"
 							output += "</div>"
 							output += "<div class='my-3 border-bottom'></div>"
-								
-							
 							var cnt = $("#sc_cnt").text();
 							$("#sc_cnt").text(Number(cnt) + 1);
 							$("#sComment_view").prepend(output);
