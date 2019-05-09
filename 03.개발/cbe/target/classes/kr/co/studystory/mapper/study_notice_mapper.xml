@@ -28,6 +28,12 @@
 	order by sn.input_date desc
 </select>
 
+<select id="selectCloseFlag" parameterType="String" resultType="String">
+	SELECT deactivation
+	FROM study
+	WHERE s_num=#{ s_num }
+</select>
+
 <select id="selectCommentNum" parameterType="String" resultType="int">
 	select count(*) cnt
 	from sn_comment

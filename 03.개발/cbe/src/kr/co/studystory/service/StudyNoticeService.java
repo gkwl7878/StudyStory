@@ -40,6 +40,14 @@ public class StudyNoticeService {
 	}
 	
 	/**
+	 * 스터디가 종료되었는지 확인하는 메서드
+	 * by 영근
+	 */
+	public boolean isClosed(String s_num) {
+		return sn_dao.selectCloseFlag(s_num);
+	}
+	
+	/**
 	 * snNum으로 스터디명 조회하기
 	 */
 	public String getStudyNameBySnNum(String sn_num) {
