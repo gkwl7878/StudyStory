@@ -128,7 +128,10 @@ public class StudyGroupService {
 		return flag;
 	}//leaveStudy
 	
-	
+	public String getStudyName(String s_num) {
+		return sg_dao.selectStudyName(s_num);
+		
+	}//getLeaderId
 	
 	/**
 	 * 스터디 활동 종료 -혜원

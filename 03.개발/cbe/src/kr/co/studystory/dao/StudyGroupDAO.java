@@ -164,6 +164,16 @@ public class StudyGroupDAO {
 		return flag;
 	}//deleteMember
 	
+	public String selectStudyName(String s_num) {
+		String id="";
+		
+		SqlSession ss=sg_dao.getSqlSessionFactory().openSession();
+		id= ss.selectOne("selectStudyName",s_num);
+		
+		return id;
+	}
+	
+	
 	
 	//스터디 활동 종료
 	

@@ -133,6 +133,7 @@ public class UserStudyController {
 				ms_vo.setImg(img);
 				ms_vo.setsNum(sNum);
 				
+				System.out.println(ms_vo);
 				
 		if(sgs.modifyStudy(ms_vo)) {
 			url="study_group/study_i_made";
@@ -157,10 +158,8 @@ public class UserStudyController {
 		l_vo.setId(id);
 		
 		String url="study_group/my_study";
-		System.out.println("--------------------1111111111");
 		
 		if(sgs.leaveStudy(l_vo)) {
-			System.out.println("--------------------22222222");
 			
 			LeaveAlarmVO la_vo=new LeaveAlarmVO();
 			la_vo.setLeaderId(sgs.getLeaderId(l_vo.getsNum()));
@@ -170,14 +169,13 @@ public class UserStudyController {
 			// s_num을 받아서 study_name을 조회해 온 후 content에 
 			// id가 [스터디명]에서 탈퇴하셨습니다. \n탈퇴사유 : 
 			
-			la_vo.setContent(l_vo.getId()+"가 탈퇴되었습니다.: "+l_vo.getReason());
+			la_vo.setContent(l_vo.getId()+"가 ["+sgs.getStudyName(l_vo.getsNum())+"]에서 탈퇴되었습니다.: "+l_vo.getReason());
 			la_vo.setsNum(l_vo.getsNum());
 			
 			sgs.sendLeaveAlarm(la_vo);
 			
 			url="redirect:../study_info/main.do";
 		}else {
-			System.out.println("--------------------못들어옴");
 			model.addAttribute("failFlag",true);
 			url="study_group/study_out";
 		}
@@ -198,11 +196,10 @@ public class UserStudyController {
 			c_vo.setId(id);
 			
 			String url="study_group/my_study";
-
 			if(sgs.closeStudy(c_vo)) {
 			
 				CloseAlarmVO ca_vo=new CloseAlarmVO();
-				
+				//멤버들아이디가져오기
 				ca_vo.setId(id);
 				ca_vo.setCategory("스터디");
 				ca_vo.setSubject("스터디가 종료되었습니다.");
@@ -211,7 +208,7 @@ public class UserStudyController {
 				//
 				sgs.sendCloseAlarm(ca_vo);
 			
-				url="redirect:../study_i_made.do";
+				url="redirect:study_i_made.do";
 			}else {
 				model.addAttribute("failFlag",true);
 				url="study_group/end_study";

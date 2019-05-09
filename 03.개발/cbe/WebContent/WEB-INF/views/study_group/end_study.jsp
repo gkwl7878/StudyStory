@@ -48,6 +48,7 @@ $(function () {
 
 	<div id="wrap">
 		<form action="../study_group/end_study_process.do" method="post" id="endFrm" >
+		<input type="hidden" value="${ param.sNum }" name="sNum"/>
 			<br />
 			<br />
 			<div style="width: 920px; border: 1px solid #D7D7D7; padding: 40px;">
