@@ -14,13 +14,12 @@ import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
-import kr.co.studystory.vo.AddFavStudyVO;
 import kr.co.studystory.vo.DetailMenuVO;
+import kr.co.studystory.vo.FavFlagVO;
 import kr.co.studystory.vo.FavSNumFlagVO;
 import kr.co.studystory.vo.FavStudyOrderVO;
 import kr.co.studystory.vo.JoinAlarmVO;
 import kr.co.studystory.vo.JoinFormVO;
-import kr.co.studystory.vo.RemoveFavStudyVO;
 import kr.co.studystory.vo.ReplyVO;
 import kr.co.studystory.vo.SearchListVO;
 
@@ -156,6 +155,18 @@ public class StudyInfoDAO {
 	}// selectSCommentList
 
 	/**
+	 * 댓글의 갯수 구하기.
+	 * @param s_num
+	 * @return
+	 */
+	public int selectScommentCnt(String s_num) {
+		int cnt = 0;
+		SqlSession ss = getSessionFatory().openSession();
+		cnt = ss.selectOne("selectScommentCnt", s_num);
+		return cnt;
+	}// selectScommentCnt
+	
+	/**
 	 * 상세 스터디의 댓글을 insert하고 정상 동작시 입력한 유저의 이미지 파일명 반환 메서드.
 	 * 
 	 * @return int count
@@ -257,16 +268,20 @@ public class StudyInfoDAO {
 		return list;
 	}// selectMyFavStudy
 
+	/////////////////////////////////////// 하트 구현
+	
 	/**
-	 * 관심 스터디로 추가하기.
+	 * 관심 스터디로 인서트.
 	 * 
 	 * @param afs_vo
 	 * @return
 	 */
-	public int insertFavStudy(AddFavStudyVO afs_vo) {
+	public int insertFavStudy(FavFlagVO ff_vo) {
 		int resultCnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
-		resultCnt = ss.insert("insertFavStudy", afs_vo);
+		System.out.println("///////////////////// 다오" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+
+		resultCnt = ss.insert("insertFavStudy", ff_vo);
 		// 정상적으로 추가가 되었을 경우 커밋하기.
 		if (resultCnt == 1) {
 			ss.commit();
@@ -280,16 +295,21 @@ public class StudyInfoDAO {
 	 * 
 	 * @param sNum
 	 */
-	public int deleteFavStudy(RemoveFavStudyVO rfa_vo) {
+	public int deleteFavStudy(FavFlagVO ff_vo) {
 		int resultCnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
-		resultCnt = ss.delete("deleteFavStudy", rfa_vo);
+		System.out.println("///////////////////// 다오" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+
+		resultCnt = ss.delete("deleteFavStudy", ff_vo);
 		if (resultCnt == 1) {
 			ss.commit();
 		} // end if
 		ss.close();
 		return resultCnt;
 	}// deleteFavStudy
+	
+	/////////////////////////////////////// 하트 구현
+
 
 	/////////////////////////// 스터디 찾기
 

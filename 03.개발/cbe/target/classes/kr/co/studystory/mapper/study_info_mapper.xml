@@ -60,6 +60,12 @@
 				)
 		ORDER BY R_NUM ASC
 	</select>
+
+	<select id="selectScommentCnt" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM S_COMMENT
+		WHERE S_NUM = #{sNum}
+	</select>
 	<!-- 스터디 상세 정보의 댓글 조회 -->
 	
 	<!-- 스터디 참여하기 페이지의 기본 정보 조회. -->
