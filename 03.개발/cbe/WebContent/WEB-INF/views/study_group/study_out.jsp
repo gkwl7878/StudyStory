@@ -48,6 +48,7 @@
 	
 	<div id="wrap" >
 		<form action="../study_group/leave_study_process.do" method="post" id="outFrm" >
+			<input type="hidden" value="${ param.sNum }" name="sNum"/>
 		 <br/><br/>
 		 <div style="border:1px solid #D7D7D7; padding:40px"><br/><br/>
 		<h1 ><Strong>정말 이 스터디를 탈퇴하시겠어요?</Strong></h1>

@@ -152,28 +152,32 @@ public class UserStudyController {
 	
 	@RequestMapping(value="study_group/leave_study_process.do" , method=POST )
 	public String leaveStudyProcess(LeaveVO l_vo, HttpSession session, Model model) {
-		//vo ????
+		
 		String id=(String)session.getAttribute("id");
 		l_vo.setId(id);
 		
 		String url="study_group/my_study";
+		System.out.println("--------------------1111111111");
 		
 		if(sgs.leaveStudy(l_vo)) {
+			System.out.println("--------------------22222222");
 			
 			LeaveAlarmVO la_vo=new LeaveAlarmVO();
-			la_vo.setLeaderId(id);
+			la_vo.setLeaderId(sgs.getLeaderId(l_vo.getsNum()));
 			la_vo.setCategory("스터디");
 			la_vo.setSubject("스터디에서 탈퇴하였습니다.");
 			// snum이용해서 스터디명을 조회해서 content내용으로 추가
-			la_vo.setContent(l_vo.getsNum()+"가 탈퇴되었습니다.: "+l_vo.getReason());
+			// s_num을 받아서 study_name을 조회해 온 후 content에 
+			// id가 [스터디명]에서 탈퇴하셨습니다. \n탈퇴사유 : 
+			
+			la_vo.setContent(l_vo.getId()+"가 탈퇴되었습니다.: "+l_vo.getReason());
 			la_vo.setsNum(l_vo.getsNum());
-			//
+			
 			sgs.sendLeaveAlarm(la_vo);
 			
-				url="redirect:../index.do";
-				model.addAttribute("id","");
-			
+			url="redirect:../study_info/main.do";
 		}else {
+			System.out.println("--------------------못들어옴");
 			model.addAttribute("failFlag",true);
 			url="study_group/study_out";
 		}

@@ -20,6 +20,7 @@ import kr.co.studystory.vo.LeaveAlarmVO;
 import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
+import kr.co.studystory.vo.OutStudyVO;
 
 @Component
 public class StudyGroupDAO {
@@ -148,17 +149,18 @@ public class StudyGroupDAO {
 		
 	}//insertLeaveAlarm
 	
-	public boolean deleteMember(String id) {
+	public boolean deleteMember(OutStudyVO osvo) {
 		boolean flag=false;
 		
 		SqlSession ss=StudyGroupDAO.getInstance().getSqlSessionFactory().openSession();
 		
-		int cnt=ss.delete("deleteStudyMember",id);
+		int cnt=ss.delete("deleteStudyMember",osvo);
 		if(cnt==1) {
 			flag=true;
 			ss.commit();
 		}
 		ss.close();
+		
 		return flag;
 	}//deleteMember
 	
