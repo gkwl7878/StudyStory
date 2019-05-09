@@ -93,7 +93,6 @@
 				}); // ajax
 			}// end if
 		});
-
 	}); // ready
 </script>
 
@@ -130,8 +129,6 @@
 						<strong>상세 정보</strong>
 					</div>
 					<div class="col-lg-9">
-
-						<!-- private int favNum, memberNum; // 좋아요 갯수, 스터디 참여자 수. -->
 
 						<div class="row">
 							<!-- 스터디 지역 -->
