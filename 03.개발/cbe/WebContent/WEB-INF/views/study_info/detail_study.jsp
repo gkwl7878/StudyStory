@@ -80,13 +80,14 @@
 							output += "	<div class='col-lg-10' style='margin-top: 5px; padding-right: 0px;'>"
 							output += "		<div style='overflow: hidden'>"
 							output += "			<div class='mt-0' style='float: left;'>"+json.id+"</div>"
-							output += "			<div style='float: right;'>" + date.getFullYear() + "/" +(date.getMonth()+1) + "/" + date.getDate() + "/" + "</div>"
+							output += "			<div style='float: right;'>" + date.getFullYear() + "/0" +(date.getMonth()+1) + "/0" + date.getDate() + "</div>"
 							output += "		</div>"
 							output += "		<div style='margin-top: 15px;'>"+ input_reply +"</div>"
 							output += "	</div>"
 							output += "</div>"
 							output += "<div class='my-3 border-bottom'></div>"
-							
+						
+							$("#sc_cnt").text(${scomment_cnt} + 1);
 							$("#sComment_view").prepend(output);
 						}// end if
 					}
@@ -183,7 +184,7 @@
 							<div class="col-lg-9" style="font-size: 20px; padding: 30px">
 								<!-- 리더(스터디 개설자의 nick)-->
 								<strong>${ s_Info.nick }</strong>
-								<br />
+								<br/>
 								<p style="font-size: 13px;">
 									<c:out value="${ s_Info.introduce }" />
 								</p>
@@ -197,7 +198,7 @@
 					<div class="col-lg-12">
 						<div class="row" style="margin-bottom: 20px; font-weight: bold">
 							<!-- 댓글의 총 갯수. -->
-							<div class="col-lg-10">댓글 1</div>
+							<div class="col-lg-10">댓글 : <span id="sc_cnt">${scomment_cnt}</span>개</div>
 						</div>
 						<!-- 댓글 입력 폼 -->
 						<div class="row">
@@ -230,7 +231,6 @@
 										</div>
 										
 										<div class="my-3 border-bottom"></div>
-										
 									</c:forEach>
 								</div>
 							</div>

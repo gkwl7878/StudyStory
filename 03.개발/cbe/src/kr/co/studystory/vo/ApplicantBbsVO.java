@@ -1,11 +1,14 @@
 package kr.co.studystory.vo;
 
 public class ApplicantBbsVO {
-	private String sNum;
+	private String s_num;
 	private int begin, end, currPage;
 	
-	public String getsNum() {
-		return sNum;
+	public String getS_num() {
+		return s_num;
+	}
+	public void setS_num(String s_num) {
+		this.s_num = s_num;
 	}
 	public int getBegin() {
 		return begin;
@@ -16,9 +19,6 @@ public class ApplicantBbsVO {
 	public int getCurrPage() {
 		return currPage;
 	}
-	public void setsNum(String sNum) {
-		this.sNum = sNum;
-	}
 	public void setBegin(int begin) {
 		this.begin = begin;
 	}
@@ -28,9 +28,4 @@ public class ApplicantBbsVO {
 	public void setCurrPage(int currPage) {
 		this.currPage = currPage;
 	}
-	
-	
-	
-	
-
 }

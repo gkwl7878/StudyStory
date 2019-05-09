@@ -11,12 +11,11 @@ import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
-import kr.co.studystory.vo.AddFavStudyVO;
 import kr.co.studystory.vo.DetailMenuVO;
+import kr.co.studystory.vo.FavFlagVO;
 import kr.co.studystory.vo.FavSNumFlagVO;
 import kr.co.studystory.vo.FavStudyOrderVO;
 import kr.co.studystory.vo.JoinFormVO;
-import kr.co.studystory.vo.RemoveFavStudyVO;
 import kr.co.studystory.vo.ReplyVO;
 import kr.co.studystory.vo.SearchListVO;
 
@@ -103,6 +102,18 @@ public class StudyInfoService {
 	}// getStudyComment
 
 	/**
+	 * 댓글의 갯수 얻기.
+	 * 
+	 * @param s_num
+	 * @return
+	 */
+	public int getScommentCnt(String s_num) {
+		int cnt = 0;
+		cnt = si_dao.selectScommentCnt(s_num);
+		return cnt;
+	}// getScommentCnt
+
+	/**
 	 * 스터디 참여의 리더의 기본 정보 얻기.
 	 * 
 	 * @param s_num
@@ -166,36 +177,45 @@ public class StudyInfoService {
 	}// getMyInterestStudy
 
 	/**
-	 * 좋아요 눌렀을 때.
+	 * 좋아요 프로세스.
 	 * 
-	 * @param afs_vo
+	 * @param ff_vo
 	 * @return
 	 */
-	public boolean addLikeProcess(AddFavStudyVO afs_vo) {
-		boolean addFlag = false;
-		// 추가 되었다면 true.
-		if (si_dao.insertFavStudy(afs_vo) == 1) {
-			addFlag = true;
-		} // end if
-		return addFlag;
-	}// addLikeProcess
+	@SuppressWarnings("unchecked")
+	public JSONObject heartProcess(FavFlagVO ff_vo) {
+		System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+		JSONObject json = new JSONObject();
+		String strFlag = "";
+		int cnt = 0;
 
-	/**
-	 * 좋아요 제거시.
-	 * 
-	 * @param sNum
-	 * @return
-	 */
-	public boolean removeLikeProcess(RemoveFavStudyVO rfa_vo) {
-		boolean removeFlag = false;
-
-		// 제거에 성공했다면 true.
-		if (si_dao.deleteFavStudy(rfa_vo) == 1) {
-			removeFlag = true;
+		// '좋아요'하지 않은 썸네일인 경우 - 인서트 하기.
+		if ("gray".equals(ff_vo.getColor())) {
+			System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+			// 인서트 DB 작업 실행.
+			cnt = si_dao.insertFavStudy(ff_vo);
+			// DB작업이 정상적으로 동작 되었을 때.
+			if (cnt == 1) {
+				strFlag = "toI";
+				json.put("result", strFlag);
+			} // end if
 		} // end if
 
-		return removeFlag;
-	}// removeLikeProcess
+		// 이전에 이미 '좋아요'했던 썸네일인 경우 - 지우기.
+		if ("red".equals(ff_vo.getColor())) {
+			// 인서트 DB 작업 실행.
+			System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+
+			cnt = si_dao.deleteFavStudy(ff_vo);
+			// DB작업이 정상적으로 동작 되었을 때.
+			if (cnt == 1) {
+				strFlag = "toR";
+				json.put("result", strFlag);
+			} // end if
+		} // end if
+
+		return json;
+	}// end if
 
 	/**
 	 * 썸네일 리스트 얻기.

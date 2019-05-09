@@ -1,7 +1,7 @@
 package kr.co.studystory.domain;
 
 public class Homework {
-	private String id, workload, finishFlag, nick;
+	private String id, workload, finish_flag, nick;
 
 	public String getId() {
 		return id;
@@ -11,8 +11,12 @@ public class Homework {
 		return workload;
 	}
 
-	public String getFinishFlag() {
-		return finishFlag;
+	public String getFinish_flag() {
+		return finish_flag;
+	}
+
+	public void setFinish_flag(String finish_flag) {
+		this.finish_flag = finish_flag;
 	}
 
 	public String getNick() {
@@ -27,13 +31,8 @@ public class Homework {
 		this.workload = workload;
 	}
 
-	public void setFinishFlag(String finishFlag) {
-		this.finishFlag = finishFlag;
-	}
 
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
-	
-	
 }

@@ -3,6 +3,22 @@
 <script type="text/javascript">
 	$(function() {
 		
+		$.ajax({
+			url:"../check_alarm.do",
+			dataType:"json",
+			async:"true",
+			error:function(xhr) {
+				alert("에러코드 : "+xhr+status+", 에러 메시지 : "+xhr.statusText);
+			},
+			success:function(json) {
+				if(json.newAlarmFlag) {
+					$("#showNewAlarm").attr("src", "/third_prj/resources/images/nav_icon_alarm_new.png");
+				} else {
+					$("#showNewAlarm").attr("src", "/third_prj/resources/images/nav_icon_alarm.png");
+				}
+			}
+		});
+		
 		var getAlarmFlag = false;
 		
 		$("#showNewAlarm").click(function() {

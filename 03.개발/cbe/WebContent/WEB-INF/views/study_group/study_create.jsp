@@ -191,6 +191,7 @@
 			</div>
 
 			<div class="row" style="margin-bottom: 60px;">
+			
 				<a onclick="history.back()" class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 250px; margin-right: 10px;">취소</a> 
 				<input type="button" value="승인요청" class="btn btn-primary btn-lg" id="createBtn" style="right: 100">
 			</div>

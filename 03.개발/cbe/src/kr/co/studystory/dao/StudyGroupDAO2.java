@@ -11,8 +11,10 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.domain.JoinBbs;
+import kr.co.studystory.domain.Joiner;
 import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.vo.ApplicantBbsVO;
+import kr.co.studystory.vo.DetailJoinerVO;
 @Component
 public class StudyGroupDAO2 {
 
@@ -59,6 +61,9 @@ public class StudyGroupDAO2 {
 		return list;
 	}//selectMemberWithImg
 	
+	/**
+	 * 신청자 조회해오는 메서드
+	 */
 	public List<JoinBbs> selectJoinerList(ApplicantBbsVO abvo){
 		List<JoinBbs> list= null;
 		
@@ -69,20 +74,47 @@ public class StudyGroupDAO2 {
 		return list;
 	}//selectJoinerList
 	
+	/**
+	 * 신청자 총 합계 구하기 - 정미
+	 */
+	public int selectJoinerTotal(String s_num) {
+		int jTotal=0;
+		
+		SqlSession ss= StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		jTotal=ss.selectOne("selectJoinerTotal", s_num);
+		ss.close();
+		
+		return jTotal;
+	}
+	
+	public Joiner selectJoiner(DetailJoinerVO djvo) {
+		Joiner jr=null;
+		
+		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		jr=ss.selectOne("selectDetailJoiner",djvo);
+		ss.close();
+		
+		return jr;
+	}
 	
 	//단위테스트
-	/*public static void main(String[] args) {
-		ApplicantBbsVO abvo=new ApplicantBbsVO();
-		abvo.setsNum("s_000069");
-		abvo.setBegin(1);
+	public static void main(String[] args) {
+		//ApplicantBbsVO abvo=new ApplicantBbsVO();
+		//abvo.setsNum("s_000069");
+		/*abvo.setBegin(1);
 		abvo.setEnd(2);
-		abvo.setCurrPage(1);
+		abvo.setCurrPage(1);*/
 		
 		//sg_dao.selectJoinerList(new ApplicantBbsVO());
+		//System.out.println(sgd.selectJoinerList(abvo));
 		StudyGroupDAO2 sgd=new StudyGroupDAO2();
-		System.out.println(sgd.selectJoinerList(abvo));
 		
+		DetailJoinerVO djvo=new DetailJoinerVO();
+		djvo.setId("wjdaks12");
+		djvo.setS_num("s_000069");
+		sg_dao.selectJoiner(new DetailJoinerVO());//왜 여기서 null이 나오지?
+		System.out.println(sgd.selectJoiner(djvo));
 		
-	}단위테스트 */
+	} 
 	
 }
