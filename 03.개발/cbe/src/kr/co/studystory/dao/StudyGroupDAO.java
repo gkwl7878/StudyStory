@@ -115,14 +115,12 @@ public class StudyGroupDAO {
 		return flag;
 	}
 	
-/*	//전에갖고있는이미지 삭제
 	public String selectPreImg(String sNum) {
-		String preImg="";
-		
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		preImg= ss.selectOne("selectPreImage",sNum);
+		String preImg= ss.selectOne("selectPreImg",sNum);
 		return preImg;
-	}*/
+	}
+	
 	
 	//스터디 탈퇴
 	public String selectLeaderId(String s_num) {

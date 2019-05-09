@@ -54,6 +54,12 @@
   set 		content=#{content}, img=#{img}
   where s_num=#{sNum}
   </update>
+  
+  <select id="selectPreImg" resultType="String" parameterType="String">
+	select img
+	from   study
+	where  s_num=#{sNum}
+</select>
 
 
 <!--스터디 탈퇴  -->

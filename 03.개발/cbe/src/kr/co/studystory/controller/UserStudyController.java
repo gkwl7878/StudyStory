@@ -140,7 +140,21 @@ public class UserStudyController {
 				ms_vo.setImg(img);
 				ms_vo.setsNum(sNum);
 				
-			//	File file=new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
+				String preImg= sgs.searchPreImg(sNum);
+				
+				
+				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
+				if(!(preImg.equals("no_study_img.png"))){
+						if(file.exists()||img!=null) {
+						file.delete();
+					}else {
+						System.out.println("파일이 존재하지 않습니다.");
+					}
+				}
+				
+				if(img==null) {
+					img ="no_study_img.png";
+				}
 				
 				
 				System.out.println(ms_vo);

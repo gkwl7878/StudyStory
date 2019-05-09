@@ -64,7 +64,6 @@
 			//FLAG변수를 
 			var fileValue= $("#real_file").val();
 			
-			alert(fileValue);
 			
 			if(fileValue=="") {
 				$("[name='imgChangeFlag']").val("false");
@@ -73,7 +72,6 @@
 			}else {
 				$("[name='imgChangeFlag']").val("true");
 			}
-			alert($("[name='imgChangeFlag']").val()+" "+$("[name='prevImg']").val());
 			
 			 $("#modifyFrm").submit();
 		});//click

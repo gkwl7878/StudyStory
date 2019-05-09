@@ -97,7 +97,10 @@ public class StudyGroupService {
 		return flag;
 	}//modifyStudy
 	
-
+	public String searchPreImg(String sNum) {
+		String preImg= sg_dao.selectPreImg(sNum);
+		return preImg;
+	}
 	
 	/**
 	 * ½ºÅÍµð Å»Åð -Çý¿ø
