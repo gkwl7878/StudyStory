@@ -59,7 +59,7 @@
 
 <!-- 좋아요 -->
 <script type="text/javascript">
-		
+/* 		
 	 // 좋아요 해제 실행.
 	function dislikeProcess(sNum) {
 		var remove_flag = confirm("관심 스터디를 해제 하시겠습니까?");
@@ -109,20 +109,25 @@
 				}// end if
 			}// success
 		}); // ajax
-	}// likeProcess */
+	}// likeProcess
+*/
 </script>
 <!-- 좋아요 -->
 
 <!-- 상세페이지로 이동 -->
 <script type="text/javascript">
-/* 	$(function() {
+	$(function() {
 
 		$(".thumb").click(function(event){
-		    var id_check = $(this).attr("id");
-		    alert(id_check);
-		});
+		    var id = "#" + $(this).attr("id");
+		    alert(id);
+		    
+		    var button_id = $(id+":button").attr("id");
+		    alert(button_id);
+		    
+		}); // click
 		
-	}); // ready */
+	}); // ready
 </script>
 <!-- 상세페이지로 이동 -->
 
@@ -158,7 +163,7 @@
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 						<c:forEach var="thumbnail" items="${ thumbnail_list }">
 							<div id="${ thumbnail.s_num }_space" class="col-md-4">
-								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
+								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. -->
 								<div id="${ thumbnail.s_num }_thumb" class="thumb card mb-4 shadow-sm">
 									<!-- 썸네일 스터디 이미지 -->
 									<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="height: 200px;" />
@@ -202,11 +207,11 @@
 
 											<c:choose>
 												<c:when test="${ thumbnail.favFlag eq true }">
-													<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active"  onclick="disLikeProcess('${ thumbnail.s_num }')">좋아요</button>
+													<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active">좋아요</button>
 												</c:when>
 
 												<c:when test="${ thumbnail.favFlag eq false }">
-													<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary" onclick="likeProcess('${ thumbnail.s_num }')">좋아요</button>
+													<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary">좋아요</button>
 												</c:when>
 											</c:choose>
 										</div>
