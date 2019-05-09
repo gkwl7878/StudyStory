@@ -80,7 +80,7 @@
 					<a href="#">
 								<div class="col-2.5">
 									<div class="card mb-4 shadow-sm text-center " style="margin-left: 20px">
-										<img class="card-img-top" src="third_prj/WebContent/profile_img/${mbwiList.img }" onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img">
+										<img class="card-img-top" src="/third_prj/profile_img/${mbwiList.img}" onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img">
 										<div class="card-body">
 											<strong import!><p class="card-title">${ mbwiList.nick }</p></strong>
 											<p class="card-text">${ mbwiList.tel }</p>

@@ -67,8 +67,6 @@ public class StudyNoticeService {
 	public List<Homework> getHomework(String sn_num){
 		List<Homework> list= null;
 		list=sn_dao.selectHomework(sn_num);
-		
-		
 		return list;
 	}//getHomework
 	

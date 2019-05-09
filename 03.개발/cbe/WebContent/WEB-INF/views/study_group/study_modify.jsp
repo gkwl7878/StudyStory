@@ -27,8 +27,7 @@
 <link
 	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
 	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+
 <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
 
 <script type="text/javascript">
@@ -45,28 +44,20 @@
 
 <script type="text/javascript">
 	$(function() {
-		$("#request").click(function() {
-			if ($("#subject").val() == "") {
-				alert("주제를 선택해주세요.");
-				$("#subject").focus();
-				return;
-			}//end if
-			if ($("#loc").val() == "") {
-				alert("지역을 선택해주세요.");
-				$("#loc").focus();
-				return;
-			}//end if
-			if ($("#name").val() == "") {
-				alert("스터디 이름을 입력해주세요.");
-				$("#name").focus();
-				return;
-			}//end if
+		
+		 <c:if test="${failFlag}">
+			alert("수정에 실패했습니다.");
+		</c:if>
+		
+		
+		$("#modifyBtn").click(function() {
+			
 			if ($("#detail").val() == "") {
 				alert("스터디의 상세설명을 입력해주세요.");
 				$("#detail").focus();
 				return;
 			}//end if
-
+			$("#modifyFrm").submit();
 		});//click
 	});//ready
 </script>
@@ -90,26 +81,24 @@
 		}
 	}
 </script>
-
 </head>
 <body>
 	<!-- header -->
-	<c:import url="/third_prj/layout/navbar.jsp"></c:import>
-<form action="modify_study.do" method="post" enctype="multipart/form-data">	
-	<div id="wrap">
+	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 		  <!-- 점보트론 : 전광판 -->
-    <section class="text-center bg-white mb-0" style="margin-top:30px; margin-bottom:20px;">
+    <section class="text-center bg-white mb-0" style="margin-top:100px; margin-bottom:20px;">
        <div class="container">
           <h1 class="jumbotron-heading">내 스터디 수정하기</h1>
        </div>
     </section>
-    <div style="height:20px;"></div>
     <!-- 점보트론 : 전광판 -->
-
-		<div class="row" style="margin-top: 30px;">
+<form id="modifyFrm" action="modify_study_process.do" method="post" enctype="multipart/form-data">	
+	<div id="wrap">
+<input type="hidden" name="s_num" value="${ s_num }"/>
+		<div class="row" style="margin-top: 0px;">
 			<img alt="" src="/third_prj/resources/images/name.png" style="width: 35px; height: 33px; margin-right: 12px;"><label style="font-size: 20px; margin-right: 20px;"><strong>이름</strong></label>
 			<div class="col-sm-10">
-				<input id="name" name="name" type="text" class="form-control" style="margin-bottom: 30px;" readonly="readonly" value="${ps_Info.name }">
+				<input id="name" name="name" type="text" class="form-control" style="margin-bottom: 30px;" readonly="readonly" value="${name}">
 			</div>
 		</div>
 
@@ -124,30 +113,18 @@
 						<label style="font-size: 20px; width: 70px; margin-left: 10px; margin-top: 7px;"><strong>지역</strong></label>
 					</td>
 					<td>
-					<input id="loc" name="loc" type="text" class="form-control" style="width: 180px;" readonly="readonly" value="${ps_Info.loc }">
-						<!-- <select class="form-control" id="subject" style="width: 180px;" >
-							<option value="언어">언어</option>
-							<option value="취업">취업</option>
-							<option value="취미">취미</option>
-							<option value="기타">기타</option>
-						</select> -->
+					<input id="loc" name="loc" type="text" class="form-control" style="width: 180px;" readonly="readonly" value="${loc }">
+						
 					</td>
 					<td>
-						<img alt="" src="/third_prj/resources/images/sub.png" style="width: 33px; height: 33px; margin-left: 30px;">
+						<img src="/third_prj/resources/images/sub.png" style="width: 33px; height: 33px; margin-left: 30px;">
 					</td>
 					<td>
 						<label style="font-size: 20px; margin-left: 10px; margin-top: 7px;"><strong>주제</strong></label>
 					</td>
 					<td>
-					<input id="category" name="category" type="text" class="form-control" style="width: 250px ;margin-left: 30px;" readonly="readonly" value="${ps_Info.category }">
-						<!-- <select class="form-control" id="loc" style="width: 250px; margin-left: 30px;">
-							<option value="신촌">신촌</option>
-							<option value="홍대">홍대</option>
-							<option value="종각">종각</option>
-							<option value="건대">건대</option>
-							<option value="노원">노원</option>
-							<option value="강남">강남</option>
-						</select> -->
+					<input id="category" name="category" type="text" class="form-control" style="width: 250px ;margin-left: 30px;" readonly="readonly" value="${category }">
+						
 					</td>
 				</tr>
 			</table>
@@ -158,7 +135,7 @@
 			</label>
 			<div class="font20bold">
 				<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> <input type="text" id='file_sub' style="width: 700px; border: 0px; display: none"> <a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;">
-				<!--이미지경로?  --><img width="700" height="300" id="img" src="http://localhost:8080/third_prj/resources/images/${ps_Info.img }" border="0" title='찾아보기' alt='찾아보기'></a>
+				<img width="700" height="300" id="img" src="http://localhost:8080/third_prj/study_img/${img }" border="0" title='찾아보기' alt='찾아보기'></a>
 			</div>
 		</div>
 
@@ -166,24 +143,26 @@
 			<img src="/third_prj/resources/images/detail.png" style="width: 30px; height: 30px; margin-right: 10px; margin-bottom: 10px;"><label style="font-size: 20px; margin-bottom: 20px;">어떤 <strong>주제</strong>와 <strong>규칙</strong> 으로 변경하시겠습니까?
 			</label>
 			<div class="" style="width: 700px; height: 300px">
-				<textarea class="form-control" id="summernote">${ps_Info.content }</textarea>
+				<textarea class="form-control" id="summernote" name="content">${content }</textarea>
 			</div>
 		</div>
 
 
 
 		<div class="row" style="margin-top: 30px;">
-			<a class="btn btn-secondary btn-lg" href="#void" role="button" style="margin-left: 250px;">취소</a> <a class="btn btn-primary btn-lg" href="#void" role="button" id="request" style="right: 100; margin-left: 10px;">수정</a>
+			<button type="button" class="btn btn-secondary btn-lg" onclick="location.href='notice_list_leader.do" style="margin-left: 250px;">취소</button> 
+			<input value="수정" type="button" class="btn btn-primary btn-lg" id="modifyBtn" style="right: 100; margin-left: 10px;">
 		</div>
 	</div>
 </form>
 	<!-- footer -->
-	<c:import url="/third_prj/layout/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="/third_prj/resources/js/popper.min.js"></script>
 	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
 
 
 

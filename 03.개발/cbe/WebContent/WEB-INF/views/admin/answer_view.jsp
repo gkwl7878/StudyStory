@@ -29,9 +29,7 @@
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
@@ -56,6 +54,9 @@
 		</c:if>
 		
 	});
+	function delete_confirm(){
+		return confirm("정말 이 문의사항을 삭제하시겠습니까?");
+	}
 </script>
 
 </head>
@@ -65,10 +66,6 @@
 	<!-- navbar 끝 -->
 	
 	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-			<c:param name="weekUser" value="${param.weekUser}"></c:param>
-			<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
-			<c:param name="allUser" value="${param.allUser}"></c:param>
-			<c:param name="allStudy" value="${param.allStudy}"></c:param>
 			<c:param name="activeFlag" value="${param.activeFlag}"></c:param>
 	</c:import>
 
@@ -77,7 +74,7 @@
 			<div class="row">
 				<div class="col-3"></div>
 				<div class="col-9 justify-content-left" style="margin-bottom: 20px; margin-top: 20px;">
-					<label style="font-size: 40px;"><strong>문의 답변하기</strong></label> <img alt="" src="resources/images/qa.png" style="width: 130px; height: 100px; margin-left: 0px;">
+					<label style="font-size: 40px;"><strong>문의 답변하기</strong></label> <img src="../resources/images/qa.png" style="width: 130px; height: 100px; margin-left: 0px;">
 				</div>
 			</div>
 			<div class=" row">
@@ -106,14 +103,13 @@
 				</div>
 			</div>
 			<div class="row">
-				<div style="margin-top: 10px; margin-left: 115px;">
-					<label class=" font17bold"><strong>문의내용 </strong> : </label>
-				</div>
-				<div class="col-7" style="margin-top: 10px;">
-					<textarea class=" form-control" rows="3" style="resize: none; width: 480px; height: 180px;" name="contents" readonly="readonly">${content}</textarea>
+				<div class="col-9" style="margin-top: 10px; margin-left: 100px;">
+					<label class="font17bold"><strong>문의내용</strong> : </label>
+					<div class=" rounded-sm text-dark " style="min-height: 300px; margin-top: 10px; background-color:#E9ECEF; border: 1px solid #CED4DA; font-size: 17px; padding: 10px">
+						<c:out value="${content}" escapeXml="false"/>
+					</div>
 				</div>
 			</div>
-
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
 					<label class="font17bold"><strong>답변 시간</strong> : </label> <label>${answerDate}</label>
@@ -133,12 +129,8 @@
 			</div>
 			
 			<div class="row" style="margin-top: 30px;">
-				<a class="btn btn-secondary btn" href="question_mng.do?currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchCondition=${param.searchCondition }" role="button" style="margin-left: 400px;">돌아가기</a> 
-				<a class="btn btn-secondary btn " href="del_question.do?currPage=${param.currPage}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}
-									&allStudy=${param.allStudy}&searchCondition=${param.searchCondition}&qNum=${qNum}" role="button" style="margin-left: 10px;">삭제</a>
+				<a class="btn btn-secondary btn" href="question_mng.do?currPage=${param.currPage}&searchCondition=${param.searchCondition }" role="button" style="margin-left: 400px;">돌아가기</a> 
+				<a class="btn btn-secondary btn " onclick="return delete_confirm();" href="del_question.do?currPage=${param.currPage}&searchCondition=${param.searchCondition}&qNum=${qNum}" role="button" style="margin-left: 10px;">삭제</a>
 			</div>
 		</div>
 	</form>

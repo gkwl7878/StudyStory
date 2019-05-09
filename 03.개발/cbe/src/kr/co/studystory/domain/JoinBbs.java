@@ -1,7 +1,25 @@
 package kr.co.studystory.domain;
 
 public class JoinBbs {
-	private String id, nick, img, motive;
+	private String id, nick, img, motive, input_date,accept_flag;
+
+	
+	
+	public void setAccept_flag(String accept_flag) {
+		this.accept_flag = accept_flag;
+	}
+
+	public String getAccept_flag() {
+		return accept_flag;
+	}
+
+	public void setInput_date(String input_date) {
+		this.input_date = input_date;
+	}
+
+	public String getInput_date() {
+		return input_date;
+	}
 
 	public String getId() {
 		return id;

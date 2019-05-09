@@ -16,16 +16,16 @@
 		<where>
 			<choose>
 				<when test="loc != 'none' and category != 'none'">
-					id = #{ id } AND loc = #{ loc } AND category = #{ category }
+					id = #{ id } AND loc = #{ loc } AND category = #{ category } AND delete_flag = 'N'
 				</when>
 				<when test="loc != 'none' and category == 'none'">
-					id = #{ id } AND loc = #{ loc } 
+					id = #{ id } AND loc = #{ loc } AND delete_flag = 'N'
 				</when>
 				<when test="loc == 'none' and category != 'none'">
-					id = #{ id } AND category = #{ category }
+					id = #{ id } AND category = #{ category } AND delete_flag = 'N'
 				</when>
 				<otherwise>
-					id = #{ id }
+					id = #{ id } AND delete_flag = 'N'
 				</otherwise>
 			</choose>
 		</where>
@@ -38,19 +38,19 @@
 		<where>
 			<choose>
 				<when test="loc != 'none' and category != 'none'">
-					u.id = #{ id } AND loc = #{ loc } AND category = #{ category }
+					u.id = #{ id } AND loc = #{ loc } AND category = #{ category } AND s.delete_flag = 'N'
 						AND m.id=u.id AND m.s_num=s.s_num
 				</when>
 				<when test="loc != 'none' and category == 'none'">
-					u.id = #{ id } AND loc = #{ loc }
+					u.id = #{ id } AND loc = #{ loc } AND s.delete_flag = 'N'
 						AND m.id=u.id AND m.s_num=s.s_num 
 				</when>
 				<when test="loc == 'none' and category != 'none'">
-					u.id = #{ id } AND category = #{ category }
+					u.id = #{ id } AND category = #{ category } AND s.delete_flag = 'N'
 						AND m.id=u.id AND m.s_num=s.s_num
 				</when>
 				<otherwise>
-					u.id = #{ id }
+					u.id = #{ id } AND s.delete_flag = 'N'
 						AND m.id=u.id AND m.s_num=s.s_num
 				</otherwise>
 			</choose>
@@ -65,19 +65,19 @@
 		<where>
 			<choose>
 				<when test="loc != 'none' and category != 'none'">
-					u.id = #{ id } AND loc = #{ loc } AND category = #{ category }
+					u.id = #{ id } AND loc = #{ loc } AND category = #{ category } AND s.delete_flag = 'N'
 						AND j.id=u.id AND j.s_num=s.s_num
 				</when>
 				<when test="loc != 'none' and category == 'none'">
-					u.id = #{ id } AND loc = #{ loc }
+					u.id = #{ id } AND loc = #{ loc } AND s.delete_flag = 'N'
 						AND j.id=u.id AND j.s_num=s.s_num 
 				</when>
 				<when test="loc == 'none' and category != 'none'">
-					u.id = #{ id } AND category = #{ category }
+					u.id = #{ id } AND category = #{ category } AND s.delete_flag = 'N'
 						AND j.id=u.id AND j.s_num=s.s_num
 				</when>
 				<otherwise>
-					u.id = #{ id }
+					u.id = #{ id } AND s.delete_flag = 'N'
 						AND j.id=u.id AND j.s_num=s.s_num
 				</otherwise>
 			</choose>

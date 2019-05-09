@@ -1,6 +1,7 @@
 package kr.co.studystory.admin.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class NoticeMngController {
 	@Autowired
 	private NoticeService ns;
 	
-	@RequestMapping(value="/admin/notice_mng.do", method= GET)
+	@RequestMapping(value="/admin/notice_mng.do", method= {GET,POST})
 	private String noticeMngPage(NoticeBoardVO nb_vo,Model model) {
 		int totalCount=cms.noticeCount(nb_vo);
 		int pageScale=cms.pageScale();
@@ -72,7 +73,7 @@ public class NoticeMngController {
 		return "/admin/notice";
 	}
 	
-	@RequestMapping(value="/admin/notice_detail.do",method= GET)
+	@RequestMapping(value="/admin/notice_detail.do",method= {GET,POST})
 	public String searchDetailNotice(NoticeBoardVO nd_vo,Model model) {
 		String nNum= nd_vo.getnNum();
 		//subject, inputDate, content,viewCnt;
@@ -86,7 +87,7 @@ public class NoticeMngController {
 		return "/admin/notice_detail";
 	}
 	
-	@RequestMapping(value="/admin/update_notice.do",method=GET)
+	@RequestMapping(value="/admin/update_notice.do",method=POST)
 	public String modifyNoticeProcess(NoticeModifyVO nm_vo, Model model) {
 		boolean modifyFlag= ns.modifyDetailNotice(nm_vo);
 		String nNum= nm_vo.getnNum();
@@ -110,7 +111,7 @@ public class NoticeMngController {
 		return "/admin/new_notice";
 	}
 	
-	@RequestMapping(value="/admin/write_notice_proc.do",method=GET)
+	@RequestMapping(value="/admin/write_notice_proc.do",method=POST)
 	public String writeNoticeProcess(NewNoticeVO nn_vo, Model model) {
 		ns.newNotice(nn_vo);
 		List<String> list=ns.getAllUser();

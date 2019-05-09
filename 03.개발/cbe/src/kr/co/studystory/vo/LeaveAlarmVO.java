@@ -1,7 +1,7 @@
 package kr.co.studystory.vo;
 
 public class LeaveAlarmVO {
-	private String leaderId, reason, category, subject, content;
+	private String leaderId, reason, category, subject, content,sNum;
 
 	public String getLeaderId() {
 		return leaderId;
@@ -41,6 +41,14 @@ public class LeaveAlarmVO {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getsNum() {
+		return sNum;
+	}
+
+	public void setsNum(String sNum) {
+		this.sNum = sNum;
 	}
 	
 	

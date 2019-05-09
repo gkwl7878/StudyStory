@@ -69,7 +69,7 @@
 	</c:import>
 
 
-	<form action="write_notice_proc.do" method="get" id="newNoticeFrm">
+	<form action="write_notice_proc.do" method="post" id="newNoticeFrm">
 		<div class="container form-group" id="wrap">
 			<div class="row">
 				<div class="col-12 justify-content-left">

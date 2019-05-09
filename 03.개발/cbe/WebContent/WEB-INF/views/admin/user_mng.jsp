@@ -13,11 +13,14 @@
 <link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <!-- Custom styles for this template -->
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+<style type="text/css">
+#mouseOver:hover {
+	color: #3498db
+}
+</style>
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		<c:if test="${ !loginSession }">
@@ -27,8 +30,16 @@
 		<c:if test="${removeFlag }">
 			alert("${param.id}님이 탈퇴처리 되었습니다");
 		</c:if>
-		
 	});//ready
+	
+	
+	function hiddenGame() {
+		if($("#searchCondition").val()=="--검색조건--"){
+			if($("#searchWord").val()=="#krunker" ){
+				window.open("https://krunker.io", "_blank", "width=300,height=300");
+			}
+		}
+	}
 </script>
 </head>
 
@@ -52,7 +63,7 @@
 					<h1 class="h2">회원정보 관리</h1>
 				</div>
 				<div class="col-2" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
-					<select class="form-control" name="searchCondition" style="font-size: 12px;">
+					<select class="form-control" id="searchCondition" name="searchCondition" style="font-size: 12px;">
 						<option ${param.searchCondition eq  ""?"selected='selected'":"" } value="--검색조건--">--검색조건--</option>
 						<option ${param.searchCondition eq  "아이디"?"selected='selected'":"" } value="아이디">아이디</option>
 						<option ${param.searchCondition eq  "이름"?"selected='selected'":"" } value="이름">이름</option>
@@ -60,10 +71,10 @@
 					</select>
 				</div>
 				<div class="col-1" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
-					<input type="text" name="searchWord" class="form-control form-control-sm" />
+					<input type="text" id="searchWord" name="searchWord" class="form-control form-control-sm" />
 				</div>
 				<div class="col-1" style="padding-left: 2px; padding-right: 2px; padding-top: 15px;">
-					<button type="submit" id="searchBtn" class="btn btn-sm btn-secondary">검색</button>
+					<button type="submit" id="searchBtn" onclick="hiddenGame();" class="btn btn-sm btn-secondary">검색</button>
 				</div>
 			</div>
 			</form>
@@ -89,20 +100,11 @@
 						</c:if>
 						<c:forEach var="uList" items="${uList }">
 						<c:set var="i" value="${i+1 }"/>
-							<tr>
+							<tr id="mouseOver" onclick="location.href='user_detail.do?currPage=${currPage}&id=${uList.id}&searchCondition=${searchCondition}&searchWord=${searchWord}'" style="cursor:pointer; ">
 								<td class="text-center"><c:out value="${(totalCount-(currPage-1)*pageScale-i)+1}"/></td>
-								<td class="text-center"><a href="user_detail.do?currPage=${currPage}&id=${uList.id}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
-									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
-									><c:out value="${uList.id }"/></a></td>
-								<td class="text-center"><a href="user_detail.do?currPage=${currPage}&id=${uList.id}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
-									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
-									><c:out value="${uList.nick }"/></a></td>
-								<td class="text-center"><a href="user_detail.do?currPage=${currPage}&id=${uList.id}&weekUser=${param.weekUser}
-									&weekStudy=${param.weekStudy}&allUser=${param.allUser}&allStudy=${param.allStudy}
-									&searchCondition=${searchCondition}&searchWord=${searchWord}" style="color: black"
-									><c:out value="${uList.name}"/></a></td>
+								<td class="text-center"><c:out value="${uList.id }"/></td>
+								<td class="text-center"><c:out value="${uList.nick }"/></td>
+								<td class="text-center"><c:out value="${uList.name}"/></td>
 								<td class="text-center"><c:out value="${uList.tel }"/></td>
 								<td class="text-center"><c:out value="${uList.email }"/></td>
 								<td class="text-center"><c:out value="${uList.regDate }"/></td>
@@ -113,7 +115,7 @@
 				<div class="d-flex justify-content-center">
 					<ul class="pagination">
 						<li class="paginate_button page-item previous ${ forwardFlag ? '' : 'disabled' }" id="dataTable_previous">
-							<a href="user_mng.do?currPage=${ startPage-1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a>
+							<a href="user_mng.do?currPage=${ startPage-1 }&searchCondition=${searchCondition}&searchWord=${searchWord}" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a>
 						</li>
 						<c:forEach var="i" step="1" begin="${ startPage }" end="${ endPage }">
 							<li class="paginate_button page-item ${ currPage == i ? 'active' : '' }">
@@ -123,7 +125,7 @@
 							</li>
 						</c:forEach>
 						<li class="paginate_button page-item next ${ backwardFlag ? '' : 'disabled' }" id="dataTable_next">
-							<a href="user_mng.do?currPage=${ endPage+1 }" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
+							<a href="user_mng.do?currPage=${ endPage+1 }&searchCondition=${searchCondition}&searchWord=${searchWord}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
 						</li>
 					</ul>
 				</div>

@@ -22,9 +22,7 @@
 <link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
 <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/feather.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		<c:if test="${ !loginSession }">
@@ -69,7 +67,7 @@
 			<br />
 
 			<a class="btn btn-secondary btn-lg" href="ns_detail.do?sNum=${param.sNum}&currPage=${param.currPage}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
-			<input type="button" class="btn btn-secondary btn-lg" value="삭제" id="rejectBtn" />
+			<input type="button" class="btn btn-secondary btn-lg" value="거절" id="rejectBtn" />
 		</form>
 	</div>
 
