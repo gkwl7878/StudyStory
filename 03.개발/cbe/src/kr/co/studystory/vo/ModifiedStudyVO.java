@@ -27,6 +27,11 @@ public class ModifiedStudyVO {
 	public void setImg(String img) {
 		this.img = img;
 	}
+
+	@Override
+	public String toString() {
+		return "ModifiedStudyVO [sNum=" + sNum + ", content=" + content + ", img=" + img + "]";
+	}
 	
 	
 }

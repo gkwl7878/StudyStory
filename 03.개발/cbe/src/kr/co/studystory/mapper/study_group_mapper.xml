@@ -9,8 +9,6 @@
 
 <mapper namespace="kr.co.studystory.study_group2">
 	
-	
-	
 	<select id="selectMemberList"  resultType="kr.co.studystory.domain.MemberWithImg" parameterType="String">
 <!-- 	 select nick, tel, img
 	from user_table  -->
@@ -56,16 +54,17 @@
   set 		content=#{content}, img=#{img}
   where s_num=#{sNum}
   </update>
-
-<!-- <select id="selectPreImage" resultType="String" parameterType="String">
+  
+  <select id="selectPreImg" resultType="String" parameterType="String">
 	select img
 	from   study
-	where  s_num=#{sNum,jdbcType=VARCHAR}
-</select> -->
+	where  s_num=#{sNum}
+</select>
+
 
 <!--스터디 탈퇴  -->
 
- <select id="selectLeaderId">
+ <select id="selectLeaderId" resultType="String">
   	select id
   	from study
   	where s_num=#{sNum}		
@@ -76,10 +75,16 @@
    values (a_code, #{leaderId}, #{category}, #{subject}, #{content})
   </insert>
   
-  <delete id="deleteStudyMember" parameterType="String">
+  <delete id="deleteStudyMember" parameterType="kr.co.studystory.vo.OutStudyVO">
   delete from member
-  where id=#{id}
+  where id=#{id} and s_num=#{ s_num }
   </delete> 
+  
+  <select id="selectStudyName" resultType="String">
+  	select study_name
+  	from study
+  	where s_num=#{sNum}
+  </select>
   
   <!--스터디 활동 종료  -->
   <select id="selectMemberId" resultType="String">
