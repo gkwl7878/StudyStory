@@ -69,9 +69,9 @@
    values (a_code, #{leaderId}, #{category}, #{subject}, #{content})
   </insert>
   
-  <delete id="deleteStudyMember" parameterType="String">
+  <delete id="deleteStudyMember" parameterType="kr.co.studystory.vo.OutStudyVO">
   delete from member
-  where id=#{id}
+  where id=#{id} and s_num=#{ s_num }
   </delete> 
   
   <!--스터디 활동 종료  -->

@@ -24,6 +24,7 @@ import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
+import kr.co.studystory.vo.OutStudyVO;
 
 @Component
 public class StudyGroupService {
@@ -119,7 +120,8 @@ public class StudyGroupService {
 	public boolean leaveStudy(LeaveVO l_vo) {
 		boolean flag=false;
 		
-		if(sg_dao.deleteMember(l_vo.getId())) {
+		OutStudyVO osvo = new OutStudyVO(l_vo.getsNum(),l_vo.getId());
+		if(sg_dao.deleteMember(osvo)) {
 			flag=true;
 		}
 		
