@@ -38,10 +38,7 @@
 			    });
 			
 			$("#loginBtn").click(function() {
-				
 				$("#frm").submit();
-				
-				
 			});
 		})//ready
 	</script>

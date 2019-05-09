@@ -67,7 +67,7 @@
 			<br />
 
 			<a class="btn btn-secondary btn-lg" href="ns_detail.do?sNum=${param.sNum}&currPage=${param.currPage}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
-			<input type="button" class="btn btn-secondary btn-lg" value="삭제" id="rejectBtn" />
+			<input type="button" class="btn btn-secondary btn-lg" value="거절" id="rejectBtn" />
 		</form>
 	</div>
 
