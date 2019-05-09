@@ -49,6 +49,8 @@
 		alert("수정에 실패했습니다.");
 	</c:if>
 		
+	var imgChangeFlag=false;
+	
 		
 		$("#modifyBtn").click(function() {
 			
@@ -57,15 +59,30 @@
 				$("#detail").focus();
 				return;
 			}//end if
-			$("#modifyFrm").submit();
+			
+			//이미지변경여부에 따라 전달하는 값이 달라야함
+			//FLAG변수를 
+			var fileValue= $("#real_file").val();
+			
+			alert(fileValue);
+			
+			if(fileValue=="") {
+				$("[name='imgChangeFlag']").val("false");
+				$("[name='prevImg']").val("${img }");
+				
+			}else {
+				$("[name='imgChangeFlag']").val("true");
+			}
+			alert($("[name='imgChangeFlag']").val()+" "+$("[name='prevImg']").val());
+			
+			 $("#modifyFrm").submit();
 		});//click
 	});//ready
 </script>
 <script type="text/javascript">
 	function schfile() {
 		document.getElementById("real_file").click();
-		document.getElementById("file_sub").value = document
-				.getElementById("real_file").value;
+		document.getElementById("file_sub").value = document.getElementById("real_file").value;
 	}
 	function previewFile() {
 		var preview = document.querySelector('#img');
@@ -93,8 +110,10 @@
     </section>
     <!-- 점보트론 : 전광판 -->
 <form id="modifyFrm" action="modify_study_process.do" method="post" enctype="multipart/form-data">	
+	<input type="hidden" name="imgChangeFlag">
+	<input type="hidden" name="prevImg">
 	<div id="wrap">
-<input type="hidden" name="s_num" value="${ s_num }"/>
+<input type="hidden" name="sNum" value="${ param.sNum }"/>
 		<div class="row" style="margin-top: 0px;">
 			<img alt="" src="/third_prj/resources/images/name.png" style="width: 35px; height: 33px; margin-right: 12px;"><label style="font-size: 20px; margin-right: 20px;"><strong>이름</strong></label>
 			<div class="col-sm-10">
@@ -135,7 +154,7 @@
 			</label>
 			<div class="font20bold">
 				<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> <input type="text" id='file_sub' style="width: 700px; border: 0px; display: none"> <a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;">
-				<img width="700" height="300" id="img" src="http://localhost:8080/third_prj/study_img/${img }" border="0" title='찾아보기' alt='찾아보기'></a>
+				<img width="700" height="300" id="img" src="/third_prj/study_img/${img }" border="0" title='찾아보기' alt='찾아보기'></a>
 			</div>
 		</div>
 
