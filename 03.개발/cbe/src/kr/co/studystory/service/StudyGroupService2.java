@@ -11,8 +11,11 @@ import kr.co.studystory.domain.Joiner;
 import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.vo.ApplicantBbsVO;
 import kr.co.studystory.vo.DetailJoinerVO;
+import kr.co.studystory.vo.JoinAlarmVO;
 import kr.co.studystory.vo.JoinDeleteVO;
 import kr.co.studystory.vo.NewMemberVO;
+import kr.co.studystory.vo.RefuseAlarmVO;
+import kr.co.studystory.vo.RefuseVO;
 
 /**
  * 스터디 참여자 보기 - 정미 
@@ -125,16 +128,31 @@ public class StudyGroupService2 {
 		boolean acceptFlag=false;
 		acceptFlag=sg_dao.insertNewMember(nmvo);
 		
+		String study_name = sg_dao.selectStudyName(nmvo.getS_num());
+		
+		JoinAlarmVO javo = new JoinAlarmVO("스터디", "가입 수락되었습니다",
+				"가입 요청하셨던 ["+study_name+"]에 가입이 수락되었습니다. 많은 활동 부탁드립니다.",
+				nmvo.getId());
+		sg_dao.insertJoinAlarm(javo);
 		
 		return acceptFlag;
 	}
 	
 	public boolean removeJoin(JoinDeleteVO jdvo) {
-		boolean deleteFlag=false;
-		deleteFlag=sg_dao.deleteJoin(jdvo);
+		boolean flag = false;
+		System.out.println("=====================22222222222222222");
+		flag = sg_dao.deleteJoin(jdvo);
+		return flag;
+	}
+	
+	public void sendRefuseAlarm(RefuseVO rfvo) {
 		
-		return deleteFlag;
+		String study_name = sg_dao.selectStudyName(rfvo.getS_num());
+		RefuseAlarmVO rfavo = new RefuseAlarmVO("스터디", "가입이 거절되었습니다",
+				"가입 요청하셨던 ["+study_name+"]에 가입이 거절되었습니다. 사유는 다음과 같습니다.\n거절 사유 : "
+				+rfvo.getReason(), rfvo.getId());
 		
+		sg_dao.insertRefuseAlarm(rfavo);
 	}
 	
 	

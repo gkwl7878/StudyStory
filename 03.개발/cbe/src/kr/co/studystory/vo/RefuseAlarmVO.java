@@ -1,10 +1,10 @@
 package kr.co.studystory.vo;
 
-public class JoinAlarmVO {
-
-	private String category, subject, content, id;
+public class RefuseAlarmVO {
 	
-	public JoinAlarmVO(String category, String subject, String content, String id) {
+private String category, subject, content, id;
+	
+	public RefuseAlarmVO(String category, String subject, String content, String id) {
 		this.category = category;
 		this.subject = subject;
 		this.content = content;

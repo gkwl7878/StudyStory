@@ -9,16 +9,16 @@
 <title>스터디 신청자 보기</title>
 
 <!-- Bootstrap core CSS -->
-<link href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
-<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/Chart
+<link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
+<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
+<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
+<script src="/third_prj/resources/js/Chart
 .js/2.7.3/Chart.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/admin_dashboard.js"></script>
+<script src="/third_prj/resources/js/admin_dashboard.js"></script>
 </body>
 </head>
 <body>

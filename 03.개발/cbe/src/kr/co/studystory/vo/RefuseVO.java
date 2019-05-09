@@ -26,7 +26,9 @@ public class RefuseVO {
 	public void setS_num(String s_num) {
 		this.s_num = s_num;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "RefuseVO [id=" + id + ", reason=" + reason + ", s_num=" + s_num + "]";
+	}
 }

@@ -18,6 +18,7 @@ import kr.co.studystory.vo.DetailJoinerVO;
 import kr.co.studystory.vo.JoinAlarmVO;
 import kr.co.studystory.vo.JoinDeleteVO;
 import kr.co.studystory.vo.NewMemberVO;
+import kr.co.studystory.vo.RefuseAlarmVO;
 @Component
 public class StudyGroupDAO2 {
 
@@ -111,34 +112,40 @@ public class StudyGroupDAO2 {
 		if(cnt>0) {
 			insertNewMemberflag = true;
 			ss.commit();
-			insertJoinAlarm(nmvo);
 		}
 		ss.close();
 		return insertNewMemberflag;
 	}
 	
-	public void insertJoinAlarm(NewMemberVO nmvo) {
-		
-		int cnt=0;
+	public void insertJoinAlarm(JoinAlarmVO javo) {
 		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
-//		JoinAlarmVO ja_vo=new JoinAlarmVO("½ºÅÍµð","½ºÅÍµð °¡ÀÔ ½Â³«µÊ",
-//			"\"" + nmvo.getS_num()	)
-//		cnt=ss.insert("insertJoinedAlarm",javo);
-		
-		
+		ss.insert("insertJoinedAlarm", javo);
+		ss.close();
+	}
+	
+	public void insertRefuseAlarm(RefuseAlarmVO rfavo) {
+		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		ss.insert("insertRefuseAlarm", rfavo);
+		ss.close();
+	}
+	
+	public String selectStudyName(String s_num) {
+		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		String study_name = ss.selectOne("selectStudyName", s_num);
+		ss.close();
+		return study_name;
 	}
 	
 	public boolean deleteJoin(JoinDeleteVO jdvo) {
-		boolean deleteJoinerflag=false;
-		int cnt=0;
+		boolean flag = false;
 		SqlSession ss= StudyGroupDAO2.getInstance().getSessionFactory().openSession();
-		cnt=ss.delete("deleteJoiner",jdvo);
-			if(cnt>0) {
-				deleteJoinerflag= true;
-				ss.commit();
-			}//end if
-			ss.close();
-		return deleteJoinerflag;
+		int cnt=ss.delete("deleteJoiner",jdvo);
+		if(cnt == 1) {
+			ss.commit();
+			flag = true;
+		}//end if
+		ss.close();
+		return flag;
 	}
 	
 	

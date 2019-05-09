@@ -117,49 +117,55 @@ public class UserStudyController2 {
 		
 		model.addAttribute("jrInfo",jr);
 		
-		
-		
 		return "study_group/req_detail";
 	}
 	
 	@RequestMapping(value="/study_group/req_accept.do", method=RequestMethod.GET)
 	public String acceptMember(HttpSession session, NewMemberVO nmvo, Model model, JoinDeleteVO jdvo) {
 		boolean acceptFlag =false;
+		
 		if (session.getAttribute("id") == null) {
 			return "redirect:../index.do";
 		}
-		System.out.println("================"+nmvo);
 		
-		System.out.println("========================="+acceptFlag);
+		// member에 추가 + 알람 보내기
 		 acceptFlag=sgs.addNewMember(nmvo);
-		System.out.println("========================="+acceptFlag);
+		 
 		//JoinAlarmVO ja_vo=new JoinAlarmVO();
 		if(acceptFlag) {
-			sgs.removeJoin(nmvo);
+			// join에서 삭제
+			sgs.removeJoin(new JoinDeleteVO(nmvo.getId(), nmvo.getS_num()));
 		}
-		
 			
 		return "forward:../study_group/new_joiner.do";
 	}
 	
 	@RequestMapping(value="/study_group/req_reject.do", method=RequestMethod.GET)
-	public String refuseApplicantPage(HttpSession session, String s) {
+	public String refuseApplicantPage(HttpSession session, String id, Model model) {
+		
 		if (session.getAttribute("id") == null) {
 			return "redirect:../index.do";
 		}
+		
+		model.addAttribute("id", id);
 		
 		return "study_group/req_reject";
 	}
 	
 	@RequestMapping(value="/study_group/req_reject_proc.do", method=RequestMethod.POST)
-	public String refuseApplicantProcess(HttpSession session, RefuseVO rfvo,JoinDeleteVO jdvo, Model model ) {
+	public String refuseApplicantProcess(HttpSession session, RefuseVO rfvo, Model model ) {
 		boolean refuseFlag=false;
+		
 		if (session.getAttribute("id") == null) {
 			return "redirect:../index.do";
 		}
-		refuseFlag=sgs.removeJoin(rfvo);
+		
+		System.out.println("================ 삭제할 VO : "+rfvo);
+		
+		refuseFlag = sgs.removeJoin(new JoinDeleteVO(rfvo.getId(), rfvo.getS_num()));
 		if(refuseFlag) {
-			//알람 보내기 - 거절 
+			//알람 보내기 - 거절
+			sgs.sendRefuseAlarm(rfvo);
 		}
 		
 		return "forward:../study_group/new_joiner.do";

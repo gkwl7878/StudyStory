@@ -9,16 +9,22 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
   <title>신청자 거절</title>
   <!-- Custom styles for this template -->
-
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script type="text/javascript">
   	$(function(){
   		$("#refuse_btn").click(function(){
+  			
+  			if ($("[name='reason']").val() == "") {
+  				alert("거절 사유를 입력해주세요");
+  				$("[name='reason']").focus();
+  				return;
+  			}
+  			
   			$("#rejFrm").submit();
   		})
   	})
@@ -28,18 +34,19 @@
 	<!-- header -->
 	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
-
-	
 	
 	<div id="wrap" >
 		<form id="rejFrm" action="req_reject_proc.do" method="post">
+			<input type="hidden" value="${ param.s_num }" name="s_num"/>
+			<input type="hidden" value="${ param.id }" name="id"/>
+			
 		 <br/><br/>
 		 <div style="border:1px solid #D7D7D7; padding:40px"><br/><br/>
 		<h1 ><Strong>이 신청자를 거절하시겠습니까?</Strong></h1>
 		<hr  color="gray" >
 		<h5>거절 이유를 해당 회원에게 알려주세요.</h5>
 		<br/>
-		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+		<input type="text" class="form-control" name="reason" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
 				placeholder="내용을 입력해주세요.">
 		<br/>
 	
@@ -53,13 +60,9 @@
 		<!-- footer -->
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
-
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
-	
-
-	
+  <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="/third_prj/resources/js/popper.min.js" ></script>
+  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
 </body>
 </html>

@@ -10,30 +10,16 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
   
   <title>신청자 상세보기 페이지</title>
-  <!-- Custom styles for this template -->
-
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script type="text/javascript">
-  /* $(function() {
-	              ===================post 처리는 좀 나중에
-});//끝 */
-  
-  </script>
 </head>
 <body>
-  	<!-- <form action="" method="post" id="act_bt">
-  						===================post 처리는 좀 나중에
-  	
-  	</form> -->
 	<!-- header -->
 	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 	<!--  -->
-
 	
 	
 	<div id="wrap" >
@@ -85,7 +71,7 @@
 		</c:choose>
   <a class="btn btn-secondary btn-lg" href="req_accept.do?s_num=${ param.s_num }&id=${jrInfo.id}" role="button" style="margin-left: 10px;">수락하기</a>
  <!--  <a class="btn btn-secondary btn-lg" href="#" id="act_bt" role="button" style="margin-left: 10px;">수락하기</a> -->
-  <a class="btn btn-secondary btn-lg" href="req_reject.do?s_num=${param.s_num}" role="button" style="margin-left: 10px;">거절하기</a>
+  <a class="btn btn-secondary btn-lg" href="req_reject.do?s_num=${param.s_num}&id=${jrInfo.id}" role="button" style="margin-left: 10px;">거절하기</a>
 </form>
 	</div>
 	
@@ -94,9 +80,9 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
+  <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="/third_prj/resources/js/popper.min.js" ></script>
+  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
 	
 
 	
