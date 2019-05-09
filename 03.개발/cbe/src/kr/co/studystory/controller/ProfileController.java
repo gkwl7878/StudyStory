@@ -81,6 +81,7 @@ public class ProfileController {
 		
 		if (cs.setProfile(pv)) {
 			model.addAttribute("changeFlag", true);
+			session.setAttribute("nick", pv.getNick());
 		}
 		
 		return "forward:profile.do";
