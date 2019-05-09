@@ -73,8 +73,6 @@
 			  var mynick = '${ sessionScope.nick }';
 			  var nick = $(this).parent().parent().children("td:first").first().text();
 			  
-			  alert(mynick +" "+nick);
-			  
 			  if (mynick != nick) {
 				  $(this).attr('checked',false);
 				  alert('회원님의 과제가 아닙니다');
