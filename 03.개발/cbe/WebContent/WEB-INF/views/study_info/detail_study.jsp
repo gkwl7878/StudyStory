@@ -35,52 +35,64 @@
 		// 스터디 참여하기 버튼 클릭 시 동작.
 		$("#study_join_btn").click(function() {
 			$("#join_study_frm").submit(); // submit
-		});// click
+		});
 
 		// 댓글 달기 버튼 클릭 시 동작.
-		$("#reply_btn").click( function() {
-					var input_reply = $("#reply_inputBox").val();
+		$("#reply_btn").click(function() {
+			var input_reply = $("#reply_inputBox").val();
 
-					// 댓글을 입력하지 않고 댓글달기 버튼을 눌렀을 경우.
-					if (input_reply == "") {
-						alert("먼저 댓글을 입력해 주세요.");
-						return;
-					}// end if
-					
-					
-					
-					// 댓글을 입력된 경우.
-					if (input_reply != "") {
-						
-						$.ajax({
-							//var query_string = "sNum=" + $("[name='ref_num']").val() + "&reply=" + input_reply;
+			// 댓글을 입력하지 않고 댓글달기 버튼을 눌렀을 경우.
+			if (input_reply == "") {
+				alert("먼저 댓글을 입력해 주세요.");
+				return;
+			}// end if
+
+			// 댓글을 100자 이상 입려한 경우.
+			if (input_reply.length > 100) {
+				alert("댓글을 100자 이상 입력하셨습니다.");
+				return;
+			}// end if
+
+			// 정상입력된 경우 서브밋 하기.
+			if (input_reply != "" && input_reply.length < 100) {
+				
+				// 쿼리스트링 만들기
+				var query_string = "reply=" + input_reply + "&sNum=" + $("#ref_num").val();
+				
+				$.ajax({
+					url : "../detail/add_reply.do",
+					data : query_string,
+					type : "post",
+					dataType : "json",
+					error : function(xhr) {
+						alert("댓글 작성 실패");
+						console.log(xhr.status + " / " + xhr.statusText);					
+					}, 
+					success : function( json ) {
+						if( json.result ) {
+							var date = new Date();
 							
-							url : "../detail/add_reply.do?",
-							data : "sNum=" + $("[name='ref_num']").val() + "&reply=" + input_reply,
-							type : "get",
-							dataType : "json", // 응답 받을 데이터.
-							error : function(xhr) {
-								alert("댓글 작성 실패" + $("[name='num_ref']").val() );
-								console.log(xhr.status + " / " + xhr.statusText);
-							},
-							success : function(json) {
-								if (json.result) {
-									alert("댓글이 정상적으로 동록 되었습니다.");
-									
-									// 첫 번쨰 리플의 태그를 가져오기.
-									var new_reply = $("#reply_row1").html();
-									
-									// new_reply.find("#writer").text("${ sessionScope.nick }");
-									// new_reply.find("#content").text(input_reply);
-									$("#reply_list").prepend("<li id='reply_row' class='media' style='padding-bottom: 20px'>" + new_reply + "</li>");
-								}// end if
-							}// success
-						}); // ajax
-
-					}// end if
-
-				}); // click
-
+							var output = "";
+							output += "<div class='media'>"
+							output += "	<div style='width: 95px; height: 95px; background-color: #F0F0F0; margin-right: 10px; text-align: center;'>"
+							output += "		<img src='http://localhost:8080/third_prj/study_img/" + json.img + "' class='w-100 h-100 align-self-start mr-3'>"
+							output += "	</div>"
+							output += "	<div class='col-lg-10' style='margin-top: 5px; padding-right: 0px;'>"
+							output += "		<div style='overflow: hidden'>"
+							output += "			<div class='mt-0' style='float: left;'>"+json.id+"</div>"
+							output += "			<div style='float: right;'>" + date.getFullYear() + "/" +(date.getMonth()+1) + "/" + date.getDate() + "/" + "</div>"
+							output += "		</div>"
+							output += "		<div style='margin-top: 15px;'>"+ input_reply +"</div>"
+							output += "	</div>"
+							output += "</div>"
+							output += "<div class='my-3 border-bottom'></div>"
+							
+							$("#sComment_view").prepend(output);
+						}// end if
+					}
+				}); // ajax
+			}// end if
+		});
 	}); // ready
 </script>
 
@@ -99,14 +111,16 @@
 				<div class="row">
 					<div class="col-lg-8"></div>
 					<div class="col-lg-4" style="font-size: 17px; font-weight: bold; margin-bottom: 20px">
-						현재 <c:out value="${ s_Info.favNum eq '0' ? '0' : s_Info.favNum }"/>명이 이 스터디를 좋아합니다
+						현재
+						<c:out value="${ s_Info.favNum eq '0' ? '0' : s_Info.favNum }" />
+						명이 이 스터디를 좋아합니다
 					</div>
 				</div>
 				<div class="row" style="margin-bottom: 20px">
 					<div class="col-lg-12">
 						<!-- 스터디 이미지 -->
 						<div style="height: 450px; background-color: #F0F0F0">
-							<img src="/third_prj/study_img/${ s_Info.studyImg }" style="width:100%; height:100%;">
+							<img src="/third_prj/study_img/${ s_Info.studyImg }" style="width: 100%; height: 100%;">
 						</div>
 					</div>
 				</div>
@@ -116,18 +130,28 @@
 					</div>
 					<div class="col-lg-9">
 
-						<!-- private int favNum, memberNum; // 좋아요 갯수, 스터디 참여자 수. -->
-
 						<div class="row">
 							<!-- 스터디 지역 -->
-							<div class="col-lg-6">지역 : <c:out value="${ s_Info.loc }"/></div>
+							<div class="col-lg-6">
+								지역 :
+								<c:out value="${ s_Info.loc }" />
+							</div>
 							<!-- 스터디 모집 인원 -->
-							<div class="col-lg-6">참여인원 : <c:out value="${ s_Info.memberNum }"/></div>
+							<div class="col-lg-6">
+								참여인원 :
+								<c:out value="${ s_Info.memberNum }" />
+							</div>
 						</div>
 
 						<div class="row">
-							<div class="col-lg-6">종류 : <c:out value="${ s_Info.category }"/></div>
-							<div class="col-lg-6">등록일 : <c:out value="${ s_Info.inputDate }"/></div>
+							<div class="col-lg-6">
+								종류 :
+								<c:out value="${ s_Info.category }" />
+							</div>
+							<div class="col-lg-6">
+								등록일 :
+								<c:out value="${ s_Info.inputDate }" />
+							</div>
 						</div>
 					</div>
 				</div>
@@ -137,7 +161,7 @@
 					</div>
 					<!-- 스터디 소개. -->
 					<div class="col-lg-9">
-						<c:out value="${ s_Info.content }" escapeXml="false"/>
+						<c:out value="${ s_Info.content }" escapeXml="false" />
 					</div>
 				</div>
 				<div class="row" style="padding: 50px; border: 1px solid #F0F0F0">
@@ -153,15 +177,15 @@
 							<div class="col-lg-3" style="padding-left: 18px;">
 								<!-- 리더 이미지 -->
 								<div style="width: 150px; height: 150px;">
-									<img src="/third_prj/profile_img/${ s_Info.leaderImg }"class="card-img-top w-75 mx-auto d-block rounded-circle mt-3">
+									<img src="/third_prj/profile_img/${ s_Info.leaderImg }" class="card-img-top w-75 mx-auto d-block rounded-circle mt-3">
 								</div>
 							</div>
 							<div class="col-lg-9" style="font-size: 20px; padding: 30px">
 								<!-- 리더(스터디 개설자의 nick)-->
 								<strong>${ s_Info.nick }</strong>
-								<br/>
-								<p style="font-size:13px;">
-									<c:out value="${ s_Info.introduce }"/>
+								<br />
+								<p style="font-size: 13px;">
+									<c:out value="${ s_Info.introduce }" />
 								</p>
 							</div>
 						</div>
@@ -183,36 +207,32 @@
 							<div class="col-lg-2">
 								<button id="reply_btn" type="button" class="btn btn btn-secondary btn-adjust">댓글달기</button>
 							</div>
-							<input type="hidden" name="ref_num" value=${ param.sNum }>
+							<input type="hidden" id="ref_num" value=${ param.sNum }>
 						</div>
 						<!-- 댓글 입력 폼 -->
 
 						<!-- 댓글 읽기  -->
 						<div class="row">
 							<div class="col-lg-12" style="margin-top: 60px">
-								<ul id="reply_list" class="list-unstyled">
+								<div id="sComment_view">
 									<c:forEach var="s_comment" items="${ sCommentList }">
-									<c:set var="i" value="${ i + 1 }"/>
-										<!-- 댓글 하나 -->
-										<li id="reply_row${ i }" class="media" style="padding-bottom: 20px">
-											<!-- 댓글을 쓴 사용자의 이미지 -->
-											<div style="width: 100px; height: 100px; background-color: #F0F0F0; margin-right: 20px">
-												<img id="writer_img" alt="" src="">
+										<div class="media">
+											<div style="width: 95px; height: 95px; background-color: #F0F0F0; margin-right: 10px; text-align: center;">
+												<img src="/third_prj/study_img/${ s_comment.img }" class="w-100 h-100 align-self-start mr-3">
 											</div>
-											<div class="media-body row">
-												<div class="col-lg-10">
-													<!-- 댓글 쓴 사용자의 이름. -->
-													<h5 id="writer" class="mt-0 mb-1">${ s_comment.id }</h5>
-													<!-- 댓글의 내용. -->
-													<div id="content">${ s_comment.s_comment }</div>
+											<div class="col-lg-10" style="margin-top: 5px; padding-right: 0px;">
+												<div style="overflow: hidden">
+													<div class="mt-0" style="float: left;">${ s_comment.id }</div>
+													<div style="float: right;">${ s_comment.input_date }</div>
 												</div>
-												<!-- 댓글의 입력일 -->
-												<div id="w_date" class="col-lg-2" style="font-size: 12px;">${ s_comment.input_date }</div>
+												<div style="margin-top: 15px;">${ s_comment.s_comment }</div>
 											</div>
-										</li>
-										<!-- 댓글 하나 -->
+										</div>
+										
+										<div class="my-3 border-bottom"></div>
+										
 									</c:forEach>
-								</ul>
+								</div>
 							</div>
 						</div>
 						<!-- 댓글 읽기  -->
@@ -223,121 +243,126 @@
 
 			<!-- 따라다니는 사이드바 -->
 
-	
-			<div class="col-lg-2" style="position: fixed; margin-left: 940px; margin-top:100px;">
+
+			<div class="col-lg-2" style="position: fixed; margin-left: 940px; margin-top: 100px;">
 				<div id="sidebar" style="width: 300px; min-height: 300px">
-					<div class="row  border border-secondary" style="padding: 20px; margin-left: 10px; border-radius:10px;">
+					<div class="row  border border-secondary" style="padding: 20px; margin-left: 10px; border-radius: 10px;">
 						<div class="col-lg-12">
-							
-						<c:choose>
-							<c:when test="${ leaderFlag }"><!-- 스터디장일 때 -->
-						
-								<div class="row">
-									<div class="col-lg-12">
-										<!-- 스터디명 -->
-										<div style="font-size: 17px; text-align:center; font-weight: bold; height: 40px;">
-											<c:out value="${ s_Info.studyName }"/>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="row">
-											<div class="col text-center" style="margin-top: 30px">
-												<button onclick="location.href='../study_notice/notice_list_leader.do?s_num=${ param.sNum }'" type="button" class="btn btn-secondary btn-sm">스터디 관리하기</button>
+
+							<c:choose>
+								<c:when test="${ leaderFlag }">
+									<!-- 스터디장일 때 -->
+
+									<div class="row">
+										<div class="col-lg-12">
+											<!-- 스터디명 -->
+											<div style="font-size: 17px; text-align: center; font-weight: bold; height: 40px;">
+												<c:out value="${ s_Info.studyName }" />
 											</div>
 										</div>
 									</div>
-								</div>
-							
-							</c:when>
-							<c:when test="${ memberFlag }"><!-- 이미 가입된 멤버일때 -->
-							
-								<div class="row">
-									<div class="col-lg-12">
-										<!-- 스터디명 -->
-										<div style="font-size: 17px; text-align:center; font-weight: bold; height: 40px;">
-											<c:out value="${ s_Info.studyName }"/>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="row">
-											<div class="col text-center" style="margin-top: 30px">
-												<button onclick="location.href='../study_notice/notice_list.do?s_num=${ param.sNum }'" type="button" class="btn btn-secondary btn-sm">스터디 공지보기</button>
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="row">
+												<div class="col text-center" style="margin-top: 30px">
+													<button onclick="location.href='../study_notice/notice_list_leader.do?s_num=${ param.sNum }'" type="button" class="btn btn-secondary btn-sm">스터디 관리하기</button>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							
-							</c:when>
-							<c:when test="${ joinerFlag }"><!-- 신청자일 때 -->
-							
-								<div class="row">
-									<div class="col-lg-12">
-										<!-- 스터디명 -->
-										<div style="font-size: 17px; text-align:center; font-weight: bold; height: 40px;">
-											<c:out value="${ s_Info.studyName }"/>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12" style="font-size: 12px;  text-align:center; margin-top: 10px; height: 40px">
-										<p>
-											스터디장의 수락을 기다리고 있습니다<br/>
-											수락 이후에 정상적인 활동이 가능합니다
-										</p>
-									</div>
-								</div>
-							
-							</c:when>
-							<c:otherwise><!-- 가입한, 신청한, 리더가 아니라면 -->
-								
-								<div class="row">
-									<div class="col-lg-12">
-										<!-- 스터디명 -->
-										<div style="font-size: 17px; text-align:center; font-weight: bold; height: 40px;">
-											<c:out value="${ s_Info.studyName }"/>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12" style="font-size: 12px;  text-align:center; margin-top: 10px; height: 40px">
-										<p>
-											<c:choose>
-												<c:when test="${ s_Info.memberNum ne 20 and s_Info.recruitment eq 'Y' }">
-													<c:out value="${ s_Info.favNum }"/>명이 좋아하는 스터디!<br/>
-													<c:out value="${ 20 - s_Info.memberNum }"/>명 더 가입가능한 상태입니다!<br/>
-												</c:when>
-												<c:when test="${ s_Info.recruitment eq 'N' }">
-													아쉽지만 모집이 마감되었습니다..<br/>다음 기회에 가입해주세요<br/>
-												</c:when>
-												<c:when test="${ s_Info.deactivation eq 'Y' }">
-													활동이 종료된 스터디입니다.<br/>다른 스터디를 이용해주세요<br/>
-												</c:when>
-											</c:choose>
-										</p>
-									</div>
-								</div>
-								<c:if test="${ s_Info.recruitment eq 'Y' }">
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="row">
-											<div class="col text-center" style="margin-top: 30px">
-												<form id="join_study_frm" action="../study_info/study_req_join.do">
-													<button id="study_join_btn" type="button" class="btn btn-secondary btn-sm">스터디 참여하기</button>
-													<input type="hidden" name="sNum" value="${ param.sNum }">
-												</form>
+
+								</c:when>
+								<c:when test="${ memberFlag }">
+									<!-- 이미 가입된 멤버일때 -->
+
+									<div class="row">
+										<div class="col-lg-12">
+											<!-- 스터디명 -->
+											<div style="font-size: 17px; text-align: center; font-weight: bold; height: 40px;">
+												<c:out value="${ s_Info.studyName }" />
 											</div>
 										</div>
 									</div>
-								</div>
-								</c:if>
-								
-							</c:otherwise>
-						</c:choose>
-						
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="row">
+												<div class="col text-center" style="margin-top: 30px">
+													<button onclick="location.href='../study_notice/notice_list.do?s_num=${ param.sNum }'" type="button" class="btn btn-secondary btn-sm">스터디 공지보기</button>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</c:when>
+								<c:when test="${ joinerFlag }">
+									<!-- 신청자일 때 -->
+
+									<div class="row">
+										<div class="col-lg-12">
+											<!-- 스터디명 -->
+											<div style="font-size: 17px; text-align: center; font-weight: bold; height: 40px;">
+												<c:out value="${ s_Info.studyName }" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12" style="font-size: 12px; text-align: center; margin-top: 10px; height: 40px">
+											<p>
+												스터디장의 수락을 기다리고 있습니다
+												<br />
+												수락 이후에 정상적인 활동이 가능합니다
+											</p>
+										</div>
+									</div>
+
+								</c:when>
+								<c:otherwise>
+									<!-- 가입한, 신청한, 리더가 아니라면 -->
+
+									<div class="row">
+										<div class="col-lg-12">
+											<!-- 스터디명 -->
+											<div style="font-size: 17px; text-align: center; font-weight: bold; height: 40px;">
+												<c:out value="${ s_Info.studyName }" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12" style="font-size: 12px; text-align: center; margin-top: 10px; height: 40px">
+											<p>
+												<c:choose>
+													<c:when test="${ s_Info.memberNum ne 20 and s_Info.recruitment eq 'Y' }">
+														<c:out value="${ s_Info.favNum }" />명이 좋아하는 스터디!<br />
+														<c:out value="${ 20 - s_Info.memberNum }" />명 더 가입가능한 상태입니다!<br />
+													</c:when>
+													<c:when test="${ s_Info.recruitment eq 'N' }">
+													아쉽지만 모집이 마감되었습니다..<br />다음 기회에 가입해주세요<br />
+													</c:when>
+													<c:when test="${ s_Info.deactivation eq 'Y' }">
+													활동이 종료된 스터디입니다.<br />다른 스터디를 이용해주세요<br />
+													</c:when>
+												</c:choose>
+											</p>
+										</div>
+									</div>
+									<c:if test="${ s_Info.recruitment eq 'Y' }">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="row">
+													<div class="col text-center" style="margin-top: 30px">
+														<form id="join_study_frm" action="../study_info/study_req_join.do">
+															<button id="study_join_btn" type="button" class="btn btn-secondary btn-sm">스터디 참여하기</button>
+															<input type="hidden" name="sNum" value="${ param.sNum }">
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</c:if>
+
+								</c:otherwise>
+							</c:choose>
+
 						</div>
 					</div>
 				</div>

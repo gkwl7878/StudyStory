@@ -41,6 +41,10 @@
 
 		var remove_flag = confirm("관심 스터디를 해제 하시겠습니까?");
 
+		if(!remove_flag){
+			return;
+		}// end if
+		
 		// '예' - 관심 스터디를 해제 할 경우.
 		if (remove_flag) {
 			$.ajax({
@@ -54,28 +58,28 @@
 				success : function(json) {
 					// 정삭적으로 제거가 되었다면 true가 반환된다.
 					if (json.resultFlag) {
-						$("#" + sNum + "_thumb").remove();
+						
 					}// end if
 				}// success
 			}); // ajax
-		}
+		}// end if
 
 		if (remove_flag == false) {
 			alert("#" + sNum + "_like_btn");
 			$("#" + sNum + "_like_btn").attr("class",
 					"btn btn-sm btn-outline-secondary active");
 		}// end if
-
 	}// dislikeProcess
 
 	// ready 입니다.
 	$(function() {
-
 		$("#fav_search_btn").click(function() {
 			$("#fav_search_frm").submit();
 		});// click
-
 	}); // ready
+</script>
+
+<script type="text/javascript">
 </script>
 
 </head>
@@ -151,7 +155,7 @@
 						<c:forEach var="thumbnail" items="${ thumbnail_list }">
 							<div id="${ thumbnail.s_num }_thumb" class="thumb col-md-4">
 								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-								<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }" style="color: #333;">
+								<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }" style="color: #333; text-decoration: none;">
 									<div class="card mb-4 shadow-sm">
 										<!-- 썸네일 스터디 이미지 -->
 										<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="height: 200px;" />
@@ -192,7 +196,8 @@
 													<small>${ thumbnail.category }</small>
 												</div>
 												<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
-												<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active" data-toggle="button" onclick="dislikeProcess('${ thumbnail.s_num }')">좋아요</button>
+												<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active">좋아요</button>
+												<%-- <button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active" onclick="dislikeProcess('${ thumbnail.s_num }')">좋아요</button> --%>
 											</div>
 										</div>
 									</div>
