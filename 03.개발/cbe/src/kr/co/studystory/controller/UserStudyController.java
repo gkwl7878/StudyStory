@@ -25,7 +25,6 @@ import kr.co.studystory.service.StudyGroupService;
 import kr.co.studystory.vo.CloseAlarmVO;
 import kr.co.studystory.vo.CloseVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
-import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
@@ -86,7 +85,11 @@ public class UserStudyController {
 	
 	//내 스터디 수정하기
 	@RequestMapping(value="study_group/modify_study.do", method= {GET,POST} )
-	public String modifyStudyPage(String sNum, Model model ) {
+	public String modifyStudyPage(HttpSession session, String sNum, Model model ) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		PrevStudyInfo psInfo=sgs.getPrevStudy(sNum);
 		if(psInfo !=null) {
@@ -109,8 +112,13 @@ public class UserStudyController {
 	}//createStudyPage
 	
 	@RequestMapping(value="study_group/modify_study_process.do", method= {RequestMethod.POST})
-	public String modifyStudyProcess(ModifiedStudyVO ms_vo, 
+	public String modifyStudyProcess(HttpSession session, ModifiedStudyVO ms_vo, 
 			HttpServletRequest request, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		
 		String url = "study_group/study_modify";
 		
@@ -164,12 +172,21 @@ public class UserStudyController {
 
 	// 내 스터디 탈퇴하기
 	@RequestMapping(value="study_group/leave_study.do", method= {GET,POST} )
-		public String leaveStudyPage(String id) {
+	public String leaveStudyPage(HttpSession session, String id) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		return "study_group/study_out";
 	}//leaveStudyPage
 	
 	@RequestMapping(value="study_group/leave_study_process.do" , method=POST )
 	public String leaveStudyProcess(LeaveVO l_vo, HttpSession session, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		String id=(String)session.getAttribute("id");
 		l_vo.setId(id);
@@ -202,35 +219,42 @@ public class UserStudyController {
 	
 	//스터디 활동 종료
 	@RequestMapping(value="study_group/end_study.do", method= {GET,POST} )
-	public String closeStudyPage(String id) {
+	public String closeStudyPage(HttpSession session, String id) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		return "study_group/end_study";
 	}//leaveStudyPage
 		
 	@RequestMapping(value="study_group/end_study_process.do" , method=POST )
 	public String closeStudyProcess(CloseVO c_vo, HttpSession session, Model model) {
 
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
+		String id=(String)session.getAttribute("id");
+		c_vo.setId(id);
 		
-			String id=(String)session.getAttribute("id");
-			c_vo.setId(id);
-			
-			String url="study_group/my_study";
-			if(sgs.closeStudy(c_vo)) {
-			
-				CloseAlarmVO ca_vo=new CloseAlarmVO();
-				ca_vo.setId(id);
-				ca_vo.setCategory("스터디");
-				ca_vo.setSubject("스터디가 종료되었습니다.");
-				ca_vo.setContent(sgs.getStudyName(c_vo.getsNum())+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
-				ca_vo.setsNum(c_vo.getsNum());
-				//
-				sgs.sendCloseAlarm(ca_vo);
-			
-				url="redirect:../study_group/study_i_made.do";
-			}else {
-				model.addAttribute("failFlag",true);
-				url="study_group/end_study";
-			}
+		String url="study_group/my_study";
+		if(sgs.closeStudy(c_vo)) {
+		
+			CloseAlarmVO ca_vo=new CloseAlarmVO();
+			ca_vo.setId(id);
+			ca_vo.setCategory("스터디");
+			ca_vo.setSubject("스터디가 종료되었습니다.");
+			ca_vo.setContent(sgs.getStudyName(c_vo.getsNum())+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
+			ca_vo.setsNum(c_vo.getsNum());
+			//
+			sgs.sendCloseAlarm(ca_vo);
+		
+			url="redirect:../study_group/study_i_made.do";
+		}else {
+			model.addAttribute("failFlag",true);
+			url="study_group/end_study";
+		}
 
 		return url ;
 	}
