@@ -112,49 +112,51 @@ public class UserStudyController {
 	public String modifyStudyProcess(ModifiedStudyVO ms_vo, 
 			HttpServletRequest request, Model model) {
 		
+		String url = "study_group/study_modify";
+		
 		// 파일 업로드
-				MultipartRequest mr=null;
-				try {
-					mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/",
-							1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
-				} catch (IOException e) {
-					e.printStackTrace();
+		MultipartRequest mr=null;
+		
+		try {
+			mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/",
+					1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		String flag=mr.getParameter("imgChangeFlag");
+		String img="";
+		String prevImg=mr.getParameter("prevImg");
+		String sNum = mr.getParameter("sNum");
+		String content= mr.getParameter("content");
+		
+		System.out.println("=======================prefImg : "+prevImg);
+		
+		if("true".equals(flag)) { // 파일이 바뀐 경우
+			img= mr.getFilesystemName("file");
+			System.out.println("====================파일이 바뀌었다!");
+			// 기존 파일을 삭제해야 함
+			if(!("no_study_img.png".equals(prevImg))){ // 이전 이미지명이 기본 이미지명이 아니면
+				System.out.println("====================삭제하자 삭제!");
+				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+prevImg);
+				
+				if(file.exists()) {
+					System.out.println("삭제 되었다!!!");
+					file.delete();
 				}
-				String flag=mr.getParameter("imgChangeFlag");
-				String img="";
-				if("true".equals(flag)) {
-					img= mr.getFilesystemName("file");
-					
-				}else {
-					img=mr.getParameter("prevImg");
-				}
-				System.out.println("================="+img);
-				String url = "study_group/study_modify";
-				
-				String sNum = mr.getParameter("sNum");
-				String content= mr.getParameter("content");
-				ms_vo.setContent(content);
-				ms_vo.setImg(img);
-				ms_vo.setsNum(sNum);
-				
-				String preImg= sgs.searchPreImg(sNum);
-				
-				
-				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
-				if(!(preImg.equals("no_study_img.png"))){
-						if(file.exists()||img!=null) {
-						file.delete();
-					}else {
-						System.out.println("파일이 존재하지 않습니다.");
-					}
-				}
-				
-				if(img==null) {
-					img ="no_study_img.png";
-				}
-				
-				
-				System.out.println(ms_vo);
+			}
+			
+		}else { // 파일이 안바뀐 경우
+			System.out.println("안바뀜, 삭제 안됨");
+			img = prevImg;
+		}
+		
+		System.out.println("=================DB에 변경처리할 img명 : "+img);
+		
+		ms_vo.setContent(content);
+		ms_vo.setImg(img);
+		ms_vo.setsNum(sNum);
+			
 				
 		if(sgs.modifyStudy(ms_vo)) {
 			url="redirect:../study_group/study_i_made.do";

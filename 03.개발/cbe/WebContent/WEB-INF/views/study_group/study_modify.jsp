@@ -67,13 +67,13 @@
 			
 			if(fileValue=="") {
 				$("[name='imgChangeFlag']").val("false");
-				$("[name='prevImg']").val("${img }");
-				
 			}else {
 				$("[name='imgChangeFlag']").val("true");
 			}
 			
-			 $("#modifyFrm").submit();
+			// 이전파일은 무조건 보내서 변경여부 확인 후 삭제처리
+			$("[name='prevImg']").val("${img }");
+			$("#modifyFrm").submit();
 		});//click
 	});//ready
 </script>
