@@ -15,7 +15,7 @@
 
 ## DB 설계
 
-* [테이블 설계서](https://github.com/younggeun0/StudyStory/tree/master/02.%EC%84%A4%EA%B3%84/ERD%20png/v0409/%ED%85%8C%EC%9D%B4%EB%B8%94%EC%84%A4%EA%B3%84%EC%84%9C_v0409)
+* [테이블 설계서 ](https://github.com/younggeun0/StudyStory/tree/master/02.%EC%84%A4%EA%B3%84/ERD%20png/v0409/%ED%85%8C%EC%9D%B4%EB%B8%94%EC%84%A4%EA%B3%84%EC%84%9C_v0409)
 
 ## DB 설계 - ERD 논리모델
 
