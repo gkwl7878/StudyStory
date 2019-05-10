@@ -15,6 +15,10 @@ import kr.co.studystory.domain.Joiner;
 import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.vo.ApplicantBbsVO;
 import kr.co.studystory.vo.DetailJoinerVO;
+import kr.co.studystory.vo.JoinAlarmVO;
+import kr.co.studystory.vo.JoinDeleteVO;
+import kr.co.studystory.vo.NewMemberVO;
+import kr.co.studystory.vo.RefuseAlarmVO;
 @Component
 public class StudyGroupDAO2 {
 
@@ -87,6 +91,9 @@ public class StudyGroupDAO2 {
 		return jTotal;
 	}
 	
+	/**
+	 * 신청자 디테일 정보 - 정미
+	 */
 	public Joiner selectJoiner(DetailJoinerVO djvo) {
 		Joiner jr=null;
 		
@@ -96,6 +103,51 @@ public class StudyGroupDAO2 {
 		
 		return jr;
 	}
+	
+	public boolean insertNewMember(NewMemberVO nmvo) {
+		boolean insertNewMemberflag=false;
+		int cnt=0;
+		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		cnt=ss.insert("insertNewMember",nmvo);
+		if(cnt>0) {
+			insertNewMemberflag = true;
+			ss.commit();
+		}
+		ss.close();
+		return insertNewMemberflag;
+	}
+	
+	public void insertJoinAlarm(JoinAlarmVO javo) {
+		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		ss.insert("insertJoinedAlarm", javo);
+		ss.close();
+	}
+	
+	public void insertRefuseAlarm(RefuseAlarmVO rfavo) {
+		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		ss.insert("insertRefuseAlarm", rfavo);
+		ss.close();
+	}
+	
+	public String selectStudyName(String s_num) {
+		SqlSession ss=StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		String study_name = ss.selectOne("selectStudyName", s_num);
+		ss.close();
+		return study_name;
+	}
+	
+	public boolean deleteJoin(JoinDeleteVO jdvo) {
+		boolean flag = false;
+		SqlSession ss= StudyGroupDAO2.getInstance().getSessionFactory().openSession();
+		int cnt=ss.delete("deleteJoiner",jdvo);
+		if(cnt == 1) {
+			ss.commit();
+			flag = true;
+		}//end if
+		ss.close();
+		return flag;
+	}
+	
 	
 	//단위테스트
 	public static void main(String[] args) {

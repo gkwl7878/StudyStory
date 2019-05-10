@@ -19,17 +19,27 @@
 	</resultMap>
 	<!-- 썸네일 resultMap -->
 
+	<!-- ///////////////////////////////////////////// 메인 썸네일 -->
 	
 	<!-- 메인 페이지 썸네일 조회. -->
 	<select id="selectThumbnailList" resultMap="ThumbnailDomain">
 		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT,TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG
 		FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
 	    	     FROM STUDY S, USER_TABLE U
-	        	WHERE S.ID=U.ID AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N' )
+	        	  WHERE S.ID=U.ID AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N' )
 		ORDER BY R_NUM ASC
 	</select>
 	<!-- 메인 페이지 썸네일 조회. -->
 
+	<!-- 좋아요  s_num의 갯수 조회. - 조회가 되면 1 반환. -->
+	<select id="selectMyFavSNumCNT" resultType="int" parameterType="kr.co.studystory.vo.FavSNumFlagVO">
+		SELECT COUNT(S_NUM) CNT
+		FROM FAV_STUDY
+		WHERE ID = #{id} AND S_NUM = #{myFavSNum}
+	</select>
+	<!-- 좋아요  s_num의 갯수 조회. -->
+
+	<!-- ///////////////////////////////////////////// 메인 썸네일 -->
 
 	<!-- 내 관심 스터디 조회. -->
 	<select id="selectFavStudy" resultMap="ThumbnailDomain" parameterType="kr.co.studystory.vo.FavStudyOrderVO">
@@ -49,22 +59,27 @@
 				</when>
 			</choose>    		
     		)
+   ORDER BY R_NUM ASC
 	</select>
 	<!-- 내 관심 스터디 조회. -->
 	
 	<!-- 관심 스터디 추가. -->
-	<delete id="insertFavStudy" parameterType="kr.co.studystory.vo.AddFavStudyVO">
+	<delete id="insertFavStudy" parameterType="kr.co.studystory.vo.FavFlagVO">
 		INSERT INTO FAV_STUDY(S_NUM, ID)
 		VALUES(#{sNum}, #{my_id})
 	</delete>
 	<!-- 관심 스터디 추가. -->
 
 	<!-- 관심 스터디 제거. -->
-	<delete id="deleteFavStudy" parameterType="kr.co.studystory.vo.RemoveFavStudyVO">
+	<delete id="deleteFavStudy" parameterType="kr.co.studystory.vo.FavFlagVO">
 		DELETE FROM FAV_STUDY
-		WHERE S_NUM = #{sNum} AND ID=#{id}
+		WHERE S_NUM = #{sNum} AND ID=#{my_id}
 	</delete>
 	<!-- 관심 스터디 제거. -->
+
+
+	<!-- ///////////////////////////////////////////// 스터디 찾기 -->
+
 
 	<!-- 검색 조건에 따라 썸네일의 갯수 조회. -->
 	<select id="selectSearchListCnt" resultType="int" parameterType="kr.co.studystory.vo.SearchListVO">

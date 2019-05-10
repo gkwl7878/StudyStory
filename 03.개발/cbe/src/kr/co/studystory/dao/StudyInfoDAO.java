@@ -14,12 +14,13 @@ import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
-import kr.co.studystory.vo.AddFavStudyVO;
+import kr.co.studystory.domain.WriterInfoDomain;
 import kr.co.studystory.vo.DetailMenuVO;
+import kr.co.studystory.vo.FavFlagVO;
+import kr.co.studystory.vo.FavSNumFlagVO;
 import kr.co.studystory.vo.FavStudyOrderVO;
 import kr.co.studystory.vo.JoinAlarmVO;
 import kr.co.studystory.vo.JoinFormVO;
-import kr.co.studystory.vo.RemoveFavStudyVO;
 import kr.co.studystory.vo.ReplyVO;
 import kr.co.studystory.vo.SearchListVO;
 
@@ -78,7 +79,7 @@ public class StudyInfoDAO {
 		return ssf;
 	}// getSessionFatory
 
-	////////////////// Singleton
+	//////////////////////////////////// Singleton
 
 	/**
 	 * 스터디의 상세 정보를 조회하는 메서드.
@@ -89,13 +90,9 @@ public class StudyInfoDAO {
 	public StudyInfoDomain selectStudyInfo(String s_num) {
 		StudyInfoDomain s_info = null;
 		SqlSession ss = getSessionFatory().openSession();
-
 		s_info = ss.selectOne("selectDetailStudy", s_num);
-
 		s_info.setFavNum(ss.selectOne("selectFavNum", s_num));
-
 		s_info.setMemberNum(ss.selectOne("selectMemberNum", s_num));
-
 		ss.close();
 		return s_info;
 	}// selectStudyInfo
@@ -105,14 +102,11 @@ public class StudyInfoDAO {
 	 */
 	public boolean selectAmIMember(DetailMenuVO dmvo) {
 		boolean flag = false;
-
 		SqlSession ss = getSessionFatory().openSession();
 		int cnt = ss.selectOne("selectAmIMember", dmvo);
-
 		if (cnt == 1) {
 			flag = true;
-		}
-
+		} // end if
 		return flag;
 	}// selectAmIMember
 
@@ -162,21 +156,34 @@ public class StudyInfoDAO {
 	}// selectSCommentList
 
 	/**
-	 * 상세 스터디의 댓글을 insert하는 메서드.
+	 * 댓글의 갯수 구하기.
+	 * @param s_num
+	 * @return
+	 */
+	public int selectScommentCnt(String s_num) {
+		int cnt = 0;
+		SqlSession ss = getSessionFatory().openSession();
+		cnt = ss.selectOne("selectScommentCnt", s_num);
+		return cnt;
+	}// selectScommentCnt
+	
+	/**
+	 * 상세 스터디의 댓글을 insert하고 정상 동작시 입력한 유저의 이미지 파일명 반환 메서드.
 	 * 
 	 * @return int count
 	 */
-	public int insertComment(ReplyVO r_vo) {
+	public WriterInfoDomain insertComment(ReplyVO r_vo) {
+		WriterInfoDomain wid = null;
 		int cnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
 		cnt = ss.insert("insertComment", r_vo);
-
 		// 1개 행이 정상적으로 입력 되었을 때.
 		if (cnt == 1) {
+			wid = ss.selectOne("selectWriterInfo", r_vo);
 			ss.commit();
 		} // end if
 		ss.close();
-		return cnt;
+		return wid;
 	}// insertComment
 
 	/**
@@ -200,11 +207,9 @@ public class StudyInfoDAO {
 	public boolean insertJoinForm(JoinFormVO jf_vo) {
 		boolean flag = false;
 		SqlSession ss = getSessionFatory().openSession();
-		JoinAlarmVO ja_vo = new JoinAlarmVO("스터디", "스터디 신청완료",
-				"\"" + jf_vo.getStudyName() + "\"에 가입 신청이 완료되었습니다.\n가입 신청이 수락되면 알림으로 알려드리겠습니다.", jf_vo.getJoinerId());
+		JoinAlarmVO ja_vo = new JoinAlarmVO("스터디", "스터디 신청완료", "\"" + jf_vo.getStudyName() + "\"에 가입 신청이 완료되었습니다.\n가입 신청이 수락되면 알림으로 알려드리겠습니다.", jf_vo.getJoinerId());
 		String joinerNick = ss.selectOne("selectJoinerNick", jf_vo.getJoinerId());
-		JoinAlarmVO ja_vo2 = new JoinAlarmVO("스터디", "스터디 가입요청",
-				"\"" + joinerNick + "\"님께서 " + jf_vo.getStudyName() + "에 가입 신청을 하셨습니다.", jf_vo.getLeaderNick());
+		JoinAlarmVO ja_vo2 = new JoinAlarmVO("스터디", "스터디 가입요청", "\"" + joinerNick + "\"님께서 " + jf_vo.getStudyName() + "에 가입 신청을 하셨습니다.", jf_vo.getLeaderNick());
 		int cnt = ss.insert("insertJoinFormVO", jf_vo);
 		cnt += ss.insert("insertJoinerAlarm", ja_vo);
 		cnt += ss.insert("insertLeaderAlarm", ja_vo2);
@@ -232,6 +237,25 @@ public class StudyInfoDAO {
 	}// selectHotStudies()
 
 	/**
+	 * 내가 좋아요한 썸네일 번호 조회.
+	 * 
+	 * @param my_id
+	 * @return
+	 */
+	public boolean selectMyFavSNum(FavSNumFlagVO fsf_vo) {
+		boolean flag = false;
+		int cnt = 0;
+		SqlSession ss = getSessionFatory().openSession();
+		cnt = ss.selectOne("selectMyFavSNumCNT", fsf_vo);
+		System.out.println("///////////////////////// dao : " + cnt);
+		if (cnt == 1) {
+			flag = true;
+		} // end if
+		ss.close();
+		return flag;
+	}// selectMyFavSNum
+
+	/**
 	 * 내 관심 스터디 썸네일 조회.
 	 * 
 	 * @param my_id
@@ -245,16 +269,20 @@ public class StudyInfoDAO {
 		return list;
 	}// selectMyFavStudy
 
+	/////////////////////////////////////// 하트 구현
+	
 	/**
-	 * 관심 스터디로 추가하기.
+	 * 관심 스터디로 인서트.
 	 * 
 	 * @param afs_vo
 	 * @return
 	 */
-	public int insertFavStudy(AddFavStudyVO afs_vo) {
+	public int insertFavStudy(FavFlagVO ff_vo) {
 		int resultCnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
-		resultCnt = ss.insert("insertFavStudy", afs_vo);
+		System.out.println("///////////////////// 다오" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+
+		resultCnt = ss.insert("insertFavStudy", ff_vo);
 		// 정상적으로 추가가 되었을 경우 커밋하기.
 		if (resultCnt == 1) {
 			ss.commit();
@@ -268,16 +296,21 @@ public class StudyInfoDAO {
 	 * 
 	 * @param sNum
 	 */
-	public int deleteFavStudy(RemoveFavStudyVO rfa_vo) {
+	public int deleteFavStudy(FavFlagVO ff_vo) {
 		int resultCnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
-		resultCnt = ss.delete("deleteFavStudy", rfa_vo);
+		System.out.println("///////////////////// 다오" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+
+		resultCnt = ss.delete("deleteFavStudy", ff_vo);
 		if (resultCnt == 1) {
 			ss.commit();
 		} // end if
 		ss.close();
 		return resultCnt;
 	}// deleteFavStudy
+	
+	/////////////////////////////////////// 하트 구현
+
 
 	/////////////////////////// 스터디 찾기
 

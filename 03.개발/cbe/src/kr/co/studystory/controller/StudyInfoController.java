@@ -35,8 +35,8 @@ public class StudyInfoController {
 	private StudyInfoService sis;
 
 	/**
-	 * 스터디 상세 정보 페이지로 부터의 요청 처리.
-	 * 보완수정 by 영근 190502
+	 * 스터디 상세 정보 페이지로 부터의 요청 처리. 보완수정 by 영근 190502
+	 * 
 	 * @param sNum
 	 * @param session
 	 * @param model
@@ -44,29 +44,32 @@ public class StudyInfoController {
 	 */
 	@RequestMapping(value = "/detail/detail_study.do", method = GET)
 	public String studyInfoPage(String sNum, HttpSession session, Model model) {
-		
+
 		if (session.getAttribute("id") == null) {
 			return "redirect:../index.do";
 		}
-		
+
 		// 내 아이디로 이미 가입했는지, 가입수락대기중인지, 내가 만든 스터디인지 조회
 		// 조회 결과에 따라 오른쪽 상단 화면을 다르게 보여줘야 함
-		
-		DetailMenuVO dmvo = new DetailMenuVO((String)session.getAttribute("id"), sNum);
+		DetailMenuVO dmvo = new DetailMenuVO((String) session.getAttribute("id"), sNum);
 		if (sis.amILeader(dmvo)) { // 만든 유저인지
 			model.addAttribute("leaderFlag", true);
 		} else if (sis.amIMember(dmvo)) { // 가입한 멤버인지
 			model.addAttribute("memberFlag", true);
 		} else if (sis.didIrequest(dmvo)) { // 스터디 신청했는지
 			model.addAttribute("joinerFlag", true);
-		}
+		}// end if
+
+		
 		
 		StudyInfoDomain sInfo = sis.getStudyInfo(sNum); // 스터디 상세 정보 가져오기.
 		List<StudyCommentDomain> sCommentList = sis.getStudyComment(sNum); // 스터디 상세정보의 댓글 List 가져오기.
-		
+		int cnt = sis.getScommentCnt(sNum);
+
 		model.addAttribute("s_Info", sInfo); // 스터디 상세정보 model에 담기.
 		model.addAttribute("sCommentList", sCommentList); // 댓글 list 모델에 담기.
-		
+		model.addAttribute("scomment_cnt", cnt); // 댓글의 갯수 담기.
+
 		return "study_info/detail_study";
 	}// studyInfoPage()
 
@@ -78,18 +81,15 @@ public class StudyInfoController {
 	 * @return
 	 */
 	@ResponseBody // DispatcherServlet을 거치지 않고 바로 응답.
-	@RequestMapping(value = "/detail/add_reply.do", method = GET)
+	@RequestMapping(value = "/detail/add_reply.do", method = POST)
 	public String studyInfoReply(ReplyVO r_vo, HttpSession session) {
 		JSONObject json = null;
-
-		// 세션으로 댓글을 입력하는 사용자의 아이디 얻기.
-		String user_id = (String) session.getAttribute("id");
-		// VO에 set하기.
-		r_vo.setId(user_id);
-
+		String id = (String) session.getAttribute("id");
+		if (r_vo.getId() == null) {
+			r_vo.setId(id);
+		} // end if
 		// 값 확인 하기.
-		System.out.println("/////////////////////////////////" + r_vo.getId() + "/" + r_vo.getReply() + "/" + r_vo.getsNum());
-
+		System.out.println("//////////////////////////////// 컨틀로 : " + r_vo.getId() + "/" + r_vo.getReply() + "/" + r_vo.getsNum());
 		json = sis.addReply(r_vo);
 		return json.toJSONString();
 	}// addComment()
@@ -97,8 +97,8 @@ public class StudyInfoController {
 	/*********************************** 진행중 ****/
 
 	/**
-	 * 스터디 가입 요청 페이지으로 부터의 요청 처리.
-	 * 보완수정 by 영근 190502
+	 * 스터디 가입 요청 페이지으로 부터의 요청 처리. 보완수정 by 영근 190502
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/study_info/study_req_join.do", method = GET)
@@ -117,17 +117,17 @@ public class StudyInfoController {
 	}// joinPage()
 
 	/**
-	 * 스터디 참여 페이지의 Form으로 부터의 요청 처리.
-	 * 보완수정 by 영근 190502
+	 * 스터디 참여 페이지의 Form으로 부터의 요청 처리. 보완수정 by 영근 190502
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/study_info/join_process.do", method = POST)
 	public String joinProcess(JoinFormVO jf_vo, Model model) {
 
-		if(sis.addJoinStudy(jf_vo)) {
+		if (sis.addJoinStudy(jf_vo)) {
 			model.addAttribute("joinReqSuccess", true);
 		} else {
-			model.addAttribute("joinReqFail",true);
+			model.addAttribute("joinReqFail", true);
 		}
 
 		return "forward:../study_info/main.do";

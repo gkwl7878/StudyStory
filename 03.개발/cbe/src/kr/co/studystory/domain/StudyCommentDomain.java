@@ -2,9 +2,7 @@ package kr.co.studystory.domain;
 
 public class StudyCommentDomain {
 
-	private String s_comment, input_date, id;
-
-	/* getter & setter */
+	private String s_comment, input_date, nick, img;
 
 	public String getS_comment() {
 		return s_comment;
@@ -22,19 +20,26 @@ public class StudyCommentDomain {
 		this.input_date = input_date;
 	}
 
-	public String getId() {
-		return id;
+	public String getNick() {
+		return nick;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 
-	/* getter & setter */
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
 
 	@Override
 	public String toString() {
-		return "StudyCommentDomain [s_comment=" + s_comment + ", input_date=" + input_date + ", id=" + id + "]";
+		return "StudyCommentDomain [s_comment=" + s_comment + ", input_date=" + input_date + ", nick=" + nick + ", img="
+				+ img + "]";
 	}// toString
 
 }// class
