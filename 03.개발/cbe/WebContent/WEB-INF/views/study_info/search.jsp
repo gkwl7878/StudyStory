@@ -7,14 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- 폰트 CSS -->
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
+<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <!-- Custom styles for this template -->
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
+<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+<link href="/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
+<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/third_prj/resources/js/popper.min.js"></script>
+<script src="/third_prj/resources/js/bootstrap.min.js"></script>
 
 <title>Bootstrap Template By Young</title>
 
