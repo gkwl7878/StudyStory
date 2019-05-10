@@ -99,30 +99,38 @@
 		</choose>
 	</select>
 	<!-- 검색 조건에 따라 썸네일의 갯수 조회. -->
-	
+
 
 	<!-- 검색 조건에 따라 썸네일 조회. -->
 	<select id="selectSearchList" resultMap="ThumbnailDomain" parameterType="kr.co.studystory.vo.SearchListVO">
-		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT,TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG
-		FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
-	    	    FROM STUDY S, USER_TABLE U
-	        	WHERE S.ID=U.ID AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N' AND STUDY_NAME Like '%${search_inputBox}%'
-				<choose>
-					<when test="loc_select != 'none' and kind_select == 'none'">
-						AND LOC = '${loc_select}'
-					</when>
-					<when test="kind_select != 'none' and loc_select == 'none'">
-						AND CATEGORY = '${kind_select}'			
-					</when>
-					<when test="loc_select != 'none' and kind_select != 'none'  ">
-						AND LOC = '${loc_select}' and CATEGORY = '${kind_select}'
-					</when>
-				</choose>	
+		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG
+		FROM	(
+					SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, 
+							<choose>
+								<when test="order_select == 'none' or order_select == '최신순'">
+									ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
+								</when>
+								<when test="order_select == '인기순'">
+									ROW_NUMBER() OVER( ORDER BY COUNT(FS.S_NUM) DESC, INPUT_DATE DESC) R_NUM
+								</when>
+							</choose>
+	    	   	FROM STUDY S, FAV_STUDY FS, USER_TABLE U
+   		 		WHERE S.S_NUM = FS.S_NUM(+) AND S.ID=U.ID AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N' AND STUDY_NAME Like '%${search_inputBox}%'
+					<choose>
+						<when test="loc_select != 'none' and kind_select == 'none'">
+							AND LOC = '${loc_select}'
+						</when>
+						<when test="kind_select != 'none' and loc_select == 'none'">
+							AND CATEGORY = '${kind_select}'			
+						</when>
+						<when test="loc_select != 'none' and kind_select != 'none'  ">
+							AND LOC = '${loc_select}' and CATEGORY = '${kind_select}'
+						</when>
+					</choose>
+			    	GROUP BY S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG
 	        	)
 	   	WHERE R_NUM BETWEEN #{startNum} and #{endNum}
 		ORDER BY R_NUM ASC
 	</select>
 	<!-- 검색 조건에 따라 썸네일 조회. -->
-
-
 </mapper>

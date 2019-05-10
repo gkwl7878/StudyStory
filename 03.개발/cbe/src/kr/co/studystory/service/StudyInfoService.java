@@ -287,25 +287,20 @@ public class StudyInfoService {
 
 		// 보여줄 글자 길이 조정.
 		for (ThumbnailDomain td : list) {
-
 			fsf_vo.setMyFavSNum(td.getS_num());
-
 			if (si_dao.selectMyFavSNum(fsf_vo)) {
 				td.setFavFlag(true);
 			} // end if
-
 			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
 			if (td.getStudy_name().length() > 14) {
 				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
 				td.setStudy_name(changedStudyName);
 			} // end if
-
 			// 썸네일의 nick의 길이가 3을 넘어가면 "..." 처리.
 			if (td.getNick().length() > 3) {
 				changedNick = td.getNick().substring(0, 3) + "...";
 				td.setNick(changedNick);
 			} // end if
-
 		} // end for
 
 		return list;
