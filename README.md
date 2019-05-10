@@ -1,13 +1,13 @@
 # 스터디 스토리📝
 
-[스터디 스토리 로고](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/logo.PNG?raw=true)
+![스터디 스토리 로고](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/logo.PNG?raw=true)
 
 * **SIST Web 3번째 Team Project**
 * **스터디 커뮤니티 사이트**
 
 ## 간트 차트
 
-* [간트차트](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/gantt.PNG?raw=true)
+![간트차트](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/gantt.PNG?raw=true)
 
 ## UI 설계
 
