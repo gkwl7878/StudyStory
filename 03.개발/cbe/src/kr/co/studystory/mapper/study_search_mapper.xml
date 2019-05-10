@@ -41,27 +41,71 @@
 
 	<!-- ///////////////////////////////////////////// 메인 썸네일 -->
 
+	<!-- 
+		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG, cnt
+		FROM
+		(
+		SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, COUNT(FS.S_NUM) cnt,
+						ROW_NUMBER() OVER( ORDER BY COUNT(FS.S_NUM) DESC, INPUT_DATE DESC) R_NUM
+		FROM STUDY S, FAV_STUDY FS, fav_study fs2, USER_TABLE U
+		WHERE S.S_NUM = FS.S_NUM AND S.ID=U.ID AND fs.s_num = fs2.s_num and fs2.id = 'Dkfkfl' AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N'
+		GROUP BY S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG
+		)
+		ORDER BY R_NUM ASC
+	 -->
+	 
+	<!-- 검색 조건에 따라 썸네일의 갯수 조회. -->
+	<select id="selectFavStudyCnt" resultType="int" parameterType="kr.co.studystory.vo.FavStudyOrderVO">
+		SELECT COUNT(FS.S_NUM) CNT
+		FROM FAV_STUDY FS, STUDY S
+		WHERE FS.S_NUM = S.S_NUM AND FS.ID = #{ my_id }
+		<choose>
+			<when test="fav_loc_select != 'none' and fav_kind_select == 'none'">
+				AND LOC = '${fav_loc_select}'
+			</when>
+			<when test="fav_kind_select != 'none' and fav_loc_select == 'none'">
+				AND CATEGORY = '${fav_kind_select}'
+			</when>
+			<when test="fav_loc_select != 'none' and fav_kind_select != 'none'">
+				AND LOC = '${fav_loc_select}' and CATEGORY = '${fav_kind_select}'
+			</when>
+		</choose>    		
+	</select>
+	<!-- 검색 조건에 따라 썸네일의 갯수 조회. -->
+	 
 	<!-- 내 관심 스터디 조회. -->
 	<select id="selectFavStudy" resultMap="ThumbnailDomain" parameterType="kr.co.studystory.vo.FavStudyOrderVO">
-	SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'YYYY/MM/DD') INPUT_DATE, NICK, USER_IMG
-	FROM   (SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
-        	FROM FAV_STUDY FS, STUDY S, USER_TABLE U
-    		WHERE ( FS.S_NUM = S.S_NUM ) AND ( S.ID=U.ID ) AND FS.ID = #{ my_id }
-			<choose>
-				<when test="fav_loc_select != 'none' and fav_kind_select == 'none'">
-					AND LOC = '${fav_loc_select}'
-				</when>
-				<when test="fav_kind_select != 'none' and fav_loc_select == 'none'">
-					AND CATEGORY = '${fav_kind_select}'
-				</when>
-				<when test="fav_loc_select != 'none' and fav_kind_select != 'none'">
-					AND LOC = '${fav_loc_select}' and CATEGORY = '${fav_kind_select}'
-				</when>
-			</choose>    		
-    		)
-   ORDER BY R_NUM ASC
+			SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG, CNT
+			FROM	(
+					SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, COUNT(FS.S_NUM) CNT, 
+							<choose>
+								<when test="fav_order_select == 'none' or fav_order_select == '최신순'">
+									ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM
+								</when>
+								<when test="fav_order_select == '인기순'">
+									ROW_NUMBER() OVER( ORDER BY COUNT(FS.S_NUM) DESC, INPUT_DATE DESC) R_NUM
+								</when>
+							</choose>
+					FROM STUDY S, FAV_STUDY FS, FAV_STUDY FS2, USER_TABLE U
+					WHERE S.S_NUM = FS.S_NUM AND S.ID=U.ID AND FS.S_NUM = FS2.S_NUM AND FS2.ID = #{ my_id } AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N'
+					<choose>
+						<when test="fav_loc_select != 'none' and fav_kind_select == 'none'">
+							AND LOC = '${fav_loc_select}'
+						</when>
+						<when test="fav_kind_select != 'none' and fav_loc_select == 'none'">
+							AND CATEGORY = '${fav_kind_select}'
+						</when>
+						<when test="fav_loc_select != 'none' and fav_kind_select != 'none'">
+							AND LOC = '${fav_loc_select}' and CATEGORY = '${fav_kind_select}'
+						</when>
+					</choose>    		
+			    	GROUP BY S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG
+	        	)
+	   WHERE R_NUM BETWEEN #{startNum} and #{endNum}
+		ORDER BY R_NUM ASC
 	</select>
 	<!-- 내 관심 스터디 조회. -->
+
 	
 	<!-- 관심 스터디 추가. -->
 	<delete id="insertFavStudy" parameterType="kr.co.studystory.vo.FavFlagVO">
@@ -79,7 +123,6 @@
 
 
 	<!-- ///////////////////////////////////////////// 스터디 찾기 -->
-
 
 	<!-- 검색 조건에 따라 썸네일의 갯수 조회. -->
 	<select id="selectSearchListCnt" resultType="int" parameterType="kr.co.studystory.vo.SearchListVO">

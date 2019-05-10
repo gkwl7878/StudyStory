@@ -71,7 +71,7 @@
 	}); // ready
 </script>
 
-<!-- 상세페이지로 이동 -->
+<!-- 좋아요 구현 -->
 <script type="text/javascript">
 	$(function() {
 
@@ -132,7 +132,7 @@
 					// 해제인 경우.
 					if (json.result == "toR") {
 						// 하트 색 바꿔 주기.
-						heart_node.attr("class", "gary_heart heart");
+						heart_node.attr("class", "gray_heart heart");
 					}// end if
 
 				}// success
@@ -140,7 +140,7 @@
 		});
 	}); // ready
 </script>
-<!-- 상세페이지로 이동 -->
+<!-- 좋아요 구현 -->
 
 </head>
 <body>

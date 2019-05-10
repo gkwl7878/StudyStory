@@ -256,6 +256,19 @@ public class StudyInfoDAO {
 	}// selectMyFavSNum
 
 	/**
+	 * 관심 스터디 썸네일의 갯수 조회.
+	 * 
+	 * @return
+	 */
+	public int selectFavStudyCnt(FavStudyOrderVO fso_vo) {
+		int cnt = 0;
+		SqlSession ss = getSessionFatory().openSession();
+		cnt = ss.selectOne("selectFavStudyCnt", fso_vo);
+		ss.close();
+		return cnt;
+	}// selectTotalThumbCnt
+
+	/**
 	 * 내 관심 스터디 썸네일 조회.
 	 * 
 	 * @param my_id

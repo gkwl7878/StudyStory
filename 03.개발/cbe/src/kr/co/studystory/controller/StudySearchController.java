@@ -70,6 +70,14 @@ public class StudySearchController {
 	@RequestMapping(value = "/interest/show_interest_study.do", method = GET)
 	public String studyLikedPage(FavStudyOrderVO fso_vo, Model model, HttpSession session) {
 
+		String my_id = (String) session.getAttribute("id"); // 내 아이디 얻기.
+		fso_vo.setMy_id(my_id);
+
+		// 최초 호출시 초기화된 현재 페이지를 1페이지로 설정.
+		if (fso_vo.getCurrentPage() == 0) {
+			fso_vo.setCurrentPage(1);
+		} // end if
+
 		if (fso_vo.getFav_order_select() == null) {
 			fso_vo.setFav_order_select("none");
 		} // end if
@@ -82,13 +90,34 @@ public class StudySearchController {
 			fso_vo.setFav_kind_select("none");
 		} // end if
 
-		String my_id = (String) session.getAttribute("id"); // 내 아이디 얻기.
-		fso_vo.setMy_id(my_id);
+		int totalCnt = sis.getFavStudyCnt(fso_vo);
+		int totalPage = sis.totalPage(totalCnt); // 전체 게시물을 보여주기 위한 총 페이지의 수.
+		int startNum = sis.startNum(fso_vo.getCurrentPage()); // DB에서 조회할 현재 페이지의 게시물의 시작 번호.
+		int endNum = sis.endNum(startNum); // 현재 페이지의 게시물의 끝 번호
+
+		int pageIndexNum = sis.pageIndexNum(); // 한 화면에 보여줄 페이지의 인덱스 수 얻기. - 3개.
+		int startPage = sis.startPage(fso_vo.getCurrentPage(), pageIndexNum); // 페이지 인덱스의 첫 번호.
+		int endPage = sis.endPage(startPage, pageIndexNum, totalPage); // 페이지 인덱스의 끝 번호.
+
+		// 요청으로 부터 들어오는 값을 VO에 설정함.
+		fso_vo.setStartNum(startNum); // 페이지 마다 조회할 시작 번호
+		fso_vo.setEndNum(endNum); // 페이지 마다 조회할 끝 번호.
+		List<ThumbnailDomain> list = sis.getMyFavStudy(fso_vo);
+
+		// 페이지네이션의 URL을 설정 하기 위한 문자열
+		String responseURL = "../interest/show_interest_study.do?fav_order_select=" + fso_vo.getFav_order_select() + "&fav_loc_select=" + fso_vo.getFav_loc_select() + "&fav_kind_select=" + fso_vo.getFav_kind_select();
 
 		// 썸네일 리스트 생성.
-		List<ThumbnailDomain> list = sis.getMyFavStudy(fso_vo);
+
 		// model 객체에 값 저장.
 		model.addAttribute("thumbnail_list", list);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("responseURL", responseURL);
+		model.addAttribute("currentPage", fso_vo.getCurrentPage());
+		model.addAttribute("pageIndexNum", pageIndexNum);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+
 
 		return "study_info/show_interest_study";
 	}// studyLikedPage
@@ -113,7 +142,7 @@ public class StudySearchController {
 
 		System.out.println("///////////////////// 컨트롤 - 제이슨 넣기 위한 : " + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
 		json = sis.heartProcess(ff_vo);
-		
+
 		return json.toJSONString();
 	}// heartProcess
 
@@ -154,13 +183,18 @@ public class StudySearchController {
 		} // end if
 
 		int totalCnt = sis.getSearchListCnt(sl_vo); // 총 게시물의 수.
-		int totalPage = sis.totalPage(totalCnt); // 전체 게시물을 보여주기 위한 총 페이지의 수.
+		int totalPage = sis.totalPage(totalCnt); // 전체 게시물을 보여주기 위한 총 페이지의 수. - 6개.
 		int startNum = sis.startNum(sl_vo.getCurrentPage()); // DB에서 조회할 현재 페이지의 게시물의 시작 번호.
 		int endNum = sis.endNum(startNum); // 현재 페이지의 게시물의 끝 번호
+
+		int pageIndexNum = sis.pageIndexNum(); // 한 화면에 보여줄 페이지의 인덱스 수 얻기. - 3개.
+		int startPage = sis.startPage(sl_vo.getCurrentPage(), pageIndexNum); // 페이지 인덱스의 첫 번호.
+		int endPage = sis.endPage(startPage, pageIndexNum, totalPage); // 페이지 인덱스의 끝 번호.
 
 		// 요청으로 부터 들어오는 값을 VO에 설정함.
 		sl_vo.setStartNum(startNum); // 페이지 마다 조회할 시작 번호
 		sl_vo.setEndNum(endNum); // 페이지 마다 조회할 끝 번호.
+		List<ThumbnailDomain> list = sis.getSearchList(sl_vo, fsf_vo);
 
 		// 페이지네이션의 URL을 설정 하기 위한 문자열
 		String responseURL = "";
@@ -172,14 +206,15 @@ public class StudySearchController {
 			responseURL = "search.do?order_select=" + sl_vo.getOrder_select() + "&loc_select=" + sl_vo.getLoc_select() + "&kind_select=" + sl_vo.getKind_select() + "&search_inputBox=" + sl_vo.getSearch_inputBox();
 		} // end if
 
-		List<ThumbnailDomain> list = sis.getSearchList(sl_vo, fsf_vo);
-
 		// model 객체에 값 저장.
 		model.addAttribute("thumbnail_list", list);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("responseURL", responseURL);
 		model.addAttribute("currentPage", sl_vo.getCurrentPage());
 		model.addAttribute("inputWord", sl_vo.getSearch_inputBox());
+		model.addAttribute("pageIndexNum", pageIndexNum);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
 
 		return "study_info/search";
 	}// searchStudy

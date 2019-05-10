@@ -15,7 +15,7 @@
 <script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
 <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
 
-<title>Bootstrap Template By Young</title>
+<title>관심 스터디 보기</title>
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;
@@ -31,56 +31,96 @@
 		font-size: 3.5rem;
 	}
 }
+
+.red_heart {
+	background: url("/third_prj/study_img/like_icon.png") no-repeat;
+	background-size: 100%;
+}
+
+.gray_heart {
+	background: url("/third_prj/study_img/dislike_icon.png") no-repeat;
+	background-size: 100%;
+}
+
+.heart:hover {
+	cursor: pointer;
+}
+</style>
 </style>
 
 <!-- CDN -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<!-- 스터디 찾기. -->
 <script type="text/javascript">
-	// 좋아요 해제 실행.
-	function dislikeProcess(sNum) {
+	$(function() {
 
-		var remove_flag = confirm("관심 스터디를 해제 하시겠습니까?");
+		// 찾기 버튼 눌렀을 때.
+		$("#fav_search_btn").click(function() {
+			$("#fav_search_frm").submit();
+		});//click
 
-		if(!remove_flag){
-			return;
-		}// end if
-		
-		// '예' - 관심 스터디를 해제 할 경우.
-		if (remove_flag) {
+		// 정렬이 바뛰었을 때.
+		$("#fav_order_select").change(function() {
+			$("#fav_search_frm").submit();
+		});//change
+
+	}); // ready
+</script>
+<!-- 스터디 찾기. -->
+
+<!-- 좋아요 구현 -->
+<script type="text/javascript">
+	$(function() {
+
+		$(".heart").click(function(event) {
+			// 클릭된 썸네일의 하트 노트 가져오기.
+			var heart_node = $(this);
+
+			// 아이디와 클래스 속성 값 가져오기.
+			var this_id = heart_node.attr("id");
+			var this_class = heart_node.attr("class");
+
+			// 아이디에서 sNum, 클래스에서 Color 얻기.
+			var sNum = this_id.substring(0, this_id.lastIndexOf("_"));
+			var Color = this_class.substring(0, this_class.lastIndexOf("_"));
+
+			// 좋아요 해제인 경우 물어보기.
+			if (Color == "red") {
+				var removeFlag = confirm("이 스터디를 관심 스터디에서 제거 하시겠습니까?");
+				// 취소
+				if (!removeFlag) {
+					return;
+				}// end if
+			}// end if
+
 			$.ajax({
-				url : "../dislikeProcess/dislikeProcess.do?",
-				data : "sNum=" + sNum,
+				url : "../heartProcess/heartProcess.do?",
+				data : "sNum=" + sNum + "&Color=" + Color,
 				type : "get",
 				dataType : "json", // 응답 받을 데이터.
 				error : function(xhr) {
+					alert("오류발생")
 					console.log(xhr.status + " / " + xhr.statusText);
 				},
 				success : function(json) {
-					// 정삭적으로 제거가 되었다면 true가 반환된다.
-					if (json.resultFlag) {
-						
+					// 추가인 경우.
+					if (json.result == "toI") {
+						// 하트 색 바꿔 주기.
+						heart_node.attr("class", "red_heart heart");
+					}// end if
+
+					// 해제인 경우.
+					if (json.result == "toR") {
+						// 하트 색 바꿔 주기.
+						heart_node.attr("class", "gray_heart heart");
 					}// end if
 				}// success
 			}); // ajax
-		}// end if
-
-		if (remove_flag == false) {
-			alert("#" + sNum + "_like_btn");
-			$("#" + sNum + "_like_btn").attr("class",
-					"btn btn-sm btn-outline-secondary active");
-		}// end if
-	}// dislikeProcess
-
-	// ready 입니다.
-	$(function() {
-		$("#fav_search_btn").click(function() {
-			$("#fav_search_frm").submit();
-		});// click
+		});
 	}); // ready
 </script>
+<!-- 좋아요 구현 -->
 
-<script type="text/javascript">
-</script>
 
 </head>
 <body>
@@ -148,75 +188,100 @@
 					<!-- 썸네일 row -->
 					<div class="row">
 						<c:if test="${ empty thumbnail_list }">
-							조회할 수 있는 썸네일이 없습니다.
+							관심 스터디가 존재하지 않습니다.
 						</c:if>
 
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 						<c:forEach var="thumbnail" items="${ thumbnail_list }">
 							<div id="${ thumbnail.s_num }_thumb" class="thumb col-md-4">
 								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
-								<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }" style="color: #333; text-decoration: none;">
-									<div class="card mb-4 shadow-sm">
-										<!-- 썸네일 스터디 이미지 -->
-										<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="height: 200px;" />
-										<div class="card-body text-center p-3">
-											<div class="d-flex justify-content-end align-items-center mb-3">
-												<div class="mr-5">
-													<!-- 썸네일 들록일 -->
-													<small class="text-muted">${ thumbnail.input_date }</small>
-												</div>
-												<!-- 썸네일 모집상태 - 진행중. -->
-												<small class="pr-1">모집상태</small>
+								<div class="card mb-4 shadow-sm">
+									<div class="card-body text-center p-0">
+
+										<div>
+											<div>
+												<!-- 썸네일 스터디 이미지 -->
+												<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="width: 100%; height: 180px;" />
 											</div>
-											<div class="px-3 border-bottom">
-												<p class="card-text pb-3">
-													<!-- 썸네일 제목부분 -->
-													<strong>${ thumbnail.study_name }</strong>
-												</p>
-											</div>
-											<div class="d-flex justify-content-between align-items-center mt-3 px-2">
-	
-												<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
-													<!-- 썸네일 리더의 이미지 -->
-													<img src="/third_prj/profile_img/${ thumbnail.user_img }" class="card-img-top w-100 rounded-circle" style="width: 40px; height: 50px;">
+											<div id="moveTo" class="px-3 pt-3">
+												<div class="d-flex justify-content-end align-items-center mb-3">
+													<div class="mr-5">
+														<!-- 썸네일 들록일 -->
+														<small class="text-muted">${ thumbnail.input_date }</small>
+													</div>
+													<!-- 썸네일 모집상태 - 진행중. -->
+													<small class="pr-1">모집상태</small>
 												</div>
-	
-												<div class="border-right p-2">
-													<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-													<small>${ thumbnail.nick }</small>
+												<div class="m-2 border-bottom">
+													<p class="card-text pb-3">
+														<!-- 썸네일 제목부분 -->
+														<strong>${ thumbnail.study_name }</strong>
+													</p>
 												</div>
-	
-												<div class="border-right p-2">
-													<!-- 썸네일 리더의 닉네임 -->
-													<small>${ thumbnail.loc }</small>
-												</div>
-	
-												<div class="p-2">
-													<!-- 썸네일 리더의 닉네임 -->
-													<small>${ thumbnail.category }</small>
-												</div>
-												<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
-												<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active">좋아요</button>
-												<%-- <button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active" onclick="dislikeProcess('${ thumbnail.s_num }')">좋아요</button> --%>
 											</div>
 										</div>
+
+										<div class="d-flex justify-content-between align-items-center mb-3 px-3">
+											<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
+												<!-- 썸네일 리더의 이미지 -->
+												<img src="/third_prj/profile_img/${ thumbnail.user_img }" class="card-img-top w-100 rounded-circle" style="width: 45px; height: 45px;">
+											</div>
+
+											<div class="border-right p-2">
+												<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
+												<small>${ thumbnail.nick }</small>
+											</div>
+
+											<div class="border-right p-2">
+												<!-- 썸네일 리더의 닉네임 -->
+												<small>${ thumbnail.loc }</small>
+											</div>
+
+											<div class="p-2">
+												<!-- 썸네일 리더의 닉네임 -->
+												<small>${ thumbnail.category }</small>
+											</div>
+											<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
+
+											<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
+											<div id="heart_btn">
+												<div id="${ thumbnail.s_num }_btn" class="red_heart heart" style="width: 27px; height: 27px;"></div>
+											</div>
+											<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
+										</div>
 									</div>
-								</a>
+								</div>
 							</div>
 						</c:forEach>
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 					</div>
 					<!-- 썸네일 row -->
 				</div>
+				<!-- row -->
 			</div>
-			<!-- row -->
+			<!-- CONTAINER DIV -->
+			<!-- 페이지네이션 -->
+			<div class="d-flex justify-content-center">
+				<ul class="pagination">
+					<li class="paginate_button page-item previous ${ currentPage != 1 ? '' : 'disabled' }" id="dataTable_previous">
+						<a class="page-link" href="${ responseURL }&currentPage=${ currentPage-1 }" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+					</li>
+					<c:forEach var="i" step="1" begin="${ startPage }" end="${ endPage }">
+						<li class="page-item ${ currentPage == i ? 'active' : '' }">
+							<a class="page-link" href="${ responseURL }&currentPage=${i}"> <c:out value="${ i }" /></a>
+						</li>
+					</c:forEach>
+					<li class="paginate_button page-item next ${ currentPage < totalPage ? '' : 'disabled' }" id="dataTable_next">
+						<a class="page-link" href="${ responseURL }&currentPage=${ currentPage+1 }" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a>
+					</li>
+				</ul>
+			</div>
+			<!-- 페이지네이션 -->
 		</div>
-		<!-- CONTAINER DIV -->
-	</div>
-	<!-- DIV ROLE MAIN -->
+		<!-- DIV ROLE MAIN -->
 
 
-	<!-- footer -->
-	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
+		<!-- footer -->
+		<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 </body>
 </html>

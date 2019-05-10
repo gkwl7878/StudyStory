@@ -16,7 +16,7 @@
 <script src="/third_prj/resources/js/popper.min.js"></script>
 <script src="/third_prj/resources/js/bootstrap.min.js"></script>
 
-<title>Bootstrap Template By Young</title>
+<title>스터디 찾기</title>
 
 <style>
 .bd-placeholder-img {
@@ -52,58 +52,59 @@
 <!-- CDN -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
-<!-- 좋아요 -->
+<!-- 좋아요 구현 -->
 <script type="text/javascript">
-	//좋아요 해제 실행.
-	function dislikeProcess(sNum) {
+	$(function() {
 
-		var remove_flag = confirm("관심 스터디를 해제 하시겠습니까?");
+		$(".heart").click(function(event) {
+			// 클릭된 썸네일의 하트 노트 가져오기.
+			var heart_node = $(this);
 
-		// '예' - 관심 스터디를 해제 할 경우.
-		if (remove_flag) {
+			// 아이디와 클래스 속성 값 가져오기.
+			var this_id = heart_node.attr("id");
+			var this_class = heart_node.attr("class");
+
+			// 아이디에서 sNum, 클래스에서 Color 얻기.
+			var sNum = this_id.substring(0, this_id.lastIndexOf("_"));
+			var Color = this_class.substring(0, this_class.lastIndexOf("_"));
+
+			// 좋아요 해제인 경우 물어보기.
+			if (Color == "red") {
+				var removeFlag = confirm("이 스터디를 관심 스터디에서 제거 하시겠습니까?");
+				// 취소
+				if (!removeFlag) {
+					return;
+				}// end if
+			}// end if
+
 			$.ajax({
-				url : "../dislikeProcess/dislikeProcess.do?",
-				data : "sNum=" + sNum,
+				url : "../heartProcess/heartProcess.do?",
+				data : "sNum=" + sNum + "&Color=" + Color,
 				type : "get",
 				dataType : "json", // 응답 받을 데이터.
 				error : function(xhr) {
+					alert("오류발생")
 					console.log(xhr.status + " / " + xhr.statusText);
 				},
 				success : function(json) {
+					// 추가인 경우.
+					if (json.result == "toI") {
+						// 하트 색 바꿔 주기.
+						heart_node.attr("class", "red_heart heart");
+					}// end if
+
+					// 해제인 경우.
+					if (json.result == "toR") {
+						// 하트 색 바꿔 주기.
+						heart_node.attr("class", "gray_heart heart");
+					}// end if
+
 				}// success
 			}); // ajax
-		}// end if
-	}// dislikeProcess
-
-	function likeProcess(sNum) {
-		$.ajax({
-			url : "../likeProcess/likeProcess.do?",
-			data : "sNum=" + sNum,
-			type : "get",
-			dataType : "json", // 응답 받을 데이터.
-			error : function(xhr) {
-				console.log(xhr.status + " / " + xhr.statusText);
-			},
-			success : function(json) {
-				// 정삭적으로 추가 되었다면 true가 반환된다.
-				if (json.resultFlag) {
-					var moveFlag = confirm("관심 페이지로 이동 하시겠습니까?");
-
-					// '예'일 경우 이동하기.
-					if (moveFlag) {
-						location.replace("../interest/show_interest_study.do");
-					}// end if
-
-					if (!moveFlag) {
-						location.reload();
-					}// end if
-
-				}// end if
-			}// success
-		}); // ajax
-	}// likeProcess
+		});
+	}); // ready
 </script>
-<!-- 좋아요 -->
+<!-- 좋아요 구현 -->
 
 <script type="text/javascript">
 	$(function() {
@@ -289,32 +290,23 @@
 			<!-- CONTAINER DIV -->
 		</div>
 
-
-
 		<!-- 페이지네이션 -->
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<!-- 이전 페이지 -->
-				<li class="page-item"><a class="page-link" href="${ responseURL }&currentPage=${currentPage - 1}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<!-- 이전 페이지 -->
-
-				<!-- 페이지 번호 -->
-				<c:forEach begin="1" end="${ totalPage }">
-					<c:set var="i" value="${ i + 1 }" />
-					<li class="page-item"><a class="page-link" href="${ responseURL }&currentPage=${i}"> <c:out value="${ i }" />
-					</a></li>
+		<div class="d-flex justify-content-center">
+			<ul class="pagination">
+				<li class="paginate_button page-item previous ${ currentPage != 1 ? '' : 'disabled' }" id="dataTable_previous">
+					<a class="page-link" href="${ responseURL }&currentPage=${ currentPage-1 }" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+				</li>
+				<c:forEach var="i" step="1" begin="${ startPage }" end="${ endPage }">
+					<li class="page-item ${ currentPage == i ? 'active' : '' }">
+						<a class="page-link" href="${ responseURL }&currentPage=${i}"> <c:out value="${ i }" /></a>
+					</li>
 				</c:forEach>
-				<!-- 페이지 번호 -->
-
-				<!-- 다음 페이지 -->
-				<li class="page-item"><a class="page-link" href="${ responseURL }&currentPage=${currentPage + 1}" aria-label="Previous"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-				<!-- 다음 페이지 -->
+				<li class="paginate_button page-item next ${ currentPage < totalPage ? '' : 'disabled' }" id="dataTable_next">
+					<a class="page-link" href="${ responseURL }&currentPage=${ currentPage+1 }" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a>
+				</li>
 			</ul>
-		</nav>
+		</div>
 		<!-- 페이지네이션 -->
-
 	</div>
 	<!-- DIV ROLE MAIN -->
 
