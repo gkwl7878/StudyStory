@@ -11,13 +11,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.dao.StudyAndUserDAO;
-import kr.co.studystory.domain.AppliedStudy;
-import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.vo.CloseAlarmVO;
-import kr.co.studystory.vo.ConditionVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
-import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
 import kr.co.studystory.vo.OutStudyVO;
@@ -118,16 +114,17 @@ public class StudyGroupDAO {
 	public String selectPreImg(String sNum) {
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
 		String preImg= ss.selectOne("selectPreImg",sNum);
+		ss.close();
+		
 		return preImg;
 	}
 	
 	
 	//½ºÅÍµð Å»Åð
 	public String selectLeaderId(String s_num) {
-		String id="";
-		
 		SqlSession ss=sg_dao.getSqlSessionFactory().openSession();
-		id= ss.selectOne("selectLeaderId",s_num);
+		String id= ss.selectOne("selectLeaderId",s_num);
+		ss.close();
 		
 		return id;
 	}
@@ -163,10 +160,10 @@ public class StudyGroupDAO {
 	}//deleteMember
 	
 	public String selectStudyName(String s_num) {
-		String id="";
 		
 		SqlSession ss=sg_dao.getSqlSessionFactory().openSession();
-		id= ss.selectOne("selectStudyName",s_num);
+		String id= ss.selectOne("selectStudyNameForClose",s_num);
+		ss.close();
 		
 		return id;
 	}

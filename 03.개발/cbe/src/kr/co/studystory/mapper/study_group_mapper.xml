@@ -80,7 +80,7 @@
   where id=#{id} and s_num=#{ s_num }
   </delete> 
   
-  <select id="selectStudyName" resultType="String">
+  <select id="selectStudyNameForClose" resultType="String">
   	select study_name
   	from study
   	where s_num=#{sNum}

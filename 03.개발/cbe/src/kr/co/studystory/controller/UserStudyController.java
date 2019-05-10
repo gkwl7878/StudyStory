@@ -86,10 +86,7 @@ public class UserStudyController {
 	
 	//내 스터디 수정하기
 	@RequestMapping(value="study_group/modify_study.do", method= {GET,POST} )
-//	public String modifyStudyPage(ModifiedStudyVO ms_vo, Model model ) {
-		public String modifyStudyPage(String sNum, Model model ) {
-		
-	/*	String url="";*/
+	public String modifyStudyPage(String sNum, Model model ) {
 		
 		PrevStudyInfo psInfo=sgs.getPrevStudy(sNum);
 		if(psInfo !=null) {
@@ -160,7 +157,7 @@ public class UserStudyController {
 				System.out.println(ms_vo);
 				
 		if(sgs.modifyStudy(ms_vo)) {
-			url="study_group/study_i_made";
+			url="redirect:../study_group/study_i_made.do";
 			model.addAttribute("successFlag",true);
 		}else {
 			model.addAttribute("failFlag",true);
@@ -234,7 +231,7 @@ public class UserStudyController {
 				sgs.sendCloseAlarm(ca_vo);
 			
 				System.out.println(c_vo);
-				url="redirect:study_i_made.do";
+				url="redirect:../study_group/study_i_made.do";
 			}else {
 				model.addAttribute("failFlag",true);
 				url="study_group/end_study";
