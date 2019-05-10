@@ -14,6 +14,7 @@ import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
+import kr.co.studystory.domain.WriterInfoDomain;
 import kr.co.studystory.vo.DetailMenuVO;
 import kr.co.studystory.vo.FavFlagVO;
 import kr.co.studystory.vo.FavSNumFlagVO;
@@ -171,18 +172,18 @@ public class StudyInfoDAO {
 	 * 
 	 * @return int count
 	 */
-	public String insertComment(ReplyVO r_vo) {
-		String writerImg = "";
+	public WriterInfoDomain insertComment(ReplyVO r_vo) {
+		WriterInfoDomain wid = null;
 		int cnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
 		cnt = ss.insert("insertComment", r_vo);
 		// 1개 행이 정상적으로 입력 되었을 때.
 		if (cnt == 1) {
-			writerImg = ss.selectOne("selectWriterImg", r_vo);
+			wid = ss.selectOne("selectWriterInfo", r_vo);
 			ss.commit();
 		} // end if
 		ss.close();
-		return writerImg;
+		return wid;
 	}// insertComment
 
 	/**

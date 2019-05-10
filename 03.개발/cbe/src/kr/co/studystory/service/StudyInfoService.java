@@ -11,6 +11,7 @@ import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
+import kr.co.studystory.domain.WriterInfoDomain;
 import kr.co.studystory.vo.DetailMenuVO;
 import kr.co.studystory.vo.FavFlagVO;
 import kr.co.studystory.vo.FavSNumFlagVO;
@@ -68,15 +69,13 @@ public class StudyInfoService {
 	@SuppressWarnings("unchecked")
 	public JSONObject addReply(ReplyVO r_vo) {
 		JSONObject json = new JSONObject();
-		String writerImg = "";
-		String id = "";
-		writerImg = si_dao.insertComment(r_vo);
-		if (!"".equals(writerImg)) {
-			System.out.println("/////////////// 서비스 : " + writerImg);
+		String nick = "";
+		WriterInfoDomain wid = si_dao.insertComment(r_vo);
+		if (!"".equals(wid.getNick())) {
+			nick = wid.getNick().substring(0, 2) + "***";
 			json.put("result", true);
-			json.put("img", writerImg);
-			id = r_vo.getId().substring(0, 2) + "***";
-			json.put("id", id);
+			json.put("img", wid.getImg());
+			json.put("nick", nick);
 		} // end if
 		return json;
 	}// addReply
@@ -92,10 +91,11 @@ public class StudyInfoService {
 		list = si_dao.selectSCommentList(s_num);
 
 		// 댓글을 입력한 사용자의 아이디 숨기기.
-		String changedId = "";
+		String changedNick = "";
 		for (StudyCommentDomain scd : list) {
-			changedId = scd.getId().substring(0, 2) + "***";
-			scd.setId(changedId);
+			changedNick = scd.getNick().substring(0, 2) + "***";
+			scd.setNick(changedNick);
+			;
 		} // end for
 
 		return list;
@@ -184,14 +184,16 @@ public class StudyInfoService {
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject heartProcess(FavFlagVO ff_vo) {
-		System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+		System.out.println(
+				"///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
 		JSONObject json = new JSONObject();
 		String strFlag = "";
 		int cnt = 0;
 
 		// '좋아요'하지 않은 썸네일인 경우 - 인서트 하기.
 		if ("gray".equals(ff_vo.getColor())) {
-			System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+			System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / "
+					+ ff_vo.getMy_id());
 			// 인서트 DB 작업 실행.
 			cnt = si_dao.insertFavStudy(ff_vo);
 			// DB작업이 정상적으로 동작 되었을 때.
@@ -204,7 +206,8 @@ public class StudyInfoService {
 		// 이전에 이미 '좋아요'했던 썸네일인 경우 - 지우기.
 		if ("red".equals(ff_vo.getColor())) {
 			// 인서트 DB 작업 실행.
-			System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+			System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / "
+					+ ff_vo.getMy_id());
 
 			cnt = si_dao.deleteFavStudy(ff_vo);
 			// DB작업이 정상적으로 동작 되었을 때.

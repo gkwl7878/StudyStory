@@ -89,14 +89,11 @@
 
 			// 좋아요 해제인 경우 물어보기.
 			if (Color == "red") {
-
 				var removeFlag = confirm("이 스터디를 관심 스터디에서 제거 하시겠습니까?");
-
 				// 취소
 				if (!removeFlag) {
 					return;
 				}// end if
-
 			}// end if
 
 			$.ajax({
@@ -141,7 +138,6 @@
 				}// success
 			}); // ajax
 		});
-
 	}); // ready
 </script>
 <!-- 상세페이지로 이동 -->
@@ -171,7 +167,6 @@
 					<c:if test="${ empty thumbnail_list }">
 							조회할 수 있는 썸네일이 없습니다.
 						</c:if>
-
 					<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 					<c:forEach var="thumbnail" items="${ thumbnail_list }">
 						<div id="${ thumbnail.s_num }_thumb" class="thumb col-md-4">
