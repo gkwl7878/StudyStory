@@ -12,8 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
+<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <title>스터디 활동 종료</title>
 <!-- Custom styles for this template -->
 
@@ -48,6 +48,8 @@ $(function () {
 
 	<div id="wrap">
 		<form action="../study_group/end_study_process.do" method="post" id="endFrm" >
+
+			<input type="hidden" value="${ param.sNum }" name="sNum"/>
 			<br />
 			<br />
 			<div style="width: 920px; border: 1px solid #D7D7D7; padding: 40px;">
@@ -74,9 +76,9 @@ $(function () {
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
-	<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="/third_prj/resources/js/popper.min.js"></script>
+	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
 
 
 

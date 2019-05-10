@@ -2,7 +2,6 @@ package kr.co.studystory.vo;
 
 public class JoinAlarmVO {
 
-
 	private String category, subject, content, id;
 	
 	public JoinAlarmVO(String category, String subject, String content, String id) {
@@ -43,6 +42,4 @@ public class JoinAlarmVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	
 }

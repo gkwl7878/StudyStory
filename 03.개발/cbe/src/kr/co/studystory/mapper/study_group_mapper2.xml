@@ -30,9 +30,35 @@
 <select id="selectDetailJoiner" parameterType="kr.co.studystory.vo.DetailJoinerVO" resultType="kr.co.studystory.domain.Joiner">
 	select ut.id, ut.nick, ut.img, j.introduce, j.motive
 	from join j, user_table ut
-	where ut.id=#{id} and j.s_num=#{s_num} and ut.id=j.id;
+	where ut.id=#{id} and j.s_num=#{s_num} and ut.id=j.id
 
 </select>	
 	
+<insert id="insertNewMember" parameterType="kr.co.studystory.vo.NewMemberVO" >
+	insert into member(id, s_num)
+	values(#{id},#{s_num})
+</insert>
+
+<insert id="insertRefuseAlarm" parameterType="kr.co.studystory.vo.RefuseAlarmVO">
+	INSERT INTO alarm(a_num, category, subject, content, id)
+	VALUES(a_code, #{ category }, #{ subject }, #{ content }, #{ id })
+</insert>
+
+<select id="selectStudyName" parameterType="String" resultType="String">
+	SELECT study_name
+	FROM study
+	WHERE s_num=#{ s_num }
+</select>
+
+<insert id="insertJoinedAlarm" parameterType="kr.co.studystory.vo.JoinAlarmVO">
+	insert into alarm(A_NUM, CATEGORY, SUBJECT, CONTENT, ID)
+	values(A_CODE,#{ category},#{ subject}, #{content}, (select id from user_table where id=#{ id }))
+</insert>
+
+<delete id="deleteJoiner" parameterType="kr.co.studystory.vo.JoinDeleteVO">
+	delete from join
+	where id=#{id} and s_num=#{s_num}
+</delete>
+
 
 </mapper>

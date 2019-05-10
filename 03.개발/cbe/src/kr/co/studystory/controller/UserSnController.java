@@ -63,6 +63,11 @@ public class UserSnController {
 			model.addAttribute("leaderFlag", true);
 		}
 		
+		// 종료 스터디 일 경우 종료 플래그를 전달해서 댓글 막음
+		if(sns.isClosed(s_num)) {
+			model.addAttribute("closeFlag", true);
+		}
+		
 		DetailStudyNotice dsn= sns.getDetailSn(sn_num);
 		List<Homework> hwList = sns.getHomework(sn_num);
 		List<SnComment> snCmt=sns.getComment(sn_num);

@@ -28,6 +28,12 @@
 	order by sn.input_date desc
 </select>
 
+<select id="selectCloseFlag" parameterType="String" resultType="String">
+	SELECT deactivation
+	FROM study
+	WHERE s_num=#{ s_num }
+</select>
+
 <select id="selectCommentNum" parameterType="String" resultType="int">
 	select count(*) cnt
 	from sn_comment
@@ -125,7 +131,7 @@
 <update id="updateRecruit" parameterType="kr.co.studystory.vo.RecruitVO">
 	UPDATE study
 	SET recruitment=#{ status }
-	WHERE s_num=#{ sNum }
+	WHERE s_num=#{ s_num }
 </update>
 
 <select id="selectAllMember" parameterType="String" resultType="kr.co.studystory.domain.NickAndId">

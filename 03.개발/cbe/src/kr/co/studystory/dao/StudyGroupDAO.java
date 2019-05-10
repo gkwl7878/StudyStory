@@ -11,15 +11,12 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Component;
 
 import kr.co.studystory.admin.dao.StudyAndUserDAO;
-import kr.co.studystory.domain.AppliedStudy;
-import kr.co.studystory.domain.MyStudy;
 import kr.co.studystory.domain.PrevStudyInfo;
 import kr.co.studystory.vo.CloseAlarmVO;
-import kr.co.studystory.vo.ConditionVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
-import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
+import kr.co.studystory.vo.OutStudyVO;
 
 @Component
 public class StudyGroupDAO {
@@ -114,19 +111,20 @@ public class StudyGroupDAO {
 		return flag;
 	}
 	
-/*	//전에갖고있는이미지 삭제
 	public String selectPreImg(String sNum) {
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		String preImg= ss.selectOne("selectPreImage",sNum);
+		String preImg= ss.selectOne("selectPreImg",sNum);
+		ss.close();
+		
 		return preImg;
 	}
-	*/
+	
+	
 	//스터디 탈퇴
 	public String selectLeaderId(String s_num) {
-		String id="";
-		
 		SqlSession ss=sg_dao.getSqlSessionFactory().openSession();
-		id= ss.selectOne("selectLeaderId",s_num);
+		String id= ss.selectOne("selectLeaderId",s_num);
+		ss.close();
 		
 		return id;
 	}
@@ -146,19 +144,30 @@ public class StudyGroupDAO {
 		
 	}//insertLeaveAlarm
 	
-	public boolean deleteMember(String id) {
+	public boolean deleteMember(OutStudyVO osvo) {
 		boolean flag=false;
 		
 		SqlSession ss=StudyGroupDAO.getInstance().getSqlSessionFactory().openSession();
 		
-		int cnt=ss.delete("deleteStudyMember",id);
+		int cnt=ss.delete("deleteStudyMember",osvo);
 		if(cnt==1) {
 			flag=true;
 			ss.commit();
 		}
 		ss.close();
+		
 		return flag;
 	}//deleteMember
+	
+	public String selectStudyName(String s_num) {
+		
+		SqlSession ss=sg_dao.getSqlSessionFactory().openSession();
+		String id= ss.selectOne("selectStudyNameForClose",s_num);
+		ss.close();
+		
+		return id;
+	}
+	
 	
 	
 	//스터디 활동 종료

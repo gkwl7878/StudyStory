@@ -11,8 +11,8 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
   
   <title>스터디 탈퇴</title>
   <!-- Custom styles for this template -->
@@ -48,6 +48,7 @@
 	
 	<div id="wrap" >
 		<form action="../study_group/leave_study_process.do" method="post" id="outFrm" >
+			<input type="hidden" value="${ param.sNum }" name="sNum"/>
 		 <br/><br/>
 		 <div style="border:1px solid #D7D7D7; padding:40px"><br/><br/>
 		<h1 ><Strong>정말 이 스터디를 탈퇴하시겠어요?</Strong></h1>
@@ -71,9 +72,9 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/popper.min.js" ></script>
-  <script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js" ></script>
+  <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="/third_prj/resources/js/popper.min.js" ></script>
+  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
 	
 
 	
