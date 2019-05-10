@@ -10,8 +10,8 @@
 ## DB 설계
 
 * [테이블 설계서](https://github.com/younggeun0/StudyStory/tree/master/02.%EC%84%A4%EA%B3%84/ERD%20png/v0409/%ED%85%8C%EC%9D%B4%EB%B8%94%EC%84%A4%EA%B3%84%EC%84%9C_v0409)
-* [DB ERD 논리모델](https://github.com/younggeun0/StudyStory/blob/master/02.%EC%84%A4%EA%B3%84/ERD%20png/v0409/%EB%85%BC%EB%A6%AC%EB%AA%A8%EB%8D%B8_v0409.PNG?raw=true)
-* [DB ERD 물리모델](https://github.com/younggeun0/StudyStory/blob/master/02.%EC%84%A4%EA%B3%84/ERD%20png/v0409/%EB%AC%BC%EB%A6%AC%EB%AA%A8%EB%8D%B8_v0409.PNG?raw=true)
+* [DB ERD 논리모델](https://github.com/younggeun0/StudyStory/blob/master/02.%EC%84%A4%EA%B3%84/ERD%20png/%EB%85%BC%EB%A6%AC%EB%AA%A8%EB%8D%B8_v0430.png?raw=true)
+* [DB ERD 물리모델](https://github.com/younggeun0/StudyStory/blob/master/02.%EC%84%A4%EA%B3%84/ERD%20png/%EB%AC%BC%EB%A6%AC%EB%AA%A8%EB%8D%B8_v0430.png?raw=true)
 
 ## 클래스 다이어그램
 
