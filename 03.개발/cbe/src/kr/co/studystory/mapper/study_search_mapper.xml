@@ -39,8 +39,7 @@
 	</select>
 	<!-- 좋아요  s_num의 갯수 조회. -->
 
-
-	<!-- ///////////////////////////////////////////// 관심 스터디 보기 -->
+	<!-- ///////////////////////////////////////////// 메인 썸네일 -->
 
 	<!-- 내 관심 스터디 조회. -->
 	<select id="selectFavStudy" resultMap="ThumbnailDomain" parameterType="kr.co.studystory.vo.FavStudyOrderVO">
@@ -65,16 +64,16 @@
 	<!-- 내 관심 스터디 조회. -->
 	
 	<!-- 관심 스터디 추가. -->
-	<delete id="insertFavStudy" parameterType="kr.co.studystory.vo.AddFavStudyVO">
+	<delete id="insertFavStudy" parameterType="kr.co.studystory.vo.FavFlagVO">
 		INSERT INTO FAV_STUDY(S_NUM, ID)
 		VALUES(#{sNum}, #{my_id})
 	</delete>
 	<!-- 관심 스터디 추가. -->
 
 	<!-- 관심 스터디 제거. -->
-	<delete id="deleteFavStudy" parameterType="kr.co.studystory.vo.RemoveFavStudyVO">
+	<delete id="deleteFavStudy" parameterType="kr.co.studystory.vo.FavFlagVO">
 		DELETE FROM FAV_STUDY
-		WHERE S_NUM = #{sNum} AND ID=#{id}
+		WHERE S_NUM = #{sNum} AND ID=#{my_id}
 	</delete>
 	<!-- 관심 스터디 제거. -->
 
