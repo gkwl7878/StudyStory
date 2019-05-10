@@ -184,48 +184,50 @@ public class StudyAndUserDAO {
 	 */
 	public boolean updateRemoveUser(String id) {
 		boolean updateRemoveUser= false;
-		boolean transaction=false;
 		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		updateRemoveUser =ss.update("updateDelUser",id)==1;
 		
-		if(updateRemoveUser) {
-			transaction=true;
+		// join, member에 몇명이 있는지 모르기 때문에 조회
+		int joinNum = ss.selectOne("selectJoinNum", id);
+		int memNum = ss.selectOne("selectMemNum",id);
+		
+		// 조회한 레코드가 모두 지워지고, deactivation flag를 true로 업데이트 처리 후 commit 수행
+		if (deleteJoinRecord(id, ss, joinNum) && deleteMemberRecord(id, ss, memNum)
+				&& ss.update("updateDelUser",id) == 1) {
 			ss.commit();
 		}
+		ss.close();
 		
-		return transaction;
+		return updateRemoveUser;
 	}
 	
 	/**
-	 * join레코드에서 유저 삭제
+	 * join레코드에서 유저 삭제, join에 존재하는 수가 다 삭제되면 true
 	 * @param id
 	 * @return
 	 */
-	public boolean deleteJoinRecord(String id) {
-		boolean deleteJoinRecord= false;
-		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		deleteJoinRecord =ss.delete("delJoinRecord",id)==1;
-		if(deleteJoinRecord) {
-			deleteJoinRecord=true;
-			ss.commit();
+	public boolean deleteJoinRecord(String id, SqlSession ss, int joinNum) {
+		boolean flag = false;
+		
+		if (joinNum == ss.delete("delJoinRecord",id)) {
+			flag = true;
 		}
-		return deleteJoinRecord;
+		
+		return flag;
 	}
 	
 	/**
-	 * member 레코드에서 유저 삭제 
+	 * member 레코드에서 유저 삭제, member에 존재하는 수가 다 삭제되면 true
 	 * @param id
 	 * @return
 	 */
-	public boolean deleteMemberRecord(String id) {
-		boolean deleteMemberRecord= false;
-		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		deleteMemberRecord =ss.delete("delJoinRecord",id)==1;
-		if(deleteMemberRecord) {
-			deleteMemberRecord=true;
-			ss.commit();
+	public boolean deleteMemberRecord(String id, SqlSession ss, int memNum) {
+		boolean flag = false;
+		
+		if (memNum == ss.delete("delMemRecord",id)) {
+			flag = true;
 		}
-		return deleteMemberRecord;
+		
+		return flag;
 	}
 	
 	/**
