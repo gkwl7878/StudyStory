@@ -130,28 +130,22 @@ public class UserStudyController {
 		String sNum = mr.getParameter("sNum");
 		String content= mr.getParameter("content");
 		
-		System.out.println("=======================prefImg : "+prevImg);
 		
 		if("true".equals(flag)) { // 파일이 바뀐 경우
 			img= mr.getFilesystemName("file");
-			System.out.println("====================파일이 바뀌었다!");
 			// 기존 파일을 삭제해야 함
 			if(!("no_study_img.png".equals(prevImg))){ // 이전 이미지명이 기본 이미지명이 아니면
-				System.out.println("====================삭제하자 삭제!");
 				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+prevImg);
 				
 				if(file.exists()) {
-					System.out.println("삭제 되었다!!!");
 					file.delete();
 				}
 			}
 			
 		}else { // 파일이 안바뀐 경우
-			System.out.println("안바뀜, 삭제 안됨");
 			img = prevImg;
 		}
 		
-		System.out.println("=================DB에 변경처리할 img명 : "+img);
 		
 		ms_vo.setContent(content);
 		ms_vo.setImg(img);
@@ -232,7 +226,6 @@ public class UserStudyController {
 				//
 				sgs.sendCloseAlarm(ca_vo);
 			
-				System.out.println(c_vo);
 				url="redirect:../study_group/study_i_made.do";
 			}else {
 				model.addAttribute("failFlag",true);
