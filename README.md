@@ -3,14 +3,6 @@
 * **SIST Web 3번째 Team Project**
 * **스터디 커뮤니티 사이트**
 
-## 프로젝트 간트차트 (예정)
-
-<!-- ![간트차트]() -->
-
-## Scope & Boundary (예정)
-
-<!-- * [요구사항 명세서, 요구사항 정의서, 개발표준정의서]() -->
-
 ## UI 설계
 
 * [UI 설계 png](https://github.com/younggeun0/StudyStory/tree/master/02.%EC%84%A4%EA%B3%84/UI%20png)
@@ -26,10 +18,5 @@
 * [클래스 다이어그램 - 관리자](https://github.com/younggeun0/StudyStory/blob/master/02.%EC%84%A4%EA%B3%84/class_diaram_%EA%B4%80%EB%A6%AC%EC%9E%90_v0418.png?raw=true)
 * [클래스 다이어그램 - 사용자](https://github.com/younggeun0/StudyStory/blob/master/02.%EC%84%A4%EA%B3%84/class_diagram_%EC%9C%A0%EC%A0%80_v0416.png?raw=true)
 
-## 테스트 (예정)
-
-<!-- * [단위테스트]() -->
-<!-- * [통합테스트]() -->
-
-## 시연(예정)
+## 시연
 
