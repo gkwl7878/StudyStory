@@ -11,6 +11,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import kr.co.studystory.admin.domain.UserAndStudy;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.vo.LoginVO;
+import kr.co.studystory.util.ShaUtil;
 
 @SessionAttributes({"loginSession","weekUser","weekStudy","allUser","allStudy"})
 @Controller
@@ -39,7 +40,8 @@ public class adLoginController {
 		boolean loginSession=false;
 		UserAndStudy uas= new UserAndStudy();
 		uas=cms.getCountUserAndStudy();
-		//l_vo.setPass(ShaUtil.shaEncoding(l_vo.getPass()));
+		
+		l_vo.setPass(ShaUtil.shaEncoding(l_vo.getPass()));
 		loginFlag= cms.login(l_vo);
 		
 		int weekUser= uas.getWeekUser();
