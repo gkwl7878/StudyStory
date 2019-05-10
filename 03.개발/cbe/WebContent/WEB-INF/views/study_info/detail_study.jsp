@@ -75,7 +75,7 @@
 							var output = "";
 							output += "<div class='media'>"
 							output += "	<div style='width: 95px; height: 95px; background-color: #F0F0F0; margin-right: 10px; text-align: center;'>"
-							output += "		<img src='http://localhost:8080/third_prj/study_img/" + json.img + "' class='w-100 h-100 align-self-start mr-3'>"
+							output += "		<img src='/third_prj/profile_img/" + json.img + "' class='w-100 h-100 align-self-start mr-3'>"
 							output += "	</div>"
 							output += "	<div class='col-lg-10' style='margin-top: 5px; padding-right: 0px;'>"
 							output += "		<div style='overflow: hidden'>"
@@ -219,7 +219,7 @@
 									<c:forEach var="s_comment" items="${ sCommentList }">
 										<div class="media">
 											<div style="width: 95px; height: 95px; background-color: #F0F0F0; margin-right: 10px; text-align: center;">
-												<img src="/third_prj/study_img/${ s_comment.img }" class="w-100 h-100 align-self-start mr-3">
+												<img src="/third_prj/profile_img/${ s_comment.img }" class="w-100 h-100 align-self-start mr-3">
 											</div>
 											<div class="col-lg-10" style="margin-top: 5px; padding-right: 0px;">
 												<div style="overflow: hidden">

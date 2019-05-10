@@ -89,15 +89,6 @@ public class StudyInfoService {
 	public List<StudyCommentDomain> getStudyComment(String s_num) {
 		List<StudyCommentDomain> list = null;
 		list = si_dao.selectSCommentList(s_num);
-
-		// 댓글을 입력한 사용자의 아이디 숨기기.
-		String changedNick = "";
-		for (StudyCommentDomain scd : list) {
-			changedNick = scd.getNick().substring(0, 2) + "***";
-			scd.setNick(changedNick);
-			;
-		} // end for
-
 		return list;
 	}// getStudyComment
 
