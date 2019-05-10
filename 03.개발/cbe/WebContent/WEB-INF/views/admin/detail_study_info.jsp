@@ -106,7 +106,6 @@
 	
 	<form id="studyDetailFrm" action="study_modify.do" method="post" enctype="multipart/form-data" >
 	<input type="hidden" name="sNum" value="${param.sNum }"/>
-	<input type="hidden" name="content" value="${content}"/>
 	<input type="hidden" name="currPage" value="${param.currPage}"/>
 	<div class="container form-group" id="wrap">
 		<div class="row">

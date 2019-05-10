@@ -53,6 +53,11 @@ public class DetailStudyVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "DetailStudyVO [sNum=" + sNum + ", category=" + category + ", loc=" + loc + ", img=" + img + ", content="
+				+ content + ", currPage=" + currPage + "]";
+	}
 	
 }
