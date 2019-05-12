@@ -136,7 +136,6 @@ public class StudyMngController {
 		
 		String preImg= saus.searchPreImg(sNum);
 		
-		System.out.println("================="+content);
 		
 		File file = new File("C:/dev/StudyStory/03.°³¹ß/cbe/WebContent/study_img/"+preImg);
 		
