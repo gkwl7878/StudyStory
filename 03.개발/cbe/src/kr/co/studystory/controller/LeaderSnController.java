@@ -46,15 +46,21 @@ public class LeaderSnController {
 			return "redirect:../study_info/main.do";
 		}
 		
-		List<StudyNotice> list = sns.getSnList(s_num);
+		String url = "study_notice/notice_list_leader_closed";
 		
-		// 스터디명과 모집상태를 반환해서 보여줘야 함
+		List<StudyNotice> list = sns.getSnList(s_num);
 		StudyNameAndRecruit snar = sns.getStudyNameAndRecruit(s_num);
 		
+		if (!sns.isClosed(s_num)) {
+			// 스터디명과 모집상태를 반환해서 보여줘야 함
+			model.addAttribute("recruitment", snar.getRecruitment());
+			url = "study_notice/notice_list_leader";
+		}
+		
 		model.addAttribute("study_name", snar.getStudy_name());
-		model.addAttribute("recruitment", snar.getRecruitment());
 		model.addAttribute("snList", list);
-		return "study_notice/notice_list_leader";
+		
+		return url;
 	}//leaderSnList
 	
 	@RequestMapping(value="/study_notice/change_recruit.do", method=POST)

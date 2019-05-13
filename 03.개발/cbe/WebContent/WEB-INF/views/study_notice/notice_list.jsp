@@ -43,9 +43,9 @@
 	  	<div class="row col-sm justify-content-center">
 	      <!-- 공지가 존재하지 않을 경우 공지사항이 없다고 보여주기  -->
 	      <c:if test="${ empty snList  }">
-		   	<div class="card select-card border-dark m-3 p-2" style="width:250px; height:150px;">
+		   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;">
 		   		<div class="card-body">
-		   			 <h6 class="card-title"><strong>등록된 스터디 공지가 없습니다</strong></h6>
+		   			 <h6 class="card-title text-center"><strong>등록된 스터디 공지가 없습니다</strong></h6>
 		   		</div>
 		 		</div>
 	      </c:if>

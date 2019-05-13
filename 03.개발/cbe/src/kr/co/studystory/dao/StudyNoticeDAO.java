@@ -62,6 +62,25 @@ public class StudyNoticeDAO {
 	}//getSessionFactory
 	
 	/**
+	 * 스터디 종료 여부를 확인하는 메서드
+	 * by 영근
+	 */
+	public boolean selectCloseFlag(String s_num) {
+		boolean flag = false;
+		
+		SqlSession ss=getSessionFactory().openSession();
+		String accept_flag = ss.selectOne("selectCloseFlag",s_num);
+		
+		if("Y".equals(accept_flag)) {
+			flag = true;
+		}
+		
+		ss.close();
+		
+		return flag;
+	}
+	
+	/**
 	 * 리더 페이지에 접근한 유저가 스터디장인지 판단하는 메서드
 	 * by 영근
 	 */

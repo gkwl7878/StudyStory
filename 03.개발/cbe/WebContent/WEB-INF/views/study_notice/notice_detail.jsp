@@ -191,6 +191,9 @@
 	      	</c:forEach>
 	      	</table>
 	   
+	   
+	   
+	   		<c:if test="${ not closeFlag }">
 	      	<div class="col-3"></div> 
 	      	<form action="add_sn_comment.do" id="commentFrm" method="post" class="col-9" style="margin-top:20px;">
 	      	<div class="font-weight-bold" style="float:left; width:100px;">
@@ -206,6 +209,10 @@
 		      	<button type="button" id="commentBtn" class="btn btn-secondary" style="font-size:12px; width:100%">댓글달기</button>
 	      	</div>
 		      </form>
+		    </c:if>  
+		      
+		      
+		      
 	      </div>
 	      <div class="row justify-content-center" style="min-height:100px; margin-top:30px;">
 	      	<button type="button" class="btn btn-secondary" style="height:40px; " onclick="location.href='${ leaderFlag ? 'notice_list_leader.do' : 'notice_list.do' }?s_num=${ param.s_num }'">목록으로</button>

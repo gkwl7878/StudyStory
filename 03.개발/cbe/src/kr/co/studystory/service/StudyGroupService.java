@@ -24,6 +24,7 @@ import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
+import kr.co.studystory.vo.OutStudyVO;
 
 @Component
 public class StudyGroupService {
@@ -73,10 +74,10 @@ public class StudyGroupService {
 	/**
 	 * 내 스터디 수정하기 -혜원
 	 */
-/*	public String deletePreImg(String sNum) {
-		String preImg= sg_dao.selectPreImg(sNum);
-		return preImg;
-	}*/
+	public void deletePreImg(String sNum) {
+	/*	String preImg= sg_dao.selectPreImg(sNum);
+		return preImg;*/
+	}
 	
 	
 	public PrevStudyInfo getPrevStudy(String s_num) {
@@ -89,8 +90,6 @@ public class StudyGroupService {
 	public boolean modifyStudy(ModifiedStudyVO ms_vo) {
 		boolean flag=false;
 		
-		StudyGroupDAO sg_dao=StudyGroupDAO.getInstance();
-		
 		if(sg_dao.updateStudy(ms_vo)) {
 			flag=true;
 		}
@@ -98,7 +97,10 @@ public class StudyGroupService {
 		return flag;
 	}//modifyStudy
 	
-
+	public String searchPreImg(String sNum) {
+		String preImg= sg_dao.selectPreImg(sNum);
+		return preImg;
+	}
 	
 	/**
 	 * 스터디 탈퇴 -혜원
@@ -121,14 +123,18 @@ public class StudyGroupService {
 	public boolean leaveStudy(LeaveVO l_vo) {
 		boolean flag=false;
 		
-		if(sg_dao.deleteMember(l_vo.getId())) {
+		OutStudyVO osvo = new OutStudyVO(l_vo.getsNum(),l_vo.getId());
+		if(sg_dao.deleteMember(osvo)) {
 			flag=true;
 		}
 		
 		return flag;
 	}//leaveStudy
 	
-	
+	public String getStudyName(String s_num) {
+		return sg_dao.selectStudyName(s_num);
+		
+	}//getLeaderId
 	
 	/**
 	 * 스터디 활동 종료 -혜원
