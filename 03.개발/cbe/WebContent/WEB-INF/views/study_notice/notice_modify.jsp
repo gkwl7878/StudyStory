@@ -189,6 +189,7 @@
   			nickArr[i] = nick;
   			workloadArr[i] = workload;
   			i++;
+  			$("#workload").val('');
   		});
   	});
   	

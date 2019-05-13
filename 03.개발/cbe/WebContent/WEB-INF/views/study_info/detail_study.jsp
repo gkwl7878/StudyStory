@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
+<link href="/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
