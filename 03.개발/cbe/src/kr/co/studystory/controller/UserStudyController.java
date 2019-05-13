@@ -25,7 +25,6 @@ import kr.co.studystory.service.StudyGroupService;
 import kr.co.studystory.vo.CloseAlarmVO;
 import kr.co.studystory.vo.CloseVO;
 import kr.co.studystory.vo.LeaveAlarmVO;
-import kr.co.studystory.vo.LeaveStudyVO;
 import kr.co.studystory.vo.LeaveVO;
 import kr.co.studystory.vo.ModifiedStudyVO;
 import kr.co.studystory.vo.NewStudyVO;
@@ -86,10 +85,11 @@ public class UserStudyController {
 	
 	//내 스터디 수정하기
 	@RequestMapping(value="study_group/modify_study.do", method= {GET,POST} )
-//	public String modifyStudyPage(ModifiedStudyVO ms_vo, Model model ) {
-		public String modifyStudyPage(String sNum, Model model ) {
+	public String modifyStudyPage(HttpSession session, String sNum, Model model ) {
 		
-	/*	String url="";*/
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		PrevStudyInfo psInfo=sgs.getPrevStudy(sNum);
 		if(psInfo !=null) {
@@ -112,55 +112,56 @@ public class UserStudyController {
 	}//createStudyPage
 	
 	@RequestMapping(value="study_group/modify_study_process.do", method= {RequestMethod.POST})
-	public String modifyStudyProcess(ModifiedStudyVO ms_vo, 
+	public String modifyStudyProcess(HttpSession session, ModifiedStudyVO ms_vo, 
 			HttpServletRequest request, Model model) {
 		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
+		
+		String url = "study_group/study_modify";
+		
 		// 파일 업로드
-				MultipartRequest mr=null;
-				try {
-					mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/",
-							1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
-				} catch (IOException e) {
-					e.printStackTrace();
+		MultipartRequest mr=null;
+		
+		try {
+			mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/",
+					1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		String flag=mr.getParameter("imgChangeFlag");
+		String img="";
+		String prevImg=mr.getParameter("prevImg");
+		String sNum = mr.getParameter("sNum");
+		String content= mr.getParameter("content");
+		
+		
+		if("true".equals(flag)) { // 파일이 바뀐 경우
+			img= mr.getFilesystemName("file");
+			// 기존 파일을 삭제해야 함
+			if(!("no_study_img.png".equals(prevImg))){ // 이전 이미지명이 기본 이미지명이 아니면
+				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+prevImg);
+				
+				if(file.exists()) {
+					file.delete();
 				}
-				String flag=mr.getParameter("imgChangeFlag");
-				String img="";
-				if("true".equals(flag)) {
-					img= mr.getFilesystemName("file");
-					
-				}else {
-					img=mr.getParameter("prevImg");
-				}
-				System.out.println("================="+img);
-				String url = "study_group/study_modify";
-				
-				String sNum = mr.getParameter("sNum");
-				String content= mr.getParameter("content");
-				ms_vo.setContent(content);
-				ms_vo.setImg(img);
-				ms_vo.setsNum(sNum);
-				
-				String preImg= sgs.searchPreImg(sNum);
-				
-				
-				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
-				if(!(preImg.equals("no_study_img.png"))){
-						if(file.exists()||img!=null) {
-						file.delete();
-					}else {
-						System.out.println("파일이 존재하지 않습니다.");
-					}
-				}
-				
-				if(img==null) {
-					img ="no_study_img.png";
-				}
-				
-				
-				System.out.println(ms_vo);
+			}
+			
+		}else { // 파일이 안바뀐 경우
+			img = prevImg;
+		}
+		
+		
+		ms_vo.setContent(content);
+		ms_vo.setImg(img);
+		ms_vo.setsNum(sNum);
+			
 				
 		if(sgs.modifyStudy(ms_vo)) {
-			url="study_group/study_i_made";
+			url="redirect:../study_group/study_i_made.do";
 			model.addAttribute("successFlag",true);
 		}else {
 			model.addAttribute("failFlag",true);
@@ -171,12 +172,21 @@ public class UserStudyController {
 
 	// 내 스터디 탈퇴하기
 	@RequestMapping(value="study_group/leave_study.do", method= {GET,POST} )
-		public String leaveStudyPage(String id) {
+	public String leaveStudyPage(HttpSession session, String id) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		return "study_group/study_out";
 	}//leaveStudyPage
 	
 	@RequestMapping(value="study_group/leave_study_process.do" , method=POST )
 	public String leaveStudyProcess(LeaveVO l_vo, HttpSession session, Model model) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
 		String id=(String)session.getAttribute("id");
 		l_vo.setId(id);
@@ -209,36 +219,42 @@ public class UserStudyController {
 	
 	//스터디 활동 종료
 	@RequestMapping(value="study_group/end_study.do", method= {GET,POST} )
-	public String closeStudyPage(String id) {
+	public String closeStudyPage(HttpSession session, String id) {
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
+		
 		return "study_group/end_study";
 	}//leaveStudyPage
 		
 	@RequestMapping(value="study_group/end_study_process.do" , method=POST )
 	public String closeStudyProcess(CloseVO c_vo, HttpSession session, Model model) {
 
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 		
+		String id=(String)session.getAttribute("id");
+		c_vo.setId(id);
 		
-			String id=(String)session.getAttribute("id");
-			c_vo.setId(id);
-			
-			String url="study_group/my_study";
-			if(sgs.closeStudy(c_vo)) {
-			
-				CloseAlarmVO ca_vo=new CloseAlarmVO();
-				ca_vo.setId(id);
-				ca_vo.setCategory("스터디");
-				ca_vo.setSubject("스터디가 종료되었습니다.");
-				ca_vo.setContent(sgs.getStudyName(c_vo.getsNum())+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
-				ca_vo.setsNum(c_vo.getsNum());
-				//
-				sgs.sendCloseAlarm(ca_vo);
-			
-				System.out.println(c_vo);
-				url="redirect:study_i_made.do";
-			}else {
-				model.addAttribute("failFlag",true);
-				url="study_group/end_study";
-			}
+		String url="study_group/my_study";
+		if(sgs.closeStudy(c_vo)) {
+		
+			CloseAlarmVO ca_vo=new CloseAlarmVO();
+			ca_vo.setId(id);
+			ca_vo.setCategory("스터디");
+			ca_vo.setSubject("스터디가 종료되었습니다.");
+			ca_vo.setContent(sgs.getStudyName(c_vo.getsNum())+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
+			ca_vo.setsNum(c_vo.getsNum());
+			//
+			sgs.sendCloseAlarm(ca_vo);
+		
+			url="redirect:../study_group/study_i_made.do";
+		}else {
+			model.addAttribute("failFlag",true);
+			url="study_group/end_study";
+		}
 
 		return url ;
 	}

@@ -2,7 +2,7 @@ package kr.co.studystory.domain;
 
 public class StudyCommentDomain {
 
-	private String s_comment, input_date, id, img;
+	private String s_comment, input_date, nick, img;
 
 	public String getS_comment() {
 		return s_comment;
@@ -20,12 +20,12 @@ public class StudyCommentDomain {
 		this.input_date = input_date;
 	}
 
-	public String getId() {
-		return id;
+	public String getNick() {
+		return nick;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 
 	public String getImg() {
@@ -38,7 +38,8 @@ public class StudyCommentDomain {
 
 	@Override
 	public String toString() {
-		return "StudyCommentDomain [s_comment=" + s_comment + ", input_date=" + input_date + ", id=" + id + ", img=" + img + "]";
-	}
+		return "StudyCommentDomain [s_comment=" + s_comment + ", input_date=" + input_date + ", nick=" + nick + ", img="
+				+ img + "]";
+	}// toString
 
 }// class

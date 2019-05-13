@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.studystory.domain.ThumbnailDomain;
 import kr.co.studystory.service.StudyInfoService;
-import kr.co.studystory.vo.AddFavStudyVO;
+import kr.co.studystory.vo.FavFlagVO;
 import kr.co.studystory.vo.FavSNumFlagVO;
 import kr.co.studystory.vo.FavStudyOrderVO;
-import kr.co.studystory.vo.RemoveFavStudyVO;
 import kr.co.studystory.vo.SearchListVO;
 
 /**
@@ -45,7 +44,7 @@ public class StudySearchController {
 	public String mainPage(FavSNumFlagVO fsf_vo, Model model, HttpSession session) {
 
 		String id = (String) session.getAttribute("id");
-		
+
 		if (session.getAttribute("id") == null) {
 			return "redirect:../index.do";
 		} // end if
@@ -53,7 +52,7 @@ public class StudySearchController {
 		// id가 null인 경우.
 		if (fsf_vo.getId() == null) {
 			fsf_vo.setId(id);
-		}// end if
+		} // end if
 
 		// 썸네일 리스트 생성.
 		List<ThumbnailDomain> list = sis.getThumbnailList(fsf_vo);
@@ -99,40 +98,24 @@ public class StudySearchController {
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@ResponseBody
-	@RequestMapping(value = "/likeProcess/likeProcess.do", method = GET)
-	public String likeProcess(AddFavStudyVO afs_vo, HttpSession session) {
-		JSONObject json = new JSONObject();
-		boolean resultFlag = false;
+	@RequestMapping(value = "/heartProcess/heartProcess.do", method = GET)
+	public String heartProcess(FavFlagVO ff_vo, HttpSession session) {
+		JSONObject json = null;
+		String id = (String) session.getAttribute("id");
 
-		String id = (String) session.getAttribute("id");// 접속자의 아이디 얻기.
-		afs_vo.setMy_id(id);
+		System.out.println("///////////////////// 컨트롤 : " + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
 
-		resultFlag = sis.addLikeProcess(afs_vo);
-		json.put("resultFlag", resultFlag);
+		// vo에 아이디 설정하기.
+		if (ff_vo.getMy_id() == null) {
+			ff_vo.setMy_id(id);
+		} // end if
+
+		System.out.println("///////////////////// 컨트롤 - 제이슨 넣기 위한 : " + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+		json = sis.heartProcess(ff_vo);
+		
 		return json.toJSONString();
-	}// likeProcess
-
-	/**
-	 * 좋아요 버튼을 해제로 부터의 요청 처리.
-	 * 
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	@ResponseBody
-	@RequestMapping(value = "/dislikeProcess/dislikeProcess.do", method = GET)
-	public String dislikeProcess(RemoveFavStudyVO rfa_vo, HttpSession session) {
-		JSONObject json = new JSONObject();
-		boolean resultFlag = false;
-
-		String id = (String) session.getAttribute("id");// 접속자의 아이디 얻기.
-		rfa_vo.setId(id);
-
-		resultFlag = sis.removeLikeProcess(rfa_vo);
-		json.put("resultFlag", resultFlag);
-		return json.toJSONString();
-	}// likeOrDislikeProcess
+	}// heartProcess
 
 	/**
 	 * 스터디 찾기로 부터의 요청 처리.
@@ -146,7 +129,7 @@ public class StudySearchController {
 
 		String id = (String) session.getAttribute("id");
 		fsf_vo.setId(id);
-		
+
 		System.out.println("////////////////////////컨트롤 : " + " 정렬/ " + sl_vo.getOrder_select() + " 지역/ " + sl_vo.getLoc_select() + " 종류/ " + sl_vo.getKind_select() + " 입력/ " + sl_vo.getSearch_inputBox());
 
 		// 최초 호출시 초기화된 현재 페이지를 1페이지로 설정.

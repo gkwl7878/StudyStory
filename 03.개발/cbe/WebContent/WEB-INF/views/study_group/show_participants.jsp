@@ -8,32 +8,10 @@
 <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
 
-<title>Bootstrap Template By Young</title>
+<title>참여자 보기</title>
 <style>
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
- a:link { color: red; text-decoration: none;}
- a:visited { color: black; text-decoration: none;}
- a:hover { color: blue; text-decoration: underline;}
-/*       위의 a내용은 링크가 파랗게 되는걸 막아주고   */
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-
-#profile_img{ width: 200px ;height: 200px}
-
+	#profile_img{ width: 200px ;height: 200px}
 </style>
-<!-- Custom styles for this template -->
-<link href="/third_prj/resources/css/jumbotron.css" rel="stylesheet">
-
 </head>
 <body>
 	<!-- header -->
@@ -42,8 +20,9 @@
 	<!-- body -->
 	<div role="main" style="min-height: 900px">
 
+
 		<!-- 점보트론 : 전광판 -->
-		<section class="text-center bg-white mb-0" style="margin-top: 30px; margin-bottom: 20px;">
+		<section class="text-center bg-white mb-0" style="margin-top: 90px; margin-bottom: 20px;">
 			<div class="container">
 				<h1 class="jumbotron-heading">참여자 보기</h1>
 			</div>
@@ -74,10 +53,9 @@
 					<div class="row p-3">
 						<div class="col-12.5 bg-white">
 							<!-- 썸네일 row -->
-							<div class="row pt-3">
+							<div class="row pt-3 bg-light">
 								<!-- 1번째 줄 시작 -->
 					<c:forEach var="mbwiList" items="${mbwi }">
-					<a href="#">
 								<div class="col-2.5">
 									<div class="card mb-4 shadow-sm text-center " style="margin-left: 20px">
 										<img class="card-img-top" src="/third_prj/profile_img/${mbwiList.img}" onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img">
@@ -87,7 +65,6 @@
 										</div>
 									</div>
 								</div>
-								</a>
 								<!-- 1번째 줄 시작 -->
 					</c:forEach>
 							</div>

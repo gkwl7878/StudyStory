@@ -1,5 +1,8 @@
 package kr.co.studystory.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -7,10 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.AlternativeJdkIdGenerator;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.studystory.domain.JoinBbs;
 import kr.co.studystory.domain.Joiner;
@@ -18,13 +19,9 @@ import kr.co.studystory.domain.MemberWithImg;
 import kr.co.studystory.service.StudyGroupService2;
 import kr.co.studystory.vo.ApplicantBbsVO;
 import kr.co.studystory.vo.DetailJoinerVO;
-import kr.co.studystory.vo.JoinAlarmVO;
 import kr.co.studystory.vo.JoinDeleteVO;
 import kr.co.studystory.vo.NewMemberVO;
 import kr.co.studystory.vo.RefuseVO;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 public class UserStudyController2 {
@@ -57,9 +54,9 @@ public class UserStudyController2 {
 	@RequestMapping(value="/study_group/new_joiner.do",method= {GET, POST})
 	public String appliedMemberPage(HttpSession session, ApplicantBbsVO abvo, Model model) {
 		
-	if (session.getAttribute("id") == null) {
-		return "redirect:../index.do";
-	}
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		}
 	
 		if(abvo.getCurrPage()==0) {
 			abvo.setCurrPage(1);

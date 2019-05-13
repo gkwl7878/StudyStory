@@ -7,14 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- 폰트 CSS -->
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/font.css" />
+<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
 <!-- Custom styles for this template -->
-<link rel="stylesheet" href="http://localhost:8080/third_prj/resources/css/bootstrap.min.css">
-<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
+<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+<link href="/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="http://localhost:8080/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/popper.min.js"></script>
-<script src="http://localhost:8080/third_prj/resources/js/bootstrap.min.js"></script>
+<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/third_prj/resources/js/popper.min.js"></script>
+<script src="/third_prj/resources/js/bootstrap.min.js"></script>
 
 <title>Bootstrap Template By Young</title>
 
@@ -32,6 +32,20 @@
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
 	}
+}
+
+.red_heart {
+	background: url("/third_prj/study_img/like_icon.png") no-repeat;
+	background-size: 100%;
+}
+
+.gray_heart {
+	background: url("/third_prj/study_img/dislike_icon.png") no-repeat;
+	background-size: 100%;
+}
+
+.heart:hover {
+	cursor: pointer;
 }
 </style>
 
@@ -248,15 +262,19 @@
 											</div>
 											<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
 
+											<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
+											<div id="heart_btn">
 											<c:choose>
 												<c:when test="${ thumbnail.favFlag eq true }">
-													<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary active" onclick="dislikeProcess('${ thumbnail.s_num }')">좋아요</button>
+													<div id="${ thumbnail.s_num }_btn" class="red_heart heart" style="width: 27px; height: 27px;"></div>
 												</c:when>
 
 												<c:when test="${ thumbnail.favFlag eq false }">
-													<button id="${ thumbnail.s_num }_like_btn" type="button" class="btn btn-sm btn-outline-secondary" onclick="likeProcess('${ thumbnail.s_num }')">좋아요</button>
+													<div id="${ thumbnail.s_num }_btn" class="gray_heart heart" style="width: 27px; height: 27px;"></div>
 												</c:when>
 											</c:choose>
+											</div>
+											<!-- 토글버튼 : 좋아요를 누르면  .active를 주세요. -->
 										</div>
 									</div>
 								</div>
