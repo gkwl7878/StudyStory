@@ -38,7 +38,7 @@
 							<th style="width: 100px">번호</th>
 							<th style="width: 150px">분류</th>
 							<th style="width: 500px">제목</th>
-							<th style="width: 100px">날짜</th>
+							<th style="width: 120px">날짜</th>
 							<th style="width: 100px">읽음여부</th>
 						</tr>
 					</thead>

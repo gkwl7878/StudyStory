@@ -196,7 +196,10 @@ public class AdCommonDAO {
 	
 	public static void main(String[] args) {
 		AdCommonDAO c_dao = new AdCommonDAO();
-		c_dao.testAccount();
+		LoginVO l_vo= new LoginVO();
+		l_vo.setId("admin");
+		l_vo.setPass("zOD0B1Zp+jpZc9iPEUDJTDMIUTg=");
+		c_dao.selectLogin(l_vo);
 	}
 	
 	

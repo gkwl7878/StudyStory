@@ -188,14 +188,12 @@
 
 	<!-- sidebar 시작 -->
 	<c:import url="/WEB-INF/views/admin/layout/sidebar.jsp">
-				<c:param name="weekUser" value="${param.weekUser}"></c:param>
-				<c:param name="weekStudy" value="${param.weekStudy}"></c:param>
-				<c:param name="allUser" value="${param.allUser}"></c:param>
-				<c:param name="allStudy" value="${param.allStudy}"></c:param>
 	</c:import>
 	<!-- sidebar 끝 -->
 	<form id="userDetailFrm" action="user_modify.do" method="post">
 	<input type="hidden" value="${param.currPage}" name="currPage">
+	<input type="hidden" value="${param.searchCondition}" name="searchCondition">
+	<input type="hidden" value="${param.searchWord}" name="searchWord">
 	<div class="container form-group" id="wrap">
 		<div class="row">
 			<div class="col-12 justify-content-left" style="margin-bottom: 20px; margin-top: 20px;">
@@ -280,10 +278,9 @@
 		</div>
 
 		<div class="row" style="margin-top: 70px;">
-			<a class="btn btn-secondary btn" href="user_mng.do?currPage=${param.currPage}
-									&allStudy=${param.allStudy}" role="button" style="margin-left: 180px;">목록으로</a>
+			<a class="btn btn-secondary btn" href="user_mng.do?currPage=${param.currPage}&searchCondition=${param.searchCondition}&searchWord=${param.searchWord}" role="button" style="margin-left: 180px;">목록으로</a>
 			<input type="button" class="btn btn-secondary btn" value="수정" id="modifyBtn" style="margin-left: 10px;" />
-			 <a class="btn btn-secondary btn"  onclick="return delete_confirm();" href="user_delete.do?id=${param.id }&currPage=${param.currPage}" role="button" style="margin-left: 10px;">탈퇴</a>
+			 <a class="btn btn-secondary btn"  onclick="return delete_confirm();" href="user_delete.do?id=${param.id }&currPage=1" role="button" style="margin-left: 10px;">탈퇴</a>
 		</div>
 	</div>
 	</form>

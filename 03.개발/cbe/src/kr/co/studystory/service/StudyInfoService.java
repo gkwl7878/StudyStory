@@ -11,12 +11,13 @@ import kr.co.studystory.domain.LeaderOfJoinDomain;
 import kr.co.studystory.domain.StudyCommentDomain;
 import kr.co.studystory.domain.StudyInfoDomain;
 import kr.co.studystory.domain.ThumbnailDomain;
-import kr.co.studystory.vo.AddFavStudyVO;
+import kr.co.studystory.domain.WriterInfoDomain;
 import kr.co.studystory.vo.DetailMenuVO;
+import kr.co.studystory.vo.FavFlagVO;
 import kr.co.studystory.vo.FavSNumFlagVO;
 import kr.co.studystory.vo.FavStudyOrderVO;
 import kr.co.studystory.vo.JoinFormVO;
-import kr.co.studystory.vo.RemoveFavStudyVO;
+import kr.co.studystory.vo.MainFavListVO;
 import kr.co.studystory.vo.ReplyVO;
 import kr.co.studystory.vo.SearchListVO;
 
@@ -69,15 +70,12 @@ public class StudyInfoService {
 	@SuppressWarnings("unchecked")
 	public JSONObject addReply(ReplyVO r_vo) {
 		JSONObject json = new JSONObject();
-		String writerImg = "";
-		String id = "";
-		writerImg = si_dao.insertComment(r_vo);
-		if (!"".equals(writerImg)) {
-			System.out.println("/////////////// 서비스 : " + writerImg);
+		String nick = "";
+		WriterInfoDomain wid = si_dao.insertComment(r_vo);
+		if (!"".equals(wid.getNick())) {
 			json.put("result", true);
-			json.put("img", writerImg);
-			id = r_vo.getId().substring(0, 2) + "***";
-			json.put("id", id);
+			json.put("img", wid.getImg());
+			json.put("nick", nick);
 		} // end if
 		return json;
 	}// addReply
@@ -91,16 +89,20 @@ public class StudyInfoService {
 	public List<StudyCommentDomain> getStudyComment(String s_num) {
 		List<StudyCommentDomain> list = null;
 		list = si_dao.selectSCommentList(s_num);
-
-		// 댓글을 입력한 사용자의 아이디 숨기기.
-		String changedId = "";
-		for (StudyCommentDomain scd : list) {
-			changedId = scd.getId().substring(0, 2) + "***";
-			scd.setId(changedId);
-		} // end for
-
 		return list;
 	}// getStudyComment
+
+	/**
+	 * 댓글의 갯수 얻기.
+	 * 
+	 * @param s_num
+	 * @return
+	 */
+	public int getScommentCnt(String s_num) {
+		int cnt = 0;
+		cnt = si_dao.selectScommentCnt(s_num);
+		return cnt;
+	}// getScommentCnt
 
 	/**
 	 * 스터디 참여의 리더의 기본 정보 얻기.
@@ -130,6 +132,49 @@ public class StudyInfoService {
 	}// addJoinForm
 
 	/******************* Search 페이지들 서비스. *******************/
+
+	/**
+	 * 썸네일 리스트 얻기.
+	 * 
+	 * @return List<ThumbnailDomain>
+	 */
+	public List<ThumbnailDomain> getFavThList(MainFavListVO mfl_vo) {
+		List<ThumbnailDomain> list = null;
+		list = si_dao.selectFavThList(mfl_vo);
+
+		String changedNick = "";
+		String changedStudyName = "";
+
+		for (ThumbnailDomain td : list) {
+			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
+			if (td.getStudy_name().length() > 14) {
+				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
+				td.setStudy_name(changedStudyName);
+			} // end if
+
+			// 썸네일의 nick의 길이가 3을 넘어가면 "..." 처리.
+			if (td.getNick().length() > 3) {
+				changedNick = td.getNick().substring(0, 3) + "...";
+				td.setNick(changedNick);
+			} // end if
+		} // end for
+
+		return list;
+	}// getThumbnailList
+
+	//////////////////////////////////////// 관심 스터디
+
+	/**
+	 * 관심 스터디 썸네일의 총 갯수 얻기.
+	 * 
+	 * @param ff_vo
+	 * @return
+	 */
+	public int getFavStudyCnt(FavStudyOrderVO fso_vo) {
+		int cnt = 0;
+		cnt = si_dao.selectFavStudyCnt(fso_vo);
+		return cnt;
+	}// totalCount()
 
 	/**
 	 * 내 관심 스터디 리스트 얻기.
@@ -166,75 +211,50 @@ public class StudyInfoService {
 	}// getMyInterestStudy
 
 	/**
-	 * 좋아요 눌렀을 때.
+	 * 좋아요 프로세스.
 	 * 
-	 * @param afs_vo
+	 * @param ff_vo
 	 * @return
 	 */
-	public boolean addLikeProcess(AddFavStudyVO afs_vo) {
-		boolean addFlag = false;
-		// 추가 되었다면 true.
-		if (si_dao.insertFavStudy(afs_vo) == 1) {
-			addFlag = true;
-		} // end if
-		return addFlag;
-	}// addLikeProcess
+	@SuppressWarnings("unchecked")
+	public JSONObject heartProcess(FavFlagVO ff_vo) {
+		System.out.println(
+				"///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+		JSONObject json = new JSONObject();
+		String strFlag = "";
+		int cnt = 0;
 
-	/**
-	 * 좋아요 제거시.
-	 * 
-	 * @param sNum
-	 * @return
-	 */
-	public boolean removeLikeProcess(RemoveFavStudyVO rfa_vo) {
-		boolean removeFlag = false;
-
-		// 제거에 성공했다면 true.
-		if (si_dao.deleteFavStudy(rfa_vo) == 1) {
-			removeFlag = true;
+		// '좋아요'하지 않은 썸네일인 경우 - 인서트 하기.
+		if ("gray".equals(ff_vo.getColor())) {
+			System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / "
+					+ ff_vo.getMy_id());
+			// 인서트 DB 작업 실행.
+			cnt = si_dao.insertFavStudy(ff_vo);
+			// DB작업이 정상적으로 동작 되었을 때.
+			if (cnt == 1) {
+				strFlag = "toI";
+				json.put("result", strFlag);
+			} // end if
 		} // end if
 
-		return removeFlag;
-	}// removeLikeProcess
+		// 이전에 이미 '좋아요'했던 썸네일인 경우 - 지우기.
+		if ("red".equals(ff_vo.getColor())) {
+			// 인서트 DB 작업 실행.
+			System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / "
+					+ ff_vo.getMy_id());
 
-	/**
-	 * 썸네일 리스트 얻기.
-	 * 
-	 * @return List<ThumbnailDomain>
-	 */
-	public List<ThumbnailDomain> getThumbnailList(FavSNumFlagVO fsf_vo) {
-		List<ThumbnailDomain> list = null;
-		list = si_dao.selectThumbnailList();
-
-		String changedNick = "";
-		String changedStudyName = "";
-
-		for (ThumbnailDomain td : list) {
-
-			fsf_vo.setMyFavSNum(td.getS_num());
-
-			System.out.println("//////////////////////////////// 서비스 : " + fsf_vo.getMyFavSNum());
-
-			if (si_dao.selectMyFavSNum(fsf_vo)) {
-				td.setFavFlag(true);
+			cnt = si_dao.deleteFavStudy(ff_vo);
+			// DB작업이 정상적으로 동작 되었을 때.
+			if (cnt == 1) {
+				strFlag = "toR";
+				json.put("result", strFlag);
 			} // end if
+		} // end if
 
-			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
-			if (td.getStudy_name().length() > 14) {
-				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
-				td.setStudy_name(changedStudyName);
-			} // end if
+		return json;
+	}// end if
 
-			// 썸네일의 nick의 길이가 3을 넘어가면 "..." 처리.
-			if (td.getNick().length() > 3) {
-				changedNick = td.getNick().substring(0, 3) + "...";
-				td.setNick(changedNick);
-			} // end if
-
-		} // end for
-
-		return list;
-	}// getThumbnailList
+	//////////////////////////////////////// 관심 스터디
 
 	//////////////////////////////////////// 스터디 찾기
 
@@ -264,25 +284,20 @@ public class StudyInfoService {
 
 		// 보여줄 글자 길이 조정.
 		for (ThumbnailDomain td : list) {
-
 			fsf_vo.setMyFavSNum(td.getS_num());
-
 			if (si_dao.selectMyFavSNum(fsf_vo)) {
 				td.setFavFlag(true);
 			} // end if
-
-			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
+				// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
 			if (td.getStudy_name().length() > 14) {
 				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
 				td.setStudy_name(changedStudyName);
 			} // end if
-
-			// 썸네일의 nick의 길이가 3을 넘어가면 "..." 처리.
+				// 썸네일의 nick의 길이가 3을 넘어가면 "..." 처리.
 			if (td.getNick().length() > 3) {
 				changedNick = td.getNick().substring(0, 3) + "...";
 				td.setNick(changedNick);
 			} // end if
-
 		} // end for
 
 		return list;
@@ -299,7 +314,7 @@ public class StudyInfoService {
 	}// pageScale
 
 	/**
-	 * 게시판 한 화면에 보여질 게시물의 수 얻는 메서드
+	 * 총 페이지 수 얻는 메서드
 	 * 
 	 * @param
 	 * @return
@@ -337,6 +352,24 @@ public class StudyInfoService {
 		int endNum = startNum + pageScale() - 1;
 		return endNum;
 	} // endNum
+
+	// 인덱스 지정하기.
+	public int pageIndexNum() {
+		return 3;
+	}// pageIndexNum
+
+	public int startPage(int currPage, int pageIndexNum) {
+		int startPage = ((currPage - 1) / pageIndexNum) * pageIndexNum + 1;
+		return startPage;
+	}// startPage
+
+	public int endPage(int startPage, int pageIndexNum, int totalPage) {
+		int endPage = (((startPage - 1) + pageIndexNum) / pageIndexNum) * pageIndexNum;
+		if (totalPage <= endPage) {
+			endPage = totalPage;
+		} // end if
+		return endPage;
+	}// endPage
 
 	//////////////////////////////////////// 스터디 찾기
 

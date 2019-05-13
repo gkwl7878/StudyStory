@@ -62,7 +62,7 @@
 			<br />
 			<br />
 			<br />
-			<a class="btn btn-secondary btn-lg" href="study_detail.do?sNum=${param.sNum}&currPage=${param.currPage}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+			<a class="btn btn-secondary btn-lg" href="study_detail.do?sNum=${param.sNum}&currPage=${param.currPage}&searchCondition=${param.searchCondition}&searchWord=${param.searchWord}" role="button">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
 			<input type="button" class="btn btn-secondary btn-lg" value="삭제" id="removeBtn" />
 		</form>
 	</div>

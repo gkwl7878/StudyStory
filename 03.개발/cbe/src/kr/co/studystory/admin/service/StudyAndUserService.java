@@ -133,14 +133,7 @@ public class StudyAndUserService {
 	 */
 	public boolean removeUser(String id) {
 		boolean removeUser=false;
-		boolean updateRemoveUser=sau_dao.updateRemoveUser(id);
-		
-		if(updateRemoveUser) {
-			boolean deleteJoinRecord=sau_dao.deleteJoinRecord(id);
-			boolean deleteMemberRecord = sau_dao.deleteMemberRecord(id);
-			removeUser = true;
-		}
-		System.out.println(removeUser);
+		removeUser = sau_dao.updateRemoveUser(id);
 		return removeUser;
 	}
 	

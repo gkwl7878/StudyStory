@@ -23,28 +23,28 @@
 		WHERE S_NUM = #{ sNum } AND ( S.ID = U.ID ) 
 	</select>
 	<select id="selectFavNum" parameterType="String" resultType="int">
-		SELECT COUNT(*) cnt
+		SELECT COUNT(*) CNT
 		FROM fav_study
 		WHERE s_num=#{ s_num }
 	</select>
 	<select id="selectMemberNum" parameterType="String" resultType="int">
-		SELECT COUNT(*) cnt
+		SELECT COUNT(*) CNT
 		FROM member
 		WHERE s_num=#{ s_num }
 	</select>
 	
 	<select id="selectAmIMember" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
-		SELECT COUNT(*) cnt
+		SELECT COUNT(*) CNT
 		FROM member
 		WHERE s_num=#{ s_num } AND id=#{ id } 
 	</select>
 	<select id="selectAmIPended" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
-		SELECT COUNT(*) cnt
+		SELECT COUNT(*) CNT
 		FROM join
 		WHERE s_num=#{ s_num } AND id=#{ id } 
 	</select>
 	<select id="selectDidIMade" parameterType="kr.co.studystory.vo.DetailMenuVO" resultType="int">
-		SELECT COUNT(*) cnt
+		SELECT COUNT(*) CNT
 		FROM study
 		WHERE s_num = #{ s_num } AND id=#{ id }
 	</select>
@@ -53,12 +53,18 @@
 
 	<!-- 스터디 상세 정보의 댓글 조회 -->
 	<select id="selectStudyCommentList" resultType="kr.co.studystory.domain.StudyCommentDomain" parameterType="String">
-		SELECT S_COMMENT, ID,TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, IMG
-		FROM (SELECT SC.S_COMMENT, SC.ID, UT.IMG, SC.INPUT_DATE, ROW_NUMBER() OVER( ORDER BY SC.INPUT_DATE DESC) R_NUM
-				FROM STUDY STD, S_COMMENT SC, USER_TABLE UT
-				WHERE STD.S_NUM=SC.S_NUM AND UT.ID = SC.ID AND SC.S_NUM= #{sNum}
-				)
+		SELECT S_COMMENT, IMG, TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, IMG, NICK
+		FROM (SELECT SC.S_COMMENT, UT1.IMG, SC.INPUT_DATE, UT1.NICK, ROW_NUMBER() OVER( ORDER BY SC.INPUT_DATE DESC) R_NUM
+        	  FROM S_COMMENT SC, USER_TABLE UT1, USER_TABLE UT2
+        	  WHERE ( UT1.ID = UT2.ID ) AND ( UT2.ID = SC.ID ) AND SC.S_NUM = #{ sNum }
+        	  )
 		ORDER BY R_NUM ASC
+	</select>
+
+	<select id="selectScommentCnt" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM S_COMMENT
+		WHERE S_NUM = #{sNum}
 	</select>
 	<!-- 스터디 상세 정보의 댓글 조회 -->
 	
@@ -76,8 +82,8 @@
 		values(#{ sNum }, #{ reply }, #{ id }, SYSDATE)
 	</insert>
 	
-	<select id="selectWriterImg" resultType="String" parameterType="kr.co.studystory.vo.ReplyVO">
-		SELECT IMG
+	<select id="selectWriterInfo" resultType="kr.co.studystory.domain.WriterInfoDomain" parameterType="kr.co.studystory.vo.ReplyVO">
+		SELECT IMG, NICK
 		FROM USER_TABLE
 		WHERE ID = #{id}
 	</select>

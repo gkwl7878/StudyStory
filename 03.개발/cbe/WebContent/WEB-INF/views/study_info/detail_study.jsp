@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
+<link href="/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
@@ -75,18 +75,22 @@
 							var output = "";
 							output += "<div class='media'>"
 							output += "	<div style='width: 95px; height: 95px; background-color: #F0F0F0; margin-right: 10px; text-align: center;'>"
-							output += "		<img src='http://localhost:8080/third_prj/study_img/" + json.img + "' class='w-100 h-100 align-self-start mr-3'>"
+							output += "		<img src='/third_prj/profile_img/" + json.img + "' class='w-100 h-100 align-self-start mr-3'>"
 							output += "	</div>"
 							output += "	<div class='col-lg-10' style='margin-top: 5px; padding-right: 0px;'>"
 							output += "		<div style='overflow: hidden'>"
-							output += "			<div class='mt-0' style='float: left;'>"+json.id+"</div>"
-							output += "			<div style='float: right;'>" + date.getFullYear() + "/" +(date.getMonth()+1) + "/" + date.getDate() + "/" + "</div>"
+							output += "			<div class='mt-0' style='float: left;'>"+json.nick+"</div>"
+							output += "			<div style='float: right;'>" + date.getFullYear() + "/0" +(date.getMonth()+1) + "/0" + date.getDate() + "</div>"
 							output += "		</div>"
 							output += "		<div style='margin-top: 15px;'>"+ input_reply +"</div>"
 							output += "	</div>"
 							output += "</div>"
 							output += "<div class='my-3 border-bottom'></div>"
 							
+							var cnt = $("#sc_cnt").text();
+							$("#sc_cnt").text(Number(cnt) + 1);
+							
+							 $("#reply_inputBox").val("");
 							$("#sComment_view").prepend(output);
 						}// end if
 					}
@@ -183,7 +187,7 @@
 							<div class="col-lg-9" style="font-size: 20px; padding: 30px">
 								<!-- 리더(스터디 개설자의 nick)-->
 								<strong>${ s_Info.nick }</strong>
-								<br />
+								<br/>
 								<p style="font-size: 13px;">
 									<c:out value="${ s_Info.introduce }" />
 								</p>
@@ -197,7 +201,7 @@
 					<div class="col-lg-12">
 						<div class="row" style="margin-bottom: 20px; font-weight: bold">
 							<!-- 댓글의 총 갯수. -->
-							<div class="col-lg-10">댓글 1</div>
+							<div class="col-lg-10">댓글 : <span id="sc_cnt"><c:out value="${scomment_cnt}"/></span>개</div>
 						</div>
 						<!-- 댓글 입력 폼 -->
 						<div class="row">
@@ -218,11 +222,11 @@
 									<c:forEach var="s_comment" items="${ sCommentList }">
 										<div class="media">
 											<div style="width: 95px; height: 95px; background-color: #F0F0F0; margin-right: 10px; text-align: center;">
-												<img src="/third_prj/study_img/${ s_comment.img }" class="w-100 h-100 align-self-start mr-3">
+												<img src="/third_prj/profile_img/${ s_comment.img }" class="w-100 h-100 align-self-start mr-3">
 											</div>
 											<div class="col-lg-10" style="margin-top: 5px; padding-right: 0px;">
 												<div style="overflow: hidden">
-													<div class="mt-0" style="float: left;">${ s_comment.id }</div>
+													<div class="mt-0" style="float: left;">${ s_comment.nick }</div>
 													<div style="float: right;">${ s_comment.input_date }</div>
 												</div>
 												<div style="margin-top: 15px;">${ s_comment.s_comment }</div>
@@ -230,7 +234,6 @@
 										</div>
 										
 										<div class="my-3 border-bottom"></div>
-										
 									</c:forEach>
 								</div>
 							</div>

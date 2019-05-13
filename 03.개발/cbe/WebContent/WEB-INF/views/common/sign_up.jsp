@@ -429,7 +429,7 @@
 					<option value="none">직접입력</option>
 					<option value="naver.com">naver.com</option>
 					<option value="hanmail.net">hanmail.net</option>
-					<option value="google.com">gmail.com</option>
+					<option value="gmail.com">gmail.com</option>
 					<option value="nate.net">nate.net</option>
 				</select>
 				<button type="button" id="dupEmail" class="btn btn-outline-secondary btn-adjust">중복확인</button>
