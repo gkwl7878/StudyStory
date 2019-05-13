@@ -3,8 +3,11 @@ package kr.co.studystory.controller;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -20,6 +23,7 @@ import kr.co.studystory.vo.FavFlagVO;
 import kr.co.studystory.vo.FavSNumFlagVO;
 import kr.co.studystory.vo.FavStudyOrderVO;
 import kr.co.studystory.vo.MainFavListVO;
+import kr.co.studystory.vo.MainLatestListVO;
 import kr.co.studystory.vo.SearchListVO;
 
 /**
@@ -42,31 +46,87 @@ public class StudySearchController {
 	 * @return
 	 */
 	@RequestMapping(value = "/study_info/main.do", method = { GET, POST })
-	public String mainPage(MainFavListVO mfl_vo, Model model, HttpSession session) {
+	public String mainPage(MainFavListVO mfl_vo, MainLatestListVO mll_vo, Model model, HttpSession session) {
 
 		// 세션이 만료 되었다면 로그인 페이지로.
 		if (session.getAttribute("id") == null) {
 			return "redirect:../index.do";
 		} // end if
 
-		System.out.println("///////////////////// 컨트롤 : " + mfl_vo.getFavStartNum() + " / " + mfl_vo.getFavEndNum());
-		
 		if (mfl_vo.getFavStartNum() == 0) {
 			mfl_vo.setFavStartNum(1);
 		} // end if
-	
+
 		if (mfl_vo.getFavEndNum() == 0) {
-			mfl_vo.setFavEndNum(4);;
+			mfl_vo.setFavEndNum(4);
+		} // end if
+
+		if (mll_vo.getLatestStartNum() == 0) {
+			mll_vo.setLatestStartNum(1);
+		} // end if
+
+		if (mll_vo.getLatestEndNum() == 0) {
+			mll_vo.setLatestEndNum(4);
 		} // end if
 
 		// 썸네일 리스트 생성.
 		List<ThumbnailDomain> favList = sis.getFavThList(mfl_vo);
+		List<ThumbnailDomain> latestList = sis.getLatestThList(mll_vo);
+
+		System.out.println("////////////////////////// 컨트롤 : " + favList);
+		System.out.println("////////////////////////// 컨트롤 : " + latestList);
 
 		// model 객체에 값 저장.
 		model.addAttribute("favList", favList);
+		model.addAttribute("latestList", latestList);
 
 		return "study_info/main";
 	}// mainPage
+
+	//////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * 메인 페이지의 요청처리.
+	 * 
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/mainProcess/mainProcess.do", method = GET)
+	public String mainProcess(MainFavListVO mfl_vo, MainLatestListVO mll_vo, HttpServletResponse response, Model model) {
+		JSONObject json = null;
+
+		// 인기 스터디로부터의 요청일 경우.
+		if (mll_vo.getLatestCurPage() == 0 && mfl_vo.getFavCurPage() != 0) {
+			int startNum = sis.mainStartNum(mfl_vo.getFavCurPage()); // DB에서 조회할 현재 페이지의 게시물의 시작 번호.
+			int endNum = sis.mainEndNum(startNum); // 현재 페이지의 게시물의 끝 번호
+
+			// 요청으로 부터 들어오는 값을 VO에 설정함.
+			mfl_vo.setFavStartNum(startNum); // 페이지 마다 조회할 시작 번호
+			mfl_vo.setFavEndNum(endNum);// 페이지 마다 조회할 끝 번호.
+
+			// JSON 얻기.
+			json = sis.getMainFavListProcess(mfl_vo);
+		} // end if
+
+		// 최신 스터디로 부터 요청일 경우.
+		if (mfl_vo.getFavCurPage() == 0 && mll_vo.getLatestCurPage() != 0) {
+			int startNum = sis.mainStartNum(mll_vo.getLatestCurPage()); // DB에서 조회할 현재 페이지의 게시물의 시작 번호.
+			int endNum = sis.mainEndNum(startNum); // 현재 페이지의 게시물의 끝 번호
+
+			System.out.println("/////////////////////////////// 컨트롤" + startNum + "/ /" + endNum);
+			
+			// 요청으로 부터 들어오는 값을 VO에 설정함.
+			mll_vo.setLatestStartNum(startNum); // 페이지 마다 조회할 시작 번호
+			mll_vo.setLatestEndNum(endNum);  ;// 페이지 마다 조회할 끝 번호.
+
+			// JSON 얻기.
+			json = sis.getMainLatestListProcess(mll_vo);
+		} // end if
+		
+		return json.toJSONString();
+	} // mainAjax
+
+	//////////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * 내 관심 스터디으로 부터의 요청 처리.

@@ -54,26 +54,14 @@
 
 <!-- 검색창 -->
 <script type="text/javascript">
-	$(function() {   // <input>요소에 문자가 입력될 때마다 호출됨.
-       
+	$(function() { // <input>요소에 문자가 입력될 때마다 호출됨.
+
 		// 검색버튼 눌렀을 때.
-        $("#word_search_btn").click(function() {
-        	
-        	var search_val = $("#word_search_inputBox").val();
-        	var move_search_flag = false;
-        	
-        	// 검색창에 아무것도 입력하지 않았을 때.
-        	if(search_val == "") {
-        		move_search_flag = confirm("스터디 찾기로 이동하시겠습니까?");
-        	}// end if
-        	
-        	if(move_search_flag) {
-        		$("#word_search_frm").submit();
-        	}// end if
-        	
-        }); // click
-        
-    }); // ready
+		$("#word_search_btn").click(function() {
+			$("#word_search_frm").submit();
+		}); // click
+
+	}); // ready
 </script>
 <!-- 검색창 -->
 
@@ -109,9 +97,11 @@
 				<input name="search_inputBox" id="word_search_inputBox"class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
 				<button id="word_search_btn" class="btn btn-outline-info my-2 my-sm-0 mr-sm-2" type="button">검색</button> 
 				<!-- 제안  -->
+				<!-- 
 				<div id="word_search_show" class="dropdown-menu" style="display: block;">
 				  <a id="word_suggest_item" class="dropdown-item" href="#">Action</a>
 				</div>
+				 -->
 				<!-- 제안  -->
 			</form>
 			<!-- 검색창 -->

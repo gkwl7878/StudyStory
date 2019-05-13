@@ -22,6 +22,7 @@ import kr.co.studystory.vo.FavStudyOrderVO;
 import kr.co.studystory.vo.JoinAlarmVO;
 import kr.co.studystory.vo.JoinFormVO;
 import kr.co.studystory.vo.MainFavListVO;
+import kr.co.studystory.vo.MainLatestListVO;
 import kr.co.studystory.vo.ReplyVO;
 import kr.co.studystory.vo.SearchListVO;
 
@@ -233,6 +234,22 @@ public class StudyInfoDAO {
 		List<ThumbnailDomain> list = null;
 		SqlSession ss = getSessionFatory().openSession();
 		list = ss.selectList("selectFavThList", mfl_vo);
+		
+		System.out.println("////////////////////////// 다오 : " + list);
+
+		ss.close();
+		return list;
+	}// selectHotStudies()
+
+	/**
+	 * 메인 페이지의 썸네일 리스트 조회 하는 메서드.
+	 * 
+	 * @return List<ThumbnailDomain>
+	 */
+	public List<ThumbnailDomain> selectLatestThList(MainLatestListVO mll_vo) {
+		List<ThumbnailDomain> list = null;
+		SqlSession ss = getSessionFatory().openSession();
+		list = ss.selectList("selectLatestThList", mll_vo);
 		ss.close();
 		return list;
 	}// selectHotStudies()
