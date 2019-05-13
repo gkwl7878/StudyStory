@@ -38,7 +38,7 @@
 <script type="text/javascript">
 	$(function() {
 		$('#summernote').summernote({
-			placeholder : '공지사항입니다  :)',
+			placeholder : '문의답변을 입력해주세요.  :)',
 			tabsize : 2,
 			height : 200,
 			lang : 'ko-KR'

@@ -9,6 +9,7 @@ package kr.co.studystory.vo;
 public class FavStudyOrderVO {
 
 	private String fav_order_select, fav_loc_select, fav_kind_select, my_id;
+	private int startNum, endNum, currentPage;
 
 	public String getFav_order_select() {
 		return fav_order_select;
@@ -42,10 +43,33 @@ public class FavStudyOrderVO {
 		this.my_id = my_id;
 	}
 
+	public int getStartNum() {
+		return startNum;
+	}
+
+	public void setStartNum(int startNum) {
+		this.startNum = startNum;
+	}
+
+	public int getEndNum() {
+		return endNum;
+	}
+
+	public void setEndNum(int endNum) {
+		this.endNum = endNum;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
 	@Override
 	public String toString() {
-		return "FavStudyOrderVO [fav_order_select=" + fav_order_select + ", fav_loc_select=" + fav_loc_select
-				+ ", fav_kind_select=" + fav_kind_select + ", my_id=" + my_id + "]";
+		return "FavStudyOrderVO [fav_order_select=" + fav_order_select + ", fav_loc_select=" + fav_loc_select + ", fav_kind_select=" + fav_kind_select + ", my_id=" + my_id + ", startNum=" + startNum + ", endNum=" + endNum + ", currentPage=" + currentPage + "]";
 	}// toString
 
 }// class

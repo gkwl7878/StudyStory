@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Custom styles for this template -->
-<link href="http://localhost:8080/third_prj/resources/css/jumbotron.css" rel="stylesheet">
+<link href="/third_prj/resources/css/jumbotron.css" rel="stylesheet">
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
@@ -75,7 +75,7 @@
 							var output = "";
 							output += "<div class='media'>"
 							output += "	<div style='width: 95px; height: 95px; background-color: #F0F0F0; margin-right: 10px; text-align: center;'>"
-							output += "		<img src='http://localhost:8080/third_prj/study_img/" + json.img + "' class='w-100 h-100 align-self-start mr-3'>"
+							output += "		<img src='/third_prj/profile_img/" + json.img + "' class='w-100 h-100 align-self-start mr-3'>"
 							output += "	</div>"
 							output += "	<div class='col-lg-10' style='margin-top: 5px; padding-right: 0px;'>"
 							output += "		<div style='overflow: hidden'>"
@@ -86,8 +86,11 @@
 							output += "	</div>"
 							output += "</div>"
 							output += "<div class='my-3 border-bottom'></div>"
+							
 							var cnt = $("#sc_cnt").text();
 							$("#sc_cnt").text(Number(cnt) + 1);
+							
+							 $("#reply_inputBox").val("");
 							$("#sComment_view").prepend(output);
 						}// end if
 					}
@@ -219,7 +222,7 @@
 									<c:forEach var="s_comment" items="${ sCommentList }">
 										<div class="media">
 											<div style="width: 95px; height: 95px; background-color: #F0F0F0; margin-right: 10px; text-align: center;">
-												<img src="/third_prj/study_img/${ s_comment.img }" class="w-100 h-100 align-self-start mr-3">
+												<img src="/third_prj/profile_img/${ s_comment.img }" class="w-100 h-100 align-self-start mr-3">
 											</div>
 											<div class="col-lg-10" style="margin-top: 5px; padding-right: 0px;">
 												<div style="overflow: hidden">

@@ -133,10 +133,11 @@ public class StudyMngController {
 		String loc= mr.getParameter("loc");
 		String content= mr.getParameter("content");
 		String currPage= mr.getParameter("currPage");
+		String searchCondition= mr.getParameter("searchCondition");
+		String searchWord= mr.getParameter("searchWord");
 		
 		String preImg= saus.searchPreImg(sNum);
 		
-		System.out.println("================="+content);
 		
 		File file = new File("C:/dev/StudyStory/03.°³¹ß/cbe/WebContent/study_img/"+preImg);
 		
@@ -160,7 +161,7 @@ public class StudyMngController {
 		
 		model.addAttribute("sModifyFlag", sModifyFlag);
 		
-		return "forward:study_detail.do?sNum="+sNum+"&currPage="+currPage;
+		return "forward:study_detail.do?sNum="+sNum+"&currPage="+currPage+"&searchCondition="+searchCondition+"&searchWord="+searchWord;
 	}
 	
 	/**
