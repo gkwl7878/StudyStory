@@ -2,6 +2,7 @@ package kr.co.studystory.service;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import kr.co.studystory.vo.FavSNumFlagVO;
 import kr.co.studystory.vo.FavStudyOrderVO;
 import kr.co.studystory.vo.JoinFormVO;
 import kr.co.studystory.vo.MainFavListVO;
+import kr.co.studystory.vo.MainLatestListVO;
 import kr.co.studystory.vo.ReplyVO;
 import kr.co.studystory.vo.SearchListVO;
 
@@ -70,12 +72,11 @@ public class StudyInfoService {
 	@SuppressWarnings("unchecked")
 	public JSONObject addReply(ReplyVO r_vo) {
 		JSONObject json = new JSONObject();
-		String nick = "";
 		WriterInfoDomain wid = si_dao.insertComment(r_vo);
 		if (!"".equals(wid.getNick())) {
 			json.put("result", true);
 			json.put("img", wid.getImg());
-			json.put("nick", nick);
+			json.put("nick", wid.getNick());
 		} // end if
 		return json;
 	}// addReply
@@ -133,6 +134,8 @@ public class StudyInfoService {
 
 	/******************* Search 페이지들 서비스. *******************/
 
+	//////////////////////////////////////// 메인
+
 	/**
 	 * 썸네일 리스트 얻기.
 	 * 
@@ -159,8 +162,202 @@ public class StudyInfoService {
 			} // end if
 		} // end for
 
+		System.out.println("////////////////////////// 서비스 : " + list);
+
 		return list;
 	}// getThumbnailList
+
+	/**
+	 * 썸네일 리스트 얻기.
+	 * 
+	 * @return List<ThumbnailDomain>
+	 */
+	public List<ThumbnailDomain> getLatestThList(MainLatestListVO mll_vo) {
+		List<ThumbnailDomain> list = null;
+		list = si_dao.selectLatestThList(mll_vo);
+
+		String changedNick = "";
+		String changedStudyName = "";
+
+		for (ThumbnailDomain td : list) {
+			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
+			if (td.getStudy_name().length() > 14) {
+				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
+				td.setStudy_name(changedStudyName);
+			} // end if
+
+			// 썸네일의 nick의 길이가 3을 넘어가면 "..." 처리.
+			if (td.getNick().length() > 3) {
+				changedNick = td.getNick().substring(0, 3) + "...";
+				td.setNick(changedNick);
+			} // end if
+		} // end for
+
+		return list;
+	}// getThumbnailList
+
+	/**
+	 * 썸네일 리스트 JSON으로 반환하기
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public JSONObject getMainFavListProcess(MainFavListVO mfl_vo) {
+		JSONObject json = new JSONObject();
+		JSONObject data = null;
+		JSONArray jsonArr = new JSONArray();
+
+		List<ThumbnailDomain> list = si_dao.selectFavThList(mfl_vo);
+
+		String changedNick = "";
+		String changedStudyName = "";
+
+		ThumbnailDomain td = null;
+
+		for (int i = 0; i < list.size(); i++) {
+
+			data = new JSONObject();
+
+			td = list.get(i);
+			
+			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
+			if (td.getStudy_name().length() > 14) {
+				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
+				td.setStudy_name(changedStudyName);
+			} // end if
+
+			// 썸네일의 nick의 길이가 3을 넘어가면 "..." 처리.
+			if (td.getNick().length() > 3) {
+				changedNick = td.getNick().substring(0, 3) + "...";
+				td.setNick(changedNick);
+			} // end if
+
+			data.put("s_num", td.getS_num());
+			data.put("study_name", td.getStudy_name());
+			data.put("loc", td.getLoc());
+			data.put("category", td.getCategory());
+			data.put("img", td.getImg());
+			data.put("recruitment", td.getRecruitment());
+			data.put("input_date", td.getInput_date());
+			data.put("nick", td.getNick());
+			data.put("user_img", td.getUser_img());
+
+			jsonArr.add(i, data);
+		} // end for
+		
+		json.put("jsonArr", jsonArr);
+		json.put("resultFlag", "fav");
+
+		return json;
+	}// getMainFavListProcess
+
+	
+	/**
+	 * 썸네일 리스트 JSON으로 반환하기
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public JSONObject getMainLatestListProcess(MainLatestListVO mll_vo) {
+		JSONObject json = new JSONObject();
+		JSONObject data = null;
+		JSONArray jsonArr = new JSONArray();
+		
+		List<ThumbnailDomain> list = si_dao.selectLatestThList(mll_vo);
+		
+		String changedNick = "";
+		String changedStudyName = "";
+		
+		ThumbnailDomain td = null;
+		
+		for (int i = 0; i < list.size(); i++) {
+			
+			data = new JSONObject();
+			
+			td = list.get(i);
+			
+			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
+			if (td.getStudy_name().length() > 14) {
+				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
+				td.setStudy_name(changedStudyName);
+			} // end if
+			
+			// 썸네일의 nick의 길이가 3을 넘어가면 "..." 처리.
+			if (td.getNick().length() > 3) {
+				changedNick = td.getNick().substring(0, 3) + "...";
+				td.setNick(changedNick);
+			} // end if
+			
+			data.put("s_num", td.getS_num());
+			data.put("study_name", td.getStudy_name());
+			data.put("loc", td.getLoc());
+			data.put("category", td.getCategory());
+			data.put("img", td.getImg());
+			data.put("recruitment", td.getRecruitment());
+			data.put("input_date", td.getInput_date());
+			data.put("nick", td.getNick());
+			data.put("user_img", td.getUser_img());
+			
+			jsonArr.add(i, data);
+		} // end for
+		
+		json.put("jsonArr", jsonArr);
+		json.put("resultFlag", "latest");
+		
+		return json;
+	}// getMainFavListProcess
+
+	/**
+	 * 한 페이지에 보여질 게시물의 수 얻는 메서드
+	 * 
+	 * @return
+	 */
+	public int mainPageScale() {
+		int pageScale = 4;
+		return pageScale;
+	}// pageScale
+
+	/**
+	 * 총 페이지 수 얻는 메서드
+	 * 
+	 * @param
+	 * @return
+	 */
+	public int mainTotalPage(int totalCount) {
+		// 페이지 당 게시물이 하나 라도 있으면 페이지가 생성 되어야 함.
+		// 전체 게시물에서 페이지당 보여줄 게시물의 수를 나눈뒤 올리을 해주기.
+		int totalPage = (int) Math.ceil((totalCount / (double) mainPageScale()));
+		return totalPage;
+	}// totalPage
+
+	/**
+	 * 시작페이지 처음 번호 구하는 메서드.
+	 * 
+	 * @param currentPage
+	 * @return
+	 */
+	public int mainStartNum(int currentPage) {
+		int startNum = 1;
+		// 페이지 당 시작 번호는 1, 7, 13 ... 으로 되어야 한다.
+		// 시작번호 = 6 ( 현재페이지의 게시물의 수 ) - 6 (한 화면에 보여질 게시물의수) + 1
+		startNum = (currentPage * mainPageScale()) - mainPageScale() + 1;
+		return startNum;
+	}// startNum
+
+	/**
+	 * 선택한 인덱스 리스트에서 조회할 끝번호
+	 * 
+	 * @param startNum
+	 * @return
+	 */
+	public int mainEndNum(int startNum) {
+		// 페이지당 끝 번호는 6, 12, 18 ... 으로 되어야 한다.
+		// 현재 페이지의 게시물의 끝 번호 구하기.
+		int endNum = startNum + mainPageScale() - 1;
+		return endNum;
+	} // endNum
+
+	//////////////////////////////////////// 메인
 
 	//////////////////////////////////////// 관심 스터디
 
