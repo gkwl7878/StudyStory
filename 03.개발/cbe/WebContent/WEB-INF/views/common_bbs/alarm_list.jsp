@@ -55,7 +55,7 @@
 								<td>[<c:out value="${ alarm.category }"/>]</td>
 								<td class="text-left"><c:out value="${ alarm.subject }"/></td>
 								<td><c:out value="${ alarm.input_date }"/></td>
-								<td>${ alarm.read_flag eq 'N' ? '안읽음' : '읽음' }</td>
+								<td>${ alarm.read_flag eq 'N' ? '<strong>안읽음</strong>' : '읽음' }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
