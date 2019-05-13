@@ -107,6 +107,8 @@
 	<form id="studyDetailFrm" action="study_modify.do" method="post" enctype="multipart/form-data" >
 	<input type="hidden" name="sNum" value="${param.sNum }"/>
 	<input type="hidden" name="currPage" value="${param.currPage}"/>
+	<input type="hidden" name="searchCondition" value="${param.searchCondition}"/>
+	<input type="hidden" name="searchWord" value="${param.searchWord}"/>
 	<div class="container form-group" id="wrap">
 		<div class="row">
 			<div class="col-2"></div>

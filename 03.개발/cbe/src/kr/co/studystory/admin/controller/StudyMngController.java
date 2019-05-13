@@ -133,6 +133,8 @@ public class StudyMngController {
 		String loc= mr.getParameter("loc");
 		String content= mr.getParameter("content");
 		String currPage= mr.getParameter("currPage");
+		String searchCondition= mr.getParameter("searchCondition");
+		String searchWord= mr.getParameter("searchWord");
 		
 		String preImg= saus.searchPreImg(sNum);
 		
@@ -159,7 +161,7 @@ public class StudyMngController {
 		
 		model.addAttribute("sModifyFlag", sModifyFlag);
 		
-		return "forward:study_detail.do?sNum="+sNum+"&currPage="+currPage;
+		return "forward:study_detail.do?sNum="+sNum+"&currPage="+currPage+"&searchCondition="+searchCondition+"&searchWord="+searchWord;
 	}
 	
 	/**
