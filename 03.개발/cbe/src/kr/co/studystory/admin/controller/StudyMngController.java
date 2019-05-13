@@ -118,6 +118,7 @@ public class StudyMngController {
 	 */
 	@RequestMapping(value="/admin/study_modify.do", method= {POST,GET})
 	public String modifyStudyProcess(DetailStudyVO ds_vo, Model model,HttpServletRequest request) {
+		
 		// 파일 업로드
 		MultipartRequest mr=null;
 		try {
@@ -132,21 +133,22 @@ public class StudyMngController {
 		String loc= mr.getParameter("loc");
 		String content= mr.getParameter("content");
 		String currPage= mr.getParameter("currPage");
+		String searchCondition= mr.getParameter("searchCondition");
+		String searchWord= mr.getParameter("searchWord");
 		
 		String preImg= saus.searchPreImg(sNum);
 		
 		
 		File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
-		if(!(preImg.equals("no_study_img.png"))){
-				if(file.exists()||img!=null) {
+		
+		if(img!=null) {
+			if(file.exists()){
 				file.delete();
 			}else {
 				System.out.println("파일이 존재하지 않습니다.");
 			}
-		}
-		
-		if(img==null) {
-			img ="no_study_img.png";
+		}else {
+			img =preImg;
 		}
 		
 		ds_vo.setCategory(category);
@@ -154,12 +156,12 @@ public class StudyMngController {
 		ds_vo.setContent(content);
 		ds_vo.setImg(img);
 		ds_vo.setsNum(sNum);
-		
+
 		boolean sModifyFlag= saus.modifyStudy(ds_vo);
 		
 		model.addAttribute("sModifyFlag", sModifyFlag);
 		
-		return "forward:study_detail.do?sNum="+sNum+"&currPage="+currPage;
+		return "forward:study_detail.do?sNum="+sNum+"&currPage="+currPage+"&searchCondition="+searchCondition+"&searchWord="+searchWord;
 	}
 	
 	/**

@@ -229,6 +229,18 @@
 	where id=#{id}
 </delete>
 
+<select id="selectJoinNum" parameterType="String" resultType="int">
+	SELECT COUNT(*) cnt
+	FROM join
+	WHERE id=#{ id }
+</select>
+
+<select id="selectMemNum" parameterType="String" resultType="int">
+	SELECT COUNT(*) cnt
+	FROM member
+	WHERE id=#{ id }
+</select>
+
 <!--//////////////////////////////////////////// Study Mapper////////////////////////////////////////////////// -->
 <resultMap type="kr.co.studystory.admin.domain.StudyInfo" id="studyInfoResult">
 	<result column="s_num" property="sNum"/>

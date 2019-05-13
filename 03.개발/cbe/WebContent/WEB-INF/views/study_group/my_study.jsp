@@ -202,7 +202,7 @@ function moveToDetail(pendingFlag, sNum) {
 										<div class="d-flex justify-content-center align-items-center mt-1 px-2">
 	
 											<div class="border border-secondary rounded-circle" style="width: 45px; height: 45px;">
-												<img src="/third_prj/profile_img/${ study.user_img }" class="card-img-top w-100 rounded-circle">
+												<img src="/third_prj/profile_img/${ study.user_img }" class="card-img-top w-100 h-100 rounded-circle">
 											</div>
 											
 											<div class="border-right p-2">

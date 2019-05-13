@@ -77,7 +77,7 @@
 						<tr class="text-center">
 							<th style="width: 100px">번호</th>
 							<th style="width: 500px">제목</th>
-							<th style="width: 100px">등록일</th>
+							<th style="width: 120px">등록일</th>
 							<th style="width: 100px">조회수</th>
 						</tr>
 					</thead>

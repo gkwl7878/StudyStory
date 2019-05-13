@@ -111,14 +111,6 @@ public class StudyGroupDAO {
 		return flag;
 	}
 	
-	public String selectPreImg(String sNum) {
-		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
-		String preImg= ss.selectOne("selectPreImg",sNum);
-		ss.close();
-		
-		return preImg;
-	}
-	
 	
 	//½ºÅÍµð Å»Åð
 	public String selectLeaderId(String s_num) {

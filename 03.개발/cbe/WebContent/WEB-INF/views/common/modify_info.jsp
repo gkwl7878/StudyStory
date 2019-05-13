@@ -198,7 +198,7 @@
 			</tr>
 		</table>
 		<div style="padding-left:180px ; padding-bottom: 30px; width: 700px">
-		<button type="button" class="btn btn-dark btn-lg bigBtn" onclick="location.href='modify_info.do'">돌아가기</button>
+		<button type="button" class="btn btn-dark btn-lg bigBtn" onclick="location.href='user_modify_menu.do'">돌아가기</button>
 		<button type="button" class="btn btn-outline-secondary btn-lg bigBtn" id="modifyBtn">수정</button>
 		</div>
   </form>

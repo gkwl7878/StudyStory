@@ -16,7 +16,7 @@
 	from join j, user_table ut
 	<!-- where j.id=ut.id -->
 	where s_num=#{s_num} and ut.id=j.id
-	order by j.input_date asc
+	order by j.input_date desc
 </select>
 	
 <select id="selectJoinerTotal" resultType="int" parameterType="String">
