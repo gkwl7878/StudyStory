@@ -21,6 +21,7 @@ import kr.co.studystory.vo.FavSNumFlagVO;
 import kr.co.studystory.vo.FavStudyOrderVO;
 import kr.co.studystory.vo.JoinAlarmVO;
 import kr.co.studystory.vo.JoinFormVO;
+import kr.co.studystory.vo.MainFavListVO;
 import kr.co.studystory.vo.ReplyVO;
 import kr.co.studystory.vo.SearchListVO;
 
@@ -228,10 +229,10 @@ public class StudyInfoDAO {
 	 * 
 	 * @return List<ThumbnailDomain>
 	 */
-	public List<ThumbnailDomain> selectThumbnailList() {
+	public List<ThumbnailDomain> selectFavThList(MainFavListVO mfl_vo) {
 		List<ThumbnailDomain> list = null;
 		SqlSession ss = getSessionFatory().openSession();
-		list = ss.selectList("selectThumbnailList");
+		list = ss.selectList("selectFavThList", mfl_vo);
 		ss.close();
 		return list;
 	}// selectHotStudies()
@@ -254,6 +255,19 @@ public class StudyInfoDAO {
 		ss.close();
 		return flag;
 	}// selectMyFavSNum
+
+	/**
+	 * 관심 스터디 썸네일의 갯수 조회.
+	 * 
+	 * @return
+	 */
+	public int selectFavStudyCnt(FavStudyOrderVO fso_vo) {
+		int cnt = 0;
+		SqlSession ss = getSessionFatory().openSession();
+		cnt = ss.selectOne("selectFavStudyCnt", fso_vo);
+		ss.close();
+		return cnt;
+	}// selectTotalThumbCnt
 
 	/**
 	 * 내 관심 스터디 썸네일 조회.
