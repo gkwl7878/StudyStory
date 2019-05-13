@@ -19,6 +19,7 @@ import kr.co.studystory.service.StudyInfoService;
 import kr.co.studystory.vo.FavFlagVO;
 import kr.co.studystory.vo.FavSNumFlagVO;
 import kr.co.studystory.vo.FavStudyOrderVO;
+import kr.co.studystory.vo.MainFavListVO;
 import kr.co.studystory.vo.SearchListVO;
 
 /**
@@ -41,23 +42,28 @@ public class StudySearchController {
 	 * @return
 	 */
 	@RequestMapping(value = "/study_info/main.do", method = { GET, POST })
-	public String mainPage(FavSNumFlagVO fsf_vo, Model model, HttpSession session) {
+	public String mainPage(MainFavListVO mfl_vo, Model model, HttpSession session) {
 
-		String id = (String) session.getAttribute("id");
-
+		// 세션이 만료 되었다면 로그인 페이지로.
 		if (session.getAttribute("id") == null) {
 			return "redirect:../index.do";
 		} // end if
 
-		// id가 null인 경우.
-		if (fsf_vo.getId() == null) {
-			fsf_vo.setId(id);
+		System.out.println("///////////////////// 컨트롤 : " + mfl_vo.getFavStartNum() + " / " + mfl_vo.getFavEndNum());
+		
+		if (mfl_vo.getFavStartNum() == 0) {
+			mfl_vo.setFavStartNum(1);
+		} // end if
+	
+		if (mfl_vo.getFavEndNum() == 0) {
+			mfl_vo.setFavEndNum(4);;
 		} // end if
 
 		// 썸네일 리스트 생성.
-		List<ThumbnailDomain> list = sis.getThumbnailList(fsf_vo);
+		List<ThumbnailDomain> favList = sis.getFavThList(mfl_vo);
+
 		// model 객체에 값 저장.
-		model.addAttribute("thumbnail_list", list);
+		model.addAttribute("favList", favList);
 
 		return "study_info/main";
 	}// mainPage
@@ -105,7 +111,8 @@ public class StudySearchController {
 		List<ThumbnailDomain> list = sis.getMyFavStudy(fso_vo);
 
 		// 페이지네이션의 URL을 설정 하기 위한 문자열
-		String responseURL = "../interest/show_interest_study.do?fav_order_select=" + fso_vo.getFav_order_select() + "&fav_loc_select=" + fso_vo.getFav_loc_select() + "&fav_kind_select=" + fso_vo.getFav_kind_select();
+		String responseURL = "../interest/show_interest_study.do?fav_order_select=" + fso_vo.getFav_order_select()
+				+ "&fav_loc_select=" + fso_vo.getFav_loc_select() + "&fav_kind_select=" + fso_vo.getFav_kind_select();
 
 		// 썸네일 리스트 생성.
 
@@ -115,9 +122,8 @@ public class StudySearchController {
 		model.addAttribute("responseURL", responseURL);
 		model.addAttribute("currentPage", fso_vo.getCurrentPage());
 		model.addAttribute("pageIndexNum", pageIndexNum);
-		model.addAttribute("startPage",startPage);
-		model.addAttribute("endPage",endPage);
-
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 
 		return "study_info/show_interest_study";
 	}// studyLikedPage
@@ -133,14 +139,16 @@ public class StudySearchController {
 		JSONObject json = null;
 		String id = (String) session.getAttribute("id");
 
-		System.out.println("///////////////////// 컨트롤 : " + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+		System.out.println(
+				"///////////////////// 컨트롤 : " + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
 
 		// vo에 아이디 설정하기.
 		if (ff_vo.getMy_id() == null) {
 			ff_vo.setMy_id(id);
 		} // end if
 
-		System.out.println("///////////////////// 컨트롤 - 제이슨 넣기 위한 : " + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
+		System.out.println("///////////////////// 컨트롤 - 제이슨 넣기 위한 : " + ff_vo.getsNum() + " / " + ff_vo.getColor()
+				+ " / " + ff_vo.getMy_id());
 		json = sis.heartProcess(ff_vo);
 
 		return json.toJSONString();
@@ -159,7 +167,8 @@ public class StudySearchController {
 		String id = (String) session.getAttribute("id");
 		fsf_vo.setId(id);
 
-		System.out.println("////////////////////////컨트롤 : " + " 정렬/ " + sl_vo.getOrder_select() + " 지역/ " + sl_vo.getLoc_select() + " 종류/ " + sl_vo.getKind_select() + " 입력/ " + sl_vo.getSearch_inputBox());
+		System.out.println("////////////////////////컨트롤 : " + " 정렬/ " + sl_vo.getOrder_select() + " 지역/ "
+				+ sl_vo.getLoc_select() + " 종류/ " + sl_vo.getKind_select() + " 입력/ " + sl_vo.getSearch_inputBox());
 
 		// 최초 호출시 초기화된 현재 페이지를 1페이지로 설정.
 		if (sl_vo.getCurrentPage() == 0) {
@@ -199,11 +208,13 @@ public class StudySearchController {
 		// 페이지네이션의 URL을 설정 하기 위한 문자열
 		String responseURL = "";
 		if ("".equals(sl_vo.getSearch_inputBox())) { // 검색창을 이용하지 않았을 때.
-			responseURL = "../search/search.do?order_select=" + sl_vo.getOrder_select() + "&loc_select=" + sl_vo.getLoc_select() + "&kind_select=" + sl_vo.getKind_select();
+			responseURL = "../search/search.do?order_select=" + sl_vo.getOrder_select() + "&loc_select="
+					+ sl_vo.getLoc_select() + "&kind_select=" + sl_vo.getKind_select();
 		} // end if
 
 		if (!"".equals(sl_vo.getSearch_inputBox())) {
-			responseURL = "search.do?order_select=" + sl_vo.getOrder_select() + "&loc_select=" + sl_vo.getLoc_select() + "&kind_select=" + sl_vo.getKind_select() + "&search_inputBox=" + sl_vo.getSearch_inputBox();
+			responseURL = "search.do?order_select=" + sl_vo.getOrder_select() + "&loc_select=" + sl_vo.getLoc_select()
+					+ "&kind_select=" + sl_vo.getKind_select() + "&search_inputBox=" + sl_vo.getSearch_inputBox();
 		} // end if
 
 		// model 객체에 값 저장.
@@ -213,8 +224,8 @@ public class StudySearchController {
 		model.addAttribute("currentPage", sl_vo.getCurrentPage());
 		model.addAttribute("inputWord", sl_vo.getSearch_inputBox());
 		model.addAttribute("pageIndexNum", pageIndexNum);
-		model.addAttribute("startPage",startPage);
-		model.addAttribute("endPage",endPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 
 		return "study_info/search";
 	}// searchStudy
