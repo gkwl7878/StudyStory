@@ -194,6 +194,7 @@ public class StudyAndUserDAO {
 		if (deleteJoinRecord(id, ss, joinNum) && deleteMemberRecord(id, ss, memNum)
 				&& ss.update("updateDelUser",id) == 1) {
 			ss.commit();
+			updateRemoveUser=true;
 		}
 		ss.close();
 		
