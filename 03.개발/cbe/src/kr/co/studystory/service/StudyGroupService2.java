@@ -140,7 +140,6 @@ public class StudyGroupService2 {
 	
 	public boolean removeJoin(JoinDeleteVO jdvo) {
 		boolean flag = false;
-		System.out.println("=====================22222222222222222");
 		flag = sg_dao.deleteJoin(jdvo);
 		return flag;
 	}

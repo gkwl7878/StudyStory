@@ -235,8 +235,6 @@ public class StudyInfoDAO {
 		SqlSession ss = getSessionFatory().openSession();
 		list = ss.selectList("selectFavThList", mfl_vo);
 		
-		System.out.println("////////////////////////// 다오 : " + list);
-
 		ss.close();
 		return list;
 	}// selectHotStudies()
@@ -265,7 +263,6 @@ public class StudyInfoDAO {
 		int cnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
 		cnt = ss.selectOne("selectMyFavSNumCNT", fsf_vo);
-		System.out.println("///////////////////////// dao : " + cnt);
 		if (cnt == 1) {
 			flag = true;
 		} // end if
@@ -311,7 +308,6 @@ public class StudyInfoDAO {
 	public int insertFavStudy(FavFlagVO ff_vo) {
 		int resultCnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
-		System.out.println("///////////////////// 다오" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
 
 		resultCnt = ss.insert("insertFavStudy", ff_vo);
 		// 정상적으로 추가가 되었을 경우 커밋하기.
@@ -330,8 +326,6 @@ public class StudyInfoDAO {
 	public int deleteFavStudy(FavFlagVO ff_vo) {
 		int resultCnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
-		System.out.println("///////////////////// 다오" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
-
 		resultCnt = ss.delete("deleteFavStudy", ff_vo);
 		if (resultCnt == 1) {
 			ss.commit();

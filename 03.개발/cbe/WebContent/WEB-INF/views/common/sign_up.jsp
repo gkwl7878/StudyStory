@@ -68,7 +68,7 @@
   			// 한글 아이디 방지
   			var tempId = id.replace(/[ㄱ-힣]/g,"");
   			if (id.length != tempId.length) {
-  				alert("아이디는 영문으로만 생성가능합니다.");
+  				alert("아이디는 영문으로만 생성가능합니다");
   				$("#id").val("");
   				$("#id").focus();
   				return;
@@ -115,7 +115,7 @@
   			// 한글 email 방지
   			var tempEmail1 = email1.replace(/[ㄱ-힣~!@#$%^&*()_+={}\[\];:]/g,"");
   			if (email1.length != tempEmail1.length) {
-  				alert("이메일은 영문과 숫자로만 입력가능합니다.");
+  				alert("이메일은 영문과 숫자로만 입력가능합니다");
   				$("#email1").val("");
   				$("#email1").focus();
   				return;
@@ -130,7 +130,7 @@
   			// 한글 email 방지
   			var tempEmail2 = email2.replace(/[ㄱ-힣~!@#$%^&*()_+={}\[\];:]/g,"");
   			if (email2.length != tempEmail2.length) {
-  				alert("이메일은 영문과 숫자로만 입력가능합니다.");
+  				alert("이메일은 영문과 숫자로만 입력가능합니다");
   				$("#email2").val("");
   				$("#email2").focus();
   				return;

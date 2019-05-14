@@ -317,11 +317,4 @@ public class StudyAndUserDAO {
 		List<String> preSnum= ss.selectList("selectDeleteSnum",id);
 		return preSnum;
 	}
-	
-	
-	public static void main(String[] args) {
-		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
-		System.out.println(sau_dao.selectStudyMember("s_000041"));
-	}
-	
 }

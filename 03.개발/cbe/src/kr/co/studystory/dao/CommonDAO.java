@@ -364,16 +364,4 @@ public class CommonDAO {
 		
 		return flag;
 	}
-	
-	/*public static void main(String[] args) {
-		
-		ProfileVO pv = new ProfileVO();
-		pv.setId("young333");
-		pv.setNick("¿À·æ·æ");
-		pv.setIntroduce("¹Ý°©½À´Ï´Ù ³¸¼±ÀÌ¿©");
-		pv.setImg("¹«½¼.jpg");
-		
-		System.out.println(CommonDAO.getInstance().updateProfile(pv));
-		
-	}*/
 }

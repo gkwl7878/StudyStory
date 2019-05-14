@@ -50,9 +50,6 @@ public class AlarmController {
 		NewAlarm na = null;
 		List<NewAlarm> list = cbs.getNewAlarms((String)session.getAttribute("id"));
 		
-		System.out.println((String)session.getAttribute("id"));
-		System.out.println(list);
-		
 		for(int i=0; i<list.size(); i++) {
 			na = list.get(i);
 			json = new JSONObject();

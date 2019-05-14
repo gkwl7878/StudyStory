@@ -119,12 +119,8 @@
 					console.log(xhr.status + " / " + xhr.statusText);
 				},
 				success : function(json) {
-					alert("응답받음.");
-					alert(json.result);
-
 					// 추가인 경우.
 					if (json.result == "toI") {
-						alert("추가성공");
 						// 하트 색 바꿔 주기.
 						heart_node.attr("class", "red_heart heart");
 
@@ -176,14 +172,11 @@
 			
 			if (id.indexOf("fav") != -1 ) {
 				flag = "favCurPage=" + page;
-				alert(flag);
 			}// end if
 
 			if (id.indexOf("latest") != -1 ) {
 				flag = "latestCurPage=" + page;
 			}// end if
-			
-			alert(page);
 			
 			$.ajax({
 				url : "../mainProcess/mainProcess.do?",
@@ -197,8 +190,6 @@
 				success : function(json) {
 					
 					var jsonArr = json.jsonArr;
-
-					alert(jsonArr);
 					
 					// 인기순일때.
 					if (json.resultFlag == "fav") {

@@ -53,7 +53,7 @@
 						$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="jpg"||
 						$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="jpeg"||
 						$("#real_file").val().substr($("#real_file").val().lastIndexOf(".")+1).toLowerCase()=="gif")){
-					alert("이미지 파일형식이 아닙니다.");
+					alert("이미지 파일형식이 아닙니다");
 					return;
 				}
 			}

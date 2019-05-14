@@ -176,10 +176,4 @@ public class CommonMngService {
 		
 		return endPage;
 	}
-	
-	
-	public static void main(String[] args) {
-		CommonMngService cms= new CommonMngService();
-		System.out.println();
-	}
 }

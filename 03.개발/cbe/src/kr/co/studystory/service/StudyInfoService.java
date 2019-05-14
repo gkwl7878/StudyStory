@@ -162,8 +162,6 @@ public class StudyInfoService {
 			} // end if
 		} // end for
 
-		System.out.println("////////////////////////// 서비스 : " + list);
-
 		return list;
 	}// getThumbnailList
 
@@ -417,16 +415,12 @@ public class StudyInfoService {
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject heartProcess(FavFlagVO ff_vo) {
-		System.out.println(
-				"///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
 		JSONObject json = new JSONObject();
 		String strFlag = "";
 		int cnt = 0;
 
 		// '좋아요'하지 않은 썸네일인 경우 - 인서트 하기.
 		if ("gray".equals(ff_vo.getColor())) {
-			System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / "
-					+ ff_vo.getMy_id());
 			// 인서트 DB 작업 실행.
 			cnt = si_dao.insertFavStudy(ff_vo);
 			// DB작업이 정상적으로 동작 되었을 때.
@@ -439,8 +433,6 @@ public class StudyInfoService {
 		// 이전에 이미 '좋아요'했던 썸네일인 경우 - 지우기.
 		if ("red".equals(ff_vo.getColor())) {
 			// 인서트 DB 작업 실행.
-			System.out.println("///////////////////// 서비스" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / "
-					+ ff_vo.getMy_id());
 
 			cnt = si_dao.deleteFavStudy(ff_vo);
 			// DB작업이 정상적으로 동작 되었을 때.

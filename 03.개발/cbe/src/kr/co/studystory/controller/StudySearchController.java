@@ -70,9 +70,6 @@ public class StudySearchController {
 		List<ThumbnailDomain> favList = sis.getFavThList(mfl_vo);
 		List<ThumbnailDomain> latestList = sis.getLatestThList(mll_vo);
 
-		System.out.println("////////////////////////// 컨트롤 : " + favList);
-		System.out.println("////////////////////////// 컨트롤 : " + latestList);
-
 		// model 객체에 값 저장.
 		model.addAttribute("favList", favList);
 		model.addAttribute("favCurPage", 1);
@@ -116,8 +113,6 @@ public class StudySearchController {
 		if (mfl_vo.getFavCurPage() == 0 && mll_vo.getLatestCurPage() != 0) {
 			int startNum = sis.mainStartNum(mll_vo.getLatestCurPage()); // DB에서 조회할 현재 페이지의 게시물의 시작 번호.
 			int endNum = sis.mainEndNum(startNum); // 현재 페이지의 게시물의 끝 번호
-
-			System.out.println("/////////////////////////////// 컨트롤" + startNum + "/ /" + endNum);
 
 			// 요청으로 부터 들어오는 값을 VO에 설정함.
 			mll_vo.setLatestStartNum(startNum); // 페이지 마다 조회할 시작 번호
@@ -214,14 +209,11 @@ public class StudySearchController {
 		JSONObject json = null;
 		String id = (String) session.getAttribute("id");
 
-		System.out.println("///////////////////// 컨트롤 : " + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
-
 		// vo에 아이디 설정하기.
 		if (ff_vo.getMy_id() == null) {
 			ff_vo.setMy_id(id);
 		} // end if
 
-		System.out.println("///////////////////// 컨트롤 - 제이슨 넣기 위한 : " + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
 		json = sis.heartProcess(ff_vo);
 
 		return json.toJSONString();
@@ -244,8 +236,6 @@ public class StudySearchController {
 
 		String id = (String) session.getAttribute("id");
 		fsf_vo.setId(id);
-
-		System.out.println("////////////////////////컨트롤 : " + " 정렬/ " + sl_vo.getOrder_select() + " 지역/ " + sl_vo.getLoc_select() + " 종류/ " + sl_vo.getKind_select() + " 입력/ " + sl_vo.getSearch_inputBox());
 
 		// 최초 호출시 초기화된 현재 페이지를 1페이지로 설정.
 		if (sl_vo.getCurrentPage() == 0) {

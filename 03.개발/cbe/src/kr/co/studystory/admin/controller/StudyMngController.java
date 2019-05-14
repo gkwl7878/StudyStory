@@ -157,8 +157,6 @@ public class StudyMngController {
 		if(img!=null) {
 			if(file.exists()){
 				file.delete();
-			}else {
-				System.out.println("파일이 존재하지 않습니다.");
 			}
 		}else {
 			img =preImg;

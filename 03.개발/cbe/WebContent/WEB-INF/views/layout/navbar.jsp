@@ -31,7 +31,6 @@
 						alert("에러코드 : "+xhr+status+", 에러 메시지 : "+xhr.statusText);
 					},
 					success:function(jsonArr) {
-						console.log(jsonArr);
 						var jsonArrLength = jsonArr.length;
 						if (jsonArrLength == 0) {
 							$("#alarmMenu").append("<a class='dropdown-item' href='../common_bbs/alarm.do'>더보기</a>");

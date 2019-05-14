@@ -73,20 +73,6 @@ public class StudyGroupDAO3 {
 		return list;
 	}//selectAppliedStudy
 	
-	
-	
-	/*public static void main(String[] args) {
-		
-		ConditionVO cdvo = new ConditionVO();
-		cdvo.setId("young3");
-		cdvo.setCategory("Ãë¾÷");
-		cdvo.setLoc("È«´ë");
-		
-		StudyGroupDAO2 sgd = new StudyGroupDAO2();
-		System.out.println(sgd.selectStudyImade(cdvo));
-		
-	}*/
-	
 }//class
 
 

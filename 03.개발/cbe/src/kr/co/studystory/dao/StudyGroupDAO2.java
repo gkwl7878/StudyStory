@@ -147,26 +147,4 @@ public class StudyGroupDAO2 {
 		ss.close();
 		return flag;
 	}
-	
-	
-	//단위테스트
-	public static void main(String[] args) {
-		//ApplicantBbsVO abvo=new ApplicantBbsVO();
-		//abvo.setsNum("s_000069");
-		/*abvo.setBegin(1);
-		abvo.setEnd(2);
-		abvo.setCurrPage(1);*/
-		
-		//sg_dao.selectJoinerList(new ApplicantBbsVO());
-		//System.out.println(sgd.selectJoinerList(abvo));
-		StudyGroupDAO2 sgd=new StudyGroupDAO2();
-		
-		DetailJoinerVO djvo=new DetailJoinerVO();
-		djvo.setId("wjdaks12");
-		djvo.setS_num("s_000069");
-		sg_dao.selectJoiner(new DetailJoinerVO());//왜 여기서 null이 나오지?
-		System.out.println(sgd.selectJoiner(djvo));
-		
-	} 
-	
 }
