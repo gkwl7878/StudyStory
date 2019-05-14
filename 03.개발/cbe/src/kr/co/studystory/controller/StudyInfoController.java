@@ -58,10 +58,8 @@ public class StudyInfoController {
 			model.addAttribute("memberFlag", true);
 		} else if (sis.didIrequest(dmvo)) { // 스터디 신청했는지
 			model.addAttribute("joinerFlag", true);
-		}// end if
+		} // end if
 
-		
-		
 		StudyInfoDomain sInfo = sis.getStudyInfo(sNum); // 스터디 상세 정보 가져오기.
 		List<StudyCommentDomain> sCommentList = sis.getStudyComment(sNum); // 스터디 상세정보의 댓글 List 가져오기.
 		int cnt = sis.getScommentCnt(sNum);
@@ -73,8 +71,6 @@ public class StudyInfoController {
 		return "study_info/detail_study";
 	}// studyInfoPage()
 
-	/*********************************** 진행중 ****/
-
 	/**
 	 * 스터디 상세 정보 페이지의 댓글로 부터의 요청 처리.
 	 * 
@@ -83,18 +79,20 @@ public class StudyInfoController {
 	@ResponseBody // DispatcherServlet을 거치지 않고 바로 응답.
 	@RequestMapping(value = "/detail/add_reply.do", method = POST)
 	public String studyInfoReply(ReplyVO r_vo, HttpSession session) {
+
+		// 세션이 만료 되었다면 로그인 페이지로.
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		} // end if
+
 		JSONObject json = null;
 		String id = (String) session.getAttribute("id");
 		if (r_vo.getId() == null) {
 			r_vo.setId(id);
 		} // end if
-		// 값 확인 하기.
-		System.out.println("==============================="+r_vo);
 		json = sis.addReply(r_vo);
 		return json.toJSONString();
 	}// addComment()
-
-	/*********************************** 진행중 ****/
 
 	/**
 	 * 스터디 가입 요청 페이지으로 부터의 요청 처리. 보완수정 by 영근 190502
@@ -104,6 +102,11 @@ public class StudyInfoController {
 	@RequestMapping(value = "/study_info/study_req_join.do", method = GET)
 	public String joinPage(String sNum, Model model, HttpSession session) {
 		LeaderOfJoinDomain loj = sis.getLeaderOfJoin(sNum);
+
+		// 세션이 만료 되었다면 로그인 페이지로.
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		} // end if
 
 		// session.getAttribute는 속성의 값을 가져오는 것이다. - sessionScope을 사용하는 것이 아니다.
 		String my_nick = (String) session.getAttribute("nick");
@@ -122,7 +125,12 @@ public class StudyInfoController {
 	 * @return
 	 */
 	@RequestMapping(value = "/study_info/join_process.do", method = POST)
-	public String joinProcess(JoinFormVO jf_vo, Model model) {
+	public String joinProcess(JoinFormVO jf_vo, Model model, HttpSession session) {
+
+		// 세션이 만료 되었다면 로그인 페이지로.
+		if (session.getAttribute("id") == null) {
+			return "redirect:../index.do";
+		} // end if
 
 		if (sis.addJoinStudy(jf_vo)) {
 			model.addAttribute("joinReqSuccess", true);

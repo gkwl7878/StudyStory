@@ -150,8 +150,8 @@ public class StudyInfoService {
 
 		for (ThumbnailDomain td : list) {
 			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
-			if (td.getStudy_name().length() > 14) {
-				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
+			if (td.getStudy_name().length() > 10) {
+				changedStudyName = td.getStudy_name().substring(0, 10) + "...";
 				td.setStudy_name(changedStudyName);
 			} // end if
 
@@ -181,8 +181,8 @@ public class StudyInfoService {
 
 		for (ThumbnailDomain td : list) {
 			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
-			if (td.getStudy_name().length() > 14) {
-				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
+			if (td.getStudy_name().length() > 10) {
+				changedStudyName = td.getStudy_name().substring(0, 10) + "...";
 				td.setStudy_name(changedStudyName);
 			} // end if
 
@@ -221,8 +221,8 @@ public class StudyInfoService {
 			td = list.get(i);
 			
 			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
-			if (td.getStudy_name().length() > 14) {
-				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
+			if (td.getStudy_name().length() > 10) {
+				changedStudyName = td.getStudy_name().substring(0, 10) + "...";
 				td.setStudy_name(changedStudyName);
 			} // end if
 
@@ -277,8 +277,8 @@ public class StudyInfoService {
 			td = list.get(i);
 			
 			// 썸네일의 스터디 이름이 14자 이상일 경우 "..." 처리.
-			if (td.getStudy_name().length() > 14) {
-				changedStudyName = td.getStudy_name().substring(0, 14) + "...";
+			if (td.getStudy_name().length() > 10) {
+				changedStudyName = td.getStudy_name().substring(0, 10) + "...";
 				td.setStudy_name(changedStudyName);
 			} // end if
 			

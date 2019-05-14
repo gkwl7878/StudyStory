@@ -35,6 +35,11 @@
 	enable-responsive-font-sizes: ture;
 }
 
+.thumb:hover{
+	color: blue;
+}
+
+
 .custom_jumbo {
 	min-height: 350px;
 	background-image:

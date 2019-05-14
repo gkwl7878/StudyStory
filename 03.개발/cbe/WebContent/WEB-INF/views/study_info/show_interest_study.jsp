@@ -200,11 +200,9 @@
 								<div class="card mb-4 shadow-sm">
 									<div class="card-body text-center p-0">
 
-										<div>
-											<div>
-												<!-- 썸네일 스터디 이미지 -->
-												<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="width: 100%; height: 180px;" />
-											</div>
+										<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }" style="color: #333; text-decoration: none;">
+											<!-- 썸네일 스터디 이미지 -->
+											<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="width: 100%; height: 180px;" />
 											<div id="moveTo" class="px-3 pt-3">
 												<div class="d-flex justify-content-end align-items-center mb-3">
 													<div class="mr-5">
@@ -221,7 +219,7 @@
 													</p>
 												</div>
 											</div>
-										</div>
+										</a>
 
 										<div class="d-flex justify-content-between align-items-center mb-3 px-3">
 											<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
