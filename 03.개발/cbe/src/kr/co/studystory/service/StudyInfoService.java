@@ -247,6 +247,7 @@ public class StudyInfoService {
 		
 		json.put("jsonArr", jsonArr);
 		json.put("resultFlag", "fav");
+		json.put("favCurPage", mfl_vo.getFavCurPage());
 
 		return json;
 	}// getMainFavListProcess
@@ -303,6 +304,7 @@ public class StudyInfoService {
 		
 		json.put("jsonArr", jsonArr);
 		json.put("resultFlag", "latest");
+		json.put("latestCurPage", mll_vo.getLatestCurPage());
 		
 		return json;
 	}// getMainFavListProcess

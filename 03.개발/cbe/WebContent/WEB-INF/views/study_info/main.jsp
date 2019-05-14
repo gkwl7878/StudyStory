@@ -156,11 +156,30 @@
 
 	$(function() {
 		
+		$(".page-link").keydown(function(key) {
+      	if (key.keyCode == 13) {
+      		key.preventDefault();
+      	}// end if
+      });// keydown
+		
 		$(".page-link").click(function() {
 			
-			var flag = $(this).val();
+
+			var page = $(this).val();
 			
-			alert(flag);
+			var id = $(this).attr("id");
+			var flag = "";
+			
+			if (id.indexOf("fav") != -1 ) {
+				flag = "favCurPage=" + page;
+				alert(flag);
+			}// end if
+
+			if (id.indexOf("latest") != -1 ) {
+				flag = "latestCurPage=" + page;
+			}// end if
+			
+			alert(page);
 			
 			$.ajax({
 				url : "../mainProcess/mainProcess.do?",
@@ -236,13 +255,46 @@
 					// 인기순일때.
 					if (json.resultFlag == "fav") {
 						$("#favThumbView").append(output);
+						
+						$("#favPrev").val(json.favCurPage - 1);
+						$("#favNext").val(json.favCurPage + 1);
+						
+						if ($("#favPrev").val() != 0 && $("#favNext").val() != 4) {
+							$("#favLiPrev").attr("class", "paginate_button page-item next");
+							$("#favLiNext").attr("class", "paginate_button page-item next");
+						}
+						
+						if( $("#favPrev").val() == 0 ){
+							$("#favLiPrev").attr("class", "paginate_button page-item next disabled");
+						}// end if
+
+						if( $("#favNext").val() == 4 ){
+							$("#favLiNext").attr("class", "paginate_button page-item next disabled");
+						}// end if
+						
 					}// end if
 
 					// 최신순일때.
 					if (json.resultFlag == "latest") {
 						$("#latestThumbView").append(output);
+
+						$("#latestPrev").val(json.latestCurPage - 1);
+						$("#latestNext").val(json.latestCurPage + 1);
+						
+						if ($("#latestPrev").val() != 0 && $("#latestNext").val() != 4) {
+							$("#latestLiPrev").attr("class", "paginate_button page-item next");
+							$("#latestLiNext").attr("class", "paginate_button page-item next");
+						}
+
+						if( $("#latestPrev").val() == 0 ){
+							$("#latestLiPrev").attr("class", "paginate_button page-item next disabled");
+						}// end if
+
+						if( $("#latestNext").val() == 4 ){
+							$("#latestLiNext").attr("class", "paginate_button page-item next disabled");
+						}// end if
 					}// end if
-					
+				
 				}// success
 				
 			}); // ajax
@@ -280,13 +332,13 @@
 					<div class="justify-content-center border-bottom p-2">
 						<ul class="pagination mb-0" style="vertical-align: middle; height: 38px;">
 							<li class="mr-auto" style="font-size: 24px;">인기 스터디</li>
-							<li class="paginate_button page-item previous">
-								<button class="page-link" value="favCurPage=1">
+							<li id="favLiPrev" class="paginate_button page-item previous disabled">
+								<button id="favPrev" class="page-link" value="${ favCurPage - 1 }">
 									<span aria-hidden="true">&laquo;</span>
 								</button>
 							</li>
-							<li class="paginate_button page-item next">
-								<button class="page-link" value="favCurPage=2">
+							<li id="favLiNext" class="paginate_button page-item next">
+								<button id="favNext" class="page-link" value="${ favCurPage + 1 }">
 									<span aria-hidden="true">&raquo;</span>
 								</button>
 							</li>
@@ -347,13 +399,13 @@
 					<div class="justify-content-center border-bottom p-2">
 						<ul class="pagination mb-0" style="vertical-align: middle; height: 38px;">
 							<li class="mr-auto" style="font-size: 24px;">최신 스터디</li>
-							<li class="paginate_button page-item previous">
-								<button class="page-link" value="latestCurPage=1">
+							<li id="latestLiPrev" class="paginate_button page-item previous disabled">
+								<button id="latestPrev" class="page-link" value="${ latestCurPage - 1 }">
 									<span aria-hidden="true">&laquo;</span>
 								</button>
 							</li>
-							<li class="paginate_button page-item next">
-								<button class="page-link" value="latestCurPage=2">
+							<li id="latestLiNext" class="paginate_button page-item next">
+								<button id="latestNext" class="page-link" value="${ latestCurPage + 1 }">
 									<span aria-hidden="true">&raquo;</span>
 								</button>
 							</li>
