@@ -47,11 +47,20 @@
 		location.replace("login.do");
 		</c:if>
 		$("#modifyBtn").click(function() {
+			
+			var subject = $("#subject").val();
+  			
+  			if(subject == "") {
+  				alert("제목을 입력해주세요");
+  				$("#subject").focus();
+  				return;
+  			}
+  			
 			$("#noticeDetailFrm").submit();
 		})
 	});
 	<c:if test="${nModifyFlag }">
-	alert("스터디 정보가 수정 되었습니다");
+		alert("공지사항이 수정 되었습니다");
 	</c:if>
 	
 	function delete_confirm(){
@@ -82,7 +91,7 @@
 
 			<div class="row">
 				<div class="col-9 " style="margin-top: 10px; margin-left: 100px;">
-					<input type="text" name="subject" size="46"  style="font-size: 25px;" value="${subject }" />
+					<input type="text" name="subject" id="subject" size="46"  style="font-size: 25px;" value="${subject }" />
 				</div>
 			</div>
 			<div class="row">
