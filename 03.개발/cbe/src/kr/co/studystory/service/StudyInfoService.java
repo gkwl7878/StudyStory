@@ -73,10 +73,10 @@ public class StudyInfoService {
 	public JSONObject addReply(ReplyVO r_vo) {
 		JSONObject json = new JSONObject();
 		WriterInfoDomain wid = si_dao.insertComment(r_vo);
-		if (!"".equals(wid.getNick())) {
+		if (!"".equals(wid.getImg())) {
 			json.put("result", true);
 			json.put("img", wid.getImg());
-			json.put("nick", wid.getNick());
+			json.put("input_date", wid.getInput_date());
 		} // end if
 		return json;
 	}// addReply

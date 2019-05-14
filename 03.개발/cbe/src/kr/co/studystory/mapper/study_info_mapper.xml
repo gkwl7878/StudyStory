@@ -78,14 +78,17 @@
 	
 	<!-- 댓글 인서트 -->
 	<insert id="insertComment" parameterType="kr.co.studystory.vo.ReplyVO">
-		insert into s_comment(s_num, s_comment, id, input_date)
-		values(#{ sNum }, #{ reply }, #{ id }, SYSDATE)
+		insert into s_comment(s_num, s_comment, id)
+		values(#{ sNum }, #{ reply }, #{ id })
 	</insert>
 	
 	<select id="selectWriterInfo" resultType="kr.co.studystory.domain.WriterInfoDomain" parameterType="kr.co.studystory.vo.ReplyVO">
-		SELECT IMG, NICK
-		FROM USER_TABLE
-		WHERE ID = #{id}
+		select img, input_date
+    from 	 (SELECT rownum r, u.IMG, to_char(s.input_date, 'yyyy-mm-dd') input_date
+						FROM USER_TABLE u, s_comment s
+						WHERE s.id = #{ id } and s.id = u.id and s.s_num = #{ sNum }
+						order by s.input_date desc)
+		where r=1
 	</select>
 	<!-- 댓글 인서트 -->
 

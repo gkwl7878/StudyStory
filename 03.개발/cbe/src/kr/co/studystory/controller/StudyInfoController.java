@@ -89,7 +89,7 @@ public class StudyInfoController {
 			r_vo.setId(id);
 		} // end if
 		// 값 확인 하기.
-		System.out.println("//////////////////////////////// 컨틀로 : " + r_vo.getId() + "/" + r_vo.getReply() + "/" + r_vo.getsNum());
+		System.out.println("==============================="+r_vo);
 		json = sis.addReply(r_vo);
 		return json.toJSONString();
 	}// addComment()

@@ -44,57 +44,57 @@
 			// 댓글을 입력하지 않고 댓글달기 버튼을 눌렀을 경우.
 			if (input_reply == "") {
 				alert("먼저 댓글을 입력해 주세요.");
+				$("#reply_btn").focus();
 				return;
 			}// end if
 
-			// 댓글을 100자 이상 입려한 경우.
-			if (input_reply.length > 100) {
+			// 댓글을 100자 이상 입려한 경우.(HTML로 maxlength 줘서 지워도 되는 검증)
+			/* if (input_reply.length > 100) {
 				alert("댓글을 100자 이상 입력하셨습니다.");
 				return;
-			}// end if
+			}// end if */
 
 			// 정상입력된 경우 서브밋 하기.
 			if (input_reply != "" && input_reply.length < 100) {
 				
-				// 쿼리스트링 만들기
-				var query_string = "reply=" + input_reply + "&sNum=" + $("#ref_num").val();
-				
-				$.ajax({
-					url : "../detail/add_reply.do",
-					data : query_string,
-					type : "post",
-					dataType : "json",
-					error : function(xhr) {
-						alert("댓글 작성 실패");
-						console.log(xhr.status + " / " + xhr.statusText);					
-					}, 
-					success : function( json ) {
-						if( json.result ) {
-							var date = new Date();
-							
-							var output = "";
-							output += "<div class='media'>"
-							output += "	<div style='width: 95px; height: 95px; background-color: #F0F0F0; margin-right: 10px; text-align: center;'>"
-							output += "		<img src='/third_prj/profile_img/" + json.img + "' class='w-100 h-100 align-self-start mr-3'>"
-							output += "	</div>"
-							output += "	<div class='col-lg-10' style='margin-top: 5px; padding-right: 0px;'>"
-							output += "		<div style='overflow: hidden'>"
-							output += "			<div class='mt-0' style='float: left;'>"+json.nick+"</div>"
-							output += "			<div style='float: right;'>" + date.getFullYear() + "/0" +(date.getMonth()+1) + "/0" + date.getDate() + "</div>"
-							output += "		</div>"
-							output += "		<div style='margin-top: 15px;'>"+ input_reply +"</div>"
-							output += "	</div>"
-							output += "</div>"
-							output += "<div class='my-3 border-bottom'></div>"
-							
-							var cnt = $("#sc_cnt").text();
-							$("#sc_cnt").text(Number(cnt) + 1);
-							
-							 $("#reply_inputBox").val("");
-							$("#sComment_view").prepend(output);
-						}// end if
-					}
-				}); // ajax
+			// 쿼리스트링 만들기
+			var query_string = "reply=" + encodeURIComponent(input_reply) + "&sNum=" + $("#ref_num").val();
+			
+			$.ajax({
+				url : "../detail/add_reply.do",
+				data : query_string,
+				type : "post",
+				dataType : "json",
+				error : function(xhr) {
+					alert("댓글 작성 실패");
+					console.log(xhr.status + " / " + xhr.statusText);					
+				}, 
+				success : function( json ) {
+					if( json.result ) {
+						
+						var output = "";
+						output += "<div class='media'>"
+						output += "	<div style='width: 95px; height: 95px; background-color: #F0F0F0; margin-right: 10px; text-align: center;'>"
+						output += "		<img src='/third_prj/profile_img/" + json.img + "' class='w-100 h-100 align-self-start mr-3'>"
+						output += "	</div>"
+						output += "	<div class='col-lg-10' style='margin-top: 5px; padding-right: 0px;'>"
+						output += "		<div style='overflow: hidden'>"
+						output += "			<div class='mt-0' style='float: left;'>${ sessionScope.nick }</div>"
+						output += "			<div style='float: right;'>"+json.input_date+"</div>"
+						output += "		</div>"
+						output += "		<div style='margin-top: 15px;'>"+ input_reply +"</div>"
+						output += "	</div>"
+						output += "</div>"
+						output += "<div class='my-3 border-bottom'></div>"
+						
+						var cnt = $("#sc_cnt").text();
+						$("#sc_cnt").text(Number(cnt) + 1);
+						
+						 $("#reply_inputBox").val("");
+						$("#sComment_view").prepend(output);
+					}// end if
+				}
+			}); // ajax
 			}// end if
 		});
 	}); // ready
