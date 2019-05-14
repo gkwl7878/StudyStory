@@ -178,7 +178,7 @@ public class CommonService {
 		int maxSize = 1024*1024*10;
 		String name = "";
 		
-		File uploadDir = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/profile_img");
+		File uploadDir = new File("C:/release_0515/profile_img");
 		
 		// 1. 생성 - 파일 업로드
 		MultipartRequest mr = null;
@@ -190,7 +190,7 @@ public class CommonService {
 			String prevImg = mr.getParameter("prevImg");
 			
 			if (!"no_user_img.png".equals(prevImg)) {
-				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/profile_img/"
+				File file = new File("C:/release_0515/profile_img/"
 						+prevImg);
 				
 				if (file.exists()) { // 파일이 존재하면 삭제

@@ -10,8 +10,8 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
   
   <title>신청자 상세보기 페이지</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -35,7 +35,7 @@
     <div style="height:20px;"></div>
     <!-- 점보트론 : 전광판 -->
 		<div align="center">
-		<img src="/third_prj/profile_img/${jrInfo.img}" style="float: inherit; margin-top: 20px; margin-left: 30px ;="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" /><br/><br/>
+		<img src="http://211.63.89.144/profile_img/${jrInfo.img}" style="float: inherit; margin-top: 20px; margin-left: 30px ;="Card image cap" onerror="this.src='http://211.63.89.144/resources/images/not_find_image.png'" /><br/><br/>
 		<span style="vertical-align: bottom;"><h2>${jrInfo.nick}<!-- 닉네임 : 신규에용 --></h2></span>
 		</div>
 		<hr  color="gray" >
@@ -80,9 +80,9 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="/third_prj/resources/js/popper.min.js" ></script>
-  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
+  <script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="http://211.63.89.144/resources/js/popper.min.js" ></script>
+  <script src="http://211.63.89.144/resources/js/bootstrap.min.js" ></script>
 	
 
 	

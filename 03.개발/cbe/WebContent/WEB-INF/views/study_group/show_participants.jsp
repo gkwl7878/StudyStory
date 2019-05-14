@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
 
 <title>참여자 보기</title>
 <style>
@@ -58,7 +58,7 @@
 					<c:forEach var="mbwiList" items="${mbwi }">
 								<div class="col-2.5">
 									<div class="card mb-4 shadow-sm text-center " style="margin-left: 20px">
-										<img class="card-img-top" src="/third_prj/profile_img/${mbwiList.img}" onerroalt="Card image cap" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img">
+										<img class="card-img-top" src="http://211.63.89.144/profile_img/${mbwiList.img}" onerroalt="Card image cap" onerror="this.src='http://211.63.89.144/resources/images/not_find_image.png'" id="profile_img">
 										<div class="card-body">
 											<strong import!><p class="card-title">${ mbwiList.nick }</p></strong>
 											<p class="card-text">${ mbwiList.tel }</p>
@@ -84,8 +84,8 @@
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="/third_prj/resources/js/popper.min.js"></script>
-	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/popper.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

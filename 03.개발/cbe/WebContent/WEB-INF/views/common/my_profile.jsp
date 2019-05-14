@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
 <!-- 폰트 CSS -->
-<link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
 <title>프로필 관리</title>
 <style>
 /* 프로필 작성 */
@@ -117,7 +117,7 @@ $(function() {
 				<!-- 왼쪽 사용자 이미지-->
 				<div class="col-auto">
 					<div class="card border-0 pr-0" style="width: 260px;">
-						<img style="width: 200px; height: 200px;" id="img" src="/third_prj/profile_img/${ prevProfile.img }" class="card-img-top mx-auto d-block rounded-circle mt-3" alt="...">
+						<img style="width: 200px; height: 200px;" id="img" src="http://211.63.89.144/profile_img/${ prevProfile.img }" class="card-img-top mx-auto d-block rounded-circle mt-3" alt="...">
 						<div class="card-body text-center pt-0">
 							<h5 class="card-title text-center m-4">프로필 사진</h5>
 							<a href="#" class="btn btn-sm btn-primary mb-4" id="uploadImgBtn">이미지 변경</a>
@@ -184,7 +184,7 @@ $(function() {
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="/third_prj/resources/js/popper.min.js"></script>
-	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/popper.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

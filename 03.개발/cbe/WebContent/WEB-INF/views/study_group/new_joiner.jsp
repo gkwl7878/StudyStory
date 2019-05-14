@@ -8,11 +8,11 @@
 
 <title>스터디 신청자 보기</title>
 
-<link href="/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="http://211.63.89.144/resources/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
+<script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://211.63.89.144/resources/js/bootstrap.bundle.min.js"></script>
 </body>
 </head>
 <body>
@@ -54,7 +54,7 @@
 								<c:set var="i" value="${ i+1 }"/>
 								<td><c:out value="${ (totalCnt-(currPage-1)*pageScale-i)+1 }"/></td>
 								<td>
-									<img src="/third_prj/profile_img/${jbList.img}" width="100" height="120" onerror="this.src='/third_prj/resources/images/not_find_image.png'" id="profile_img"/>
+									<img src="http://211.63.89.144/profile_img/${jbList.img}" width="100" height="120" onerror="this.src='http://211.63.89.144/resources/images/not_find_image.png'" id="profile_img"/>
 									<br />
 								<div>
 									<span class="text-center"><strong>${jbList.nick }</strong></span>

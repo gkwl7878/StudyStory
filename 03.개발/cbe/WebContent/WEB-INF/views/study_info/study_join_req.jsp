@@ -60,11 +60,11 @@ div {
 </style>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="/third_prj/resources/js/popper.min.js"></script>
-<script src="/third_prj/resources/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
+<script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://211.63.89.144/resources/js/popper.min.js"></script>
+<script src="http://211.63.89.144/resources/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css" />
 <title>스터디 참여 신청</title>
 <!-- Custom styles for this template -->
 
@@ -123,7 +123,7 @@ div {
 				<tbody>
 					<tr style="vertical-align: middle;">
 						<td scope="row">
-							<img src="/third_prj/profile_img/${ leader.leaderImg }" width="100" height="100">
+							<img src="http://211.63.89.144/profile_img/${ leader.leaderImg }" width="100" height="100">
 							<br />${ leader.nick }</td>
 						<td style="vertical-align: middle;">${ leader.studyName }</td>
 					</tr>

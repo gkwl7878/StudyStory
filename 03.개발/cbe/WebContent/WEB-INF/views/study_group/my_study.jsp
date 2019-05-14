@@ -5,9 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
 <!-- 폰트 CSS -->
-<link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
 
 <title>내 스터디</title>
 <style>
@@ -37,7 +37,7 @@ a:hover {
 <script type="text/javascript">
 $(function() {
 	$(".pending").hover(function() { 
-		$(this).children("img:first").prop("src","/third_prj/resources/images/pending_leader.png");
+		$(this).children("img:first").prop("src","http://211.63.89.144/resources/images/pending_leader.png");
 		$(this).children("img:first").show();
 		$(this).children("div:first").hide();
 	}, function() {
@@ -46,7 +46,7 @@ $(function() {
 	});
 	
 	$(".deactive").hover(function() {
-		$(this).children("img:first").prop("src","/third_prj/resources/images/closed.png");
+		$(this).children("img:first").prop("src","http://211.63.89.144/resources/images/closed.png");
 		$(this).children("img:first").show();
 		$(this).children("div:first").hide();
 	}, function() {
@@ -90,7 +90,7 @@ function moveToDetail(pendingFlag, sNum) {
 				<!-- 왼쪽 사용자 상태 -->
 				<div class="col-auto">
 					<div class="card" style="width: 250px;">
-						<img src="/third_prj/profile_img/${ myImg }" style="width:200px; height:200px;" class="card-img-top w-75 mx-auto d-block rounded-circle mt-3">
+						<img src="http://211.63.89.144/profile_img/${ myImg }" style="width:200px; height:200px;" class="card-img-top w-75 mx-auto d-block rounded-circle mt-3">
 						<div class="card-body text-center pt-0">
 							<h6 class="card-title text-center my-3">
 								<strong>닉네임</strong>
@@ -185,7 +185,7 @@ function moveToDetail(pendingFlag, sNum) {
 							<div class="card mb-4 shadow-sm pending" onclick="moveToDetail('pending','${ study.s_num }')">
 								<img width="100%" height="350" style="display:none"/>
 								<div>
-									<img class="card-img-top" src="/third_prj/study_img/${ study.study_img }" width="100%" height="200">
+									<img class="card-img-top" src="http://211.63.89.144/study_img/${ study.study_img }" width="100%" height="200">
 									<div class="card-body text-center p-3" style="min-height:150px;">
 	
 										<div class="d-flex justify-content-end align-items-center mb-3">
@@ -202,7 +202,7 @@ function moveToDetail(pendingFlag, sNum) {
 										<div class="d-flex justify-content-center align-items-center mt-1 px-2">
 	
 											<div class="border border-secondary rounded-circle" style="width: 45px; height: 45px;">
-												<img src="/third_prj/profile_img/${ study.user_img }" class="card-img-top w-100 h-100 rounded-circle">
+												<img src="http://211.63.89.144/profile_img/${ study.user_img }" class="card-img-top w-100 h-100 rounded-circle">
 											</div>
 											
 											<div class="border-right p-2">
@@ -228,7 +228,7 @@ function moveToDetail(pendingFlag, sNum) {
 								onclick="moveToDetail('active','${ study.s_num }')">
 								<img width="100%" height="350" style="display:none"/>
 								<div>
-									<img class="card-img-top" src="/third_prj/study_img/${ study.study_img }" width="100%" height="200">
+									<img class="card-img-top" src="http://211.63.89.144/study_img/${ study.study_img }" width="100%" height="200">
 									<div class="card-body text-center p-3" style="min-height:150px;">
 	
 										<div class="d-flex justify-content-end align-items-center mb-3">
@@ -245,7 +245,7 @@ function moveToDetail(pendingFlag, sNum) {
 										<div class="d-flex justify-content-center align-items-center mt-1 px-2">
 										
 											<div class="border border-secondary rounded-circle" style="width: 45px; height: 45px;">
-												<img src="/third_prj/profile_img/${ study.user_img }" class="card-img-top w-100 h-100 rounded-circle">
+												<img src="http://211.63.89.144/profile_img/${ study.user_img }" class="card-img-top w-100 h-100 rounded-circle">
 											</div>
 											
 											<div class="border-right p-2">
@@ -287,8 +287,8 @@ function moveToDetail(pendingFlag, sNum) {
 	<!-- footer -->
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-	<script src="/third_prj/resources/js/popper.min.js"></script>
-	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/popper.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

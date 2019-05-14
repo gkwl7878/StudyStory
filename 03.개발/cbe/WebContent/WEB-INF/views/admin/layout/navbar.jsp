@@ -4,7 +4,7 @@
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="new_study.do">Study Story</a>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="/third_prj/admin/logout.do">로그아웃</a>
+      <a class="nav-link" href="http://211.63.89.144/admin/logout.do">로그아웃</a>
     </li>
   </ul>
 </nav>

@@ -6,13 +6,13 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
 	<title>스터디 공지 리스트</title>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="/third_prj/resources/js/popper.min.js" ></script>
-  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
+  <script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="http://211.63.89.144/resources/js/popper.min.js" ></script>
+  <script src="http://211.63.89.144/resources/js/bootstrap.min.js" ></script>
   <style type="text/css">
   	.select-card:hover {
   		background-color:#F1F3F4;
@@ -102,12 +102,12 @@
    			 		<c:out value="${ studyNotice.commentNum eq '0' ? '' : studyNotice.commentNum}"/>
    			 	</span>
    			 </div>
-   			 <div style="float:right;"><a href="javascript:location.href='../study_notice/modify.do?sn_num=${ studyNotice.snNum }&s_num=${ param.s_num }'"><img src="/third_prj/resources/images/setting.png" width="20" height="20"/></a></div>
+   			 <div style="float:right;"><a href="javascript:location.href='../study_notice/modify.do?sn_num=${ studyNotice.snNum }&s_num=${ param.s_num }'"><img src="http://211.63.89.144/resources/images/setting.png" width="20" height="20"/></a></div>
    			 <br/>
 		    <p class="card-text">
 		    	<p class="text-left">
 		    		<span style="font-size:12px;"><c:out value="${ studyNotice.inputDate }"/></span>
-		    		<img src="/third_prj/profile_img/${ studyNotice.img }" width="50" height="60" style="float:right;"/>
+		    		<img src="http://211.63.89.144/profile_img/${ studyNotice.img }" width="50" height="60" style="float:right;"/>
 		    	</p>
 	    	</p>
    		</div>

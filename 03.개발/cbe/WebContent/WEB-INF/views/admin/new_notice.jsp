@@ -21,16 +21,16 @@
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
 
 <title>새 공지사항</title>
 <!-- Custom styles for this template -->
-<link href="/third_prj/resources/css/admin_dashboard.css" rel="stylesheet">
-<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
-<script src="/third_prj/resources/js/feather-icons/4.9.0/feather.min.js"></script>
-<script src="/third_prj/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
-<script src="/third_prj/resources/js/admin_dashboard.js"></script>
+<link href="http://211.63.89.144/resources/css/admin_dashboard.css" rel="stylesheet">
+<script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://211.63.89.144/resources/js/bootstrap.bundle.min.js"></script>
+<script src="http://211.63.89.144/resources/js/feather-icons/4.9.0/feather.min.js"></script>
+<script src="http://211.63.89.144/resources/js/Chart.js/2.7.3/Chart.min.js"></script>
+<script src="http://211.63.89.144/resources/js/admin_dashboard.js"></script>
 
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
@@ -97,8 +97,8 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="/third_prj/resources/js/popper.min.js"></script>
-	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/popper.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/bootstrap.min.js"></script>
 
 </body>
 </html>

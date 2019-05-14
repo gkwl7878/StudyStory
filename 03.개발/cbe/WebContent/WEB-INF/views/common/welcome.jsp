@@ -7,14 +7,14 @@
   <style type="text/css">
 		#wrap{ margin:0px auto; margin-top:200px; width: 700px; min-height: 800px; }
    	body {
-			background-image: url("/third_prj/resources/images/cover.png");
+			background-image: url("http://211.63.89.144/resources/images/cover.png");
 			background-size: 100%;
 		}
   </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
   <title>회원가입을 환영합니다</title>
   <!-- Custom styles for this template -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -27,7 +27,7 @@
       <form>
 		<br/><br/>
 		<div style= "width: 800px; padding:40px ; "><br/><br/>
-		<img src="/third_prj/resources/images/welcome.png"  style="float: left; width:200px; height:200px;">
+		<img src="http://211.63.89.144/resources/images/welcome.png"  style="float: left; width:200px; height:200px;">
 		<h3 style="color: #333333; margin-left: 280px "><Strong>환영합니다!</Strong></h3><br/>
 		<div style="margin-left: 280px">
 		<h5><c:out value="${ name }"/>님 회원가입을 완료 했습니다.</h5>
@@ -46,7 +46,7 @@
   </div>
 	
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="/third_prj/resources/js/popper.min.js" ></script>
-  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
+  <script src="http://211.63.89.144/resources/js/popper.min.js" ></script>
+  <script src="http://211.63.89.144/resources/js/bootstrap.min.js" ></script>
 </body>
 </html>

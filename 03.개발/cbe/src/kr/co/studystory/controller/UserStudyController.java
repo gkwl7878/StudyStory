@@ -126,7 +126,7 @@ public class UserStudyController {
 		MultipartRequest mr=null;
 		
 		try {
-			mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/",
+			mr = new MultipartRequest(request,"C:/release_0515/study_img/",
 					1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -143,7 +143,7 @@ public class UserStudyController {
 			img= mr.getFilesystemName("file");
 			// 기존 파일을 삭제해야 함
 			if(!("no_study_img.png".equals(prevImg))){ // 이전 이미지명이 기본 이미지명이 아니면
-				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+prevImg);
+				File file = new File("C:/release_0515/study_img/"+prevImg);
 				
 				if(file.exists()) {
 					file.delete();

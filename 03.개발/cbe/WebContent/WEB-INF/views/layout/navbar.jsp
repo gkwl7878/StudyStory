@@ -12,9 +12,9 @@
 			},
 			success:function(json) {
 				if(json.newAlarmFlag) {
-					$("#showNewAlarm").attr("src", "/third_prj/resources/images/nav_icon_alarm_new.png");
+					$("#showNewAlarm").attr("src", "http://211.63.89.144/resources/images/nav_icon_alarm_new.png");
 				} else {
-					$("#showNewAlarm").attr("src", "/third_prj/resources/images/nav_icon_alarm.png");
+					$("#showNewAlarm").attr("src", "http://211.63.89.144/resources/images/nav_icon_alarm.png");
 				}
 			}
 		});
@@ -89,7 +89,7 @@
 				<li class="nav-item"><a class="nav-link text-secondary" href="../search/search.do">스터디 찾기</a></li>
 				<li class="nav-item"><a class="nav-link text-secondary" href="../study_group/create_study.do">스터디 만들기</a></li>
 			</ul>
-			<a class="navbar-brand mx-auto text-dark" href="../study_info/main.do"><img src="/third_prj/resources/images/study_story_logo2.png" width="140" height="40"/></a>
+			<a class="navbar-brand mx-auto text-dark" href="../study_info/main.do"><img src="http://211.63.89.144/resources/images/study_story_logo2.png" width="140" height="40"/></a>
 			
 			<!-- 검색창 : 엔터 서브밋 막기. -->
 			<form id="word_search_frm" class="form-inline my-2 my-lg-0" action="../search/search.do" method="get">
@@ -108,14 +108,14 @@
 			<ul class="navbar-nav text-center">
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" id="my_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img class="rounded-circle" src="/third_prj/resources/images/nav_icon_alarm.png" id="showNewAlarm" style="width: 36px; height: 36px;">
+						<img class="rounded-circle" src="http://211.63.89.144/resources/images/nav_icon_alarm.png" id="showNewAlarm" style="width: 36px; height: 36px;">
 					</a>
 					<div class="dropdown-menu" aria-labelledby="notice" id="alarmMenu">
 					</div>
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link" href="#" id="my_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img class="rounded-circle" src="/third_prj/resources/images/nav_icon_my_page.png" style="width: 35px; height: 35px;">
+						<img class="rounded-circle" src="http://211.63.89.144/resources/images/nav_icon_my_page.png" style="width: 35px; height: 35px;">
 					</a>
 					<div class="dropdown-menu" aria-labelledby="my_menu">
 						<a class="dropdown-item" href="../study_group/my_study.do">내 스터디</a>

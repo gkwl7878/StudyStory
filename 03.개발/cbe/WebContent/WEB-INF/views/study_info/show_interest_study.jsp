@@ -7,13 +7,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- 폰트 CSS -->
-<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css" />
 <!-- Custom styles for this template -->
-<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
-<link href="/third_prj/resources/css/jumbotron.css" rel="stylesheet">
-<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="/third_prj/resources/js/popper.min.js"></script>
-<script src="/third_prj/resources/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
+<link href="http://211.63.89.144/resources/css/jumbotron.css" rel="stylesheet">
+<script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://211.63.89.144/resources/js/popper.min.js"></script>
+<script src="http://211.63.89.144/resources/js/bootstrap.min.js"></script>
 
 <title>관심 스터디 보기</title>
 <style>
@@ -33,12 +33,12 @@
 }
 
 .red_heart {
-	background: url("/third_prj/study_img/like_icon.png") no-repeat;
+	background: url("http://211.63.89.144/study_img/like_icon.png") no-repeat;
 	background-size: 100%;
 }
 
 .gray_heart {
-	background: url("/third_prj/study_img/dislike_icon.png") no-repeat;
+	background: url("http://211.63.89.144/study_img/dislike_icon.png") no-repeat;
 	background-size: 100%;
 }
 
@@ -204,7 +204,7 @@
 
 										<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }" style="color: #333; text-decoration: none;">
 											<!-- 썸네일 스터디 이미지 -->
-											<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="width: 100%; height: 180px;" />
+											<img class="card-img-top" src="http://211.63.89.144/study_img/${ thumbnail.img }" style="width: 100%; height: 180px;" />
 											<div id="moveTo" class="px-3 pt-3">
 												<div class="d-flex justify-content-end align-items-center mb-3">
 													<div class="mr-5">
@@ -226,7 +226,7 @@
 										<div class="d-flex justify-content-between align-items-center mb-3 px-3">
 											<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
 												<!-- 썸네일 리더의 이미지 -->
-												<img src="/third_prj/profile_img/${ thumbnail.user_img }" class="card-img-top w-100 rounded-circle" style="width: 45px; height: 45px;">
+												<img src="http://211.63.89.144/profile_img/${ thumbnail.user_img }" class="card-img-top w-100 rounded-circle" style="width: 45px; height: 45px;">
 											</div>
 
 											<div class="border-right p-2">

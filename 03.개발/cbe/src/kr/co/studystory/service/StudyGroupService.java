@@ -52,7 +52,7 @@ public class StudyGroupService {
 		boolean flag=false;
 
 		try {
-			MultipartRequest mr = new MultipartRequest(request, "C:/dev/StudyStory/03.°³¹ß/cbe/WebContent/study_img/",
+			MultipartRequest mr = new MultipartRequest(request, "C:/release_0515/study_img/",
 					 1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
 
 			ns_vo.setCategory(mr.getParameter("category"));

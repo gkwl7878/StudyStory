@@ -6,13 +6,13 @@
 <head>
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+  <link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
 	<title>스터디 공지 수정</title>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js" ></script>
-  <script src="/third_prj/resources/js/popper.min.js" ></script>
-  <script src="/third_prj/resources/js/bootstrap.min.js" ></script>
+  <script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js" ></script>
+  <script src="http://211.63.89.144/resources/js/popper.min.js" ></script>
+  <script src="http://211.63.89.144/resources/js/bootstrap.min.js" ></script>
   <style type="text/css">
   
   .font20bold {
@@ -26,7 +26,7 @@
   }
   
   </style>
-	<script src="/third_prj/resources/summernote/bootstrap.js"></script> 
+	<script src="http://211.63.89.144/resources/summernote/bootstrap.js"></script> 
 	<!-- include summernote css/js, font깨짐으로 CDN이용해서 summernote 사용 -->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
   <!-- daum map api -->
@@ -183,7 +183,7 @@
   			$("#hwTab:last").append(
   					"<tr><td width='100' style='text-align:center;'><span class='font12bold'>"+nick+"</span></td>"
   		  		+"<td width='400'><span class='font12bold' style='padding-left:20px;'>"+workload+"</span></td>"
-  		  		+"<td width='100' style='text-align:right;'><a href='#'><img onclick='deleteHw(this)' src='/third_prj/resources/images/minus.png' style='width:20px; height:20px;'/></a></td></tr>"
+  		  		+"<td width='100' style='text-align:right;'><a href='#'><img onclick='deleteHw(this)' src='http://211.63.89.144/resources/images/minus.png' style='width:20px; height:20px;'/></a></td></tr>"
   			);
   			
   			nickArr[i] = nick;
@@ -274,7 +274,7 @@
 		     			<td width='100' style='text-align:center;'><span class='font12bold'><c:out value="${ hwdata.nick }"/></span></td>
 		     			<td width='400'><span class='font12bold' style='padding-left:20px;'><c:out value="${ hwdata.workload }"/></span></td>
 		     			<td width='100' style='text-align:right;'>
-		     				<a href='#'><img onclick='deleteHw(this)' src='/third_prj/resources/images/minus.png' style='width:20px; height:20px;'/></a>
+		     				<a href='#'><img onclick='deleteHw(this)' src='http://211.63.89.144/resources/images/minus.png' style='width:20px; height:20px;'/></a>
 		     			</td>
 		     		</tr>
 		     	</c:forEach>
@@ -319,7 +319,7 @@
 	<!-- footer -->
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
-	<script src="/third_prj/resources/summernote/summernote-ko-KR.js"></script>
+	<script src="http://211.63.89.144/resources/summernote/summernote-ko-KR.js"></script>
 	<script>
 	  $('#summernote').summernote({
 	    lang: 'ko-KR', 

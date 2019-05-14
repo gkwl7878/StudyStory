@@ -9,8 +9,8 @@
     <title>관리자 로그인</title>
 
     <!-- Bootstrap core CSS -->
-		<link href="/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+		<link href="http://211.63.89.144/resources/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script type="text/javascript">
 
@@ -59,7 +59,7 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="/third_prj/resources/css/signin.css" rel="stylesheet">
+    <link href="http://211.63.89.144/resources/css/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
    <form class="form-signin" action="login_proc.do" method="POST" id="frm">

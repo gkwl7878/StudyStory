@@ -5,14 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
 <!-- 폰트 CSS -->
-<link rel="stylesheet" href="/third_prj/resources/css/font.css" />
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css" />
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-<script src="/third_prj/resources/js/popper.min.js"></script>
-<script src="/third_prj/resources/js/bootstrap.min.js"></script>
+<script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://211.63.89.144/resources/js/popper.min.js"></script>
+<script src="http://211.63.89.144/resources/js/bootstrap.min.js"></script>
 
 <title>스터디 스토리</title>
 <style>
@@ -42,7 +42,7 @@
 .custom_jumbo {
 	min-height: 350px;
 	background-image:
-		url('/third_prj/resources/images/main_page_jumbotron.jpg');
+		url('http://211.63.89.144/resources/images/main_page_jumbotron.jpg');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 100%;
@@ -50,12 +50,12 @@
 }
 
 .red_heart {
-	background: url("/third_prj/study_img/like_icon.png") no-repeat;
+	background: url("http://211.63.89.144/study_img/like_icon.png") no-repeat;
 	background-size: 100%;
 }
 
 .gray_heart {
-	background: url("/third_prj/study_img/dislike_icon.png") no-repeat;
+	background: url("http://211.63.89.144/study_img/dislike_icon.png") no-repeat;
 	background-size: 100%;
 }
 
@@ -69,7 +69,7 @@
 
 </style>
 <!-- Custom styles for this template -->
-<link href="/third_prj/resources/css/jumbotron.css" rel="stylesheet">
+<link href="http://211.63.89.144/resources/css/jumbotron.css" rel="stylesheet">
 
 <!-- CDN -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -210,7 +210,7 @@
 					output += "			<div class='thumb card-body text-center p-0'>"
 					output += "				<a href='../detail/detail_study.do?sNum="+jsonArr[i].s_num+"' style='color: #333; text-decoration: none;'>"
 					output += "					<div>"
-					output += "						<img class='card-img-top' src='/third_prj/study_img/"+jsonArr[i].img+"' style='width: 100%; height: 120px;'>"
+					output += "						<img class='card-img-top' src='http://211.63.89.144/study_img/"+jsonArr[i].img+"' style='width: 100%; height: 120px;'>"
 					output += "					</div>"
 					output += "					<div id='moveTo' class='px-3 pt-3'>"
 					output += "						<div class='d-flex justify-content-end align-items-center mb-3'>"
@@ -316,7 +316,7 @@
 
 				<div class="mainIntroImg my-5" style="width: 100%; background-color: #EAEAEA;">
 					<a href="../common/introduction.do"  style="width: 100%; height: 250px;">
-						<img src="/third_prj/study_img/main_move_to_Intro.png" style="margin:0px auto; width: 100%; height: 250px;">
+						<img src="http://211.63.89.144/study_img/main_move_to_Intro.png" style="margin:0px auto; width: 100%; height: 250px;">
 					</a>
 				</div>
 
@@ -349,7 +349,7 @@
 										<a href="../detail/detail_study.do?sNum=${ favThumb.s_num }" style="color: #333; text-decoration: none;">
 											<div>
 												<!-- 썸네일 스터디 이미지 -->
-												<img class="card-img-top" src="/third_prj/study_img/${ favThumb.img }" style="width: 100%; height: 120px;">
+												<img class="card-img-top" src="http://211.63.89.144/study_img/${ favThumb.img }" style="width: 100%; height: 120px;">
 											</div>
 											<div id="moveTo" class="px-3 pt-3">
 												<div class="d-flex justify-content-end align-items-center mb-3">
@@ -420,7 +420,7 @@
 										<a href="../detail/detail_study.do?sNum=${ latestThumb.s_num }" style="color: #333; text-decoration: none;">
 											<div>
 												<!-- 썸네일 스터디 이미지 -->
-												<img class="card-img-top" src="/third_prj/study_img/${ latestThumb.img }" style="width: 100%; height: 120px;">
+												<img class="card-img-top" src="http://211.63.89.144/study_img/${ latestThumb.img }" style="width: 100%; height: 120px;">
 											</div>
 											<div id="moveTo" class="px-3 pt-3">
 												<div class="d-flex justify-content-end align-items-center mb-3">
@@ -464,7 +464,7 @@
 
 				<div class="mb-5" style="width: 100%; background-color: #EAEAEA;">
 					<a href="../search/search.do" style="width: 100%; height: 165px;">
-						<img src="/third_prj/study_img/main_study_find.png" style="width: 100%; height: 165px;">
+						<img src="http://211.63.89.144/study_img/main_study_find.png" style="width: 100%; height: 165px;">
 					</a>
 				</div>
 

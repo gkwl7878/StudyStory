@@ -135,7 +135,7 @@ public class StudyMngController {
 		// 파일 업로드
 		MultipartRequest mr=null;
 		try {
-			mr = new MultipartRequest(request,"C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/",
+			mr = new MultipartRequest(request,"C:/release_0515/study_img/",
 					1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -152,7 +152,7 @@ public class StudyMngController {
 		String preImg= saus.searchPreImg(sNum);
 		
 		
-		File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
+		File file = new File("C:/release_0515/study_img/"+preImg);
 		
 		if(img!=null) {
 			if(file.exists()){
@@ -205,7 +205,7 @@ public class StudyMngController {
 				al_vo.setContent("["+studyName+"]  스터디가 삭제되었습니다. 삭제사유: [" +ds_vo.getMsg()+"]");
 				cms.sendAlarm(al_vo);
 				String preImg= saus.searchPreImg(ds_vo.getsNum());
-				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
+				File file = new File("C:/release_0515/study_img/"+preImg);
 				if(file.exists()){
 					file.delete();
 				}

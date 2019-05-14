@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>로그인</title>
     <!-- Bootstrap core CSS -->
-		<link href="/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+		<link href="http://211.63.89.144/resources/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
     <!-- Custom styles for this template -->
-    <link href="/third_prj/resources/css/signin.css" rel="stylesheet">
+    <link href="http://211.63.89.144/resources/css/signin.css" rel="stylesheet">
     <style type="text/css">
    	body {
-		background-image: url("/third_prj/resources/images/cover.png");
+		background-image: url("http://211.63.89.144/resources/images/cover.png");
 		background-size: 100%;
 	}
 	.form-signin {
@@ -78,7 +78,7 @@
 </head>
 <body class="text-center">
   <form class="form-signin" id="loginFrm" action="login_process.do" method="post">
-	  <h1><img src="/third_prj/resources/images/study_story_logo.png"/></h1>
+	  <h1><img src="http://211.63.89.144/resources/images/study_story_logo.png"/></h1>
 	  <h5 class="mb-3 font-weight-normal">서비스 사용을 위해선 로그인이 필요합니다</h5>
 	  <label class="sr-only">관리자 아이디</label>
 	  <input type="text" id="id" name="id" class="form-control" placeholder="아이디" required autofocus>

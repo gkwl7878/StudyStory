@@ -9,11 +9,11 @@
 	<title>공지사항</title>
 	
 	<!-- Bootstrap core CSS -->
-	<link href="/third_prj/resources/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+	<link href="http://211.63.89.144/resources/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<script src="/third_prj/resources/js/bootstrap.bundle.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript">
 	$(function(){
 		

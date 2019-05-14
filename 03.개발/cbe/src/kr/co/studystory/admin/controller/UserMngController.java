@@ -165,7 +165,7 @@ public class UserMngController {
 						cms.sendAlarm(al_vo);
 						
 						String preImg= saus.searchPreImg(listSnum.get(j));
-						File file = new File("C:/dev/StudyStory/03.°³¹ß/cbe/WebContent/study_img/"+preImg);
+						File file = new File("C:/release_0515/study_img/"+preImg);
 						if(file.exists()){
 							file.delete();
 						}

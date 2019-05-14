@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
 <style type="text/css">
 #wrap {
 	margin: 100px auto;
@@ -107,7 +107,7 @@
 			<div class="row" style="margin-top: 30px;">
 				<a id="backBtn" class="btn btn-secondary btn" role="button"
 					style="margin-left: 290px;">목록으로</a>
-				<a class="btn btn-secondary btn" href="/third_prj/common_bbs/ask.do" role="button"
+				<a class="btn btn-secondary btn" href="http://211.63.89.144/common_bbs/ask.do" role="button"
 					style="margin-left: 10px;">재문의하기</a>
 			</div>
 		</div>
@@ -117,7 +117,7 @@
 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="/third_prj/resources/js/popper.min.js"></script>
-	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/popper.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -17,18 +17,18 @@
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
 
 <title>내 스터디 수정하기</title>
 <!-- Custom styles for this template -->
 
-<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js"></script>
 
 <link
 	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css"
 	rel="stylesheet">
 
-<link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
 
 <script type="text/javascript">
 	$(function() {
@@ -113,7 +113,7 @@
 	<div id="wrap">
 <input type="hidden" name="sNum" value="${ param.sNum }"/>
 		<div class="row" style="margin-top: 0px;">
-			<img alt="" src="/third_prj/resources/images/name.png" style="width: 35px; height: 33px; margin-right: 12px;"><label style="font-size: 20px; margin-right: 20px;"><strong>이름</strong></label>
+			<img alt="" src="http://211.63.89.144/resources/images/name.png" style="width: 35px; height: 33px; margin-right: 12px;"><label style="font-size: 20px; margin-right: 20px;"><strong>이름</strong></label>
 			<div class="col-sm-10">
 				<input id="name" name="name" type="text" class="form-control" style="margin-bottom: 30px;" readonly="readonly" value="${name}">
 			</div>
@@ -124,7 +124,7 @@
 			<table>
 				<tr>
 					<td>
-						<img src="/third_prj/resources/images/loc.png" style="width: 33px; height: 33px;">
+						<img src="http://211.63.89.144/resources/images/loc.png" style="width: 33px; height: 33px;">
 					</td>
 					<td>
 						<label style="font-size: 20px; width: 70px; margin-left: 10px; margin-top: 7px;"><strong>지역</strong></label>
@@ -134,7 +134,7 @@
 						
 					</td>
 					<td>
-						<img src="/third_prj/resources/images/sub.png" style="width: 33px; height: 33px; margin-left: 30px;">
+						<img src="http://211.63.89.144/resources/images/sub.png" style="width: 33px; height: 33px; margin-left: 30px;">
 					</td>
 					<td>
 						<label style="font-size: 20px; margin-left: 10px; margin-top: 7px;"><strong>주제</strong></label>
@@ -148,16 +148,16 @@
 		</div>
 
 		<div class="row" style="margin-top: 50px;">
-			<img src="/third_prj/resources/images/Image.png" style="width: 35px; height: 35px; margin-right: 10px; margin-bottom: 10px;"> <label style="font-size: 20px;">어떤 <strong>대표이미지</strong>로 변경하시겠습니까?
+			<img src="http://211.63.89.144/resources/images/Image.png" style="width: 35px; height: 35px; margin-right: 10px; margin-bottom: 10px;"> <label style="font-size: 20px;">어떤 <strong>대표이미지</strong>로 변경하시겠습니까?
 			</label>
 			<div class="font20bold">
 				<input type='file' name='file' id='real_file' onchange="previewFile()" style='display: none;' /> <input type="text" id='file_sub' style="width: 700px; border: 0px; display: none"> <a href="<?echo $PHP_SELF;?>" onclick="schfile(); return false;">
-				<img width="700" height="300" id="img" src="/third_prj/study_img/${img }" border="0" title='찾아보기' alt='찾아보기'></a>
+				<img width="700" height="300" id="img" src="http://211.63.89.144/study_img/${img }" border="0" title='찾아보기' alt='찾아보기'></a>
 			</div>
 		</div>
 
 		<div class="row" style="margin-top: 50px;">
-			<img src="/third_prj/resources/images/detail.png" style="width: 30px; height: 30px; margin-right: 10px; margin-bottom: 10px;"><label style="font-size: 20px; margin-bottom: 20px;">어떤 <strong>주제</strong>와 <strong>규칙</strong> 으로 변경하시겠습니까?
+			<img src="http://211.63.89.144/resources/images/detail.png" style="width: 30px; height: 30px; margin-right: 10px; margin-bottom: 10px;"><label style="font-size: 20px; margin-bottom: 20px;">어떤 <strong>주제</strong>와 <strong>규칙</strong> 으로 변경하시겠습니까?
 			</label>
 			<div class="" style="width: 700px; height: 300px">
 				<textarea class="form-control" id="summernote" name="content">${content }</textarea>
@@ -177,8 +177,8 @@
 
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="/third_prj/resources/js/popper.min.js"></script>
-	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/popper.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/bootstrap.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
 
 

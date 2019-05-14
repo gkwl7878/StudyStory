@@ -23,10 +23,10 @@
 	</style>
 	<meta charset="UTF-8">
 	<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="/third_prj/resources/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://211.63.89.144/resources/css/bootstrap.min.css">
 	<title>이용 약관</title>
-	<script src="/third_prj/resources/js/jquery-3.3.1.slim.min.js"></script>
-	<link rel="stylesheet" href="/third_prj/resources/css/font.css"/>
+	<script src="http://211.63.89.144/resources/js/jquery-3.3.1.slim.min.js"></script>
+	<link rel="stylesheet" href="http://211.63.89.144/resources/css/font.css"/>
 </head>
 <body>
 	<!-- header -->
@@ -451,7 +451,7 @@
 	<c:import url="/WEB-INF/views/layout/footer.jsp"/>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="/third_prj/resources/js/popper.min.js"></script>
-	<script src="/third_prj/resources/js/bootstrap.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/popper.min.js"></script>
+	<script src="http://211.63.89.144/resources/js/bootstrap.min.js"></script>
 </body>
 </html>
