@@ -160,7 +160,7 @@
 							<div class="row px-2 mx-3 w-100 border-top align-items-center">
 								<div class="mr-auto">
 									검색어 :
-									<c:out value="${ inputWord }" />
+									<strong><c:out value="${ inputWord }" /></strong>
 								</div>
 								<input id="word_search_reset_btn" type="button" class="btn btn-sm btn-secondary ml-1" value="초기화" />
 							</div>
@@ -211,9 +211,11 @@
 
 
 					<!-- 썸네일 row -->
-					<div class="row">
+					<div class="row justify-content-center">
 						<c:if test="${ empty thumbnail_list }">
-							조회할 수 있는 썸네일이 없습니다.
+						<div style="margin:300px;">
+							<strong>조회할 수 있는 썸네일이 없습니다</strong>
+						</div>
 						</c:if>
 
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
@@ -293,7 +295,9 @@
 			<!-- CONTAINER DIV -->
 		</div>
 
+
 		<!-- 페이지네이션 -->
+		<c:if test="${ not empty thumbnail_list }">
 		<div class="d-flex justify-content-center">
 			<ul class="pagination">
 				<li class="paginate_button page-item previous ${ currentPage != 1 ? '' : 'disabled' }" id="dataTable_previous">
@@ -309,6 +313,7 @@
 				</li>
 			</ul>
 		</div>
+		</c:if>
 		<!-- 페이지네이션 -->
 	</div>
 	<!-- DIV ROLE MAIN -->
