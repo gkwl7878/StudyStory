@@ -245,7 +245,7 @@ public class UserStudyController {
 			ca_vo.setId(id);
 			ca_vo.setCategory("스터디");
 			ca_vo.setSubject("스터디가 종료되었습니다.");
-			ca_vo.setContent(sgs.getStudyName(c_vo.getsNum())+"스터디가 해당 이유로 활동 종료되었습니다.: "+c_vo.getReason());
+			ca_vo.setContent(sgs.getStudyName(c_vo.getsNum())+"스터디가 해당 이유로 활동 종료되었습니다.\n종료 사유 : "+c_vo.getReason());
 			ca_vo.setsNum(c_vo.getsNum());
 			//
 			sgs.sendCloseAlarm(ca_vo);
