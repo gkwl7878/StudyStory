@@ -25,7 +25,7 @@
 <select id="countWeekStudy" resultType="int" >
 	select count(*)
 	from study
-	where input_date between (SYSDATE-7) and SYSDATE and (delete_flag !='Y' and accept_flag='Y')
+	where input_date between (SYSDATE-7) and SYSDATE and (delete_flag !='Y' and accept_flag='Y' and deactivation='N')
 </select>
 
 <select id="countAllUser" resultType="int" >
@@ -37,7 +37,7 @@
 <select id="countAllStudy" resultType="int" >
 	select count(*)
 	from study
-	where (delete_flag !='Y' and accept_flag='Y')
+	where (delete_flag !='Y' and accept_flag='Y' and deactivation='N')
 </select>
 
 <select id="nsTotalCnt" resultType="int">
