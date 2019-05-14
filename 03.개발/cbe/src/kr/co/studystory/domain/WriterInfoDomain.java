@@ -2,7 +2,7 @@ package kr.co.studystory.domain;
 
 public class WriterInfoDomain {
 
-	private String img, nick;
+	private String img, input_date;
 
 	public String getImg() {
 		return img;
@@ -12,17 +12,15 @@ public class WriterInfoDomain {
 		this.img = img;
 	}
 
-	public String getNick() {
-		return nick;
+	public String getInput_date() {
+		return input_date;
 	}
 
-	public void setNick(String nick) {
-		this.nick = nick;
+	public void setInput_date(String input_date) {
+		this.input_date = input_date;
 	}
-
 	@Override
 	public String toString() {
-		return "WriterInfoDomain [img=" + img + ", nick=" + nick + "]";
+		return "WriterInfoDomain [img=" + img + ", input_date=" + input_date + "]";
 	}
-
 }// class

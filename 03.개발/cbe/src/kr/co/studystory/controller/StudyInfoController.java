@@ -90,8 +90,6 @@ public class StudyInfoController {
 		if (r_vo.getId() == null) {
 			r_vo.setId(id);
 		} // end if
-			// 값 확인 하기.
-		System.out.println("//////////////////////////////// 컨틀로 : " + r_vo.getId() + "/" + r_vo.getReply() + "/" + r_vo.getsNum());
 		json = sis.addReply(r_vo);
 		return json.toJSONString();
 	}// addComment()
