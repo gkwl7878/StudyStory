@@ -35,10 +35,9 @@
 	enable-responsive-font-sizes: ture;
 }
 
-.thumb:hover{
+.thumb:hover {
 	color: blue;
 }
-
 
 .custom_jumbo {
 	min-height: 350px;
@@ -153,156 +152,195 @@
 
 <!-- 메인페이징의 인덱스 구형  -->
 <script type="text/javascript">
-
 	$(function() {
-		
+
 		$(".page-link").keydown(function(key) {
-      	if (key.keyCode == 13) {
-      		key.preventDefault();
-      	}// end if
-      });// keydown
-		
-		$(".page-link").click(function() {
-			
-
-			var page = $(this).val();
-			
-			var id = $(this).attr("id");
-			var flag = "";
-			
-			if (id.indexOf("fav") != -1 ) {
-				flag = "favCurPage=" + page;
-				alert(flag);
+			if (key.keyCode == 13) {
+				key.preventDefault();
 			}// end if
+		});// keydown
 
-			if (id.indexOf("latest") != -1 ) {
-				flag = "latestCurPage=" + page;
-			}// end if
-			
-			alert(page);
-			
-			$.ajax({
-				url : "../mainProcess/mainProcess.do?",
-				data : flag,
-				type : "get",
-				dataType : "json", // 응답 받을 데이터.
-				error : function(xhr) {
-					alert("오류발생")
-					console.log(xhr.status + " / " + xhr.statusText);
-				},
-				success : function(json) {
-					
-					var jsonArr = json.jsonArr;
+		$(".page-link")
+				.click(
+						function() {
 
-					alert(jsonArr);
-					
-					// 인기순일때.
-					if (json.resultFlag == "fav") {
-						$("#favThumbView").html("");
-					}// end if
+							var page = $(this).val();
 
-					// 최신순일때.
-					if (json.resultFlag == "latest") {
-						$("#latestThumbView").html("");
-					}// end if
-					
-					var output = "";
-					
-					for (var i = 0; i < jsonArr.length ; i++) {
-					
-					output += "	<div id='"+ jsonArr[i].s_num +"_thumb' class='thumb col-md-3'>"
- 					output += "		<div class='card mb-4 shadow-sm'>"
-					output += "			<div class='card-body text-center p-0'>"
-					output += "				<a href='../detail/detail_study.do?sNum="+jsonArr[i].s_num+"' style='color: #333; text-decoration: none;'>"
-					output += "					<div>"
-					output += "						<img class='card-img-top' src='/third_prj/study_img/"+jsonArr[i].img+"' style='width: 100%; height: 120px;'>"
-					output += "					</div>"
-					output += "					<div id='moveTo' class='px-3 pt-3'>"
-					output += "						<div class='d-flex justify-content-end align-items-center mb-3'>"
-					output += "							<div class='mr-auto'>"
-					output += "								<small class='text-muted'>"+jsonArr[i].input_date+"</small>"
-					output += "							</div>"
-					output += "							<small class='pr-1'>모집상태</small>"
-					output += "						</div>"
-					output += " 				</div>"
-					output += "						<div class='m-2 border-bottom'>"
-					output += "							<p class='card-text pb-3'>"
-					output += "								<strong>"+jsonArr[i].study_name+"</strong>"
-					output += "							</p>"
-					output += "						</div>"
-					output += "					</div>"
-					output += "				</a>"
-					output += "				<div class='d-flex justify-content-between align-items-center mb-3 px-3'>"
-					output += "						<div class='p-2'>"
-		 			output += "							<small>"+jsonArr[i].nick+"</small>"
-					output += "						</div>"
-					output += "						<div class='border-right' style='height: 40px;'></div>"
-					output += "							<div class='p-2'>"
-					output += "								<small>"+jsonArr[i].loc+"</small>"
-					output += "							</div>"
-					output += "						<div class='border-right' style='height: 40px;'></div>"
-					output += "						<div class='p-2'>"
-					output += "							<small>"+jsonArr[i].category+"</small>"
-					output += "						</div>"
-					output += "				</div>"
-					output += "			</div>"
-					output += "		</div>"
-					output += " </div>"
+							var id = $(this).attr("id");
+							var flag = "";
 
-					}// end for
-					
-					
-					// 인기순일때.
-					if (json.resultFlag == "fav") {
-						$("#favThumbView").append(output);
-						
-						$("#favPrev").val(json.favCurPage - 1);
-						$("#favNext").val(json.favCurPage + 1);
-						
-						if ($("#favPrev").val() != 0 && $("#favNext").val() != 4) {
-							$("#favLiPrev").attr("class", "paginate_button page-item next");
-							$("#favLiNext").attr("class", "paginate_button page-item next");
-						}
-						
-						if( $("#favPrev").val() == 0 ){
-							$("#favLiPrev").attr("class", "paginate_button page-item next disabled");
-						}// end if
+							if (id.indexOf("fav") != -1) {
+								flag = "favCurPage=" + page;
+								alert(flag);
+							}// end if
 
-						if( $("#favNext").val() == 4 ){
-							$("#favLiNext").attr("class", "paginate_button page-item next disabled");
-						}// end if
-						
-					}// end if
+							if (id.indexOf("latest") != -1) {
+								flag = "latestCurPage=" + page;
+							}// end if
 
-					// 최신순일때.
-					if (json.resultFlag == "latest") {
-						$("#latestThumbView").append(output);
+							alert(page);
 
-						$("#latestPrev").val(json.latestCurPage - 1);
-						$("#latestNext").val(json.latestCurPage + 1);
-						
-						if ($("#latestPrev").val() != 0 && $("#latestNext").val() != 4) {
-							$("#latestLiPrev").attr("class", "paginate_button page-item next");
-							$("#latestLiNext").attr("class", "paginate_button page-item next");
-						}
+							$
+									.ajax({
+										url : "../mainProcess/mainProcess.do?",
+										data : flag,
+										type : "get",
+										dataType : "json", // 응답 받을 데이터.
+										error : function(xhr) {
+											alert("오류발생")
+											console.log(xhr.status + " / "
+													+ xhr.statusText);
+										},
+										success : function(json) {
 
-						if( $("#latestPrev").val() == 0 ){
-							$("#latestLiPrev").attr("class", "paginate_button page-item next disabled");
-						}// end if
+											var jsonArr = json.jsonArr;
 
-						if( $("#latestNext").val() == 4 ){
-							$("#latestLiNext").attr("class", "paginate_button page-item next disabled");
-						}// end if
-					}// end if
-				
-				}// success
-				
-			}); // ajax
-			
-		}); // click
-		
+											alert(jsonArr);
+
+											// 인기순일때.
+											if (json.resultFlag == "fav") {
+												$("#favThumbView").html("");
+											}// end if
+
+											// 최신순일때.
+											if (json.resultFlag == "latest") {
+												$("#latestThumbView").html("");
+											}// end if
+
+											var output = "";
+
+											for (var i = 0; i < jsonArr.length; i++) {
+
+												output += "	<div id='"+ jsonArr[i].s_num +"_thumb' class='thumb col-md-3'>"
+												output += "		<div class='card mb-4 shadow-sm'>"
+												output += "			<div class='card-body text-center p-0'>"
+												output += "				<a href='../detail/detail_study.do?sNum="
+														+ jsonArr[i].s_num
+														+ "' style='color: #333; text-decoration: none;'>"
+												output += "					<div>"
+												output += "						<img class='card-img-top' src='/third_prj/study_img/"
+														+ jsonArr[i].img
+														+ "' style='width: 100%; height: 120px;'>"
+												output += "					</div>"
+												output += "					<div id='moveTo' class='px-3 pt-3'>"
+												output += "						<div class='d-flex justify-content-end align-items-center mb-3'>"
+												output += "							<div class='mr-auto'>"
+												output += "								<small class='text-muted'>"
+														+ jsonArr[i].input_date
+														+ "</small>"
+												output += "							</div>"
+												output += "							<small class='pr-1'>모집상태</small>"
+												output += "						</div>"
+												output += " 				</div>"
+												output += "						<div class='m-2 border-bottom'>"
+												output += "							<p class='card-text pb-3'>"
+												output += "								<strong>"
+														+ jsonArr[i].study_name
+														+ "</strong>"
+												output += "							</p>"
+												output += "						</div>"
+												output += "					</div>"
+												output += "				</a>"
+												output += "				<div class='d-flex justify-content-between align-items-center mb-3 px-3'>"
+												output += "						<div class='p-2'>"
+												output += "							<small>"
+														+ jsonArr[i].nick
+														+ "</small>"
+												output += "						</div>"
+												output += "						<div class='border-right' style='height: 40px;'></div>"
+												output += "							<div class='p-2'>"
+												output += "								<small>"
+														+ jsonArr[i].loc
+														+ "</small>"
+												output += "							</div>"
+												output += "						<div class='border-right' style='height: 40px;'></div>"
+												output += "						<div class='p-2'>"
+												output += "							<small>"
+														+ jsonArr[i].category
+														+ "</small>"
+												output += "						</div>"
+												output += "				</div>"
+												output += "			</div>"
+												output += "		</div>"
+												output += " </div>"
+
+											}// end for
+
+											// 인기순일때.
+											if (json.resultFlag == "fav") {
+												$("#favThumbView").append(
+														output);
+
+												$("#favPrev").val(
+														json.favCurPage - 1);
+												$("#favNext").val(
+														json.favCurPage + 1);
+
+												if ($("#favPrev").val() != 0
+														&& $("#favNext").val() != 5) {
+													$("#favLiPrev")
+															.attr("class",
+																	"paginate_button page-item next");
+													$("#favLiNext")
+															.attr("class",
+																	"paginate_button page-item next");
+												}
+
+												if ($("#favPrev").val() == 0) {
+													$("#favLiPrev")
+															.attr("class",
+																	"paginate_button page-item next disabled");
+												}// end if
+
+												if ($("#favNext").val() == 5) {
+													$("#favLiNext")
+															.attr("class",
+																	"paginate_button page-item next disabled");
+												}// end if
+
+											}// end if
+
+											// 최신순일때.
+											if (json.resultFlag == "latest") {
+												$("#latestThumbView").append(
+														output);
+
+												$("#latestPrev").val(
+														json.latestCurPage - 1);
+												$("#latestNext").val(
+														json.latestCurPage + 1);
+
+												if ($("#latestPrev").val() != 0
+														&& $("#latestNext")
+																.val() != 5) {
+													$("#latestLiPrev")
+															.attr("class",
+																	"paginate_button page-item next");
+													$("#latestLiNext")
+															.attr("class",
+																	"paginate_button page-item next");
+												}
+
+												if ($("#latestPrev").val() == 0) {
+													$("#latestLiPrev")
+															.attr("class",
+																	"paginate_button page-item next disabled");
+												}// end if
+
+												if ($("#latestNext").val() == 5) {
+													$("#latestLiNext")
+															.attr("class",
+																	"paginate_button page-item next disabled");
+												}// end if
+											}// end if
+
+										}// success
+
+									}); // ajax
+
+						}); // click
+
 	}); // ajax
-
 </script>
 <!-- 메인페이징의 인덱스 구형  -->
 
@@ -323,6 +361,15 @@
 
 	<!-- CONTAINER DIV -->
 	<div class="container-fluid">
+
+		<div class="row" style="">
+			<a href="../third_prj/common/introduction.do"> 
+			
+				sdfasdfasdfasdfasdfasfasdfa
+				<img src="">
+			</a>
+		</div>
+
 		<!-- row -->
 		<div class="row justify-content-center">
 			<div class="col-auto" style="width: 1000px;">
@@ -393,7 +440,7 @@
 					</div>
 				</div>
 				<!-- 인기 스터디 -->
-				
+
 				<!-- 최신 스터디 -->
 				<div id="latest_order_carousal" class="slide border-bottom mb-5">
 					<div class="justify-content-center border-bottom p-2">
@@ -460,8 +507,8 @@
 					</div>
 				</div>
 				<!-- 최신 스터디 -->
-				
-				
+
+
 			</div>
 		</div>
 		<!-- row -->
