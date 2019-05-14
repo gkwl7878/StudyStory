@@ -35,10 +35,9 @@
 	enable-responsive-font-sizes: ture;
 }
 
-.thumb:hover{
-	color: blue;
+.thumb:hover {
+	
 }
-
 
 .custom_jumbo {
 	min-height: 350px;
@@ -63,6 +62,11 @@
 .heart:hover {
 	cursor: pointer;
 }
+
+.thumb:hover {
+	box-shadow:0 4px 50px -3px rgba(0,0,0,0.1);
+}
+
 </style>
 <!-- Custom styles for this template -->
 <link href="/third_prj/resources/css/jumbotron.css" rel="stylesheet">
@@ -156,11 +160,30 @@
 
 	$(function() {
 		
+		$(".page-link").keydown(function(key) {
+      	if (key.keyCode == 13) {
+      		key.preventDefault();
+      	}// end if
+      });// keydown
+		
 		$(".page-link").click(function() {
 			
-			var flag = $(this).val();
+
+			var page = $(this).val();
 			
-			alert(flag);
+			var id = $(this).attr("id");
+			var flag = "";
+			
+			if (id.indexOf("fav") != -1 ) {
+				flag = "favCurPage=" + page;
+				alert(flag);
+			}// end if
+
+			if (id.indexOf("latest") != -1 ) {
+				flag = "latestCurPage=" + page;
+			}// end if
+			
+			alert(page);
 			
 			$.ajax({
 				url : "../mainProcess/mainProcess.do?",
@@ -191,9 +214,9 @@
 					
 					for (var i = 0; i < jsonArr.length ; i++) {
 					
-					output += "	<div id='"+ jsonArr[i].s_num +"_thumb' class='thumb col-md-3'>"
+					output += "	<div id='"+ jsonArr[i].s_num +"_thumb' class='col-md-3'>"
  					output += "		<div class='card mb-4 shadow-sm'>"
-					output += "			<div class='card-body text-center p-0'>"
+					output += "			<div class='thumb card-body text-center p-0'>"
 					output += "				<a href='../detail/detail_study.do?sNum="+jsonArr[i].s_num+"' style='color: #333; text-decoration: none;'>"
 					output += "					<div>"
 					output += "						<img class='card-img-top' src='/third_prj/study_img/"+jsonArr[i].img+"' style='width: 100%; height: 120px;'>"
@@ -236,13 +259,46 @@
 					// 인기순일때.
 					if (json.resultFlag == "fav") {
 						$("#favThumbView").append(output);
+						
+						$("#favPrev").val(json.favCurPage - 1);
+						$("#favNext").val(json.favCurPage + 1);
+						
+						if ($("#favPrev").val() != 0 && $("#favNext").val() != 5) {
+							$("#favLiPrev").attr("class", "paginate_button page-item next");
+							$("#favLiNext").attr("class", "paginate_button page-item next");
+						}
+						
+						if( $("#favPrev").val() == 0 ){
+							$("#favLiPrev").attr("class", "paginate_button page-item next disabled");
+						}// end if
+
+						if( $("#favNext").val() == 5 ){
+							$("#favLiNext").attr("class", "paginate_button page-item next disabled");
+						}// end if
+						
 					}// end if
 
 					// 최신순일때.
 					if (json.resultFlag == "latest") {
 						$("#latestThumbView").append(output);
+
+						$("#latestPrev").val(json.latestCurPage - 1);
+						$("#latestNext").val(json.latestCurPage + 1);
+						
+						if ($("#latestPrev").val() != 0 && $("#latestNext").val() != 5) {
+							$("#latestLiPrev").attr("class", "paginate_button page-item next");
+							$("#latestLiNext").attr("class", "paginate_button page-item next");
+						}
+
+						if( $("#latestPrev").val() == 0 ){
+							$("#latestLiPrev").attr("class", "paginate_button page-item next disabled");
+						}// end if
+
+						if( $("#latestNext").val() == 5 ){
+							$("#latestLiNext").attr("class", "paginate_button page-item next disabled");
+						}// end if
 					}// end if
-					
+				
 				}// success
 				
 			}); // ajax
@@ -260,33 +316,35 @@
 	<!-- header -->
 	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 
-	<section class="jumbotron custom_jumbo" style="min-height: 350px;">
-		<div class="container">
-			<div style="margin-left: 50px; margin-top: 280px;">
-				<h2>스터디 스토리</h2>
-				<h5>성공을 향해 나아가는 당신의 이야기.</h5>
-			</div>
-		</div>
-	</section>
-
 	<!-- CONTAINER DIV -->
 	<div class="container-fluid">
+				
 		<!-- row -->
 		<div class="row justify-content-center">
 			<div class="col-auto" style="width: 1000px;">
+
+				<div class="mainIntroImg my-5" style="width: 100%; background-color: #EAEAEA;">
+					<a href="../common/introduction.do"  style="width: 100%; height: 250px;">
+						<img src="/third_prj/study_img/main_move_to_Intro.png" style="margin:0px auto; width: 100%; height: 250px;">
+					</a>
+				</div>
 
 				<!-- 인기 스터디 -->
 				<div id="fav_order_carousal" class="slide border-bottom mb-5">
 					<div class="justify-content-center border-bottom p-2">
 						<ul class="pagination mb-0" style="vertical-align: middle; height: 38px;">
-							<li class="mr-auto" style="font-size: 24px;">인기 스터디</li>
-							<li class="paginate_button page-item previous">
-								<button class="page-link" value="favCurPage=1">
+							<li class="mr-auto" style="font-size: 24px;">
+								<a href="../search/search.do?order_select=인기순&loc_select=none&kind_select=none" style="color: #333; text-decoration: none;">
+									인기 스터디
+								</a>
+							</li>
+							<li id="favLiPrev" class="paginate_button page-item previous disabled">
+								<button id="favPrev" class="page-link" value="${ favCurPage - 1 }">
 									<span aria-hidden="true">&laquo;</span>
 								</button>
 							</li>
-							<li class="paginate_button page-item next">
-								<button class="page-link" value="favCurPage=2">
+							<li id="favLiNext" class="paginate_button page-item next">
+								<button id="favNext" class="page-link" value="${ favCurPage + 1 }">
 									<span aria-hidden="true">&raquo;</span>
 								</button>
 							</li>
@@ -294,9 +352,9 @@
 					</div>
 					<div id="favThumbView" class="row p-3" style="height: 320px;">
 						<c:forEach var="favThumb" items="${ favList }">
-							<div id="${ favThumb.s_num }_thumb" class="thumb col-md-3">
+							<div id="${ favThumb.s_num }_thumb" class="col-md-3">
 								<div class="card mb-4 shadow-sm">
-									<div class="card-body text-center p-0">
+									<div class="thumb card-body text-center p-0">
 										<a href="../detail/detail_study.do?sNum=${ favThumb.s_num }" style="color: #333; text-decoration: none;">
 											<div>
 												<!-- 썸네일 스터디 이미지 -->
@@ -346,14 +404,18 @@
 				<div id="latest_order_carousal" class="slide border-bottom mb-5">
 					<div class="justify-content-center border-bottom p-2">
 						<ul class="pagination mb-0" style="vertical-align: middle; height: 38px;">
-							<li class="mr-auto" style="font-size: 24px;">최신 스터디</li>
-							<li class="paginate_button page-item previous">
-								<button class="page-link" value="latestCurPage=1">
+							<li class="mr-auto" style="font-size: 24px;">
+								<a href="../search/search.do?order_select=최신순&loc_select=none&kind_select=none" style="color: #333; text-decoration: none;">
+									최신 스터디
+								</a>
+							</li>
+							<li id="latestLiPrev" class="paginate_button page-item previous disabled">
+								<button id="latestPrev" class="page-link" value="${ latestCurPage - 1 }">
 									<span aria-hidden="true">&laquo;</span>
 								</button>
 							</li>
-							<li class="paginate_button page-item next">
-								<button class="page-link" value="latestCurPage=2">
+							<li id="latestLiNext" class="paginate_button page-item next">
+								<button id="latestNext" class="page-link" value="${ latestCurPage + 1 }">
 									<span aria-hidden="true">&raquo;</span>
 								</button>
 							</li>
@@ -361,9 +423,9 @@
 					</div>
 					<div id="latestThumbView" class="row p-3" style="height: 320px;">
 						<c:forEach var="latestThumb" items="${ latestList }">
-							<div id="${ favThumb.s_num }_thumb" class="thumb col-md-3">
+							<div id="${ favThumb.s_num }_thumb" class="col-md-3">
 								<div class="card mb-4 shadow-sm">
-									<div class="card-body text-center p-0">
+									<div class="thumb card-body text-center p-0">
 										<a href="../detail/detail_study.do?sNum=${ latestThumb.s_num }" style="color: #333; text-decoration: none;">
 											<div>
 												<!-- 썸네일 스터디 이미지 -->
@@ -408,8 +470,13 @@
 					</div>
 				</div>
 				<!-- 최신 스터디 -->
-				
-				
+
+				<div class="mb-5" style="width: 100%; background-color: #EAEAEA;">
+					<a href="../search/search.do" style="width: 100%; height: 165px;">
+						<img src="/third_prj/study_img/main_study_find.png" style="width: 100%; height: 165px;">
+					</a>
+				</div>
+
 			</div>
 		</div>
 		<!-- row -->

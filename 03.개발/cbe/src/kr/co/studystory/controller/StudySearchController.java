@@ -75,7 +75,9 @@ public class StudySearchController {
 
 		// model 객체에 값 저장.
 		model.addAttribute("favList", favList);
+		model.addAttribute("favCurPage", 1);
 		model.addAttribute("latestList", latestList);
+		model.addAttribute("latestCurPage", 1);
 
 		return "study_info/main";
 	}// mainPage
@@ -89,7 +91,7 @@ public class StudySearchController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/mainProcess/mainProcess.do", method = GET, produces = "application/text; charset=utf8")
-	public String mainProcess(MainFavListVO mfl_vo, MainLatestListVO mll_vo, HttpSession session) {
+	public String mainProcess(MainFavListVO mfl_vo, MainLatestListVO mll_vo, HttpSession session, Model model) {
 		JSONObject json = null;
 
 		// 세션이 만료 되었다면 로그인 페이지로.

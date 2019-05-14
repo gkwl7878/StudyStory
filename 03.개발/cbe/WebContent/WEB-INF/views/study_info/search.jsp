@@ -47,6 +47,11 @@
 .heart:hover {
 	cursor: pointer;
 }
+
+.thumb:hover {
+	box-shadow:0 4px 50px -3px rgba(0,0,0,0.1);
+}
+
 </style>
 
 <!-- CDN -->
@@ -213,10 +218,10 @@
 
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 						<c:forEach var="thumbnail" items="${ thumbnail_list }">
-							<div id="${ thumbnail.s_num }_thumb" class="thumb col-md-4">
+							<div id="${ thumbnail.s_num }_thumb" class="col-md-4">
 								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
 								<div class="card mb-4 shadow-sm">
-									<div class="card-body text-center p-0">
+									<div class="thumb card-body text-center p-0">
 
 										<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }" style="color: #333; text-decoration: none;">
 												<!-- 썸네일 스터디 이미지 -->
