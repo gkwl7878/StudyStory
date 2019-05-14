@@ -186,9 +186,11 @@
 					<!-- 정렬바 row -->
 
 					<!-- 썸네일 row -->
-					<div class="row">
+					<div class="row ${ empty thumbnail_list ? 'justify-content-center' : '' }">
 						<c:if test="${ empty thumbnail_list }">
-							관심 스터디가 존재하지 않습니다.
+						<div style="margin:300px;">
+							<strong>관심 스터디가 존재하지 않습니다</strong>
+						</div>	
 						</c:if>
 
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
@@ -261,6 +263,7 @@
 			</div>
 			<!-- CONTAINER DIV -->
 			<!-- 페이지네이션 -->
+			<c:if test="${ not empty thumbnail_list }">
 			<div class="d-flex justify-content-center">
 				<ul class="pagination">
 					<li class="paginate_button page-item previous ${ currentPage != 1 ? '' : 'disabled' }" id="dataTable_previous">
@@ -276,6 +279,7 @@
 					</li>
 				</ul>
 			</div>
+			</c:if>
 			<!-- 페이지네이션 -->
 		</div>
 		<!-- DIV ROLE MAIN -->
