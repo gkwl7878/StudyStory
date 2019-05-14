@@ -94,7 +94,7 @@
 			
 			<!-- 검색창 : 엔터 서브밋 막기. -->
 			<form id="word_search_frm" class="form-inline my-2 my-lg-0" action="../search/search.do" method="get">
-				<input name="search_inputBox" id="word_search_inputBox"class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+				<input name="search_inputBox" id="word_search_inputBox"class="form-control mr-sm-2" type="text" placeholder="스터디검색" aria-label="Search">
 				<button id="word_search_btn" class="btn btn-outline-info my-2 my-sm-0 mr-sm-2" type="button">검색</button> 
 				<!-- 제안  -->
 				<!-- 

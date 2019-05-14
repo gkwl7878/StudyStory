@@ -94,7 +94,7 @@
  		</div>
   	</c:if>
   	<c:forEach items="${ snList }" var="studyNotice">
-   	<div class="card select-card border-dark m-3 p-2" style="width:300px; height:150px;">
+   	<div class="card select-card border-dark m-3 p-2" style="width:300px; min-height:150px;">
    		<div class="card-body">
    			 <div style="float:left;" class="card-title">
    			 	<a href="javascript:location.href='notice_detail.do?sn_num=${ studyNotice.snNum }&s_num=${ param.s_num }'"><strong>${ studyNotice.subject }</strong></a>&nbsp;&nbsp;
