@@ -61,7 +61,7 @@
     <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" style="resize: none" placeholder="내용을 입력해주세요.";></textarea> -->
   </div>
 	
-  <a class="btn btn-secondary btn-lg" href="#void" role="button" onclick="location.href='study_group/my_study.do'">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a class="btn btn-secondary btn-lg" href="#void" role="button" onclick="history.back()">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp;
   <input type="button" class="btn btn-secondary btn-lg" id="outBtn" value="스터디 탈퇴"/>
   </div>
 </form>
