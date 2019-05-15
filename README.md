@@ -49,3 +49,6 @@
 
 ## 시연
 
+### 로그인, 아이디 찾기, 비밀번호 찾기
+
+![시연01](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/%EB%A1%9C%EA%B7%B8%EC%9D%B8,%EC%B0%BE%EA%B8%B0.gif?raw=true)
