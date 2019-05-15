@@ -65,7 +65,7 @@ $(function () {
 				<br />
 
 				<br />
-				<a class="btn btn-secondary btn-lg" href="#void" role="button" onclick="location.href='study_group/my_study.do'">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+				<a class="btn btn-secondary btn-lg" href="#void" role="button" onclick="history.back()">돌아가기</a>&nbsp;&nbsp;&nbsp;&nbsp; 
 				<input type="button" class="btn btn-secondary btn-lg" id="endBtn" value="스터디 활동종료"/>
 			</div>
 		</form>
