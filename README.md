@@ -29,7 +29,15 @@
 
 * [클래스 다이어그램 - 사용자](https://github.com/younggeun0/StudyStory/blob/master/02.%EC%84%A4%EA%B3%84/class_diagram_%EC%9C%A0%EC%A0%80_v0416.png?raw=true)
 
-## 시연
+## 시연(vimeo 동영상)
+
+* 영상은 비밀번호 `Aaa11!` 입력하면 재생가능
+* [유저 01](https://vimeo.com/336271557)
+* [유저 02](https://vimeo.com/336271704)
+* [관리자 01](https://vimeo.com/336269459)
+* [관리자 02](https://vimeo.com/336269685)
+
+## 시연(GIF)
 
 ### 유저 로그인 전 
 
@@ -37,7 +45,11 @@
 
 ### 유저 로그인 후
 
-![시연02]()
+![시연02-01](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/%EC%8B%9C%EC%97%B002-01.gif?raw=true)
+
+![시연02-02](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/%EC%8B%9C%EC%97%B002-02.gif?raw=true)
+
+![시연02-03](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/%EC%8B%9C%EC%97%B002-03.gif?raw=true)
 
 ### 관리자
 
