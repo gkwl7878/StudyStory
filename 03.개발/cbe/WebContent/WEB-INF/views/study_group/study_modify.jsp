@@ -167,7 +167,7 @@
 
 
 		<div class="row" style="margin-top: 30px;">
-			<button type="button" class="btn btn-secondary btn-lg" onclick="location.href='notice_list_leader.do" style="margin-left: 250px;">취소</button> 
+			<button type="button" class="btn btn-secondary btn-lg" onclick="history.back()" style="margin-left: 250px;">취소</button> 
 			<input value="수정" type="button" class="btn btn-primary btn-lg" id="modifyBtn" style="right: 100; margin-left: 10px;">
 		</div>
 	</div>
