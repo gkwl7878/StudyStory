@@ -29,7 +29,7 @@
 
 * [클래스 다이어그램 - 사용자](https://github.com/younggeun0/StudyStory/blob/master/02.%EC%84%A4%EA%B3%84/class_diagram_%EC%9C%A0%EC%A0%80_v0416.png?raw=true)
 
-## 시연(vimeo 동영상)
+## 시연(동영상)
 
 * 영상은 비밀번호 `Aaa11!` 입력하면 재생가능
 * [유저 01](https://vimeo.com/336271557)
