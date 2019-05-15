@@ -39,15 +39,19 @@
 
 ## 시연(GIF)
 
-### 유저 로그인 전 
+### 유저 로그인 전
 
 ![시연01](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/%EC%8B%9C%EC%97%B001.gif?raw=true)
 
-### 유저 로그인 후
+### 유저 - 기본 기능들
 
 ![시연02-01](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/%EC%8B%9C%EC%97%B002-01.gif?raw=true)
 
+### 유저 - 스터디장
+
 ![시연02-02](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/%EC%8B%9C%EC%97%B002-02.gif?raw=true)
+
+### 유저 - 스터디원
 
 ![시연02-03](https://github.com/younggeun0/StudyStory/blob/master/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/img/%EC%8B%9C%EC%97%B002-03.gif?raw=true)
 
