@@ -211,7 +211,7 @@
 
 
 					<!-- 썸네일 row -->
-					<div class="row justify-content-center">
+					<div class="row ${ empty thumbnail_list ? 'justify-content-center' : '' }">
 						<c:if test="${ empty thumbnail_list }">
 						<div style="margin:300px;">
 							<strong>조회할 수 있는 썸네일이 없습니다</strong>

@@ -93,7 +93,7 @@ function moveToDetail(pendingFlag, sNum) {
 						<img src="/third_prj/profile_img/${ myImg }"  style="width:200px; height:200px;" class="card-img-top w-75 mx-auto d-block rounded-circle mt-3">
 						<div class="card-body text-center pt-0">
 							<h6 class="card-title text-center my-3">
-								<strong>닉네임</strong>
+								<strong>${ sessionScope.nick }</strong>
 							</h6>
 							<div class="border-top border-bottom my-4">
 								<div class="d-flex flex-row p-2 border-bottom">
