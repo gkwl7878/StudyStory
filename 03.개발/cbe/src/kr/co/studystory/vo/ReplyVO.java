@@ -35,7 +35,7 @@ public class ReplyVO {
 	public void setsNum(String sNum) {
 		this.sNum = sNum;
 	}
-
+	
 	/* setter & getter */
 
 	@Override

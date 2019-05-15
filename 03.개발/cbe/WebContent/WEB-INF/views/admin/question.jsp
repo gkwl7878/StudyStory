@@ -29,7 +29,7 @@ $(function() {
 	</c:if>
 	
 	<c:if test="${ qDeleteFlag }">
-		alert("문의사항글이 삭제되었습니다.")
+		alert("문의사항글이 삭제되었습니다")
 	</c:if>
 	
 	$("#search").change(function() {

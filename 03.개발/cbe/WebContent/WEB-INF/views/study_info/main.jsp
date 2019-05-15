@@ -35,6 +35,10 @@
 	enable-responsive-font-sizes: ture;
 }
 
+.thumb:hover {
+	
+}
+
 .custom_jumbo {
 	min-height: 350px;
 	background-image:
@@ -58,6 +62,11 @@
 .heart:hover {
 	cursor: pointer;
 }
+
+.thumb:hover {
+	box-shadow:0 4px 50px -3px rgba(0,0,0,0.1);
+}
+
 </style>
 <!-- Custom styles for this template -->
 <link href="/third_prj/resources/css/jumbotron.css" rel="stylesheet">
@@ -110,12 +119,8 @@
 					console.log(xhr.status + " / " + xhr.statusText);
 				},
 				success : function(json) {
-					alert("응답받음.");
-					alert(json.result);
-
 					// 추가인 경우.
 					if (json.result == "toI") {
-						alert("추가성공");
 						// 하트 색 바꿔 주기.
 						heart_node.attr("class", "red_heart heart");
 
@@ -146,45 +151,201 @@
 </script>
 <!-- 좋아요 구현 -->
 
+<!-- 메인페이징의 인덱스 구형  -->
+<script type="text/javascript">
+
+	$(function() {
+		
+		$(".page-link").keydown(function(key) {
+      	if (key.keyCode == 13) {
+      		key.preventDefault();
+      	}// end if
+      });// keydown
+		
+		$(".page-link").click(function() {
+			
+
+			var page = $(this).val();
+			
+			var id = $(this).attr("id");
+			var flag = "";
+			
+			if (id.indexOf("fav") != -1 ) {
+				flag = "favCurPage=" + page;
+			}// end if
+
+			if (id.indexOf("latest") != -1 ) {
+				flag = "latestCurPage=" + page;
+			}// end if
+			
+			$.ajax({
+				url : "../mainProcess/mainProcess.do?",
+				data : flag,
+				type : "get",
+				dataType : "json", // 응답 받을 데이터.
+				error : function(xhr) {
+					alert("오류발생")
+					console.log(xhr.status + " / " + xhr.statusText);
+				},
+				success : function(json) {
+					
+					var jsonArr = json.jsonArr;
+					
+					// 인기순일때.
+					if (json.resultFlag == "fav") {
+						$("#favThumbView").html("");
+					}// end if
+
+					// 최신순일때.
+					if (json.resultFlag == "latest") {
+						$("#latestThumbView").html("");
+					}// end if
+					
+					var output = "";
+					
+					for (var i = 0; i < jsonArr.length ; i++) {
+					
+					output += "	<div id='"+ jsonArr[i].s_num +"_thumb' class='col-md-3'>"
+ 					output += "		<div class='card mb-4 shadow-sm'>"
+					output += "			<div class='thumb card-body text-center p-0'>"
+					output += "				<a href='../detail/detail_study.do?sNum="+jsonArr[i].s_num+"' style='color: #333; text-decoration: none;'>"
+					output += "					<div>"
+					output += "						<img class='card-img-top' src='/third_prj/study_img/"+jsonArr[i].img+"' style='width: 100%; height: 120px;'>"
+					output += "					</div>"
+					output += "					<div id='moveTo' class='px-3 pt-3'>"
+					output += "						<div class='d-flex justify-content-end align-items-center mb-3'>"
+					output += "							<div class='mr-auto'>"
+					output += "								<small class='text-muted'>"+jsonArr[i].input_date+"</small>"
+					output += "							</div>"
+					output += "							<small class='pr-1'>모집상태</small>"
+					output += "						</div>"
+					output += " 				</div>"
+					output += "						<div class='m-2 border-bottom'>"
+					output += "							<p class='card-text pb-3'>"
+					output += "								<strong>"+jsonArr[i].study_name+"</strong>"
+					output += "							</p>"
+					output += "						</div>"
+					output += "					</div>"
+					output += "				</a>"
+					output += "				<div class='d-flex justify-content-between align-items-center mb-3 px-3'>"
+					output += "						<div class='p-2'>"
+		 			output += "							<small>"+jsonArr[i].nick+"</small>"
+					output += "						</div>"
+					output += "						<div class='border-right' style='height: 40px;'></div>"
+					output += "							<div class='p-2'>"
+					output += "								<small>"+jsonArr[i].loc+"</small>"
+					output += "							</div>"
+					output += "						<div class='border-right' style='height: 40px;'></div>"
+					output += "						<div class='p-2'>"
+					output += "							<small>"+jsonArr[i].category+"</small>"
+					output += "						</div>"
+					output += "				</div>"
+					output += "			</div>"
+					output += "		</div>"
+					output += " </div>"
+
+					}// end for
+					
+					
+					// 인기순일때.
+					if (json.resultFlag == "fav") {
+						$("#favThumbView").append(output);
+						
+						$("#favPrev").val(json.favCurPage - 1);
+						$("#favNext").val(json.favCurPage + 1);
+						
+						if ($("#favPrev").val() != 0 && $("#favNext").val() != 5) {
+							$("#favLiPrev").attr("class", "paginate_button page-item next");
+							$("#favLiNext").attr("class", "paginate_button page-item next");
+						}
+						
+						if( $("#favPrev").val() == 0 ){
+							$("#favLiPrev").attr("class", "paginate_button page-item next disabled");
+						}// end if
+
+						if( $("#favNext").val() == 5 ){
+							$("#favLiNext").attr("class", "paginate_button page-item next disabled");
+						}// end if
+						
+					}// end if
+
+					// 최신순일때.
+					if (json.resultFlag == "latest") {
+						$("#latestThumbView").append(output);
+
+						$("#latestPrev").val(json.latestCurPage - 1);
+						$("#latestNext").val(json.latestCurPage + 1);
+						
+						if ($("#latestPrev").val() != 0 && $("#latestNext").val() != 5) {
+							$("#latestLiPrev").attr("class", "paginate_button page-item next");
+							$("#latestLiNext").attr("class", "paginate_button page-item next");
+						}
+
+						if( $("#latestPrev").val() == 0 ){
+							$("#latestLiPrev").attr("class", "paginate_button page-item next disabled");
+						}// end if
+
+						if( $("#latestNext").val() == 5 ){
+							$("#latestLiNext").attr("class", "paginate_button page-item next disabled");
+						}// end if
+					}// end if
+				
+				}// success
+				
+			}); // ajax
+			
+		}); // click
+		
+	}); // ajax
+
+</script>
+<!-- 메인페이징의 인덱스 구형  -->
+
+
 </head>
 <body>
 	<!-- header -->
 	<c:import url="/WEB-INF/views/layout/navbar.jsp"></c:import>
 
-	<section class="jumbotron custom_jumbo" style="min-height: 350px;">
-		<div class="container">
-			<div style="margin-left: 50px; margin-top: 280px;">
-				<h2>스터디 스토리</h2>
-				<h5>성공을 향해 나아가는 당신의 이야기.</h5>
-			</div>
-		</div>
-	</section>
-
 	<!-- CONTAINER DIV -->
 	<div class="container-fluid">
+				
 		<!-- row -->
 		<div class="row justify-content-center">
 			<div class="col-auto" style="width: 1000px;">
+
+				<div class="mainIntroImg my-5" style="width: 100%; background-color: #EAEAEA;">
+					<a href="../common/introduction.do"  style="width: 100%; height: 250px;">
+						<img src="/third_prj/study_img/main_move_to_Intro.png" style="margin:0px auto; width: 100%; height: 250px;">
+					</a>
+				</div>
 
 				<!-- 인기 스터디 -->
 				<div id="fav_order_carousal" class="slide border-bottom mb-5">
 					<div class="justify-content-center border-bottom p-2">
 						<ul class="pagination mb-0" style="vertical-align: middle; height: 38px;">
-							<li class="mr-auto" style="font-size: 24px;">인기스터디</li>
-							<li class="paginate_button page-item previous" id="dataTable_previous"><a class="page-link align-middel" href="">
-								<span aria-hidden="true">&laquo;</span></a></li>
-							<li class="paginate_button page-item next" id="dataTable_next"><a class="page-link"
-								href=""><span aria-hidden="true">&raquo;</span></a></li>
+							<li class="mr-auto" style="font-size: 24px;">
+								<a href="../search/search.do?order_select=인기순&loc_select=none&kind_select=none" style="color: #333; text-decoration: none;">
+									인기 스터디
+								</a>
+							</li>
+							<li id="favLiPrev" class="paginate_button page-item previous disabled">
+								<button id="favPrev" class="page-link" value="${ favCurPage - 1 }">
+									<span aria-hidden="true">&laquo;</span>
+								</button>
+							</li>
+							<li id="favLiNext" class="paginate_button page-item next">
+								<button id="favNext" class="page-link" value="${ favCurPage + 1 }">
+									<span aria-hidden="true">&raquo;</span>
+								</button>
+							</li>
 						</ul>
 					</div>
-					<div class="row p-3" style="height: 320px;">
+					<div id="favThumbView" class="row p-3" style="height: 320px;">
 						<c:forEach var="favThumb" items="${ favList }">
-							<!-- private String s_num, study_name, loc, category, img, recruitment, input_date, nick, user_img;
-						private boolean favFlag; -->
-
-							<div id="${ favThumb.s_num }_thumb" class="thumb col-md-3">
+							<div id="${ favThumb.s_num }_thumb" class="col-md-3">
 								<div class="card mb-4 shadow-sm">
-									<div class="card-body text-center p-0">
+									<div class="thumb card-body text-center p-0">
 										<a href="../detail/detail_study.do?sNum=${ favThumb.s_num }" style="color: #333; text-decoration: none;">
 											<div>
 												<!-- 썸네일 스터디 이미지 -->
@@ -229,387 +390,83 @@
 					</div>
 				</div>
 				<!-- 인기 스터디 -->
-
-
-				<!-- 인기 스터디 -->
-				<div id="fav_order_carousal" class="slide border-bottom mb-5">
+				
+				<!-- 최신 스터디 -->
+				<div id="latest_order_carousal" class="slide border-bottom mb-5">
 					<div class="justify-content-center border-bottom p-2">
-						인기 스터디<span aria-hidden="true">&laquo;</span><span aria-hidden="true">&raquo;</span>
+						<ul class="pagination mb-0" style="vertical-align: middle; height: 38px;">
+							<li class="mr-auto" style="font-size: 24px;">
+								<a href="../search/search.do?order_select=최신순&loc_select=none&kind_select=none" style="color: #333; text-decoration: none;">
+									최신 스터디
+								</a>
+							</li>
+							<li id="latestLiPrev" class="paginate_button page-item previous disabled">
+								<button id="latestPrev" class="page-link" value="${ latestCurPage - 1 }">
+									<span aria-hidden="true">&laquo;</span>
+								</button>
+							</li>
+							<li id="latestLiNext" class="paginate_button page-item next">
+								<button id="latestNext" class="page-link" value="${ latestCurPage + 1 }">
+									<span aria-hidden="true">&raquo;</span>
+								</button>
+							</li>
+						</ul>
 					</div>
-					<div class="row p-3" style="height: 320px;">
-						<div id="s_000109_thumb" class="thumb col-md-3">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body text-center p-0">
-									<a href="../detail/detail_study.do?sNum=s_000109" style="color: #333; text-decoration: none;">
-										<div>
-											<!-- 썸네일 스터디 이미지 -->
-											<img class="card-img-top" src="/third_prj/study_img/no_study_img.png" style="width: 100%; height: 120px;">
-										</div>
-										<div id="moveTo h-75" class="px-3 pt-3">
-											<div class="d-flex justify-content-end align-items-center mb-3">
-												<div class="mr-5">
-													<!-- 썸네일 들록일 -->
-													<small class="text-muted">2019/05/06</small>
+					<div id="latestThumbView" class="row p-3" style="height: 320px;">
+						<c:forEach var="latestThumb" items="${ latestList }">
+							<div id="${ favThumb.s_num }_thumb" class="col-md-3">
+								<div class="card mb-4 shadow-sm">
+									<div class="thumb card-body text-center p-0">
+										<a href="../detail/detail_study.do?sNum=${ latestThumb.s_num }" style="color: #333; text-decoration: none;">
+											<div>
+												<!-- 썸네일 스터디 이미지 -->
+												<img class="card-img-top" src="/third_prj/study_img/${ latestThumb.img }" style="width: 100%; height: 120px;">
+											</div>
+											<div id="moveTo" class="px-3 pt-3">
+												<div class="d-flex justify-content-end align-items-center mb-3">
+													<div class="mr-auto">
+														<small class="text-muted"><c:out value="${ latestThumb.input_date }" /></small>
+													</div>
+													<!-- 썸네일 모집상태 - 진행중. -->
+													<small class="pr-1">모집상태</small>
 												</div>
-												<!-- 썸네일 모집상태 - 진행중. -->
-												<small class="pr-1">모집상태</small>
+												<div class="m-2 border-bottom">
+													<p class="card-text pb-3">
+														<strong><c:out value="${ latestThumb.study_name }" /></strong>
+													</p>
+												</div>
 											</div>
-											<div class="m-2 border-bottom">
-												<p class="card-text pb-3">
-													<!-- 썸네일 제목부분 -->
-													<strong>미술미술</strong>
-												</p>
-											</div>
-										</div>
-									</a>
+										</a>
 
-									<div class="d-flex justify-content-between align-items-center mb-3 px-3">
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-											<small>use...</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>홍대</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>언어</small>
+										<div class="d-flex justify-content-between align-items-center mb-3 px-3">
+											<div class="p-2">
+												<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
+												<small><c:out value="${ latestThumb.nick }" /></small>
+											</div>
+											<div class="border-right" style="height: 40px;"></div>
+											<div class="p-2">
+												<!-- 썸네일 리더의 닉네임 -->
+												<small><c:out value="${ latestThumb.loc }" /></small>
+											</div>
+											<div class="border-right" style="height: 40px;"></div>
+											<div class="p-2">
+												<!-- 썸네일 리더의 닉네임 -->
+												<small><c:out value="${ latestThumb.category }" /></small>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div id="s_000109_thumb" class="thumb col-md-3">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body text-center p-0">
-									<a href="../detail/detail_study.do?sNum=s_000109" style="color: #333; text-decoration: none;">
-										<div>
-											<!-- 썸네일 스터디 이미지 -->
-											<img class="card-img-top" src="/third_prj/study_img/no_study_img.png" style="width: 100%; height: 120px;">
-										</div>
-										<div id="moveTo h-75" class="px-3 pt-3">
-											<div class="d-flex justify-content-end align-items-center mb-3">
-												<div class="mr-5">
-													<!-- 썸네일 들록일 -->
-													<small class="text-muted">2019/05/06</small>
-												</div>
-												<!-- 썸네일 모집상태 - 진행중. -->
-												<small class="pr-1">모집상태</small>
-											</div>
-											<div class="m-2 border-bottom">
-												<p class="card-text pb-3">
-													<!-- 썸네일 제목부분 -->
-													<strong>미술미술</strong>
-												</p>
-											</div>
-										</div>
-									</a>
-
-									<div class="d-flex justify-content-between align-items-center mb-3 px-3">
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-											<small>use...</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>홍대</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>언어</small>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="s_000109_thumb" class="thumb col-md-3">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body text-center p-0">
-									<a href="../detail/detail_study.do?sNum=s_000109" style="color: #333; text-decoration: none;">
-										<div>
-											<!-- 썸네일 스터디 이미지 -->
-											<img class="card-img-top" src="/third_prj/study_img/no_study_img.png" style="width: 100%; height: 120px;">
-										</div>
-										<div id="moveTo h-75" class="px-3 pt-3">
-											<div class="d-flex justify-content-end align-items-center mb-3">
-												<div class="mr-5">
-													<!-- 썸네일 들록일 -->
-													<small class="text-muted">2019/05/06</small>
-												</div>
-												<!-- 썸네일 모집상태 - 진행중. -->
-												<small class="pr-1">모집상태</small>
-											</div>
-											<div class="m-2 border-bottom">
-												<p class="card-text pb-3">
-													<!-- 썸네일 제목부분 -->
-													<strong>미술미술</strong>
-												</p>
-											</div>
-										</div>
-									</a>
-
-									<div class="d-flex justify-content-between align-items-center mb-3 px-3">
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-											<small>use...</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>홍대</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>언어</small>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="s_000109_thumb" class="thumb col-md-3">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body text-center p-0">
-									<a href="../detail/detail_study.do?sNum=s_000109" style="color: #333; text-decoration: none;">
-										<div>
-											<!-- 썸네일 스터디 이미지 -->
-											<img class="card-img-top" src="/third_prj/study_img/no_study_img.png" style="width: 100%; height: 120px;">
-										</div>
-										<div id="moveTo h-75" class="px-3 pt-3">
-											<div class="d-flex justify-content-end align-items-center mb-3">
-												<div class="mr-5">
-													<!-- 썸네일 들록일 -->
-													<small class="text-muted">2019/05/06</small>
-												</div>
-												<!-- 썸네일 모집상태 - 진행중. -->
-												<small class="pr-1">모집상태</small>
-											</div>
-											<div class="m-2 border-bottom">
-												<p class="card-text pb-3">
-													<!-- 썸네일 제목부분 -->
-													<strong>미술미술</strong>
-												</p>
-											</div>
-										</div>
-									</a>
-
-									<div class="d-flex justify-content-between align-items-center mb-3 px-3">
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-											<small>use...</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>홍대</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>언어</small>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
-				<!-- 인기 스터디 -->
-				<!-- 인기 스터디 -->
-				<div id="fav_order_carousal" class="slide border-bottom mb-5">
-					<div class="justify-content-center border-bottom p-2">
-						인기 스터디<span aria-hidden="true">&laquo;</span><span aria-hidden="true">&raquo;</span>
-					</div>
-					<div class="row p-3" style="height: 320px;">
-						<div id="s_000109_thumb" class="thumb col-md-3">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body text-center p-0">
-									<a href="../detail/detail_study.do?sNum=s_000109" style="color: #333; text-decoration: none;">
-										<div>
-											<!-- 썸네일 스터디 이미지 -->
-											<img class="card-img-top" src="/third_prj/study_img/no_study_img.png" style="width: 100%; height: 120px;">
-										</div>
-										<div id="moveTo h-75" class="px-3 pt-3">
-											<div class="d-flex justify-content-end align-items-center mb-3">
-												<div class="mr-5">
-													<!-- 썸네일 들록일 -->
-													<small class="text-muted">2019/05/06</small>
-												</div>
-												<!-- 썸네일 모집상태 - 진행중. -->
-												<small class="pr-1">모집상태</small>
-											</div>
-											<div class="m-2 border-bottom">
-												<p class="card-text pb-3">
-													<!-- 썸네일 제목부분 -->
-													<strong>미술미술</strong>
-												</p>
-											</div>
-										</div>
-									</a>
+				<!-- 최신 스터디 -->
 
-									<div class="d-flex justify-content-between align-items-center mb-3 px-3">
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-											<small>use...</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>홍대</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>언어</small>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="s_000109_thumb" class="thumb col-md-3">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body text-center p-0">
-									<a href="../detail/detail_study.do?sNum=s_000109" style="color: #333; text-decoration: none;">
-										<div>
-											<!-- 썸네일 스터디 이미지 -->
-											<img class="card-img-top" src="/third_prj/study_img/no_study_img.png" style="width: 100%; height: 120px;">
-										</div>
-										<div id="moveTo h-75" class="px-3 pt-3">
-											<div class="d-flex justify-content-end align-items-center mb-3">
-												<div class="mr-5">
-													<!-- 썸네일 들록일 -->
-													<small class="text-muted">2019/05/06</small>
-												</div>
-												<!-- 썸네일 모집상태 - 진행중. -->
-												<small class="pr-1">모집상태</small>
-											</div>
-											<div class="m-2 border-bottom">
-												<p class="card-text pb-3">
-													<!-- 썸네일 제목부분 -->
-													<strong>미술미술</strong>
-												</p>
-											</div>
-										</div>
-									</a>
-
-									<div class="d-flex justify-content-between align-items-center mb-3 px-3">
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-											<small>use...</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>홍대</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>언어</small>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="s_000109_thumb" class="thumb col-md-3">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body text-center p-0">
-									<a href="../detail/detail_study.do?sNum=s_000109" style="color: #333; text-decoration: none;">
-										<div>
-											<!-- 썸네일 스터디 이미지 -->
-											<img class="card-img-top" src="/third_prj/study_img/no_study_img.png" style="width: 100%; height: 120px;">
-										</div>
-										<div id="moveTo h-75" class="px-3 pt-3">
-											<div class="d-flex justify-content-end align-items-center mb-3">
-												<div class="mr-5">
-													<!-- 썸네일 들록일 -->
-													<small class="text-muted">2019/05/06</small>
-												</div>
-												<!-- 썸네일 모집상태 - 진행중. -->
-												<small class="pr-1">모집상태</small>
-											</div>
-											<div class="m-2 border-bottom">
-												<p class="card-text pb-3">
-													<!-- 썸네일 제목부분 -->
-													<strong>미술미술</strong>
-												</p>
-											</div>
-										</div>
-									</a>
-
-									<div class="d-flex justify-content-between align-items-center mb-3 px-3">
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-											<small>use...</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>홍대</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>언어</small>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="s_000109_thumb" class="thumb col-md-3">
-							<div class="card mb-4 shadow-sm">
-								<div class="card-body text-center p-0">
-									<a href="../detail/detail_study.do?sNum=s_000109" style="color: #333; text-decoration: none;">
-										<div>
-											<!-- 썸네일 스터디 이미지 -->
-											<img class="card-img-top" src="/third_prj/study_img/no_study_img.png" style="width: 100%; height: 120px;">
-										</div>
-										<div id="moveTo h-75" class="px-3 pt-3">
-											<div class="d-flex justify-content-end align-items-center mb-3">
-												<div class="mr-5">
-													<!-- 썸네일 들록일 -->
-													<small class="text-muted">2019/05/06</small>
-												</div>
-												<!-- 썸네일 모집상태 - 진행중. -->
-												<small class="pr-1">모집상태</small>
-											</div>
-											<div class="m-2 border-bottom">
-												<p class="card-text pb-3">
-													<!-- 썸네일 제목부분 -->
-													<strong>미술미술</strong>
-												</p>
-											</div>
-										</div>
-									</a>
-
-									<div class="d-flex justify-content-between align-items-center mb-3 px-3">
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 - 3자 이상 일 때 ... 으로 표시. -->
-											<small>use...</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>홍대</small>
-										</div>
-										<div class="border-right" style="height: 40px;"></div>
-										<div class="p-2">
-											<!-- 썸네일 리더의 닉네임 -->
-											<small>언어</small>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+				<div class="mb-5" style="width: 100%; background-color: #EAEAEA;">
+					<a href="../search/search.do" style="width: 100%; height: 165px;">
+						<img src="/third_prj/study_img/main_study_find.png" style="width: 100%; height: 165px;">
+					</a>
 				</div>
-				<!-- 인기 스터디 -->
-
 
 			</div>
 		</div>

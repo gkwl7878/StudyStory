@@ -22,12 +22,12 @@
 			</c:if>
 			
 			<c:if test="${ param.logoutFlag }">
-				alert("로그아웃 되었습니다.");
+				alert("로그아웃 되었습니다");
 			</c:if>
 			
 			if("${param.id}"!=""){
 				if("${ requestScope.loginFlag }"!="true"){
-					alert("정보가 일치하지 않습니다.");
+					alert("정보가 일치하지 않습니다");
 				}
 			}
 			

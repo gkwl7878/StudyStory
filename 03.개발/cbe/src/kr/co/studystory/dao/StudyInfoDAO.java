@@ -22,6 +22,7 @@ import kr.co.studystory.vo.FavStudyOrderVO;
 import kr.co.studystory.vo.JoinAlarmVO;
 import kr.co.studystory.vo.JoinFormVO;
 import kr.co.studystory.vo.MainFavListVO;
+import kr.co.studystory.vo.MainLatestListVO;
 import kr.co.studystory.vo.ReplyVO;
 import kr.co.studystory.vo.SearchListVO;
 
@@ -233,6 +234,20 @@ public class StudyInfoDAO {
 		List<ThumbnailDomain> list = null;
 		SqlSession ss = getSessionFatory().openSession();
 		list = ss.selectList("selectFavThList", mfl_vo);
+		
+		ss.close();
+		return list;
+	}// selectHotStudies()
+
+	/**
+	 * 메인 페이지의 썸네일 리스트 조회 하는 메서드.
+	 * 
+	 * @return List<ThumbnailDomain>
+	 */
+	public List<ThumbnailDomain> selectLatestThList(MainLatestListVO mll_vo) {
+		List<ThumbnailDomain> list = null;
+		SqlSession ss = getSessionFatory().openSession();
+		list = ss.selectList("selectLatestThList", mll_vo);
 		ss.close();
 		return list;
 	}// selectHotStudies()
@@ -248,7 +263,6 @@ public class StudyInfoDAO {
 		int cnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
 		cnt = ss.selectOne("selectMyFavSNumCNT", fsf_vo);
-		System.out.println("///////////////////////// dao : " + cnt);
 		if (cnt == 1) {
 			flag = true;
 		} // end if
@@ -294,7 +308,6 @@ public class StudyInfoDAO {
 	public int insertFavStudy(FavFlagVO ff_vo) {
 		int resultCnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
-		System.out.println("///////////////////// 다오" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
 
 		resultCnt = ss.insert("insertFavStudy", ff_vo);
 		// 정상적으로 추가가 되었을 경우 커밋하기.
@@ -313,8 +326,6 @@ public class StudyInfoDAO {
 	public int deleteFavStudy(FavFlagVO ff_vo) {
 		int resultCnt = 0;
 		SqlSession ss = getSessionFatory().openSession();
-		System.out.println("///////////////////// 다오" + ff_vo.getsNum() + " / " + ff_vo.getColor() + " / " + ff_vo.getMy_id());
-
 		resultCnt = ss.delete("deleteFavStudy", ff_vo);
 		if (resultCnt == 1) {
 			ss.commit();

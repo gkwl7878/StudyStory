@@ -45,7 +45,9 @@
 .heart:hover {
 	cursor: pointer;
 }
-</style>
+.thumb:hover {
+	box-shadow:0 4px 50px -3px rgba(0,0,0,0.1);
+}
 </style>
 
 <!-- CDN -->
@@ -186,23 +188,23 @@
 					<!-- 정렬바 row -->
 
 					<!-- 썸네일 row -->
-					<div class="row">
+					<div class="row ${ empty thumbnail_list ? 'justify-content-center' : '' }">
 						<c:if test="${ empty thumbnail_list }">
-							관심 스터디가 존재하지 않습니다.
+						<div style="margin:300px;">
+							<strong>관심 스터디가 존재하지 않습니다</strong>
+						</div>	
 						</c:if>
 
 						<!-- 썸네일 시작 - 썸네일은 한 줄에 3개씩 채워진다. -->
 						<c:forEach var="thumbnail" items="${ thumbnail_list }">
-							<div id="${ thumbnail.s_num }_thumb" class="thumb col-md-4">
+							<div id="${ thumbnail.s_num }_thumb" class="col-md-4">
 								<!-- 썸네일 클릭시 상세 페이지로 이동하는 a 태그. - 나중에 div노드로 변경하기. -->
 								<div class="card mb-4 shadow-sm">
-									<div class="card-body text-center p-0">
+									<div class="thumb card-body text-center p-0">
 
-										<div>
-											<div>
-												<!-- 썸네일 스터디 이미지 -->
-												<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="width: 100%; height: 180px;" />
-											</div>
+										<a href="../detail/detail_study.do?sNum=${ thumbnail.s_num }" style="color: #333; text-decoration: none;">
+											<!-- 썸네일 스터디 이미지 -->
+											<img class="card-img-top" src="/third_prj/study_img/${ thumbnail.img }" style="width: 100%; height: 180px;" />
 											<div id="moveTo" class="px-3 pt-3">
 												<div class="d-flex justify-content-end align-items-center mb-3">
 													<div class="mr-5">
@@ -219,7 +221,7 @@
 													</p>
 												</div>
 											</div>
-										</div>
+										</a>
 
 										<div class="d-flex justify-content-between align-items-center mb-3 px-3">
 											<div class="border border-light rounded-circle" style="width: 45px; height: 45px;">
@@ -261,6 +263,7 @@
 			</div>
 			<!-- CONTAINER DIV -->
 			<!-- 페이지네이션 -->
+			<c:if test="${ not empty thumbnail_list }">
 			<div class="d-flex justify-content-center">
 				<ul class="pagination">
 					<li class="paginate_button page-item previous ${ currentPage != 1 ? '' : 'disabled' }" id="dataTable_previous">
@@ -276,6 +279,7 @@
 					</li>
 				</ul>
 			</div>
+			</c:if>
 			<!-- 페이지네이션 -->
 		</div>
 		<!-- DIV ROLE MAIN -->

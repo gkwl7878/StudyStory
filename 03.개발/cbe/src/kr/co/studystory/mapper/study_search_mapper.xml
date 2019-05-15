@@ -22,10 +22,7 @@
 	<!-- ///////////////////////////////////////////// 메인 썸네일 -->
 	
 	<!-- 메인 페이지 마감임박순 썸네일 조회. -->
-	<!-- 메인 페이지 최신순 썸네일 조회. -->
-	<!-- ROW_NUMBER() OVER( ORDER BY S.INPUT_DATE DESC) R_NUM -->
 	<!-- 메인 페이지 인기순 썸네일 조회. -->
-
 	<select id="selectFavThList" resultMap="ThumbnailDomain" parameterType="kr.co.studystory.vo.MainFavListVO">
 		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG
 		FROM	(
@@ -37,6 +34,21 @@
 	   	WHERE R_NUM BETWEEN #{favStartNum} and #{favEndNum}
 		ORDER BY R_NUM ASC
 	</select>
+	<!-- 메인 페이지 인기순 썸네일 조회. -->
+
+	<!-- 메인 페이지 최신순 썸네일 조회. -->
+	<select id="selectLatestThList" resultMap="ThumbnailDomain" parameterType="kr.co.studystory.vo.MainLatestListVO">
+		SELECT S_NUM, STUDY_NAME, LOC, CATEGORY, IMG, RECRUITMENT, TO_CHAR(INPUT_DATE, 'yyyy/mm/dd') INPUT_DATE, NICK, USER_IMG
+		FROM	(
+				SELECT S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG USER_IMG, ROW_NUMBER() OVER( ORDER BY INPUT_DATE DESC) R_NUM
+				FROM STUDY S, FAV_STUDY FS, USER_TABLE U
+   		 		WHERE S.S_NUM = FS.S_NUM(+) AND S.ID=U.ID AND ACCEPT_FLAG='Y' AND S.DEACTIVATION='N' AND DELETE_FLAG='N'
+			    GROUP BY S.S_NUM, S.STUDY_NAME, S.LOC, S.CATEGORY, S.IMG, S.RECRUITMENT, S.INPUT_DATE, U.NICK, U.IMG
+	        	)
+	   	WHERE R_NUM BETWEEN #{latestStartNum} and #{latestEndNum}
+		ORDER BY R_NUM ASC
+	</select>
+	<!-- 메인 페이지 최신순 썸네일 조회. -->
 	<!-- 메인 페이지 썸네일 조회. -->
 
 	<!-- 좋아요  s_num의 갯수 조회. - 조회가 되면 1 반환. -->

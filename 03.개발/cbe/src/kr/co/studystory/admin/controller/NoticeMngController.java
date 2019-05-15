@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.studystory.admin.domain.DetailNotice;
 import kr.co.studystory.admin.domain.Notice;
+import kr.co.studystory.admin.domain.UserAndStudy;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.service.NoticeService;
 import kr.co.studystory.admin.vo.AlarmVO;
@@ -20,7 +21,7 @@ import kr.co.studystory.admin.vo.NewNoticeVO;
 import kr.co.studystory.admin.vo.NoticeBoardVO;
 import kr.co.studystory.admin.vo.NoticeModifyVO;
 
-@SessionAttributes("activeFlag")
+@SessionAttributes({"loginSession","weekUser","weekStudy","allUser","allStudy","activeFlag"})
 @Controller
 public class NoticeMngController {
 	
@@ -44,6 +45,18 @@ public class NoticeMngController {
 		int pageIndexNum= cms.pageIndexNum();
 		int startPage= cms.startPage(nb_vo.getCurrPage(), pageIndexNum);
 		int endPage= cms.endPage(startPage, pageIndexNum, totalPage);
+		
+		UserAndStudy uas= new UserAndStudy();
+		uas=cms.getCountUserAndStudy();
+		int weekUser= uas.getWeekUser();
+		int weekStudy= uas.getWeekStudy();
+		int allUser= uas.getAllUser();
+		int allStudy= uas.getAllStudy();
+		model.addAttribute("weekUser",weekUser);
+		model.addAttribute("weekStudy",weekStudy);
+		model.addAttribute("allUser",allUser);
+		model.addAttribute("allStudy",allStudy);
+		
 		
 		nb_vo.setBegin(startNum);
 		nb_vo.setEnd(endNum);

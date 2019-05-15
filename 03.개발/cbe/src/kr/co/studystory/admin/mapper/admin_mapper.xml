@@ -25,7 +25,7 @@
 <select id="countWeekStudy" resultType="int" >
 	select count(*)
 	from study
-	where input_date between (SYSDATE-7) and SYSDATE and delete_flag !='Y'
+	where input_date between (SYSDATE-7) and SYSDATE and (delete_flag !='Y' and accept_flag='Y' and deactivation='N')
 </select>
 
 <select id="countAllUser" resultType="int" >
@@ -37,7 +37,7 @@
 <select id="countAllStudy" resultType="int" >
 	select count(*)
 	from study
-	where delete_flag !='Y'
+	where (delete_flag !='Y' and accept_flag='Y' and deactivation='N')
 </select>
 
 <select id="nsTotalCnt" resultType="int">
@@ -66,7 +66,7 @@
 	from(
 		select s.id,s.study_name,ut.nick
 		from study s, user_table ut
-		where s.id=ut.id and (delete_flag!='Y')
+		where s.id=ut.id and (delete_flag!='Y'and accept_flag='Y'and s.deactivation='N')
 		<if test="'스터디명'.equals(searchCondition)">
 			and s.study_name like '%'||#{searchWord}||'%' 
 		</if>
@@ -206,6 +206,12 @@
 	where id= #{id}
 </select>
 
+<select id="selectDeleteSnum" resultType="String" parameterType="String">
+	select s_num 
+	from study 
+	where id=#{id}
+</select>
+
 <update id="updateModUser" parameterType="kr.co.studystory.admin.vo.DetailUserVO">
 	<!-- id,name,pass,tel,zipcode,addr1,addr2 -->
 	update user_table
@@ -259,7 +265,7 @@
 		select s.s_num s_num, s.id, ut.nick, s.study_name, s.category, s.loc, s.input_date,
 		row_number() over(order by s.input_date desc) r_num
 		from study s, user_table ut
-		where s.id=ut.id and (delete_flag!='Y')
+		where s.id=ut.id and (delete_flag!='Y'and accept_flag='Y'and s.deactivation='N')
 		<if test="'스터디명'.equals(searchCondition)">
 			and s.study_name like '%'||#{searchWord}||'%'
 		</if>

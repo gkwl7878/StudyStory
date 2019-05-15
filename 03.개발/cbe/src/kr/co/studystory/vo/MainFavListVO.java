@@ -8,7 +8,15 @@ package kr.co.studystory.vo;
  */
 public class MainFavListVO {
 
-	private int favStartNum, favEndNum;
+	private int favCurPage, favStartNum, favEndNum;
+
+	public int getFavCurPage() {
+		return favCurPage;
+	}
+
+	public void setFavCurPage(int favCurPage) {
+		this.favCurPage = favCurPage;
+	}
 
 	public int getFavStartNum() {
 		return favStartNum;
@@ -28,7 +36,8 @@ public class MainFavListVO {
 
 	@Override
 	public String toString() {
-		return "MainFavListVO [favStartNum=" + favStartNum + ", favEndNum=" + favEndNum + "]";
+		return "MainFavListVO [favCurPage=" + favCurPage + ", favStartNum=" + favStartNum + ", favEndNum=" + favEndNum
+				+ "]";
 	}
 
 }// class

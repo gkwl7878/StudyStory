@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import kr.co.studystory.admin.domain.Answer;
 import kr.co.studystory.admin.domain.DetailQuestion;
 import kr.co.studystory.admin.domain.Question;
+import kr.co.studystory.admin.domain.UserAndStudy;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.service.QuestionService;
 import kr.co.studystory.admin.vo.AlarmVO;
@@ -22,7 +23,7 @@ import kr.co.studystory.admin.vo.AnswerVO;
 import kr.co.studystory.admin.vo.QuestionBoardVO;
 import kr.co.studystory.admin.vo.QuestionDetailVO;
 
-@SessionAttributes("activeFlag")
+@SessionAttributes({"loginSession","weekUser","weekStudy","allUser","allStudy","activeFlag"})
 @Controller
 public class QuestionMngController {
 	
@@ -46,6 +47,18 @@ public class QuestionMngController {
 		int pageIndexNum= cms.pageIndexNum();
 		int startPage= cms.startPage(qb_vo.getCurrPage(), pageIndexNum);
 		int endPage= cms.endPage(startPage, pageIndexNum, totalPage);
+		
+		UserAndStudy uas= new UserAndStudy();
+		uas=cms.getCountUserAndStudy();
+		int weekUser= uas.getWeekUser();
+		int weekStudy= uas.getWeekStudy();
+		int allUser= uas.getAllUser();
+		int allStudy= uas.getAllStudy();
+		model.addAttribute("weekUser",weekUser);
+		model.addAttribute("weekStudy",weekStudy);
+		model.addAttribute("allUser",allUser);
+		model.addAttribute("allStudy",allStudy);
+		
 		
 		qb_vo.setBegin(startNum);
 		qb_vo.setEnd(endNum);

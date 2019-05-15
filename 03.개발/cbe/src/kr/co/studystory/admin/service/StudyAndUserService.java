@@ -207,6 +207,11 @@ public class StudyAndUserService {
 		return removeFlag;
 	}
 	
+	public List<String> searchDeleteSnum(String id) {
+		List<String> preSnum= sau_dao.selectDeleteSnum(id);
+		return preSnum;
+	}
+	
 	
 	public static void main(String[] args) {
 //		 StudyAndUserService saus= new StudyAndUserService();

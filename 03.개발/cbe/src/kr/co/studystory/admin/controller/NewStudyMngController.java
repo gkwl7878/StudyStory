@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.studystory.admin.domain.DetailNewStudyInfo;
 import kr.co.studystory.admin.domain.NewStudyInfo;
+import kr.co.studystory.admin.domain.UserAndStudy;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.service.StudyAndUserService;
 import kr.co.studystory.admin.vo.AcceptVO;
@@ -20,7 +21,7 @@ import kr.co.studystory.admin.vo.NsBoardVO;
 import kr.co.studystory.admin.vo.NsDetailVO;
 import kr.co.studystory.admin.vo.RefuseVO;
 
-@SessionAttributes("activeFlag")
+@SessionAttributes({"loginSession","weekUser","weekStudy","allUser","allStudy","activeFlag"})
 @Controller
 public class NewStudyMngController {
 	
@@ -36,6 +37,7 @@ public class NewStudyMngController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin/new_study.do", method= {RequestMethod.POST,RequestMethod.GET})
+	
 	public String nsMngPage(NsBoardVO nb_vo, Model model) {
 		int totalCount=cms.nsTotalCount();
 		int pageScale=cms.pageScale();
@@ -50,6 +52,17 @@ public class NewStudyMngController {
 		int pageIndexNum= cms.pageIndexNum();
 		int startPage= cms.startPage(nb_vo.getCurrPage(), pageIndexNum);
 		int endPage= cms.endPage(startPage, pageIndexNum, totalPage);
+		
+		UserAndStudy uas= new UserAndStudy();
+		uas=cms.getCountUserAndStudy();
+		int weekUser= uas.getWeekUser();
+		int weekStudy= uas.getWeekStudy();
+		int allUser= uas.getAllUser();
+		int allStudy= uas.getAllStudy();
+		model.addAttribute("weekUser",weekUser);
+		model.addAttribute("weekStudy",weekStudy);
+		model.addAttribute("allUser",allUser);
+		model.addAttribute("allStudy",allStudy);
 		
 		nb_vo.setBegin(startNum);
 		nb_vo.setEnd(endNum);

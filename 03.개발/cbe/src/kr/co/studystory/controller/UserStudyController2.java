@@ -68,7 +68,6 @@ public class UserStudyController2 {
 		int begin = sgs.beginNum(currPage);
 		int end = sgs.endNum(begin);
 		
-		System.out.println(totalCnt+"≈‰≈ª cnt");//≈‰≈ª cnt¥¬ ¿ﬂ ≥™ø»
 		int pageScale=sgs.pageScale();
 		
 		abvo.setBegin(begin);
@@ -156,8 +155,6 @@ public class UserStudyController2 {
 		if (session.getAttribute("id") == null) {
 			return "redirect:../index.do";
 		}
-		
-		System.out.println("================ ªË¡¶«“ VO : "+rfvo);
 		
 		refuseFlag = sgs.removeJoin(new JoinDeleteVO(rfvo.getId(), rfvo.getS_num()));
 		if(refuseFlag) {

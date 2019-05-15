@@ -29,11 +29,11 @@ $(function() {
 	</c:if>
 	
 	<c:if test="${ nDeleteFlag }">
-	alert("공지사항 글이 삭제되었습니다.")
+	alert("공지사항 글이 삭제되었습니다")
 	</c:if>
 	
 	<c:if test="${ nInsertFlag }">
-	alert("공지사항 글이 등록되었습니다.")
+	alert("공지사항 글이 등록되었습니다")
 	</c:if>
 	
 	$("#search").click(function() {

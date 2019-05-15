@@ -194,6 +194,7 @@ public class StudyAndUserDAO {
 		if (deleteJoinRecord(id, ss, joinNum) && deleteMemberRecord(id, ss, memNum)
 				&& ss.update("updateDelUser",id) == 1) {
 			ss.commit();
+			updateRemoveUser=true;
 		}
 		ss.close();
 		
@@ -306,9 +307,14 @@ public class StudyAndUserDAO {
 		return deleteStudy;
 	}
 	
-	public static void main(String[] args) {
-		StudyAndUserDAO sau_dao= new StudyAndUserDAO();
-		System.out.println(sau_dao.selectStudyMember("s_000041"));
+	/**
+	 * 회원삭제시 해당 아이디라 리더일 때 만든 스터디 삭제
+	 * @param sNum
+	 * @return
+	 */
+	public List<String> selectDeleteSnum(String id) {
+		SqlSession ss= StudyAndUserDAO.getInstance().getSessionFactory().openSession();
+		List<String> preSnum= ss.selectList("selectDeleteSnum",id);
+		return preSnum;
 	}
-	
 }

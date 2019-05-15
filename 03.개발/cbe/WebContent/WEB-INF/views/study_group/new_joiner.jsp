@@ -70,15 +70,15 @@
 				<c:if test="${ not empty jb }">
 				<div class="d-flex justify-content-center">
 					<ul class="pagination">
-						<li class="paginate_button page-item previous disabled" id="dataTable_previous ${ forwardFlag?'':'disabled' }"><a href="new_joiner.do?currPage=${ startPage-1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a></li>
+						<li class="paginate_button page-item previous disabled ${ forwardFlag?'':'disabled' }" id="dataTable_previous"><a href="new_joiner.do?currPage=${ startPage-1 }" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">이전으로</a></li>
 						<c:forEach var="i" step="1" begin="${ startPage }" end="${ endPage }">
 						<li class="paginate_button page-item ${ currPage==i? 'active':''}">
 							<a href="new_joiner.do?currPage=${ i }" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">
 								<c:out value="${ i }"/>
 							</a></li>
 						</c:forEach>
-						<li class="paginate_button page-item next" id="dataTable_next ${ backwardFlag ?'':'disabled' }">
-							<a href="new_joiner.do?currPage=${ endPage+1}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
+						<li class="paginate_button page-item next  ${ backwardFlag ?'':'disabled' }" id="dataTable_next">
+							<a href="new_joiner.do?currPage=${ endPage+1 }" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">다음으로</a>
 						</li>
 					</ul>
 				</div>

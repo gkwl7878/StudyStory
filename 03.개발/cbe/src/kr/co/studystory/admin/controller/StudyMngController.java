@@ -20,6 +20,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.studystory.admin.domain.DetailStudy;
 import kr.co.studystory.admin.domain.StudyInfo;
+import kr.co.studystory.admin.domain.UserAndStudy;
 import kr.co.studystory.admin.service.CommonMngService;
 import kr.co.studystory.admin.service.StudyAndUserService;
 import kr.co.studystory.admin.vo.AlarmVO;
@@ -28,7 +29,7 @@ import kr.co.studystory.admin.vo.DetailStudyVO;
 import kr.co.studystory.admin.vo.StudyBoardVO;
 import kr.co.studystory.admin.vo.StudyDetailVO;
 
-@SessionAttributes("activeFlag")
+@SessionAttributes({"loginSession","weekUser","weekStudy","allUser","allStudy","activeFlag"})
 @Controller
 public class StudyMngController {
 	
@@ -57,6 +58,18 @@ public class StudyMngController {
 		int pageIndexNum= cms.pageIndexNum();
 		int startPage= cms.startPage(sb_vo.getCurrPage(), pageIndexNum);
 		int endPage= cms.endPage(startPage, pageIndexNum, totalPage);
+		
+		UserAndStudy uas= new UserAndStudy();
+		uas=cms.getCountUserAndStudy();
+		int weekUser= uas.getWeekUser();
+		int weekStudy= uas.getWeekStudy();
+		int allUser= uas.getAllUser();
+		int allStudy= uas.getAllStudy();
+		model.addAttribute("weekUser",weekUser);
+		model.addAttribute("weekStudy",weekStudy);
+		model.addAttribute("allUser",allUser);
+		model.addAttribute("allStudy",allStudy);
+		
 		
 		sb_vo.setBegin(startNum);
 		sb_vo.setEnd(endNum);
@@ -144,8 +157,6 @@ public class StudyMngController {
 		if(img!=null) {
 			if(file.exists()){
 				file.delete();
-			}else {
-				System.out.println("파일이 존재하지 않습니다.");
 			}
 		}else {
 			img =preImg;
@@ -193,6 +204,11 @@ public class StudyMngController {
 				al_vo.setSubject("스터디가 삭제되었습니다.");
 				al_vo.setContent("["+studyName+"]  스터디가 삭제되었습니다. 삭제사유: [" +ds_vo.getMsg()+"]");
 				cms.sendAlarm(al_vo);
+				String preImg= saus.searchPreImg(ds_vo.getsNum());
+				File file = new File("C:/dev/StudyStory/03.개발/cbe/WebContent/study_img/"+preImg);
+				if(file.exists()){
+					file.delete();
+				}
 			}
 		}
 		model.addAttribute("sDeleteFlag", sDeleteFlag);
